@@ -15,6 +15,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me--from hardware-audio!");
+        System.out.println("You clicked me--from hardware-audio! from Gem Aludino");        
         label.setText("Hello World!");
     }
     
