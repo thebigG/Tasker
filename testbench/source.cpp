@@ -95,7 +95,7 @@ bool person::operator==(const person& p) {
  *              less than 0 if age is less than p.age,
  *              greater than 0 if age is greater than p.age
  */
-int person::operator<(const person&p) {
+int person::operator<(const person& p) {
     return (int)(age - p.age);
 }
 
