@@ -44,9 +44,9 @@ public:
     void set_name(std::string);                 /**< mutator */
     void set_age(uint32_t age);                 /**< mutator */
 
-    bool operator==(const person&p);            /**< op-overload, equality */
-    int operator<(const person&p);              /**< op-overload, comparator */
-    void operator=(const person&p);             /**< op-overload, assignment */
+    bool operator==(const person& p);            /**< op-overload, equality */
+    int operator<(const person& p);              /**< op-overload, comparator */
+    void operator=(const person& p);             /**< op-overload, assignment */
     
     /**< op-overload - friend keyword allows a class (in this case, the std::ostream class),
          to access private/protected fields. (essentially breaks encapsulation) */
