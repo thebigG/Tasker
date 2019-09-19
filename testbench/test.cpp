@@ -32,7 +32,8 @@ int main(int argc, const char *argv[]) {
         person q("jane doe", 18);
         p = q;
         std::cout << p << std::endl;
-    } // p will have its destructor called when it goes out of scope.
+        printf("using c_str name: %s\n", p.get_name().c_str());
+     } // p will have its destructor called when it goes out of scope.
     
     {
         // has one and only one owner.
@@ -84,6 +85,7 @@ int main(int argc, const char *argv[]) {
         std::cout << "another_iterator: " << *(--another_iterator) << std::endl;
     }
 
+    
     return EXIT_SUCCESS;
 }
 
