@@ -4,6 +4,8 @@
 using std::vector;
 using std::cout;
 using std::cin;
+using std::cerr;
+using std::out_of_range;
 int main()
 {
     // Person my_person("John", 34, "Jeans");
@@ -29,19 +31,88 @@ int main()
     //     cout<<"vectoring:"<<loop_vector[i]<<"\n";
     // }
     // cout<<"first element:"<<nums[0]<<"\n"<<"Second element:"<<nums[1];
-    vector<double> temps;
-    for(double temp;cin>>temp;)
+    // vector<double> temps;
+    // for(double temp;cin>>temp;)
+    // {
+    //     temps.push_back(temp);
+    // }
+    // double sum = 0;
+    // for (double item: temps)
+    // {
+    //     sum += item;
+    // }
+    // sort(temps);
+    // cout<<"Average:"<<sum/(temps.size())<<"\n";
+    // cout<<"Median:"<<temps[temps.size()/2];
+    // vector<string> disliked_list = {"floss", "bleach"};
+    // vector<string> words;
+    // for(string str;cin>>str;)
+    // {
+    //     for(string s:disliked_list)
+    //     {
+    //         if(s == str)
+    //         {
+    //             cout<<"BLEEP. I don't like that word!";
+    //             return -1;
+    //         }
+    //     }
+    //     words.push_back(str);
+    // }
+
+
+    /*
+    Calculator v1.0
+    -------------------------------
+    */
+    // cout<< "Please enter expression: (+, -):";
+    // cout<<"Add an 'x' to mark the end of an expression";
+    // int left_val = 0;
+    // int right_val = 0;
+    // char op = 0;
+    // int result = 0;
+    // cin>>left_val;
+    // if(!cin)
+    // {
+    //     perror("cin:");
+    //     return -1;
+    // }
+    // else
+    // {
+    //     cout<<"No errors?";
+    //     return 0;
+    // }
+    // if (op =='+')
+    // {
+    //     result = left_val + right_val;
+    // }
+    // else if(op =='-')
+    // {
+    //     result  =  left_val - right_val;
+    // }
+    // cout<<"Result "<< result << "\n";
+    //execption handling
+    //<--------------------------------------->
+    /*
+    int g  = 100;
+    vector<int> nums(10);
+    try{
+        // nums.at(1) = 2000;
+     g = nums.at(1);
+}
+catch(out_of_range)
+{
+    cerr<<"Out of range!";
+        return -1;
+}
+    cout<<g;
+    */
+    double input;
+    cout<<"Enter a double:";
+    cin>>input;
+    if(!cin)
     {
-        temps.push_back(temp);
+        cerr<<"cin error";
+        return -1;
     }
-    double sum = 0;
-    for (double item: temps)
-    {
-        sum += item;
-    }
-    sort(temps);
-    cout<<"Average:"<<sum/(temps.size())<<"\n";
-    cout<<"Median:"<<temps[temps.size()/2];
-    
     return 0;
 }

@@ -1,0 +1,13 @@
+This is a list of things(technical concerns) we'd like to consider:
+
+*Exceptions:
+            -When do we decide to check exceptions?
+            -For what classes/objects do we make exceptions?
+            -What will be the action(s) that exceptions take?
+
+*OOP:
+     -C++ ALLOWS programmers to enforce OOP, but it DOES NOT "force" it like languages
+      such as Java/C#
+     -How strict should we be with enforcing an OOP-style code design?
+     -Should we have ANY functional/non-OOP components?
+     
