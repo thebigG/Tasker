@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="New-Project-Linux" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="bin/Release/New-Project-Linux" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="`wx-config --cflags`" />
+			<Add option="-Wall" />
+		</Compiler>
+		<Linker>
+			<Add option="`wx-config --libs`" />
+		</Linker>
+		<Unit filename="New_Project_LinuxApp.cpp" />
+		<Unit filename="New_Project_LinuxApp.h" />
+		<Unit filename="New_Project_LinuxMain.cpp" />
+		<Unit filename="New_Project_LinuxMain.h" />
+		<Unit filename="wxsmith/New_Project_Linuxframe.wxs" />
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="New_Project_LinuxApp.cpp" main="New_Project_LinuxFrame" init_handlers="necessary" language="CPP" />
+				<resources>
+					<wxFrame wxs="wxsmith/New_Project_Linuxframe.wxs" src="New_Project_LinuxMain.cpp" hdr="New_Project_LinuxMain.h" fwddecl="0" i18n="1" name="New_Project_LinuxFrame" language="CPP" />
+				</resources>
+			</wxsmith>
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
