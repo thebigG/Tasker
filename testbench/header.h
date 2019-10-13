@@ -27,13 +27,14 @@
  *  }
  */
 
+
 /**
  *  @class  person
  *  @brief  Sample class to describe C++ syntax
  */
 class person {
 public:
-    person();                                   /**< default constructor */
+    person(); /**< default constructor */
     person(std::string name, uint32_t age);     /**< parameterized constructor */
     person(const person& p);                    /**< copy constructor */
     ~person();                                  /**< destructor */
@@ -55,6 +56,7 @@ private:
     std::string name;
     uint32_t age;
 };
+
 
 #endif /* HEADER_H */
 
