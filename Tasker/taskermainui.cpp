@@ -6,6 +6,7 @@ TaskerMainUI::TaskerMainUI(QWidget *parent)
     , ui(new Ui::TaskerMainUI)
 {
     ui->setupUi(this);
+
 }
 
 TaskerMainUI::~TaskerMainUI()

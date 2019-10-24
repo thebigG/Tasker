@@ -10,8 +10,10 @@
 #define UI_TASKERMAINUI_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
@@ -22,7 +24,8 @@ class Ui_TaskerMainUI
 {
 public:
     QWidget *centralwidget;
-    QMenuBar *menubar;
+    QMenuBar *newmenu;
+    QMenu *menuHello;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *TaskerMainUI)
@@ -33,12 +36,17 @@ public:
         centralwidget = new QWidget(TaskerMainUI);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         TaskerMainUI->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(TaskerMainUI);
-        menubar->setObjectName(QString::fromUtf8("menubar"));
-        TaskerMainUI->setMenuBar(menubar);
+        newmenu = new QMenuBar(TaskerMainUI);
+        newmenu->setObjectName(QString::fromUtf8("newmenu"));
+        newmenu->setGeometry(QRect(0, 0, 800, 21));
+        menuHello = new QMenu(newmenu);
+        menuHello->setObjectName(QString::fromUtf8("menuHello"));
+        TaskerMainUI->setMenuBar(newmenu);
         statusbar = new QStatusBar(TaskerMainUI);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         TaskerMainUI->setStatusBar(statusbar);
+
+        newmenu->addAction(menuHello->menuAction());
 
         retranslateUi(TaskerMainUI);
 
@@ -48,6 +56,7 @@ public:
     void retranslateUi(QMainWindow *TaskerMainUI)
     {
         TaskerMainUI->setWindowTitle(QApplication::translate("TaskerMainUI", "TaskerMainUI", nullptr));
+        menuHello->setTitle(QApplication::translate("TaskerMainUI", "Hello", nullptr));
     } // retranslateUi
 
 };
