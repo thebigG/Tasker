@@ -13,7 +13,18 @@
   <property name="windowTitle">
    <string>TaskerMainUI</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTimeEdit" name="timeEdit">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>90</y>
+      <width>118</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="newmenu">
    <property name="geometry">
     <rect>
