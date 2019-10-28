@@ -52,14 +52,14 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Tasker/dialog.cpp \
+SOURCES       = ../Tasker/cratecommitment.cpp \
 		../Tasker/main.cpp \
-		../Tasker/taskermainui.cpp moc_dialog.cpp \
+		../Tasker/taskermainui.cpp moc_cratecommitment.cpp \
 		moc_taskermainui.cpp
-OBJECTS       = dialog.o \
+OBJECTS       = cratecommitment.o \
 		main.o \
 		taskermainui.o \
-		moc_dialog.o \
+		moc_cratecommitment.o \
 		moc_taskermainui.o
 DIST          = ../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.12.5/gcc_64/mkspecs/common/unix.conf \
@@ -251,8 +251,8 @@ DIST          = ../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.12.5/gcc_64/mkspecs/features/exceptions.prf \
 		../../Qt/5.12.5/gcc_64/mkspecs/features/yacc.prf \
 		../../Qt/5.12.5/gcc_64/mkspecs/features/lex.prf \
-		../Tasker/Tasker.pro ../Tasker/dialog.h \
-		../Tasker/taskermainui.h ../Tasker/dialog.cpp \
+		../Tasker/Tasker.pro ../Tasker/cratecommitment.h \
+		../Tasker/taskermainui.h ../Tasker/cratecommitment.cpp \
 		../Tasker/main.cpp \
 		../Tasker/taskermainui.cpp
 QMAKE_TARGET  = Tasker
@@ -263,7 +263,7 @@ TARGET        = Tasker
 first: all
 ####### Build rules
 
-Tasker: ui_dialog.h ui_taskermainui.h $(OBJECTS)  
+Tasker: ui_cratecommitment.h ui_taskermainui.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../Tasker/Tasker.pro ../../Qt/5.12.5/gcc_64/mkspecs/linux-g++/qmake.conf ../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
@@ -664,9 +664,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Qt/5.12.5/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/dialog.h ../Tasker/taskermainui.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/dialog.cpp ../Tasker/main.cpp ../Tasker/taskermainui.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/dialog.ui ../Tasker/taskermainui.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/cratecommitment.h ../Tasker/taskermainui.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/cratecommitment.cpp ../Tasker/main.cpp ../Tasker/taskermainui.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/cratecommitment.ui ../Tasker/taskermainui.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -698,12 +698,12 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../Qt/5.12.5/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../Qt/5.12.5/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_dialog.cpp moc_taskermainui.cpp
+compiler_moc_header_make_all: moc_cratecommitment.cpp moc_taskermainui.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_dialog.cpp moc_taskermainui.cpp
-moc_dialog.cpp: ../Tasker/dialog.h \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/QDialog \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/qdialog.h \
+	-$(DEL_FILE) moc_cratecommitment.cpp moc_taskermainui.cpp
+moc_cratecommitment.cpp: ../Tasker/cratecommitment.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QMainWindow \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qtguiglobal.h \
 		../../Qt/5.12.5/gcc_64/include/QtCore/qglobal.h \
@@ -806,9 +806,11 @@ moc_dialog.cpp: ../Tasker/dialog.h \
 		../../Qt/5.12.5/gcc_64/include/QtCore/qfiledevice.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qvector2d.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qtouchdevice.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qicon.h \
 		moc_predefs.h \
 		../../Qt/5.12.5/gcc_64/bin/moc
-	/home/digital_alchemist/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/digital_alchemist/Tasker/build-Tasker-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/digital_alchemist/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/digital_alchemist/Tasker/Tasker -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtGui -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/dialog.h -o moc_dialog.cpp
+	/home/digital_alchemist/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/digital_alchemist/Tasker/build-Tasker-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/digital_alchemist/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/digital_alchemist/Tasker/Tasker -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtGui -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/cratecommitment.h -o moc_cratecommitment.cpp
 
 moc_taskermainui.cpp: ../Tasker/taskermainui.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QMainWindow \
@@ -925,12 +927,12 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_dialog.h ui_taskermainui.h
+compiler_uic_make_all: ui_cratecommitment.h ui_taskermainui.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_dialog.h ui_taskermainui.h
-ui_dialog.h: ../Tasker/dialog.ui \
+	-$(DEL_FILE) ui_cratecommitment.h ui_taskermainui.h
+ui_cratecommitment.h: ../Tasker/cratecommitment.ui \
 		../../Qt/5.12.5/gcc_64/bin/uic
-	/home/digital_alchemist/Qt/5.12.5/gcc_64/bin/uic ../Tasker/dialog.ui -o ui_dialog.h
+	/home/digital_alchemist/Qt/5.12.5/gcc_64/bin/uic ../Tasker/cratecommitment.ui -o ui_cratecommitment.h
 
 ui_taskermainui.h: ../Tasker/taskermainui.ui \
 		../../Qt/5.12.5/gcc_64/bin/uic
@@ -946,9 +948,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-dialog.o: ../Tasker/dialog.cpp ../Tasker/dialog.h \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/QDialog \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/qdialog.h \
+cratecommitment.o: ../Tasker/cratecommitment.cpp ../Tasker/cratecommitment.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QMainWindow \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qtguiglobal.h \
 		../../Qt/5.12.5/gcc_64/include/QtCore/qglobal.h \
@@ -1051,18 +1053,10 @@ dialog.o: ../Tasker/dialog.cpp ../Tasker/dialog.h \
 		../../Qt/5.12.5/gcc_64/include/QtCore/qfiledevice.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qvector2d.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qtouchdevice.h \
-		ui_dialog.h \
-		../../Qt/5.12.5/gcc_64/include/QtCore/QVariant \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/QApplication \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/qapplication.h \
-		../../Qt/5.12.5/gcc_64/include/QtCore/qcoreapplication.h \
-		../../Qt/5.12.5/gcc_64/include/QtCore/qeventloop.h \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../Qt/5.12.5/gcc_64/include/QtGui/qguiapplication.h \
-		../../Qt/5.12.5/gcc_64/include/QtGui/qinputmethod.h \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/QDialogButtonBox \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/qdialogbuttonbox.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialog.o ../Tasker/dialog.cpp
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qicon.h \
+		ui_cratecommitment.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cratecommitment.o ../Tasker/cratecommitment.cpp
 
 main.o: ../Tasker/main.cpp ../Tasker/taskermainui.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QMainWindow \
@@ -1171,9 +1165,6 @@ main.o: ../Tasker/main.cpp ../Tasker/taskermainui.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qtouchdevice.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qicon.h \
-		../Tasker/dialog.h \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/QDialog \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/qdialog.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QApplication \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qapplication.h \
 		../../Qt/5.12.5/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1308,11 +1299,17 @@ taskermainui.o: ../Tasker/taskermainui.cpp ../Tasker/taskermainui.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qmenubar.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QStatusBar \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QTimeEdit \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qdatetimeedit.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qdatetime.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qregularexpression.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o taskermainui.o ../Tasker/taskermainui.cpp
 
-moc_dialog.o: moc_dialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dialog.o moc_dialog.cpp
+moc_cratecommitment.o: moc_cratecommitment.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_cratecommitment.o moc_cratecommitment.cpp
 
 moc_taskermainui.o: moc_taskermainui.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_taskermainui.o moc_taskermainui.cpp

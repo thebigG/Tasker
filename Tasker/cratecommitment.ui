@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TaskerMainUI</class>
- <widget class="QMainWindow" name="TaskerMainUI">
+ <class>CrateCommitment</class>
+ <widget class="QMainWindow" name="CrateCommitment">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,21 +11,27 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>TaskerMainUI</string>
+   <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTimeEdit" name="timeEdit">
+   <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>90</y>
-      <width>118</width>
-      <height>25</height>
+      <x>0</x>
+      <y>0</y>
+      <width>861</width>
+      <height>721</height>
      </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
     </property>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="newmenu">
+  <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -34,12 +40,6 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuHello">
-    <property name="title">
-     <string>Hello</string>
-    </property>
-   </widget>
-   <addaction name="menuHello"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
