@@ -52,14 +52,14 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Tasker/dialog.cpp \
+SOURCES       = ../Tasker/commstats.cpp \
 		../Tasker/main.cpp \
-		../Tasker/taskermainui.cpp moc_dialog.cpp \
+		../Tasker/taskermainui.cpp moc_commstats.cpp \
 		moc_taskermainui.cpp
-OBJECTS       = dialog.o \
+OBJECTS       = commstats.o \
 		main.o \
 		taskermainui.o \
-		moc_dialog.o \
+		moc_commstats.o \
 		moc_taskermainui.o
 DIST          = /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/qdevice.pri \
@@ -222,6 +222,7 @@ DIST          = /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_p
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/qt_config.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_post.prf \
+		../Tasker/.qmake.stash \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/toolchain.prf \
@@ -249,8 +250,8 @@ DIST          = /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_p
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/exceptions.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/yacc.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/lex.prf \
-		../Tasker/Tasker.pro ../Tasker/dialog.h \
-		../Tasker/taskermainui.h ../Tasker/dialog.cpp \
+		../Tasker/Tasker.pro ../Tasker/commstats.h \
+		../Tasker/taskermainui.h ../Tasker/commstats.cpp \
 		../Tasker/main.cpp \
 		../Tasker/taskermainui.cpp
 QMAKE_TARGET  = Tasker
@@ -271,7 +272,7 @@ include /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-Tasker.app/Contents/MacOS/Tasker: ui_dialog.h ui_taskermainui.h $(OBJECTS)  
+Tasker.app/Contents/MacOS/Tasker: ui_commstats.h ui_createcommitment.h ui_taskermainui.h $(OBJECTS)  
 	@test -d Tasker.app/Contents/MacOS/ || mkdir -p Tasker.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -436,6 +437,7 @@ Makefile: ../Tasker/Tasker.pro /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/qt_config.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/toolchain.prf \
@@ -629,6 +631,7 @@ Makefile: ../Tasker/Tasker.pro /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/
 /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/qt_config.prf:
 /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang/qmake.conf:
 /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/exclusive_builds.prf:
 /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/mac/sdk.prf:
 /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/toolchain.prf:
@@ -690,9 +693,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/dialog.h ../Tasker/taskermainui.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/dialog.cpp ../Tasker/main.cpp ../Tasker/taskermainui.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/dialog.ui ../Tasker/taskermainui.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/commstats.h ../Tasker/taskermainui.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/commstats.cpp ../Tasker/main.cpp ../Tasker/taskermainui.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/commstats.ui ../Tasker/createcommitment.ui ../Tasker/taskermainui.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -702,6 +705,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r Tasker.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -726,15 +730,15 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/data/dummy.cpp
 	/Library/Developer/CommandLineTools/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.12 -Wall -W -dM -E -o moc_predefs.h /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_dialog.cpp moc_taskermainui.cpp
+compiler_moc_header_make_all: moc_commstats.cpp moc_taskermainui.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_dialog.cpp moc_taskermainui.cpp
-moc_dialog.cpp: ../Tasker/dialog.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+	-$(DEL_FILE) moc_commstats.cpp moc_taskermainui.cpp
+moc_commstats.cpp: ../Tasker/commstats.h \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		moc_predefs.h \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc
-	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc $(DEFINES) --include /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/build-Tasker-Desktop_Qt_5_12_5_clang_64bit-Debug/moc_predefs.h -I/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang -I/Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtGui.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include -I/Library/Developer/CommandLineTools/usr/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include -F/Users/gemuelealudino/Qt/5.12.5/clang_64/lib ../Tasker/dialog.h -o moc_dialog.cpp
+	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc $(DEFINES) --include /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/build-Tasker-Desktop_Qt_5_12_5_clang_64bit-Debug/moc_predefs.h -I/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang -I/Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtGui.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include -I/Library/Developer/CommandLineTools/usr/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include -F/Users/gemuelealudino/Qt/5.12.5/clang_64/lib ../Tasker/commstats.h -o moc_commstats.cpp
 
 moc_taskermainui.cpp: ../Tasker/taskermainui.h \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
@@ -747,12 +751,16 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_dialog.h ui_taskermainui.h
+compiler_uic_make_all: ui_commstats.h ui_createcommitment.h ui_taskermainui.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_dialog.h ui_taskermainui.h
-ui_dialog.h: ../Tasker/dialog.ui \
+	-$(DEL_FILE) ui_commstats.h ui_createcommitment.h ui_taskermainui.h
+ui_commstats.h: ../Tasker/commstats.ui \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic
-	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic ../Tasker/dialog.ui -o ui_dialog.h
+	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic ../Tasker/commstats.ui -o ui_commstats.h
+
+ui_createcommitment.h: ../Tasker/createcommitment.ui \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic
+	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic ../Tasker/createcommitment.ui -o ui_createcommitment.h
 
 ui_taskermainui.h: ../Tasker/taskermainui.ui \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic
@@ -770,18 +778,15 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-dialog.o: ../Tasker/dialog.cpp ../Tasker/dialog.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_dialog.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialog.o ../Tasker/dialog.cpp
+commstats.o: ../Tasker/commstats.cpp ../Tasker/commstats.h \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		ui_commstats.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o commstats.o ../Tasker/commstats.cpp
 
 main.o: ../Tasker/main.cpp ../Tasker/taskermainui.h \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		../Tasker/dialog.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Tasker/main.cpp
@@ -792,8 +797,8 @@ taskermainui.o: ../Tasker/taskermainui.cpp ../Tasker/taskermainui.h \
 		ui_taskermainui.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o taskermainui.o ../Tasker/taskermainui.cpp
 
-moc_dialog.o: moc_dialog.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dialog.o moc_dialog.cpp
+moc_commstats.o: moc_commstats.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_commstats.o moc_commstats.cpp
 
 moc_taskermainui.o: moc_taskermainui.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_taskermainui.o moc_taskermainui.cpp

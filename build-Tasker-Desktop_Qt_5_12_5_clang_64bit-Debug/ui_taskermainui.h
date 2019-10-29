@@ -16,6 +16,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTimeEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,6 +25,7 @@ class Ui_TaskerMainUI
 {
 public:
     QWidget *centralwidget;
+    QTimeEdit *timeEdit;
     QMenuBar *newmenu;
     QMenu *menuHello;
     QStatusBar *statusbar;
@@ -35,6 +37,9 @@ public:
         TaskerMainUI->resize(800, 600);
         centralwidget = new QWidget(TaskerMainUI);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        timeEdit = new QTimeEdit(centralwidget);
+        timeEdit->setObjectName(QString::fromUtf8("timeEdit"));
+        timeEdit->setGeometry(QRect(170, 90, 118, 25));
         TaskerMainUI->setCentralWidget(centralwidget);
         newmenu = new QMenuBar(TaskerMainUI);
         newmenu->setObjectName(QString::fromUtf8("newmenu"));
