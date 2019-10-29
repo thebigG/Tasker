@@ -17,13 +17,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Widget_CommStats.cpp \
+    createcommitment.cpp \
     main.cpp
 
 HEADERS += \
-    Widget_CommStats.h
+    Widget_CommStats.h \
+    createcommitment.h
 
 FORMS += \
-    Widget_CommStats.ui
+    Widget_CommStats.ui \
+    createcommitment.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
