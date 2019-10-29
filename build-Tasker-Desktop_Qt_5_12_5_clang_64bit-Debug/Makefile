@@ -54,13 +54,17 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../Tasker/Widget_CommStats.cpp \
 		../Tasker/createcommitment.cpp \
-		../Tasker/main.cpp moc_Widget_CommStats.cpp \
-		moc_createcommitment.cpp
+		../Tasker/main.cpp \
+		../Tasker/taskeruimainwindow.cpp moc_Widget_CommStats.cpp \
+		moc_createcommitment.cpp \
+		moc_taskeruimainwindow.cpp
 OBJECTS       = Widget_CommStats.o \
 		createcommitment.o \
 		main.o \
+		taskeruimainwindow.o \
 		moc_Widget_CommStats.o \
-		moc_createcommitment.o
+		moc_createcommitment.o \
+		moc_taskeruimainwindow.o
 DIST          = /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/qdevice.pri \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/device_config.prf \
@@ -251,9 +255,11 @@ DIST          = /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_p
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/yacc.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/lex.prf \
 		../Tasker/Tasker.pro ../Tasker/Widget_CommStats.h \
-		../Tasker/createcommitment.h ../Tasker/Widget_CommStats.cpp \
+		../Tasker/createcommitment.h \
+		../Tasker/taskeruimainwindow.h ../Tasker/Widget_CommStats.cpp \
 		../Tasker/createcommitment.cpp \
-		../Tasker/main.cpp
+		../Tasker/main.cpp \
+		../Tasker/taskeruimainwindow.cpp
 QMAKE_TARGET  = Tasker
 DESTDIR       = 
 TARGET        = Tasker.app/Contents/MacOS/Tasker
@@ -272,7 +278,7 @@ include /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-Tasker.app/Contents/MacOS/Tasker: ui_Widget_CommStats.h ui_createcommitment.h $(OBJECTS)  
+Tasker.app/Contents/MacOS/Tasker: ui_Widget_CommStats.h ui_createcommitment.h ui_taskeruimainwindow.h $(OBJECTS)  
 	@test -d Tasker.app/Contents/MacOS/ || mkdir -p Tasker.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -693,9 +699,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/Widget_CommStats.h ../Tasker/createcommitment.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/Widget_CommStats.cpp ../Tasker/createcommitment.cpp ../Tasker/main.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/Widget_CommStats.ui ../Tasker/createcommitment.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/Widget_CommStats.h ../Tasker/createcommitment.h ../Tasker/taskeruimainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/Widget_CommStats.cpp ../Tasker/createcommitment.cpp ../Tasker/main.cpp ../Tasker/taskeruimainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/Widget_CommStats.ui ../Tasker/createcommitment.ui ../Tasker/taskeruimainwindow.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -730,9 +736,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/data/dummy.cpp
 	/Library/Developer/CommandLineTools/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.12 -Wall -W -dM -E -o moc_predefs.h /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_Widget_CommStats.cpp moc_createcommitment.cpp
+compiler_moc_header_make_all: moc_Widget_CommStats.cpp moc_createcommitment.cpp moc_taskeruimainwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Widget_CommStats.cpp moc_createcommitment.cpp
+	-$(DEL_FILE) moc_Widget_CommStats.cpp moc_createcommitment.cpp moc_taskeruimainwindow.cpp
 moc_Widget_CommStats.cpp: ../Tasker/Widget_CommStats.h \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
@@ -747,13 +753,25 @@ moc_createcommitment.cpp: ../Tasker/createcommitment.h \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc
 	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc $(DEFINES) --include /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/build-Tasker-Desktop_Qt_5_12_5_clang_64bit-Debug/moc_predefs.h -I/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang -I/Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtGui.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include -I/Library/Developer/CommandLineTools/usr/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include -F/Users/gemuelealudino/Qt/5.12.5/clang_64/lib ../Tasker/createcommitment.h -o moc_createcommitment.cpp
 
+moc_taskeruimainwindow.cpp: ../Tasker/taskeruimainwindow.h \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QFrame \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
+		../Tasker/createcommitment.h \
+		moc_predefs.h \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc
+	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc $(DEFINES) --include /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/build-Tasker-Desktop_Qt_5_12_5_clang_64bit-Debug/moc_predefs.h -I/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang -I/Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtGui.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include -I/Library/Developer/CommandLineTools/usr/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include -F/Users/gemuelealudino/Qt/5.12.5/clang_64/lib ../Tasker/taskeruimainwindow.h -o moc_taskeruimainwindow.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_Widget_CommStats.h ui_createcommitment.h
+compiler_uic_make_all: ui_Widget_CommStats.h ui_createcommitment.h ui_taskeruimainwindow.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_Widget_CommStats.h ui_createcommitment.h
+	-$(DEL_FILE) ui_Widget_CommStats.h ui_createcommitment.h ui_taskeruimainwindow.h
 ui_Widget_CommStats.h: ../Tasker/Widget_CommStats.ui \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic
 	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic ../Tasker/Widget_CommStats.ui -o ui_Widget_CommStats.h
@@ -761,6 +779,10 @@ ui_Widget_CommStats.h: ../Tasker/Widget_CommStats.ui \
 ui_createcommitment.h: ../Tasker/createcommitment.ui \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic
 	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic ../Tasker/createcommitment.ui -o ui_createcommitment.h
+
+ui_taskeruimainwindow.h: ../Tasker/taskeruimainwindow.ui \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic
+	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic ../Tasker/taskeruimainwindow.ui -o ui_taskeruimainwindow.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -786,18 +808,38 @@ createcommitment.o: ../Tasker/createcommitment.cpp ../Tasker/createcommitment.h 
 		ui_createcommitment.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o createcommitment.o ../Tasker/createcommitment.cpp
 
-main.o: ../Tasker/main.cpp ../Tasker/Widget_CommStats.h \
+main.o: ../Tasker/main.cpp /Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		../Tasker/taskeruimainwindow.h \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QFrame \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
+		../Tasker/createcommitment.h \
+		../Tasker/Widget_CommStats.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Tasker/main.cpp
+
+taskeruimainwindow.o: ../Tasker/taskeruimainwindow.cpp ../Tasker/taskeruimainwindow.h \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QFrame \
+		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
+		../Tasker/createcommitment.h \
+		ui_taskeruimainwindow.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o taskeruimainwindow.o ../Tasker/taskeruimainwindow.cpp
 
 moc_Widget_CommStats.o: moc_Widget_CommStats.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Widget_CommStats.o moc_Widget_CommStats.cpp
 
 moc_createcommitment.o: moc_createcommitment.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_createcommitment.o moc_createcommitment.cpp
+
+moc_taskeruimainwindow.o: moc_taskeruimainwindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_taskeruimainwindow.o moc_taskeruimainwindow.cpp
 
 ####### Install
 
