@@ -16,21 +16,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    commstats.cpp \
-    main.cpp \
-    taskermainui.cpp \
-    taskeruimainwindow.cpp
+    Widget_CommStats.cpp \
+    main.cpp
 
 HEADERS += \
-    commstats.h \
-    taskermainui.h \
-    taskeruimainwindow.h
+    Widget_CommStats.h
 
 FORMS += \
-    commstats.ui \
-    createcommitment.ui \
-    taskermainui.ui \
-    taskeruimainwindow.ui
+    Widget_CommStats.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,11 +1,12 @@
-#include "taskermainui.h"
-#include "commstats.h"
+#include "Widget_CommStats.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    CommStats c;
+
+    Widget_CommStats c;
     c.show();
+
     return a.exec();
 }
