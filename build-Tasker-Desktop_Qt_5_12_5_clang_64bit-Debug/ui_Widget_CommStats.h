@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'commstats.ui'
+** Form generated from reading UI file 'Widget_CommStats.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.12.5
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_COMMSTATS_H
-#define UI_COMMSTATS_H
+#ifndef UI_WIDGET_COMMSTATS_H
+#define UI_WIDGET_COMMSTATS_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
@@ -24,7 +24,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_CommStats
+class Ui_Widget_CommStats
 {
 public:
     QFrame *Frame_Commitments;
@@ -53,12 +53,12 @@ public:
     QCommandLinkButton *CommandLinkButton_AddNewCommitment;
     QCommandLinkButton *CommandLinkButton_RemoveCommitment;
 
-    void setupUi(QWidget *CommStats)
+    void setupUi(QWidget *Widget_CommStats)
     {
-        if (CommStats->objectName().isEmpty())
-            CommStats->setObjectName(QString::fromUtf8("CommStats"));
-        CommStats->resize(1280, 720);
-        Frame_Commitments = new QFrame(CommStats);
+        if (Widget_CommStats->objectName().isEmpty())
+            Widget_CommStats->setObjectName(QString::fromUtf8("Widget_CommStats"));
+        Widget_CommStats->resize(1280, 720);
+        Frame_Commitments = new QFrame(Widget_CommStats);
         Frame_Commitments->setObjectName(QString::fromUtf8("Frame_Commitments"));
         Frame_Commitments->setGeometry(QRect(0, 30, 271, 661));
         Frame_Commitments->setFrameShape(QFrame::NoFrame);
@@ -93,7 +93,7 @@ public:
         TreeWidget_Commitments->setAlternatingRowColors(true);
         TreeWidget_Commitments->setSelectionMode(QAbstractItemView::SingleSelection);
         TreeWidget_Commitments->header()->setVisible(false);
-        Frame_OverviewStatsNotesMedia = new QFrame(CommStats);
+        Frame_OverviewStatsNotesMedia = new QFrame(Widget_CommStats);
         Frame_OverviewStatsNotesMedia->setObjectName(QString::fromUtf8("Frame_OverviewStatsNotesMedia"));
         Frame_OverviewStatsNotesMedia->setGeometry(QRect(271, 30, 1011, 661));
         Frame_OverviewStatsNotesMedia->setFrameShape(QFrame::NoFrame);
@@ -177,7 +177,7 @@ public:
         CommandLinkButton_RemoveFile = new QCommandLinkButton(GroupBox_NotesMedia);
         CommandLinkButton_RemoveFile->setObjectName(QString::fromUtf8("CommandLinkButton_RemoveFile"));
         CommandLinkButton_RemoveFile->setGeometry(QRect(850, 70, 91, 31));
-        Frame_BottomBar = new QFrame(CommStats);
+        Frame_BottomBar = new QFrame(Widget_CommStats);
         Frame_BottomBar->setObjectName(QString::fromUtf8("Frame_BottomBar"));
         Frame_BottomBar->setGeometry(QRect(0, 690, 1280, 31));
         Frame_BottomBar->setFrameShape(QFrame::NoFrame);
@@ -190,7 +190,7 @@ public:
         font3.setBold(true);
         font3.setWeight(75);
         label->setFont(font3);
-        Frame_TopBar = new QFrame(CommStats);
+        Frame_TopBar = new QFrame(Widget_CommStats);
         Frame_TopBar->setObjectName(QString::fromUtf8("Frame_TopBar"));
         Frame_TopBar->setGeometry(QRect(0, 0, 1281, 41));
         Frame_TopBar->setFrameShape(QFrame::NoFrame);
@@ -203,45 +203,45 @@ public:
         CommandLinkButton_RemoveCommitment->setGeometry(QRect(140, 0, 131, 31));
         CommandLinkButton_RemoveCommitment->setIconSize(QSize(20, 20));
 
-        retranslateUi(CommStats);
+        retranslateUi(Widget_CommStats);
 
-        QMetaObject::connectSlotsByName(CommStats);
+        QMetaObject::connectSlotsByName(Widget_CommStats);
     } // setupUi
 
-    void retranslateUi(QWidget *CommStats)
+    void retranslateUi(QWidget *Widget_CommStats)
     {
-        CommStats->setWindowTitle(QApplication::translate("CommStats", "Tasker - My Commitments", nullptr));
+        Widget_CommStats->setWindowTitle(QApplication::translate("Widget_CommStats", "Tasker - My Commitments", nullptr));
         QTreeWidgetItem *___qtreewidgetitem = TreeWidget_Commitments->headerItem();
-        ___qtreewidgetitem->setText(0, QApplication::translate("CommStats", "COMMITMENTS", nullptr));
+        ___qtreewidgetitem->setText(0, QApplication::translate("Widget_CommStats", "COMMITMENTS", nullptr));
 
         const bool __sortingEnabled = TreeWidget_Commitments->isSortingEnabled();
         TreeWidget_Commitments->setSortingEnabled(false);
         QTreeWidgetItem *___qtreewidgetitem1 = TreeWidget_Commitments->topLevelItem(0);
-        ___qtreewidgetitem1->setText(0, QApplication::translate("CommStats", "Untitled Commitment 0", nullptr));
+        ___qtreewidgetitem1->setText(0, QApplication::translate("Widget_CommStats", "Untitled Commitment 0", nullptr));
         QTreeWidgetItem *___qtreewidgetitem2 = ___qtreewidgetitem1->child(0);
-        ___qtreewidgetitem2->setText(0, QApplication::translate("CommStats", "Session 0 (00/00/00)", nullptr));
+        ___qtreewidgetitem2->setText(0, QApplication::translate("Widget_CommStats", "Session 0 (00/00/00)", nullptr));
         QTreeWidgetItem *___qtreewidgetitem3 = ___qtreewidgetitem1->child(1);
-        ___qtreewidgetitem3->setText(0, QApplication::translate("CommStats", "Session 1 (00/00/00)", nullptr));
+        ___qtreewidgetitem3->setText(0, QApplication::translate("Widget_CommStats", "Session 1 (00/00/00)", nullptr));
         QTreeWidgetItem *___qtreewidgetitem4 = ___qtreewidgetitem1->child(2);
-        ___qtreewidgetitem4->setText(0, QApplication::translate("CommStats", "Session 2 (00/00/00)", nullptr));
+        ___qtreewidgetitem4->setText(0, QApplication::translate("Widget_CommStats", "Session 2 (00/00/00)", nullptr));
         QTreeWidgetItem *___qtreewidgetitem5 = TreeWidget_Commitments->topLevelItem(1);
-        ___qtreewidgetitem5->setText(0, QApplication::translate("CommStats", "Untitled Commitment 1", nullptr));
+        ___qtreewidgetitem5->setText(0, QApplication::translate("Widget_CommStats", "Untitled Commitment 1", nullptr));
         QTreeWidgetItem *___qtreewidgetitem6 = ___qtreewidgetitem5->child(0);
-        ___qtreewidgetitem6->setText(0, QApplication::translate("CommStats", "(no commitments yet)", nullptr));
+        ___qtreewidgetitem6->setText(0, QApplication::translate("Widget_CommStats", "(no commitments yet)", nullptr));
         TreeWidget_Commitments->setSortingEnabled(__sortingEnabled);
 
 #ifndef QT_NO_ACCESSIBILITY
         GroupBox_Overview->setAccessibleName(QString());
 #endif // QT_NO_ACCESSIBILITY
-        GroupBox_Overview->setTitle(QApplication::translate("CommStats", "Untitled Commitment - Session 0", nullptr));
-        Label_ProductiveTime->setText(QApplication::translate("CommStats", "PRODUCTIVE TIME", nullptr));
-        Label_UnproductiveTime->setText(QApplication::translate("CommStats", "UNPRODUCTIVE TIME", nullptr));
-        Label_DurationProductive->setText(QApplication::translate("CommStats", "(00:00:00)", nullptr));
-        Label_DurationUnproductive->setText(QApplication::translate("CommStats", "(00:00:00)", nullptr));
-        Label_TotalTime->setText(QApplication::translate("CommStats", "TOTAL TIME", nullptr));
-        Label_DurationTotal->setText(QApplication::translate("CommStats", "(00:00:00)", nullptr));
-        GroupBox_NotesMedia->setTitle(QApplication::translate("CommStats", "NOTES/MEDIA", nullptr));
-        TextEdit_Notes->setHtml(QApplication::translate("CommStats", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        GroupBox_Overview->setTitle(QApplication::translate("Widget_CommStats", "Untitled Commitment - Session 0", nullptr));
+        Label_ProductiveTime->setText(QApplication::translate("Widget_CommStats", "PRODUCTIVE TIME", nullptr));
+        Label_UnproductiveTime->setText(QApplication::translate("Widget_CommStats", "UNPRODUCTIVE TIME", nullptr));
+        Label_DurationProductive->setText(QApplication::translate("Widget_CommStats", "(00:00:00)", nullptr));
+        Label_DurationUnproductive->setText(QApplication::translate("Widget_CommStats", "(00:00:00)", nullptr));
+        Label_TotalTime->setText(QApplication::translate("Widget_CommStats", "TOTAL TIME", nullptr));
+        Label_DurationTotal->setText(QApplication::translate("Widget_CommStats", "(00:00:00)", nullptr));
+        GroupBox_NotesMedia->setTitle(QApplication::translate("Widget_CommStats", "NOTES/MEDIA", nullptr));
+        TextEdit_Notes->setHtml(QApplication::translate("Widget_CommStats", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
@@ -250,26 +250,26 @@ public:
         const bool __sortingEnabled1 = ListWidget_Files->isSortingEnabled();
         ListWidget_Files->setSortingEnabled(false);
         QListWidgetItem *___qlistwidgetitem = ListWidget_Files->item(0);
-        ___qlistwidgetitem->setText(QApplication::translate("CommStats", "file_0.mp3", nullptr));
+        ___qlistwidgetitem->setText(QApplication::translate("Widget_CommStats", "file_0.mp3", nullptr));
         QListWidgetItem *___qlistwidgetitem1 = ListWidget_Files->item(1);
-        ___qlistwidgetitem1->setText(QApplication::translate("CommStats", "file_1.jpg", nullptr));
+        ___qlistwidgetitem1->setText(QApplication::translate("Widget_CommStats", "file_1.jpg", nullptr));
         QListWidgetItem *___qlistwidgetitem2 = ListWidget_Files->item(2);
-        ___qlistwidgetitem2->setText(QApplication::translate("CommStats", "file_2.cpp", nullptr));
+        ___qlistwidgetitem2->setText(QApplication::translate("Widget_CommStats", "file_2.cpp", nullptr));
         ListWidget_Files->setSortingEnabled(__sortingEnabled1);
 
-        CommandLinkButton_AddFile->setText(QApplication::translate("CommStats", "Add file", nullptr));
-        CommandLinkButton_RemoveFile->setText(QApplication::translate("CommStats", "Remove file", nullptr));
-        label->setText(QApplication::translate("CommStats", "2 total commitments, 00:00:00 productive time, 00:00:00 unproductive time", nullptr));
-        CommandLinkButton_AddNewCommitment->setText(QApplication::translate("CommStats", "Add new commitment", nullptr));
-        CommandLinkButton_RemoveCommitment->setText(QApplication::translate("CommStats", "Remove commitment", nullptr));
+        CommandLinkButton_AddFile->setText(QApplication::translate("Widget_CommStats", "Add file", nullptr));
+        CommandLinkButton_RemoveFile->setText(QApplication::translate("Widget_CommStats", "Remove file", nullptr));
+        label->setText(QApplication::translate("Widget_CommStats", "2 total commitments, 00:00:00 productive time, 00:00:00 unproductive time", nullptr));
+        CommandLinkButton_AddNewCommitment->setText(QApplication::translate("Widget_CommStats", "Add new commitment", nullptr));
+        CommandLinkButton_RemoveCommitment->setText(QApplication::translate("Widget_CommStats", "Remove commitment", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class CommStats: public Ui_CommStats {};
+    class Widget_CommStats: public Ui_Widget_CommStats {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_COMMSTATS_H
+#endif // UI_WIDGET_COMMSTATS_H

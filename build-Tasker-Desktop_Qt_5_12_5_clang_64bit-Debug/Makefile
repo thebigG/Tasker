@@ -52,19 +52,11 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../Tasker/commstats.cpp \
-		../Tasker/main.cpp \
-		../Tasker/taskermainui.cpp \
-		../Tasker/taskeruimainwindow.cpp moc_commstats.cpp \
-		moc_taskermainui.cpp \
-		moc_taskeruimainwindow.cpp
-OBJECTS       = commstats.o \
+SOURCES       = ../Tasker/Widget_CommStats.cpp \
+		../Tasker/main.cpp moc_Widget_CommStats.cpp
+OBJECTS       = Widget_CommStats.o \
 		main.o \
-		taskermainui.o \
-		taskeruimainwindow.o \
-		moc_commstats.o \
-		moc_taskermainui.o \
-		moc_taskeruimainwindow.o
+		moc_Widget_CommStats.o
 DIST          = /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/qdevice.pri \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/device_config.prf \
@@ -226,7 +218,6 @@ DIST          = /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_p
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/qt_config.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_post.prf \
-		../Tasker/.qmake.stash \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/toolchain.prf \
@@ -254,12 +245,8 @@ DIST          = /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_p
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/exceptions.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/yacc.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/lex.prf \
-		../Tasker/Tasker.pro ../Tasker/commstats.h \
-		../Tasker/taskermainui.h \
-		../Tasker/taskeruimainwindow.h ../Tasker/commstats.cpp \
-		../Tasker/main.cpp \
-		../Tasker/taskermainui.cpp \
-		../Tasker/taskeruimainwindow.cpp
+		../Tasker/Tasker.pro ../Tasker/Widget_CommStats.h ../Tasker/Widget_CommStats.cpp \
+		../Tasker/main.cpp
 QMAKE_TARGET  = Tasker
 DESTDIR       = 
 TARGET        = Tasker.app/Contents/MacOS/Tasker
@@ -278,7 +265,7 @@ include /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-Tasker.app/Contents/MacOS/Tasker: ui_commstats.h ui_createcommitment.h ui_taskermainui.h ui_taskeruimainwindow.h $(OBJECTS)  
+Tasker.app/Contents/MacOS/Tasker: ui_Widget_CommStats.h $(OBJECTS)  
 	@test -d Tasker.app/Contents/MacOS/ || mkdir -p Tasker.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -443,7 +430,6 @@ Makefile: ../Tasker/Tasker.pro /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/qt_config.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/toolchain.prf \
@@ -637,7 +623,6 @@ Makefile: ../Tasker/Tasker.pro /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/
 /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/qt_config.prf:
 /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang/qmake.conf:
 /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/exclusive_builds.prf:
 /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/mac/sdk.prf:
 /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/toolchain.prf:
@@ -699,9 +684,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/commstats.h ../Tasker/taskermainui.h ../Tasker/taskeruimainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/commstats.cpp ../Tasker/main.cpp ../Tasker/taskermainui.cpp ../Tasker/taskeruimainwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/commstats.ui ../Tasker/createcommitment.ui ../Tasker/taskermainui.ui ../Tasker/taskeruimainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/Widget_CommStats.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/Widget_CommStats.cpp ../Tasker/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/Widget_CommStats.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -711,7 +696,6 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r Tasker.app
-	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -736,56 +720,26 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/data/dummy.cpp
 	/Library/Developer/CommandLineTools/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.12 -Wall -W -dM -E -o moc_predefs.h /Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_commstats.cpp moc_taskermainui.cpp moc_taskeruimainwindow.cpp
+compiler_moc_header_make_all: moc_Widget_CommStats.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_commstats.cpp moc_taskermainui.cpp moc_taskeruimainwindow.cpp
-moc_commstats.cpp: ../Tasker/commstats.h \
+	-$(DEL_FILE) moc_Widget_CommStats.cpp
+moc_Widget_CommStats.cpp: ../Tasker/Widget_CommStats.h \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		moc_predefs.h \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc
-	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc $(DEFINES) --include /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/build-Tasker-Desktop_Qt_5_12_5_clang_64bit-Debug/moc_predefs.h -I/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang -I/Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtGui.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include -I/Library/Developer/CommandLineTools/usr/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include -F/Users/gemuelealudino/Qt/5.12.5/clang_64/lib ../Tasker/commstats.h -o moc_commstats.cpp
-
-moc_taskermainui.cpp: ../Tasker/taskermainui.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		moc_predefs.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc
-	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc $(DEFINES) --include /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/build-Tasker-Desktop_Qt_5_12_5_clang_64bit-Debug/moc_predefs.h -I/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang -I/Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtGui.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include -I/Library/Developer/CommandLineTools/usr/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include -F/Users/gemuelealudino/Qt/5.12.5/clang_64/lib ../Tasker/taskermainui.h -o moc_taskermainui.cpp
-
-moc_taskeruimainwindow.cpp: ../Tasker/taskeruimainwindow.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QFrame \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
-		moc_predefs.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc
-	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc $(DEFINES) --include /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/build-Tasker-Desktop_Qt_5_12_5_clang_64bit-Debug/moc_predefs.h -I/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang -I/Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtGui.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include -I/Library/Developer/CommandLineTools/usr/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include -F/Users/gemuelealudino/Qt/5.12.5/clang_64/lib ../Tasker/taskeruimainwindow.h -o moc_taskeruimainwindow.cpp
+	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/moc $(DEFINES) --include /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/build-Tasker-Desktop_Qt_5_12_5_clang_64bit-Debug/moc_predefs.h -I/Users/gemuelealudino/Qt/5.12.5/clang_64/mkspecs/macx-clang -I/Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtGui.framework/Headers -I/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include -I/Library/Developer/CommandLineTools/usr/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include -F/Users/gemuelealudino/Qt/5.12.5/clang_64/lib ../Tasker/Widget_CommStats.h -o moc_Widget_CommStats.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_commstats.h ui_createcommitment.h ui_taskermainui.h ui_taskeruimainwindow.h
+compiler_uic_make_all: ui_Widget_CommStats.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_commstats.h ui_createcommitment.h ui_taskermainui.h ui_taskeruimainwindow.h
-ui_commstats.h: ../Tasker/commstats.ui \
+	-$(DEL_FILE) ui_Widget_CommStats.h
+ui_Widget_CommStats.h: ../Tasker/Widget_CommStats.ui \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic
-	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic ../Tasker/commstats.ui -o ui_commstats.h
-
-ui_createcommitment.h: ../Tasker/createcommitment.ui \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic
-	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic ../Tasker/createcommitment.ui -o ui_createcommitment.h
-
-ui_taskermainui.h: ../Tasker/taskermainui.ui \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic
-	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic ../Tasker/taskermainui.ui -o ui_taskermainui.h
-
-ui_taskeruimainwindow.h: ../Tasker/taskeruimainwindow.ui \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic
-	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic ../Tasker/taskeruimainwindow.ui -o ui_taskeruimainwindow.h
+	/Users/gemuelealudino/Qt/5.12.5/clang_64/bin/uic ../Tasker/Widget_CommStats.ui -o ui_Widget_CommStats.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -799,46 +753,21 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-commstats.o: ../Tasker/commstats.cpp ../Tasker/commstats.h \
+Widget_CommStats.o: ../Tasker/Widget_CommStats.cpp ../Tasker/Widget_CommStats.h \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		ui_commstats.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o commstats.o ../Tasker/commstats.cpp
+		ui_Widget_CommStats.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Widget_CommStats.o ../Tasker/Widget_CommStats.cpp
 
-main.o: ../Tasker/main.cpp ../Tasker/taskermainui.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		../Tasker/commstats.h \
+main.o: ../Tasker/main.cpp ../Tasker/Widget_CommStats.h \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Tasker/main.cpp
 
-taskermainui.o: ../Tasker/taskermainui.cpp ../Tasker/taskermainui.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		ui_taskermainui.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o taskermainui.o ../Tasker/taskermainui.cpp
-
-taskeruimainwindow.o: ../Tasker/taskeruimainwindow.cpp ../Tasker/taskeruimainwindow.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/QFrame \
-		/Users/gemuelealudino/Qt/5.12.5/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
-		ui_taskeruimainwindow.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o taskeruimainwindow.o ../Tasker/taskeruimainwindow.cpp
-
-moc_commstats.o: moc_commstats.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_commstats.o moc_commstats.cpp
-
-moc_taskermainui.o: moc_taskermainui.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_taskermainui.o moc_taskermainui.cpp
-
-moc_taskeruimainwindow.o: moc_taskeruimainwindow.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_taskeruimainwindow.o moc_taskeruimainwindow.cpp
+moc_Widget_CommStats.o: moc_Widget_CommStats.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Widget_CommStats.o moc_Widget_CommStats.cpp
 
 ####### Install
 
