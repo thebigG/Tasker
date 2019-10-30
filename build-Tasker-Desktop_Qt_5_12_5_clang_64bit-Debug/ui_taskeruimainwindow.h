@@ -30,24 +30,34 @@ public:
     {
         if (TaskerUIMainWindow->objectName().isEmpty())
             TaskerUIMainWindow->setObjectName(QString::fromUtf8("TaskerUIMainWindow"));
-        TaskerUIMainWindow->resize(450, 450);
+        TaskerUIMainWindow->resize(640, 90);
         QFrame_Welcome = new QFrame(TaskerUIMainWindow);
         QFrame_Welcome->setObjectName(QString::fromUtf8("QFrame_Welcome"));
-        QFrame_Welcome->setGeometry(QRect(0, 0, 450, 450));
+        QFrame_Welcome->setGeometry(QRect(0, 0, 640, 90));
         QFrame_Welcome->setFrameShape(QFrame::StyledPanel);
         QFrame_Welcome->setFrameShadow(QFrame::Raised);
         QPushButton_MakeCommitment = new QPushButton(QFrame_Welcome);
         QPushButton_MakeCommitment->setObjectName(QString::fromUtf8("QPushButton_MakeCommitment"));
-        QPushButton_MakeCommitment->setGeometry(QRect(20, 380, 161, 24));
+        QPushButton_MakeCommitment->setGeometry(QRect(128, 50, 130, 30));
+        QFont font;
+        font.setPointSize(12);
+        font.setBold(false);
+        font.setWeight(50);
+        QPushButton_MakeCommitment->setFont(font);
         QPushButton_QuickSession = new QPushButton(QFrame_Welcome);
         QPushButton_QuickSession->setObjectName(QString::fromUtf8("QPushButton_QuickSession"));
-        QPushButton_QuickSession->setGeometry(QRect(270, 380, 161, 24));
+        QPushButton_QuickSession->setGeometry(QRect(384, 50, 130, 30));
+        QFont font1;
+        font1.setPointSize(12);
+        QPushButton_QuickSession->setFont(font1);
         QLabel_Welcome = new QLabel(QFrame_Welcome);
         QLabel_Welcome->setObjectName(QString::fromUtf8("QLabel_Welcome"));
-        QLabel_Welcome->setGeometry(QRect(80, 140, 301, 20));
-        QFont font;
-        font.setPointSize(14);
-        QLabel_Welcome->setFont(font);
+        QLabel_Welcome->setGeometry(QRect(180, 10, 271, 20));
+        QFont font2;
+        font2.setPointSize(14);
+        font2.setBold(true);
+        font2.setWeight(75);
+        QLabel_Welcome->setFont(font2);
         QLabel_Welcome->setScaledContents(true);
 
         retranslateUi(TaskerUIMainWindow);
