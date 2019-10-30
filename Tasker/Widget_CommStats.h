@@ -15,6 +15,9 @@ public:
     explicit Widget_CommStats(QWidget *parent = nullptr);
     ~Widget_CommStats();
 
+private slots:
+    void on_CommandLinkButton_AddNewCommitment_clicked();
+
 private:
     Ui::Widget_CommStats *ui;
 };

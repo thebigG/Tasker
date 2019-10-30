@@ -10,6 +10,8 @@ TaskerUIMainWindow::TaskerUIMainWindow(QWidget *parent)
 
     x = new createcommitment();
     this->setWindowTitle("Tasker");
+
+    wc = new Widget_CommStats();
 }
 
 QPushButton *TaskerUIMainWindow::getButton() {
@@ -22,6 +24,10 @@ createcommitment *TaskerUIMainWindow::getCreateCommitment() {
 
 QFrame *TaskerUIMainWindow::getWelcomeFrame() {
     return ui->QFrame_Welcome;
+}
+
+Widget_CommStats *TaskerUIMainWindow::getCommStats() {
+    return wc;
 }
 
 TaskerUIMainWindow::~TaskerUIMainWindow() {

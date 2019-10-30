@@ -35,3 +35,6 @@ void createcommitment::on_comboBox_2_currentIndexChanged(const QString &arg1) {
         this->getKeyboardCheckBox()->setCheckState(Qt::CheckState{ Qt::Unchecked });
     }
 }
+
+
+
