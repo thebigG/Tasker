@@ -1,21 +1,30 @@
-#include <QApplication>
-
+#include "createcommitment.h"
 #include "taskeruimainwindow.h"
 #include "Widget_CommStats.h"
-#include "createcommitment.h"
 
-int main(int argc, char *argv[])
-{
+#include <QApplication>
+#include <Qt>
+#include <stdio.h>
+#include <stdlib.h>
+
+static TaskerUIMainWindow* f = nullptr;
+
+int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
+    f = new TaskerUIMainWindow;
 
-    TaskerUIMainWindow mw;
-    createcommitment cc;
-    Widget_CommStats cs;
-
-    cs.show();
-    cc.show();
-
-    mw.show();
-
+    f->show();
     return a.exec();
+}
+
+void TaskerUIMainWindow::on_QPushButton_MakeCommitment_clicked() {
+   f->hide();
+   f->getCreateCommitment()->show();
+
+   emit hello_clicked();
+}
+
+void createcommitment::on_pushButton_2_clicked() {
+    this->hide();
+    f->show();
 }

@@ -1,11 +1,10 @@
 #ifndef TASKERUIMAINWINDOW_H
 #define TASKERUIMAINWINDOW_H
 
-#include <QWidget>
-#include <QPushButton>
-#include <QFrame>
-
 #include "createcommitment.h"
+#include <QFrame>
+#include <QPushButton>
+#include <QWidget>
 
 namespace Ui {
 class TaskerUIMainWindow;
@@ -14,25 +13,24 @@ class TaskerUIMainWindow;
 class TaskerUIMainWindow : public QWidget {
     Q_OBJECT
 
-public:
+    public:
     explicit TaskerUIMainWindow(QWidget *parent = nullptr);
     ~TaskerUIMainWindow();
 
-    QPushButton* getButton();
-    QFrame* getWelcomeFrame();
-    createcommitment* getCreateCommitment();
+    QPushButton *getButton();
+    createcommitment *getCreateCommitment();
+    QFrame *getWelcomeFrame();
 
-public slots:
-    void on_TaskerUIMainWindow_windowIconTextChanged(const QString &iconText);
+    public slots:
+
     void on_QPushButton_MakeCommitment_clicked();
 
-public:
+    public:
     Ui::TaskerUIMainWindow *ui;
 
-private:
-    createcommitment* x;
-
-signals:
+    private:
+    createcommitment *x;
+    signals:
     void hello_clicked();
 };
 

@@ -1,28 +1,32 @@
 #ifndef CREATECOMMITMENT_H
 #define CREATECOMMITMENT_H
 
+#include <QCheckBox>
+#include <QIntValidator>
 #include <QWidget>
 
 namespace Ui {
 class createcommitment;
 }
 
-class createcommitment : public QWidget
-{
+class createcommitment : public QWidget {
     Q_OBJECT
 
-public:
+    public:
     explicit createcommitment(QWidget *parent = nullptr);
     ~createcommitment();
 
-private slots:
+    QCheckBox *getKeyboardCheckBox();
+    QCheckBox *getAudioCheckBox();
+
+    QValidator *validator;
+
+    private slots:
     void on_pushButton_2_clicked();
+    void on_comboBox_2_currentIndexChanged(const QString &arg1);
 
-private:
+    private:
     Ui::createcommitment *ui;
-
-
 };
 
 #endif // CREATECOMMITMENT_H
-
