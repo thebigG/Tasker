@@ -1,14 +1,14 @@
+#include "Widget_CommStats.h"
 #include "createcommitment.h"
 #include "taskeruimainwindow.h"
-#include "Widget_CommStats.h"
 
 #include <QApplication>
+#include <QDebug>
 #include <Qt>
 #include <stdio.h>
 #include <stdlib.h>
-#include <QDebug>
 
-static TaskerUIMainWindow* f = nullptr;
+static TaskerUIMainWindow *f = nullptr;
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
@@ -19,14 +19,11 @@ int main(int argc, char *argv[]) {
 }
 
 void TaskerUIMainWindow::on_QPushButton_MakeCommitment_clicked() {
-   f->hide();
-   f->getCreateCommitment()->show();
-
-   /*emit hello_clicked();*/
+    f->hide();
+    f->getCreateCommitment()->show();
 }
 
 void createcommitment::on_pushButton_clicked() {
-
     this->hide();
     Widget_CommStats *wc = f->getCommStats();
     wc->show();
@@ -37,23 +34,19 @@ void createcommitment::on_pushButton_2_clicked() {
     f->show();
 }
 
-void Widget_CommStats::on_CommandLinkButton_AddNewCommitment_clicked()
-{
+void Widget_CommStats::on_CommandLinkButton_AddNewCommitment_clicked() {
     this->hide();
     createcommitment *cc = f->getCreateCommitment();
     cc->show();
 }
 
-void TaskerUIMainWindow::on_QPushButton_QuickSession_clicked()
-{
+void TaskerUIMainWindow::on_QPushButton_QuickSession_clicked() {
     this->hide();
     timerwindow *tw = f->getTimerWindow();
     tw->show();
-
 }
 
-void timerwindow::on_pushButton_2_clicked()
-{
+void timerwindow::on_pushButton_2_clicked() {
     this->hide();
     f->show();
 }

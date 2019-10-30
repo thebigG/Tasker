@@ -5,9 +5,8 @@
 
 #include <QtCharts/QBarSeries>
 
-Widget_CommStats::Widget_CommStats(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Widget_CommStats) {
+Widget_CommStats::Widget_CommStats(QWidget *parent)
+: QWidget(parent), ui(new Ui::Widget_CommStats) {
     ui->setupUi(this);
 
     MainWidget *mw = new MainWidget;
@@ -18,13 +17,10 @@ Widget_CommStats::Widget_CommStats(QWidget *parent) :
     layout->addWidget(mw);
     fstats->setLayout(layout);
 
-
-
-
-
+    /* layout is dynamically allocated..delete it with conditions later */
+    /* layout will cause a leak */
 }
 
-Widget_CommStats::~Widget_CommStats()
-{
+Widget_CommStats::~Widget_CommStats() {
     delete ui;
 }

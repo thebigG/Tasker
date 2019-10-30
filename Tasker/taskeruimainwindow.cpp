@@ -37,6 +37,9 @@ timerwindow *TaskerUIMainWindow::getTimerWindow() {
 }
 
 TaskerUIMainWindow::~TaskerUIMainWindow() {
+    delete tw;
+    delete wc;
+    delete x;
+
     delete ui;
 }
-

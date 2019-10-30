@@ -2,29 +2,29 @@
 #ifndef MAINWIDGET_H
 #define MAINWIDGET_H
 
-#include <QtCharts/QChartGlobal>
+#include <QtCharts/QBarSeries>
 #include <QtCharts/QChart>
+#include <QtCharts/QChartGlobal>
 #include <QtCharts/QChartView>
-#include <QtWidgets/QWidget>
+#include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QGraphicsGridLayout>
 #include <QtWidgets/QGraphicsWidget>
 #include <QtWidgets/QGridLayout>
-#include <QtWidgets/QGraphicsGridLayout>
-#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGroupBox>
-#include <QtCharts/QBarSeries>
+#include <QtWidgets/QWidget>
 
 QT_CHARTS_USE_NAMESPACE
 
-class MainWidget : public QWidget
-{
+class MainWidget : public QWidget {
     Q_OBJECT
-public:
+
+    public:
     explicit MainWidget(QWidget *parent = 0);
     void createSeries();
     void showLegendSpinbox();
     void hideLegendSpinbox();
 
-public Q_SLOTS:
+    public Q_SLOTS:
     void toggleAttached();
     void addBarset();
     void removeBarset();
@@ -37,7 +37,7 @@ public Q_SLOTS:
 
     void updateLegendLayout();
 
-private:
+    private:
     QChart *m_chart;
     QBarSeries *m_series;
 

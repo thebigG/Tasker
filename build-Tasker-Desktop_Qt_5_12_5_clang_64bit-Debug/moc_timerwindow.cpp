@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'Widget_CommStats.h'
+** Meta object code from reading C++ file 'timerwindow.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.5)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../Tasker/Widget_CommStats.h"
+#include "../Tasker/timerwindow.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'Widget_CommStats.h' doesn't include <QObject>."
+#error "The header file 'timerwindow.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.12.5. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,29 +20,28 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_Widget_CommStats_t {
+struct qt_meta_stringdata_timerwindow_t {
     QByteArrayData data[3];
-    char stringdata0[64];
+    char stringdata0[37];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_Widget_CommStats_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_timerwindow_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_Widget_CommStats_t qt_meta_stringdata_Widget_CommStats = {
+static const qt_meta_stringdata_timerwindow_t qt_meta_stringdata_timerwindow = {
     {
-QT_MOC_LITERAL(0, 0, 16), // "Widget_CommStats"
-QT_MOC_LITERAL(1, 17, 45), // "on_CommandLinkButton_AddNewCo..."
-QT_MOC_LITERAL(2, 63, 0) // ""
+QT_MOC_LITERAL(0, 0, 11), // "timerwindow"
+QT_MOC_LITERAL(1, 12, 23), // "on_pushButton_2_clicked"
+QT_MOC_LITERAL(2, 36, 0) // ""
 
     },
-    "Widget_CommStats\0"
-    "on_CommandLinkButton_AddNewCommitment_clicked\0"
+    "timerwindow\0on_pushButton_2_clicked\0"
     ""
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_Widget_CommStats[] = {
+static const uint qt_meta_data_timerwindow[] = {
 
  // content:
        8,       // revision
@@ -64,43 +63,43 @@ static const uint qt_meta_data_Widget_CommStats[] = {
        0        // eod
 };
 
-void Widget_CommStats::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void timerwindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<Widget_CommStats *>(_o);
+        auto *_t = static_cast<timerwindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_CommandLinkButton_AddNewCommitment_clicked(); break;
+        case 0: _t->on_pushButton_2_clicked(); break;
         default: ;
         }
     }
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject Widget_CommStats::staticMetaObject = { {
+QT_INIT_METAOBJECT const QMetaObject timerwindow::staticMetaObject = { {
     &QWidget::staticMetaObject,
-    qt_meta_stringdata_Widget_CommStats.data,
-    qt_meta_data_Widget_CommStats,
+    qt_meta_stringdata_timerwindow.data,
+    qt_meta_data_timerwindow,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *Widget_CommStats::metaObject() const
+const QMetaObject *timerwindow::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *Widget_CommStats::qt_metacast(const char *_clname)
+void *timerwindow::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_Widget_CommStats.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_timerwindow.stringdata0))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int Widget_CommStats::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int timerwindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)

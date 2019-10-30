@@ -35,7 +35,6 @@ public:
     QLabel *label_4;
     QLineEdit *lineEdit_2;
     QLabel *label_5;
-    QLineEdit *lineEdit_3;
     QLabel *label_6;
     QLabel *label_7;
     QComboBox *comboBox;
@@ -48,6 +47,7 @@ public:
     QCheckBox *checkBox_3;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
+    QComboBox *QLineEdit_Qty;
 
     void setupUi(QWidget *createcommitment)
     {
@@ -95,14 +95,11 @@ public:
         lineEdit_2->setGeometry(QRect(70, 190, 41, 25));
         label_5 = new QLabel(QFrame_CreateCommitment);
         label_5->setObjectName(QString::fromUtf8("label_5"));
-        label_5->setGeometry(QRect(140, 170, 58, 16));
+        label_5->setGeometry(QRect(120, 170, 58, 16));
         label_5->setFont(font1);
-        lineEdit_3 = new QLineEdit(QFrame_CreateCommitment);
-        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
-        lineEdit_3->setGeometry(QRect(140, 190, 41, 25));
         label_6 = new QLabel(QFrame_CreateCommitment);
         label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setGeometry(QRect(210, 190, 21, 25));
+        label_6->setGeometry(QRect(220, 190, 21, 25));
         QFont font2;
         font2.setPointSize(12);
         font2.setBold(true);
@@ -118,6 +115,9 @@ public:
         comboBox->addItem(QString());
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
         comboBox->setGeometry(QRect(270, 190, 79, 25));
+        QFont font3;
+        font3.setPointSize(12);
+        comboBox->setFont(font3);
         label_8 = new QLabel(QFrame_CreateCommitment);
         label_8->setObjectName(QString::fromUtf8("label_8"));
         label_8->setGeometry(QRect(140, 240, 31, 25));
@@ -126,6 +126,7 @@ public:
         comboBox_2->addItem(QString());
         comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
         comboBox_2->setGeometry(QRect(180, 240, 91, 25));
+        comboBox_2->setFont(font3);
         label_9 = new QLabel(QFrame_CreateCommitment);
         label_9->setObjectName(QString::fromUtf8("label_9"));
         label_9->setGeometry(QRect(140, 280, 58, 25));
@@ -139,19 +140,28 @@ public:
         comboBox_3->addItem(QString());
         comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
         comboBox_3->setGeometry(QRect(230, 320, 121, 25));
+        comboBox_3->setFont(font3);
         checkBox_3 = new QCheckBox(QFrame_CreateCommitment);
         checkBox_3->setObjectName(QString::fromUtf8("checkBox_3"));
         checkBox_3->setGeometry(QRect(40, 360, 231, 25));
         pushButton = new QPushButton(QFrame_CreateCommitment);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(40, 390, 150, 25));
-        QFont font3;
-        font3.setBold(false);
-        font3.setWeight(50);
-        pushButton->setFont(font3);
+        QFont font4;
+        font4.setPointSize(12);
+        font4.setBold(false);
+        font4.setWeight(50);
+        pushButton->setFont(font4);
         pushButton_2 = new QPushButton(QFrame_CreateCommitment);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
         pushButton_2->setGeometry(QRect(230, 390, 150, 25));
+        pushButton_2->setFont(font3);
+        QLineEdit_Qty = new QComboBox(QFrame_CreateCommitment);
+        QLineEdit_Qty->addItem(QString());
+        QLineEdit_Qty->addItem(QString());
+        QLineEdit_Qty->setObjectName(QString::fromUtf8("QLineEdit_Qty"));
+        QLineEdit_Qty->setGeometry(QRect(120, 190, 81, 25));
+        QLineEdit_Qty->setFont(font3);
 
         retranslateUi(createcommitment);
 
@@ -167,7 +177,6 @@ public:
         label_4->setText(QApplication::translate("createcommitment", "Qty", nullptr));
         lineEdit_2->setText(QApplication::translate("createcommitment", "1", nullptr));
         label_5->setText(QApplication::translate("createcommitment", "Units", nullptr));
-        lineEdit_3->setText(QApplication::translate("createcommitment", "hr", nullptr));
         label_6->setText(QApplication::translate("createcommitment", "per", nullptr));
         label_7->setText(QApplication::translate("createcommitment", "Units", nullptr));
         comboBox->setItemText(0, QApplication::translate("createcommitment", "Day", nullptr));
@@ -186,6 +195,9 @@ public:
         checkBox_3->setText(QApplication::translate("createcommitment", "Make this my default commitment", nullptr));
         pushButton->setText(QApplication::translate("createcommitment", "Create Commitment", nullptr));
         pushButton_2->setText(QApplication::translate("createcommitment", "Back", nullptr));
+        QLineEdit_Qty->setItemText(0, QApplication::translate("createcommitment", "Minute(s)", nullptr));
+        QLineEdit_Qty->setItemText(1, QApplication::translate("createcommitment", "Hour(s)", nullptr));
+
     } // retranslateUi
 
 };

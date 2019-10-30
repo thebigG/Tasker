@@ -7,18 +7,17 @@ namespace Ui {
 class Widget_CommStats;
 }
 
-class Widget_CommStats : public QWidget
-{
+class Widget_CommStats : public QWidget {
     Q_OBJECT
 
-public:
+    public:
     explicit Widget_CommStats(QWidget *parent = nullptr);
     ~Widget_CommStats();
 
-private slots:
+    private slots:
     void on_CommandLinkButton_AddNewCommitment_clicked();
 
-private:
+    private:
     Ui::Widget_CommStats *ui;
 };
 

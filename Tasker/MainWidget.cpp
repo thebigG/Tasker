@@ -1,20 +1,18 @@
 #include "MainWidget.h"
+
 //#include <QCharts>
 #include <QtCharts/QBarSeries>
-#include <QtCharts/QChartView>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QLabel>
-#include <QtCore/QDebug>
 #include <QtCharts/QBarSet>
-#include <QtCharts/QBarSeries>
+#include <QtCharts/QChartView>
 #include <QtCharts/QLegend>
+#include <QtCore/QDebug>
 #include <QtWidgets/QFormLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 
 QT_CHARTS_USE_NAMESPACE
 
-MainWidget::MainWidget(QWidget *parent) :
-    QWidget(parent)
-{
+MainWidget::MainWidget(QWidget *parent) : QWidget(parent) {
     // Create buttons for ui
 
     m_buttonLayout = new QGridLayout();
@@ -71,7 +69,7 @@ MainWidget::MainWidget(QWidget *parent) :
     m_legendSettings->setVisible(false);
 
     // Create chart view with the chart
-      m_chart = new QChart();
+    m_chart = new QChart();
     m_chartView = new QChartView(m_chart, this);
 
     // Create spinbox to modify font size
@@ -98,8 +96,7 @@ MainWidget::MainWidget(QWidget *parent) :
     createSeries();
 }
 
-void MainWidget::createSeries()
-{
+void MainWidget::createSeries() {
     m_series = new QBarSeries();
     addBarset();
     addBarset();
@@ -109,16 +106,15 @@ void MainWidget::createSeries()
     m_chart->addSeries(m_series);
     m_chart->setTitle("Untitled Commitment 0");
     m_chart->createDefaultAxes();
-//![1]
+    //![1]
     m_chart->legend()->setVisible(true);
     m_chart->legend()->setAlignment(Qt::AlignBottom);
-//![1]
+    //![1]
 
     m_chartView->setRenderHint(QPainter::Antialiasing);
 }
 
-void MainWidget::showLegendSpinbox()
-{
+void MainWidget::showLegendSpinbox() {
     m_legendSettings->setVisible(true);
     QRectF chartViewRect = m_chartView->rect();
 
@@ -139,14 +135,11 @@ void MainWidget::showLegendSpinbox()
     m_legendHeight->setValue(75);
 }
 
-void MainWidget::hideLegendSpinbox()
-{
+void MainWidget::hideLegendSpinbox() {
     m_legendSettings->setVisible(false);
 }
 
-
-void MainWidget::toggleAttached()
-{
+void MainWidget::toggleAttached() {
     QLegend *legend = m_chart->legend();
     if (legend->isAttachedToChart()) {
         //![2]
@@ -167,24 +160,22 @@ void MainWidget::toggleAttached()
     update();
 }
 
-void MainWidget::addBarset()
-{
-    QBarSet *barSet = new QBarSet(QString("session ") + QString::number(m_series->count()));
+void MainWidget::addBarset() {
+    QBarSet *barSet =
+        new QBarSet(QString("session ") + QString::number(m_series->count()));
     qreal delta = m_series->count() * 0.1;
     *barSet << 1 + delta << 2 + delta << 3 + delta << 4 + delta;
     m_series->append(barSet);
 }
 
-void MainWidget::removeBarset()
-{
+void MainWidget::removeBarset() {
     QList<QBarSet *> sets = m_series->barSets();
     if (sets.count() > 0) {
         m_series->remove(sets.at(sets.count() - 1));
     }
 }
 
-void MainWidget::setLegendAlignment()
-{
+void MainWidget::setLegendAlignment() {
     QPushButton *button = qobject_cast<QPushButton *>(sender());
 
     switch (m_chart->legend()->alignment()) {
@@ -211,34 +202,29 @@ void MainWidget::setLegendAlignment()
     }
 }
 
-void MainWidget::toggleBold()
-{
+void MainWidget::toggleBold() {
     QFont font = m_chart->legend()->font();
     font.setBold(!font.bold());
     m_chart->legend()->setFont(font);
 }
 
-void MainWidget::toggleItalic()
-{
+void MainWidget::toggleItalic() {
     QFont font = m_chart->legend()->font();
     font.setItalic(!font.italic());
     m_chart->legend()->setFont(font);
 }
 
-void MainWidget::fontSizeChanged()
-{
+void MainWidget::fontSizeChanged() {
     QFont font = m_chart->legend()->font();
     font.setPointSizeF(m_fontSize->value());
     m_chart->legend()->setFont(font);
 }
 
-void MainWidget::updateLegendLayout()
-{
-//![4]
-    m_chart->legend()->setGeometry(QRectF(m_legendPosX->value(),
-                                          m_legendPosY->value(),
-                                          m_legendWidth->value(),
-                                          m_legendHeight->value()));
+void MainWidget::updateLegendLayout() {
+    //![4]
+    m_chart->legend()->setGeometry(
+        QRectF(m_legendPosX->value(), m_legendPosY->value(),
+               m_legendWidth->value(), m_legendHeight->value()));
     m_chart->legend()->update();
-//![4]
+    //![4]
 }

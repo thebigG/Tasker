@@ -1,8 +1,8 @@
 #ifndef TASKERUIMAINWINDOW_H
 #define TASKERUIMAINWINDOW_H
 
-#include "createcommitment.h"
 #include "Widget_CommStats.h"
+#include "createcommitment.h"
 #include "timerwindow.h"
 
 #include <QFrame>
@@ -26,25 +26,19 @@ class TaskerUIMainWindow : public QWidget {
     Widget_CommStats *getCommStats();
     timerwindow *getTimerWindow();
 
-
     public slots:
     void on_QPushButton_MakeCommitment_clicked();
 
     public:
     Ui::TaskerUIMainWindow *ui;
 
-private slots:
+    private slots:
     void on_QPushButton_QuickSession_clicked();
 
-private:
+    private:
     createcommitment *x;
     Widget_CommStats *wc;
     timerwindow *tw;
-
-    /*
-    signals:
-    void hello_clicked();
-    */
 };
 
 #endif // TASKERUIMAINWINDOW_H

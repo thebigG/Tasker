@@ -7,18 +7,17 @@ namespace Ui {
 class timerwindow;
 }
 
-class timerwindow : public QWidget
-{
+class timerwindow : public QWidget {
     Q_OBJECT
 
-public:
+    public:
     explicit timerwindow(QWidget *parent = nullptr);
     ~timerwindow();
 
-private slots:
+    private slots:
     void on_pushButton_2_clicked();
 
-private:
+    private:
     Ui::timerwindow *ui;
 };
 

@@ -23,7 +23,6 @@ QCheckBox *createcommitment::getAudioCheckBox() {
 }
 
 void createcommitment::on_comboBox_2_currentIndexChanged(const QString &arg1) {
-
     if (arg1 == QString("Writing")) {
         this->getKeyboardCheckBox()->setCheckState(Qt::CheckState{ Qt::Checked });
         this->getAudioCheckBox()->setCheckState(Qt::CheckState{ Qt::Unchecked });
@@ -35,6 +34,3 @@ void createcommitment::on_comboBox_2_currentIndexChanged(const QString &arg1) {
         this->getKeyboardCheckBox()->setCheckState(Qt::CheckState{ Qt::Unchecked });
     }
 }
-
-
-
