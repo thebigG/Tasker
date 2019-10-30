@@ -21,18 +21,21 @@ SOURCES += \
     Widget_CommStats.cpp \
     createcommitment.cpp \
     main.cpp \
-    taskeruimainwindow.cpp
+    taskeruimainwindow.cpp \
+    timerwindow.cpp
 
 HEADERS += \
     MainWidget.h \
     Widget_CommStats.h \
     createcommitment.h \
-    taskeruimainwindow.h
+    taskeruimainwindow.h \
+    timerwindow.h
 
 FORMS += \
     Widget_CommStats.ui \
     createcommitment.ui \
-    taskeruimainwindow.ui
+    taskeruimainwindow.ui \
+    timerwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

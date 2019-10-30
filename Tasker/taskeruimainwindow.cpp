@@ -12,6 +12,8 @@ TaskerUIMainWindow::TaskerUIMainWindow(QWidget *parent)
     this->setWindowTitle("Tasker");
 
     wc = new Widget_CommStats();
+
+    tw = new timerwindow();
 }
 
 QPushButton *TaskerUIMainWindow::getButton() {
@@ -30,6 +32,11 @@ Widget_CommStats *TaskerUIMainWindow::getCommStats() {
     return wc;
 }
 
+timerwindow *TaskerUIMainWindow::getTimerWindow() {
+    return tw;
+}
+
 TaskerUIMainWindow::~TaskerUIMainWindow() {
     delete ui;
 }
+

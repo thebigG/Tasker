@@ -43,3 +43,17 @@ void Widget_CommStats::on_CommandLinkButton_AddNewCommitment_clicked()
     createcommitment *cc = f->getCreateCommitment();
     cc->show();
 }
+
+void TaskerUIMainWindow::on_QPushButton_QuickSession_clicked()
+{
+    this->hide();
+    timerwindow *tw = f->getTimerWindow();
+    tw->show();
+
+}
+
+void timerwindow::on_pushButton_2_clicked()
+{
+    this->hide();
+    f->show();
+}
