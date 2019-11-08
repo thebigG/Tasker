@@ -19,7 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     MainWidget.cpp \
     Widget_CommStats.cpp \
-    createcommitment.cpp \
+    createcommitmentqwidget.cpp \
     main.cpp \
     taskeruimainwindow.cpp \
     timerwindow.cpp
@@ -27,7 +27,7 @@ SOURCES += \
 HEADERS += \
     MainWidget.h \
     Widget_CommStats.h \
-    createcommitment.h \
+    createcommitmentqwidget.h \
     taskeruimainwindow.h \
     timerwindow.h
 

@@ -54,23 +54,23 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../Tasker/MainWidget.cpp \
 		../Tasker/Widget_CommStats.cpp \
-		../Tasker/createcommitment.cpp \
+		../Tasker/createcommitmentqwidget.cpp \
 		../Tasker/main.cpp \
 		../Tasker/taskeruimainwindow.cpp \
 		../Tasker/timerwindow.cpp moc_MainWidget.cpp \
 		moc_Widget_CommStats.cpp \
-		moc_createcommitment.cpp \
+		moc_createcommitmentqwidget.cpp \
 		moc_taskeruimainwindow.cpp \
 		moc_timerwindow.cpp
 OBJECTS       = MainWidget.o \
 		Widget_CommStats.o \
-		createcommitment.o \
+		createcommitmentqwidget.o \
 		main.o \
 		taskeruimainwindow.o \
 		timerwindow.o \
 		moc_MainWidget.o \
 		moc_Widget_CommStats.o \
-		moc_createcommitment.o \
+		moc_createcommitmentqwidget.o \
 		moc_taskeruimainwindow.o \
 		moc_timerwindow.o
 DIST          = ../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
@@ -243,6 +243,7 @@ DIST          = ../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.12.5/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.12.5/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.12.5/gcc_64/mkspecs/features/spec_post.prf \
+		../Tasker/.qmake.stash \
 		../../Qt/5.12.5/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.12.5/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.12.5/gcc_64/mkspecs/features/default_pre.prf \
@@ -264,11 +265,11 @@ DIST          = ../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.12.5/gcc_64/mkspecs/features/lex.prf \
 		../Tasker/Tasker.pro ../Tasker/MainWidget.h \
 		../Tasker/Widget_CommStats.h \
-		../Tasker/createcommitment.h \
+		../Tasker/createcommitmentqwidget.h \
 		../Tasker/taskeruimainwindow.h \
 		../Tasker/timerwindow.h ../Tasker/MainWidget.cpp \
 		../Tasker/Widget_CommStats.cpp \
-		../Tasker/createcommitment.cpp \
+		../Tasker/createcommitmentqwidget.cpp \
 		../Tasker/main.cpp \
 		../Tasker/taskeruimainwindow.cpp \
 		../Tasker/timerwindow.cpp
@@ -453,6 +454,7 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.12.5/gcc_64/mkspecs/linux-g++/qmake.co
 		../../Qt/5.12.5/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.12.5/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.12.5/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../Qt/5.12.5/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.12.5/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.12.5/gcc_64/mkspecs/features/default_pre.prf \
@@ -644,6 +646,7 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.12.5/gcc_64/mkspecs/linux-g++/qmake.co
 ../../Qt/5.12.5/gcc_64/mkspecs/features/qt_config.prf:
 ../../Qt/5.12.5/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../Qt/5.12.5/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../Qt/5.12.5/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../Qt/5.12.5/gcc_64/mkspecs/features/toolchain.prf:
 ../../Qt/5.12.5/gcc_64/mkspecs/features/default_pre.prf:
@@ -679,8 +682,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Qt/5.12.5/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/MainWidget.h ../Tasker/Widget_CommStats.h ../Tasker/createcommitment.h ../Tasker/taskeruimainwindow.h ../Tasker/timerwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/MainWidget.cpp ../Tasker/Widget_CommStats.cpp ../Tasker/createcommitment.cpp ../Tasker/main.cpp ../Tasker/taskeruimainwindow.cpp ../Tasker/timerwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/MainWidget.h ../Tasker/Widget_CommStats.h ../Tasker/createcommitmentqwidget.h ../Tasker/taskeruimainwindow.h ../Tasker/timerwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/MainWidget.cpp ../Tasker/Widget_CommStats.cpp ../Tasker/createcommitmentqwidget.cpp ../Tasker/main.cpp ../Tasker/taskeruimainwindow.cpp ../Tasker/timerwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Tasker/Widget_CommStats.ui ../Tasker/createcommitment.ui ../Tasker/taskeruimainwindow.ui ../Tasker/timerwindow.ui $(DISTDIR)/
 
 
@@ -713,9 +716,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../Qt/5.12.5/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../Qt/5.12.5/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_MainWidget.cpp moc_Widget_CommStats.cpp moc_createcommitment.cpp moc_taskeruimainwindow.cpp moc_timerwindow.cpp
+compiler_moc_header_make_all: moc_MainWidget.cpp moc_Widget_CommStats.cpp moc_createcommitmentqwidget.cpp moc_taskeruimainwindow.cpp moc_timerwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_MainWidget.cpp moc_Widget_CommStats.cpp moc_createcommitment.cpp moc_taskeruimainwindow.cpp moc_timerwindow.cpp
+	-$(DEL_FILE) moc_MainWidget.cpp moc_Widget_CommStats.cpp moc_createcommitmentqwidget.cpp moc_taskeruimainwindow.cpp moc_timerwindow.cpp
 moc_MainWidget.cpp: ../Tasker/MainWidget.h \
 		../../Qt/5.12.5/gcc_64/include/QtCharts/QBarSeries \
 		../../Qt/5.12.5/gcc_64/include/QtCharts/qbarseries.h \
@@ -984,7 +987,7 @@ moc_Widget_CommStats.cpp: ../Tasker/Widget_CommStats.h \
 		../../Qt/5.12.5/gcc_64/bin/moc
 	/home/digital_alchemist/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/digital_alchemist/Tasker/build-Tasker-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/digital_alchemist/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/digital_alchemist/Tasker/Tasker -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtCharts -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtGui -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/Widget_CommStats.h -o moc_Widget_CommStats.cpp
 
-moc_createcommitment.cpp: ../Tasker/createcommitment.h \
+moc_createcommitmentqwidget.cpp: ../Tasker/createcommitmentqwidget.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QCheckBox \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qcheckbox.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1097,7 +1100,7 @@ moc_createcommitment.cpp: ../Tasker/createcommitment.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QWidget \
 		moc_predefs.h \
 		../../Qt/5.12.5/gcc_64/bin/moc
-	/home/digital_alchemist/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/digital_alchemist/Tasker/build-Tasker-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/digital_alchemist/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/digital_alchemist/Tasker/Tasker -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtCharts -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtGui -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/createcommitment.h -o moc_createcommitment.cpp
+	/home/digital_alchemist/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/digital_alchemist/Tasker/build-Tasker-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/digital_alchemist/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/digital_alchemist/Tasker/Tasker -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtCharts -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtGui -I/home/digital_alchemist/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/createcommitmentqwidget.h -o moc_createcommitmentqwidget.cpp
 
 moc_taskeruimainwindow.cpp: ../Tasker/taskeruimainwindow.h \
 		../Tasker/Widget_CommStats.h \
@@ -1204,7 +1207,7 @@ moc_taskeruimainwindow.cpp: ../Tasker/taskeruimainwindow.h \
 		../../Qt/5.12.5/gcc_64/include/QtCore/qfiledevice.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qvector2d.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qtouchdevice.h \
-		../Tasker/createcommitment.h \
+		../Tasker/createcommitmentqwidget.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QCheckBox \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qcheckbox.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractbutton.h \
@@ -1637,6 +1640,58 @@ Widget_CommStats.o: ../Tasker/Widget_CommStats.cpp ../Tasker/Widget_CommStats.h 
 		../../Qt/5.12.5/gcc_64/include/QtGui/qvector2d.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qtouchdevice.h \
 		ui_Widget_CommStats.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QCommandLinkButton \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qcommandlinkbutton.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qicon.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QFrame \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QGroupBox \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qgroupbox.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QListWidget \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qlistwidget.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qlistview.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QProgressBar \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qprogressbar.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QTextEdit \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtextedit.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qtextdocument.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qtextoption.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qtextcursor.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qtextformat.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qpen.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QTreeWidget \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtreewidget.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtreeview.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtreewidgetitemiterator.h \
 		../Tasker/MainWidget.h \
 		../../Qt/5.12.5/gcc_64/include/QtCharts/QBarSeries \
 		../../Qt/5.12.5/gcc_64/include/QtCharts/qbarseries.h \
@@ -1650,9 +1705,7 @@ Widget_CommStats.o: ../Tasker/Widget_CommStats.cpp ../Tasker/Widget_CommStats.h 
 		../../Qt/5.12.5/gcc_64/include/QtCharts/QAbstractAxis \
 		../../Qt/5.12.5/gcc_64/include/QtCharts/qabstractaxis.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/QPen \
-		../../Qt/5.12.5/gcc_64/include/QtGui/qpen.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/QFont \
-		../../Qt/5.12.5/gcc_64/include/QtCore/QVariant \
 		../../Qt/5.12.5/gcc_64/include/QtCore/QObject \
 		../../Qt/5.12.5/gcc_64/include/QtCore/QStringList \
 		../../Qt/5.12.5/gcc_64/include/QtCharts/QChart \
@@ -1670,16 +1723,10 @@ Widget_CommStats.o: ../Tasker/Widget_CommStats.cpp ../Tasker/Widget_CommStats.h 
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsView \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qgraphicsview.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qpainter.h \
-		../../Qt/5.12.5/gcc_64/include/QtGui/qtextoption.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qscrollarea.h \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/qframe.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qgraphicsscene.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QDoubleSpinBox \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qspinbox.h \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../Qt/5.12.5/gcc_64/include/QtGui/qvalidator.h \
-		../../Qt/5.12.5/gcc_64/include/QtCore/qregularexpression.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QGraphicsGridLayout \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qgraphicsgridlayout.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qgraphicslayout.h \
@@ -1687,12 +1734,10 @@ Widget_CommStats.o: ../Tasker/Widget_CommStats.cpp ../Tasker/Widget_CommStats.h 
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qgridlayout.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qlayout.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/QGroupBox \
-		../../Qt/5.12.5/gcc_64/include/QtWidgets/qgroupbox.h
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qboxlayout.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Widget_CommStats.o ../Tasker/Widget_CommStats.cpp
 
-createcommitment.o: ../Tasker/createcommitment.cpp ../Tasker/createcommitment.h \
+createcommitmentqwidget.o: ../Tasker/createcommitmentqwidget.cpp ../Tasker/createcommitmentqwidget.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QCheckBox \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qcheckbox.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1804,8 +1849,43 @@ createcommitment.o: ../Tasker/createcommitment.cpp ../Tasker/createcommitment.h 
 		../../Qt/5.12.5/gcc_64/include/QtCore/qregularexpression.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QWidget \
 		ui_createcommitment.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QComboBox \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qcombobox.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QDateEdit \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qdatetimeedit.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qdatetime.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QFrame \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QLineEdit \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qlineedit.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qtextcursor.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qtextformat.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qpen.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qtextoption.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../Qt/5.12.5/gcc_64/include/QtCore/QDebug
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o createcommitment.o ../Tasker/createcommitment.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o createcommitmentqwidget.o ../Tasker/createcommitmentqwidget.cpp
 
 main.o: ../Tasker/main.cpp ../Tasker/Widget_CommStats.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QWidget \
@@ -1911,7 +1991,7 @@ main.o: ../Tasker/main.cpp ../Tasker/Widget_CommStats.h \
 		../../Qt/5.12.5/gcc_64/include/QtCore/qfiledevice.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qvector2d.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qtouchdevice.h \
-		../Tasker/createcommitment.h \
+		../Tasker/createcommitmentqwidget.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QCheckBox \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qcheckbox.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractbutton.h \
@@ -2041,7 +2121,7 @@ taskeruimainwindow.o: ../Tasker/taskeruimainwindow.cpp ../Tasker/taskeruimainwin
 		../../Qt/5.12.5/gcc_64/include/QtCore/qfiledevice.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qvector2d.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qtouchdevice.h \
-		../Tasker/createcommitment.h \
+		../Tasker/createcommitmentqwidget.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QCheckBox \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qcheckbox.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractbutton.h \
@@ -2054,7 +2134,17 @@ taskeruimainwindow.o: ../Tasker/taskeruimainwindow.cpp ../Tasker/taskeruimainwin
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qframe.h \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/QPushButton \
 		../../Qt/5.12.5/gcc_64/include/QtWidgets/qpushbutton.h \
-		ui_taskeruimainwindow.h
+		ui_taskeruimainwindow.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qlabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o taskeruimainwindow.o ../Tasker/taskeruimainwindow.cpp
 
 timerwindow.o: ../Tasker/timerwindow.cpp ../Tasker/timerwindow.h \
@@ -2161,7 +2251,49 @@ timerwindow.o: ../Tasker/timerwindow.cpp ../Tasker/timerwindow.h \
 		../../Qt/5.12.5/gcc_64/include/QtCore/qfiledevice.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qvector2d.h \
 		../../Qt/5.12.5/gcc_64/include/QtGui/qtouchdevice.h \
-		ui_timerwindow.h
+		ui_timerwindow.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QCheckBox \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qcheckbox.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qicon.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QComboBox \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qcombobox.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.12.5/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QFrame \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QLineEdit \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qlineedit.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qtextcursor.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qtextformat.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qpen.h \
+		../../Qt/5.12.5/gcc_64/include/QtGui/qtextoption.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QRadioButton \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qradiobutton.h \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/QSpinBox \
+		../../Qt/5.12.5/gcc_64/include/QtWidgets/qspinbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o timerwindow.o ../Tasker/timerwindow.cpp
 
 moc_MainWidget.o: moc_MainWidget.cpp 
@@ -2170,8 +2302,8 @@ moc_MainWidget.o: moc_MainWidget.cpp
 moc_Widget_CommStats.o: moc_Widget_CommStats.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Widget_CommStats.o moc_Widget_CommStats.cpp
 
-moc_createcommitment.o: moc_createcommitment.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_createcommitment.o moc_createcommitment.cpp
+moc_createcommitmentqwidget.o: moc_createcommitmentqwidget.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_createcommitmentqwidget.o moc_createcommitmentqwidget.cpp
 
 moc_taskeruimainwindow.o: moc_taskeruimainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_taskeruimainwindow.o moc_taskeruimainwindow.cpp

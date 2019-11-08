@@ -8,7 +8,7 @@ TaskerUIMainWindow::TaskerUIMainWindow(QWidget *parent)
 : QWidget(parent), ui(new Ui::TaskerUIMainWindow) {
     ui->setupUi(this);
 
-    x = new createcommitment();
+    createCommitmentWindow = new createCommitmentQWidget();
     this->setWindowTitle("Tasker");
 
     wc = new Widget_CommStats();
@@ -20,8 +20,8 @@ QPushButton *TaskerUIMainWindow::getButton() {
     return ui->QPushButton_MakeCommitment;
 }
 
-createcommitment *TaskerUIMainWindow::getCreateCommitment() {
-    return x;
+createCommitmentQWidget *TaskerUIMainWindow::getCreateCommitment() {
+    return createCommitmentWindow;
 }
 
 QFrame *TaskerUIMainWindow::getWelcomeFrame() {
@@ -39,7 +39,7 @@ timerwindow *TaskerUIMainWindow::getTimerWindow() {
 TaskerUIMainWindow::~TaskerUIMainWindow() {
     delete tw;
     delete wc;
-    delete x;
+    delete createCommitmentWindow;
 
     delete ui;
 }

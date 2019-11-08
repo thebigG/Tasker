@@ -2,7 +2,7 @@
 #define TASKERUIMAINWINDOW_H
 
 #include "Widget_CommStats.h"
-#include "createcommitment.h"
+#include "createcommitmentqwidget.h"
 #include "timerwindow.h"
 
 #include <QFrame>
@@ -21,7 +21,7 @@ class TaskerUIMainWindow : public QWidget {
     ~TaskerUIMainWindow();
 
     QPushButton *getButton();
-    createcommitment *getCreateCommitment();
+    createCommitmentQWidget *getCreateCommitment();
     QFrame *getWelcomeFrame();
     Widget_CommStats *getCommStats();
     timerwindow *getTimerWindow();
@@ -36,7 +36,7 @@ class TaskerUIMainWindow : public QWidget {
     void on_QPushButton_QuickSession_clicked();
 
     private:
-    createcommitment *x;
+    createCommitmentQWidget *createCommitmentWindow;
     Widget_CommStats *wc;
     timerwindow *tw;
 };

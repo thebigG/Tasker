@@ -9,12 +9,12 @@ namespace Ui {
 class createcommitment;
 }
 
-class createcommitment : public QWidget {
+class createCommitmentQWidget : public QWidget {
     Q_OBJECT
 
     public:
-    explicit createcommitment(QWidget *parent = nullptr);
-    ~createcommitment();
+    explicit createCommitmentQWidget(QWidget *parent = nullptr);
+    ~createCommitmentQWidget();
 
     QCheckBox *getKeyboardCheckBox();
     QCheckBox *getAudioCheckBox();
