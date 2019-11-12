@@ -10,14 +10,14 @@ class CommStatsQWidget;
 class CommStatsQWidget : public QWidget {
     Q_OBJECT
 
-    public:
+public:
     explicit CommStatsQWidget(QWidget *parent = nullptr);
     ~CommStatsQWidget();
 
-    private slots:
+private slots:
     void on_addCommitmentQCommandLinkButton_clicked();
 
-    private:
+private:
     Ui::CommStatsQWidget *ui;
 };
 
