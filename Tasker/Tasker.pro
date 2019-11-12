@@ -17,21 +17,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-<<<<<<< HEAD
-    MainWidget.cpp \
-    Widget_CommStats.cpp \
-    createcommitmentqwidget.cpp \
-    main.cpp \
-    taskeruimainwindow.cpp \
-    timerwindow.cpp
-
-HEADERS += \
-    MainWidget.h \
-    Widget_CommStats.h \
-    createcommitmentqwidget.h \
-    taskeruimainwindow.h \
-    timerwindow.h
-=======
     CommStatsQWidget.cpp \
     CreateCommitmentQWidget.cpp \
     TaskerUIMainWindowQWidget.cpp \
@@ -45,7 +30,6 @@ HEADERS += \
     TaskerUIMainWindowQWidget.h \
     TempChartQWidget.h \
     TimerWindowQWidget.h
->>>>>>> hardware-audio
 
 FORMS += \
     CommStatsQWidget.ui \
