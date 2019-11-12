@@ -1,4 +1,3 @@
-
 #ifndef MAINWIDGET_H
 #define MAINWIDGET_H
 
@@ -15,16 +14,16 @@
 
 QT_CHARTS_USE_NAMESPACE
 
-class MainWidget : public QWidget {
+class TempChartQWidget : public QWidget {
     Q_OBJECT
 
-    public:
-    explicit MainWidget(QWidget *parent = 0);
+public:
+    explicit TempChartQWidget(QWidget *parent = nullptr);
     void createSeries();
     void showLegendSpinbox();
     void hideLegendSpinbox();
 
-    public Q_SLOTS:
+public Q_SLOTS:
     void toggleAttached();
     void addBarset();
     void removeBarset();
@@ -37,7 +36,7 @@ class MainWidget : public QWidget {
 
     void updateLegendLayout();
 
-    private:
+private:
     QChart *m_chart;
     QBarSeries *m_series;
 

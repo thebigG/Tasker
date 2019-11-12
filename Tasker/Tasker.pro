@@ -17,25 +17,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    MainWidget.cpp \
-    Widget_CommStats.cpp \
-    createcommitment.cpp \
-    main.cpp \
-    taskeruimainwindow.cpp \
-    timerwindow.cpp
+    CommStatsQWidget.cpp \
+    CreateCommitmentQWidget.cpp \
+    TaskerUIMainWindowQWidget.cpp \
+    TempChartQWidget.cpp \
+    TimerWindowQWidget.cpp \
+    main.cpp
 
 HEADERS += \
-    MainWidget.h \
-    Widget_CommStats.h \
-    createcommitment.h \
-    taskeruimainwindow.h \
-    timerwindow.h
+    CommStatsQWidget.h \
+    CreateCommitmentQWidget.h \
+    TaskerUIMainWindowQWidget.h \
+    TempChartQWidget.h \
+    TimerWindowQWidget.h
 
 FORMS += \
-    Widget_CommStats.ui \
-    createcommitment.ui \
-    taskeruimainwindow.ui \
-    timerwindow.ui
+    CommStatsQWidget.ui \
+    CreateCommitmentQWidget.ui \
+    TaskerUIMainWindowQWidget.ui \
+    TimerWindowQWidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

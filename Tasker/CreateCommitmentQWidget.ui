@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>createcommitment</class>
- <widget class="QWidget" name="createcommitment">
+ <class>CreateCommitmentQWidget</class>
+ <widget class="QWidget" name="CreateCommitmentQWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Create a Commitment</string>
   </property>
-  <widget class="QFrame" name="QFrame_CreateCommitment">
+  <widget class="QFrame" name="createCommitmentQFrame">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -28,7 +28,7 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="commitmentNameQLabel">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -48,7 +48,7 @@
      <string>Commitment Name:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="commitmentNameQLineEdit">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -58,7 +58,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="dateStartQLabel">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -76,7 +76,7 @@
      <string>Start Date</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="dateEndQLabel">
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -94,7 +94,7 @@
      <string>End Date</string>
     </property>
    </widget>
-   <widget class="QDateEdit" name="dateEdit">
+   <widget class="QDateEdit" name="dateStartQDateEdit">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -104,7 +104,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QDateEdit" name="dateEdit_2">
+   <widget class="QDateEdit" name="dateEndQDateEdit">
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -114,7 +114,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="qtyQLabel">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -132,7 +132,7 @@
      <string>Qty</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="qtyQLineEdit">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -145,7 +145,7 @@
      <string>1</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="unitsLeftQLabel">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -163,7 +163,7 @@
      <string>Units</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="perQLabel">
     <property name="geometry">
      <rect>
       <x>220</x>
@@ -183,7 +183,7 @@
      <string>per</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_7">
+   <widget class="QLabel" name="unitsRightQLabel">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -201,7 +201,7 @@
      <string>Units</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="dropDownUnitsRightQComboBox">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -231,7 +231,7 @@
      </property>
     </item>
    </widget>
-   <widget class="QLabel" name="label_8">
+   <widget class="QLabel" name="taskQLabel">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -244,7 +244,7 @@
      <string>Task:</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_2">
+   <widget class="QComboBox" name="dropDownTaskQComboBox">
     <property name="geometry">
      <rect>
       <x>180</x>
@@ -269,7 +269,7 @@
      </property>
     </item>
    </widget>
-   <widget class="QLabel" name="label_9">
+   <widget class="QLabel" name="listenersQLabel">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -282,7 +282,7 @@
      <string>Listeners:</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
+   <widget class="QCheckBox" name="checkKeyboardQCheckBox">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -295,7 +295,7 @@
      <string>Keyboard</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_2">
+   <widget class="QCheckBox" name="checkMicQCheckBox">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -308,7 +308,7 @@
      <string>Mic</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_3">
+   <widget class="QComboBox" name="dropDownAudioListenerQComboBox">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -328,7 +328,7 @@
      </property>
     </item>
    </widget>
-   <widget class="QCheckBox" name="checkBox_3">
+   <widget class="QCheckBox" name="makeDefaultQCheckBox">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -341,7 +341,7 @@
      <string>Make this my default commitment</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="createCommitmentQPushButton">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -361,7 +361,7 @@
      <string>Create Commitment</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="backQPushButton">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -379,7 +379,7 @@
      <string>Back</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="QLineEdit_Qty">
+   <widget class="QComboBox" name="dropDownUnitsLeftQComboBox">
     <property name="geometry">
      <rect>
       <x>120</x>

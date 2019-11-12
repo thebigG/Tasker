@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Widget_CommStats</class>
- <widget class="QWidget" name="Widget_CommStats">
+ <class>CommStatsQWidget</class>
+ <widget class="QWidget" name="CommStatsQWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Tasker - My Commitments</string>
   </property>
-  <widget class="QFrame" name="Frame_Commitments">
+  <widget class="QFrame" name="commitmentsQFrame">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -28,7 +28,7 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QTreeWidget" name="TreeWidget_Commitments">
+   <widget class="QTreeWidget" name="commitmentsQTreeWidget">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -124,7 +124,7 @@
     </item>
    </widget>
   </widget>
-  <widget class="QFrame" name="Frame_OverviewStatsNotesMedia">
+  <widget class="QFrame" name="overviewStatsNotesMediaQFrame">
    <property name="geometry">
     <rect>
      <x>271</x>
@@ -139,7 +139,7 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QFrame" name="Frame_Overview">
+   <widget class="QFrame" name="overviewQFrame">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -154,7 +154,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QGroupBox" name="GroupBox_Overview">
+    <widget class="QGroupBox" name="overviewQGroupBox">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -176,7 +176,7 @@
      <property name="title">
       <string>Untitled Commitment - Session 0</string>
      </property>
-     <widget class="QProgressBar" name="ProgressBar_Productive">
+     <widget class="QProgressBar" name="percentageProductiveQProgressBar">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -192,7 +192,7 @@
        <number>75</number>
       </property>
      </widget>
-     <widget class="QProgressBar" name="ProgressBar_Unproductive">
+     <widget class="QProgressBar" name="percentageUnproductiveQProgressBar">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -208,7 +208,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="Label_ProductiveTime">
+     <widget class="QLabel" name="totalTimeProductiveQLabel">
       <property name="geometry">
        <rect>
         <x>500</x>
@@ -228,7 +228,7 @@
        <string>PRODUCTIVE TIME</string>
       </property>
      </widget>
-     <widget class="QLabel" name="Label_UnproductiveTime">
+     <widget class="QLabel" name="totalTimeUnproductiveQLabel">
       <property name="geometry">
        <rect>
         <x>500</x>
@@ -248,7 +248,7 @@
        <string>UNPRODUCTIVE TIME</string>
       </property>
      </widget>
-     <widget class="QLabel" name="Label_DurationProductive">
+     <widget class="QLabel" name="durationProductiveQLabel">
       <property name="geometry">
        <rect>
         <x>660</x>
@@ -261,7 +261,7 @@
        <string>(00:00:00)</string>
       </property>
      </widget>
-     <widget class="QLabel" name="Label_DurationUnproductive">
+     <widget class="QLabel" name="durationUnproductiveQLabel">
       <property name="geometry">
        <rect>
         <x>660</x>
@@ -274,7 +274,7 @@
        <string>(00:00:00)</string>
       </property>
      </widget>
-     <widget class="QLabel" name="Label_TotalTime">
+     <widget class="QLabel" name="totalTimeSumQLabel">
       <property name="geometry">
        <rect>
         <x>500</x>
@@ -294,7 +294,7 @@
        <string>TOTAL TIME</string>
       </property>
      </widget>
-     <widget class="QLabel" name="Label_DurationTotal">
+     <widget class="QLabel" name="durationTotalSumQLabel">
       <property name="geometry">
        <rect>
         <x>660</x>
@@ -309,7 +309,7 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QFrame" name="Frame_Stats">
+   <widget class="QFrame" name="statsQFrame">
     <property name="geometry">
      <rect>
       <x>-10</x>
@@ -325,7 +325,7 @@
      <enum>QFrame::Raised</enum>
     </property>
    </widget>
-   <widget class="QFrame" name="Frame_NotesMedia">
+   <widget class="QFrame" name="notesMediaQFrame">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -340,7 +340,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QGroupBox" name="GroupBox_NotesMedia">
+    <widget class="QGroupBox" name="notesMediaQGroupBox">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -355,7 +355,7 @@
      <property name="flat">
       <bool>false</bool>
      </property>
-     <widget class="QTextEdit" name="TextEdit_Notes">
+     <widget class="QTextEdit" name="notesQTextEdit">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -372,7 +372,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.SF NS Text';&quot;&gt;(write some notes here...)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
-     <widget class="QListWidget" name="ListWidget_Files">
+     <widget class="QListWidget" name="filesQListWidget">
       <property name="geometry">
        <rect>
         <x>490</x>
@@ -403,7 +403,7 @@ p, li { white-space: pre-wrap; }
        </property>
       </item>
      </widget>
-     <widget class="QCommandLinkButton" name="CommandLinkButton_AddFile">
+     <widget class="QCommandLinkButton" name="addFileQCommandLinkButton">
       <property name="geometry">
        <rect>
         <x>850</x>
@@ -416,7 +416,7 @@ p, li { white-space: pre-wrap; }
        <string>Add file</string>
       </property>
      </widget>
-     <widget class="QCommandLinkButton" name="CommandLinkButton_RemoveFile">
+     <widget class="QCommandLinkButton" name="removeFileQCommandLinkButton">
       <property name="geometry">
        <rect>
         <x>850</x>
@@ -432,7 +432,7 @@ p, li { white-space: pre-wrap; }
     </widget>
    </widget>
   </widget>
-  <widget class="QFrame" name="Frame_BottomBar">
+  <widget class="QFrame" name="bottomBarQFrame">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -447,7 +447,7 @@ p, li { white-space: pre-wrap; }
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="bottomBarStatsQLabel">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -468,7 +468,7 @@ p, li { white-space: pre-wrap; }
     </property>
    </widget>
   </widget>
-  <widget class="QFrame" name="Frame_TopBar">
+  <widget class="QFrame" name="topBarQFrame">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -483,7 +483,7 @@ p, li { white-space: pre-wrap; }
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QCommandLinkButton" name="CommandLinkButton_AddNewCommitment">
+   <widget class="QCommandLinkButton" name="addCommitmentQCommandLinkButton">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -496,7 +496,7 @@ p, li { white-space: pre-wrap; }
      <string>Add new commitment</string>
     </property>
    </widget>
-   <widget class="QCommandLinkButton" name="CommandLinkButton_RemoveCommitment">
+   <widget class="QCommandLinkButton" name="removeCommitmentQCommandLinkButton">
     <property name="geometry">
      <rect>
       <x>140</x>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>timerwindow</class>
- <widget class="QWidget" name="timerwindow">
+ <class>TimerWindowQWidget</class>
+ <widget class="QWidget" name="TimerWindowQWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Tasker - Session</string>
   </property>
-  <widget class="QFrame" name="QFrame_TimerWindow">
+  <widget class="QFrame" name="timerWindowQFrame">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -28,7 +28,7 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="timerQLabel">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -46,7 +46,7 @@
      <string>Timer</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="startTimerButton">
+   <widget class="QPushButton" name="startTimerQPushButton">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -59,7 +59,7 @@
      <string>Start</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="backQPushButton">
     <property name="geometry">
      <rect>
       <x>330</x>
@@ -72,7 +72,7 @@
      <string>Back</string>
     </property>
    </widget>
-   <widget class="QFrame" name="frame">
+   <widget class="QFrame" name="taskListenersQFrame">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -87,7 +87,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QComboBox" name="comboBox_2">
+    <widget class="QComboBox" name="taskQComboBox">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -112,7 +112,7 @@
       </property>
      </item>
     </widget>
-    <widget class="QLabel" name="label_8">
+    <widget class="QLabel" name="taskQLabel">
      <property name="geometry">
       <rect>
        <x>100</x>
@@ -125,7 +125,7 @@
       <string>Task:</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox_3">
+    <widget class="QComboBox" name="audioQComboBox">
      <property name="geometry">
       <rect>
        <x>50</x>
@@ -140,7 +140,7 @@
       </property>
      </item>
     </widget>
-    <widget class="QCheckBox" name="checkBox_2">
+    <widget class="QCheckBox" name="audioQCheckBox">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -153,7 +153,7 @@
       <string>Mic</string>
      </property>
     </widget>
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="keyboardQCheckBox">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -166,7 +166,7 @@
       <string>Keyboard</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_9">
+    <widget class="QLabel" name="listenersQLabel">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -180,7 +180,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QFrame" name="frame_2">
+   <widget class="QFrame" name="realTimeQFrame">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -195,7 +195,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="realTimeLabel">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -208,17 +208,7 @@
       <string>Real Time: </string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit">
-     <property name="geometry">
-      <rect>
-       <x>-60</x>
-       <y>80</y>
-       <width>113</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_2">
+    <widget class="QLineEdit" name="realTimeDurationQLineEdit">
      <property name="geometry">
       <rect>
        <x>70</x>
@@ -238,7 +228,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QFrame" name="frame_3">
+   <widget class="QFrame" name="realTimeAlertQFrame">
     <property name="geometry">
      <rect>
       <x>200</x>
@@ -253,7 +243,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="label_4">
+    <widget class="QLabel" name="realTimeAlertQLabel">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -266,7 +256,7 @@
       <string>Real-time Timer Alert</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton">
+    <widget class="QRadioButton" name="realTimeAlertWhenFinishedQRadioButton">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -279,7 +269,7 @@
       <string>Alert when finished</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_2">
+    <widget class="QRadioButton" name="realTimeOffQRadioButton">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -292,7 +282,7 @@
       <string>Off</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_3">
+    <widget class="QRadioButton" name="realTimeWaitForPauseQRadioButton">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -309,7 +299,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QFrame" name="frame_4">
+   <widget class="QFrame" name="productionTimeAlertQFrame">
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -324,7 +314,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="label_5">
+    <widget class="QLabel" name="productionTimeAlertQLabel">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -337,7 +327,7 @@
       <string>Production Timer Alert</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_4">
+    <widget class="QRadioButton" name="productionTimeAlertWhenFinishedQRadioButton">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -350,7 +340,7 @@
       <string>Alert when finished</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_5">
+    <widget class="QRadioButton" name="productionTimeOffQRadioButton">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -363,7 +353,7 @@
       <string>Off</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_6">
+    <widget class="QRadioButton" name="productionTimeWaitForPauseQRadioButton">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -380,7 +370,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QFrame" name="PTTimer_Frame">
+   <widget class="QFrame" name="productionTimerQFrame">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -395,7 +385,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QSpinBox" name="PTmSec">
+    <widget class="QSpinBox" name="productionTimeMillisecondsQSpinBox">
      <property name="geometry">
       <rect>
        <x>180</x>
@@ -425,7 +415,7 @@
       <number>0</number>
      </property>
     </widget>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="productionTimeQLabel">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -444,7 +434,7 @@
       <string>Production Time</string>
      </property>
     </widget>
-    <widget class="QSpinBox" name="PTSec">
+    <widget class="QSpinBox" name="productionTimeSecondsQSpinBox">
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -474,7 +464,7 @@
       <number>0</number>
      </property>
     </widget>
-    <widget class="QSpinBox" name="PTHrs">
+    <widget class="QSpinBox" name="productionTimeHoursQSpinBox">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -498,7 +488,7 @@
       <number>0</number>
      </property>
     </widget>
-    <widget class="QSpinBox" name="PTMin">
+    <widget class="QSpinBox" name="productionTimeMinutesQSpinBox">
      <property name="geometry">
       <rect>
        <x>60</x>
@@ -528,7 +518,7 @@
       <number>0</number>
      </property>
     </widget>
-    <widget class="QLabel" name="label_6">
+    <widget class="QLabel" name="productionTimeDescriptionsQLabel">
      <property name="geometry">
       <rect>
        <x>0</x>

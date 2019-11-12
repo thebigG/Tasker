@@ -1,28 +1,28 @@
-#include "createcommitment.h"
-#include "ui_createcommitment.h"
+#include "CreateCommitmentQWidget.h"
+#include "ui_CreateCommitmentQWidget.h"
 
 #include <QDebug>
 
-createcommitment::createcommitment(QWidget *parent)
-: QWidget(parent), ui(new Ui::createcommitment) {
+CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
+: QWidget(parent), ui(new Ui::CreateCommitmentQWidget) {
     ui->setupUi(this);
     validator = new QIntValidator(0, 999, this);
-    ui->QLineEdit_Qty->setValidator(validator);
+    ui->qtyQLineEdit->setValidator(validator);
 }
 
-createcommitment::~createcommitment() {
+CreateCommitmentQWidget::~CreateCommitmentQWidget() {
     delete ui;
 }
 
-QCheckBox *createcommitment::getKeyboardCheckBox() {
-    return ui->checkBox;
+QCheckBox *CreateCommitmentQWidget::getKeyboardCheckBox() {
+    return ui->checkKeyboardQCheckBox;
 }
 
-QCheckBox *createcommitment::getAudioCheckBox() {
-    return ui->checkBox_2;
+QCheckBox *CreateCommitmentQWidget::getAudioCheckBox() {
+    return ui->checkMicQCheckBox;
 }
 
-void createcommitment::on_comboBox_2_currentIndexChanged(const QString &arg1) {
+void CreateCommitmentQWidget::on_dropDownTaskQComboBox_activated(const QString &arg1) {
     if (arg1 == QString("Writing")) {
         this->getKeyboardCheckBox()->setCheckState(Qt::CheckState{ Qt::Checked });
         this->getAudioCheckBox()->setCheckState(Qt::CheckState{ Qt::Unchecked });

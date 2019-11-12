@@ -1,4 +1,4 @@
-#include "MainWidget.h"
+#include "TempChartQWidget.h"
 
 //#include <QCharts>
 #include <QtCharts/QBarSeries>
@@ -12,32 +12,32 @@
 
 QT_CHARTS_USE_NAMESPACE
 
-MainWidget::MainWidget(QWidget *parent) : QWidget(parent) {
+TempChartQWidget::TempChartQWidget(QWidget *parent) : QWidget(parent) {
     // Create buttons for ui
 
     m_buttonLayout = new QGridLayout();
 
     QPushButton *detachLegendButton = new QPushButton("Toggle attached");
-    connect(detachLegendButton, &QPushButton::clicked, this, &MainWidget::toggleAttached);
+    connect(detachLegendButton, &QPushButton::clicked, this, &TempChartQWidget::toggleAttached);
     m_buttonLayout->addWidget(detachLegendButton, 0, 0);
 
     QPushButton *addSetButton = new QPushButton("add barset");
-    connect(addSetButton, &QPushButton::clicked, this, &MainWidget::addBarset);
+    connect(addSetButton, &QPushButton::clicked, this, &TempChartQWidget::addBarset);
     m_buttonLayout->addWidget(addSetButton, 2, 0);
     QPushButton *removeBarsetButton = new QPushButton("remove barset");
-    connect(removeBarsetButton, &QPushButton::clicked, this, &MainWidget::removeBarset);
+    connect(removeBarsetButton, &QPushButton::clicked, this, &TempChartQWidget::removeBarset);
     m_buttonLayout->addWidget(removeBarsetButton, 3, 0);
 
     QPushButton *alignButton = new QPushButton("Align (Bottom)");
-    connect(alignButton, &QPushButton::clicked, this, &MainWidget::setLegendAlignment);
+    connect(alignButton, &QPushButton::clicked, this, &TempChartQWidget::setLegendAlignment);
     m_buttonLayout->addWidget(alignButton, 4, 0);
 
     QPushButton *boldButton = new QPushButton("Toggle bold");
-    connect(boldButton, &QPushButton::clicked, this, &MainWidget::toggleBold);
+    connect(boldButton, &QPushButton::clicked, this, &TempChartQWidget::toggleBold);
     m_buttonLayout->addWidget(boldButton, 8, 0);
 
     QPushButton *italicButton = new QPushButton("Toggle italic");
-    connect(italicButton, &QPushButton::clicked, this, &MainWidget::toggleItalic);
+    connect(italicButton, &QPushButton::clicked, this, &TempChartQWidget::toggleItalic);
     m_buttonLayout->addWidget(italicButton, 9, 0);
 
     m_legendPosX = new QDoubleSpinBox();
@@ -47,16 +47,16 @@ MainWidget::MainWidget(QWidget *parent) : QWidget(parent) {
 
     connect(m_legendPosX,
             static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-            this, &MainWidget::updateLegendLayout);
+            this, &TempChartQWidget::updateLegendLayout);
     connect(m_legendPosY,
             static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-            this, &MainWidget::updateLegendLayout);
+            this, &TempChartQWidget::updateLegendLayout);
     connect(m_legendWidth,
             static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-            this, &MainWidget::updateLegendLayout);
+            this, &TempChartQWidget::updateLegendLayout);
     connect(m_legendHeight,
             static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-            this, &MainWidget::updateLegendLayout);
+            this, &TempChartQWidget::updateLegendLayout);
 
     QFormLayout *legendLayout = new QFormLayout();
     legendLayout->addRow("HPos", m_legendPosX);
@@ -77,7 +77,7 @@ MainWidget::MainWidget(QWidget *parent) : QWidget(parent) {
     m_fontSize->setValue(m_chart->legend()->font().pointSizeF());
     connect(m_fontSize,
             static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
-            this, &MainWidget::fontSizeChanged);
+            this, &TempChartQWidget::fontSizeChanged);
 
     QFormLayout *fontLayout = new QFormLayout();
     fontLayout->addRow("Legend font size", m_fontSize);
@@ -96,7 +96,7 @@ MainWidget::MainWidget(QWidget *parent) : QWidget(parent) {
     createSeries();
 }
 
-void MainWidget::createSeries() {
+void TempChartQWidget::createSeries() {
     m_series = new QBarSeries();
     addBarset();
     addBarset();
@@ -114,7 +114,7 @@ void MainWidget::createSeries() {
     m_chartView->setRenderHint(QPainter::Antialiasing);
 }
 
-void MainWidget::showLegendSpinbox() {
+void TempChartQWidget::showLegendSpinbox() {
     m_legendSettings->setVisible(true);
     QRectF chartViewRect = m_chartView->rect();
 
@@ -135,11 +135,11 @@ void MainWidget::showLegendSpinbox() {
     m_legendHeight->setValue(75);
 }
 
-void MainWidget::hideLegendSpinbox() {
+void TempChartQWidget::hideLegendSpinbox() {
     m_legendSettings->setVisible(false);
 }
 
-void MainWidget::toggleAttached() {
+void TempChartQWidget::toggleAttached() {
     QLegend *legend = m_chart->legend();
     if (legend->isAttachedToChart()) {
         //![2]
@@ -160,7 +160,7 @@ void MainWidget::toggleAttached() {
     update();
 }
 
-void MainWidget::addBarset() {
+void TempChartQWidget::addBarset() {
     QBarSet *barSet =
         new QBarSet(QString("session ") + QString::number(m_series->count()));
     qreal delta = m_series->count() * 0.1;
@@ -168,14 +168,14 @@ void MainWidget::addBarset() {
     m_series->append(barSet);
 }
 
-void MainWidget::removeBarset() {
+void TempChartQWidget::removeBarset() {
     QList<QBarSet *> sets = m_series->barSets();
     if (sets.count() > 0) {
         m_series->remove(sets.at(sets.count() - 1));
     }
 }
 
-void MainWidget::setLegendAlignment() {
+void TempChartQWidget::setLegendAlignment() {
     QPushButton *button = qobject_cast<QPushButton *>(sender());
 
     switch (m_chart->legend()->alignment()) {
@@ -202,25 +202,25 @@ void MainWidget::setLegendAlignment() {
     }
 }
 
-void MainWidget::toggleBold() {
+void TempChartQWidget::toggleBold() {
     QFont font = m_chart->legend()->font();
     font.setBold(!font.bold());
     m_chart->legend()->setFont(font);
 }
 
-void MainWidget::toggleItalic() {
+void TempChartQWidget::toggleItalic() {
     QFont font = m_chart->legend()->font();
     font.setItalic(!font.italic());
     m_chart->legend()->setFont(font);
 }
 
-void MainWidget::fontSizeChanged() {
+void TempChartQWidget::fontSizeChanged() {
     QFont font = m_chart->legend()->font();
     font.setPointSizeF(m_fontSize->value());
     m_chart->legend()->setFont(font);
 }
 
-void MainWidget::updateLegendLayout() {
+void TempChartQWidget::updateLegendLayout() {
     //![4]
     m_chart->legend()->setGeometry(
         QRectF(m_legendPosX->value(), m_legendPosY->value(),

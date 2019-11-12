@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TaskerUIMainWindow</class>
- <widget class="QWidget" name="TaskerUIMainWindow">
+ <class>TaskerUIMainWindowQWidget</class>
+ <widget class="QWidget" name="TaskerUIMainWindowQWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Tasker</string>
   </property>
-  <widget class="QFrame" name="QFrame_Welcome">
+  <widget class="QFrame" name="welcomeQFrame">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -28,7 +28,7 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QPushButton" name="QPushButton_MakeCommitment">
+   <widget class="QPushButton" name="makeCommitmentQPushButton">
     <property name="geometry">
      <rect>
       <x>128</x>
@@ -48,7 +48,7 @@
      <string>Make Commitment</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="QPushButton_QuickSession">
+   <widget class="QPushButton" name="quickSessionQPushButton">
     <property name="geometry">
      <rect>
       <x>384</x>
@@ -66,7 +66,7 @@
      <string>Quick Session</string>
     </property>
    </widget>
-   <widget class="QLabel" name="QLabel_Welcome">
+   <widget class="QLabel" name="welcomeDescriptionQLabel">
     <property name="geometry">
      <rect>
       <x>180</x>
