@@ -19,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     CommStatsQWidget.cpp \
     CreateCommitmentQWidget.cpp \
+    Task.cpp \
     TaskerUIMainWindowQWidget.cpp \
     TempChartQWidget.cpp \
     TimerWindowQWidget.cpp \
@@ -27,8 +28,10 @@ SOURCES += \
 HEADERS += \
     CommStatsQWidget.h \
     CreateCommitmentQWidget.h \
+    Task.h \
     TaskerUIMainWindowQWidget.h \
     TempChartQWidget.h \
+    TestUtils.h \
     TimerWindowQWidget.h
 
 FORMS += \
