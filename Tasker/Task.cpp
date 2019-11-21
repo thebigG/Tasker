@@ -2,25 +2,31 @@
 #include "QString"
 Task::Task()
 {
+
 }
 
-Task::Task(const QString& newName, QVector<QString>& listeners)
+Task::Task( QString newName)
 {
+name = newName;
+}
+
+Task::Task(QString newName, QVector<QString> listeners)
+{
+
     setName(newName);
     setListeners(listeners);
 }
-Task::~Task()
-{
-    delete &name;
-    delete &listeners;
-}
+//Task::~Task()
+//{
+
+//}
 
 QString Task::getName() const
 {
     return name;
 }
 
-void Task::setName(const QString& value)
+void Task::setName(QString value)
 {
     name = value;
 }
@@ -30,7 +36,7 @@ QVector<QString> Task::getListeners() const
     return listeners;
 }
 
-void Task::setListeners(const QVector<QString>& newListeners)
+void Task::setListeners(const QVector<QString> newListeners)
 {
     for (QString l : newListeners) {
         listeners.push_back(l);

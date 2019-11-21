@@ -1,5 +1,6 @@
 QT       += charts
 QT       += core gui
+QT += testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,15 +20,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     CommStatsQWidget.cpp \
     CreateCommitmentQWidget.cpp \
+    Session.cpp \
     Task.cpp \
     TaskerUIMainWindowQWidget.cpp \
     TempChartQWidget.cpp \
+    TestUtils.cpp \
     TimerWindowQWidget.cpp \
     main.cpp
 
 HEADERS += \
     CommStatsQWidget.h \
     CreateCommitmentQWidget.h \
+    Session.h \
     Task.h \
     TaskerUIMainWindowQWidget.h \
     TempChartQWidget.h \

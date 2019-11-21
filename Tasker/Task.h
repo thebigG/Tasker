@@ -2,23 +2,25 @@
 #define TASK_H
 #include "QString"
 #include "QVector"
-
+#include "QObject"
 class Task
 {
+
 public:
     Task();
-    ~Task();
-    Task(const QString &newName);
-    Task(const QString &newName, QVector<QString> &listeners);
+//    ~Task();
+    Task(QString newName);
+    Task(QString newName, QVector<QString> listeners);
     QString getName() const;
-    void setName(const QString &value);
+    void setName(QString value);
     QVector<QString> getListeners() const;
-    void setListeners(const QVector<QString> &value);
+    void setListeners(QVector<QString> value);
 
 private:
     QString name;
     //The QString is just a placeholder. Will replace in future with actual listener class
     QVector<QString> listeners;
+
 };
 
 #endif // TASK_H
