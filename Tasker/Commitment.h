@@ -12,6 +12,12 @@ private:
 public:
     Commitment();
 
+    QDate getDateStart() const;
+    void setDateStart(const QDate &value);
+    QDate getDateEnd() const;
+    void setDateEnd(const QDate &value);
+    QVector<Session> getSessions() const;
+    void setSessions(const QVector<Session> &value);
 };
 
 #endif // COMMITMENT_H
