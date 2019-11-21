@@ -19,7 +19,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     CommStatsQWidget.cpp \
-    Commitment.cpp \
     CreateCommitmentQWidget.cpp \
     Session.cpp \
     Task.cpp \
@@ -31,7 +30,6 @@ SOURCES += \
 
 HEADERS += \
     CommStatsQWidget.h \
-    Commitment.h \
     CreateCommitmentQWidget.h \
     Session.h \
     Task.h \

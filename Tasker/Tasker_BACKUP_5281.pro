@@ -19,26 +19,38 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     CommStatsQWidget.cpp \
-    Commitment.cpp \
     CreateCommitmentQWidget.cpp \
+<<<<<<< HEAD
+    StatsUtility.cpp \
+=======
     Session.cpp \
     Task.cpp \
+>>>>>>> hardware-keyboard
     TaskerUIMainWindowQWidget.cpp \
     TempChartQWidget.cpp \
     TestUtils.cpp \
     TimerWindowQWidget.cpp \
+    User.cpp \
     main.cpp
 
 HEADERS += \
     CommStatsQWidget.h \
-    Commitment.h \
     CreateCommitmentQWidget.h \
+<<<<<<< HEAD
+    Interval.h \
+    StatsUtility.h \
+    TaskerUIMainWindowQWidget.h \
+    TempChartQWidget.h \
+    TimerWindowQWidget.h \
+    User.h
+=======
     Session.h \
     Task.h \
     TaskerUIMainWindowQWidget.h \
     TempChartQWidget.h \
     TestUtils.h \
     TimerWindowQWidget.h
+>>>>>>> hardware-keyboard
 
 FORMS += \
     CommStatsQWidget.ui \
