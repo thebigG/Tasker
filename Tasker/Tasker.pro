@@ -21,12 +21,9 @@ SOURCES += \
     CommStatsQWidget.cpp \
     Commitment.cpp \
     CreateCommitmentQWidget.cpp \
-<<<<<<< HEAD
     Session.cpp \
     Task.cpp \
-=======
     StatsUtility.cpp \
->>>>>>> hardware-audio
     TaskerUIMainWindowQWidget.cpp \
     TempChartQWidget.cpp \
     TestUtils.cpp \
@@ -38,21 +35,18 @@ HEADERS += \
     CommStatsQWidget.h \
     Commitment.h \
     CreateCommitmentQWidget.h \
-<<<<<<< HEAD
     Session.h \
     Task.h \
     TaskerUIMainWindowQWidget.h \
     TempChartQWidget.h \
     TestUtils.h \
-    TimerWindowQWidget.h
-=======
+    TimerWindowQWidget.h \
     Interval.h \
     StatsUtility.h \
     TaskerUIMainWindowQWidget.h \
     TempChartQWidget.h \
     TimerWindowQWidget.h \
     User.h
->>>>>>> hardware-audio
 
 FORMS += \
     CommStatsQWidget.ui \
