@@ -1,12 +1,21 @@
 #include "CommStatsQWidget.h"
 #include "CreateCommitmentQWidget.h"
 #include "TaskerUIMainWindowQWidget.h"
+<<<<<<< HEAD
 #include "Task.h"
 #include "TestUtils.h"
+=======
+
+#include "Interval.h"
+#include "StatsUtility.h"
+#include "User.h"
+
+>>>>>>> hardware-audio
 #include <QApplication>
 #include <QDebug>
 #include <QFile>
 #include <Qt>
+<<<<<<< HEAD
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,9 +46,19 @@ int main(int argc, char* argv[])
     qDebug()<<"Task name:" + myTask.getName();
     qDebug()<<"Task name(old var):" + taskName;
 //    delete str;
+=======
+#include <cstdio>
+#include <cstdlib>
+
+#include <iostream>
+
+using std::cout;
+using std::endl;
+>>>>>>> hardware-audio
 
 /*
 
+<<<<<<< HEAD
     auto taskName = getNameFromIn();
     qDebug() << "task Name" + *taskName;
     auto task1 = new Task();
@@ -58,6 +77,22 @@ QString testUtils::getNameFromIn()
     qtin >> yourText;
     file.close();
     return yourText;
+=======
+int main(int argc, char *argv[]) {
+    QApplication a(argc, argv);
+
+    {
+        cout << "60 seconds to mins: " << util::StatsUtility::toMinutes(60) << endl;
+        cout << "3600 seconds to hours: " << util::StatsUtility::toHours(3600) << endl;
+        cout << "86400 seconds to days: " << util::StatsUtility::toDays(86400) << endl;
+        cout << "604800 seconds to weeks: " << util::StatsUtility::toWeeks(604800) << endl;
+        cout << "2592000 seconds to months: " << util::StatsUtility::toMonths(2592000) << endl;
+    }
+
+    f = new TaskerUIMainWindowQWidget;
+    f->show();
+    return a.exec();
+>>>>>>> hardware-audio
 }
 
 QVector<QString> testUtils::getNameListFromIn()
