@@ -6,7 +6,8 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-INCLUDEPATH += /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker
+INCLUDEPATH += ../Tasker \
 
-SOURCES +=  tst_teststatsutility.cpp\
-            /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker/StatsUtility.cpp
+
+SOURCES +=  tst_teststatsutility.cpp \
+            ../Tasker/StatsUtility.cpp
