@@ -1,8 +1,6 @@
 #ifndef INTERVAL_H
 #define INTERVAL_H
-
 #include <cstdint>
-
 namespace util {
     struct Interval;
 }

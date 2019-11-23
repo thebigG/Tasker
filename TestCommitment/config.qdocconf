@@ -1,0 +1,8 @@
+outputdir = html
+headerdirs = .
+sourcedirs = .
+outputdir = doc/html
+exampledirs = .
+outputformats = HTML
+sources.fileextensions = "*.cpp *.qml"
+imagedirs   = ./images

@@ -9,4 +9,5 @@ INCLUDEPATH += ../Tasker \
 TEMPLATE = app
 SOURCES +=  tst_testcommitment.cpp \
             ../Tasker/Task.cpp \
-            ../Tasker/Session.cpp
+            ../Tasker/Session.cpp \
+            ../Tasker/Commitment.cpp

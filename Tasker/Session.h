@@ -6,32 +6,32 @@ class Session
 {
 public:
     Session();
-    Session(Task newTask, unsigned long long goalLength);
-    Task getTask() const;
+    Session(Task newTask, long long goalLength);
+    Task& getTask();
     void setTask(Task value);
 
-    unsigned long long getProductiveTime() const;
-    void setProductiveTime(unsigned long long value);
+    long long getProductiveTime() const;
+    void setProductiveTime(long long value);
 
-    unsigned long long getUnproductiveTime() const;
-    void setUnproductiveTime(unsigned long long value);
+    long long getUnproductiveTime() const;
+    void setUnproductiveTime(long long int value);
 
-    QString getNotes() const;
+    QString& getNotes() ;
     void setNotes( QString value);
 
-    QVector<QString> getMedia() const;
+    QVector<QString>& getMedia() ;
     void setMedia(QVector<QString> value);
 
-    unsigned long long getLength() const;
-    void setLength(unsigned long long value);
+    long long getLength() const;
+    void setLength(long long int value);
 
 private:
     Task task;
-    unsigned long long int productiveTime;
-    unsigned long long int unproductiveTime;
+    long long int productiveTime;
+    long long int unproductiveTime;
    QString notes;
    QVector<QString> media;
-   unsigned long long int length;
+   long long int length;
 
 };
 

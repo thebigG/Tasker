@@ -49,9 +49,9 @@ int main(int argc, char *argv[]) {
 
 int main(int argc, char* argv[])
 {
-//    QApplication a(argc, argv);
-//    f = new TaskerUIMainWindowQWidget;
-//    f->show();
+    QApplication a(argc, argv);
+    f = new TaskerUIMainWindowQWidget;
+    f->show();
 
 //    delete str;
 
@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
     auto task1 = new Task();
     */
 
-//    return a.exec();
+    return a.exec();
 }
 
 QString testUtils::getNameFromIn()

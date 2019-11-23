@@ -2,7 +2,7 @@
 #define STATSUTILITY_H
 
 #include <cstdint>
-
+#define ZERO 0
 namespace util {
     class StatsUtility;
 }

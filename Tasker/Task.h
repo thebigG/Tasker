@@ -11,9 +11,9 @@ public:
 //    ~Task();
     Task(QString newName);
     Task(QString newName, QVector<QString> listeners);
-    QString getName() const;
+    QString& getName() ;
     void setName(QString value);
-    QVector<QString> getListeners() const;
+    QVector<QString>& getListeners() ;
     void setListeners(QVector<QString> value);
 
 private:

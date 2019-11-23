@@ -1,10 +1,10 @@
 #include "Task.h"
 #include "QString"
+#include <QtCore>
 Task::Task()
 {
 
 }
-
 Task::Task( QString newName)
 {
 name = newName;
@@ -16,22 +16,20 @@ Task::Task(QString newName, QVector<QString> listeners)
     setName(newName);
     setListeners(listeners);
 }
-//Task::~Task()
-//{
 
-//}
-
-QString Task::getName() const
+QString& Task::getName()
 {
     return name;
 }
-
+/**
+   sets the name test
+ */
 void Task::setName(QString value)
 {
-    name = value;
+    this->name = QString(value);
 }
 
-QVector<QString> Task::getListeners() const
+QVector<QString>& Task::getListeners()
 {
     return listeners;
 }
