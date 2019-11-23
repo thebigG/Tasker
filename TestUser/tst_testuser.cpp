@@ -15,17 +15,6 @@ private slots:
     //void testIsDefaultCommitment(Commitment c);
     //void testGetDefaultCommitment();
 };
-
-TestUser::TestUser()
-{
-
-}
-
-TestUser::~TestUser()
-{
-
-}
-
 void TestUser::test_case1()
 {
 

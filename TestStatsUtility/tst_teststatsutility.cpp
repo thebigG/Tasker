@@ -27,9 +27,6 @@ class TestStatsUtility : public QObject {
     void calculateProductivePercentageAllPositive();
 };
 
-QTEST_MAIN(TestStatsUtility)
-
-#include "tst_teststatsutility.moc"
 
 using util::StatsUtility;
 
@@ -163,3 +160,7 @@ void TestStatsUtility::calculateProductivePercentageAllPositive() {
 
     QVERIFY(StatsUtility::calculateProductivePercentage(valueSeconds, valueProductive) > -1.0);
 }
+
+QTEST_MAIN(TestStatsUtility)
+
+#include "tst_teststatsutility.moc"
