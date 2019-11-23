@@ -3,7 +3,7 @@
 
 #include <QVector>
 
-//#include "Commitment.h"
+#include "Commitment.h"
 
 namespace udata {
     class User;
@@ -14,11 +14,11 @@ public:
     User();
     ~User();
 
-    bool isDefaultCommitment(int c);
-    int getDefaultCommitment();
+    const Commitment& getDefaultCommitment();
+    void setDefaultCommitment(const Commitment& c);
 private:
-    QVector<int> commmitments;
-    int defaultCommitment;
+    QVector<Commitment> commitments;
+    int defaultCommitmentIndex;
 
     // username?
     // user preferences?
