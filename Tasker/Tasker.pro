@@ -27,6 +27,7 @@ SOURCES += \
     TaskerUIMainWindowQWidget.cpp \
     TempChartQWidget.cpp \
     TestUtils.cpp \
+    Timer.cpp \
     TimerWindowQWidget.cpp \
     User.cpp \
     main.cpp
@@ -40,6 +41,7 @@ HEADERS += \
     TaskerUIMainWindowQWidget.h \
     TempChartQWidget.h \
     TestUtils.h \
+    Timer.h \
     TimerWindowQWidget.h \
     Interval.h \
     StatsUtility.h \
