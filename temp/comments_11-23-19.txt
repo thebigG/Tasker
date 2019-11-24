@@ -1,0 +1,16 @@
+Gemuele (Gem) Aludino
+I am pretty particular about naming conventions, keeping things organized, and maintaining good style -- and it was my duty to make sure that we were all on board with that.
+clang-format is a formatter for source code, and I have provided my .clang-format presets for the group to use for this project, as well as in the future for their software endeavors.
+Using clang-format will keep all of our code looking uniform, with consistent indenting, ordered header file inclusions, etc.
+
+The ADTs I worked on were
+    util::StatsUtility - all static functions, for seconds conversions
+    util::Interval - POD (plain old data), simply holds time (in seconds) and frequency of a udata::Commitment
+    udata::User - A container for all of the user's Commitments (they will go into a QVector<udata::Commitment> field) - also specifies the default Commitment for the user.
+
+We've been hard at work..there's a lot more ahead for all of us to do, but it will come together. I know it.
+
+p.s. Git has been a real pain at times, especially when one or more of our branches falls behind master, and/or the HEAD
+becomes misaligned. These are things I still don't understand...and I intend to do more research so that I am prepared
+if and when things go awry again with respect to version control.
+
