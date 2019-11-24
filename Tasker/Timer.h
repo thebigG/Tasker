@@ -12,7 +12,7 @@ class Engine::Timer
 private:
     QTime currentProductiveTime;
     QTime currentUnproductiveTime;
-    Session currentSession;
+    udata::Session currentSession;
     QTime startTime;
 
 public:

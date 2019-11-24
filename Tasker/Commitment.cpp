@@ -1,6 +1,7 @@
 #include "Commitment.h"
+#include <Session.h>
 #include <QDebug>
-
+using namespace udata;
 
 Commitment::Commitment()
 {

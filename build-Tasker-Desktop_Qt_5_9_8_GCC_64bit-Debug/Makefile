@@ -59,6 +59,7 @@ SOURCES       = ../Tasker/CommStatsQWidget.cpp \
 		../Tasker/TaskerUIMainWindowQWidget.cpp \
 		../Tasker/TempChartQWidget.cpp \
 		../Tasker/TestUtils.cpp \
+		../Tasker/Timer.cpp \
 		../Tasker/TimerWindowQWidget.cpp \
 		../Tasker/User.cpp \
 		../Tasker/main.cpp moc_CommStatsQWidget.cpp \
@@ -75,6 +76,7 @@ OBJECTS       = CommStatsQWidget.o \
 		TaskerUIMainWindowQWidget.o \
 		TempChartQWidget.o \
 		TestUtils.o \
+		Timer.o \
 		TimerWindowQWidget.o \
 		User.o \
 		main.o \
@@ -240,6 +242,7 @@ DIST          = ../../Qt/5.9.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/spec_post.prf \
+		../Tasker/.qmake.stash \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/default_pre.prf \
@@ -268,6 +271,7 @@ DIST          = ../../Qt/5.9.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../Tasker/TaskerUIMainWindowQWidget.h \
 		../Tasker/TempChartQWidget.h \
 		../Tasker/TestUtils.h \
+		../Tasker/Timer.h \
 		../Tasker/TimerWindowQWidget.h \
 		../Tasker/Interval.h \
 		../Tasker/StatsUtility.h \
@@ -283,6 +287,7 @@ DIST          = ../../Qt/5.9.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../Tasker/TaskerUIMainWindowQWidget.cpp \
 		../Tasker/TempChartQWidget.cpp \
 		../Tasker/TestUtils.cpp \
+		../Tasker/Timer.cpp \
 		../Tasker/TimerWindowQWidget.cpp \
 		../Tasker/User.cpp \
 		../Tasker/main.cpp
@@ -454,6 +459,7 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.con
 		../../Qt/5.9.8/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/default_pre.prf \
@@ -638,6 +644,7 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.con
 ../../Qt/5.9.8/gcc_64/mkspecs/features/qt_config.prf:
 ../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../Qt/5.9.8/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../Qt/5.9.8/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../Qt/5.9.8/gcc_64/mkspecs/features/toolchain.prf:
 ../../Qt/5.9.8/gcc_64/mkspecs/features/default_pre.prf:
@@ -679,8 +686,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Qt/5.9.8/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.h ../Tasker/Commitment.h ../Tasker/CreateCommitmentQWidget.h ../Tasker/Session.h ../Tasker/Task.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/TestUtils.h ../Tasker/TimerWindowQWidget.h ../Tasker/Interval.h ../Tasker/StatsUtility.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/TimerWindowQWidget.h ../Tasker/User.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.cpp ../Tasker/Commitment.cpp ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Session.cpp ../Tasker/Task.cpp ../Tasker/StatsUtility.cpp ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/TempChartQWidget.cpp ../Tasker/TestUtils.cpp ../Tasker/TimerWindowQWidget.cpp ../Tasker/User.cpp ../Tasker/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.h ../Tasker/Commitment.h ../Tasker/CreateCommitmentQWidget.h ../Tasker/Session.h ../Tasker/Task.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/TestUtils.h ../Tasker/Timer.h ../Tasker/TimerWindowQWidget.h ../Tasker/Interval.h ../Tasker/StatsUtility.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/TimerWindowQWidget.h ../Tasker/User.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.cpp ../Tasker/Commitment.cpp ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Session.cpp ../Tasker/Task.cpp ../Tasker/StatsUtility.cpp ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/TempChartQWidget.cpp ../Tasker/TestUtils.cpp ../Tasker/Timer.cpp ../Tasker/TimerWindowQWidget.cpp ../Tasker/User.cpp ../Tasker/main.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.ui ../Tasker/CreateCommitmentQWidget.ui ../Tasker/TaskerUIMainWindowQWidget.ui ../Tasker/TimerWindowQWidget.ui $(DISTDIR)/
 
 
@@ -2796,6 +2803,66 @@ TempChartQWidget.o: ../Tasker/TempChartQWidget.cpp ../Tasker/TempChartQWidget.h 
 
 TestUtils.o: ../Tasker/TestUtils.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TestUtils.o ../Tasker/TestUtils.cpp
+
+Timer.o: ../Tasker/Timer.cpp ../Tasker/Timer.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QTime \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdatetime.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstring.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qchar.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qglobal.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qconfig.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtcore-config.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsystemdetection.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qprocessordetection.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtypeinfo.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsysinfo.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qlogging.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qflags.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qatomic.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qbasicatomic.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qgenericatomic.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qglobalstatic.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qmutex.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qnumeric.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qversiontagging.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qbytearray.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qrefcount.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qnamespace.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qarraydata.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstringbuilder.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qshareddata.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qhash.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qiterator.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qlist.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qhashfunctions.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qpair.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qbytearraylist.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstringlist.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qregexp.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstringmatcher.h \
+		../Tasker/Session.h \
+		../Tasker/Task.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QString \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QVector \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qvector.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qpoint.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QObject \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qobject.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qobjectdefs.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcoreevent.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qscopedpointer.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qmetatype.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qobject_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Timer.o ../Tasker/Timer.cpp
 
 TimerWindowQWidget.o: ../Tasker/TimerWindowQWidget.cpp ../Tasker/TimerWindowQWidget.h \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/QWidget \

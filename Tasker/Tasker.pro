@@ -21,6 +21,7 @@ SOURCES += \
     CommStatsQWidget.cpp \
     Commitment.cpp \
     CreateCommitmentQWidget.cpp \
+    KeyboardListener.cpp \
     Session.cpp \
     Task.cpp \
     StatsUtility.cpp \
@@ -36,11 +37,11 @@ HEADERS += \
     CommStatsQWidget.h \
     Commitment.h \
     CreateCommitmentQWidget.h \
+    KeyboardListener.h \
     Session.h \
     Task.h \
     TaskerUIMainWindowQWidget.h \
     TempChartQWidget.h \
-    TestUtils.h \
     Timer.h \
     TimerWindowQWidget.h \
     Interval.h \

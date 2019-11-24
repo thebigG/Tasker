@@ -1,6 +1,7 @@
 #include <Session.h>
 #include <QtCore>
 #include <StatsUtility.h>
+using namespace udata;
 Session::Session()
 {
 

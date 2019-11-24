@@ -4,28 +4,28 @@
 #include <Session.h>
 #include <Interval.h>
 #include <QString>
-namespace UData
+namespace udata
 {
 class Commitment;
 }
-class Commitment
+class udata::Commitment
 {
 private:
     QString name;
     QDate dateStart;
     QDate dateEnd;
     util::Interval interval;
-    QVector<Session> sessions;
+    QVector<udata::Session> sessions;
 public:
     Commitment();
-    Commitment(QString newName,QDate newStart, QDate newEnd, QVector<Session> newSessions);
+    Commitment(QString newName,QDate newStart, QDate newEnd, QVector<udata::Session> newSessions);
     Commitment(QString newName,QDate newStart, QDate newEnd);
     QDate& getDateStart();
     void setDateStart(QDate value);
     QDate& getDateEnd();
     void setDateEnd(QDate value);
     QVector<Session>& getSessions();
-    void setSessions(QVector<Session> value);
+    void setSessions(QVector<udata::Session> value);
     QString& getName();
 };
 
