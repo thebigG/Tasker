@@ -18,6 +18,18 @@ Commitment::Commitment(QString newName,QDate newStart, QDate newEnd, QVector<Ses
         dateEnd = dateStart;
     }
 }
+Commitment::Commitment(QString newName,QDate newStart, QDate newEnd)
+:name{newName}, dateStart{newStart}, dateEnd{newEnd}
+{
+    if(dateStart<QDate::currentDate())
+    {
+        dateStart = QDate::currentDate();
+    }
+    if(dateEnd<dateStart)
+    {
+        dateEnd = dateStart;
+    }
+}
 QString& Commitment::getName()
 {
     return name;

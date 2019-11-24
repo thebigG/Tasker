@@ -13,6 +13,7 @@ class TestCommitment : public QObject
 private slots:
     void testTaskCorrectness();
     void testSessionCorrectness();
+    void testNoSessionsCommitment();
     void testCommitmentCorrectness();
     void testSessionNegativeGoal();
     void testCommitmentInvalidStartDate();
@@ -80,6 +81,7 @@ void TestCommitment::testSessionPostiveGoal()
     Session mySession{myTask, sessionGoal};
     QVERIFY(mySession.getLength() == sessionGoal);
 }
+
 /**
   TID:T05
   This function tests the correctness of a commitment
@@ -120,6 +122,7 @@ void TestCommitment::testCommitmentCorrectness()
     QVERIFY(myCommitment.getName() == commitmentName);
 
 }
+
 /**
     TID:T06
  * @brief This function attempts to test Commitment with an invalid start date.
@@ -186,6 +189,42 @@ void TestCommitment::testCommitmentInvalidEndDate()
     Commitment myCommitment{commitmentName ,start, end, sessions};
     QVERIFY(myCommitment.getDateStart() == QDate::currentDate());
     QVERIFY(myCommitment.getDateEnd() == QDate::currentDate());
+}
+/*
+ * TID:T08
+ */
+void TestCommitment::testNoSessionsCommitment()
+{
+    QVector<QString> listenerlist{"keyboard", "Mic"};
+    Task myTask{"write", listenerlist};
+    QVERIFY(myTask.getName() == "write");
+    QVERIFY(myTask.getListeners().size() == 2);
+    QVERIFY(myTask.getListeners().at(0) == "keyboard");
+    QVERIFY(myTask.getListeners().at(1) == "Mic");
+    Session mySession{myTask, 3000};
+    myTask.setName("code");
+    QVERIFY(myTask.getName() != "write");
+    QString newStr{"music"};
+    mySession.getTask().setName(newStr);
+    mySession.getTask().setName(newStr);
+    Task myTask2{"sing", listenerlist};
+    QVERIFY(myTask2.getName() == "sing");
+    QVERIFY(myTask2.getListeners().size() == 2);
+    QVERIFY(myTask2.getListeners().at(0) == "keyboard");
+    QVERIFY(myTask2.getListeners().at(1) == "Mic");
+    Session mySession2{myTask2, 6700 };
+    QVERIFY(mySession2.getTask().getName() != "write");
+    QDate start{QDate::currentDate()};
+    QDate end{QDate::currentDate()};
+    end = end.addDays(12);
+    end = end.addMonths(3);
+    QString commitmentName = "Build Pacman" ;
+    Commitment myCommitment{commitmentName ,start, end};
+    QVERIFY( myCommitment.getDateStart() == start);
+    QVERIFY( myCommitment.getDateStart() != end);
+    QVERIFY(myCommitment.getDateEnd() == end);
+    QVERIFY(myCommitment.getName() == commitmentName);
+    QVERIFY(myCommitment.getSessions().size() == 0);
 }
 QTEST_MAIN(TestCommitment)
 

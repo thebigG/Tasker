@@ -19,6 +19,7 @@ private:
 public:
     Commitment();
     Commitment(QString newName,QDate newStart, QDate newEnd, QVector<Session> newSessions);
+    Commitment(QString newName,QDate newStart, QDate newEnd);
     QDate& getDateStart();
     void setDateStart(QDate value);
     QDate& getDateEnd();
