@@ -2,8 +2,7 @@
 #include "CreateCommitmentQWidget.h"
 #include "TaskerUIMainWindowQWidget.h"
 #include "Task.h"
-#include "TestUtils.h"
-
+#include <KeyboardListener.h>
 #include "Interval.h"
 #include "StatsUtility.h"
 #include "User.h"
@@ -18,7 +17,6 @@
 #include <stdlib.h>
 static TaskerUIMainWindowQWidget* f = nullptr;
 using namespace std;
-using namespace testUtils;
 #include <cstdio>
 #include <cstdlib>
 
@@ -26,6 +24,7 @@ using namespace testUtils;
 
 using std::cout;
 using std::endl;
+using namespace Engine;
 // Task test_task;
 
 /*
@@ -49,14 +48,14 @@ int main(int argc, char *argv[]) {
 
 int main(int argc, char* argv[])
 {
-    QApplication a(argc, argv);
-    f = new TaskerUIMainWindowQWidget;
-    f->show();
+//    QApplication a(argc, argv);
+//    f = new TaskerUIMainWindowQWidget;
+//    f->show();
 
 //    delete str;
-
-
-
+qDebug()<<"calling keyboard listener constructor";
+KeyboardListener kL{};
+//KeyboardListener::startListening();
 
 /*
 
@@ -66,39 +65,7 @@ int main(int argc, char* argv[])
     auto task1 = new Task();
     */
 
-    return a.exec();
-}
-
-QString testUtils::getNameFromIn()
-{
-    QString yourText;
-    QFile file;
-    file.open(stdin, QIODevice::ReadOnly);
-    QTextStream qtin(&file);
-    qDebug() << "Input name:";
-    qtin >> yourText;
-    file.close();
-    return yourText;
-}
-
-QVector<QString> testUtils::getNameListFromIn()
-{
-    QString yourText;
-    QFile file;
-    file.open(stdin, QIODevice::ReadOnly);
-    QTextStream qtin(&file);
-    qDebug()<< "Enter the size of list:";
-    qtin>>yourText;
-    int size = yourText.toInt();
-    QString temp;
-    QVector<QString> list{};
-    for(int i =0;i<size;i++)
-    {
-        qDebug()<< "Enter item#" +  QString::number(i+1);
-        qtin >>temp;
-        list.push_back(temp);
-    }
-    return list;
+//    return a.exec();
 }
 
 

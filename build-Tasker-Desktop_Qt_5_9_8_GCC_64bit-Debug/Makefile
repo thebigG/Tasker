@@ -53,6 +53,7 @@ OBJECTS_DIR   = ./
 SOURCES       = ../Tasker/CommStatsQWidget.cpp \
 		../Tasker/Commitment.cpp \
 		../Tasker/CreateCommitmentQWidget.cpp \
+		../Tasker/KeyboardListener.cpp \
 		../Tasker/Session.cpp \
 		../Tasker/Task.cpp \
 		../Tasker/StatsUtility.cpp \
@@ -70,6 +71,7 @@ SOURCES       = ../Tasker/CommStatsQWidget.cpp \
 OBJECTS       = CommStatsQWidget.o \
 		Commitment.o \
 		CreateCommitmentQWidget.o \
+		KeyboardListener.o \
 		Session.o \
 		Task.o \
 		StatsUtility.o \
@@ -242,7 +244,6 @@ DIST          = ../../Qt/5.9.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/spec_post.prf \
-		../Tasker/.qmake.stash \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/default_pre.prf \
@@ -266,11 +267,11 @@ DIST          = ../../Qt/5.9.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../Tasker/Tasker.pro ../Tasker/CommStatsQWidget.h \
 		../Tasker/Commitment.h \
 		../Tasker/CreateCommitmentQWidget.h \
+		../Tasker/KeyboardListener.h \
 		../Tasker/Session.h \
 		../Tasker/Task.h \
 		../Tasker/TaskerUIMainWindowQWidget.h \
 		../Tasker/TempChartQWidget.h \
-		../Tasker/TestUtils.h \
 		../Tasker/Timer.h \
 		../Tasker/TimerWindowQWidget.h \
 		../Tasker/Interval.h \
@@ -281,6 +282,7 @@ DIST          = ../../Qt/5.9.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../Tasker/User.h ../Tasker/CommStatsQWidget.cpp \
 		../Tasker/Commitment.cpp \
 		../Tasker/CreateCommitmentQWidget.cpp \
+		../Tasker/KeyboardListener.cpp \
 		../Tasker/Session.cpp \
 		../Tasker/Task.cpp \
 		../Tasker/StatsUtility.cpp \
@@ -459,7 +461,6 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.con
 		../../Qt/5.9.8/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/default_pre.prf \
@@ -644,7 +645,6 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.con
 ../../Qt/5.9.8/gcc_64/mkspecs/features/qt_config.prf:
 ../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../Qt/5.9.8/gcc_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 ../../Qt/5.9.8/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../Qt/5.9.8/gcc_64/mkspecs/features/toolchain.prf:
 ../../Qt/5.9.8/gcc_64/mkspecs/features/default_pre.prf:
@@ -686,8 +686,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Qt/5.9.8/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.h ../Tasker/Commitment.h ../Tasker/CreateCommitmentQWidget.h ../Tasker/Session.h ../Tasker/Task.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/TestUtils.h ../Tasker/Timer.h ../Tasker/TimerWindowQWidget.h ../Tasker/Interval.h ../Tasker/StatsUtility.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/TimerWindowQWidget.h ../Tasker/User.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.cpp ../Tasker/Commitment.cpp ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Session.cpp ../Tasker/Task.cpp ../Tasker/StatsUtility.cpp ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/TempChartQWidget.cpp ../Tasker/TestUtils.cpp ../Tasker/Timer.cpp ../Tasker/TimerWindowQWidget.cpp ../Tasker/User.cpp ../Tasker/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.h ../Tasker/Commitment.h ../Tasker/CreateCommitmentQWidget.h ../Tasker/KeyboardListener.h ../Tasker/Session.h ../Tasker/Task.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/Timer.h ../Tasker/TimerWindowQWidget.h ../Tasker/Interval.h ../Tasker/StatsUtility.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/TimerWindowQWidget.h ../Tasker/User.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.cpp ../Tasker/Commitment.cpp ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/KeyboardListener.cpp ../Tasker/Session.cpp ../Tasker/Task.cpp ../Tasker/StatsUtility.cpp ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/TempChartQWidget.cpp ../Tasker/TestUtils.cpp ../Tasker/Timer.cpp ../Tasker/TimerWindowQWidget.cpp ../Tasker/User.cpp ../Tasker/main.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.ui ../Tasker/CreateCommitmentQWidget.ui ../Tasker/TaskerUIMainWindowQWidget.ui ../Tasker/TimerWindowQWidget.ui $(DISTDIR)/
 
 
@@ -2074,6 +2074,192 @@ CreateCommitmentQWidget.o: ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Creat
 		../../Qt/5.9.8/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CreateCommitmentQWidget.o ../Tasker/CreateCommitmentQWidget.cpp
 
+KeyboardListener.o: ../Tasker/KeyboardListener.cpp ../Tasker/KeyboardListener.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QtCore \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QtCoreDepends \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qglobal.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qconfig.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtcore-config.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsystemdetection.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qprocessordetection.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtypeinfo.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsysinfo.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qlogging.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qflags.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qatomic.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qbasicatomic.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qgenericatomic.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qglobalstatic.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qmutex.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qnumeric.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qversiontagging.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qabstractanimation.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qobject.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qobjectdefs.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qnamespace.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstring.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qchar.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qbytearray.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qrefcount.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qarraydata.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstringbuilder.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qlist.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qiterator.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qhashfunctions.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qpair.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qbytearraylist.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstringlist.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qregexp.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstringmatcher.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcoreevent.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qscopedpointer.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qmetatype.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qobject_impl.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qvariant.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qmap.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdebug.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qhash.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtextstream.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qlocale.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qshareddata.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qvector.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qpoint.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qset.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsharedpointer.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qabstractproxymodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qabstractstate.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qabstracttransition.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qanimationgroup.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qarraydataops.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qbasictimer.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qbitarray.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qbuffer.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qbytearraymatcher.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcache.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcollator.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcommandlineoption.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcommandlineparser.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcryptographichash.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdatastream.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdatetime.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdeadlinetimer.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qelapsedtimer.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdir.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfileinfo.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfile.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdiriterator.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qeasingcurve.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qendian.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qeventtransition.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qexception.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfactoryinterface.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfileselector.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QObject \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QStringList \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfilesystemwatcher.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfinalstate.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfuture.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfutureinterface.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qrunnable.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qresultstore.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfuturesynchronizer.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfuturewatcher.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qhistorystate.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qidentityproxymodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qisenum.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qjsonarray.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qjsonvalue.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qjsondocument.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qjsonobject.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qlibrary.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qlibraryinfo.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qversionnumber.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qline.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qlinkedlist.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qlockfile.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qloggingcategory.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qmargins.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qmath.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qmessageauthenticationcode.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qmetaobject.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qmimedata.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qmimedatabase.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qmimetype.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qobjectcleanuphandler.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qoperatingsystemversion.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qparallelanimationgroup.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qpauseanimation.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qplugin.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qpointer.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qpluginloader.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qprocess.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qpropertyanimation.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qvariantanimation.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qqueue.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qreadwritelock.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qrect.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsize.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qresource.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsavefile.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qscopedvaluerollback.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsemaphore.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsequentialanimationgroup.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsettings.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsharedmemory.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsignalmapper.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsignaltransition.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsocketnotifier.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsortfilterproxymodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstack.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstandardpaths.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstate.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstatemachine.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstorageinfo.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qstringlistmodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qsystemsemaphore.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtemporarydir.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QScopedPointer \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtemporaryfile.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtextboundaryfinder.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtextcodec.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qthread.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qthreadpool.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qthreadstorage.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtimeline.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtimer.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtimezone.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtranslator.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtypetraits.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qurl.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qurlquery.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/quuid.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qwaitcondition.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qwineventnotifier.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qxmlstream.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qtcoreversion.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o KeyboardListener.o ../Tasker/KeyboardListener.cpp
+
 Session.o: ../Tasker/Session.cpp ../Tasker/Session.h \
 		../Tasker/Task.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QString \
@@ -3149,9 +3335,7 @@ main.o: ../Tasker/main.cpp ../Tasker/CommStatsQWidget.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QString \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QVector \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QObject \
-		../Tasker/TestUtils.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/QtTest \
-		../../Qt/5.9.8/gcc_64/include/QtTest/QtTestDepends \
+		../Tasker/KeyboardListener.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QtCore \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QtCoreDepends \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qabstractanimation.h \
@@ -3264,68 +3448,6 @@ main.o: ../Tasker/main.cpp ../Tasker/CommStatsQWidget.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qwineventnotifier.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qxmlstream.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qtcoreversion.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qbenchmark.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtest_global.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qbenchmarkmetric.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qsignalspy.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtesteventloop.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtest.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtestcase.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtestdata.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtestsystem.h \
-		../../Qt/5.9.8/gcc_64/include/QtGui/QWindow \
-		../../Qt/5.9.8/gcc_64/include/QtGui/qwindow.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QEvent \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QMargins \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QRect \
-		../../Qt/5.9.8/gcc_64/include/QtGui/qsurface.h \
-		../../Qt/5.9.8/gcc_64/include/QtGui/qsurfaceformat.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtest_network.h \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/QHostAddress \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qhostaddress.h \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qtnetworkglobal.h \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qtnetwork-config.h \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qabstractsocket.h \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/QNetworkCookie \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qnetworkcookie.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QSharedDataPointer \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QList \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QMetaType \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/QNetworkReply \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qnetworkreply.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QIODevice \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QVariant \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/QNetworkRequest \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qnetworkrequest.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QUrl \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/QNetworkAccessManager \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qnetworkaccessmanager.h \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/QSslConfiguration \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qsslconfiguration.h \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qsslsocket.h \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qtcpsocket.h \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qsslerror.h \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qsslcertificate.h \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qssl.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QFlags \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/QSslPreSharedKeyAuthenticator \
-		../../Qt/5.9.8/gcc_64/include/QtNetwork/qsslpresharedkeyauthenticator.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtest_widgets.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtest_gui.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtestassert.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtestevent.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtestkeyboard.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtestspontaneevent.h \
-		../../Qt/5.9.8/gcc_64/include/QtGui/qguiapplication.h \
-		../../Qt/5.9.8/gcc_64/include/QtGui/qinputmethod.h \
-		../../Qt/5.9.8/gcc_64/include/QtWidgets/qapplication.h \
-		../../Qt/5.9.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtestmouse.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QDebug \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qtesttouch.h \
-		../../Qt/5.9.8/gcc_64/include/QtWidgets/QSizePolicy \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QMetaEnum \
-		../../Qt/5.9.8/gcc_64/include/QtTest/qttestversion.h \
 		../Tasker/Interval.h \
 		../Tasker/StatsUtility.h \
 		../Tasker/User.h \
@@ -3333,6 +3455,11 @@ main.o: ../Tasker/main.cpp ../Tasker/CommStatsQWidget.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QDate \
 		../Tasker/Session.h \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QDebug \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QFile \
 		../../Qt/5.9.8/gcc_64/include/QtCore/Qt
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Tasker/main.cpp
