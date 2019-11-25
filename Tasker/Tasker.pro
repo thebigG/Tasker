@@ -21,6 +21,7 @@ SOURCES += \
     CommStatsQWidget.cpp \
     Commitment.cpp \
     CreateCommitmentQWidget.cpp \
+    Listener.cpp \
     Session.cpp \
     Task.cpp \
     StatsUtility.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
     CommStatsQWidget.h \
     Commitment.h \
     CreateCommitmentQWidget.h \
+    Listener.h \
     Session.h \
     Task.h \
     TaskerUIMainWindowQWidget.h \
