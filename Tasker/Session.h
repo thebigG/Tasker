@@ -1,8 +1,11 @@
 #ifndef SESSION_H
 #define SESSION_H
 #include "Task.h"
+namespace udata {
+class Session;
 
-class Session
+}
+class udata::Session
 {
 public:
     Session();

@@ -3,12 +3,23 @@
 #include "QString"
 #include "QVector"
 #include "QObject"
-class Task
+/**
+ *
+ */
+namespace udata
+{
+class Task;
+}
+
+/**
+ * @brief The udata::Task class
+ * This class repsents a task. It is used as part of a Session.
+ */
+class udata::Task
 {
 
 public:
     Task();
-//    ~Task();
     Task(QString newName);
     Task(QString newName, QVector<QString> listeners);
     QString& getName() ;

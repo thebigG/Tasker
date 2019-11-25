@@ -1,6 +1,7 @@
 #include "Task.h"
 #include "QString"
 #include <QtCore>
+using namespace udata;
 Task::Task()
 {
 

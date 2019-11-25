@@ -1,0 +1,153 @@
+\hypertarget{classutil_1_1StatsUtility}{}\doxysection{util\+::Stats\+Utility Class Reference}
+\label{classutil_1_1StatsUtility}\index{util::StatsUtility@{util::StatsUtility}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int64\+\_\+t \mbox{\hyperlink{classutil_1_1StatsUtility_a385d74afc19dca7158be9f68664644ef}{to\+Minutes}} (int64\+\_\+t seconds)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classutil_1_1StatsUtility_a385d74afc19dca7158be9f68664644ef}{util\+::\+Stats\+Utility\+::to\+Minutes}} \end{DoxyCompactList}\item 
+static int64\+\_\+t \mbox{\hyperlink{classutil_1_1StatsUtility_ab837eefb3fc7e23ac0b426780f4e8689}{to\+Hours}} (int64\+\_\+t seconds)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classutil_1_1StatsUtility_ab837eefb3fc7e23ac0b426780f4e8689}{util\+::\+Stats\+Utility\+::to\+Hours}} \end{DoxyCompactList}\item 
+static int64\+\_\+t \mbox{\hyperlink{classutil_1_1StatsUtility_ae237117cbf9022e4a2da5ff5a0c4d0db}{to\+Days}} (int64\+\_\+t seconds)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classutil_1_1StatsUtility_ae237117cbf9022e4a2da5ff5a0c4d0db}{util\+::\+Stats\+Utility\+::to\+Days}} \end{DoxyCompactList}\item 
+static int64\+\_\+t \mbox{\hyperlink{classutil_1_1StatsUtility_a74d5d8f373696053167aa80a4b6ee29f}{to\+Weeks}} (int64\+\_\+t seconds)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classutil_1_1StatsUtility_a74d5d8f373696053167aa80a4b6ee29f}{util\+::\+Stats\+Utility\+::to\+Weeks}} \end{DoxyCompactList}\item 
+static int64\+\_\+t \mbox{\hyperlink{classutil_1_1StatsUtility_aa208003c6e6c772ffc2924b4e9af17e2}{to\+Months}} (int64\+\_\+t seconds)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classutil_1_1StatsUtility_aa208003c6e6c772ffc2924b4e9af17e2}{util\+::\+Stats\+Utility\+::to\+Months}} \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classutil_1_1StatsUtility_a1556c3650019332538bb4d41dc5856df}{calculate\+Productive\+Percentage}} (int64\+\_\+t seconds\+Total, int64\+\_\+t seconds\+Productive)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classutil_1_1StatsUtility_a1556c3650019332538bb4d41dc5856df}{util\+::\+Stats\+Utility\+::calculate\+Productive\+Percentage}} \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classutil_1_1StatsUtility_a1c69e04f902bc84787c420b2dee3c4a4}{calculate\+Unproductive\+Percentage}} (int64\+\_\+t seconds\+Total, int64\+\_\+t seconds\+Productive)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classutil_1_1StatsUtility_a1c69e04f902bc84787c420b2dee3c4a4}{util\+::\+Stats\+Utility\+::calculate\+Unproductive\+Percentage}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classutil_1_1StatsUtility_a1556c3650019332538bb4d41dc5856df}\label{classutil_1_1StatsUtility_a1556c3650019332538bb4d41dc5856df}} 
+\index{util::StatsUtility@{util::StatsUtility}!calculateProductivePercentage@{calculateProductivePercentage}}
+\index{calculateProductivePercentage@{calculateProductivePercentage}!util::StatsUtility@{util::StatsUtility}}
+\doxysubsubsection{\texorpdfstring{calculateProductivePercentage()}{calculateProductivePercentage()}}
+{\footnotesize\ttfamily double util\+::\+Stats\+Utility\+::calculate\+Productive\+Percentage (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{seconds\+Total,  }\item[{int64\+\_\+t}]{seconds\+Productive }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\mbox{\hyperlink{classutil_1_1StatsUtility_a1556c3650019332538bb4d41dc5856df}{util\+::\+Stats\+Utility\+::calculate\+Productive\+Percentage}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seconds} & quantity of total seconds for session \\
+\hline
+{\em seconds\+Productive} & quantity of productive seconds for session\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if seconds\+Total or seconds\+Productive is negative, otherwise percentage of productive time 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutil_1_1StatsUtility_a1c69e04f902bc84787c420b2dee3c4a4}\label{classutil_1_1StatsUtility_a1c69e04f902bc84787c420b2dee3c4a4}} 
+\index{util::StatsUtility@{util::StatsUtility}!calculateUnproductivePercentage@{calculateUnproductivePercentage}}
+\index{calculateUnproductivePercentage@{calculateUnproductivePercentage}!util::StatsUtility@{util::StatsUtility}}
+\doxysubsubsection{\texorpdfstring{calculateUnproductivePercentage()}{calculateUnproductivePercentage()}}
+{\footnotesize\ttfamily double util\+::\+Stats\+Utility\+::calculate\+Unproductive\+Percentage (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{seconds\+Total,  }\item[{int64\+\_\+t}]{seconds\+Unproductive }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\mbox{\hyperlink{classutil_1_1StatsUtility_a1c69e04f902bc84787c420b2dee3c4a4}{util\+::\+Stats\+Utility\+::calculate\+Unproductive\+Percentage}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seconds} & quantity of total seconds for session \\
+\hline
+{\em seconds\+Productive} & quantity of unproductive seconds for session\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if seconds\+Total or seconds\+Productive is negative, otherwise percentage of unproductive time 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutil_1_1StatsUtility_ae237117cbf9022e4a2da5ff5a0c4d0db}\label{classutil_1_1StatsUtility_ae237117cbf9022e4a2da5ff5a0c4d0db}} 
+\index{util::StatsUtility@{util::StatsUtility}!toDays@{toDays}}
+\index{toDays@{toDays}!util::StatsUtility@{util::StatsUtility}}
+\doxysubsubsection{\texorpdfstring{toDays()}{toDays()}}
+{\footnotesize\ttfamily int64\+\_\+t util\+::\+Stats\+Utility\+::to\+Days (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{seconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\mbox{\hyperlink{classutil_1_1StatsUtility_ae237117cbf9022e4a2da5ff5a0c4d0db}{util\+::\+Stats\+Utility\+::to\+Days}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seconds} & quantity of seconds\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if seconds is negative, otherwise quantity of days from seconds 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutil_1_1StatsUtility_ab837eefb3fc7e23ac0b426780f4e8689}\label{classutil_1_1StatsUtility_ab837eefb3fc7e23ac0b426780f4e8689}} 
+\index{util::StatsUtility@{util::StatsUtility}!toHours@{toHours}}
+\index{toHours@{toHours}!util::StatsUtility@{util::StatsUtility}}
+\doxysubsubsection{\texorpdfstring{toHours()}{toHours()}}
+{\footnotesize\ttfamily int64\+\_\+t util\+::\+Stats\+Utility\+::to\+Hours (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{seconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\mbox{\hyperlink{classutil_1_1StatsUtility_ab837eefb3fc7e23ac0b426780f4e8689}{util\+::\+Stats\+Utility\+::to\+Hours}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seconds} & quantity of seconds\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if seconds is negative, otherwise quantity of hours from soconds 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutil_1_1StatsUtility_a385d74afc19dca7158be9f68664644ef}\label{classutil_1_1StatsUtility_a385d74afc19dca7158be9f68664644ef}} 
+\index{util::StatsUtility@{util::StatsUtility}!toMinutes@{toMinutes}}
+\index{toMinutes@{toMinutes}!util::StatsUtility@{util::StatsUtility}}
+\doxysubsubsection{\texorpdfstring{toMinutes()}{toMinutes()}}
+{\footnotesize\ttfamily int64\+\_\+t util\+::\+Stats\+Utility\+::to\+Minutes (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{seconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\mbox{\hyperlink{classutil_1_1StatsUtility_a385d74afc19dca7158be9f68664644ef}{util\+::\+Stats\+Utility\+::to\+Minutes}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seconds} & quantity of seconds\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if seconds is negative, otherwise quantity of minutes from seconds 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutil_1_1StatsUtility_aa208003c6e6c772ffc2924b4e9af17e2}\label{classutil_1_1StatsUtility_aa208003c6e6c772ffc2924b4e9af17e2}} 
+\index{util::StatsUtility@{util::StatsUtility}!toMonths@{toMonths}}
+\index{toMonths@{toMonths}!util::StatsUtility@{util::StatsUtility}}
+\doxysubsubsection{\texorpdfstring{toMonths()}{toMonths()}}
+{\footnotesize\ttfamily int64\+\_\+t util\+::\+Stats\+Utility\+::to\+Months (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{seconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\mbox{\hyperlink{classutil_1_1StatsUtility_aa208003c6e6c772ffc2924b4e9af17e2}{util\+::\+Stats\+Utility\+::to\+Months}} 
+
+\begin{DoxyReturn}{Returns}
+-\/1 if seconds is negative, otherwise quantity of months from seconds 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classutil_1_1StatsUtility_a74d5d8f373696053167aa80a4b6ee29f}\label{classutil_1_1StatsUtility_a74d5d8f373696053167aa80a4b6ee29f}} 
+\index{util::StatsUtility@{util::StatsUtility}!toWeeks@{toWeeks}}
+\index{toWeeks@{toWeeks}!util::StatsUtility@{util::StatsUtility}}
+\doxysubsubsection{\texorpdfstring{toWeeks()}{toWeeks()}}
+{\footnotesize\ttfamily int64\+\_\+t util\+::\+Stats\+Utility\+::to\+Weeks (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{seconds }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\mbox{\hyperlink{classutil_1_1StatsUtility_a74d5d8f373696053167aa80a4b6ee29f}{util\+::\+Stats\+Utility\+::to\+Weeks}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seconds} & quantity of seconds\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if seconds is negative, otherwise quantity of weeks from seconds 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Stats\+Utility.\+h\item 
+Stats\+Utility.\+cpp\end{DoxyCompactItemize}

@@ -1,10 +1,10 @@
 #include "User.h"
-
-udata::User::User() {
+using namespace udata;
+User::User() {
 
 }
 
-udata::User::~User() {
+User::~User() {
 
 }
 
