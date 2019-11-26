@@ -21,10 +21,10 @@ public:
     virtual void update() = 0;
 
     virtual Listener::ListenerState listen() = 0;
-
+    ListenerState currentState;
     double getSlack();
-
-    Listener::ListenerState getState();
+    void setState(ListenerState);
+    ListenerState getState();
 
     // probably not needed...timer keeps track of live session time,
     // when session ends, session will grab this data from timer
@@ -48,7 +48,6 @@ private:
     Listener::ListenerState state;
 
     void setCheckStateDelay(double checkStateDelay);
-    void setState(Listener::ListenerState state);
 
     // probably not needed...timer keeps track of live session time,
     // when session ends, session will grab this data from timer

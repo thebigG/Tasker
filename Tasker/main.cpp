@@ -55,8 +55,9 @@ int main(int argc, char* argv[])
 //    delete str;
 qDebug()<<"calling keyboard listener constructor";
 KeyboardListener kL{};
-//KeyboardListener::startListening();
-
+qDebug()<<"after call";
+kL.startListening();
+qDebug()<<"Did it reach this?";
 /*
 
 <<<<<<< HEAD

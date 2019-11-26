@@ -7,7 +7,7 @@
 Engine::Listener::Listener() {
     checkStateDelay = 0.0;
     slack = 0.0;
-
+    currentState = Engine::Listener::ListenerState::unproductive;
     productiveTime = 0;
     unproductiveTime = 0;
 }
@@ -24,6 +24,16 @@ Engine::Listener::~Listener() {
     unproductiveTime = 0;
 }
 
+/**
+ * @brief Engine::Listener::setState
+ *
+ * @param state ListenerState, unproductive or productive
+ */
+
+void Engine::Listener::setState(Engine::Listener::ListenerState newState)
+{
+    currentState = newState;
+}
 /**
  * @brief Engine::Listener::getSlack
  *        returns slack value,
@@ -109,14 +119,7 @@ void Engine::Listener::setCheckStateDelay(double checkStateDelay) {
             ? this->checkStateDelay : checkStateDelay;
 }
 
-/**
- * @brief Engine::Listener::setState
- *
- * @param state ListenerState, unproductive or productive
- */
-void Engine::Listener::setState(Engine::Listener::ListenerState state) {
-    this->state = state;
-}
+
 
 /**
  * @brief Engine::Listener::setProductiveTime
