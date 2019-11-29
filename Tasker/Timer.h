@@ -17,10 +17,11 @@ private:
     QTime currentUnproductiveTime;
     udata::Session currentSession;
     QTime startTime;
-    KeyboardListener thisK;
+    Listener* thisK;
 
 public:
     Timer();
+    ~Timer();
     void start();
     void stop();
     void pause();

@@ -1,0 +1,155 @@
+\hypertarget{classEngine_1_1Listener}{}\doxysection{Engine\+::Listener Class Reference}
+\label{classEngine_1_1Listener}\index{Engine::Listener@{Engine::Listener}}
+Inheritance diagram for Engine\+::Listener\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classEngine_1_1Listener}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_a7b3e66a922a80a1a63f5ca7a6de1f32d}\label{classEngine_1_1Listener_a7b3e66a922a80a1a63f5ca7a6de1f32d}} 
+enum {\bfseries Listener\+State} \{ {\bfseries unproductive}, 
+{\bfseries productive}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_ab52f22e9b2a2c7912826b3894f3a0621}\label{classEngine_1_1Listener_ab52f22e9b2a2c7912826b3894f3a0621}} 
+\mbox{\hyperlink{classEngine_1_1Listener_ab52f22e9b2a2c7912826b3894f3a0621}{Listener}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1Listener_ab52f22e9b2a2c7912826b3894f3a0621}{Engine\+::\+Listener\+::\+Listener}} default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_a285fe9a52da33c20a0a252f06df36446}\label{classEngine_1_1Listener_a285fe9a52da33c20a0a252f06df36446}} 
+virtual \mbox{\hyperlink{classEngine_1_1Listener_a285fe9a52da33c20a0a252f06df36446}{$\sim$\+Listener}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1Listener_a285fe9a52da33c20a0a252f06df36446}{Engine\+::\+Listener\+::$\sim$\+Listener}} destructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_a19dd55f799bfe843969428a3946d78b2}\label{classEngine_1_1Listener_a19dd55f799bfe843969428a3946d78b2}} 
+virtual void {\bfseries start} ()=0
+\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_a398453a4ac3fcfcffef19b9fd40778e0}\label{classEngine_1_1Listener_a398453a4ac3fcfcffef19b9fd40778e0}} 
+virtual void {\bfseries end} ()=0
+\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_a270075e37ba462fab46733a1053b0d8b}\label{classEngine_1_1Listener_a270075e37ba462fab46733a1053b0d8b}} 
+virtual void {\bfseries pause} ()=0
+\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_a680ddf3487db40f0a7e08f0ab1a957dc}\label{classEngine_1_1Listener_a680ddf3487db40f0a7e08f0ab1a957dc}} 
+virtual void {\bfseries update} ()=0
+\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_afd34447f8b743ab102095823fe761e01}\label{classEngine_1_1Listener_afd34447f8b743ab102095823fe761e01}} 
+virtual Listener\+::\+Listener\+State {\bfseries listen} ()=0
+\item 
+double \mbox{\hyperlink{classEngine_1_1Listener_a39f1c62c62d2fca9e009ca70cbb33d7d}{get\+Slack}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1Listener_a39f1c62c62d2fca9e009ca70cbb33d7d}{Engine\+::\+Listener\+::get\+Slack}} returns slack value, user-\/defined grace \char`\"{}padding\char`\"{} between check\+State\+Delay. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEngine_1_1Listener_a2d777002315e579a91804e58754404b3}{set\+State}} (Listener\+State)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1Listener_a2d777002315e579a91804e58754404b3}{Engine\+::\+Listener\+::set\+State}}. \end{DoxyCompactList}\item 
+Listener\+State \mbox{\hyperlink{classEngine_1_1Listener_af91870a9571efd4ce988c9f1acb8de70}{get\+State}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1Listener_af91870a9571efd4ce988c9f1acb8de70}{Engine\+::\+Listener\+::get\+State}} Returns current state of \mbox{\hyperlink{classEngine_1_1Listener}{Listener}}, unproductive or productive. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classEngine_1_1Listener_a1ddeab7b5d8595f97fc82fd8b15268bf}{get\+Productive\+Time}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1Listener_a1ddeab7b5d8595f97fc82fd8b15268bf}{Engine\+::\+Listener\+::get\+Productive\+Time}} returns productive time of \mbox{\hyperlink{classEngine_1_1Listener}{Listener}}. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classEngine_1_1Listener_ac5463db2059adca1481b9e848e91bd1d}{get\+Unproductive\+Time}} ()
+\begin{DoxyCompactList}\small\item\em Engine\+::\+Listener\+::getun\+Productive\+Time returns unproductive time of \mbox{\hyperlink{classEngine_1_1Listener}{Listener}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEngine_1_1Listener_a64016084a0e271114ce4bdbc05bf65d9}{set\+Slack}} (double slack)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1Listener_a64016084a0e271114ce4bdbc05bf65d9}{Engine\+::\+Listener\+::set\+Slack}} sets slack value, user-\/defined grace \char`\"{}padding\char`\"{} between check\+State\+Delay. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_aa2fe9fce232854d7f513eb01bcc614d6}\label{classEngine_1_1Listener_aa2fe9fce232854d7f513eb01bcc614d6}} 
+Listener\+State {\bfseries current\+State}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classEngine_1_1Listener_a1ddeab7b5d8595f97fc82fd8b15268bf}\label{classEngine_1_1Listener_a1ddeab7b5d8595f97fc82fd8b15268bf}} 
+\index{Engine::Listener@{Engine::Listener}!getProductiveTime@{getProductiveTime}}
+\index{getProductiveTime@{getProductiveTime}!Engine::Listener@{Engine::Listener}}
+\doxysubsubsection{\texorpdfstring{getProductiveTime()}{getProductiveTime()}}
+{\footnotesize\ttfamily uint64\+\_\+t Engine\+::\+Listener\+::get\+Productive\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classEngine_1_1Listener_a1ddeab7b5d8595f97fc82fd8b15268bf}{Engine\+::\+Listener\+::get\+Productive\+Time}} returns productive time of \mbox{\hyperlink{classEngine_1_1Listener}{Listener}}. 
+
+\begin{DoxyAttention}{Attention}
+probably not needed...\mbox{\hyperlink{classEngine_1_1Timer}{Timer}} keeps track of live session time; when Session ends, Session will grab this data from \mbox{\hyperlink{classEngine_1_1Timer}{Timer}}, and have this value stored permanently within Commitment (more specifically, User\textquotesingle{}s Commitment Q\+Vector)
+\end{DoxyAttention}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classEngine_1_1Listener}{Listener}}\textquotesingle{}s productive time, in seconds 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEngine_1_1Listener_a39f1c62c62d2fca9e009ca70cbb33d7d}\label{classEngine_1_1Listener_a39f1c62c62d2fca9e009ca70cbb33d7d}} 
+\index{Engine::Listener@{Engine::Listener}!getSlack@{getSlack}}
+\index{getSlack@{getSlack}!Engine::Listener@{Engine::Listener}}
+\doxysubsubsection{\texorpdfstring{getSlack()}{getSlack()}}
+{\footnotesize\ttfamily double Engine\+::\+Listener\+::get\+Slack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classEngine_1_1Listener_a39f1c62c62d2fca9e009ca70cbb33d7d}{Engine\+::\+Listener\+::get\+Slack}} returns slack value, user-\/defined grace \char`\"{}padding\char`\"{} between check\+State\+Delay. 
+
+\begin{DoxyReturn}{Returns}
+slack value, in seconds 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEngine_1_1Listener_af91870a9571efd4ce988c9f1acb8de70}\label{classEngine_1_1Listener_af91870a9571efd4ce988c9f1acb8de70}} 
+\index{Engine::Listener@{Engine::Listener}!getState@{getState}}
+\index{getState@{getState}!Engine::Listener@{Engine::Listener}}
+\doxysubsubsection{\texorpdfstring{getState()}{getState()}}
+{\footnotesize\ttfamily Engine\+::\+Listener\+::\+Listener\+State Engine\+::\+Listener\+::get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classEngine_1_1Listener_af91870a9571efd4ce988c9f1acb8de70}{Engine\+::\+Listener\+::get\+State}} Returns current state of \mbox{\hyperlink{classEngine_1_1Listener}{Listener}}, unproductive or productive. 
+
+\begin{DoxyReturn}{Returns}
+Engine\+::\+Listener\+::\+Listener\+State\+::unproductive, or Engine\+::\+Listener\+::\+Listener\+State\+::productive 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEngine_1_1Listener_ac5463db2059adca1481b9e848e91bd1d}\label{classEngine_1_1Listener_ac5463db2059adca1481b9e848e91bd1d}} 
+\index{Engine::Listener@{Engine::Listener}!getUnproductiveTime@{getUnproductiveTime}}
+\index{getUnproductiveTime@{getUnproductiveTime}!Engine::Listener@{Engine::Listener}}
+\doxysubsubsection{\texorpdfstring{getUnproductiveTime()}{getUnproductiveTime()}}
+{\footnotesize\ttfamily uint64\+\_\+t Engine\+::\+Listener\+::get\+Unproductive\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Engine\+::\+Listener\+::getun\+Productive\+Time returns unproductive time of \mbox{\hyperlink{classEngine_1_1Listener}{Listener}}. 
+
+\begin{DoxyAttention}{Attention}
+probably not needed...\mbox{\hyperlink{classEngine_1_1Timer}{Timer}} keeps track of live session time; when Session ends, Session will grab this data from \mbox{\hyperlink{classEngine_1_1Timer}{Timer}}, and have this value stored permanently within Commitment (more specifically, User\textquotesingle{}s Commitment Q\+Vector)
+\end{DoxyAttention}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classEngine_1_1Listener}{Listener}}\textquotesingle{}s unproductive time, in seconds 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classEngine_1_1Listener_a64016084a0e271114ce4bdbc05bf65d9}\label{classEngine_1_1Listener_a64016084a0e271114ce4bdbc05bf65d9}} 
+\index{Engine::Listener@{Engine::Listener}!setSlack@{setSlack}}
+\index{setSlack@{setSlack}!Engine::Listener@{Engine::Listener}}
+\doxysubsubsection{\texorpdfstring{setSlack()}{setSlack()}}
+{\footnotesize\ttfamily void Engine\+::\+Listener\+::set\+Slack (\begin{DoxyParamCaption}\item[{double}]{slack }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classEngine_1_1Listener_a64016084a0e271114ce4bdbc05bf65d9}{Engine\+::\+Listener\+::set\+Slack}} sets slack value, user-\/defined grace \char`\"{}padding\char`\"{} between check\+State\+Delay. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em slack} & slack value, in seconds \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_1_1Listener_a2d777002315e579a91804e58754404b3}\label{classEngine_1_1Listener_a2d777002315e579a91804e58754404b3}} 
+\index{Engine::Listener@{Engine::Listener}!setState@{setState}}
+\index{setState@{setState}!Engine::Listener@{Engine::Listener}}
+\doxysubsubsection{\texorpdfstring{setState()}{setState()}}
+{\footnotesize\ttfamily void Engine\+::\+Listener\+::set\+State (\begin{DoxyParamCaption}\item[{Listener\+State}]{new\+State }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classEngine_1_1Listener_a2d777002315e579a91804e58754404b3}{Engine\+::\+Listener\+::set\+State}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Listener\+State, unproductive or productive \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Listener.\+h\item 
+Listener.\+cpp\end{DoxyCompactItemize}

@@ -16,13 +16,17 @@ KeyboardListener::KeyboardListener()
     setKeyboardPathsOnLinux();
 }
 
+/**
+ * @brief KeyboardListener::run
+ * This function gets called when the QThread::start() function gets called.
+ * This starts a background thread that is always listening for keyboard input.
+ * No keyboard data is buffered. Th only thing the keyboard input is used for is
+ * to change the state of KeyboardListener, these states are Productive or Unproductive.
+ *
+ */
 void KeyboardListener::run()
 {
     qDebug()<<"run() func";
-//    for(int i =0;i<1500;i++)
-//    {
-//    qDebug()<<"running thread";
-//    }
     start();
     emit signalThread();
 }
