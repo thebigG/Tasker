@@ -6,12 +6,12 @@
 #include "Interval.h"
 #include "StatsUtility.h"
 #include "User.h"
-
+#include <QThreadPool>
 #include <QApplication>
 #include <QDebug>
 #include <QFile>
 #include <Qt>
-
+#include <Timer.h>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,7 +19,8 @@ static TaskerUIMainWindowQWidget* f = nullptr;
 using namespace std;
 #include <cstdio>
 #include <cstdlib>
-
+#include <QtCore>
+#include <QObject>
 #include <iostream>
 
 using std::cout;
@@ -45,30 +46,45 @@ int main(int argc, char *argv[]) {
     return a.exec();
 >>>>>>> hardware-audio
  */
-
 int main(int argc, char* argv[])
 {
-//    QApplication a(argc, argv);
-//    f = new TaskerUIMainWindowQWidget;
-//    f->show();
+    QApplication a(argc, argv);
+    f = new TaskerUIMainWindowQWidget;
+    f->show();
 
 //    delete str;
 qDebug()<<"calling keyboard listener constructor";
-KeyboardListener kL{};
+//Listener* kL = new KeyboardListener{};
+//qDebug()<<QString("ideal number of threads:") + QString::number(QThreadPool::globalInstance()->activeThreadCount());
+Timer myTimer;
+myTimer.startConnect();
+//qDebug()<<QString("ideal number of threads:") + QString::number(QThreadPool::globalInstance()->activeThreadCount());
+//QApplication::instance()->moveToThread(&myTimer);
 qDebug()<<"after call";
-kL.startListening();
+//kL->start();
+//kL.startListening();
 qDebug()<<"Did it reach this?";
+for(int i =0 ;i<15;i++)
+    qDebug()<<"loop on main ";
+//while(1);
 /*
-
+QTimer myTimer = new QTimer(30mins);
+KeyboardListener k = new KeyboardListener();
+min = 0;
+k.start();
+while(min<30mins)
+{
+    while(k.listen() == Unproductive);
+    min++;
+}
 <<<<<<< HEAD
     auto taskName = getNameFromIn();
     qDebug() << "task Name" + *taskName;
     auto task1 = new Task();
     */
 
-//    return a.exec();
+    return a.exec();
 }
-
 
 
 void TaskerUIMainWindowQWidget::on_makeCommitmentQPushButton_clicked()

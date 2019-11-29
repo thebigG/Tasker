@@ -6,6 +6,10 @@ Task::Task()
 {
 
 }
+Task::~Task()
+{
+
+}
 Task::Task( QString newName)
 {
 name = newName;

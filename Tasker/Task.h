@@ -20,6 +20,7 @@ class udata::Task
 
 public:
     Task();
+    ~Task();
     Task(QString newName);
     Task(QString newName, QVector<QString> listeners);
     QString& getName() ;

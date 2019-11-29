@@ -12,23 +12,29 @@ static const char *const evval[3] = {
 namespace Engine
 {
 class KeyboardListener;
-int startListening();
 }
 
 class Engine::KeyboardListener: public Listener
 {
+    Q_OBJECT
+public:
+    enum class KeyboardListenerState{ON,OFF};
 public:
     KeyboardListener();
     int startListening(unsigned long int delay =30);
-    void start();
-    void end();
-    void pause();
-    void update();
+    virtual void start();
+    virtual void end();
+    virtual void pause();
+    virtual void run();
+    virtual void update();
     Listener::ListenerState listen();
 private:
     QString activeKeyboardPath;
+    KeyboardListenerState engineState;
     void setKeyboardPathsOnLinux(int deviceIndex = 0);
     QVector<QString> keyboardPaths;
+signals:
+    void signalThread();
 };
 
 #endif // KEYBOARDLISTENER_H

@@ -2,18 +2,21 @@
 #define LISTENER_H
 
 #include <cstdint>
-
+#include <QThread>
+#include <QObject>
 namespace Engine {
     class Listener;
 }
 
-class Engine::Listener {
+class Engine::Listener : public QThread {
+    Q_OBJECT
 public:
     enum class ListenerState { unproductive, productive };
 
 public:
     Listener();
     virtual ~Listener();
+//    virtual ~Listener() {};
 
     virtual void start() = 0;
     virtual void end() = 0;

@@ -1,25 +1,30 @@
 #ifndef TIMER_H
 #define TIMER_H
 #include <QTime>
+#include <QThread>
 #include "Session.h"
-
+#include <QObject>
+#include <KeyboardListener.h>
 namespace Engine {
 class Timer;
 }
 
-class Engine::Timer
+class Engine::Timer: public QThread
 {
+Q_OBJECT
 private:
     QTime currentProductiveTime;
     QTime currentUnproductiveTime;
     udata::Session currentSession;
     QTime startTime;
+    KeyboardListener thisK;
 
 public:
     Timer();
     void start();
     void stop();
     void pause();
+    void startConnect();
     QTime getProductiveTime();
     QTime getUnproductiveTime();
     QTime getRealTime();
@@ -29,6 +34,8 @@ public:
 
     QTime setProductiveTime(QTime*);
     QTime setRealTime(QTime*);
+public slots:
+void timeSlot();
 
 };
 

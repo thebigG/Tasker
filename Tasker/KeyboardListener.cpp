@@ -16,8 +16,26 @@ KeyboardListener::KeyboardListener()
     setKeyboardPathsOnLinux();
 }
 
+void KeyboardListener::run()
+{
+    qDebug()<<"run() func";
+//    for(int i =0;i<1500;i++)
+//    {
+//    qDebug()<<"running thread";
+//    }
+    start();
+    emit signalThread();
+}
+//void KeyboardListener::signalThread()
+//{
+//    qDebug()<<"signaling thread...";
+//}
+
 void KeyboardListener::start()
 {
+    qDebug()<<"start function :)";
+//   connect(this, &KeyboardListener::signalThread, &myTimer, &Timer::timeSlot);
+    startListening();
 }
 void KeyboardListener::end()
 {
@@ -66,10 +84,10 @@ int KeyboardListener::startListening(unsigned long int delay)
     struct input_event ev;
     ssize_t n;
     int fd;
-
     fd = open(dev, O_RDONLY);
     while (1) {
         setState(ListenerState::unproductive);
+        qDebug()<<"waitting on keyboard...:unproductive state\n";
         n = read(fd, &ev, sizeof ev);
         if (n == -1) {
             if (errno == EINTR)
@@ -82,8 +100,8 @@ int KeyboardListener::startListening(unsigned long int delay)
         }
         if (ev.type == EV_KEY && ev.value >= 0 && ev.value <= 2) {
             setState(ListenerState::productive);
+            qDebug()<<"key pressed: productive state\n";
             QThread::sleep(delay);
-            qDebug()<<"key pressed";
 
         }
     }
@@ -91,3 +109,6 @@ int KeyboardListener::startListening(unsigned long int delay)
     fprintf(stderr, "%s.\n", strerror(errno));
     return EXIT_FAILURE;
 }
+/**
+
+*/
