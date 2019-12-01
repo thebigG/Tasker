@@ -10,6 +10,11 @@ namespace Engine {
 class Timer;
 
 }
+/**
+ * @brief The Engine::Timer class
+ * @note I had to remove the start() method from Timer.
+ * It was conflicting with QThread's start() method.
+ */
 class Engine::Timer: public QThread
 {
 Q_OBJECT

@@ -78,6 +78,11 @@ $(function() {
 <div class="title">Engine::Timer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class.">Engine::Timer</a> class.  
+ <a href="classEngine_1_1Timer.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Timer_8h_source.html">Timer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Engine::Timer:</div>
 <div class="dyncontent">
@@ -99,8 +104,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>startListener</b> ()<
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3ccaf5b2568ab1378ef5b2e1175e000c"><td class="memItemLeft" align="right" valign="top"><a id="a3ccaf5b2568ab1378ef5b2e1175e000c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Timer</b> (<a class="el" href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">Listener::ListenerType</a>)</td></tr>
+<tr class="memitem:a3ccaf5b2568ab1378ef5b2e1175e000c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a3ccaf5b2568ab1378ef5b2e1175e000c">Timer</a> (<a class="el" href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">Listener::ListenerType</a>)</td></tr>
+<tr class="memdesc:a3ccaf5b2568ab1378ef5b2e1175e000c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer::Timer.  <a href="classEngine_1_1Timer.html#a3ccaf5b2568ab1378ef5b2e1175e000c">More...</a><br /></td></tr>
 <tr class="separator:a3ccaf5b2568ab1378ef5b2e1175e000c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b09cdb6c090ee4e735b219bebccf362"><td class="memItemLeft" align="right" valign="top"><a id="a9b09cdb6c090ee4e735b219bebccf362"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
@@ -143,7 +148,7 @@ Public Attributes</h2></td></tr>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a1323444ebd7f2c1407518a03a193b5f4"><td class="memItemLeft" align="right" valign="top"><a id="a1323444ebd7f2c1407518a03a193b5f4"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4">run</a> ()</td></tr>
-<tr class="memdesc:a1323444ebd7f2c1407518a03a193b5f4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4" title="Timer::run This function is called when the thread starts. Any and all QObjects(such as Listener) MUS...">Timer::run</a> This function is called when the thread starts. Any and all QObjects(such as Listener) MUST be instantiated inside this method. Otherwise, QT's thread management will NOT consider that QObject as part of the <a class="el" href="classEngine_1_1Timer.html">Timer</a> thread. The code in &amp;Listener::start, which is the ACTUAL code that listents to hardware, does not run until the startListner() signal is sent. <br /></td></tr>
+<tr class="memdesc:a1323444ebd7f2c1407518a03a193b5f4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4" title="Timer::run This function is called when the thread starts. Any and all QObjects(such as Listener) MUS...">Timer::run</a> This function is called when the thread starts. Any and all QObjects(such as Listener) MUST be instantiated inside this method. Otherwise, QT's thread management will NOT consider that QObject as part of the <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class.">Timer</a> thread. The code in &amp;Listener::start, which is the ACTUAL code that listents to hardware, does not run until the startListner() signal is sent. <br /></td></tr>
 <tr class="separator:a1323444ebd7f2c1407518a03a193b5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -170,6 +175,36 @@ const QString&#160;</td><td class="memItemRight" valign="bottom"><b>objectName</
 QThread&#160;</td><td class="memItemRight" valign="bottom"><b>listenerThread</b></td></tr>
 <tr class="separator:a5008b7350fcc839ee9f3a6e782dca69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class.">Engine::Timer</a> class. </p>
+<dl class="section note"><dt>Note</dt><dd>I had to remove the start() method from <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class.">Timer</a>. It was conflicting with QThread's start() method. </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3ccaf5b2568ab1378ef5b2e1175e000c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ccaf5b2568ab1378ef5b2e1175e000c">&#9670;&nbsp;</a></span>Timer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Timer::Timer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">Listener::ListenerType</a>&#160;</td>
+          <td class="paramname"><em>newListenerType</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Timer::Timer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newListenerType</td><td>This tells timer what type of listener to instantiate. It's not prettiest way of doing this, but at least we're not doing weird/prone-to-bugs type probing at runtime, like dynamic_cast nonsense. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="Timer_8h_source.html">Timer.h</a></li>
 <li>Timer.cpp</li>

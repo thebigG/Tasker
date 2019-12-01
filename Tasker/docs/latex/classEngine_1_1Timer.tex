@@ -1,5 +1,14 @@
 \hypertarget{classEngine_1_1Timer}{}\doxysection{Engine\+::Timer Class Reference}
 \label{classEngine_1_1Timer}\index{Engine::Timer@{Engine::Timer}}
+
+
+The \mbox{\hyperlink{classEngine_1_1Timer}{Engine\+::\+Timer}} class.  
+
+
+
+
+{\ttfamily \#include $<$Timer.\+h$>$}
+
 Inheritance diagram for Engine\+::Timer\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -21,9 +30,8 @@ void {\bfseries start\+Listener} ()
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classEngine_1_1Timer_a3ccaf5b2568ab1378ef5b2e1175e000c}\label{classEngine_1_1Timer_a3ccaf5b2568ab1378ef5b2e1175e000c}} 
-{\bfseries Timer} (\mbox{\hyperlink{classEngine_1_1Listener_a04028eb58d8908d22d5e9faa24876b19}{Listener\+::\+Listener\+Type}})
-\item 
+\mbox{\hyperlink{classEngine_1_1Timer_a3ccaf5b2568ab1378ef5b2e1175e000c}{Timer}} (\mbox{\hyperlink{classEngine_1_1Listener_a04028eb58d8908d22d5e9faa24876b19}{Listener\+::\+Listener\+Type}})
+\begin{DoxyCompactList}\small\item\em Timer\+::\+Timer. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classEngine_1_1Timer_a9b09cdb6c090ee4e735b219bebccf362}\label{classEngine_1_1Timer_a9b09cdb6c090ee4e735b219bebccf362}} 
 void {\bfseries stop} ()
 \item 
@@ -90,6 +98,32 @@ const Q\+String {\bfseries object\+Name} = \char`\"{}Timer\char`\"{}
 \mbox{\Hypertarget{classEngine_1_1Timer_a5008b7350fcc839ee9f3a6e782dca69f}\label{classEngine_1_1Timer_a5008b7350fcc839ee9f3a6e782dca69f}} 
 Q\+Thread {\bfseries listener\+Thread}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{classEngine_1_1Timer}{Engine\+::\+Timer}} class. 
+
+\begin{DoxyNote}{Note}
+I had to remove the start() method from \mbox{\hyperlink{classEngine_1_1Timer}{Timer}}. It was conflicting with Q\+Thread\textquotesingle{}s start() method. 
+\end{DoxyNote}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classEngine_1_1Timer_a3ccaf5b2568ab1378ef5b2e1175e000c}\label{classEngine_1_1Timer_a3ccaf5b2568ab1378ef5b2e1175e000c}} 
+\index{Engine::Timer@{Engine::Timer}!Timer@{Timer}}
+\index{Timer@{Timer}!Engine::Timer@{Engine::Timer}}
+\doxysubsubsection{\texorpdfstring{Timer()}{Timer()}}
+{\footnotesize\ttfamily Timer\+::\+Timer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEngine_1_1Listener_a04028eb58d8908d22d5e9faa24876b19}{Listener\+::\+Listener\+Type}}}]{new\+Listener\+Type }\end{DoxyParamCaption})}
+
+
+
+Timer\+::\+Timer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Listener\+Type} & This tells timer what type of listener to instantiate. It\textquotesingle{}s not prettiest way of doing this, but at least we\textquotesingle{}re not doing weird/prone-\/to-\/bugs type probing at runtime, like dynamic\+\_\+cast nonsense. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

@@ -6,6 +6,13 @@ using namespace Engine;
 Timer::Timer()
 {
 }
+/**
+ * @brief Timer::Timer
+ * @param newListenerType This tells timer what type of listener to instantiate.
+ * It's not prettiest way of doing this, but at least we're not doing
+ * weird/prone-to-bugs type probing at runtime, like dynamic_cast nonsense.
+ *
+ */
 Timer::Timer(Listener::ListenerType newListenerType)
 {
     listenerType = newListenerType;
@@ -21,7 +28,7 @@ Timer::~Timer()
  * Otherwise, QT's thread management will NOT consider that QObject as part of the Timer
  * thread.
  *The code in &Listener::start, which is the ACTUAL code that listents to hardware,
- * does not run until the startListner() signal is sent
+ * does not run until the startListner() signal is sent.
  */
 void Timer::run()
 {
