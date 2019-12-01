@@ -14,6 +14,7 @@ using namespace Engine;
 KeyboardListener::KeyboardListener()
 {
     setKeyboardPathsOnLinux();
+    setObjectName(KeyboardListener::objectName);
 }
 
 /**
@@ -27,8 +28,14 @@ KeyboardListener::KeyboardListener()
 void KeyboardListener::run()
 {
     qDebug()<<"run() func";
-    start();
+//    start();
+    for(int i =0 ;i<10;i++)
+    {
+        qDebug()<<"worker thread:" + QString::number(i);
+    }
+
     emit signalThread();
+
 }
 //void KeyboardListener::signalThread()
 //{
@@ -38,8 +45,9 @@ void KeyboardListener::run()
 void KeyboardListener::start()
 {
     qDebug()<<"start function :)";
+    qDebug()<<"current thread id keyBoardListner class:" << QThread::currentThreadId();
 //   connect(this, &KeyboardListener::signalThread, &myTimer, &Timer::timeSlot);
-    startListening();
+//    startListening();
 }
 void KeyboardListener::end()
 {

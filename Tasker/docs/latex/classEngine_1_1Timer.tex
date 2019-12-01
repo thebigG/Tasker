@@ -12,11 +12,17 @@ Inheritance diagram for Engine\+::Timer\+:\begin{figure}[H]
 \mbox{\Hypertarget{classEngine_1_1Timer_ad943011dea9ebcfbd23daacb0211f896}\label{classEngine_1_1Timer_ad943011dea9ebcfbd23daacb0211f896}} 
 void {\bfseries time\+Slot} ()
 \end{DoxyCompactItemize}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Timer_a54c1edf69c377990a35d342268f05f02}\label{classEngine_1_1Timer_a54c1edf69c377990a35d342268f05f02}} 
+void {\bfseries start\+Listener} ()
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classEngine_1_1Timer_aed61eace268cb478aac5ddb4c12c9719}\label{classEngine_1_1Timer_aed61eace268cb478aac5ddb4c12c9719}} 
-void {\bfseries start} ()
+\mbox{\Hypertarget{classEngine_1_1Timer_a3ccaf5b2568ab1378ef5b2e1175e000c}\label{classEngine_1_1Timer_a3ccaf5b2568ab1378ef5b2e1175e000c}} 
+{\bfseries Timer} (\mbox{\hyperlink{classEngine_1_1Listener_a04028eb58d8908d22d5e9faa24876b19}{Listener\+::\+Listener\+Type}})
 \item 
 \mbox{\Hypertarget{classEngine_1_1Timer_a9b09cdb6c090ee4e735b219bebccf362}\label{classEngine_1_1Timer_a9b09cdb6c090ee4e735b219bebccf362}} 
 void {\bfseries stop} ()
@@ -24,7 +30,7 @@ void {\bfseries stop} ()
 \mbox{\Hypertarget{classEngine_1_1Timer_abccfb090928175b7659884d62f2e7696}\label{classEngine_1_1Timer_abccfb090928175b7659884d62f2e7696}} 
 void {\bfseries pause} ()
 \item 
-\mbox{\Hypertarget{classEngine_1_1Timer_acaba69748cc86bbd021d88bd7e50f250}\label{classEngine_1_1Timer_acaba69748cc86bbd021d88bd7e50f250}} 
+\mbox{\Hypertarget{classEngine_1_1Timer_a80b8a70eade13fca7c08ce21f3064737}\label{classEngine_1_1Timer_a80b8a70eade13fca7c08ce21f3064737}} 
 void {\bfseries start\+Connect} ()
 \item 
 \mbox{\Hypertarget{classEngine_1_1Timer_a7ca45bfb6812f7674f593a7338a9a069}\label{classEngine_1_1Timer_a7ca45bfb6812f7674f593a7338a9a069}} 
@@ -47,6 +53,42 @@ Q\+Time {\bfseries set\+Productive\+Time} (Q\+Time $\ast$)
 \item 
 \mbox{\Hypertarget{classEngine_1_1Timer_aa4d03f84a980ba68c98cd360ee08bc8d}\label{classEngine_1_1Timer_aa4d03f84a980ba68c98cd360ee08bc8d}} 
 Q\+Time {\bfseries set\+Real\+Time} (Q\+Time $\ast$)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Timer_a5b489ab0251956efaa629a5b18d1b656}\label{classEngine_1_1Timer_a5b489ab0251956efaa629a5b18d1b656}} 
+\mbox{\hyperlink{classEngine_1_1Listener_a04028eb58d8908d22d5e9faa24876b19}{Listener\+::\+Listener\+Type}} {\bfseries listener\+Type}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Timer_a1323444ebd7f2c1407518a03a193b5f4}\label{classEngine_1_1Timer_a1323444ebd7f2c1407518a03a193b5f4}} 
+virtual void \mbox{\hyperlink{classEngine_1_1Timer_a1323444ebd7f2c1407518a03a193b5f4}{run}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1Timer_a1323444ebd7f2c1407518a03a193b5f4}{Timer\+::run}} This function is called when the thread starts. Any and all Q\+Objects(such as Listener) M\+U\+ST be instantiated inside this method. Otherwise, QT\textquotesingle{}s thread management will N\+OT consider that Q\+Object as part of the \mbox{\hyperlink{classEngine_1_1Timer}{Timer}} thread. The code in \&Listener\+::start, which is the A\+C\+T\+U\+AL code that listents to hardware, does not run until the start\+Listner() signal is sent. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Timer_a88d515a2d9c4f839586ab35135ec2f12}\label{classEngine_1_1Timer_a88d515a2d9c4f839586ab35135ec2f12}} 
+Q\+Time {\bfseries current\+Productive\+Time}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Timer_aa7bc566c555d762985af404ffb0172fa}\label{classEngine_1_1Timer_aa7bc566c555d762985af404ffb0172fa}} 
+Q\+Time {\bfseries current\+Unproductive\+Time}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Timer_a864178b3eae448651a926d52ca560111}\label{classEngine_1_1Timer_a864178b3eae448651a926d52ca560111}} 
+\mbox{\hyperlink{classudata_1_1Session}{udata\+::\+Session}} {\bfseries current\+Session}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Timer_aed860f30587262c5adffd966c9ebaebe}\label{classEngine_1_1Timer_aed860f30587262c5adffd966c9ebaebe}} 
+Q\+Time {\bfseries start\+Time}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Timer_af048ca9e9509b2d0cec5b8b42d0d77c8}\label{classEngine_1_1Timer_af048ca9e9509b2d0cec5b8b42d0d77c8}} 
+\mbox{\hyperlink{classEngine_1_1Listener}{Listener}} $\ast$ {\bfseries listener}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Timer_a28150a5dfc214d50b528ed262729c11b}\label{classEngine_1_1Timer_a28150a5dfc214d50b528ed262729c11b}} 
+const Q\+String {\bfseries object\+Name} = \char`\"{}Timer\char`\"{}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Timer_a5008b7350fcc839ee9f3a6e782dca69f}\label{classEngine_1_1Timer_a5008b7350fcc839ee9f3a6e782dca69f}} 
+Q\+Thread {\bfseries listener\+Thread}
 \end{DoxyCompactItemize}
 
 

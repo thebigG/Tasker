@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Tasker
    </div>
-   <div id="projectbrief">Acommitmenttracker</div>
+   <div id="projectbrief">A commitment tracker</div>
   </td>
  </tr>
  </tbody>
@@ -70,6 +70,8 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classEngine_1_1Listener-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Engine::Listener Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -91,6 +93,12 @@ Public Types</h2></td></tr>
 <b>productive</b>
  }</td></tr>
 <tr class="separator:a7b3e66a922a80a1a63f5ca7a6de1f32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04028eb58d8908d22d5e9faa24876b19"><td class="memItemLeft" align="right" valign="top"><a id="a04028eb58d8908d22d5e9faa24876b19"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">ListenerType</a> { <b>keyboard</b>, 
+<b>audio</b>, 
+<b>none</b>
+ }</td></tr>
+<tr class="memdesc:a04028eb58d8908d22d5e9faa24876b19"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ListenerType enum This enum used for <a class="el" href="classEngine_1_1Timer.html">Timer</a> to know which listener it is going to instantiate. <br /></td></tr>
+<tr class="separator:a04028eb58d8908d22d5e9faa24876b19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -141,8 +149,69 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:aa2fe9fce232854d7f513eb01bcc614d6"><td class="memItemLeft" align="right" valign="top"><a id="aa2fe9fce232854d7f513eb01bcc614d6"></a>
 ListenerState&#160;</td><td class="memItemRight" valign="bottom"><b>currentState</b></td></tr>
 <tr class="separator:aa2fe9fce232854d7f513eb01bcc614d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a567cae5e74a3cb8af95be7819024d40a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Listener.html#a567cae5e74a3cb8af95be7819024d40a">getCheckStateDelay</a> ()</td></tr>
+<tr class="memdesc:a567cae5e74a3cb8af95be7819024d40a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Listener.html#a567cae5e74a3cb8af95be7819024d40a" title="Engine::Listener::getCheckStateDelay determines how long between one invocation of listen() and the n...">Engine::Listener::getCheckStateDelay</a> determines how long between one invocation of listen() and the next.  <a href="classEngine_1_1Listener.html#a567cae5e74a3cb8af95be7819024d40a">More...</a><br /></td></tr>
+<tr class="separator:a567cae5e74a3cb8af95be7819024d40a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab836cae681de01004b5aafa385134367"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Listener.html#ab836cae681de01004b5aafa385134367">setCheckStateDelay</a> (double checkStateDelay)</td></tr>
+<tr class="memdesc:ab836cae681de01004b5aafa385134367"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Listener.html#ab836cae681de01004b5aafa385134367" title="Engine::Listener::setCheckStateDelay set how long between one invocation of listen() and the next.">Engine::Listener::setCheckStateDelay</a> set how long between one invocation of listen() and the next.  <a href="classEngine_1_1Listener.html#ab836cae681de01004b5aafa385134367">More...</a><br /></td></tr>
+<tr class="separator:ab836cae681de01004b5aafa385134367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4580a01f9d443a031ea00b79e25ac968"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Listener.html#a4580a01f9d443a031ea00b79e25ac968">setProductiveTime</a> (uint64_t productiveTime)</td></tr>
+<tr class="memdesc:a4580a01f9d443a031ea00b79e25ac968"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Listener.html#a4580a01f9d443a031ea00b79e25ac968" title="Engine::Listener::setProductiveTime set productiveTime value.">Engine::Listener::setProductiveTime</a> set productiveTime value.  <a href="classEngine_1_1Listener.html#a4580a01f9d443a031ea00b79e25ac968">More...</a><br /></td></tr>
+<tr class="separator:a4580a01f9d443a031ea00b79e25ac968"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9ce38b7794a3ce0a631e6a074284588"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Listener.html#aa9ce38b7794a3ce0a631e6a074284588">setUnproductiveTime</a> (uint64_t unproductiveTime)</td></tr>
+<tr class="memdesc:aa9ce38b7794a3ce0a631e6a074284588"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Listener.html#aa9ce38b7794a3ce0a631e6a074284588" title="Engine::Listener::setUnproductiveTime set unproductiveTime value.">Engine::Listener::setUnproductiveTime</a> set unproductiveTime value.  <a href="classEngine_1_1Listener.html#aa9ce38b7794a3ce0a631e6a074284588">More...</a><br /></td></tr>
+<tr class="separator:aa9ce38b7794a3ce0a631e6a074284588"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ace8ed65fbd5f398457fba7bd33fc0ae5"><td class="memItemLeft" align="right" valign="top"><a id="ace8ed65fbd5f398457fba7bd33fc0ae5"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>checkStateDelay</b></td></tr>
+<tr class="separator:ace8ed65fbd5f398457fba7bd33fc0ae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa720e29ec896b4ae731c3767e59e3a5a"><td class="memItemLeft" align="right" valign="top"><a id="aa720e29ec896b4ae731c3767e59e3a5a"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>slack</b></td></tr>
+<tr class="separator:aa720e29ec896b4ae731c3767e59e3a5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62985de8f377814824e0c5ff4abcbb2f"><td class="memItemLeft" align="right" valign="top"><a id="a62985de8f377814824e0c5ff4abcbb2f"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>productiveTime</b></td></tr>
+<tr class="separator:a62985de8f377814824e0c5ff4abcbb2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2df85376003d35bbe3123c61e5fcffed"><td class="memItemLeft" align="right" valign="top"><a id="a2df85376003d35bbe3123c61e5fcffed"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>unproductiveTime</b></td></tr>
+<tr class="separator:a2df85376003d35bbe3123c61e5fcffed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93de3079df96fbf7b348ca2354a6901b"><td class="memItemLeft" align="right" valign="top"><a id="a93de3079df96fbf7b348ca2354a6901b"></a>
+Listener::ListenerState&#160;</td><td class="memItemRight" valign="bottom"><b>state</b></td></tr>
+<tr class="separator:a93de3079df96fbf7b348ca2354a6901b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a567cae5e74a3cb8af95be7819024d40a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a567cae5e74a3cb8af95be7819024d40a">&#9670;&nbsp;</a></span>getCheckStateDelay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Engine::Listener::getCheckStateDelay </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classEngine_1_1Listener.html#a567cae5e74a3cb8af95be7819024d40a" title="Engine::Listener::getCheckStateDelay determines how long between one invocation of listen() and the n...">Engine::Listener::getCheckStateDelay</a> determines how long between one invocation of listen() and the next. </p>
+<dl class="section return"><dt>Returns</dt><dd>checkStateDelay, in seconds </dd></dl>
+
+</div>
+</div>
 <a id="a1ddeab7b5d8595f97fc82fd8b15268bf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1ddeab7b5d8595f97fc82fd8b15268bf">&#9670;&nbsp;</a></span>getProductiveTime()</h2>
 
@@ -225,6 +294,74 @@ ListenerState&#160;</td><td class="memItemRight" valign="bottom"><b>currentState
 
 </div>
 </div>
+<a id="ab836cae681de01004b5aafa385134367"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab836cae681de01004b5aafa385134367">&#9670;&nbsp;</a></span>setCheckStateDelay()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Engine::Listener::setCheckStateDelay </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>checkStateDelay</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classEngine_1_1Listener.html#ab836cae681de01004b5aafa385134367" title="Engine::Listener::setCheckStateDelay set how long between one invocation of listen() and the next.">Engine::Listener::setCheckStateDelay</a> set how long between one invocation of listen() and the next. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">checkStateDelay</td><td>checkStateDelay value, in seconds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4580a01f9d443a031ea00b79e25ac968"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4580a01f9d443a031ea00b79e25ac968">&#9670;&nbsp;</a></span>setProductiveTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Engine::Listener::setProductiveTime </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>productiveTime</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classEngine_1_1Listener.html#a4580a01f9d443a031ea00b79e25ac968" title="Engine::Listener::setProductiveTime set productiveTime value.">Engine::Listener::setProductiveTime</a> set productiveTime value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">productiveTime</td><td>productiveTime value, in seconds </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a64016084a0e271114ce4bdbc05bf65d9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a64016084a0e271114ce4bdbc05bf65d9">&#9670;&nbsp;</a></span>setSlack()</h2>
 
@@ -271,6 +408,40 @@ ListenerState&#160;</td><td class="memItemRight" valign="bottom"><b>currentState
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>ListenerState, unproductive or productive </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa9ce38b7794a3ce0a631e6a074284588"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9ce38b7794a3ce0a631e6a074284588">&#9670;&nbsp;</a></span>setUnproductiveTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Engine::Listener::setUnproductiveTime </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>unproductiveTime</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classEngine_1_1Listener.html#aa9ce38b7794a3ce0a631e6a074284588" title="Engine::Listener::setUnproductiveTime set unproductiveTime value.">Engine::Listener::setUnproductiveTime</a> set unproductiveTime value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">unproductiveTime</td><td>unproductiveTime value, in seconds </td></tr>
   </table>
   </dd>
 </dl>

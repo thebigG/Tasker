@@ -8,10 +8,15 @@ namespace Engine {
     class Listener;
 }
 
-class Engine::Listener : public QThread {
+class Engine::Listener : public QObject {
     Q_OBJECT
 public:
     enum class ListenerState { unproductive, productive };
+    /**
+     * @brief The ListenerType enum
+     * This enum used for Timer to know which listener it is going to instantiate
+     */
+    enum class ListenerType{keyboard,audio, none};    //I had to do this to make QThreads work
 
 public:
     Listener();

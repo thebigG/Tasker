@@ -22,17 +22,19 @@ public:
 public:
     KeyboardListener();
     int startListening(unsigned long int delay =30);
+    Listener::ListenerState listen();
+public slots:
     virtual void start();
     virtual void end();
     virtual void pause();
     virtual void run();
     virtual void update();
-    Listener::ListenerState listen();
 private:
     QString activeKeyboardPath;
     KeyboardListenerState engineState;
     void setKeyboardPathsOnLinux(int deviceIndex = 0);
     QVector<QString> keyboardPaths;
+    const QString objectName = "KeyboardListener";
 signals:
     void signalThread();
 };

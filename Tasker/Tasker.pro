@@ -28,7 +28,6 @@ SOURCES += \
     StatsUtility.cpp \
     TaskerUIMainWindowQWidget.cpp \
     TempChartQWidget.cpp \
-    TestUtils.cpp \
     Timer.cpp \
     TimerWindowQWidget.cpp \
     User.cpp \

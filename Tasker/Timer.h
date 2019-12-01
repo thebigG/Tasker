@@ -6,9 +6,10 @@
 #include <QObject>
 #include <KeyboardListener.h>
 namespace Engine {
-class Timer;
-}
 
+class Timer;
+
+}
 class Engine::Timer: public QThread
 {
 Q_OBJECT
@@ -17,26 +18,29 @@ private:
     QTime currentUnproductiveTime;
     udata::Session currentSession;
     QTime startTime;
-    Listener* thisK;
-
+    Listener* listener;
+    const QString objectName = "Timer";
+    QThread listenerThread;
+    virtual void run();
 public:
     Timer();
+    Timer(Listener::ListenerType);
     ~Timer();
-    void start();
     void stop();
     void pause();
     void startConnect();
     QTime getProductiveTime();
     QTime getUnproductiveTime();
     QTime getRealTime();
-
     QTime getProductiveTimeLeft();
     QTime getRealTimeLeft();
-
+    Listener::ListenerType listenerType;
     QTime setProductiveTime(QTime*);
     QTime setRealTime(QTime*);
 public slots:
 void timeSlot();
+signals:
+    void startListener();
 
 };
 

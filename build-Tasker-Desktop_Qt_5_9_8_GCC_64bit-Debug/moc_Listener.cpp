@@ -63,7 +63,7 @@ void Engine::Listener::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
 }
 
 const QMetaObject Engine::Listener::staticMetaObject = {
-    { &QThread::staticMetaObject, qt_meta_stringdata_Engine__Listener.data,
+    { &QObject::staticMetaObject, qt_meta_stringdata_Engine__Listener.data,
       qt_meta_data_Engine__Listener,  qt_static_metacall, nullptr, nullptr}
 };
 
@@ -78,12 +78,12 @@ void *Engine::Listener::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_Engine__Listener.stringdata0))
         return static_cast<void*>(this);
-    return QThread::qt_metacast(_clname);
+    return QObject::qt_metacast(_clname);
 }
 
 int Engine::Listener::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QThread::qt_metacall(_c, _id, _a);
+    _id = QObject::qt_metacall(_c, _id, _a);
     return _id;
 }
 QT_WARNING_POP

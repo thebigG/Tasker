@@ -5,21 +5,40 @@
 using namespace Engine;
 Timer::Timer()
 {
-    thisK = new KeyboardListener();
+}
+Timer::Timer(Listener::ListenerType newListenerType)
+{
+    listenerType = newListenerType;
 }
 Timer::~Timer()
 {
-    delete thisK;
+    delete listener;
 }
-void Timer::startConnect()
+/**
+ * @brief Timer::run
+ * This function is called when the thread starts.
+ *Any and all QObjects(such as Listener) MUST be instantiated inside this method.
+ * Otherwise, QT's thread management will NOT consider that QObject as part of the Timer
+ * thread.
+ *The code in &Listener::start, which is the ACTUAL code that listents to hardware,
+ * does not run until the startListner() signal is sent
+ */
+void Timer::run()
 {
-    qDebug()<<"startConnect func...";
-//    connect(&thisK, &KeyboardListener::signalThread, this, &Timer::timeSlot );
-    ((QThread*)thisK)->start();
+qDebug()<<"From work thread: "<<currentThreadId();
+if(listenerType == Listener::ListenerType::keyboard)
+listener = new KeyboardListener();
+else if(listenerType == Listener::ListenerType::audio)
+    listener = new KeyboardListener(); //obviously we have to change this at some point
+connect(this, &Timer::startListener, listener, &Listener::start);
+
+emit startListener();
+exec();
 }
 void Timer::timeSlot()
 {
     qDebug()<<"Time slot func :)";
+    qDebug()<<"current thread id Timer timeSlot:" << QThread::currentThreadId();
 }
 QTime Timer::getRealTime(){ //not implemented
     return QTime::currentTime();

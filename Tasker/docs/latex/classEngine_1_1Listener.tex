@@ -13,7 +13,13 @@ Inheritance diagram for Engine\+::Listener\+:\begin{figure}[H]
 enum {\bfseries Listener\+State} \{ {\bfseries unproductive}, 
 {\bfseries productive}
  \}
-\end{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_a04028eb58d8908d22d5e9faa24876b19}\label{classEngine_1_1Listener_a04028eb58d8908d22d5e9faa24876b19}} 
+enum \mbox{\hyperlink{classEngine_1_1Listener_a04028eb58d8908d22d5e9faa24876b19}{Listener\+Type}} \{ {\bfseries keyboard}, 
+{\bfseries audio}, 
+{\bfseries none}
+ \}
+\begin{DoxyCompactList}\small\item\em The Listener\+Type enum This enum used for \mbox{\hyperlink{classEngine_1_1Timer}{Timer}} to know which listener it is going to instantiate. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -56,9 +62,51 @@ void \mbox{\hyperlink{classEngine_1_1Listener_a64016084a0e271114ce4bdbc05bf65d9}
 \mbox{\Hypertarget{classEngine_1_1Listener_aa2fe9fce232854d7f513eb01bcc614d6}\label{classEngine_1_1Listener_aa2fe9fce232854d7f513eb01bcc614d6}} 
 Listener\+State {\bfseries current\+State}
 \end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classEngine_1_1Listener_a567cae5e74a3cb8af95be7819024d40a}{get\+Check\+State\+Delay}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1Listener_a567cae5e74a3cb8af95be7819024d40a}{Engine\+::\+Listener\+::get\+Check\+State\+Delay}} determines how long between one invocation of listen() and the next. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEngine_1_1Listener_ab836cae681de01004b5aafa385134367}{set\+Check\+State\+Delay}} (double check\+State\+Delay)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1Listener_ab836cae681de01004b5aafa385134367}{Engine\+::\+Listener\+::set\+Check\+State\+Delay}} set how long between one invocation of listen() and the next. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEngine_1_1Listener_a4580a01f9d443a031ea00b79e25ac968}{set\+Productive\+Time}} (uint64\+\_\+t productive\+Time)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1Listener_a4580a01f9d443a031ea00b79e25ac968}{Engine\+::\+Listener\+::set\+Productive\+Time}} set productive\+Time value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEngine_1_1Listener_aa9ce38b7794a3ce0a631e6a074284588}{set\+Unproductive\+Time}} (uint64\+\_\+t unproductive\+Time)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1Listener_aa9ce38b7794a3ce0a631e6a074284588}{Engine\+::\+Listener\+::set\+Unproductive\+Time}} set unproductive\+Time value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_ace8ed65fbd5f398457fba7bd33fc0ae5}\label{classEngine_1_1Listener_ace8ed65fbd5f398457fba7bd33fc0ae5}} 
+double {\bfseries check\+State\+Delay}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_aa720e29ec896b4ae731c3767e59e3a5a}\label{classEngine_1_1Listener_aa720e29ec896b4ae731c3767e59e3a5a}} 
+double {\bfseries slack}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_a62985de8f377814824e0c5ff4abcbb2f}\label{classEngine_1_1Listener_a62985de8f377814824e0c5ff4abcbb2f}} 
+uint64\+\_\+t {\bfseries productive\+Time}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_a2df85376003d35bbe3123c61e5fcffed}\label{classEngine_1_1Listener_a2df85376003d35bbe3123c61e5fcffed}} 
+uint64\+\_\+t {\bfseries unproductive\+Time}
+\item 
+\mbox{\Hypertarget{classEngine_1_1Listener_a93de3079df96fbf7b348ca2354a6901b}\label{classEngine_1_1Listener_a93de3079df96fbf7b348ca2354a6901b}} 
+Listener\+::\+Listener\+State {\bfseries state}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classEngine_1_1Listener_a567cae5e74a3cb8af95be7819024d40a}\label{classEngine_1_1Listener_a567cae5e74a3cb8af95be7819024d40a}} 
+\index{Engine::Listener@{Engine::Listener}!getCheckStateDelay@{getCheckStateDelay}}
+\index{getCheckStateDelay@{getCheckStateDelay}!Engine::Listener@{Engine::Listener}}
+\doxysubsubsection{\texorpdfstring{getCheckStateDelay()}{getCheckStateDelay()}}
+{\footnotesize\ttfamily double Engine\+::\+Listener\+::get\+Check\+State\+Delay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classEngine_1_1Listener_a567cae5e74a3cb8af95be7819024d40a}{Engine\+::\+Listener\+::get\+Check\+State\+Delay}} determines how long between one invocation of listen() and the next. 
+
+\begin{DoxyReturn}{Returns}
+check\+State\+Delay, in seconds 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classEngine_1_1Listener_a1ddeab7b5d8595f97fc82fd8b15268bf}\label{classEngine_1_1Listener_a1ddeab7b5d8595f97fc82fd8b15268bf}} 
 \index{Engine::Listener@{Engine::Listener}!getProductiveTime@{getProductiveTime}}
 \index{getProductiveTime@{getProductiveTime}!Engine::Listener@{Engine::Listener}}
@@ -117,6 +165,36 @@ probably not needed...\mbox{\hyperlink{classEngine_1_1Timer}{Timer}} keeps track
 \begin{DoxyReturn}{Returns}
 \mbox{\hyperlink{classEngine_1_1Listener}{Listener}}\textquotesingle{}s unproductive time, in seconds 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classEngine_1_1Listener_ab836cae681de01004b5aafa385134367}\label{classEngine_1_1Listener_ab836cae681de01004b5aafa385134367}} 
+\index{Engine::Listener@{Engine::Listener}!setCheckStateDelay@{setCheckStateDelay}}
+\index{setCheckStateDelay@{setCheckStateDelay}!Engine::Listener@{Engine::Listener}}
+\doxysubsubsection{\texorpdfstring{setCheckStateDelay()}{setCheckStateDelay()}}
+{\footnotesize\ttfamily void Engine\+::\+Listener\+::set\+Check\+State\+Delay (\begin{DoxyParamCaption}\item[{double}]{check\+State\+Delay }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classEngine_1_1Listener_ab836cae681de01004b5aafa385134367}{Engine\+::\+Listener\+::set\+Check\+State\+Delay}} set how long between one invocation of listen() and the next. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em check\+State\+Delay} & check\+State\+Delay value, in seconds \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_1_1Listener_a4580a01f9d443a031ea00b79e25ac968}\label{classEngine_1_1Listener_a4580a01f9d443a031ea00b79e25ac968}} 
+\index{Engine::Listener@{Engine::Listener}!setProductiveTime@{setProductiveTime}}
+\index{setProductiveTime@{setProductiveTime}!Engine::Listener@{Engine::Listener}}
+\doxysubsubsection{\texorpdfstring{setProductiveTime()}{setProductiveTime()}}
+{\footnotesize\ttfamily void Engine\+::\+Listener\+::set\+Productive\+Time (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{productive\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classEngine_1_1Listener_a4580a01f9d443a031ea00b79e25ac968}{Engine\+::\+Listener\+::set\+Productive\+Time}} set productive\+Time value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em productive\+Time} & productive\+Time value, in seconds \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classEngine_1_1Listener_a64016084a0e271114ce4bdbc05bf65d9}\label{classEngine_1_1Listener_a64016084a0e271114ce4bdbc05bf65d9}} 
 \index{Engine::Listener@{Engine::Listener}!setSlack@{setSlack}}
 \index{setSlack@{setSlack}!Engine::Listener@{Engine::Listener}}
@@ -145,6 +223,21 @@ probably not needed...\mbox{\hyperlink{classEngine_1_1Timer}{Timer}} keeps track
 
 \begin{DoxyParams}{Parameters}
 {\em state} & Listener\+State, unproductive or productive \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classEngine_1_1Listener_aa9ce38b7794a3ce0a631e6a074284588}\label{classEngine_1_1Listener_aa9ce38b7794a3ce0a631e6a074284588}} 
+\index{Engine::Listener@{Engine::Listener}!setUnproductiveTime@{setUnproductiveTime}}
+\index{setUnproductiveTime@{setUnproductiveTime}!Engine::Listener@{Engine::Listener}}
+\doxysubsubsection{\texorpdfstring{setUnproductiveTime()}{setUnproductiveTime()}}
+{\footnotesize\ttfamily void Engine\+::\+Listener\+::set\+Unproductive\+Time (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{unproductive\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\mbox{\hyperlink{classEngine_1_1Listener_aa9ce38b7794a3ce0a631e6a074284588}{Engine\+::\+Listener\+::set\+Unproductive\+Time}} set unproductive\+Time value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em unproductive\+Time} & unproductive\+Time value, in seconds \\
 \hline
 \end{DoxyParams}
 

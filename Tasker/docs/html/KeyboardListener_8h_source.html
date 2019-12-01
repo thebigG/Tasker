@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Tasker
    </div>
-   <div id="projectbrief">Acommitmenttracker</div>
+   <div id="projectbrief">A commitment tracker</div>
   </td>
  </tr>
  </tbody>
@@ -90,27 +90,30 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classEngine_1_1KeyboardListener.html">KeyboardListener</a>();</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classEngine_1_1KeyboardListener.html#af5ff7a95af9bd3b3bea95ced7077f7f8">startListening</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span> delay =30);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> start();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> end();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> pause();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classEngine_1_1KeyboardListener.html#af816defc5b4cdf66afc16ac90230fad5">run</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> update();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    Listener::ListenerState listen();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    QString activeKeyboardPath;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    KeyboardListenerState engineState;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> setKeyboardPathsOnLinux(<span class="keywordtype">int</span> deviceIndex = 0);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    QVector&lt;QString&gt; keyboardPaths;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;signals:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> signalThread();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif // KEYBOARDLISTENER_H</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    Listener::ListenerState listen();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> start();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> end();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> pause();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classEngine_1_1KeyboardListener.html#af816defc5b4cdf66afc16ac90230fad5">run</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> update();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    QString activeKeyboardPath;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    KeyboardListenerState engineState;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEngine_1_1KeyboardListener.html#add70efeba1f10a5ffc38611cf77f66fd">setKeyboardPathsOnLinux</a>(<span class="keywordtype">int</span> deviceIndex = 0);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    QVector&lt;QString&gt; keyboardPaths;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">const</span> QString objectName = <span class="stringliteral">&quot;KeyboardListener&quot;</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;signals:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> signalThread();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif // KEYBOARDLISTENER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassEngine_1_1KeyboardListener_html"><div class="ttname"><a href="classEngine_1_1KeyboardListener.html">Engine::KeyboardListener</a></div><div class="ttdef"><b>Definition:</b> KeyboardListener.h:17</div></div>
 <div class="ttc" id="aclassEngine_1_1Listener_html"><div class="ttname"><a href="classEngine_1_1Listener.html">Engine::Listener</a></div><div class="ttdef"><b>Definition:</b> Listener.h:11</div></div>
-<div class="ttc" id="aclassEngine_1_1KeyboardListener_html_af816defc5b4cdf66afc16ac90230fad5"><div class="ttname"><a href="classEngine_1_1KeyboardListener.html#af816defc5b4cdf66afc16ac90230fad5">Engine::KeyboardListener::run</a></div><div class="ttdeci">virtual void run()</div><div class="ttdoc">KeyboardListener::run This function gets called when the QThread::start() function gets called....</div><div class="ttdef"><b>Definition:</b> KeyboardListener.cpp:27</div></div>
-<div class="ttc" id="aclassEngine_1_1KeyboardListener_html_af5ff7a95af9bd3b3bea95ced7077f7f8"><div class="ttname"><a href="classEngine_1_1KeyboardListener.html#af5ff7a95af9bd3b3bea95ced7077f7f8">Engine::KeyboardListener::startListening</a></div><div class="ttdeci">int startListening(unsigned long int delay=30)</div><div class="ttdoc">KeyboardListener::startListening holds the core logic of this listener. This is a routine on an infin...</div><div class="ttdef"><b>Definition:</b> KeyboardListener.cpp:85</div></div>
+<div class="ttc" id="aclassEngine_1_1KeyboardListener_html_af816defc5b4cdf66afc16ac90230fad5"><div class="ttname"><a href="classEngine_1_1KeyboardListener.html#af816defc5b4cdf66afc16ac90230fad5">Engine::KeyboardListener::run</a></div><div class="ttdeci">virtual void run()</div><div class="ttdoc">KeyboardListener::run This function gets called when the QThread::start() function gets called....</div><div class="ttdef"><b>Definition:</b> KeyboardListener.cpp:28</div></div>
+<div class="ttc" id="aclassEngine_1_1KeyboardListener_html_af5ff7a95af9bd3b3bea95ced7077f7f8"><div class="ttname"><a href="classEngine_1_1KeyboardListener.html#af5ff7a95af9bd3b3bea95ced7077f7f8">Engine::KeyboardListener::startListening</a></div><div class="ttdeci">int startListening(unsigned long int delay=30)</div><div class="ttdoc">KeyboardListener::startListening holds the core logic of this listener. This is a routine on an infin...</div><div class="ttdef"><b>Definition:</b> KeyboardListener.cpp:93</div></div>
+<div class="ttc" id="aclassEngine_1_1KeyboardListener_html_add70efeba1f10a5ffc38611cf77f66fd"><div class="ttname"><a href="classEngine_1_1KeyboardListener.html#add70efeba1f10a5ffc38611cf77f66fd">Engine::KeyboardListener::setKeyboardPathsOnLinux</a></div><div class="ttdeci">void setKeyboardPathsOnLinux(int deviceIndex=0)</div><div class="ttdoc">KeyboardListener::setKeyboardPathsOnLinux This function iterates over /dev/input and finds the paths ...</div><div class="ttdef"><b>Definition:</b> KeyboardListener.cpp:72</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

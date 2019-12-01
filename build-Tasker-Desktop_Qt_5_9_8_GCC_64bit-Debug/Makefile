@@ -60,7 +60,6 @@ SOURCES       = ../Tasker/CommStatsQWidget.cpp \
 		../Tasker/StatsUtility.cpp \
 		../Tasker/TaskerUIMainWindowQWidget.cpp \
 		../Tasker/TempChartQWidget.cpp \
-		../Tasker/TestUtils.cpp \
 		../Tasker/Timer.cpp \
 		../Tasker/TimerWindowQWidget.cpp \
 		../Tasker/User.cpp \
@@ -82,7 +81,6 @@ OBJECTS       = CommStatsQWidget.o \
 		StatsUtility.o \
 		TaskerUIMainWindowQWidget.o \
 		TempChartQWidget.o \
-		TestUtils.o \
 		Timer.o \
 		TimerWindowQWidget.o \
 		User.o \
@@ -301,7 +299,6 @@ DIST          = ../../Qt/5.9.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../Tasker/StatsUtility.cpp \
 		../Tasker/TaskerUIMainWindowQWidget.cpp \
 		../Tasker/TempChartQWidget.cpp \
-		../Tasker/TestUtils.cpp \
 		../Tasker/Timer.cpp \
 		../Tasker/TimerWindowQWidget.cpp \
 		../Tasker/User.cpp \
@@ -707,7 +704,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Qt/5.9.8/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.h ../Tasker/Commitment.h ../Tasker/CreateCommitmentQWidget.h ../Tasker/Listener.h ../Tasker/KeyboardListener.h ../Tasker/Session.h ../Tasker/Task.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/Timer.h ../Tasker/TimerWindowQWidget.h ../Tasker/Interval.h ../Tasker/StatsUtility.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/TimerWindowQWidget.h ../Tasker/User.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.cpp ../Tasker/Commitment.cpp ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Listener.cpp ../Tasker/KeyboardListener.cpp ../Tasker/Session.cpp ../Tasker/Task.cpp ../Tasker/StatsUtility.cpp ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/TempChartQWidget.cpp ../Tasker/TestUtils.cpp ../Tasker/Timer.cpp ../Tasker/TimerWindowQWidget.cpp ../Tasker/User.cpp ../Tasker/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.cpp ../Tasker/Commitment.cpp ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Listener.cpp ../Tasker/KeyboardListener.cpp ../Tasker/Session.cpp ../Tasker/Task.cpp ../Tasker/StatsUtility.cpp ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/TempChartQWidget.cpp ../Tasker/Timer.cpp ../Tasker/TimerWindowQWidget.cpp ../Tasker/User.cpp ../Tasker/main.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.ui ../Tasker/CreateCommitmentQWidget.ui ../Tasker/TaskerUIMainWindowQWidget.ui ../Tasker/TimerWindowQWidget.ui $(DISTDIR)/
 
 
@@ -2295,6 +2292,63 @@ CommStatsQWidget.o: ../Tasker/CommStatsQWidget.cpp ../Tasker/CommStatsQWidget.h 
 		../../Qt/5.9.8/gcc_64/include/QtGui/qvector2d.h \
 		../../Qt/5.9.8/gcc_64/include/QtGui/qtouchdevice.h \
 		ui_CommStatsQWidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qicon.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QCommandLinkButton \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qcommandlinkbutton.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QFrame \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QGroupBox \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qgroupbox.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QListWidget \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qlistwidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qlistview.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QProgressBar \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qprogressbar.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QTextEdit \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qtextedit.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qtextdocument.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qtextoption.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qtextcursor.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qtextformat.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qpen.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QTreeWidget \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qtreewidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qtreeview.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qtreewidgetitemiterator.h \
 		../Tasker/TempChartQWidget.h \
 		../../Qt/5.9.8/gcc_64/include/QtCharts/QBarSeries \
 		../../Qt/5.9.8/gcc_64/include/QtCharts/qbarseries.h \
@@ -2308,9 +2362,7 @@ CommStatsQWidget.o: ../Tasker/CommStatsQWidget.cpp ../Tasker/CommStatsQWidget.h 
 		../../Qt/5.9.8/gcc_64/include/QtCharts/QAbstractAxis \
 		../../Qt/5.9.8/gcc_64/include/QtCharts/qabstractaxis.h \
 		../../Qt/5.9.8/gcc_64/include/QtGui/QPen \
-		../../Qt/5.9.8/gcc_64/include/QtGui/qpen.h \
 		../../Qt/5.9.8/gcc_64/include/QtGui/QFont \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QVariant \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QObject \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QStringList \
 		../../Qt/5.9.8/gcc_64/include/QtCharts/QChart \
@@ -2328,16 +2380,10 @@ CommStatsQWidget.o: ../Tasker/CommStatsQWidget.cpp ../Tasker/CommStatsQWidget.h 
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsView \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qgraphicsview.h \
 		../../Qt/5.9.8/gcc_64/include/QtGui/qpainter.h \
-		../../Qt/5.9.8/gcc_64/include/QtGui/qtextoption.h \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qscrollarea.h \
-		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../Qt/5.9.8/gcc_64/include/QtWidgets/qframe.h \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qgraphicsscene.h \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/QDoubleSpinBox \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qspinbox.h \
-		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../Qt/5.9.8/gcc_64/include/QtGui/qvalidator.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qregularexpression.h \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/QGraphicsGridLayout \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qgraphicsgridlayout.h \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qgraphicslayout.h \
@@ -2345,9 +2391,7 @@ CommStatsQWidget.o: ../Tasker/CommStatsQWidget.cpp ../Tasker/CommStatsQWidget.h 
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qgridlayout.h \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qlayout.h \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../Qt/5.9.8/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../Qt/5.9.8/gcc_64/include/QtWidgets/QGroupBox \
-		../../Qt/5.9.8/gcc_64/include/QtWidgets/qgroupbox.h
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qboxlayout.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CommStatsQWidget.o ../Tasker/CommStatsQWidget.cpp
 
 Commitment.o: ../Tasker/Commitment.cpp ../Tasker/Commitment.h \
@@ -2531,6 +2575,51 @@ CreateCommitmentQWidget.o: ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Creat
 		../../Qt/5.9.8/gcc_64/include/QtCore/qregularexpression.h \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/QWidget \
 		ui_CreateCommitmentQWidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QComboBox \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qcombobox.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QDateEdit \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qdatetimeedit.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdatetime.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QFrame \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QLineEdit \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qlineedit.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qtextcursor.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qtextformat.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qpen.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qtextoption.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CreateCommitmentQWidget.o ../Tasker/CreateCommitmentQWidget.cpp
 
@@ -3332,7 +3421,37 @@ TaskerUIMainWindowQWidget.o: ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/T
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qframe.h \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/QPushButton \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qpushbutton.h \
-		ui_TaskerUIMainWindowQWidget.h
+		ui_TaskerUIMainWindowQWidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qlabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TaskerUIMainWindowQWidget.o ../Tasker/TaskerUIMainWindowQWidget.cpp
 
 TempChartQWidget.o: ../Tasker/TempChartQWidget.cpp ../Tasker/TempChartQWidget.h \
@@ -3501,9 +3620,6 @@ TempChartQWidget.o: ../Tasker/TempChartQWidget.cpp ../Tasker/TempChartQWidget.h 
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractbutton.h \
 		../../Qt/5.9.8/gcc_64/include/QtGui/qicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TempChartQWidget.o ../Tasker/TempChartQWidget.cpp
-
-TestUtils.o: ../Tasker/TestUtils.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TestUtils.o ../Tasker/TestUtils.cpp
 
 Timer.o: ../Tasker/Timer.cpp ../Tasker/Timer.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QTime \
@@ -3801,7 +3917,59 @@ TimerWindowQWidget.o: ../Tasker/TimerWindowQWidget.cpp ../Tasker/TimerWindowQWid
 		../../Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
 		../../Qt/5.9.8/gcc_64/include/QtGui/qvector2d.h \
 		../../Qt/5.9.8/gcc_64/include/QtGui/qtouchdevice.h \
-		ui_TimerWindowQWidget.h
+		ui_TimerWindowQWidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QVariant \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QAction \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qaction.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qicon.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QApplication \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qcoreapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qeventloop.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qguiapplication.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qinputmethod.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QButtonGroup \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QCheckBox \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qcheckbox.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QComboBox \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qcombobox.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qvalidator.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qregularexpression.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qslider.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qstyle.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qtabbar.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qrubberband.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qframe.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QFrame \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QHeaderView \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qheaderview.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QLabel \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qlabel.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QLineEdit \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qlineedit.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qtextcursor.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qtextformat.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qpen.h \
+		../../Qt/5.9.8/gcc_64/include/QtGui/qtextoption.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QRadioButton \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qradiobutton.h \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/QSpinBox \
+		../../Qt/5.9.8/gcc_64/include/QtWidgets/qspinbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TimerWindowQWidget.o ../Tasker/TimerWindowQWidget.cpp
 
 User.o: ../Tasker/User.cpp ../Tasker/User.h \
