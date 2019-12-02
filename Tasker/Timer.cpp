@@ -37,7 +37,6 @@ if(listenerType == Listener::ListenerType::keyboard)
     listener = new KeyboardListener();
 else if(listenerType == Listener::ListenerType::audio)
     listener = new KeyboardListener(); //obviously we have to change this at some point
-
 connect(this, &Timer::startListener, listener, &Listener::start);
 emit startListener();
 exec();
