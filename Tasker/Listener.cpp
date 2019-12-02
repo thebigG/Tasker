@@ -1,22 +1,28 @@
 #include "Listener.h"
 
+using namespace Engine;
 /**
  * @brief Engine::Listener::Listener
  *        default constructor
  */
-Engine::Listener::Listener() {
+Listener::Listener() {
     checkStateDelay = 0.0;
     slack = 0.0;
-    currentState = Engine::Listener::ListenerState::unproductive;
+    currentState = Listener::ListenerState::unproductive;
     productiveTime = 0;
     unproductiveTime = 0;
 }
-
+Listener::ListenerType  Listener::intToListenerType(int enumInt)
+{
+ if(int(ListenerType::keyboard)<enumInt || int(ListenerType::none)>enumInt)
+     return ListenerType(enumInt);
+ return ListenerType::none;
+}
 /**
  * @brief Engine::Listener::~Listener
  *        destructor
  */
-Engine::Listener::~Listener() {
+Listener::~Listener() {
     checkStateDelay = 0.0;
     slack = 0.0;
 
@@ -30,7 +36,7 @@ Engine::Listener::~Listener() {
  * @param state ListenerState, unproductive or productive
  */
 
-void Engine::Listener::setState(Engine::Listener::ListenerState newState)
+void Listener::setState(Listener::ListenerState newState)
 {
     currentState = newState;
 }
@@ -41,7 +47,7 @@ void Engine::Listener::setState(Engine::Listener::ListenerState newState)
  *
  * @return  slack value, in seconds
  */
-double Engine::Listener::getSlack() {
+double Listener::getSlack() {
     return slack;
 }
 
@@ -53,8 +59,8 @@ double Engine::Listener::getSlack() {
  *         or
  *         Engine::Listener::ListenerState::productive
  */
-Engine::Listener::ListenerState Engine::Listener::getState() {
-    return Engine::Listener::ListenerState::unproductive;
+Listener::ListenerState Listener::getState() {
+    return Listener::ListenerState::unproductive;
 }
 
 /**
@@ -68,7 +74,7 @@ Engine::Listener::ListenerState Engine::Listener::getState() {
  *
  * @return  Listener's productive time, in seconds
  */
-uint64_t Engine::Listener::getProductiveTime() {
+uint64_t Listener::getProductiveTime() {
     return productiveTime;
 }
 
@@ -83,7 +89,7 @@ uint64_t Engine::Listener::getProductiveTime() {
  *
  * @return Listener's unproductive time, in seconds
  */
-uint64_t Engine::Listener::getUnproductiveTime() {
+uint64_t Listener::getUnproductiveTime() {
     return unproductiveTime;
 }
 
@@ -94,7 +100,7 @@ uint64_t Engine::Listener::getUnproductiveTime() {
  *
  * @param slack     slack value, in seconds
  */
-void Engine::Listener::setSlack(double slack) {
+void Listener::setSlack(double slack) {
     this->slack = (slack < 0.0) ? this->slack : slack;
 }
 
@@ -104,7 +110,7 @@ void Engine::Listener::setSlack(double slack) {
  *
  * @return checkStateDelay, in seconds
  */
-double Engine::Listener::getCheckStateDelay() {
+double Listener::getCheckStateDelay() {
     return checkStateDelay;
 }
 
@@ -114,7 +120,7 @@ double Engine::Listener::getCheckStateDelay() {
  *
  * @param checkStateDelay   checkStateDelay value, in seconds
  */
-void Engine::Listener::setCheckStateDelay(double checkStateDelay) {
+void Listener::setCheckStateDelay(double checkStateDelay) {
     this->checkStateDelay = (checkStateDelay < 0.0)
             ? this->checkStateDelay : checkStateDelay;
 }
@@ -127,7 +133,7 @@ void Engine::Listener::setCheckStateDelay(double checkStateDelay) {
  *
  * @param productiveTime productiveTime value, in seconds
  */
-void Engine::Listener::setProductiveTime(uint64_t productiveTime) {
+void Listener::setProductiveTime(uint64_t productiveTime) {
     this->productiveTime = productiveTime;
 }
 
@@ -137,6 +143,6 @@ void Engine::Listener::setProductiveTime(uint64_t productiveTime) {
  *
  * @param unproductiveTime unproductiveTime value, in seconds
  */
-void Engine::Listener::setUnproductiveTime(uint64_t unproductiveTime) {
+void Listener::setUnproductiveTime(uint64_t unproductiveTime) {
     this->unproductiveTime = unproductiveTime;
 }

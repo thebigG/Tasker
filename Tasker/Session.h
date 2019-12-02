@@ -1,6 +1,7 @@
 #ifndef SESSION_H
 #define SESSION_H
 #include "Task.h"
+#include <QDataStream>
 namespace udata {
 class Session;
 
@@ -36,6 +37,36 @@ private:
    QVector<QString> media;
    long long int length;
 
+
+   /**
+* @brief operator << I'm really sorry about this ugiliness. Apparently,
+* as far as I know, C++ wants me to do it this way in order to access private members.
+* @param out
+* @param newSession
+* @return
+*/
+friend QDataStream& operator<<(QDataStream &out, const udata::Session &newSession)
+{
+   out<<newSession.task<<newSession.productiveTime
+     <<newSession.unproductiveTime<<newSession.notes
+    <<newSession.media<<newSession.length;
+   return out;
+}
+/**
+* @brief operator >> I'm really sorry about this ugiliness. Apparently,
+* as far as I know, C++ wants me to do it this way in order to access private members.
+* @param in
+* @param newSession
+* @return
+*/
+friend QDataStream & operator>>(QDataStream &in, udata::Session &newSession)
+{
+
+   in >> newSession.task>>newSession.productiveTime
+           >>newSession.unproductiveTime>>newSession.notes>>
+           newSession.media>>newSession.length;
+   return in;
+}
 };
 
 #endif // SESSION_H

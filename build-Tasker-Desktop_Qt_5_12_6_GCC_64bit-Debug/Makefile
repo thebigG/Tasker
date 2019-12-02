@@ -271,7 +271,6 @@ DIST          = ../../Qt/5.12.6/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/spec_post.prf \
-		../Tasker/.qmake.stash \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/default_pre.prf \
@@ -509,7 +508,6 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.12.6/gcc_64/mkspecs/linux-g++/qmake.co
 		../../Qt/5.12.6/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/default_pre.prf \
@@ -706,7 +704,6 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.12.6/gcc_64/mkspecs/linux-g++/qmake.co
 ../../Qt/5.12.6/gcc_64/mkspecs/features/qt_config.prf:
 ../../Qt/5.12.6/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../Qt/5.12.6/gcc_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 ../../Qt/5.12.6/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../Qt/5.12.6/gcc_64/mkspecs/features/toolchain.prf:
 ../../Qt/5.12.6/gcc_64/mkspecs/features/default_pre.prf:
@@ -1056,6 +1053,12 @@ moc_Listener.cpp: ../Tasker/Listener.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/qcontainerfwd.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/qobject_impl.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/QObject \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QFile \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qfile.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qfiledevice.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QDataStream \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qdatastream.h \
 		moc_predefs.h \
 		../../Qt/5.12.6/gcc_64/bin/moc
 	/home/fast-alchemist/Qt/5.12.6/gcc_64/bin/moc $(DEFINES) --include /home/fast-alchemist/Tasker/build-Tasker-Desktop_Qt_5_12_6_GCC_64bit-Debug/moc_predefs.h -I/home/fast-alchemist/Qt/5.12.6/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.12.6/gcc_64/include -I/home/fast-alchemist/Qt/5.12.6/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.12.6/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.12.6/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.12.6/gcc_64/include/QtTest -I/home/fast-alchemist/Qt/5.12.6/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/Listener.h -o moc_Listener.cpp
@@ -1256,6 +1259,8 @@ moc_KeyboardListener.cpp: ../Tasker/KeyboardListener.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/qtcoreversion.h \
 		../Tasker/Listener.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/QThread \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QFile \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QDataStream \
 		moc_predefs.h \
 		../../Qt/5.12.6/gcc_64/bin/moc
 	/home/fast-alchemist/Qt/5.12.6/gcc_64/bin/moc $(DEFINES) --include /home/fast-alchemist/Tasker/build-Tasker-Desktop_Qt_5_12_6_GCC_64bit-Debug/moc_predefs.h -I/home/fast-alchemist/Qt/5.12.6/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.12.6/gcc_64/include -I/home/fast-alchemist/Qt/5.12.6/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.12.6/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.12.6/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.12.6/gcc_64/include/QtTest -I/home/fast-alchemist/Qt/5.12.6/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/KeyboardListener.h -o moc_KeyboardListener.cpp
@@ -2691,7 +2696,13 @@ Listener.o: ../Tasker/Listener.cpp ../Tasker/Listener.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/qcontainerfwd.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/qobject_impl.h \
-		../../Qt/5.12.6/gcc_64/include/QtCore/QObject
+		../../Qt/5.12.6/gcc_64/include/QtCore/QObject \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QFile \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qfile.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qfiledevice.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QDataStream \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qdatastream.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Listener.o ../Tasker/Listener.cpp
 
 KeyboardListener.o: ../Tasker/KeyboardListener.cpp ../Tasker/KeyboardListener.h \
@@ -2890,6 +2901,8 @@ KeyboardListener.o: ../Tasker/KeyboardListener.cpp ../Tasker/KeyboardListener.h 
 		../../Qt/5.12.6/gcc_64/include/QtCore/qtcoreversion.h \
 		../Tasker/Listener.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/QThread \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QFile \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QDataStream \
 		../../Qt/5.12.6/gcc_64/include/QtCore/QRegularExpression
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o KeyboardListener.o ../Tasker/KeyboardListener.cpp
 
@@ -3971,7 +3984,84 @@ TimerWindowQWidget.o: ../Tasker/TimerWindowQWidget.cpp ../Tasker/TimerWindowQWid
 		ui_TimerWindowQWidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TimerWindowQWidget.o ../Tasker/TimerWindowQWidget.cpp
 
-UdataUtils.o: ../Tasker/UdataUtils.cpp ../Tasker/UdataUtils.h
+UdataUtils.o: ../Tasker/UdataUtils.cpp ../Tasker/UdataUtils.h \
+		../Tasker/Task.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QString \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qstring.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qchar.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qglobal.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qconfig.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qtcore-config.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qsystemdetection.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qprocessordetection.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qtypeinfo.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qsysinfo.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qlogging.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qflags.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qatomic.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qbasicatomic.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qgenericatomic.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qglobalstatic.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qmutex.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qnumeric.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qversiontagging.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qbytearray.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qrefcount.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qnamespace.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qarraydata.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qstringliteral.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qstringview.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qstringbuilder.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QVector \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qvector.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qiterator.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qlist.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qhashfunctions.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qpair.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qbytearraylist.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qstringlist.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qregexp.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qstringmatcher.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qpoint.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QObject \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qobject.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qobjectdefs.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qcoreevent.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qscopedpointer.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qmetatype.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qobject_impl.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QFile \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qfile.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qfiledevice.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QDataStream \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qdatastream.h \
+		../Tasker/Listener.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QThread \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qthread.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QtGlobal \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QDebug \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qdebug.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qhash.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qmap.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qtextstream.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qlocale.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qvariant.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qshareddata.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qset.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qsharedpointer.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qsharedpointer_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o UdataUtils.o ../Tasker/UdataUtils.cpp
 
 User.o: ../Tasker/User.cpp ../Tasker/User.h \
@@ -4309,7 +4399,9 @@ main.o: ../Tasker/main.cpp ../Tasker/CommStatsQWidget.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/QDebug \
 		../../Qt/5.12.6/gcc_64/include/QtCore/Qt \
 		../Tasker/Timer.h \
-		../../Qt/5.12.6/gcc_64/include/QtCore/QTime
+		../../Qt/5.12.6/gcc_64/include/QtCore/QTime \
+		../Tasker/UdataUtils.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QtGlobal
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Tasker/main.cpp
 
 moc_CommStatsQWidget.o: moc_CommStatsQWidget.cpp 

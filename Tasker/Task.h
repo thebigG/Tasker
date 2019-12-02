@@ -23,9 +23,11 @@ class Task;
 class udata::Task
 {
 
+private:
+    QVector<Engine::Listener::ListenerType> listeners;
+    QString name;
 public:
     Task();
-    ~Task();
     Task(QString newName);
     Task(QString newName, QVector<Engine::Listener::ListenerType> listeners);
     QString& getName();
@@ -35,7 +37,7 @@ public:
 
     /**
  * @brief operator << I'm really sorry about this ugiliness. Apparently,
- * as far as I know, C++ wants me to do it this wayin order to access private members.
+ * as far as I know, C++ wants me to do it this way in order to access private members.
  * @param out
  * @param newTask
  * @return
@@ -43,6 +45,7 @@ public:
 friend QDataStream& operator<<(QDataStream &out, const udata::Task &newTask)
 {
     out<< newTask.name;
+    out<< newTask.listeners;
     return out;
 }
 /**
@@ -54,14 +57,9 @@ friend QDataStream& operator<<(QDataStream &out, const udata::Task &newTask)
 */
 friend QDataStream & operator>>(QDataStream &in, udata::Task &newTask)
 {
-    newTask = Task();
-    in >> newTask.name;
+    in >> newTask.name << newTask.listeners;
     return in;
 }
-
-private:
-    QVector<Engine::Listener::ListenerType> listeners;
-    QString name;
 
 };
 

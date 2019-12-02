@@ -40,6 +40,12 @@ int main(int argc, char* argv[])
     Task newTask{};
     UdataUtils::loadTask(newTask);
     qDebug()<<"name for task from disk:" + newTask.getName();
+//QProcess getUsername;
+//QString output;
+//getUsername.start("whoami");
+//getUsername.waitForFinished();
+//output = QString(getUsername.readAllStandardOutput());
+//qDebug()<<"ls output:" + output;
 }
 
 

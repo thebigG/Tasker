@@ -4,6 +4,8 @@
 #include <cstdint>
 #include <QThread>
 #include <QObject>
+#include <QFile>
+#include <QDataStream>
 namespace Engine {
     class Listener;
 }
@@ -15,6 +17,8 @@ public:
     /**
      * @brief The ListenerType enum
      * This enum used for Timer to know which listener it is going to instantiate
+     * @note If, for whatever reason, we decide to add ListenerType values make
+     * sure that to add them BEFORE none. The none type is used for bounds checking.
      */
     enum class ListenerType{keyboard,audio, none};    //I had to do this to make QThreads work
 
@@ -25,7 +29,7 @@ public:
     virtual void end() = 0;
     virtual void pause() = 0;
     virtual void update() = 0;
-
+    static ListenerType intToListenerType(int enumToInt);
     virtual Listener::ListenerState listen() = 0;
     ListenerState currentState;
     double getSlack();
@@ -60,6 +64,32 @@ private:
     // to store permanently in Commitment
     void setProductiveTime(uint64_t productiveTime);
     void setUnproductiveTime(uint64_t unproductiveTime);
+    /**
+ * @brief operator << I'm really sorry about this ugiliness. Apparently,
+ * as far as I know, C++ wants me to do it this way in order to access private members.
+ * @param out
+ * @param newTask
+ * @return
+ */
+friend QDataStream& operator<<(QDataStream &out, const ListenerType &newListener)
+{
+    out<<int(newListener);
+    return out;
+}
+/**
+* @brief operator >> I'm really sorry about this ugiliness. Apparently,
+* as far as I know, C++ wants me to do it this way in order to access private members.
+* @param in
+* @param newTask
+* @return
+*/
+friend QDataStream& operator>>(QDataStream &in, ListenerType &newListener)
+{
+    int enumValue = 0;
+    in >> enumValue;
+    newListener = intToListenerType(enumValue);
+    return in;
+}
 };
 
 #endif // LISTENER_H
