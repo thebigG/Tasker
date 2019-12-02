@@ -1,7 +1,6 @@
 QT       += charts
 QT       += core gui
 QT += testlib
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -30,6 +29,7 @@ SOURCES += \
     TempChartQWidget.cpp \
     Timer.cpp \
     TimerWindowQWidget.cpp \
+    UdataUtils.cpp \
     User.cpp \
     main.cpp
 
@@ -50,6 +50,7 @@ HEADERS += \
     TaskerUIMainWindowQWidget.h \
     TempChartQWidget.h \
     TimerWindowQWidget.h \
+    UdataUtils.h \
     User.h
 
 FORMS += \

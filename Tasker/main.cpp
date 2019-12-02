@@ -22,18 +22,24 @@ using namespace std;
 #include <QtCore>
 #include <QObject>
 #include <iostream>
+#include <UdataUtils.h>
 using std::cout;
 using std::endl;
 using namespace Engine;
+using namespace udata;
 int main(int argc, char* argv[])
 {
-    QApplication a(argc, argv);
-    f = new TaskerUIMainWindowQWidget;
-    f->show();
-    qDebug()<<"thread id for main GUI thread:" <<QThread::currentThreadId();
-Timer myTimer;
-myTimer.start(); //calls the run() method
-return a.exec();
+//    QApplication a(argc, argv);
+//    f = new TaskerUIMainWindowQWidget;
+//    f->show();
+//    qDebug()<<"thread id for main GUI thread:" <<QThread::currentThreadId();
+//Timer myTimer;
+//myTimer.start(); //calls the run() method
+//return a.exec();
+    UdataUtils::saveTask();
+    Task newTask{};
+    UdataUtils::loadTask(newTask);
+    qDebug()<<"name for task from disk:" + newTask.getName();
 }
 
 

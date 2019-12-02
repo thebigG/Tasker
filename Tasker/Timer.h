@@ -4,6 +4,7 @@
 #include <QThread>
 #include "Session.h"
 #include <QObject>
+
 #include <KeyboardListener.h>
 namespace Engine {
 
@@ -17,7 +18,7 @@ class Timer;
  */
 class Engine::Timer: public QThread
 {
-Q_OBJECT
+    Q_OBJECT
 private:
     QTime currentProductiveTime;
     QTime currentUnproductiveTime;

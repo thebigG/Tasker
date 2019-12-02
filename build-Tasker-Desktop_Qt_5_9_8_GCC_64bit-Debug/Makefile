@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_TESTLIB_LIB -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR='"/home/fast-alchemist/Tasker/build-Tasker-Desktop_Qt_5_9_8_GCC_64bit-Debug"'
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../Tasker -I. -I../../Qt/5.9.8/gcc_64/include -I../../Qt/5.9.8/gcc_64/include/QtCharts -I../../Qt/5.9.8/gcc_64/include/QtWidgets -I../../Qt/5.9.8/gcc_64/include/QtGui -I../../Qt/5.9.8/gcc_64/include/QtTest -I../../Qt/5.9.8/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../Qt/5.9.8/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../Tasker -I. -I../../Qt/5.9.8/gcc_64/include -I../../Qt/5.9.8/gcc_64/include/QtCharts -I../../Qt/5.9.8/gcc_64/include/QtWidgets -I../../Qt/5.9.8/gcc_64/include/QtGui -I../../Qt/5.9.8/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../Qt/5.9.8/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/fast-alchemist/Qt/5.9.8/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -38,7 +38,7 @@ DISTNAME      = Tasker1.0.0
 DISTDIR = /home/fast-alchemist/Tasker/build-Tasker-Desktop_Qt_5_9_8_GCC_64bit-Debug/.tmp/Tasker1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/fast-alchemist/Qt/5.9.8/gcc_64/lib
-LIBS          = $(SUBLIBS) -L/home/fast-alchemist/Qt/5.9.8/gcc_64/lib -lQt5Charts -lQt5Widgets -lQt5Gui -lQt5Test -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/home/fast-alchemist/Qt/5.9.8/gcc_64/lib -lQt5Charts -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -62,6 +62,7 @@ SOURCES       = ../Tasker/CommStatsQWidget.cpp \
 		../Tasker/TempChartQWidget.cpp \
 		../Tasker/Timer.cpp \
 		../Tasker/TimerWindowQWidget.cpp \
+		../Tasker/UdataUtils.cpp \
 		../Tasker/User.cpp \
 		../Tasker/main.cpp moc_CommStatsQWidget.cpp \
 		moc_CreateCommitmentQWidget.cpp \
@@ -83,6 +84,7 @@ OBJECTS       = CommStatsQWidget.o \
 		TempChartQWidget.o \
 		Timer.o \
 		TimerWindowQWidget.o \
+		UdataUtils.o \
 		User.o \
 		main.o \
 		moc_CommStatsQWidget.o \
@@ -263,7 +265,6 @@ DIST          = ../../Qt/5.9.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/qt.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/resources.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/moc.prf \
-		../../Qt/5.9.8/gcc_64/mkspecs/features/testlib_defines.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/unix/opengl.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/uic.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/unix/thread.prf \
@@ -289,6 +290,7 @@ DIST          = ../../Qt/5.9.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../Tasker/TaskerUIMainWindowQWidget.h \
 		../Tasker/TempChartQWidget.h \
 		../Tasker/TimerWindowQWidget.h \
+		../Tasker/UdataUtils.h \
 		../Tasker/User.h ../Tasker/CommStatsQWidget.cpp \
 		../Tasker/Commitment.cpp \
 		../Tasker/CreateCommitmentQWidget.cpp \
@@ -301,6 +303,7 @@ DIST          = ../../Qt/5.9.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../Tasker/TempChartQWidget.cpp \
 		../Tasker/Timer.cpp \
 		../Tasker/TimerWindowQWidget.cpp \
+		../Tasker/UdataUtils.cpp \
 		../Tasker/User.cpp \
 		../Tasker/main.cpp
 QMAKE_TARGET  = Tasker
@@ -485,7 +488,6 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.con
 		../../Qt/5.9.8/gcc_64/mkspecs/features/qt.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/resources.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/moc.prf \
-		../../Qt/5.9.8/gcc_64/mkspecs/features/testlib_defines.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/unix/opengl.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/uic.prf \
 		../../Qt/5.9.8/gcc_64/mkspecs/features/unix/thread.prf \
@@ -499,7 +501,6 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.con
 		../../Qt/5.9.8/gcc_64/lib/libQt5Charts.prl \
 		../../Qt/5.9.8/gcc_64/lib/libQt5Widgets.prl \
 		../../Qt/5.9.8/gcc_64/lib/libQt5Gui.prl \
-		../../Qt/5.9.8/gcc_64/lib/libQt5Test.prl \
 		../../Qt/5.9.8/gcc_64/lib/libQt5Core.prl
 	$(QMAKE) -o Makefile ../Tasker/Tasker.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug CONFIG+=force_debug_info CONFIG+=separate_debug_info
 ../../Qt/5.9.8/gcc_64/mkspecs/features/spec_pre.prf:
@@ -672,7 +673,6 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.con
 ../../Qt/5.9.8/gcc_64/mkspecs/features/qt.prf:
 ../../Qt/5.9.8/gcc_64/mkspecs/features/resources.prf:
 ../../Qt/5.9.8/gcc_64/mkspecs/features/moc.prf:
-../../Qt/5.9.8/gcc_64/mkspecs/features/testlib_defines.prf:
 ../../Qt/5.9.8/gcc_64/mkspecs/features/unix/opengl.prf:
 ../../Qt/5.9.8/gcc_64/mkspecs/features/uic.prf:
 ../../Qt/5.9.8/gcc_64/mkspecs/features/unix/thread.prf:
@@ -686,7 +686,6 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.9.8/gcc_64/mkspecs/linux-g++/qmake.con
 ../../Qt/5.9.8/gcc_64/lib/libQt5Charts.prl:
 ../../Qt/5.9.8/gcc_64/lib/libQt5Widgets.prl:
 ../../Qt/5.9.8/gcc_64/lib/libQt5Gui.prl:
-../../Qt/5.9.8/gcc_64/lib/libQt5Test.prl:
 ../../Qt/5.9.8/gcc_64/lib/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../Tasker/Tasker.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug CONFIG+=force_debug_info CONFIG+=separate_debug_info
@@ -703,8 +702,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Qt/5.9.8/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.h ../Tasker/Commitment.h ../Tasker/CreateCommitmentQWidget.h ../Tasker/Listener.h ../Tasker/KeyboardListener.h ../Tasker/Session.h ../Tasker/Task.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/Timer.h ../Tasker/TimerWindowQWidget.h ../Tasker/Interval.h ../Tasker/StatsUtility.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/TimerWindowQWidget.h ../Tasker/User.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.cpp ../Tasker/Commitment.cpp ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Listener.cpp ../Tasker/KeyboardListener.cpp ../Tasker/Session.cpp ../Tasker/Task.cpp ../Tasker/StatsUtility.cpp ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/TempChartQWidget.cpp ../Tasker/Timer.cpp ../Tasker/TimerWindowQWidget.cpp ../Tasker/User.cpp ../Tasker/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.h ../Tasker/Commitment.h ../Tasker/CreateCommitmentQWidget.h ../Tasker/Listener.h ../Tasker/KeyboardListener.h ../Tasker/Session.h ../Tasker/Task.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/Timer.h ../Tasker/TimerWindowQWidget.h ../Tasker/Interval.h ../Tasker/StatsUtility.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/TimerWindowQWidget.h ../Tasker/UdataUtils.h ../Tasker/User.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.cpp ../Tasker/Commitment.cpp ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Listener.cpp ../Tasker/KeyboardListener.cpp ../Tasker/Session.cpp ../Tasker/Task.cpp ../Tasker/StatsUtility.cpp ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/TempChartQWidget.cpp ../Tasker/Timer.cpp ../Tasker/TimerWindowQWidget.cpp ../Tasker/UdataUtils.cpp ../Tasker/User.cpp ../Tasker/main.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.ui ../Tasker/CreateCommitmentQWidget.ui ../Tasker/TaskerUIMainWindowQWidget.ui ../Tasker/TimerWindowQWidget.ui $(DISTDIR)/
 
 
@@ -843,7 +842,7 @@ moc_CommStatsQWidget.cpp: ../../Qt/5.9.8/gcc_64/include/QtWidgets/QWidget \
 		../Tasker/CommStatsQWidget.h \
 		moc_predefs.h \
 		../../Qt/5.9.8/gcc_64/bin/moc
-	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtTest -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/CommStatsQWidget.h -o moc_CommStatsQWidget.cpp
+	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/CommStatsQWidget.h -o moc_CommStatsQWidget.cpp
 
 moc_CreateCommitmentQWidget.cpp: ../../Qt/5.9.8/gcc_64/include/QtWidgets/QCheckBox \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qcheckbox.h \
@@ -955,7 +954,7 @@ moc_CreateCommitmentQWidget.cpp: ../../Qt/5.9.8/gcc_64/include/QtWidgets/QCheckB
 		../Tasker/CreateCommitmentQWidget.h \
 		moc_predefs.h \
 		../../Qt/5.9.8/gcc_64/bin/moc
-	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtTest -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/CreateCommitmentQWidget.h -o moc_CreateCommitmentQWidget.cpp
+	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/CreateCommitmentQWidget.h -o moc_CreateCommitmentQWidget.cpp
 
 moc_Listener.cpp: ../../Qt/5.9.8/gcc_64/include/QtCore/QThread \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qthread.h \
@@ -1009,7 +1008,7 @@ moc_Listener.cpp: ../../Qt/5.9.8/gcc_64/include/QtCore/QThread \
 		../Tasker/Listener.h \
 		moc_predefs.h \
 		../../Qt/5.9.8/gcc_64/bin/moc
-	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtTest -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/Listener.h -o moc_Listener.cpp
+	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/Listener.h -o moc_Listener.cpp
 
 moc_KeyboardListener.cpp: ../../Qt/5.9.8/gcc_64/include/QtCore/QtCore \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QtCoreDepends \
@@ -1199,7 +1198,7 @@ moc_KeyboardListener.cpp: ../../Qt/5.9.8/gcc_64/include/QtCore/QtCore \
 		../Tasker/KeyboardListener.h \
 		moc_predefs.h \
 		../../Qt/5.9.8/gcc_64/bin/moc
-	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtTest -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/KeyboardListener.h -o moc_KeyboardListener.cpp
+	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/KeyboardListener.h -o moc_KeyboardListener.cpp
 
 moc_TaskerUIMainWindowQWidget.cpp: ../Tasker/CommStatsQWidget.h \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/QWidget \
@@ -1318,7 +1317,7 @@ moc_TaskerUIMainWindowQWidget.cpp: ../Tasker/CommStatsQWidget.h \
 		../Tasker/TaskerUIMainWindowQWidget.h \
 		moc_predefs.h \
 		../../Qt/5.9.8/gcc_64/bin/moc
-	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtTest -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/TaskerUIMainWindowQWidget.h -o moc_TaskerUIMainWindowQWidget.cpp
+	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/TaskerUIMainWindowQWidget.h -o moc_TaskerUIMainWindowQWidget.cpp
 
 moc_TempChartQWidget.cpp: ../../Qt/5.9.8/gcc_64/include/QtCharts/QBarSeries \
 		../../Qt/5.9.8/gcc_64/include/QtCharts/qbarseries.h \
@@ -1475,7 +1474,7 @@ moc_TempChartQWidget.cpp: ../../Qt/5.9.8/gcc_64/include/QtCharts/QBarSeries \
 		../Tasker/TempChartQWidget.h \
 		moc_predefs.h \
 		../../Qt/5.9.8/gcc_64/bin/moc
-	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtTest -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/TempChartQWidget.h -o moc_TempChartQWidget.cpp
+	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/TempChartQWidget.h -o moc_TempChartQWidget.cpp
 
 moc_Timer.cpp: ../../Qt/5.9.8/gcc_64/include/QtCore/QTime \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdatetime.h \
@@ -1536,6 +1535,12 @@ moc_Timer.cpp: ../../Qt/5.9.8/gcc_64/include/QtCore/QTime \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qvector.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qpoint.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QObject \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QFile \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfile.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QDataStream \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdatastream.h \
 		../Tasker/KeyboardListener.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QtCore \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QtCoreDepends \
@@ -1547,7 +1552,6 @@ moc_Timer.cpp: ../../Qt/5.9.8/gcc_64/include/QtCore/QTime \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qmap.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdebug.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qtextstream.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qlocale.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qset.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcontiguouscache.h \
@@ -1570,13 +1574,10 @@ moc_Timer.cpp: ../../Qt/5.9.8/gcc_64/include/QtCore/QTime \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcommandlineparser.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcryptographichash.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qdatastream.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdeadlinetimer.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qelapsedtimer.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdir.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qfileinfo.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qfile.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdiriterator.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qeasingcurve.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qendian.h \
@@ -1671,7 +1672,7 @@ moc_Timer.cpp: ../../Qt/5.9.8/gcc_64/include/QtCore/QTime \
 		../Tasker/Timer.h \
 		moc_predefs.h \
 		../../Qt/5.9.8/gcc_64/bin/moc
-	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtTest -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/Timer.h -o moc_Timer.cpp
+	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/Timer.h -o moc_Timer.cpp
 
 moc_TimerWindowQWidget.cpp: ../../Qt/5.9.8/gcc_64/include/QtWidgets/QWidget \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qwidget.h \
@@ -1776,7 +1777,7 @@ moc_TimerWindowQWidget.cpp: ../../Qt/5.9.8/gcc_64/include/QtWidgets/QWidget \
 		../Tasker/TimerWindowQWidget.h \
 		moc_predefs.h \
 		../../Qt/5.9.8/gcc_64/bin/moc
-	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtTest -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/TimerWindowQWidget.h -o moc_TimerWindowQWidget.cpp
+	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/TimerWindowQWidget.h -o moc_TimerWindowQWidget.cpp
 
 moc_TaskerUIMainWindowQWidget.cpp: ../Tasker/CommStatsQWidget.h \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/QWidget \
@@ -1895,7 +1896,7 @@ moc_TaskerUIMainWindowQWidget.cpp: ../Tasker/CommStatsQWidget.h \
 		../Tasker/TaskerUIMainWindowQWidget.h \
 		moc_predefs.h \
 		../../Qt/5.9.8/gcc_64/bin/moc
-	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtTest -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/TaskerUIMainWindowQWidget.h -o moc_TaskerUIMainWindowQWidget.cpp
+	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/TaskerUIMainWindowQWidget.h -o moc_TaskerUIMainWindowQWidget.cpp
 
 moc_TempChartQWidget.cpp: ../../Qt/5.9.8/gcc_64/include/QtCharts/QBarSeries \
 		../../Qt/5.9.8/gcc_64/include/QtCharts/qbarseries.h \
@@ -2052,7 +2053,7 @@ moc_TempChartQWidget.cpp: ../../Qt/5.9.8/gcc_64/include/QtCharts/QBarSeries \
 		../Tasker/TempChartQWidget.h \
 		moc_predefs.h \
 		../../Qt/5.9.8/gcc_64/bin/moc
-	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtTest -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/TempChartQWidget.h -o moc_TempChartQWidget.cpp
+	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/TempChartQWidget.h -o moc_TempChartQWidget.cpp
 
 moc_TimerWindowQWidget.cpp: ../../Qt/5.9.8/gcc_64/include/QtWidgets/QWidget \
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qwidget.h \
@@ -2157,7 +2158,7 @@ moc_TimerWindowQWidget.cpp: ../../Qt/5.9.8/gcc_64/include/QtWidgets/QWidget \
 		../Tasker/TimerWindowQWidget.h \
 		moc_predefs.h \
 		../../Qt/5.9.8/gcc_64/bin/moc
-	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtTest -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/TimerWindowQWidget.h -o moc_TimerWindowQWidget.cpp
+	/home/fast-alchemist/Qt/5.9.8/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/fast-alchemist/Qt/5.9.8/gcc_64/mkspecs/linux-g++ -I/home/fast-alchemist/Tasker/Tasker -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCharts -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtWidgets -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtGui -I/home/fast-alchemist/Qt/5.9.8/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../Tasker/TimerWindowQWidget.h -o moc_TimerWindowQWidget.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -2452,12 +2453,17 @@ Commitment.o: ../Tasker/Commitment.cpp ../Tasker/Commitment.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcontainerfwd.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qobject_impl.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QFile \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfile.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QDataStream \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdatastream.h \
 		../Tasker/Interval.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QDebug \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdebug.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qmap.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qtextstream.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qlocale.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qvariant.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qset.h \
@@ -2917,6 +2923,12 @@ Session.o: ../Tasker/Session.cpp ../Tasker/Session.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcontainerfwd.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qobject_impl.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QFile \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfile.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QDataStream \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdatastream.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QtCore \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QtCoreDepends \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qabstractanimation.h \
@@ -2928,7 +2940,6 @@ Session.o: ../Tasker/Session.cpp ../Tasker/Session.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdebug.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qhash.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qtextstream.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qlocale.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qshareddata.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qset.h \
@@ -2952,14 +2963,11 @@ Session.o: ../Tasker/Session.cpp ../Tasker/Session.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcommandlineparser.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcryptographichash.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qdatastream.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdatetime.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdeadlinetimer.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qelapsedtimer.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdir.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qfileinfo.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qfile.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdiriterator.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qeasingcurve.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qendian.h \
@@ -3106,6 +3114,12 @@ Task.o: ../Tasker/Task.cpp ../Tasker/Task.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcontainerfwd.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qobject_impl.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QFile \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfile.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QDataStream \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdatastream.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QtCore \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QtCoreDepends \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qabstractanimation.h \
@@ -3117,7 +3131,6 @@ Task.o: ../Tasker/Task.cpp ../Tasker/Task.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdebug.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qhash.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qtextstream.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qlocale.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qshareddata.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qset.h \
@@ -3141,14 +3154,11 @@ Task.o: ../Tasker/Task.cpp ../Tasker/Task.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcommandlineparser.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcryptographichash.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qdatastream.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdatetime.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdeadlinetimer.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qelapsedtimer.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdir.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qfileinfo.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qfile.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdiriterator.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qeasingcurve.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qendian.h \
@@ -3681,6 +3691,12 @@ Timer.o: ../Tasker/Timer.cpp ../Tasker/Timer.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qvector.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qpoint.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QObject \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QFile \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfile.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QDataStream \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdatastream.h \
 		../Tasker/KeyboardListener.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QtCore \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QtCoreDepends \
@@ -3692,7 +3708,6 @@ Timer.o: ../Tasker/Timer.cpp ../Tasker/Timer.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qmap.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdebug.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qtextstream.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qlocale.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qset.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcontiguouscache.h \
@@ -3715,13 +3730,10 @@ Timer.o: ../Tasker/Timer.cpp ../Tasker/Timer.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcommandlineparser.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcryptographichash.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qdatastream.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdeadlinetimer.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qelapsedtimer.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdir.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qfileinfo.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qfile.h \
-		../../Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qdiriterator.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qeasingcurve.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qendian.h \
@@ -3972,6 +3984,9 @@ TimerWindowQWidget.o: ../Tasker/TimerWindowQWidget.cpp ../Tasker/TimerWindowQWid
 		../../Qt/5.9.8/gcc_64/include/QtWidgets/qspinbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TimerWindowQWidget.o ../Tasker/TimerWindowQWidget.cpp
 
+UdataUtils.o: ../Tasker/UdataUtils.cpp ../Tasker/UdataUtils.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o UdataUtils.o ../Tasker/UdataUtils.cpp
+
 User.o: ../Tasker/User.cpp ../Tasker/User.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QVector \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qvector.h \
@@ -4031,6 +4046,12 @@ User.o: ../Tasker/User.cpp ../Tasker/User.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qcontainerfwd.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/qobject_impl.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QFile \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfile.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qfiledevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QDataStream \
+		../../Qt/5.9.8/gcc_64/include/QtCore/qdatastream.h \
 		../Tasker/Interval.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o User.o ../Tasker/User.cpp
 
@@ -4153,6 +4174,8 @@ main.o: ../Tasker/main.cpp ../Tasker/CommStatsQWidget.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QString \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QVector \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QObject \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QFile \
+		../../Qt/5.9.8/gcc_64/include/QtCore/QDataStream \
 		../Tasker/KeyboardListener.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QtCore \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QtCoreDepends \
@@ -4281,7 +4304,6 @@ main.o: ../Tasker/main.cpp ../Tasker/CommStatsQWidget.h \
 		../../Qt/5.9.8/gcc_64/include/QtGui/qguiapplication.h \
 		../../Qt/5.9.8/gcc_64/include/QtGui/qinputmethod.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QDebug \
-		../../Qt/5.9.8/gcc_64/include/QtCore/QFile \
 		../../Qt/5.9.8/gcc_64/include/QtCore/Qt \
 		../Tasker/Timer.h \
 		../../Qt/5.9.8/gcc_64/include/QtCore/QTime
