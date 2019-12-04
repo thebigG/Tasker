@@ -27,7 +27,6 @@ public slots:
     virtual void start();
     virtual void end();
     virtual void pause();
-    virtual void run();
     virtual void update();
 private:
     QString activeKeyboardPath;

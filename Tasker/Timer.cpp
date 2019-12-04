@@ -5,6 +5,7 @@
 using namespace Engine;
 Timer::Timer()
 {
+qDebug()<<"Timer() constructor: "<<currentThreadId();
 }
 /**
  * @brief Timer::Timer
@@ -32,7 +33,6 @@ Timer::~Timer()
  */
 void Timer::run()
 {
-qDebug()<<"From work thread: "<<currentThreadId();
 if(listenerType == Listener::ListenerType::keyboard)
     listener = new KeyboardListener();
 else if(listenerType == Listener::ListenerType::audio)
@@ -45,6 +45,11 @@ void Timer::timeSlot()
 {
     qDebug()<<"Time slot func :)";
     qDebug()<<"current thread id Timer timeSlot:" << QThread::currentThreadId();
+}
+//print thread id for timer
+void Timer::printThread()
+{
+qDebug()<<"From printThread: "<<currentThreadId();
 }
 QTime Timer::getRealTime(){ //not implemented
     return QTime::currentTime();

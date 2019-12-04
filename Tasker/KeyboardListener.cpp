@@ -13,30 +13,12 @@ using namespace Engine;
 
 KeyboardListener::KeyboardListener()
 {
+    #ifdef Q_OS_LINUX
     setKeyboardPathsOnLinux();
+    #endif// setKeyboardPathsOnLinux
     setObjectName(KeyboardListener::objectName);
 }
 
-/**
- * @brief KeyboardListener::run
- * This function gets called when the QThread::start() function gets called.
- * This starts a background thread that is always listening for keyboard input.
- * No keyboard data is buffered. Th only thing the keyboard input is used for is
- * to change the state of KeyboardListener, these states are Productive or Unproductive.
- *
- */
-void KeyboardListener::run()
-{
-    qDebug()<<"run() func";
-//    start();
-    for(int i =0 ;i<10;i++)
-    {
-        qDebug()<<"worker thread:" + QString::number(i);
-    }
-
-    emit signalThread();
-
-}
 //void KeyboardListener::signalThread()
 //{
 //    qDebug()<<"signaling thread...";
@@ -45,8 +27,7 @@ void KeyboardListener::run()
 void KeyboardListener::start()
 {
     qDebug()<<"start function :)";
-    qDebug()<<"current thread id keyBoardListner class:" << QThread::currentThreadId();
-//   connect(this, &KeyboardListener::signalThread, &myTimer, &Timer::timeSlot);
+    qDebug()<<"current thread id keyBoardListner class(start):" << QThread::currentThreadId();
 //    startListening();
 }
 void KeyboardListener::end()
@@ -60,7 +41,6 @@ void KeyboardListener::update()
 }
 Listener::ListenerState KeyboardListener::listen()
 {
-
     return Listener::ListenerState::productive;
 }
 /**
@@ -69,6 +49,7 @@ Listener::ListenerState KeyboardListener::listen()
  * to a keyboard device. This has been tested on Ubuntu-based distros.
  * These paths will be stored as QStrings in keyboardPaths.
  */
+#ifdef Q_OS_LINUX
 void KeyboardListener::setKeyboardPathsOnLinux(int deviceIndex)
 {
     QDir linuxDir(LNUX_DEV_PATH);
@@ -82,6 +63,7 @@ void KeyboardListener::setKeyboardPathsOnLinux(int deviceIndex)
     }
     activeKeyboardPath = LNUX_DEV_PATH + keyboardPaths.at(deviceIndex);
 }
+#endif //setKeyboardPathsOnLinux
 /**
  * @brief KeyboardListener::startListening holds the core logic of this listener.
  * This is a routine on an infinite loop that waits for keyboard input to come in.
@@ -90,6 +72,7 @@ void KeyboardListener::setKeyboardPathsOnLinux(int deviceIndex)
  * @param delay For how long do we keep the active state. The default value is 30 seconds.
  * @return
  */
+#ifdef Q_OS_LINUX
 int KeyboardListener::startListening(unsigned long int delay)
 {
     const char* dev = activeKeyboardPath.toLocal8Bit().data();
@@ -121,6 +104,7 @@ int KeyboardListener::startListening(unsigned long int delay)
     fprintf(stderr, "%s.\n", strerror(errno));
     return EXIT_FAILURE;
 }
+#endif //startListening
 /**
 
 */

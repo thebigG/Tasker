@@ -1,24 +1,24 @@
 #ifndef UDATAUTILS_H
 #define UDATAUTILS_H
+#include <QtGlobal>
 #include <Task.h>
- #include <QtGlobal>
-#endif // UDATAUTILS_H
 #ifdef Q_OS_LINUX
 #define USERDATA_DIR "."
+#define HOME_FOLDER_NAME "~"
+#define USER_FOLDER_NAME ".Tasker"
 #endif
 namespace udata {
 class UdataUtils;
-//static const QString USERDATA_FILEPATH = "";
 }
 
-class udata::UdataUtils
-{
+class udata::UdataUtils {
+private:
+    static bool firstTimer();
 public:
     UdataUtils();
     static void saveTask();
     static void loadTask(Task&);
-    static void firstTimer();
-
-
+    static int prepFiles();
 };
 
+#endif // UDATAUTILS_H
