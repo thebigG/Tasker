@@ -35,19 +35,7 @@ public:
     QVector<Engine::Listener::ListenerType>& getListeners();
     void setListeners(QVector<Engine::Listener::ListenerType> value);
 
-    /**
- * @brief operator << I'm really sorry about this ugiliness. Apparently,
- * as far as I know, C++ wants me to do it this way in order to access private members.
- * @param out
- * @param newTask
- * @return
- */
-friend QDataStream& operator<<(QDataStream &out, const udata::Task &newTask)
-{
-    out<< newTask.name;
-    out<< newTask.listeners;
-    return out;
-}
+friend QDataStream& operator<<(QDataStream &out, const udata::Task &newTask);
 /**
 * @brief operator >> I'm really sorry about this ugiliness. Apparently,
 * as far as I know, C++ wants me to do it this way in order to access private members.
@@ -55,11 +43,7 @@ friend QDataStream& operator<<(QDataStream &out, const udata::Task &newTask)
 * @param newTask
 * @return
 */
-friend QDataStream & operator>>(QDataStream &in, udata::Task &newTask)
-{
-    in >> newTask.name << newTask.listeners;
-    return in;
-}
+friend QDataStream & operator>>(QDataStream &in, udata::Task &newTask);
 
 };
 

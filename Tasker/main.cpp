@@ -29,23 +29,24 @@ using namespace Engine;
 using namespace udata;
 int main(int argc, char* argv[])
 {
-//    QApplication a(argc, argv);
-//    f = new TaskerUIMainWindowQWidget;
-//    f->show();
+    QApplication a(argc, argv);
+    f = new TaskerUIMainWindowQWidget;
+    f->show();
 //    qDebug()<<"thread id for main GUI thread:" <<QThread::currentThreadId();
+
 //Timer myTimer;
 //myTimer.start(); //calls the run() method
-//return a.exec();
-    UdataUtils::saveTask();
-    Task newTask{};
-    UdataUtils::loadTask(newTask);
-    qDebug()<<"name for task from disk:" + newTask.getName();
-//QProcess getUsername;
-//QString output;
-//getUsername.start("whoami");
-//getUsername.waitForFinished();
-//output = QString(getUsername.readAllStandardOutput());
-//qDebug()<<"ls output:" + output;
+    QProcess getUsername;
+    QString output;
+    getUsername.start("whoami");
+    getUsername.waitForFinished();
+    output = QString(getUsername.readAllStandardOutput());
+    qDebug()<<"ls output:" + output;
+return a.exec();
+//    UdataUtils::saveTask();
+//    Task newTask{};
+//    UdataUtils::loadTask(newTask);
+//    qDebug()<<"name for task from disk:" + newTask.getName();
 }
 
 

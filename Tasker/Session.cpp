@@ -50,7 +50,21 @@ QString& Session::getNotes()
 {
     return notes;
 }
+QDataStream& udata::operator<<(QDataStream &out, const udata::Session &newSession)
+{
+   out<<newSession.task<<newSession.productiveTime
+     <<newSession.unproductiveTime<<newSession.notes
+    <<newSession.media<<newSession.length;
+   return out;
+}
+QDataStream & udata::operator>>(QDataStream &in, udata::Session &newSession)
+{
 
+   in >> newSession.task>>newSession.productiveTime
+           >>newSession.unproductiveTime>>newSession.notes>>
+           newSession.media>>newSession.length;
+   return in;
+}
 void Session::setNotes(QString value)
 {
     notes = value;
