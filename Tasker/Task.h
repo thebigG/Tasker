@@ -1,26 +1,67 @@
 #ifndef TASK_H
 #define TASK_H
-#include "QString"
+#include <QString>
 #include "QVector"
 #include "QObject"
-class Task
+#include <QFile>
+#include <QDataStream>
+#include <Listener.h>
+/**
+ *
+ */
+namespace udata
+{
+class Task;
+
+}
+
+
+/**
+ * @brief The udata::Task class
+ * This class repsents a task. It is used as part of a Session.
+ */
+class udata::Task
 {
 
+private:
+    QVector<Engine::Listener::ListenerType> listeners;
+    QString name;
 public:
     Task();
-//    ~Task();
     Task(QString newName);
-    Task(QString newName, QVector<QString> listeners);
-    QString& getName() ;
+    Task(QString newName, QVector<Engine::Listener::ListenerType> listeners);
+    QString& getName();
     void setName(QString value);
-    QVector<QString>& getListeners() ;
-    void setListeners(QVector<QString> value);
+    QVector<Engine::Listener::ListenerType>& getListeners();
+    void setListeners(QVector<Engine::Listener::ListenerType> value);
 
-private:
-    QString name;
-    //The QString is just a placeholder. Will replace in future with actual listener class
-    QVector<QString> listeners;
+    /**
+ * @brief operator << I'm really sorry about this ugiliness. Apparently,
+ * as far as I know, C++ wants me to do it this way in order to access private members.
+ * @param out
+ * @param newTask
+ * @return
+ */
+friend QDataStream& operator<<(QDataStream &out, const udata::Task &newTask)
+{
+    out<< newTask.name;
+    out<< newTask.listeners;
+    return out;
+}
+/**
+* @brief operator >> I'm really sorry about this ugiliness. Apparently,
+* as far as I know, C++ wants me to do it this way in order to access private members.
+* @param in
+* @param newTask
+* @return
+*/
+friend QDataStream & operator>>(QDataStream &in, udata::Task &newTask)
+{
+    in >> newTask.name << newTask.listeners;
+    return in;
+}
 
 };
+
 
 #endif // TASK_H

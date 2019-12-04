@@ -1,16 +1,20 @@
 #include "Task.h"
 #include "QString"
 #include <QtCore>
+#include <QFile>
+#include <QDataStream>
+using namespace udata;
 Task::Task()
 {
 
 }
-Task::Task( QString newName)
+
+Task::Task(QString newName)
 {
 name = newName;
 }
 
-Task::Task(QString newName, QVector<QString> listeners)
+Task::Task(QString newName, QVector<Engine::Listener::ListenerType> listeners)
 {
 
     setName(newName);
@@ -29,14 +33,14 @@ void Task::setName(QString value)
     this->name = QString(value);
 }
 
-QVector<QString>& Task::getListeners()
+QVector<Engine::Listener::ListenerType>& Task::getListeners()
 {
     return listeners;
 }
 
-void Task::setListeners(const QVector<QString> newListeners)
+void Task::setListeners(const QVector<Engine::Listener::ListenerType> newListeners)
 {
-    for (QString l : newListeners) {
+    for (Engine::Listener::ListenerType l : newListeners) {
         listeners.push_back(l);
     }
 }

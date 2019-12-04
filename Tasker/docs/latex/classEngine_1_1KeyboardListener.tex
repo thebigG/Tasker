@@ -1,0 +1,106 @@
+\hypertarget{classEngine_1_1KeyboardListener}{}\doxysection{Engine\+::Keyboard\+Listener Class Reference}
+\label{classEngine_1_1KeyboardListener}\index{Engine::KeyboardListener@{Engine::KeyboardListener}}
+Inheritance diagram for Engine\+::Keyboard\+Listener\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classEngine_1_1KeyboardListener}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_aff092111e67e9698a9de3bca71651913}\label{classEngine_1_1KeyboardListener_aff092111e67e9698a9de3bca71651913}} 
+enum {\bfseries Keyboard\+Listener\+State} \{ {\bfseries ON}, 
+{\bfseries O\+FF}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_aeb2e11b143ccb3112804a7908fe60f13}\label{classEngine_1_1KeyboardListener_aeb2e11b143ccb3112804a7908fe60f13}} 
+virtual void {\bfseries start} ()
+\item 
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_a6881a5df55dd0da73974a303fc09c7a7}\label{classEngine_1_1KeyboardListener_a6881a5df55dd0da73974a303fc09c7a7}} 
+virtual void {\bfseries end} ()
+\item 
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_ad3ed74bc672f5519b7275edc9f634d91}\label{classEngine_1_1KeyboardListener_ad3ed74bc672f5519b7275edc9f634d91}} 
+virtual void {\bfseries pause} ()
+\item 
+virtual void \mbox{\hyperlink{classEngine_1_1KeyboardListener_af816defc5b4cdf66afc16ac90230fad5}{run}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1KeyboardListener_af816defc5b4cdf66afc16ac90230fad5}{Keyboard\+Listener\+::run}} This function gets called when the Q\+Thread\+::start() function gets called. This starts a background thread that is always listening for keyboard input. No keyboard data is buffered. Th only thing the keyboard input is used for is to change the state of \mbox{\hyperlink{classEngine_1_1KeyboardListener}{Keyboard\+Listener}}, these states are Productive or Unproductive. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_ad106366da3b1d4d87dca634b679fe9ec}\label{classEngine_1_1KeyboardListener_ad106366da3b1d4d87dca634b679fe9ec}} 
+virtual void {\bfseries update} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_a706f852b10c4f32de0b5686748ce1225}\label{classEngine_1_1KeyboardListener_a706f852b10c4f32de0b5686748ce1225}} 
+void {\bfseries signal\+Thread} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classEngine_1_1KeyboardListener_af5ff7a95af9bd3b3bea95ced7077f7f8}{start\+Listening}} (unsigned long int delay=30)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1KeyboardListener_af5ff7a95af9bd3b3bea95ced7077f7f8}{Keyboard\+Listener\+::start\+Listening}} holds the core logic of this listener. This is a routine on an infinite loop that waits for keyboard input to come in. Once it receives(detects) keyboard input, it will hold an active state for the listener for the number of sconds that is delay. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_a90ed7209fec99712fbd5c6302207579b}\label{classEngine_1_1KeyboardListener_a90ed7209fec99712fbd5c6302207579b}} 
+Listener\+::\+Listener\+State {\bfseries listen} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_add70efeba1f10a5ffc38611cf77f66fd}\label{classEngine_1_1KeyboardListener_add70efeba1f10a5ffc38611cf77f66fd}} 
+void \mbox{\hyperlink{classEngine_1_1KeyboardListener_add70efeba1f10a5ffc38611cf77f66fd}{set\+Keyboard\+Paths\+On\+Linux}} (int device\+Index=0)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classEngine_1_1KeyboardListener_add70efeba1f10a5ffc38611cf77f66fd}{Keyboard\+Listener\+::set\+Keyboard\+Paths\+On\+Linux}} This function iterates over /dev/input and finds the paths that point to a keyboard device. This has been tested on Ubuntu-\/based distros. These paths will be stored as Q\+Strings in keyboard\+Paths. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_a16db8b67d1a10f8624ab13817d471075}\label{classEngine_1_1KeyboardListener_a16db8b67d1a10f8624ab13817d471075}} 
+Q\+String {\bfseries active\+Keyboard\+Path}
+\item 
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_a7617727b9134676c11edf3a2abf1a6be}\label{classEngine_1_1KeyboardListener_a7617727b9134676c11edf3a2abf1a6be}} 
+Keyboard\+Listener\+State {\bfseries engine\+State}
+\item 
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_a60a86cbed4b84abf58d5068f6ad73c06}\label{classEngine_1_1KeyboardListener_a60a86cbed4b84abf58d5068f6ad73c06}} 
+Q\+Vector$<$ Q\+String $>$ {\bfseries keyboard\+Paths}
+\item 
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_aaa98797a47be28eaf6f461332ebae9cf}\label{classEngine_1_1KeyboardListener_aaa98797a47be28eaf6f461332ebae9cf}} 
+const Q\+String {\bfseries object\+Name} = \char`\"{}Keyboard\+Listener\char`\"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_af816defc5b4cdf66afc16ac90230fad5}\label{classEngine_1_1KeyboardListener_af816defc5b4cdf66afc16ac90230fad5}} 
+\index{Engine::KeyboardListener@{Engine::KeyboardListener}!run@{run}}
+\index{run@{run}!Engine::KeyboardListener@{Engine::KeyboardListener}}
+\doxysubsubsection{\texorpdfstring{run}{run}}
+{\footnotesize\ttfamily void Keyboard\+Listener\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [slot]}}
+
+
+
+\mbox{\hyperlink{classEngine_1_1KeyboardListener_af816defc5b4cdf66afc16ac90230fad5}{Keyboard\+Listener\+::run}} This function gets called when the Q\+Thread\+::start() function gets called. This starts a background thread that is always listening for keyboard input. No keyboard data is buffered. Th only thing the keyboard input is used for is to change the state of \mbox{\hyperlink{classEngine_1_1KeyboardListener}{Keyboard\+Listener}}, these states are Productive or Unproductive. 
+
+\mbox{\Hypertarget{classEngine_1_1KeyboardListener_af5ff7a95af9bd3b3bea95ced7077f7f8}\label{classEngine_1_1KeyboardListener_af5ff7a95af9bd3b3bea95ced7077f7f8}} 
+\index{Engine::KeyboardListener@{Engine::KeyboardListener}!startListening@{startListening}}
+\index{startListening@{startListening}!Engine::KeyboardListener@{Engine::KeyboardListener}}
+\doxysubsubsection{\texorpdfstring{startListening()}{startListening()}}
+{\footnotesize\ttfamily int Keyboard\+Listener\+::start\+Listening (\begin{DoxyParamCaption}\item[{unsigned long int}]{delay = {\ttfamily 30} }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classEngine_1_1KeyboardListener_af5ff7a95af9bd3b3bea95ced7077f7f8}{Keyboard\+Listener\+::start\+Listening}} holds the core logic of this listener. This is a routine on an infinite loop that waits for keyboard input to come in. Once it receives(detects) keyboard input, it will hold an active state for the listener for the number of sconds that is delay. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delay} & For how long do we keep the active state. The default value is 30 seconds. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Keyboard\+Listener.\+h\item 
+Keyboard\+Listener.\+cpp\end{DoxyCompactItemize}

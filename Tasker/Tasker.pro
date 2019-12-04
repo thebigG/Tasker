@@ -2,7 +2,6 @@ QT       += charts
 QT       += core gui
 QT += multimedia
 QT += testlib
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -24,14 +23,15 @@ SOURCES += \
     Commitment.cpp \
     CreateCommitmentQWidget.cpp \
     Listener.cpp \
+    KeyboardListener.cpp \
     Session.cpp \
     Task.cpp \
     StatsUtility.cpp \
     TaskerUIMainWindowQWidget.cpp \
     TempChartQWidget.cpp \
-    TestUtils.cpp \
     Timer.cpp \
     TimerWindowQWidget.cpp \
+    UdataUtils.cpp \
     User.cpp \
     main.cpp
 
@@ -41,11 +41,11 @@ HEADERS += \
     Commitment.h \
     CreateCommitmentQWidget.h \
     Listener.h \
+    KeyboardListener.h \
     Session.h \
     Task.h \
     TaskerUIMainWindowQWidget.h \
     TempChartQWidget.h \
-    TestUtils.h \
     Timer.h \
     TimerWindowQWidget.h \
     Interval.h \
@@ -53,6 +53,7 @@ HEADERS += \
     TaskerUIMainWindowQWidget.h \
     TempChartQWidget.h \
     TimerWindowQWidget.h \
+    UdataUtils.h \
     User.h
 
 FORMS += \
