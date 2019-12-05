@@ -29,33 +29,14 @@
 #ifndef AUDIOLISTENER_H
 #define AUDIOLISTENER_H
 
-#include <QAudioInput>
 #include <QAudioDeviceInfo>
+#include <QAudioInput>
 
 #include "Listener.h"
 
 namespace Engine {
-    class AudioListener;
+class AudioListener;
 }
-
-/*
-class Engine::AudioListener : public Engine::Listener {
-public:
-    AudioListener();
-    ~AudioListener() override;
-
-    void start() override;
-    void end() override;
-    void pause() override;
-    void update() override;
-
-    Listener::ListenerState listen() override;
-private:
-    QAudioInput audioSourceDevice;
-
-    double thresholdMin;
-};
-*/
 
 class Engine::AudioListener : public Engine::Listener {
     Q_OBJECT

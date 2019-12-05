@@ -26,40 +26,50 @@
  *  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-#include <QDebug>
 #include "AudioListener.h"
+#include <QDebug>
 
-using Engine::Listener;
 using Engine::AudioListener;
+using Engine::Listener;
 
-AudioListener::AudioListener() : Engine::Listener::Listener() {
-
+AudioListener::AudioListener()
+    : Listener::Listener() {
+    qDebug() << "AudioListener::AudioListener\n";
 }
 
 AudioListener::~AudioListener() {
-    Engine::Listener::~Listener();
+    Listener::~Listener();
+    qDebug() << "AudioListener::~AudioListener\n";
 }
 
 void AudioListener::run() {
-
+    qDebug() << "AudioListener::run\n";
+    // NOT NEEDED, DEPRECATED
 }
 
 void AudioListener::start() {
-
+    qDebug() << "AudioListener::start\n";
+    int status = startListening(0);
 }
 
 void AudioListener::end() {
-
+    qDebug() << "AudioListener::end\n";
 }
 
 void AudioListener::pause() {
-
+    qDebug() << "AudioListener::pause\n";
 }
 
 void AudioListener::update() {
-
+    qDebug() << "AudioListener::update\n";
 }
 
 Listener::ListenerState AudioListener::listen() {
+    qDebug() << "AudioListener::listen\n";
     return Listener::getState();
+}
+
+int AudioListener::startListening(unsigned long int delay) {
+    // see KeyboardListener, while(1) { ... }
+    return 0;
 }

@@ -1,41 +1,35 @@
 #include "UdataUtils.h"
-#include <QFile>
 #include <QDebug>
+#include <QFile>
 using namespace udata;
-UdataUtils::UdataUtils()
-{
-
+UdataUtils::UdataUtils() {
 }
- void UdataUtils::saveTask()
-{
-     Task newTask{"Music"};
+void UdataUtils::saveTask() {
+    Task newTask{ "Music" };
 
-     QString filename = "newTask.tasker";
-     QFile file(filename);
-     if(!file.open(QIODevice::WriteOnly))
-     {
-         qDebug() << "Could not open " << filename;
-         return;
-     }
-     QDataStream out(&file);
-     out.setVersion(QDataStream::Qt_5_1);
-     out<<newTask;
-     file.flush();
-     file.close();
+    QString filename = "newTask.tasker";
+    QFile file(filename);
+    if (!file.open(QIODevice::WriteOnly)) {
+        qDebug() << "Could not open " << filename;
+        return;
+    }
+    QDataStream out(&file);
+    out.setVersion(QDataStream::Qt_5_1);
+    out << newTask;
+    file.flush();
+    file.close();
 }
-void UdataUtils::loadTask(Task& newTask)
-{
+void UdataUtils::loadTask(Task &newTask) {
 
-        QString filename = "newTask.tasker";
-        QFile file(filename);
-        if(!file.open(QIODevice::ReadOnly))
-        {
-            qDebug() << "Could not open " << filename;
-            return ;
-        }
+    QString filename = "newTask.tasker";
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "Could not open " << filename;
+        return;
+    }
 
-        QDataStream in(&file);
-        in.setVersion(QDataStream::Qt_5_1);
-        in >> newTask;
-        file.close();
+    QDataStream in(&file);
+    in.setVersion(QDataStream::Qt_5_1);
+    in >> newTask;
+    file.close();
 }
