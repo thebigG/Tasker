@@ -22,35 +22,13 @@ public:
      */
     enum class ListenerType{keyboard,audio, none};    //I had to do this to make QThreads work
 
-protected:
+public:
     Listener();
     virtual ~Listener();
-<<<<<<< HEAD
-
-protected:
-    double getCheckStateDelay();
-
-    void setCheckStateDelay(double checkStateDelay);
-    void setState(Listener::ListenerState state);
-
-    // probably not needed...timer keeps track of live session time,
-    // when session ends, session will grab this data from timer
-    // to store permanently in Commitment
-    void setProductiveTime(uint64_t productiveTime);
-    void setUnproductiveTime(uint64_t unproductiveTime);
-
-public:
-=======
->>>>>>> master
     virtual void start() = 0;
     virtual void end() = 0;
     virtual void pause() = 0;
     virtual void update() = 0;
-<<<<<<< HEAD
-    virtual Listener::ListenerState listen() = 0;
-
-public:
-=======
     static ListenerType intToListenerType(int enumToInt);
     virtual Listener::ListenerState listen() = 0;
     ListenerState currentState;
@@ -58,19 +36,14 @@ public:
     void setState(ListenerState);
     ListenerState getState();
 
->>>>>>> master
     // probably not needed...timer keeps track of live session time,
     // when session ends, session will grab this data from timer
     // to store permanently in Commitment
     uint64_t getProductiveTime();
     uint64_t getUnproductiveTime();
 
-    double getSlack();
     void setSlack(double slack);
-
-    Listener::ListenerState getState();
-
-protected:
+private:
     double checkStateDelay;
     double slack;
 
@@ -80,9 +53,9 @@ protected:
     uint64_t productiveTime;
     uint64_t unproductiveTime;
 
+    double getCheckStateDelay();
+
     Listener::ListenerState state;
-<<<<<<< HEAD
-=======
 
     void setCheckStateDelay(double checkStateDelay);
 
@@ -117,7 +90,6 @@ friend QDataStream& operator>>(QDataStream &in, ListenerType &newListener)
     newListener = intToListenerType(enumValue);
     return in;
 }
->>>>>>> master
 };
 
 #endif // LISTENER_H

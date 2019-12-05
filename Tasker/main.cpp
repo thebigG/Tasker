@@ -6,6 +6,7 @@
 #include "Interval.h"
 #include "StatsUtility.h"
 #include "User.h"
+#include "AudioListener.h"
 #include <QThreadPool>
 #include <QApplication>
 #include <QDebug>
@@ -32,6 +33,9 @@ int main(int argc, char* argv[])
     QApplication a(argc, argv);
     f = new TaskerUIMainWindowQWidget;
     f->show();
+
+
+
 //    qDebug()<<"thread id for main GUI thread:" <<QThread::currentThreadId();
 
 //Timer myTimer;

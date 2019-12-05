@@ -3,12 +3,16 @@
 #include <QtCore>
 #include <errno.h>
 #include <fcntl.h>
-#include <linux/input.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <QThread>
+
+#ifdef Q_OS_LINUX
+#include <linux/input.h>
+#endif
+
 using namespace Engine;
 
 KeyboardListener::KeyboardListener()
@@ -63,6 +67,8 @@ Listener::ListenerState KeyboardListener::listen()
 
     return Listener::ListenerState::productive;
 }
+
+
 /**
  * @brief KeyboardListener::setKeyboardPathsOnLinux
  * This function iterates over /dev/input and finds the paths that point
@@ -71,6 +77,7 @@ Listener::ListenerState KeyboardListener::listen()
  */
 void KeyboardListener::setKeyboardPathsOnLinux(int deviceIndex)
 {
+    #ifdef Q_OS_LINUX
     QDir linuxDir(LNUX_DEV_PATH);
     QStringList devices = linuxDir.entryList();
     QRegularExpression re(LINUX_KEYBOARD_PATH_KEYWORD);
@@ -81,6 +88,7 @@ void KeyboardListener::setKeyboardPathsOnLinux(int deviceIndex)
         }
     }
     activeKeyboardPath = LNUX_DEV_PATH + keyboardPaths.at(deviceIndex);
+    #endif
 }
 /**
  * @brief KeyboardListener::startListening holds the core logic of this listener.
@@ -90,8 +98,10 @@ void KeyboardListener::setKeyboardPathsOnLinux(int deviceIndex)
  * @param delay For how long do we keep the active state. The default value is 30 seconds.
  * @return
  */
+
 int KeyboardListener::startListening(unsigned long int delay)
 {
+#ifdef Q_OS_LINUX
     const char* dev = activeKeyboardPath.toLocal8Bit().data();
     struct input_event ev;
     ssize_t n;
@@ -119,6 +129,7 @@ int KeyboardListener::startListening(unsigned long int delay)
     }
     fflush(stdout);
     fprintf(stderr, "%s.\n", strerror(errno));
+#endif
     return EXIT_FAILURE;
 }
 /**

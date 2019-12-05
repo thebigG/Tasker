@@ -5,20 +5,12 @@ using namespace Engine;
  * @brief Engine::Listener::Listener
  *        default constructor
  */
-<<<<<<< HEAD
-Engine::Listener::Listener() : checkStateDelay(0.0),
-                               slack(0.0),
-                               productiveTime(0.0),
-                               unproductiveTime(0.0) {
-
-=======
 Listener::Listener() {
     checkStateDelay = 0.0;
     slack = 0.0;
     currentState = Listener::ListenerState::unproductive;
     productiveTime = 0;
     unproductiveTime = 0;
->>>>>>> master
 }
 Listener::ListenerType  Listener::intToListenerType(int enumInt)
 {
@@ -39,10 +31,6 @@ Listener::~Listener() {
 }
 
 /**
-<<<<<<< HEAD
- * @brief Engine::Listener::getCheckStateDelay
- *        determines how long between one invocation of listen() and the next
-=======
  * @brief Engine::Listener::setState
  *
  * @param state ListenerState, unproductive or productive
@@ -56,62 +44,23 @@ void Listener::setState(Listener::ListenerState newState)
  * @brief Engine::Listener::getSlack
  *        returns slack value,
  *        user-defined grace "padding" between checkStateDelay
->>>>>>> master
  *
- * @return checkStateDelay, in seconds
+ * @return  slack value, in seconds
  */
-<<<<<<< HEAD
-double Engine::Listener::getCheckStateDelay() {
-    return checkStateDelay;
-=======
 double Listener::getSlack() {
     return slack;
->>>>>>> master
 }
 
 /**
- * @brief Engine::Listener::setCheckStateDelay
- *        set how long between one invocation of listen() and the next
+ * @brief Engine::Listener::getState
+ *        Returns current state of Listener, unproductive or productive
  *
- * @param checkStateDelay   checkStateDelay value, in seconds
+ * @return Engine::Listener::ListenerState::unproductive,
+ *         or
+ *         Engine::Listener::ListenerState::productive
  */
-<<<<<<< HEAD
-void Engine::Listener::setCheckStateDelay(double checkStateDelay) {
-    this->checkStateDelay = (checkStateDelay < 0.0)
-            ? this->checkStateDelay : checkStateDelay;
-}
-
-/**
- * @brief Engine::Listener::setState
- *
- * @param state ListenerState, unproductive or productive
- */
-void Engine::Listener::setState(Engine::Listener::ListenerState state) {
-    this->state = state;
-}
-
-/**
- * @brief Engine::Listener::setProductiveTime
- *        set productiveTime value
- *
- * @param productiveTime productiveTime value, in seconds
- */
-void Engine::Listener::setProductiveTime(uint64_t productiveTime) {
-    this->productiveTime = productiveTime;
-}
-
-/**
- * @brief Engine::Listener::setUnproductiveTime
- *        set unproductiveTime value
- *
- * @param unproductiveTime unproductiveTime value, in seconds
- */
-void Engine::Listener::setUnproductiveTime(uint64_t unproductiveTime) {
-    this->unproductiveTime = unproductiveTime;
-=======
 Listener::ListenerState Listener::getState() {
     return Listener::ListenerState::unproductive;
->>>>>>> master
 }
 
 /**
@@ -145,17 +94,10 @@ uint64_t Listener::getUnproductiveTime() {
 }
 
 /**
- * @brief Engine::Listener::getSlack
- *        returns slack value,
+ * @brief Engine::Listener::setSlack
+ *        sets slack value,
  *        user-defined grace "padding" between checkStateDelay
  *
-<<<<<<< HEAD
- * @return  slack value, in seconds
- */
-double Engine::Listener::getSlack() {
-    return slack;
-}
-=======
  * @param slack     slack value, in seconds
  */
 void Listener::setSlack(double slack) {
@@ -184,37 +126,23 @@ void Listener::setCheckStateDelay(double checkStateDelay) {
 }
 
 
->>>>>>> master
 
 /**
- * @brief Engine::Listener::setSlack
- *        sets slack value,
- *        user-defined grace "padding" between checkStateDelay
+ * @brief Engine::Listener::setProductiveTime
+ *        set productiveTime value
  *
- * @param slack     slack value, in seconds
+ * @param productiveTime productiveTime value, in seconds
  */
-<<<<<<< HEAD
-void Engine::Listener::setSlack(double slack) {
-    this->slack = (slack < 0.0) ? this->slack : slack;
-=======
 void Listener::setProductiveTime(uint64_t productiveTime) {
     this->productiveTime = productiveTime;
->>>>>>> master
 }
 
 /**
- * @brief Engine::Listener::getState
- *        Returns current state of Listener, unproductive or productive
+ * @brief Engine::Listener::setUnproductiveTime
+ *        set unproductiveTime value
  *
- * @return Engine::Listener::ListenerState::unproductive,
- *         or
- *         Engine::Listener::ListenerState::productive
+ * @param unproductiveTime unproductiveTime value, in seconds
  */
-<<<<<<< HEAD
-Engine::Listener::ListenerState Engine::Listener::getState() {
-    return Engine::Listener::ListenerState::unproductive;
-=======
 void Listener::setUnproductiveTime(uint64_t unproductiveTime) {
     this->unproductiveTime = unproductiveTime;
->>>>>>> master
 }

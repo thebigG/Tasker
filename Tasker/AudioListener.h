@@ -30,6 +30,7 @@
 #define AUDIOLISTENER_H
 
 #include <QAudioInput>
+#include <QAudioDeviceInfo>
 
 #include "Listener.h"
 
@@ -37,6 +38,7 @@ namespace Engine {
     class AudioListener;
 }
 
+/*
 class Engine::AudioListener : public Engine::Listener {
 public:
     AudioListener();
@@ -52,6 +54,35 @@ private:
     QAudioInput audioSourceDevice;
 
     double thresholdMin;
+};
+*/
+
+class Engine::AudioListener : public Engine::Listener {
+    Q_OBJECT
+
+public:
+    enum class AudioListenerState { ON, OFF };
+
+    AudioListener();
+    ~AudioListener() override;
+
+    int startListening(unsigned long int delay = 5); // seconds
+    Listener::ListenerState listen() override;
+
+public slots:
+    virtual void run();
+
+    virtual void start() override;
+    virtual void end() override;
+    virtual void pause() override;
+    virtual void update() override;
+
+private:
+    AudioListenerState engineState;
+    const QString objectName = "AudioListener";
+
+signals:
+    void signalThread();
 };
 
 #endif // AUDIOLISTENER_H

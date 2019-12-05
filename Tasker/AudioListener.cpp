@@ -26,39 +26,40 @@
  *  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+#include <QDebug>
 #include "AudioListener.h"
 
-Engine::AudioListener::AudioListener() : Engine::Listener::Listener(),
-                                         thresholdMin(0.0),
-                                         thresholdMax(0.0) {
+using Engine::Listener;
+using Engine::AudioListener;
+
+AudioListener::AudioListener() : Engine::Listener::Listener() {
 
 }
 
-Engine::AudioListener::~AudioListener() {
+AudioListener::~AudioListener() {
     Engine::Listener::~Listener();
 }
 
-void Engine::AudioListener::start() {
+void AudioListener::run() {
 
 }
 
-void Engine::AudioListener::end() {
+void AudioListener::start() {
 
 }
 
-void Engine::AudioListener::pause() {
+void AudioListener::end() {
 
 }
 
-void Engine::AudioListener::update() {
+void AudioListener::pause() {
 
 }
 
-Engine::Listener::ListenerState Engine::AudioListener::listen() {
-    // check if start is running
+void AudioListener::update() {
 
-    // if input is sensed above a minimum threshold,
-    // return productive
-    // else return unproductive.
-    return Engine::Listener::state;
+}
+
+Listener::ListenerState AudioListener::listen() {
+    return Listener::getState();
 }
