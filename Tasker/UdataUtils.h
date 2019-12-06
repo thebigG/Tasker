@@ -4,8 +4,9 @@
 #include <Task.h>
 #ifdef Q_OS_LINUX
 #define USERDATA_DIR "."
-#define HOME_FOLDER_NAME "~"
-#define USER_FOLDER_NAME ".Tasker"
+#define HOME_FOLDER_NAME "/home"
+#define USER_FOLDER_NAME ".TaskerData"
+#define TASKER_FILE_EXTENSION ".tasker"
 #endif
 namespace udata {
 class UdataUtils;
@@ -14,10 +15,12 @@ class UdataUtils;
 class udata::UdataUtils {
 private:
     static bool firstTimer();
+    static QString getUsername();
+
 public:
     UdataUtils();
     static void saveTask();
-    static void loadTask(Task&);
+    static void loadTask(Task &);
     static int prepFiles();
 };
 

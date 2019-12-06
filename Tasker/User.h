@@ -6,7 +6,7 @@
 #include "Commitment.h"
 
 namespace udata {
-    class User;
+class User;
 }
 
 class udata::User {
@@ -14,8 +14,9 @@ public:
     User();
     ~User();
 
-    const Commitment& getDefaultCommitment();
-    void setDefaultCommitment(const Commitment& c);
+    const Commitment &getDefaultCommitment();
+    void setDefaultCommitment(const Commitment &c);
+
 private:
     QVector<Commitment> commitments;
     int defaultCommitmentIndex;

@@ -1,13 +1,13 @@
 #ifndef LISTENER_H
 #define LISTENER_H
 
-#include <cstdint>
-#include <QThread>
-#include <QObject>
-#include <QFile>
 #include <QDataStream>
+#include <QFile>
+#include <QObject>
+#include <QThread>
+#include <cstdint>
 namespace Engine {
-    class Listener;
+class Listener;
 }
 
 class Engine::Listener : public QObject {
@@ -20,7 +20,11 @@ public:
      * @note If, for whatever reason, we decide to add ListenerType values make
      * sure that to add them BEFORE none. The none type is used for bounds checking.
      */
-    enum class ListenerType{keyboard,audio, none};    //I had to do this to make QThreads work
+    enum class ListenerType {
+        keyboard,
+        audio,
+        none
+    }; // I had to do this to make QThreads work
 
 public:
     Listener();
@@ -43,6 +47,7 @@ public:
     uint64_t getUnproductiveTime();
 
     void setSlack(double slack);
+
 private:
     double checkStateDelay;
     double slack;
@@ -65,31 +70,29 @@ private:
     void setProductiveTime(uint64_t productiveTime);
     void setUnproductiveTime(uint64_t unproductiveTime);
     /**
- * @brief operator << I'm really sorry about this ugiliness. Apparently,
- * as far as I know, C++ wants me to do it this way in order to access private members.
- * @param out
- * @param newTask
- * @return
- */
-friend QDataStream& operator<<(QDataStream &out, const ListenerType &newListener)
-{
-    out<<int(newListener);
-    return out;
-}
-/**
-* @brief operator >> I'm really sorry about this ugiliness. Apparently,
-* as far as I know, C++ wants me to do it this way in order to access private members.
-* @param in
-* @param newTask
-* @return
-*/
-friend QDataStream& operator>>(QDataStream &in, ListenerType &newListener)
-{
-    int enumValue = 0;
-    in >> enumValue;
-    newListener = intToListenerType(enumValue);
-    return in;
-}
+     * @brief operator << I'm really sorry about this ugiliness. Apparently,
+     * as far as I know, C++ wants me to do it this way in order to access private members.
+     * @param out
+     * @param newTask
+     * @return
+     */
+    friend QDataStream &operator<<(QDataStream &out, const ListenerType &newListener) {
+        out << int(newListener);
+        return out;
+    }
+    /**
+     * @brief operator >> I'm really sorry about this ugiliness. Apparently,
+     * as far as I know, C++ wants me to do it this way in order to access private members.
+     * @param in
+     * @param newTask
+     * @return
+     */
+    friend QDataStream &operator>>(QDataStream &in, ListenerType &newListener) {
+        int enumValue = 0;
+        in >> enumValue;
+        newListener = intToListenerType(enumValue);
+        return in;
+    }
 };
 
 #endif // LISTENER_H

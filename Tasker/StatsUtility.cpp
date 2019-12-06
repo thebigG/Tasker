@@ -68,7 +68,8 @@ int64_t util::StatsUtility::toMonths(int64_t seconds) {
  *
  * @return -1 if secondsTotal or secondsProductive is negative, otherwise percentage of productive time
  */
-double util::StatsUtility::calculateProductivePercentage(int64_t secondsTotal, int64_t secondsProductive) {
+double util::StatsUtility::calculateProductivePercentage(int64_t secondsTotal,
+                                                         int64_t secondsProductive) {
     double result = -1.0;
 
     if (secondsTotal >= 0 && secondsProductive >= 0 && secondsProductive <= secondsTotal) {
@@ -85,7 +86,8 @@ double util::StatsUtility::calculateProductivePercentage(int64_t secondsTotal, i
  *
  * @return -1 if secondsTotal or secondsProductive is negative, otherwise percentage of unproductive time
  */
-double util::StatsUtility::calculateUnproductivePercentage(int64_t secondsTotal, int64_t secondsUnproductive) {
+double util::StatsUtility::calculateUnproductivePercentage(int64_t secondsTotal,
+                                                           int64_t secondsUnproductive) {
     double result = -1.0;
 
     if (secondsTotal >= 0 && secondsUnproductive >= 0 && secondsUnproductive <= secondsTotal) {

@@ -1,5 +1,6 @@
 #include <KeyboardListener.h>
 #include <QRegularExpression>
+#include <QThread>
 #include <QtCore>
 #include <errno.h>
 #include <fcntl.h>
@@ -8,39 +9,33 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <QThread>
 using namespace Engine;
 
-KeyboardListener::KeyboardListener()
-{
-    #ifdef Q_OS_LINUX
+KeyboardListener::KeyboardListener() {
+#ifdef Q_OS_LINUX
     setKeyboardPathsOnLinux();
-    #endif// setKeyboardPathsOnLinux
+#endif // setKeyboardPathsOnLinux
     setObjectName(KeyboardListener::objectName);
 }
 
-//void KeyboardListener::signalThread()
+// void KeyboardListener::signalThread()
 //{
 //    qDebug()<<"signaling thread...";
 //}
 
-void KeyboardListener::start()
-{
-    qDebug()<<"start function :)";
-    qDebug()<<"current thread id keyBoardListner class(start):" << QThread::currentThreadId();
-//    startListening();
+void KeyboardListener::start() {
+    qDebug() << "start function :)";
+    qDebug() << "current thread id keyBoardListner class(start):"
+             << QThread::currentThreadId();
+    //    startListening();
 }
-void KeyboardListener::end()
-{
+void KeyboardListener::end() {
 }
-void KeyboardListener::pause()
-{
+void KeyboardListener::pause() {
 }
-void KeyboardListener::update()
-{
+void KeyboardListener::update() {
 }
-Listener::ListenerState KeyboardListener::listen()
-{
+Listener::ListenerState KeyboardListener::listen() {
     return Listener::ListenerState::productive;
 }
 /**
@@ -49,21 +44,21 @@ Listener::ListenerState KeyboardListener::listen()
  * to a keyboard device. This has been tested on Ubuntu-based distros.
  * These paths will be stored as QStrings in keyboardPaths.
  */
+void KeyboardListener::setKeyboardPathsOnLinux(int deviceIndex) {
 #ifdef Q_OS_LINUX
-void KeyboardListener::setKeyboardPathsOnLinux(int deviceIndex)
-{
     QDir linuxDir(LNUX_DEV_PATH);
     QStringList devices = linuxDir.entryList();
     QRegularExpression re(LINUX_KEYBOARD_PATH_KEYWORD);
     for (int i = 0; i < devices.length(); i++) {
         QRegularExpressionMatch myMatch = re.match(devices.at(i));
         if (myMatch.hasMatch()) {
-            keyboardPaths.append( devices.at(i));
+            keyboardPaths.append(devices.at(i));
         }
     }
     activeKeyboardPath = LNUX_DEV_PATH + keyboardPaths.at(deviceIndex);
+#endif // setKeyboardPathsOnLinux
 }
-#endif //setKeyboardPathsOnLinux
+
 /**
  * @brief KeyboardListener::startListening holds the core logic of this listener.
  * This is a routine on an infinite loop that waits for keyboard input to come in.
@@ -72,17 +67,16 @@ void KeyboardListener::setKeyboardPathsOnLinux(int deviceIndex)
  * @param delay For how long do we keep the active state. The default value is 30 seconds.
  * @return
  */
+int KeyboardListener::startListening(unsigned long int delay) {
 #ifdef Q_OS_LINUX
-int KeyboardListener::startListening(unsigned long int delay)
-{
-    const char* dev = activeKeyboardPath.toLocal8Bit().data();
+    const char *dev = activeKeyboardPath.toLocal8Bit().data();
     struct input_event ev;
     ssize_t n;
     int fd;
     fd = open(dev, O_RDONLY);
     while (1) {
         setState(ListenerState::unproductive);
-        qDebug()<<"waitting on keyboard...:unproductive state\n";
+        qDebug() << "waitting on keyboard...:unproductive state\n";
         n = read(fd, &ev, sizeof ev);
         if (n == -1) {
             if (errno == EINTR)
@@ -95,16 +89,15 @@ int KeyboardListener::startListening(unsigned long int delay)
         }
         if (ev.type == EV_KEY && ev.value >= 0 && ev.value <= 2) {
             setState(ListenerState::productive);
-            qDebug()<<"key pressed: productive state\n";
+            qDebug() << "key pressed: productive state\n";
             QThread::sleep(delay);
-
         }
     }
     fflush(stdout);
     fprintf(stderr, "%s.\n", strerror(errno));
+#endif // startListening
     return EXIT_FAILURE;
 }
-#endif //startListening
 /**
 
 */
