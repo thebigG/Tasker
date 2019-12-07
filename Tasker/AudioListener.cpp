@@ -42,14 +42,10 @@ AudioListener::~AudioListener() {
     qDebug() << "AudioListener::~AudioListener\n";
 }
 
-void AudioListener::run() {
-    qDebug() << "AudioListener::run\n";
-    // NOT NEEDED, DEPRECATED
-}
-
 void AudioListener::start() {
-    qDebug() << "AudioListener::start\n";
-    int status = startListening(0);
+    qDebug() << "AudioListener::start";
+    qDebug() << "Thread ID: " << QThread::currentThreadId() << "\n";
+    startListening();
 }
 
 void AudioListener::end() {
@@ -71,5 +67,11 @@ Listener::ListenerState AudioListener::listen() {
 
 int AudioListener::startListening(unsigned long int delay) {
     // see KeyboardListener, while(1) { ... }
-    return 0;
+    qDebug() << "AudioListener::startListening\n";
+
+    InputTest *test = new InputTest;
+
+
+
+    return EXIT_SUCCESS;
 }

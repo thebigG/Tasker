@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    AudioInfo.cpp \
     AudioListener.cpp \
     CommStatsQWidget.cpp \
     Commitment.cpp \
@@ -36,6 +37,7 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
+    AudioInfo.h \
     AudioListener.h \
     CommStatsQWidget.h \
     Commitment.h \

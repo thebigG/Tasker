@@ -45,8 +45,8 @@ void KeyboardListener::run() {
 void KeyboardListener::start() {
     qDebug() << "start function :)";
     qDebug() << "current thread id keyBoardListner class:" << QThread::currentThreadId();
-    //   connect(this, &KeyboardListener::signalThread, &myTimer, &Timer::timeSlot);
-    //    startListening();
+    //connect(this, &KeyboardListener::signalThread, &myTimer, &Timer::timeSlot);
+    startListening();
 }
 void KeyboardListener::end() {
 }

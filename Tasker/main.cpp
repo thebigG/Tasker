@@ -16,6 +16,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include "AudioInfo.h"
 static TaskerUIMainWindowQWidget *f = nullptr;
 using namespace std;
 #include <QObject>
@@ -35,6 +36,7 @@ int main(int argc, char *argv[]) {
 
     //    qDebug()<<"thread id for main GUI thread:" <<QThread::currentThreadId();
 
+    /*
     Timer myTimer(Listener::ListenerType::keyboard);
     myTimer.start(); //calls the Timer::run() method
 
@@ -49,6 +51,12 @@ int main(int argc, char *argv[]) {
     //    Task newTask{};
     //    UdataUtils::loadTask(newTask);
     //    qDebug()<<"name for task from disk:" + newTask.getName();
+    */
+
+    Timer myTimer(Listener::ListenerType::audio);
+    myTimer.start();
+
+    return a.exec();
 }
 
 void TaskerUIMainWindowQWidget::on_makeCommitmentQPushButton_clicked() {

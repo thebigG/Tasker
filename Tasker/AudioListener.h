@@ -33,6 +33,7 @@
 #include <QAudioInput>
 
 #include "Listener.h"
+#include "AudioInfo.h"
 
 namespace Engine {
 class AudioListener;
@@ -51,8 +52,6 @@ public:
     Listener::ListenerState listen() override;
 
 public slots:
-    virtual void run();
-
     virtual void start() override;
     virtual void end() override;
     virtual void pause() override;
@@ -61,7 +60,6 @@ public slots:
 private:
     AudioListenerState engineState;
     const QString objectName = "AudioListener";
-
 signals:
     void signalThread();
 };
