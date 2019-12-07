@@ -11,7 +11,7 @@ class User;
 
 class udata::User {
 public:
-    User();
+    User(QVector<Commitment>&);
     ~User();
 
     const Commitment &getDefaultCommitment();
@@ -20,9 +20,11 @@ public:
 private:
     QVector<Commitment> commitments;
     int defaultCommitmentIndex;
-
-    // username?
+    QString userName;
     // user preferences?
+
+friend QDataStream &operator>>(QDataStream &in, User &newUser);
+friend QDataStream &operator<<(QDataStream &out, User &newUser);
 };
 
 #endif // USER_H

@@ -2,6 +2,7 @@
 #define UDATAUTILS_H
 #include <QtGlobal>
 #include <Task.h>
+#include <User.h>
 #ifdef Q_OS_LINUX
 #define USERDATA_DIR "."
 #define HOME_FOLDER_NAME "/home"
@@ -12,16 +13,16 @@ namespace udata {
 class UdataUtils;
 }
 
-class udata::UdataUtils {
-private:
-    static bool firstTimer();
-    static QString getUsername();
-
-public:
-    UdataUtils();
-    static void saveTask();
-    static void loadTask(Task &);
-    static int prepFiles();
-};
+//class udata::UdataUtils {
+//private:
+//    UdataUtils();
+//    static bool firstTimer();
+//public:
+//    static void saveUserData(User&);
+//    static void loadUserData(User&);
+//    static int prepFiles();
+//    static QString getUsername();
+//    static QString userFilePath;
+//};
 
 #endif // UDATAUTILS_H

@@ -1,6 +1,7 @@
 QT       += charts
 QT       += core gui
 QT += testlib
+ QT += multimedia
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -31,7 +32,8 @@ SOURCES += \
     TimerWindowQWidget.cpp \
     UdataUtils.cpp \
     User.cpp \
-    main.cpp
+    main.cpp \
+    testaudio.cpp
 
 HEADERS += \
     CommStatsQWidget.h \
@@ -51,7 +53,8 @@ HEADERS += \
     TempChartQWidget.h \
     TimerWindowQWidget.h \
     UdataUtils.h \
-    User.h
+    User.h \
+    testaudio.h
 
 FORMS += \
     CommStatsQWidget.ui \

@@ -23,6 +23,9 @@ using namespace std;
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
+#include <QAudioDeviceInfo>
+#include <QAudioInput>
+#include <QIODevice>
 using std::cout;
 using std::endl;
 using namespace Engine;
@@ -31,16 +34,9 @@ int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     f = new TaskerUIMainWindowQWidget;
     f->show();
-    qDebug() << "thread id for main GUI thread:" << QThread::currentThreadId();
-    UdataUtils::prepFiles();
-    // Timer myTimer;
-    // myTimer.start(); //calls the run() method
-    // myTimer.printThread();
+    QIODevice::
+//    UdataUtils::prepFiles();
     return a.exec();
-    //    UdataUtils::saveTask();
-    //    Task newTask{};
-    //    UdataUtils::loadTask(newTask);
-    //    qDebug()<<"name for task from disk:" + newTask.getName();
 }
 
 void TaskerUIMainWindowQWidget::on_makeCommitmentQPushButton_clicked() {

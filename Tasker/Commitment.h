@@ -18,11 +18,11 @@ private:
     QDate dateStart;
     QDate dateEnd;
     util::Interval interval;
-    QVector<udata::Session> sessions;
+    QVector<Session> sessions;
 
 public:
     Commitment();
-    Commitment(QString newName, QDate newStart, QDate newEnd, QVector<udata::Session> newSessions);
+    Commitment(QString newName, QDate newStart, QDate newEnd, QVector<Session> newSessions);
     Commitment(QString newName, QDate newStart, QDate newEnd);
     QDate &getDateStart();
     void setDateStart(QDate value);
