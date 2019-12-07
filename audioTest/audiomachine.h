@@ -3,7 +3,7 @@
 #include <QFile>
 #include <QAudioInput>
 #include <qaudiodevice.h>
-class audioMachine:QObject
+class audioMachine: public QObject
 {
     Q_OBJECT
 public:

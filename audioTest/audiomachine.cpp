@@ -1,7 +1,7 @@
 #include "audiomachine.h"
 #include <QTimer>
 #include <QDebug>
-
+#include <QThread>
 audioMachine::audioMachine()
 {
     QAudioFormat format;
@@ -26,6 +26,8 @@ destinationFile->open( QIODevice::WriteOnly);
     connect(audio, SIGNAL(stateChanged(QAudio::State)), this, SLOT(handleStateChanged(QAudio::State)));
 
 //    QTimer::singleShot(3000, this, SLOT(stopRecording()));
+    qDebug()<<"calling start on destinationFile ";
+    qDebug()<<"audiomachine thread:"<<QThread::currentThreadId();
     audio->start(destinationFile);
     // Records audio for 3000ms
 }

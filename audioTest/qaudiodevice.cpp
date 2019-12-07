@@ -116,6 +116,7 @@ qint64  QAudioDevice::writeData(const char *data, qint64 len)
         deviceLevel = qreal(maxValue) / maxAmplitude;
         qDebug()<<"device level:"<< deviceLevel;
     }
+    qDebug()<<"thread id on write:"<<QThread::currentThreadId();
     return len;
 }
 quint32 QAudioDevice::getMin(unsigned int a, unsigned int b)
