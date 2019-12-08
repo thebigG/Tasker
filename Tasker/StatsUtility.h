@@ -4,7 +4,7 @@
 #include <cstdint>
 #define ZERO 0
 namespace util {
-    class StatsUtility;
+class StatsUtility;
 }
 
 class util::StatsUtility {

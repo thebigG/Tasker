@@ -1,13 +1,10 @@
 #include "UdataUtils.h"
 #include <QDebug>
 #include <QFile>
-#include <QDir>
 using namespace udata;
-UdataUtils::UdataUtils()
-{
+UdataUtils::UdataUtils() {
 }
-void UdataUtils::saveTask()
-{
+void UdataUtils::saveTask() {
     Task newTask{ "Music" };
 
     QString filename = "newTask.tasker";
@@ -22,8 +19,7 @@ void UdataUtils::saveTask()
     file.flush();
     file.close();
 }
-void UdataUtils::loadTask(Task& newTask)
-{
+void UdataUtils::loadTask(Task &newTask) {
 
     QString filename = "newTask.tasker";
     QFile file(filename);
@@ -31,14 +27,9 @@ void UdataUtils::loadTask(Task& newTask)
         qDebug() << "Could not open " << filename;
         return;
     }
+
     QDataStream in(&file);
     in.setVersion(QDataStream::Qt_5_1);
     in >> newTask;
     file.close();
-}
-int UdataUtils::prepFiles()
-{
-    QDir taskerFolder{};
-
-    return 0;
 }

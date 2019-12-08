@@ -12,11 +12,11 @@ Listener::Listener() {
     productiveTime = 0;
     unproductiveTime = 0;
 }
-Listener::ListenerType  Listener::intToListenerType(int enumInt)
-{
- if(int(ListenerType::keyboard)<enumInt || int(ListenerType::none)>enumInt)
-     return ListenerType(enumInt);
- return ListenerType::none;
+
+Listener::ListenerType Listener::intToListenerType(int enumInt) {
+    if (int(ListenerType::keyboard) < enumInt || int(ListenerType::none) > enumInt)
+        return ListenerType(enumInt);
+    return ListenerType::none;
 }
 /**
  * @brief Engine::Listener::~Listener
@@ -36,8 +36,7 @@ Listener::~Listener() {
  * @param state ListenerState, unproductive or productive
  */
 
-void Listener::setState(Listener::ListenerState newState)
-{
+void Listener::setState(Listener::ListenerState newState) {
     currentState = newState;
 }
 /**
@@ -121,11 +120,8 @@ double Listener::getCheckStateDelay() {
  * @param checkStateDelay   checkStateDelay value, in seconds
  */
 void Listener::setCheckStateDelay(double checkStateDelay) {
-    this->checkStateDelay = (checkStateDelay < 0.0)
-            ? this->checkStateDelay : checkStateDelay;
+    this->checkStateDelay = (checkStateDelay < 0.0) ? this->checkStateDelay : checkStateDelay;
 }
-
-
 
 /**
  * @brief Engine::Listener::setProductiveTime

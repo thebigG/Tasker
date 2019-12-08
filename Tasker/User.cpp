@@ -1,19 +1,16 @@
 #include "User.h"
 using namespace udata;
 User::User() {
-
 }
 
 User::~User() {
-
 }
 
-
-const Commitment& udata::User::getDefaultCommitment() {
+const Commitment &udata::User::getDefaultCommitment() {
     return commitments.at(defaultCommitmentIndex);
 }
 
-void udata::User::setDefaultCommitment(const Commitment& c) {
+void udata::User::setDefaultCommitment(const Commitment &c) {
     int i = 0;
     bool found = false;
 

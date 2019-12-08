@@ -2,7 +2,7 @@
 #define INTERVAL_H
 #include <cstdint>
 namespace util {
-    struct Interval;
+struct Interval;
 
 }
 
