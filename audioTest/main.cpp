@@ -11,13 +11,19 @@ Thread* t;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    qDebug()<<"run#1";
     t = new Thread();
+    qDebug()<<"run#2";
     w = new MainWindow;
 //    w.centralWidget()->layout()
 //    audioMachine x{};
 //    t.start();
     w->show();
-//    while(1)
+    while(1)
+    {
+        qDebug()<<"level:"<<t->getLevel();
+        QThread::sleep(2);
+    }
 //    {
 //        qDebug()<<"level:" <<t.level;
 //    }

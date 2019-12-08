@@ -2,6 +2,7 @@
 #include <QDebug>
 Thread::Thread()
 {
+
     connect(&thisThread, &QThread::started,this, &Thread::updateState );
     this->moveToThread(&thisThread);
     thisThread.start();
@@ -15,7 +16,9 @@ void Thread::run()
 }
 void Thread::updateState()
 {
+    qDebug()<<"updateState";
 x = new audioMachine();
+double_level = &(x->destinationFile->deviceLevel);
 //QThread::sleep(3);
 //    while(1)
     {
@@ -27,5 +30,5 @@ x = new audioMachine();
 }
 qreal Thread::getLevel()
 {
-    return x->destinationFile->deviceLevel;
+    return *double_level;
 }

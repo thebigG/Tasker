@@ -13,6 +13,7 @@ public:
 //     qreal level;
      QThread thisThread;
     void virtual run();
+    double* double_level;
     qreal getLevel();
 signals:
     void go();
