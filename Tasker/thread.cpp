@@ -30,5 +30,9 @@ level = &(x->destinationFile->deviceLevel);
 }
 qreal Thread::getLevel()
 {
+    if(level == NULL)
+    {
+        return 0.0;
+    }
     return (*level);
 }

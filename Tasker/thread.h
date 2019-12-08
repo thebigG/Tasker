@@ -14,7 +14,7 @@ public:
      QThread thisThread;
     void virtual run();
     qreal getLevel();
-    double *level;
+    double *level =0;
 signals:
     void go();
 public slots:

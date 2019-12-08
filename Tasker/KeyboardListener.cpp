@@ -15,13 +15,11 @@
 
 using namespace Engine;
 
-<<<<<<< HEAD
+
 KeyboardListener::KeyboardListener()
 {
     #ifdef Q_OS_LINUX
-=======
-KeyboardListener::KeyboardListener() {
->>>>>>> 9d53f4d699bf6b85dc04f48fad19dd4bb224f6ab
+
     setKeyboardPathsOnLinux();
     #endif// setKeyboardPathsOnLinux
     setObjectName(KeyboardListener::objectName);
@@ -35,15 +33,7 @@ KeyboardListener::KeyboardListener() {
  * to change the state of KeyboardListener, these states are Productive or Unproductive.
  *
  */
-void KeyboardListener::run() {
-    qDebug() << "run() func";
-    //    start();
-    for (int i = 0; i < 10; i++) {
-        qDebug() << "worker thread:" + QString::number(i);
-    }
 
-    emit signalThread();
-}
 // void KeyboardListener::signalThread()
 //{
 //    qDebug()<<"signaling thread...";
@@ -61,14 +51,11 @@ void KeyboardListener::pause() {
 }
 void KeyboardListener::update() {
 }
-<<<<<<< HEAD
-Listener::ListenerState KeyboardListener::listen()
-{
-=======
+
 Listener::ListenerState KeyboardListener::listen() {
 
->>>>>>> 9d53f4d699bf6b85dc04f48fad19dd4bb224f6ab
-    return Listener::ListenerState::productive;
+
+    return getState();
 }
 
 /**
@@ -91,7 +78,7 @@ void KeyboardListener::setKeyboardPathsOnLinux(int deviceIndex) {
     activeKeyboardPath = LNUX_DEV_PATH + keyboardPaths.at(deviceIndex);
 #endif
 }
-#endif //setKeyboardPathsOnLinux
+
 /**
  * @brief KeyboardListener::startListening holds the core logic of this listener.
  * This is a routine on an infinite loop that waits for keyboard input to come in.
@@ -132,7 +119,7 @@ int KeyboardListener::startListening(unsigned long int delay) {
 #endif
     return EXIT_FAILURE;
 }
-#endif //startListening
+
 /**
 
 */
