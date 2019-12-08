@@ -33,7 +33,6 @@
 #include <QAudioInput>
 
 #include "Listener.h"
-#include "AudioInfo.h"
 
 namespace Engine {
 class AudioListener;

@@ -16,7 +16,6 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-#include "AudioInfo.h"
 static TaskerUIMainWindowQWidget *f = nullptr;
 using namespace std;
 #include <QObject>

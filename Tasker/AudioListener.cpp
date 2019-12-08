@@ -69,7 +69,7 @@ int AudioListener::startListening(unsigned long int delay) {
     // see KeyboardListener, while(1) { ... }
     qDebug() << "AudioListener::startListening\n";
 
-    InputTest *test = new InputTest;
+
 
 
 
