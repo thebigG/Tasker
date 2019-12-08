@@ -33,6 +33,7 @@
 #include <QAudioInput>
 
 #include "Listener.h"
+#include "thread.h"
 
 namespace Engine {
 class AudioListener;
@@ -49,7 +50,7 @@ public:
 
     int startListening(unsigned long int delay = 5); // seconds
     Listener::ListenerState listen() override;
-
+    Thread *t;
 public slots:
     virtual void start() override;
     virtual void end() override;

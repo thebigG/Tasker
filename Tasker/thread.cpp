@@ -18,6 +18,7 @@ void Thread::updateState()
 {
 x = new audioMachine();
 level = &(x->destinationFile->deviceLevel);
+
 //QThread::sleep(3);
 //    while(1)
     {

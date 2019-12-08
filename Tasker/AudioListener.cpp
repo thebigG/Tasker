@@ -68,10 +68,11 @@ Listener::ListenerState AudioListener::listen() {
 int AudioListener::startListening(unsigned long int delay) {
     // see KeyboardListener, while(1) { ... }
     qDebug() << "AudioListener::startListening\n";
+    t = new Thread;
 
+    while (1) {
 
-
-
+    }
 
     return EXIT_SUCCESS;
 }
