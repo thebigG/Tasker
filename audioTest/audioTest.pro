@@ -19,12 +19,14 @@ SOURCES += \
     audiomachine.cpp \
     main.cpp \
     mainwindow.cpp \
-    qaudiodevice.cpp
+    qaudiodevice.cpp \
+    thread.cpp
 
 HEADERS += \
     audiomachine.h \
     mainwindow.h \
-    qaudiodevice.h
+    qaudiodevice.h \
+    thread.h
 
 FORMS += \
     mainwindow.ui
