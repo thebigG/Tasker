@@ -32,8 +32,7 @@ SOURCES += \
     TimerWindowQWidget.cpp \
     UdataUtils.cpp \
     User.cpp \
-    main.cpp \
-    testaudio.cpp
+    main.cpp
 
 HEADERS += \
     CommStatsQWidget.h \
@@ -53,8 +52,7 @@ HEADERS += \
     TempChartQWidget.h \
     TimerWindowQWidget.h \
     UdataUtils.h \
-    User.h \
-    testaudio.h
+    User.h
 
 FORMS += \
     CommStatsQWidget.ui \

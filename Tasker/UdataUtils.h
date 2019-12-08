@@ -13,16 +13,17 @@ namespace udata {
 class UdataUtils;
 }
 
-//class udata::UdataUtils {
-//private:
-//    UdataUtils();
-//    static bool firstTimer();
-//public:
-//    static void saveUserData(User&);
-//    static void loadUserData(User&);
-//    static int prepFiles();
-//    static QString getUsername();
-//    static QString userFilePath;
-//};
+class udata::UdataUtils {
+private:
+    UdataUtils();
+    static bool firstTimer();
+public:
+    static void saveUserData(User&);
+    static void loadUserData(User&);
+    static int prepFiles();
+    static QString getUsername();
+    static QString userFilePath;
+
+};
 
 #endif // UDATAUTILS_H

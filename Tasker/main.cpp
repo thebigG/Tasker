@@ -15,8 +15,6 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-static TaskerUIMainWindowQWidget *f = nullptr;
-using namespace std;
 #include <QObject>
 #include <QtCore>
 #include <UdataUtils.h>
@@ -30,12 +28,21 @@ using std::cout;
 using std::endl;
 using namespace Engine;
 using namespace udata;
+static TaskerUIMainWindowQWidget *f = nullptr;
+using namespace std;
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     f = new TaskerUIMainWindowQWidget;
+    if( UdataUtils::prepFiles() == 0)
+    {
+        qDebug()<<"files was allocated successfully";
+    }
+    else
+    {
+        qDebug()<<"prepFiles failed";
+    }
+
     f->show();
-//    QIODevice::
-//    UdataUtils::prepFiles();
     return a.exec();
 }
 
