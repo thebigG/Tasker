@@ -54,6 +54,7 @@ int main(int argc, char *argv[]) {
 
     Timer myTimer(Listener::ListenerType::audio);
     myTimer.start();
+    qDebug() << "main: << " << QThread::currentThreadId();
 
     return a.exec();
 }

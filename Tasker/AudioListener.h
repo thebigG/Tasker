@@ -33,7 +33,7 @@
 #include <QAudioInput>
 
 #include "Listener.h"
-#include "thread.h"
+#include "AudioThread.h"
 
 namespace Engine {
 class AudioListener;
@@ -48,20 +48,29 @@ public:
     AudioListener();
     ~AudioListener() override;
 
-    int startListening(unsigned long int delay = 5); // seconds
+    void setAudioThreshold(qreal audioThreshold);
+    qreal& getAudioThreshold();
+
     Listener::ListenerState listen() override;
-    Thread *t;
+
 public slots:
     virtual void start() override;
     virtual void end() override;
     virtual void pause() override;
     virtual void update() override;
 
-private:
-    AudioListenerState engineState;
-    const QString objectName = "AudioListener";
+    void cleanup();
+
 signals:
     void signalThread();
+
+private:
+    AudioListenerState audioListenerState;
+    AudioThread *audioThread;
+
+    qreal audioThreshold;
+
+    int startListening(unsigned long int delay = 0); // seconds
 };
 
 #endif // AUDIOLISTENER_H

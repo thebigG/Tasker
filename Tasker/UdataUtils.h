@@ -8,6 +8,7 @@
 #define HOME_FOLDER_NAME "~"
 #define USER_FOLDER_NAME ".Tasker"
 #endif
+
 namespace udata {
 class UdataUtils;
 // static const QString USERDATA_FILEPATH = "";
