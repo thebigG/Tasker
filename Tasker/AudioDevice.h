@@ -33,13 +33,13 @@
 #include <QIODevice>
 
 namespace Engine {
-class QAudioDevice;
+class AudioDevice;
 };
 
-class Engine::QAudioDevice : public QIODevice {
+class Engine::AudioDevice : public QIODevice {
 public:
-    QAudioDevice(const QAudioFormat newFormat);
-    ~QAudioDevice() override;
+    AudioDevice(const QAudioFormat newFormat);
+    ~AudioDevice() override;
 
     void setMinAmplitude(qreal minAmplitude);
 

@@ -57,6 +57,6 @@ qreal AudioThread::getAudioLevel() {
 
 void AudioThread::updateState() {
     audioMachine = new AudioMachine();
-    audioLevel = &(audioMachine->getQAudioDevice()->getDeviceLevel());
+    audioLevel = &(audioMachine->getAudioDevice()->getDeviceLevel());
 }
 

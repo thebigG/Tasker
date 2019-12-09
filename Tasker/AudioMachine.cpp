@@ -33,9 +33,9 @@
 #include <QTimer>
 
 using Engine::AudioMachine;
-using Engine::QAudioDevice;
+using Engine::AudioDevice;
 
-AudioMachine::AudioMachine() : qAudioDevice(nullptr), qAudioInput(nullptr) {
+AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
     QAudioFormat format;
 
     // Set up the desired format, for example:
@@ -49,8 +49,8 @@ AudioMachine::AudioMachine() : qAudioDevice(nullptr), qAudioInput(nullptr) {
     // destinationFile.setFileName("/tmp/test.raw");
     // destinationFile.open( QIODevice::WriteOnly | QIODevice::Truncate );
 
-    qAudioDevice = new QAudioDevice(format);
-    qAudioDevice->open(QIODevice::WriteOnly);
+    audioDevice = new AudioDevice(format);
+    audioDevice->open(QIODevice::WriteOnly);
 
     // assign audio device here
     QAudioDeviceInfo info = QAudioDeviceInfo::defaultInputDevice();
@@ -71,10 +71,10 @@ AudioMachine::AudioMachine() : qAudioDevice(nullptr), qAudioInput(nullptr) {
     // show device name on console
     qDebug() << info.deviceName();
 
-    qAudioInput->start(qAudioDevice);
+    qAudioInput->start(audioDevice);
 
     qAudioInput->setVolume(0.0);
-    qAudioDevice->setMinAmplitude(qAudioDevice->getDeviceLevel());
+    audioDevice->setMinAmplitude(audioDevice->getDeviceLevel());
     qAudioInput->setVolume(1.0);
 
     // Records audio for 3000ms
@@ -82,11 +82,11 @@ AudioMachine::AudioMachine() : qAudioDevice(nullptr), qAudioInput(nullptr) {
 
 AudioMachine::~AudioMachine() {
     delete qAudioInput;
-    delete qAudioDevice;
+    delete audioDevice;
 }
 
-QAudioDevice*& AudioMachine::getQAudioDevice() {
-    return qAudioDevice;
+AudioDevice*& AudioMachine::getAudioDevice() {
+    return audioDevice;
 }
 
 QAudioInput*& AudioMachine::getQAudioInput() {
@@ -118,12 +118,12 @@ void AudioMachine::handleStateChanged(QAudio::State newState) {
 
 void AudioMachine::stopRecording() {
     qAudioInput->stop();
-    qAudioDevice->close();
+    audioDevice->close();
 
     delete qAudioInput;
     qAudioInput = nullptr;
 
-    delete qAudioDevice;
-    qAudioDevice = nullptr;
+    delete audioDevice;
+    audioDevice = nullptr;
 
 }
