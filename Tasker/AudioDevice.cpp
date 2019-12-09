@@ -33,9 +33,9 @@
 #include <QtCore>
 #include <QtGlobal>
 
-using Engine::QAudioDevice;
+using Engine::AudioDevice;
 
-QAudioDevice::QAudioDevice(const QAudioFormat newFormat)
+AudioDevice::AudioDevice(const QAudioFormat newFormat)
 : qAudioFormat(newFormat), deviceLevel(0.0), minAmplitude(0.0), maxAmplitude(0) {
     switch (qAudioFormat.sampleSize()) {
     case 8:
@@ -88,38 +88,38 @@ QAudioDevice::QAudioDevice(const QAudioFormat newFormat)
     }
 }
 
-QAudioDevice::~QAudioDevice() {
+AudioDevice::~AudioDevice() {
     deviceLevel = 0.0;
     minAmplitude = 0.0;
     maxAmplitude = 0.0;
 }
 
-void QAudioDevice::setMinAmplitude(qreal minAmplitude) {
+void AudioDevice::setMinAmplitude(qreal minAmplitude) {
     this->minAmplitude = minAmplitude;
 }
 
-QAudioFormat& QAudioDevice::getQAudioFormat() {
+QAudioFormat& AudioDevice::getQAudioFormat() {
     return qAudioFormat;
 }
 
-qreal& QAudioDevice::getDeviceLevel() {
+qreal& AudioDevice::getDeviceLevel() {
     return deviceLevel;
 }
 
-qreal& QAudioDevice::getMinAmplitude() {
+qreal& AudioDevice::getMinAmplitude() {
     return minAmplitude;
 }
 
-quint32& QAudioDevice::getMaxAmplitude() {
+quint32& AudioDevice::getMaxAmplitude() {
     return maxAmplitude;
 }
 
-qint64 QAudioDevice::readData(char *data, qint64 maxlen) {
+qint64 AudioDevice::readData(char *data, qint64 maxlen) {
     // just to get warning to disappear
     return data ? maxlen : 0;
 }
 
-qint64 QAudioDevice::writeData(const char *data, qint64 len) {
+qint64 AudioDevice::writeData(const char *data, qint64 len) {
     qreal captureValue = 0.0;
 
     if (maxAmplitude) {
@@ -192,6 +192,6 @@ qint64 QAudioDevice::writeData(const char *data, qint64 len) {
     return len;
 }
 
-quint32 QAudioDevice::getMin(quint32 a, quint32 b) {
+quint32 AudioDevice::getMin(quint32 a, quint32 b) {
     return a < b ? a : b;
 }

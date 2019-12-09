@@ -95,12 +95,12 @@ int AudioListener::startListening(unsigned long int delay) {
 
     while (true) {
         if (audioThread->getAudioMachine()) {
-            if (audioThread->getAudioMachine()->getQAudioDevice()) {
+            if (audioThread->getAudioMachine()->getAudioDevice()) {
                 audioThread->getAudioMachine()->getQAudioInput()->setVolume(0.0);
-                while (audioThread->getAudioMachine()->getQAudioDevice()->getDeviceLevel() == 0.0) {
+                while (audioThread->getAudioMachine()->getAudioDevice()->getDeviceLevel() == 0.0) {
 
                 }
-                audioThread->getAudioMachine()->getQAudioDevice()->setMinAmplitude(audioThread->getAudioMachine()->getQAudioDevice()->getDeviceLevel());
+                audioThread->getAudioMachine()->getAudioDevice()->setMinAmplitude(audioThread->getAudioMachine()->getAudioDevice()->getDeviceLevel());
                 audioThread->getAudioMachine()->getQAudioInput()->setVolume(1.0);
                 break;
             }

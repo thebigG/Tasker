@@ -44,14 +44,14 @@ public:
     AudioMachine();
     ~AudioMachine();
 
-    QAudioDevice*& getQAudioDevice();
+    AudioDevice*& getAudioDevice();
     QAudioInput*& getQAudioInput();
 public slots:
     void handleStateChanged(QAudio::State);
     void stopRecording();
 
 private:
-    QAudioDevice *qAudioDevice; // Class member
+    AudioDevice *audioDevice; // Class member
     QAudioInput *qAudioInput;
 };
 
