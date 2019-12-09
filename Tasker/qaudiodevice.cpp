@@ -57,14 +57,14 @@ QAudioDevice::QAudioDevice()
 }
 qint64 QAudioDevice::readData(char *data, qint64 maxlen)
 {
-    qDebug()<<"readData begin";
-    qDebug()<<"readData end";
+//    qDebug()<<"readData begin";
+//    qDebug()<<"readData end";
     return 0;
 }
 qint64  QAudioDevice::writeData(const char *data, qint64 len)
 {
-    qDebug()<<"writeData begin";
-    qDebug()<<"writeData end";
+//    qDebug()<<"writeData begin";
+//    qDebug()<<"writeData end";
     if (maxAmplitude) {
         Q_ASSERT(format.sampleSize() % 8 == 0);
         const int channelBytes = format.sampleSize() / 8;
@@ -114,9 +114,9 @@ qint64  QAudioDevice::writeData(const char *data, qint64 len)
 
         maxValue = getMin(maxValue, maxAmplitude);
         deviceLevel = qreal(maxValue) / maxAmplitude;
-        qDebug()<<"device level:"<< deviceLevel;
+//        qDebug()<<"device level:"<< deviceLevel;
     }
-    qDebug()<<"thread id on write:"<<QThread::currentThreadId();
+//    qDebug()<<"thread id on write:"<<QThread::currentThreadId();
 
     return len;
 }

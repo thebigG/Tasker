@@ -8,6 +8,10 @@
 using namespace Engine;
 Timer::Timer() {
     qDebug() << "Timer() constructor: " << currentThreadId();
+    connect(&listenerThread, &QThread::started, this, &Timer::startTimer);
+//    this->moveToThread(&listenerThread);
+    listenerThread.start();
+
 }
 /**
  * @brief Timer::Timer
@@ -18,6 +22,10 @@ Timer::Timer() {
  */
 Timer::Timer(Listener::ListenerType newListenerType) {
     listenerType = newListenerType;
+    connect(&listenerThread, &QThread::started, this, &Timer::startTimer);
+    this->moveToThread(&listenerThread);
+    listenerThread.start();
+
 }
 Timer::~Timer() {
     delete listener;
@@ -31,7 +39,22 @@ Timer::~Timer() {
  *The code in &Listener::start, which is the ACTUAL code that listents to hardware,
  * does not run until the startListner() signal is sent.
  */
-void Timer::run() {
+//void Timer::run() {
+//    qDebug() << "From work thread: " << currentThreadId();
+
+//    if (listenerType == Listener::ListenerType::keyboard) {
+//        listener = new KeyboardListener();
+//    } else if (listenerType == Listener::ListenerType::audio) {
+//        listener = new AudioListener();
+//    }
+
+//    connect(this, &Timer::startListener, listener, &Listener::start);
+//    emit startListener();
+//    int i =0;
+//    exec();
+//}
+void Timer::startTimer()
+{
     qDebug() << "From work thread: " << currentThreadId();
 
     if (listenerType == Listener::ListenerType::keyboard) {
@@ -39,10 +62,18 @@ void Timer::run() {
     } else if (listenerType == Listener::ListenerType::audio) {
         listener = new AudioListener();
     }
-
     connect(this, &Timer::startListener, listener, &Listener::start);
     emit startListener();
-    exec();
+    int goal = 100;
+    time.start();
+    qDebug()<<"productive time"<< currentProductiveTime;
+    while(currentProductiveTime<goal)
+    {
+        currentProductiveTime += time.elapsed();
+        qDebug()<<"productive time"<< currentProductiveTime;
+    }
+    qDebug()<<"goal was reached :)";
+    int i =0;
 }
 
 void Timer::timeSlot() {

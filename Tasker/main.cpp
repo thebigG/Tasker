@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
 
    MainUI::getInstance()->show();
     Timer myTimer(Listener::ListenerType::audio);
-    myTimer.start();
+//    myTimer.start();
 
     return a.exec();
 }

@@ -18,14 +18,14 @@ class Timer;
 class Engine::Timer : public QThread {
     Q_OBJECT
 private:
-    QTime currentProductiveTime;
-    QTime currentUnproductiveTime;
+    int currentProductiveTime;
+    int currentUnproductiveTime;
     udata::Session currentSession;
-    QTime startTime;
+    QTime time;
     Listener *listener;
     const QString objectName = "Timer";
     QThread listenerThread;
-    virtual void run();
+//    virtual void run();
 
 public:
     Timer();
@@ -42,6 +42,7 @@ public:
     Listener::ListenerType listenerType;
     QTime setProductiveTime(QTime *);
     QTime setRealTime(QTime *);
+    void startTimer() ;
 public slots:
     void timeSlot();
 signals:
