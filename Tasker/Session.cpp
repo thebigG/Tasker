@@ -16,6 +16,7 @@ Task &Session::getTask() {
     return task;
 }
 
+
 void Session::setTask(Task value) {
     task = value;
 }

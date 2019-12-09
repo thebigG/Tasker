@@ -36,6 +36,7 @@ SOURCES += \
     User.cpp \
     audiomachine.cpp \
     main.cpp \
+    mainui.cpp \
     qaudiodevice.cpp \
     thread.cpp
 
@@ -60,6 +61,7 @@ HEADERS += \
     UdataUtils.h \
     User.h \
     audiomachine.h \
+    mainui.h \
     qaudiodevice.h \
     thread.h
 

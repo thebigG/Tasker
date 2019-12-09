@@ -22,15 +22,15 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
+#include <mainui.h>
 using std::cout;
 using std::endl;
 using namespace Engine;
 using namespace udata;
-static TaskerUIMainWindowQWidget *f = nullptr;
 using namespace std;
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-    f = new TaskerUIMainWindowQWidget;
+
     if( UdataUtils::prepFiles() == 0)
     {
         qDebug()<<"files was allocated successfully";
@@ -39,31 +39,12 @@ int main(int argc, char *argv[]) {
     {
         qDebug()<<"prepFiles failed";
     }
+    MainUI::getInstance()->show();
     qDebug()<<"user name:"<<User::getInstance()->getUsername();
     Commitment c = User::getInstance()->getCommitments().at(0);
     c.getName();
     qDebug()<<"commitment on disk:"<<c.getName();
-    f->show();
-
-    //    qDebug()<<"thread id for main GUI thread:" <<QThread::currentThreadId();
-
-    /*
-    Timer myTimer(Listener::ListenerType::keyboard);
-    myTimer.start(); //calls the Timer::run() method
-
-    QProcess getUsername;
-    QString output;
-    getUsername.start("whoami");
-    getUsername.waitForFinished();
-    output = QString(getUsername.readAllStandardOutput());
-    qDebug() << "ls output:" + output;
-    return a.exec();
-    //    UdataUtils::saveTask();
-    //    Task newTask{};
-    //    UdataUtils::loadTask(newTask);
-    //    qDebug()<<"name for task from disk:" + newTask.getName();
-    */
-
+    MainUI::getInstance()->show();
 //    Timer myTimer(Listener::ListenerType::audio);
 //    myTimer.start();
 
@@ -71,8 +52,8 @@ int main(int argc, char *argv[]) {
 }
 
 void TaskerUIMainWindowQWidget::on_makeCommitmentQPushButton_clicked() {
-    f->hide();
-    f->getCreateCommitment()->show();
+    MainUI::getInstance()->hide();
+    MainUI::getInstance()->getCreateCommitment()->show();
 }
 
 void CreateCommitmentQWidget::on_createCommitmentQPushButton_clicked() {
@@ -81,7 +62,7 @@ void CreateCommitmentQWidget::on_createCommitmentQPushButton_clicked() {
 
     Commitment temp{this->getCommitmentName(), this->getStartDate(),  this->getEndDate(), this->getInterval()};
     udata::User::getInstance()->addCommitment(temp);
-    CommStatsQWidget *wc = f->getCommStats();
+    CommStatsQWidget *wc = MainUI::getInstance()->getCommStats();
     wc->show();
 }
 
@@ -90,22 +71,22 @@ void CreateCommitmentQWidget::on_backQPushButton_clicked() {
     this->hide();
 
 
-    f->show();
+    MainUI::getInstance()->show();
 }
 
 void CommStatsQWidget::on_addCommitmentQCommandLinkButton_clicked() {
     this->hide();
-    CreateCommitmentQWidget *cc = f->getCreateCommitment();
+    CreateCommitmentQWidget *cc = MainUI::getInstance()->getCreateCommitment();
     cc->show();
 }
 
 void TaskerUIMainWindowQWidget::on_quickSessionQPushButton_clicked() {
     this->hide();
-    TimerWindowQWidget *tw = f->getTimerWindow();
+    TimerWindowQWidget *tw = MainUI::getInstance()->getTimerWindow();
     tw->show();
 }
 
 void TimerWindowQWidget::on_backQPushButton_clicked() {
     this->hide();
-    f->show();
+    MainUI::getInstance()->show();
 }
