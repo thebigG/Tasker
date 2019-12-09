@@ -3053,6 +3053,13 @@ CreateCommitmentQWidget.o: ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Creat
 		../../Qt/5.12.6/gcc_64/include/QtCore/qdatetime.h \
 		../../Qt/5.12.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
 		../Tasker/Interval.h \
+		../Tasker/CommStatsQWidget.h \
+		../Tasker/mainui.h \
+		../Tasker/TaskerUIMainWindowQWidget.h \
+		../Tasker/TimerWindowQWidget.h \
+		../../Qt/5.12.6/gcc_64/include/QtWidgets/QFrame \
+		../../Qt/5.12.6/gcc_64/include/QtWidgets/QPushButton \
+		../../Qt/5.12.6/gcc_64/include/QtWidgets/qpushbutton.h \
 		ui_CreateCommitmentQWidget.h \
 		../Tasker/StatsUtility.h \
 		../Tasker/User.h \
@@ -3948,7 +3955,8 @@ TaskerUIMainWindowQWidget.o: ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/T
 		../Tasker/Listener.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/QFile \
 		../../Qt/5.12.6/gcc_64/include/QtCore/QThread \
-		../../Qt/5.12.6/gcc_64/include/QtCore/qthread.h
+		../../Qt/5.12.6/gcc_64/include/QtCore/qthread.h \
+		../Tasker/mainui.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TaskerUIMainWindowQWidget.o ../Tasker/TaskerUIMainWindowQWidget.cpp
 
 TempChartQWidget.o: ../Tasker/TempChartQWidget.cpp ../Tasker/TempChartQWidget.h \
@@ -5019,7 +5027,8 @@ main.o: ../Tasker/main.cpp ../Tasker/AudioListener.h \
 		../Tasker/Timer.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/QTime \
 		../Tasker/UdataUtils.h \
-		../../Qt/5.12.6/gcc_64/include/QtCore/QtGlobal
+		../../Qt/5.12.6/gcc_64/include/QtCore/QtGlobal \
+		../Tasker/mainui.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Tasker/main.cpp
 
 mainui.o: ../Tasker/mainui.cpp ../Tasker/mainui.h \

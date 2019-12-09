@@ -15,8 +15,8 @@ public:
     ~TimerWindowQWidget();
 
 private slots:
-    void on_backQPushButton_clicked();
-
+//    void on_backQPushButton_clicked();
+    void backButtonSlot();
     void on_timerWindowQFrame_destroyed();
 
 private:

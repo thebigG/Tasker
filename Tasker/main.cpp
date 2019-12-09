@@ -44,49 +44,9 @@ int main(int argc, char *argv[]) {
     Commitment c = User::getInstance()->getCommitments().at(0);
     c.getName();
     qDebug()<<"commitment on disk:"<<c.getName();
-    MainUI::getInstance()->show();
+   MainUI::getInstance()->show();
 //    Timer myTimer(Listener::ListenerType::audio);
 //    myTimer.start();
 
     return a.exec();
-}
-
-void TaskerUIMainWindowQWidget::on_makeCommitmentQPushButton_clicked() {
-    MainUI::getInstance()->hide();
-    MainUI::getInstance()->getCreateCommitment()->show();
-}
-
-void CreateCommitmentQWidget::on_createCommitmentQPushButton_clicked() {
-    this->hide();
-//    QVector<Commitment> commitments =  udata::User::getInstance()->getCommitments();
-
-    Commitment temp{this->getCommitmentName(), this->getStartDate(),  this->getEndDate(), this->getInterval()};
-    udata::User::getInstance()->addCommitment(temp);
-    CommStatsQWidget *wc = MainUI::getInstance()->getCommStats();
-    wc->show();
-}
-
-void CreateCommitmentQWidget::on_backQPushButton_clicked() {
-
-    this->hide();
-
-
-    MainUI::getInstance()->show();
-}
-
-void CommStatsQWidget::on_addCommitmentQCommandLinkButton_clicked() {
-    this->hide();
-    CreateCommitmentQWidget *cc = MainUI::getInstance()->getCreateCommitment();
-    cc->show();
-}
-
-void TaskerUIMainWindowQWidget::on_quickSessionQPushButton_clicked() {
-    this->hide();
-    TimerWindowQWidget *tw = MainUI::getInstance()->getTimerWindow();
-    tw->show();
-}
-
-void TimerWindowQWidget::on_backQPushButton_clicked() {
-    this->hide();
-    MainUI::getInstance()->show();
 }

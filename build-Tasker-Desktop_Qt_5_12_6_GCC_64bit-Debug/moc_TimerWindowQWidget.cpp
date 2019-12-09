@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_TimerWindowQWidget_t {
     QByteArrayData data[4];
-    char stringdata0[78];
+    char stringdata0[66];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,13 +32,13 @@ struct qt_meta_stringdata_TimerWindowQWidget_t {
 static const qt_meta_stringdata_TimerWindowQWidget_t qt_meta_stringdata_TimerWindowQWidget = {
     {
 QT_MOC_LITERAL(0, 0, 18), // "TimerWindowQWidget"
-QT_MOC_LITERAL(1, 19, 26), // "on_backQPushButton_clicked"
-QT_MOC_LITERAL(2, 46, 0), // ""
-QT_MOC_LITERAL(3, 47, 30) // "on_timerWindowQFrame_destroyed"
+QT_MOC_LITERAL(1, 19, 14), // "backButtonSlot"
+QT_MOC_LITERAL(2, 34, 0), // ""
+QT_MOC_LITERAL(3, 35, 30) // "on_timerWindowQFrame_destroyed"
 
     },
-    "TimerWindowQWidget\0on_backQPushButton_clicked\0"
-    "\0on_timerWindowQFrame_destroyed"
+    "TimerWindowQWidget\0backButtonSlot\0\0"
+    "on_timerWindowQFrame_destroyed"
 };
 #undef QT_MOC_LITERAL
 
@@ -72,7 +72,7 @@ void TimerWindowQWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         auto *_t = static_cast<TimerWindowQWidget *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_backQPushButton_clicked(); break;
+        case 0: _t->backButtonSlot(); break;
         case 1: _t->on_timerWindowQFrame_destroyed(); break;
         default: ;
         }

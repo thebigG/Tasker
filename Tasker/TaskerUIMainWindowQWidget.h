@@ -30,9 +30,8 @@ public:
     Ui::TaskerUIMainWindowQWidget *ui;
 
 private slots:
-    void on_makeCommitmentQPushButton_clicked();
-    void on_quickSessionQPushButton_clicked();
-
+    void makeCommitmentButtonSlot();
+    void quickSessionButtonSlot();
     void on_welcomeQFrame_destroyed();
 
 private:

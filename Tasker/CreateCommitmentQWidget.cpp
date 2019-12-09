@@ -1,14 +1,25 @@
 #include "CreateCommitmentQWidget.h"
+#include <CommStatsQWidget.h>
+#include <mainui.h>
 #include "ui_CreateCommitmentQWidget.h"
 #include <StatsUtility.h>
 #include <User.h>
 #include <QDebug>
+#include <Commitment.h>
+#include <QObject>
 using namespace util;
+using namespace udata;
 CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
 : QWidget(parent), ui(new Ui::CreateCommitmentQWidget) {
     ui->setupUi(this);
     validator = new QIntValidator(0, 999, this);
     ui->qtyQLineEdit->setValidator(validator);
+    connect(this->getUI()->createCommitmentQPushButton,
+            &QPushButton::clicked, this,
+            &CreateCommitmentQWidget::createCommitmentButtonSlot );
+    connect(this->getUI()->backQPushButton,
+            &QPushButton::clicked, this,
+            &CreateCommitmentQWidget::backButtonSlot );
 }
 
 CreateCommitmentQWidget::~CreateCommitmentQWidget() {
@@ -18,7 +29,20 @@ Ui::CreateCommitmentQWidget* CreateCommitmentQWidget::getUI()
 {
     return ui;
 }
-
+void CreateCommitmentQWidget::backButtonSlot()
+{
+    this->hide();
+    MainUI::getInstance()->show();
+}
+void  CreateCommitmentQWidget::createCommitmentButtonSlot()
+{
+        this->hide();
+    ////    QVector<Commitment> commitments =  udata::User::getInstance()->getCommitments();
+       Commitment temp{this->getCommitmentName(), this->getStartDate(),  this->getEndDate(), this->getInterval()};
+        udata::User::getInstance()->addCommitment(temp);
+        CommStatsQWidget *wc = MainUI::getInstance()->getCommStats();
+        wc->show();
+}
 
 QCheckBox *CreateCommitmentQWidget::getKeyboardCheckBox() {
     return ui->checkKeyboardQCheckBox;

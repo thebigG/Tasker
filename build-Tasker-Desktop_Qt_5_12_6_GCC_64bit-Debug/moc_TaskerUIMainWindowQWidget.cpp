@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_TaskerUIMainWindowQWidget_t {
     QByteArrayData data[5];
-    char stringdata0[126];
+    char stringdata0[102];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,15 +32,15 @@ struct qt_meta_stringdata_TaskerUIMainWindowQWidget_t {
 static const qt_meta_stringdata_TaskerUIMainWindowQWidget_t qt_meta_stringdata_TaskerUIMainWindowQWidget = {
     {
 QT_MOC_LITERAL(0, 0, 25), // "TaskerUIMainWindowQWidget"
-QT_MOC_LITERAL(1, 26, 36), // "on_makeCommitmentQPushButton_..."
-QT_MOC_LITERAL(2, 63, 0), // ""
-QT_MOC_LITERAL(3, 64, 34), // "on_quickSessionQPushButton_cl..."
-QT_MOC_LITERAL(4, 99, 26) // "on_welcomeQFrame_destroyed"
+QT_MOC_LITERAL(1, 26, 24), // "makeCommitmentButtonSlot"
+QT_MOC_LITERAL(2, 51, 0), // ""
+QT_MOC_LITERAL(3, 52, 22), // "quickSessionButtonSlot"
+QT_MOC_LITERAL(4, 75, 26) // "on_welcomeQFrame_destroyed"
 
     },
     "TaskerUIMainWindowQWidget\0"
-    "on_makeCommitmentQPushButton_clicked\0"
-    "\0on_quickSessionQPushButton_clicked\0"
+    "makeCommitmentButtonSlot\0\0"
+    "quickSessionButtonSlot\0"
     "on_welcomeQFrame_destroyed"
 };
 #undef QT_MOC_LITERAL
@@ -77,8 +77,8 @@ void TaskerUIMainWindowQWidget::qt_static_metacall(QObject *_o, QMetaObject::Cal
         auto *_t = static_cast<TaskerUIMainWindowQWidget *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_makeCommitmentQPushButton_clicked(); break;
-        case 1: _t->on_quickSessionQPushButton_clicked(); break;
+        case 0: _t->makeCommitmentButtonSlot(); break;
+        case 1: _t->quickSessionButtonSlot(); break;
         case 2: _t->on_welcomeQFrame_destroyed(); break;
         default: ;
         }

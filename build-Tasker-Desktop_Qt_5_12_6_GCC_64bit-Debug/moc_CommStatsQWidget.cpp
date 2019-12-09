@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CommStatsQWidget_t {
     QByteArrayData data[4];
-    char stringdata0[86];
+    char stringdata0[67];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,13 +32,12 @@ struct qt_meta_stringdata_CommStatsQWidget_t {
 static const qt_meta_stringdata_CommStatsQWidget_t qt_meta_stringdata_CommStatsQWidget = {
     {
 QT_MOC_LITERAL(0, 0, 16), // "CommStatsQWidget"
-QT_MOC_LITERAL(1, 17, 42), // "on_addCommitmentQCommandLinkB..."
-QT_MOC_LITERAL(2, 60, 0), // ""
-QT_MOC_LITERAL(3, 61, 24) // "on_statsQFrame_destroyed"
+QT_MOC_LITERAL(1, 17, 23), // "addCommitmentButtonSlot"
+QT_MOC_LITERAL(2, 41, 0), // ""
+QT_MOC_LITERAL(3, 42, 24) // "on_statsQFrame_destroyed"
 
     },
-    "CommStatsQWidget\0"
-    "on_addCommitmentQCommandLinkButton_clicked\0"
+    "CommStatsQWidget\0addCommitmentButtonSlot\0"
     "\0on_statsQFrame_destroyed"
 };
 #undef QT_MOC_LITERAL
@@ -73,7 +72,7 @@ void CommStatsQWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         auto *_t = static_cast<CommStatsQWidget *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_addCommitmentQCommandLinkButton_clicked(); break;
+        case 0: _t->addCommitmentButtonSlot(); break;
         case 1: _t->on_statsQFrame_destroyed(); break;
         default: ;
         }
