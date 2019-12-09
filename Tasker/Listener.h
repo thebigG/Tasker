@@ -48,6 +48,9 @@ public:
 
     void setSlack(double slack);
 
+protected:
+    Listener::ListenerState state;
+
 private:
     double checkStateDelay;
     double slack;
@@ -57,8 +60,6 @@ private:
     // to store permanently in Commitment
     uint64_t productiveTime;
     uint64_t unproductiveTime;
-
-    Listener::ListenerState state;
 
     double getCheckStateDelay();
 

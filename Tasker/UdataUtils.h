@@ -9,6 +9,7 @@
 #define USER_FOLDER_NAME ".TaskerData"
 #define TASKER_FILE_EXTENSION ".tasker"
 #endif
+
 namespace udata {
 class UdataUtils;
 // static const QString USERDATA_FILEPATH = "";

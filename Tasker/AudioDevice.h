@@ -1,9 +1,9 @@
 /**
- *  @file       AudioListener.h
- *  @brief      Header file for Engine::AudioListener
+ *  @file       AudioDevice.h
+ *  @brief      Header file for Engine::AudioDevice
  *
  *  @author     Gemuele (Gem) Aludino
- *  @date       25 Nov 2019
+ *  @date       09 Dec 2019
  */
 /**
  *  Copyright © 2019 Gemuele Aludino
@@ -26,51 +26,41 @@
  *  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-#ifndef AUDIOLISTENER_H
-#define AUDIOLISTENER_H
+#ifndef AUDIODEVICE_H
+#define AUDIODEVICE_H
 
-#include <QAudioDeviceInfo>
-#include <QAudioInput>
-
-#include "Listener.h"
-#include "AudioThread.h"
+#include <QAudioFormat>
+#include <QIODevice>
 
 namespace Engine {
-class AudioListener;
-}
-
-class Engine::AudioListener : public Engine::Listener {
-    Q_OBJECT
-
-public:
-    enum class AudioListenerState { ON, OFF };
-
-    AudioListener();
-    ~AudioListener() override;
-
-    void setAudioThreshold(qreal audioThreshold);
-    qreal& getAudioThreshold();
-
-    Listener::ListenerState listen() override;
-
-public slots:
-    virtual void start() override;
-    virtual void end() override;
-    virtual void pause() override;
-    virtual void update() override;
-
-    void cleanup();
-
-signals:
-    void signalThread();
-
-private:
-    AudioListenerState audioListenerState;
-    AudioThread *audioThread;
-
-    qreal audioThreshold;
-
-    int startListening(unsigned long int delay = 0); // seconds
+class AudioDevice;
 };
 
-#endif // AUDIOLISTENER_H
+class Engine::AudioDevice : public QIODevice {
+public:
+    AudioDevice(const QAudioFormat newFormat);
+    ~AudioDevice() override;
+
+    void setMinAmplitude(qreal minAmplitude);
+
+    QAudioFormat& getQAudioFormat();
+    qreal& getDeviceLevel();
+    qreal& getMinAmplitude();
+    quint32& getMaxAmplitude();
+
+    static quint32 getMin(quint32 a, quint32 b);
+
+public slots:
+    qint64 readData(char *data, qint64 maxlen) override;
+    qint64 writeData(const char *data, qint64 len) override;
+
+private:
+    QAudioFormat qAudioFormat;
+
+    qreal deviceLevel;
+    qreal minAmplitude;
+
+    quint32 maxAmplitude;
+};
+
+#endif // AUDIODEVICE_H

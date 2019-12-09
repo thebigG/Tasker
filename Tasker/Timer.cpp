@@ -6,6 +6,7 @@
 #include <QTime>
 
 using namespace Engine;
+
 Timer::Timer() {
     qDebug() << "Timer() constructor: " << currentThreadId();
     connect(&listenerThread, &QThread::started, this, &Timer::startTimer);
