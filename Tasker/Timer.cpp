@@ -6,6 +6,7 @@
 #include <QTime>
 
 using namespace Engine;
+
 Timer::Timer() {
     qDebug() << "Timer() constructor: " << currentThreadId();
 }
@@ -32,7 +33,7 @@ Timer::~Timer() {
  * does not run until the startListner() signal is sent.
  */
 void Timer::run() {
-    qDebug() << "From work thread: " << currentThreadId();
+    qDebug() << "From work thread (run): " << currentThreadId();
 
     if (listenerType == Listener::ListenerType::keyboard) {
         listener = new KeyboardListener();

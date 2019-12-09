@@ -1,9 +1,9 @@
 /**
- *  @file       AudioListener.h
- *  @brief      Header file for Engine::AudioListener
+ *  @file       AudioThread.h
+ *  @brief      Header file for Engine::AudioThread
  *
  *  @author     Gemuele (Gem) Aludino
- *  @date       25 Nov 2019
+ *  @date       09 Dec 2019
  */
 /**
  *  Copyright © 2019 Gemuele Aludino
@@ -26,51 +26,38 @@
  *  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-#ifndef AUDIOLISTENER_H
-#define AUDIOLISTENER_H
+#ifndef AUDIOTHREAD_H
+#define AUDIOTHREAD_H
 
-#include <QAudioDeviceInfo>
-#include <QAudioInput>
+#include <QObject>
+#include <QThread>
 
-#include "Listener.h"
-#include "AudioThread.h"
+#include "AudioMachine.h"
 
 namespace Engine {
-class AudioListener;
+class AudioThread;
 }
 
-class Engine::AudioListener : public Engine::Listener {
+class Engine::AudioThread : public QObject {
     Q_OBJECT
 
 public:
-    enum class AudioListenerState { ON, OFF };
+    AudioThread();
+    // Need alternative constructor for audio device type
+    ~AudioThread();
 
-    AudioListener();
-    ~AudioListener() override;
-
-    void setAudioThreshold(qreal audioThreshold);
-    qreal& getAudioThreshold();
-
-    Listener::ListenerState listen() override;
+    QThread& getQThread();
+    AudioMachine*& getAudioMachine();
+    qreal getAudioLevel();
 
 public slots:
-    virtual void start() override;
-    virtual void end() override;
-    virtual void pause() override;
-    virtual void update() override;
-
-    void cleanup();
-
-signals:
-    void signalThread();
+    void updateState();
 
 private:
-    AudioListenerState audioListenerState;
-    AudioThread *audioThread;
+    QThread qThread;
 
-    qreal audioThreshold;
-
-    int startListening(unsigned long int delay = 0); // seconds
+    AudioMachine *audioMachine;
+    double *audioLevel;
 };
 
-#endif // AUDIOLISTENER_H
+#endif // AUDIOTHREAD_H

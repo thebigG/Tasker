@@ -1,9 +1,9 @@
 /**
- *  @file       AudioListener.h
- *  @brief      Header file for Engine::AudioListener
+ *  @file       AudioThread.cpp
+ *  @brief      Source file for Engine::AudioThread
  *
  *  @author     Gemuele (Gem) Aludino
- *  @date       25 Nov 2019
+ *  @date       09 Dec 2019
  */
 /**
  *  Copyright © 2019 Gemuele Aludino
@@ -26,51 +26,37 @@
  *  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-#ifndef AUDIOLISTENER_H
-#define AUDIOLISTENER_H
-
-#include <QAudioDeviceInfo>
-#include <QAudioInput>
-
-#include "Listener.h"
 #include "AudioThread.h"
+#include <QDebug>
 
-namespace Engine {
-class AudioListener;
+using Engine::AudioThread;
+using Engine::AudioMachine;
+
+AudioThread::AudioThread() : audioMachine(nullptr), audioLevel(nullptr) {
+    connect(&qThread, &QThread::started, this, &AudioThread::updateState);
+
+    this->moveToThread(&qThread);
+    qThread.start();
 }
 
-class Engine::AudioListener : public Engine::Listener {
-    Q_OBJECT
+AudioThread::~AudioThread() {
+    delete audioMachine;
+}
 
-public:
-    enum class AudioListenerState { ON, OFF };
+QThread& AudioThread::getQThread() {
+    return qThread;
+}
 
-    AudioListener();
-    ~AudioListener() override;
+AudioMachine*& AudioThread::getAudioMachine() {
+    return audioMachine;
+}
 
-    void setAudioThreshold(qreal audioThreshold);
-    qreal& getAudioThreshold();
+qreal AudioThread::getAudioLevel() {
+    return audioLevel == nullptr ? 0.0 : (*audioLevel);
+}
 
-    Listener::ListenerState listen() override;
+void AudioThread::updateState() {
+    audioMachine = new AudioMachine();
+    audioLevel = &(audioMachine->getQAudioDevice()->getDeviceLevel());
+}
 
-public slots:
-    virtual void start() override;
-    virtual void end() override;
-    virtual void pause() override;
-    virtual void update() override;
-
-    void cleanup();
-
-signals:
-    void signalThread();
-
-private:
-    AudioListenerState audioListenerState;
-    AudioThread *audioThread;
-
-    qreal audioThreshold;
-
-    int startListening(unsigned long int delay = 0); // seconds
-};
-
-#endif // AUDIOLISTENER_H
