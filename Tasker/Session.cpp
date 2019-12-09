@@ -11,8 +11,18 @@ Session::Session(Task newTask, long long int goalLength)
         length = ZERO;
     }
 }
+/**
+ * @brief Session::Session This constructor is useful when the user creates a commitment without
+ * a session. This situation usually happens when creating a commitment for the very first time.
+ * @param newTask The task of this "empty" session.
+ * @note Be aware that different sessions have different tasks.
+ */
+Session::Session(Task newTask): task{newTask}
+{
+    length =  -1;
+}
 
-Task &Session::getTask() {
+const Task &Session::getTask() const {
     return task;
 }
 

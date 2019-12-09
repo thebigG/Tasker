@@ -9,7 +9,8 @@ class udata::Session {
 public:
     Session();
     Session(Task newTask, long long goalLength);
-    Task &getTask();
+    Session(Task);
+    const Task &getTask() const;
     void setTask(Task value);
 
     long long getProductiveTime() const;

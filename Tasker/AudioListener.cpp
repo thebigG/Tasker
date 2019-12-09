@@ -28,7 +28,7 @@
  */
 #include "AudioListener.h"
 #include <QDebug>
-
+#include <QTime>
 using Engine::AudioListener;
 using Engine::Listener;
 
@@ -69,8 +69,12 @@ int AudioListener::startListening(unsigned long int delay) {
     // see KeyboardListener, while(1) { ... }
     qDebug() << "AudioListener::startListening\n";
     t = new Thread{};
+    QTime time{};
+    time.start();
     while (1) {
-        qDebug()<<"current level:"<<t->getLevel();
+//        time.ad/Secs(15);
+        qDebug()<<"time:"<<time.elapsed();
+//        qDebug()<<"current level:"<<t->getLevel();
     }
 
     return EXIT_SUCCESS;

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CreateCommitmentQWidget_t {
-    QByteArrayData data[7];
-    char stringdata0[143];
+    QByteArrayData data[6];
+    char stringdata0[120];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,18 +32,16 @@ struct qt_meta_stringdata_CreateCommitmentQWidget_t {
 static const qt_meta_stringdata_CreateCommitmentQWidget_t qt_meta_stringdata_CreateCommitmentQWidget = {
     {
 QT_MOC_LITERAL(0, 0, 23), // "CreateCommitmentQWidget"
-QT_MOC_LITERAL(1, 24, 34), // "on_dropDownTaskQComboBox_acti..."
-QT_MOC_LITERAL(2, 59, 0), // ""
-QT_MOC_LITERAL(3, 60, 4), // "arg1"
-QT_MOC_LITERAL(4, 65, 26), // "createCommitmentButtonSlot"
-QT_MOC_LITERAL(5, 92, 14), // "backButtonSlot"
-QT_MOC_LITERAL(6, 107, 35) // "on_createCommitmentQFrame_des..."
+QT_MOC_LITERAL(1, 24, 16), // "dropDownTaskSlot"
+QT_MOC_LITERAL(2, 41, 0), // ""
+QT_MOC_LITERAL(3, 42, 26), // "createCommitmentButtonSlot"
+QT_MOC_LITERAL(4, 69, 14), // "backButtonSlot"
+QT_MOC_LITERAL(5, 84, 35) // "on_createCommitmentQFrame_des..."
 
     },
-    "CreateCommitmentQWidget\0"
-    "on_dropDownTaskQComboBox_activated\0\0"
-    "arg1\0createCommitmentButtonSlot\0"
-    "backButtonSlot\0on_createCommitmentQFrame_destroyed"
+    "CreateCommitmentQWidget\0dropDownTaskSlot\0"
+    "\0createCommitmentButtonSlot\0backButtonSlot\0"
+    "on_createCommitmentQFrame_destroyed"
 };
 #undef QT_MOC_LITERAL
 
@@ -62,12 +60,12 @@ static const uint qt_meta_data_CreateCommitmentQWidget[] = {
 
  // slots: name, argc, parameters, tag, flags
        1,    1,   34,    2, 0x08 /* Private */,
-       4,    0,   37,    2, 0x08 /* Private */,
-       5,    0,   38,    2, 0x08 /* Private */,
-       6,    0,   39,    2, 0x08 /* Private */,
+       3,    0,   37,    2, 0x08 /* Private */,
+       4,    0,   38,    2, 0x08 /* Private */,
+       5,    0,   39,    2, 0x08 /* Private */,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString,    3,
+    QMetaType::Void, QMetaType::QString,    2,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -81,7 +79,7 @@ void CreateCommitmentQWidget::qt_static_metacall(QObject *_o, QMetaObject::Call 
         auto *_t = static_cast<CreateCommitmentQWidget *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_dropDownTaskQComboBox_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 0: _t->dropDownTaskSlot((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 1: _t->createCommitmentButtonSlot(); break;
         case 2: _t->backButtonSlot(); break;
         case 3: _t->on_createCommitmentQFrame_destroyed(); break;

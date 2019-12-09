@@ -21,6 +21,7 @@ public:
     void addCommitment(Commitment&);
     void setUsername(QString&);
     QString& getUsername();
+    void addSession(Session&);
 
 private:
     User(QVector<Commitment>);
@@ -30,6 +31,7 @@ private:
     int defaultCommitmentIndex;
     QString userName;
     static User* thisInstance;
+    int currentCommitment;
     // user preferences?
 
 friend QDataStream &operator>>(QDataStream &in, User &newUser);

@@ -29,6 +29,14 @@ void User::addCommitment(Commitment& newCommitment)
     commitments.push_back(newCommitment);
     UdataUtils::saveUserData(*getInstance());
 }
+
+void User::addSession(Session& newSession)
+{
+    Commitment c = commitments.at(currentCommitment);
+    c.getSessions().push_back(newSession);
+    UdataUtils::saveUserData(*getInstance());
+}
+
 void udata::User::setDefaultCommitment(const Commitment &c) {
     int i = 0;
     bool found = false;
