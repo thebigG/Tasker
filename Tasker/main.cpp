@@ -41,7 +41,10 @@ int main(int argc, char *argv[]) {
     {
         qDebug()<<"prepFiles failed";
     }
-
+    qDebug()<<"user name:"<<User::getInstance()->getUsername();
+    Commitment c = User::getInstance()->getCommitments().at(0);
+    c.getName();
+    qDebug()<<"commitment on disk:"<<c.getName();
     f->show();
     return a.exec();
 }
@@ -53,6 +56,10 @@ void TaskerUIMainWindowQWidget::on_makeCommitmentQPushButton_clicked() {
 
 void CreateCommitmentQWidget::on_createCommitmentQPushButton_clicked() {
     this->hide();
+//    QVector<Commitment> commitments =  udata::User::getInstance()->getCommitments();
+
+    Commitment temp{this->getCommitmentName(), this->getStartDate(),  this->getEndDate(), this->getInterval()};
+    udata::User::getInstance()->addCommitment(temp);
     CommStatsQWidget *wc = f->getCommStats();
     wc->show();
 }
@@ -60,6 +67,8 @@ void CreateCommitmentQWidget::on_createCommitmentQPushButton_clicked() {
 void CreateCommitmentQWidget::on_backQPushButton_clicked() {
 
     this->hide();
+
+
     f->show();
 }
 

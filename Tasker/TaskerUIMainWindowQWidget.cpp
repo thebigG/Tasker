@@ -2,6 +2,7 @@
 #include "TaskerUIMainWindowQWidget.h"
 #include "ui_TaskerUIMainWindowQWidget.h"
 
+#include <User.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -43,4 +44,9 @@ TaskerUIMainWindowQWidget::~TaskerUIMainWindowQWidget() {
     delete x;
 
     delete ui;
+}
+
+void TaskerUIMainWindowQWidget::on_welcomeQFrame_destroyed()
+{
+    delete udata::User::getInstance();
 }

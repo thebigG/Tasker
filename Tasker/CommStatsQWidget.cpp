@@ -1,6 +1,7 @@
 #include "CommStatsQWidget.h"
 #include "ui_CommStatsQWidget.h"
 
+#include <User.h>
 #include "TempChartQWidget.h"
 
 #include <QtCharts/QBarSeries>
@@ -23,4 +24,9 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
 
 CommStatsQWidget::~CommStatsQWidget() {
     delete ui;
+}
+
+void CommStatsQWidget::on_statsQFrame_destroyed()
+{
+    delete udata::User::getInstance();
 }

@@ -5,8 +5,10 @@ using namespace udata;
 
 Commitment::Commitment() {
 }
-Commitment::Commitment(QString newName, QDate newStart, QDate newEnd, QVector<Session> newSessions)
-: name{ newName }, dateStart{ newStart }, dateEnd{ newEnd }, sessions{ newSessions } {
+Commitment::Commitment(QString newName, QDate newStart, QDate newEnd, util::Interval newInterval ,QVector<Session> newSessions)
+: name{ newName }, dateStart{ newStart }, dateEnd{ newEnd }, interval{newInterval},
+  sessions{ newSessions }
+ {
     if (dateStart < QDate::currentDate()) {
         dateStart = QDate::currentDate();
     }
@@ -14,8 +16,8 @@ Commitment::Commitment(QString newName, QDate newStart, QDate newEnd, QVector<Se
         dateEnd = dateStart;
     }
 }
-Commitment::Commitment(QString newName, QDate newStart, QDate newEnd)
-: name{ newName }, dateStart{ newStart }, dateEnd{ newEnd } {
+Commitment::Commitment(QString newName, QDate newStart, QDate newEnd, util::Interval newInterval)
+: name{ newName }, dateStart{ newStart }, dateEnd{ newEnd }, interval{newInterval} {
     if (dateStart < QDate::currentDate()) {
         dateStart = QDate::currentDate();
     }

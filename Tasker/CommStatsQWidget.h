@@ -17,6 +17,8 @@ public:
 private slots:
     void on_addCommitmentQCommandLinkButton_clicked();
 
+    void on_statsQFrame_destroyed();
+
 private:
     Ui::CommStatsQWidget *ui;
 };

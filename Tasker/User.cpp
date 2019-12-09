@@ -1,21 +1,37 @@
 #include "User.h"
 #include "UdataUtils.h"
 #include <stdlib.h>
+#include <QDebug>
+#include <QVector>
 using namespace udata;
-User::User(QVector<Commitment>& newCommitments) {
+User* User::thisInstance = new User(QVector<Commitment>{});
+User::User(QVector<Commitment> newCommitments) {
     commitments = newCommitments;
 }
+User::User()
+{
 
-User::~User() {
 }
-
+User::User(QString& newUsername): userName{newUsername}
+{
+}
+User::~User()
+{}
 const Commitment &udata::User::getDefaultCommitment() {
     return commitments.at(defaultCommitmentIndex);
+}
+QVector<Commitment>& User:: getCommitments()
+{
+    return commitments;
+}
+void User::addCommitment(Commitment& newCommitment)
+{
+    commitments.push_back(newCommitment);
+    UdataUtils::saveUserData(*getInstance());
 }
 void udata::User::setDefaultCommitment(const Commitment &c) {
     int i = 0;
     bool found = false;
-
     /*
     for (i = 0; i < commitments.size(); i++) {
         if (c == commitments.at(i)) {
@@ -31,24 +47,24 @@ void udata::User::setDefaultCommitment(const Commitment &c) {
     }
     */
 }
+void User::setUsername(QString& name)
+{
+    userName = name;
+}
+QString& User::getUsername(){
+    return userName;
+}
 QDataStream& udata::operator<<(QDataStream &out, User &newUser)
 {
-    out<<newUser.commitments<<newUser.defaultCommitmentIndex;
+    out<<newUser.commitments<<newUser.defaultCommitmentIndex<<newUser.userName;
     return out;
 }
 QDataStream &udata::operator>>(QDataStream &in, User &newUser)
 {
-    in>>newUser.commitments>>newUser.defaultCommitmentIndex;
+    in>>newUser.commitments>>newUser.defaultCommitmentIndex>>newUser.userName;
     return in;
 }
 User* User::getInstance()
 {
-    if(thisInstance == nullptr){
-        thisInstance = std::make_unique<User>();
-        if(UdataUtils::prepFiles()==0)
-        {
-            UdataUtils::loadUserData(thisInstance);
-        }
-    }
     return thisInstance;
 }

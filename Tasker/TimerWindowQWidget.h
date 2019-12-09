@@ -17,6 +17,8 @@ public:
 private slots:
     void on_backQPushButton_clicked();
 
+    void on_timerWindowQFrame_destroyed();
+
 private:
     Ui::TimerWindowQWidget *ui;
 };

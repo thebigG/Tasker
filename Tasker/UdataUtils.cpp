@@ -31,6 +31,7 @@ void UdataUtils::loadUserData(User& newUser) {
     }
     QDataStream in(&file);
     in.setVersion(QDataStream::Qt_5_1);
+    qDebug()<<"loading data";
     in >> newUser;
     file.close();
 }
@@ -63,6 +64,7 @@ int UdataUtils::prepFiles() {
     QDir taskerFolder{ newDir };
     if (taskerFolder.exists()) {
         userFilePath = taskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
+        loadUserData(*User::getInstance());
         return 0;
     }
     if (taskerFolder.mkdir(newDir)) {
@@ -73,7 +75,11 @@ int UdataUtils::prepFiles() {
     if (!newFile.open(QIODevice::WriteOnly)) {
         return -1;
     }
+    newFile.close();
+    newFile.flush();
+    User::getInstance()->setUsername(userName);
     userFilePath = taskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
+    saveUserData(*User::getInstance());
     qDebug()<<"prepared files at:"<<userFilePath;
     return 0;
 }

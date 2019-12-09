@@ -1,11 +1,7 @@
 #include "StatsUtility.h"
 #include <QDebug>
 
-#define SECONDS_IN_MINUTE 60
-#define SECONDS_IN_HOUR 3600
-#define SECONDS_IN_DAY 86400
-#define SECONDS_IN_WEEK 604800
-#define SECONDS_IN_30_DAYS 2592000
+
 
 /**
  * @brief util::StatsUtility::toMinutes

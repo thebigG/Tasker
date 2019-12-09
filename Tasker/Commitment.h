@@ -22,8 +22,8 @@ private:
 
 public:
     Commitment();
-    Commitment(QString newName, QDate newStart, QDate newEnd, QVector<Session> newSessions);
-    Commitment(QString newName, QDate newStart, QDate newEnd);
+    Commitment(QString newName, QDate newStart, QDate newEnd,util::Interval, QVector<Session> newSessions);
+    Commitment(QString newName, QDate newStart, QDate newEnd, util::Interval);
     QDate &getDateStart();
     void setDateStart(QDate value);
     QDate &getDateEnd();
@@ -31,7 +31,6 @@ public:
     QVector<Session> &getSessions();
     void setSessions(QVector<udata::Session> value);
     QString &getName();
-
     friend QDataStream &operator<<(QDataStream &out, const udata::Commitment &newCommitment);
     friend QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
 };

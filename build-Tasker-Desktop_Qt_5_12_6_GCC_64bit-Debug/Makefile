@@ -271,6 +271,7 @@ DIST          = ../../Qt/5.12.6/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/spec_post.prf \
+		../Tasker/.qmake.stash \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/default_pre.prf \
@@ -508,6 +509,7 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.12.6/gcc_64/mkspecs/linux-g++/qmake.co
 		../../Qt/5.12.6/gcc_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/toolchain.prf \
 		../../Qt/5.12.6/gcc_64/mkspecs/features/default_pre.prf \
@@ -704,6 +706,7 @@ Makefile: ../Tasker/Tasker.pro ../../Qt/5.12.6/gcc_64/mkspecs/linux-g++/qmake.co
 ../../Qt/5.12.6/gcc_64/mkspecs/features/qt_config.prf:
 ../../Qt/5.12.6/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../Qt/5.12.6/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../Qt/5.12.6/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../Qt/5.12.6/gcc_64/mkspecs/features/toolchain.prf:
 ../../Qt/5.12.6/gcc_64/mkspecs/features/default_pre.prf:
@@ -4146,7 +4149,19 @@ User.o: ../Tasker/User.cpp ../Tasker/User.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/qfile.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/qfiledevice.h \
 		../../Qt/5.12.6/gcc_64/include/QtCore/QThread \
-		../../Qt/5.12.6/gcc_64/include/QtCore/qthread.h
+		../../Qt/5.12.6/gcc_64/include/QtCore/qthread.h \
+		../Tasker/UdataUtils.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QtGlobal \
+		../../Qt/5.12.6/gcc_64/include/QtCore/QDebug \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qdebug.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qmap.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qtextstream.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qlocale.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qvariant.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qset.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qsharedpointer.h \
+		../../Qt/5.12.6/gcc_64/include/QtCore/qsharedpointer_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o User.o ../Tasker/User.cpp
 
 main.o: ../Tasker/main.cpp ../Tasker/CommStatsQWidget.h \
