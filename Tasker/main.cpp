@@ -64,8 +64,8 @@ int main(int argc, char *argv[]) {
     //    qDebug()<<"name for task from disk:" + newTask.getName();
     */
 
-    Timer myTimer(Listener::ListenerType::audio);
-    myTimer.start();
+//    Timer myTimer(Listener::ListenerType::audio);
+//    myTimer.start();
 
     return a.exec();
 }

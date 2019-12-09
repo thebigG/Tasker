@@ -8,6 +8,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#ifdef Q_OS_LINUX
+#include <linux/input.h>
+#endif
 using namespace Engine;
 
 KeyboardListener::KeyboardListener() {

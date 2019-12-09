@@ -26,3 +26,4 @@ public:
     static QString userFilePath;
 
 };
+#endif
