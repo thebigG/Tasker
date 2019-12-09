@@ -42,7 +42,6 @@ public:
     Listener::ListenerType listenerType;
     QTime setProductiveTime(QTime *);
     QTime setRealTime(QTime *);
-    void printThread();
 public slots:
     void timeSlot();
 signals:

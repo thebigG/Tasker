@@ -11,7 +11,8 @@
 #endif
 namespace udata {
 class UdataUtils;
-}
+// static const QString USERDATA_FILEPATH = "";
+} // namespace udata
 
 class udata::UdataUtils {
 private:
@@ -25,5 +26,3 @@ public:
     static QString userFilePath;
 
 };
-
-#endif // UDATAUTILS_H

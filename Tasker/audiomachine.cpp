@@ -73,3 +73,7 @@ void audioMachine::stopRecording()
     destinationFile->close();
     delete audio;
 }
+
+
+
+

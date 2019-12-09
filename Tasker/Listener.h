@@ -58,9 +58,9 @@ private:
     uint64_t productiveTime;
     uint64_t unproductiveTime;
 
-    double getCheckStateDelay();
-
     Listener::ListenerState state;
+
+    double getCheckStateDelay();
 
     void setCheckStateDelay(double checkStateDelay);
 

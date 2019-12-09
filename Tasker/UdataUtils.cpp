@@ -29,6 +29,7 @@ void UdataUtils::loadUserData(User& newUser) {
         qDebug() << "Could not open " << userFilePath;
         return;
     }
+
     QDataStream in(&file);
     in.setVersion(QDataStream::Qt_5_1);
     qDebug()<<"loading data";

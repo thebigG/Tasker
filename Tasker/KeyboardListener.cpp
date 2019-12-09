@@ -4,7 +4,6 @@
 #include <QtCore>
 #include <errno.h>
 #include <fcntl.h>
-#include <linux/input.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -25,9 +24,9 @@ KeyboardListener::KeyboardListener() {
 
 void KeyboardListener::start() {
     qDebug() << "start function :)";
-    qDebug() << "current thread id keyBoardListner class(start):"
-             << QThread::currentThreadId();
-    //    startListening();
+    qDebug() << "current thread id keyBoardListner class:" << QThread::currentThreadId();
+    //connect(this, &KeyboardListener::signalThread, &myTimer, &Timer::timeSlot);
+    startListening();
 }
 void KeyboardListener::end() {
 }
@@ -35,9 +34,13 @@ void KeyboardListener::pause() {
 }
 void KeyboardListener::update() {
 }
+
 Listener::ListenerState KeyboardListener::listen() {
-    return Listener::ListenerState::productive;
+
+
+    return getState();
 }
+
 /**
  * @brief KeyboardListener::setKeyboardPathsOnLinux
  * This function iterates over /dev/input and finds the paths that point

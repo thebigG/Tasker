@@ -1,3 +1,4 @@
+#include "AudioListener.h"
 #include "CommStatsQWidget.h"
 #include "CreateCommitmentQWidget.h"
 #include "Interval.h"
@@ -21,9 +22,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-#include <QAudioDeviceInfo>
-#include <QAudioInput>
-#include <QIODevice>
 using std::cout;
 using std::endl;
 using namespace Engine;
@@ -46,6 +44,29 @@ int main(int argc, char *argv[]) {
     c.getName();
     qDebug()<<"commitment on disk:"<<c.getName();
     f->show();
+
+    //    qDebug()<<"thread id for main GUI thread:" <<QThread::currentThreadId();
+
+    /*
+    Timer myTimer(Listener::ListenerType::keyboard);
+    myTimer.start(); //calls the Timer::run() method
+
+    QProcess getUsername;
+    QString output;
+    getUsername.start("whoami");
+    getUsername.waitForFinished();
+    output = QString(getUsername.readAllStandardOutput());
+    qDebug() << "ls output:" + output;
+    return a.exec();
+    //    UdataUtils::saveTask();
+    //    Task newTask{};
+    //    UdataUtils::loadTask(newTask);
+    //    qDebug()<<"name for task from disk:" + newTask.getName();
+    */
+
+    Timer myTimer(Listener::ListenerType::audio);
+    myTimer.start();
+
     return a.exec();
 }
 

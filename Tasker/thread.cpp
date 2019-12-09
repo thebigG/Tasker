@@ -18,6 +18,7 @@ void Thread::updateState()
 {
 x = new audioMachine();
 level = &(x->destinationFile->deviceLevel);
+
 //QThread::sleep(3);
 //    while(1)
     {
@@ -29,5 +30,9 @@ level = &(x->destinationFile->deviceLevel);
 }
 qreal Thread::getLevel()
 {
+    if(level == NULL)
+    {
+        return 0.0;
+    }
     return (*level);
 }
