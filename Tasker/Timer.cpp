@@ -55,6 +55,11 @@ Timer::~Timer() {
 //    int i =0;
 //    exec();
 //}
+void Timer::run()
+{
+    startTimer();
+
+}
 void Timer::startTimer() {
     qDebug() << "From work thread: " << currentThreadId();
 
@@ -64,7 +69,7 @@ void Timer::startTimer() {
         listener = new AudioListener();
     }
 //    connect(this, &Timer::startListener, listener, &Listener::start);
-    qDebug() << "From work thread after connect: " << currentThreadId();
+    qDebug() << "From work thread: " << currentThreadId();
 //    emit startListener();
     listener->moveToThread(&listenerThread);
     listenerThread.start();

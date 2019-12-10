@@ -25,7 +25,7 @@ private:
     Listener *listener;
     const QString objectName = "Timer";
     QThread listenerThread;
-//    virtual void run();
+    virtual void run();
 
 public:
     Timer();
@@ -42,7 +42,8 @@ public:
     Listener::ListenerType listenerType;
     QTime setProductiveTime(QTime *);
     QTime setRealTime(QTime *);
-    void startTimer() ;
+    void startTimer();
+
 public slots:
     void timeSlot();
 signals:
