@@ -43,6 +43,7 @@ public:
     QTime setProductiveTime(QTime *);
     QTime setRealTime(QTime *);
     void startTimer();
+    QTime* time;
 
 public slots:
     void timeSlot();

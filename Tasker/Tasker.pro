@@ -38,7 +38,8 @@ SOURCES += \
     UdataUtils.cpp \
     User.cpp \
     mainui.cpp \
-    main.cpp
+    main.cpp \
+    timerthread.cpp
 
 HEADERS += \
     AudioDevice.h \
@@ -63,7 +64,8 @@ HEADERS += \
     TimerWindowQWidget.h \
     UdataUtils.h \
     mainui.h \
-    User.h
+    User.h \
+    timerthread.h
 
 FORMS += \
     CommStatsQWidget.ui \

@@ -16,7 +16,6 @@ public:
 
 private slots:
     void addCommitmentButtonSlot();
-//    void on_addCommitmentQCommandLinkButton_clicked();
     void on_statsQFrame_destroyed();
 
 private:

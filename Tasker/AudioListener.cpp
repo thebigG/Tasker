@@ -92,8 +92,10 @@ int AudioListener::startListening(unsigned long int delay) {
     // function i want to run, &AudioListener::cleanup);
 
     connect(&audioThread->getQThread(), &QThread::finished, this, &AudioListener::cleanup);
+//    connect();
     qDebug() << "From startListening on Listener.cpp: " << QThread::currentThreadId();
-    this->moveToThread(&audioThread->getQThread());
+    audioThread->moveToThread(&audioThread->getQThread());
+
     audioListenerState = AudioListenerState::ON;
 
     while (true) {

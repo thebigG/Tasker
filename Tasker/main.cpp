@@ -40,17 +40,6 @@ int main(int argc, char *argv[]) {
         qDebug()<<"prepFiles failed";
     }
     MainUI::getInstance()->show();
-//    qDebug()<<"user name:"<<User::getInstance()->getUsername();
-
-//    Commitment c = User::getInstance()->getCommitments().at(0);
-//    c.getName();
-//    QVector<Session> sessions = c.getSessions();
-//    Task t = sessions.at(0).getTask();
-//    qDebug()<<"commitment on disk:"<<c.getName();
-//    qDebug()<<"task on commitment:"<<t.getName();
-//    qDebug()<<"start date:"<<c.getDateStart();
-//    qDebug()<<"end date:"<<c.getDateEnd();
-   MainUI::getInstance()->show();
     Timer myTimer(Listener::ListenerType::audio);
     myTimer.start();
     qDebug() << "main thread id: << " << QThread::currentThreadId();

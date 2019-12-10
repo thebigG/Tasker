@@ -10,8 +10,8 @@ using namespace Engine;
 Timer::Timer() {
     qDebug() << "Timer() constructor: " << currentThreadId();
     connect(&listenerThread, &QThread::started, this, &Timer::startTimer);
-//        this->moveToThread(&listenerThread);
-//    listenerThread.start();
+    listener->moveToThread(&listenerThread);
+    listenerThread.start();
 }
 /**
  * @brief Timer::Timer
@@ -27,7 +27,7 @@ Timer::Timer(Listener::ListenerType newListenerType) {
 //    this->moveToThread(&listenerThread);
 
 //    listenerThread.start();
-    qDebug() << "Timer() constructor after start(): " << currentThreadId();
+    qDebug()<< "Timer() constructor after start(): "<<currentThreadId();
 }
 Timer::~Timer() {
     delete listener;
@@ -57,7 +57,9 @@ Timer::~Timer() {
 //}
 void Timer::run()
 {
+    qDebug()<<"run method on Timer:"<<QThread::currentThreadId();
     startTimer();
+    exec();
 
 }
 void Timer::startTimer() {
@@ -68,24 +70,26 @@ void Timer::startTimer() {
     } else if (listenerType == Listener::ListenerType::audio) {
         listener = new AudioListener();
     }
-//    connect(this, &Timer::startListener, listener, &Listener::start);
-    qDebug() << "From work thread: " << currentThreadId();
-//    emit startListener();
-    listener->moveToThread(&listenerThread);
-    listenerThread.start();
-//    ((QThread*)listener)->start();
-    qDebug() << "From work thread after connect after signal: " << currentThreadId();
+    qDebug()<<"before listener->start()";
+
+    qDebug()<<"after listener->start()";
+//    time = new QTime();
+//    qDebug() << "From work thread: " << currentThreadId();
+//    listener->moveToThread(&listenerThread);
+//    listenerThread.start();
+////    ((QThread*)listener)->start();
+//    qDebug() << "From work thread after connect after signal: " << currentThreadId();
     int goal = 100;
-    QTime time;
-    time.start();
-    currentProductiveTime = 0;
-    qDebug() << "productive time" << currentProductiveTime;
+//    time->start();
+//    currentProductiveTime = 0;
+//    qDebug() << "productive time" << currentProductiveTime;
     while (currentProductiveTime < goal) {
-        currentProductiveTime += time.elapsed();
+//        currentProductiveTime += time.elapsed();
+        currentProductiveTime++;
         qDebug() << "productive time" << currentProductiveTime;
     }
-    qDebug() << "goal was reached :)";
-    int i = 0;
+//    qDebug() << "goal was reached :)";
+//    int i = 0;
 }
 
 void Timer::timeSlot() {
