@@ -1,7 +1,7 @@
 #include "Timer.h"
 #include "AudioListener.h"
 #include "KeyboardListener.h"
-
+#include <QThread>
 #include <QDebug>
 #include <QTime>
 
@@ -12,6 +12,9 @@ using namespace Engine;
  */
 Timer::Timer() {
     qDebug() << "Timer() constructor: " << currentThreadId();
+    connect(&listenerThread, &QThread::started, this, &Timer::startTimer);
+    listener->moveToThread(&listenerThread);
+    listenerThread.start();
 }
 /**
  * @brief Timer::Timer
@@ -21,7 +24,13 @@ Timer::Timer() {
  *
  */
 Timer::Timer(Listener::ListenerType newListenerType) {
+    qDebug() << "Timer() constructor: " << currentThreadId();
     listenerType = newListenerType;
+    connect(&listenerThread, &QThread::started, this, &Timer::startTimer);
+//    this->moveToThread(&listenerThread);
+
+//    listenerThread.start();
+    qDebug()<< "Timer() constructor after start(): "<<currentThreadId();
 }
 
 /**
@@ -40,18 +49,55 @@ Timer::~Timer() {
  *The code in &Listener::start, which is the ACTUAL code that listents to hardware,
  * does not run until the startListner() signal is sent.
  */
-void Timer::run() {
-    qDebug() << "From work thread (run): " << currentThreadId();
+// void Timer::run() {
+//    qDebug() << "From work thread: " << currentThreadId();
+
+//    if (listenerType == Listener::ListenerType::keyboard) {
+//        listener = new KeyboardListener();
+//    } else if (listenerType == Listener::ListenerType::audio) {
+//        listener = new AudioListener();
+//    }
+
+//    connect(this, &Timer::startListener, listener, &Listener::start);
+//    emit startListener();
+//    int i =0;
+//    exec();
+//}
+void Timer::run()
+{
+    qDebug()<<"run method on Timer:"<<QThread::currentThreadId();
+    startTimer();
+    exec();
+
+}
+void Timer::startTimer() {
+    qDebug() << "From work thread: " << currentThreadId();
 
     if (listenerType == Listener::ListenerType::keyboard) {
         listener = new KeyboardListener();
     } else if (listenerType == Listener::ListenerType::audio) {
         listener = new AudioListener();
     }
+    qDebug()<<"before listener->start()";
 
-    connect(this, &Timer::startListener, listener, &Listener::start);
-    emit startListener();
-    exec();
+    qDebug()<<"after listener->start()";
+//    time = new QTime();
+//    qDebug() << "From work thread: " << currentThreadId();
+//    listener->moveToThread(&listenerThread);
+//    listenerThread.start();
+////    ((QThread*)listener)->start();
+//    qDebug() << "From work thread after connect after signal: " << currentThreadId();
+    int goal = 100;
+//    time->start();
+//    currentProductiveTime = 0;
+//    qDebug() << "productive time" << currentProductiveTime;
+    while (currentProductiveTime < goal) {
+//        currentProductiveTime += time.elapsed();
+        currentProductiveTime++;
+        qDebug() << "productive time" << currentProductiveTime;
+    }
+//    qDebug() << "goal was reached :)";
+//    int i = 0;
 }
 
 /**

@@ -32,7 +32,7 @@ public:
 
 public:
     Listener();
-    virtual ~Listener();
+    ~Listener();
     virtual void start() = 0;
     virtual void end() = 0;
     virtual void pause() = 0;
