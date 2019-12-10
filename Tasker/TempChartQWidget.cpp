@@ -12,6 +12,10 @@
 
 QT_CHARTS_USE_NAMESPACE
 
+/**
+ * @brief TempChartQWidget::TempChartQWidget
+ * @param parent
+ */
 TempChartQWidget::TempChartQWidget(QWidget *parent) : QWidget(parent) {
     // Create buttons for ui
 
@@ -96,6 +100,9 @@ TempChartQWidget::TempChartQWidget(QWidget *parent) : QWidget(parent) {
     createSeries();
 }
 
+/**
+ * @brief TempChartQWidget::createSeries
+ */
 void TempChartQWidget::createSeries() {
     m_series = new QBarSeries();
     addBarset();
@@ -114,6 +121,9 @@ void TempChartQWidget::createSeries() {
     m_chartView->setRenderHint(QPainter::Antialiasing);
 }
 
+/**
+ * @brief TempChartQWidget::showLegendSpinbox
+ */
 void TempChartQWidget::showLegendSpinbox() {
     m_legendSettings->setVisible(true);
     QRectF chartViewRect = m_chartView->rect();
@@ -135,10 +145,16 @@ void TempChartQWidget::showLegendSpinbox() {
     m_legendHeight->setValue(75);
 }
 
+/**
+ * @brief TempChartQWidget::hideLegendSpinbox
+ */
 void TempChartQWidget::hideLegendSpinbox() {
     m_legendSettings->setVisible(false);
 }
 
+/**
+ * @brief TempChartQWidget::toggleAttached
+ */
 void TempChartQWidget::toggleAttached() {
     QLegend *legend = m_chart->legend();
     if (legend->isAttachedToChart()) {
@@ -160,6 +176,9 @@ void TempChartQWidget::toggleAttached() {
     update();
 }
 
+/**
+ * @brief TempChartQWidget::addBarset
+ */
 void TempChartQWidget::addBarset() {
     QBarSet *barSet =
         new QBarSet(QString("session ") + QString::number(m_series->count()));
@@ -168,6 +187,9 @@ void TempChartQWidget::addBarset() {
     m_series->append(barSet);
 }
 
+/**
+ * @brief TempChartQWidget::removeBarset
+ */
 void TempChartQWidget::removeBarset() {
     QList<QBarSet *> sets = m_series->barSets();
     if (sets.count() > 0) {
@@ -175,6 +197,9 @@ void TempChartQWidget::removeBarset() {
     }
 }
 
+/**
+ * @brief TempChartQWidget::setLegendAlignment
+ */
 void TempChartQWidget::setLegendAlignment() {
     QPushButton *button = qobject_cast<QPushButton *>(sender());
 
@@ -202,24 +227,36 @@ void TempChartQWidget::setLegendAlignment() {
     }
 }
 
+/**
+ * @brief TempChartQWidget::toggleBold
+ */
 void TempChartQWidget::toggleBold() {
     QFont font = m_chart->legend()->font();
     font.setBold(!font.bold());
     m_chart->legend()->setFont(font);
 }
 
+/**
+ * @brief TempChartQWidget::toggleItalic
+ */
 void TempChartQWidget::toggleItalic() {
     QFont font = m_chart->legend()->font();
     font.setItalic(!font.italic());
     m_chart->legend()->setFont(font);
 }
 
+/**
+ * @brief TempChartQWidget::fontSizeChanged
+ */
 void TempChartQWidget::fontSizeChanged() {
     QFont font = m_chart->legend()->font();
     font.setPointSizeF(m_fontSize->value());
     m_chart->legend()->setFont(font);
 }
 
+/**
+ * @brief TempChartQWidget::updateLegendLayout
+ */
 void TempChartQWidget::updateLegendLayout() {
     //![4]
     m_chart->legend()->setGeometry(

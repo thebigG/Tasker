@@ -32,13 +32,16 @@
 #include <QAudioDeviceInfo>
 #include <QAudioInput>
 
-#include "Listener.h"
 #include "AudioThread.h"
+#include "Listener.h"
 
 namespace Engine {
 class AudioListener;
 }
 
+/**
+ * @brief The Engine::AudioListener class
+ */
 class Engine::AudioListener : public Engine::Listener {
     Q_OBJECT
 
@@ -49,7 +52,7 @@ public:
     ~AudioListener() override;
 
     void setAudioThreshold(qreal audioThreshold);
-    qreal& getAudioThreshold();
+    qreal &getAudioThreshold();
 
     Listener::ListenerState listen() override;
 

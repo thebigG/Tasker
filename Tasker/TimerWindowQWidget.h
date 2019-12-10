@@ -7,6 +7,9 @@ namespace Ui {
 class TimerWindowQWidget;
 }
 
+/**
+ * @brief The TimerWindowQWidget class
+ */
 class TimerWindowQWidget : public QWidget {
     Q_OBJECT
 
@@ -15,7 +18,7 @@ public:
     ~TimerWindowQWidget();
 
 private slots:
-//    void on_backQPushButton_clicked();
+    //    void on_backQPushButton_clicked();
     void backButtonSlot();
     void on_timerWindowQFrame_destroyed();
 

@@ -1,15 +1,17 @@
 #ifndef TIMER_H
 #define TIMER_H
+
 #include "Session.h"
 #include <QObject>
 #include <QThread>
 #include <QTime>
 
 #include <KeyboardListener.h>
-namespace Engine {
 
+namespace Engine {
 class Timer;
 }
+
 /**
  * @brief The Engine::Timer class
  * @note I had to remove the start() method from Timer.

@@ -1,15 +1,22 @@
 #ifndef KEYBOARDLISTENER_H
 #define KEYBOARDLISTENER_H
+
 #define LNUX_DEV_PATH "/dev/input/by-id/"
 #define LINUX_KEYBOARD_PATH_KEYWORD                                            \
     "-kbd" // This is used for regular expression matching
+
 #include <Listener.h>
 #include <QtCore>
+
 static const char *const evval[3] = { "RELEASED", "PRESSED ", "REPEATED" };
+
 namespace Engine {
 class KeyboardListener;
 }
 
+/**
+ * @brief The Engine::KeyboardListener class
+ */
 class Engine::KeyboardListener : public Listener {
     Q_OBJECT
 public:

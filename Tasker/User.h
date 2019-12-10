@@ -14,28 +14,28 @@ class User;
 class udata::User {
 public:
     ~User();
-    static User* getInstance();
-    const Commitment& getDefaultCommitment();
+    static User *getInstance();
+    const Commitment &getDefaultCommitment();
     void setDefaultCommitment(const Commitment &c);
-    QVector<Commitment>& getCommitments();
-    void addCommitment(Commitment&);
-    void setUsername(QString&);
-    QString& getUsername();
-    void addSession(Session&);
+    QVector<Commitment> &getCommitments();
+    void addCommitment(Commitment &);
+    void setUsername(QString &);
+    QString &getUsername();
+    void addSession(Session &);
 
 private:
     User(QVector<Commitment>);
     User();
-    User(QString& username);
+    User(QString &username);
     QVector<Commitment> commitments;
     int defaultCommitmentIndex;
     QString userName;
-    static User* thisInstance;
+    static User *thisInstance;
     int currentCommitment;
     // user preferences?
 
-friend QDataStream &operator>>(QDataStream &in, User &newUser);
-friend QDataStream &operator<<(QDataStream &out, User &newUser);
+    friend QDataStream &operator>>(QDataStream &in, User &newUser);
+    friend QDataStream &operator<<(QDataStream &out, User &newUser);
 };
 
 #endif // USER_H

@@ -35,6 +35,10 @@
 
 using Engine::AudioDevice;
 
+/**
+ * @brief AudioDevice::AudioDevice
+ * @param newFormat
+ */
 AudioDevice::AudioDevice(const QAudioFormat newFormat)
 : qAudioFormat(newFormat), deviceLevel(0.0), minAmplitude(0.0), maxAmplitude(0) {
     switch (qAudioFormat.sampleSize()) {
@@ -88,37 +92,72 @@ AudioDevice::AudioDevice(const QAudioFormat newFormat)
     }
 }
 
+/**
+ * @brief AudioDevice::~AudioDevice
+ */
 AudioDevice::~AudioDevice() {
     deviceLevel = 0.0;
     minAmplitude = 0.0;
     maxAmplitude = 0.0;
 }
 
+/**
+ * @brief AudioDevice::setMinAmplitude
+ * @param minAmplitude
+ */
 void AudioDevice::setMinAmplitude(qreal minAmplitude) {
     this->minAmplitude = minAmplitude;
 }
 
-QAudioFormat& AudioDevice::getQAudioFormat() {
+/**
+ * @brief AudioDevice::getQAudioFormat
+ * @return
+ */
+QAudioFormat &AudioDevice::getQAudioFormat() {
     return qAudioFormat;
 }
 
-qreal& AudioDevice::getDeviceLevel() {
+/**
+ * @brief AudioDevice::getDeviceLevel
+ * @return
+ */
+qreal &AudioDevice::getDeviceLevel() {
     return deviceLevel;
 }
 
-qreal& AudioDevice::getMinAmplitude() {
+/**
+ * @brief AudioDevice::getMinAmplitude
+ * @return
+ */
+qreal &AudioDevice::getMinAmplitude() {
     return minAmplitude;
 }
 
-quint32& AudioDevice::getMaxAmplitude() {
+/**
+ * @brief AudioDevice::getMaxAmplitude
+ * @return
+ */
+quint32 &AudioDevice::getMaxAmplitude() {
     return maxAmplitude;
 }
 
+/**
+ * @brief AudioDevice::readData
+ * @param data
+ * @param maxlen
+ * @return
+ */
 qint64 AudioDevice::readData(char *data, qint64 maxlen) {
     // just to get warning to disappear
     return data ? maxlen : 0;
 }
 
+/**
+ * @brief AudioDevice::writeData
+ * @param data
+ * @param len
+ * @return
+ */
 qint64 AudioDevice::writeData(const char *data, qint64 len) {
     qreal captureValue = 0.0;
 
@@ -139,7 +178,8 @@ qint64 AudioDevice::writeData(const char *data, qint64 len) {
             for (int j = 0; j < qAudioFormat.channelCount(); ++j) {
                 quint32 value = 0;
 
-                if (qAudioFormat.sampleSize() == 8 && qAudioFormat.sampleType() == QAudioFormat::UnSignedInt) {
+                if (qAudioFormat.sampleSize() == 8 &&
+                    qAudioFormat.sampleType() == QAudioFormat::UnSignedInt) {
                     value = *reinterpret_cast<const quint8 *>(ptr);
                 } else if (qAudioFormat.sampleSize() == 8 &&
                            qAudioFormat.sampleType() == QAudioFormat::SignedInt) {
@@ -192,6 +232,12 @@ qint64 AudioDevice::writeData(const char *data, qint64 len) {
     return len;
 }
 
+/**
+ * @brief AudioDevice::getMin
+ * @param a
+ * @param b
+ * @return
+ */
 quint32 AudioDevice::getMin(quint32 a, quint32 b) {
     return a < b ? a : b;
 }

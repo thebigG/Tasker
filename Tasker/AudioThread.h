@@ -38,6 +38,9 @@ namespace Engine {
 class AudioThread;
 }
 
+/**
+ * @brief The Engine::AudioThread class
+ */
 class Engine::AudioThread : public QObject {
     Q_OBJECT
 
@@ -46,8 +49,8 @@ public:
     // Need alternative constructor for audio device type
     ~AudioThread();
 
-    QThread& getQThread();
-    AudioMachine*& getAudioMachine();
+    QThread &getQThread();
+    AudioMachine *&getAudioMachine();
     qreal getAudioLevel();
 
 public slots:

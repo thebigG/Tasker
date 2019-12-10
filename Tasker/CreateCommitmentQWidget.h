@@ -1,12 +1,12 @@
 #ifndef CREATECOMMITMENT_H
 #define CREATECOMMITMENT_H
 
-#include <QCheckBox>
-#include <QIntValidator>
-#include <QWidget>
-#include <QLineEdit>
-#include <QDateEdit>
 #include <Interval.h>
+#include <QCheckBox>
+#include <QDateEdit>
+#include <QIntValidator>
+#include <QLineEdit>
+#include <QWidget>
 #define WRITING_STRING "Writing"
 #define MUSIC_STRING "Compose Music"
 #define CUSTOM_STRING "Custom"
@@ -15,6 +15,9 @@ namespace Ui {
 class CreateCommitmentQWidget;
 }
 
+/**
+ * @brief The CreateCommitmentQWidget class
+ */
 class CreateCommitmentQWidget : public QWidget {
     Q_OBJECT
 
@@ -24,7 +27,7 @@ public:
 
     QCheckBox *getKeyboardCheckBox();
     QCheckBox *getAudioCheckBox();
-    Ui::CreateCommitmentQWidget* getUI();
+    Ui::CreateCommitmentQWidget *getUI();
     QValidator *validator;
     QString getCommitmentName();
     QDate getStartDate();
@@ -32,7 +35,7 @@ public:
     util::Interval getInterval();
 
 private slots:
-    void dropDownTaskSlot(const QString&);
+    void dropDownTaskSlot(const QString &);
     void createCommitmentButtonSlot();
     void backButtonSlot();
     void on_createCommitmentQFrame_destroyed();

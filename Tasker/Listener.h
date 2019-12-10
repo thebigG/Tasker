@@ -6,10 +6,14 @@
 #include <QObject>
 #include <QThread>
 #include <cstdint>
+
 namespace Engine {
 class Listener;
 }
 
+/**
+ * @brief The Engine::Listener class
+ */
 class Engine::Listener : public QObject {
     Q_OBJECT
 public:

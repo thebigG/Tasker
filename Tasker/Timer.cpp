@@ -7,6 +7,9 @@
 
 using namespace Engine;
 
+/**
+ * @brief Timer::Timer
+ */
 Timer::Timer() {
     qDebug() << "Timer() constructor: " << currentThreadId();
 }
@@ -20,9 +23,14 @@ Timer::Timer() {
 Timer::Timer(Listener::ListenerType newListenerType) {
     listenerType = newListenerType;
 }
+
+/**
+ * @brief Timer::~Timer
+ */
 Timer::~Timer() {
     delete listener;
 }
+
 /**
  * @brief Timer::run
  * This function is called when the thread starts.
@@ -46,11 +54,18 @@ void Timer::run() {
     exec();
 }
 
+/**
+ * @brief Timer::timeSlot
+ */
 void Timer::timeSlot() {
     qDebug() << "Time slot func :)";
     qDebug() << "current thread id Timer timeSlot:" << QThread::currentThreadId();
 }
 
+/**
+ * @brief Timer::getRealTime
+ * @return
+ */
 QTime Timer::getRealTime() { // not implemented
     return QTime::currentTime();
 }

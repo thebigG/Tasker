@@ -1,46 +1,85 @@
 #include "User.h"
 #include "UdataUtils.h"
-#include <stdlib.h>
 #include <QDebug>
 #include <QVector>
+#include <stdlib.h>
+
 using namespace udata;
-User* User::thisInstance = new User(QVector<Commitment>{});
+
+User *User::thisInstance = new User(QVector<Commitment>{});
+
+/**
+ * @brief User::User
+ * @param newCommitments
+ */
 User::User(QVector<Commitment> newCommitments) {
     commitments = newCommitments;
 }
-User::User()
-{
 
+/**
+ * @brief User::User
+ */
+User::User() {
 }
-User::User(QString& newUsername): userName{newUsername}
-{
+
+/**
+ * @brief User::User
+ * @param newUsername
+ */
+User::User(QString &newUsername) : userName{ newUsername } {
 }
-User::~User()
-{}
+
+/**
+ * @brief User::~User
+ */
+User::~User() {
+}
+
+/**
+ * @brief udata::User::getDefaultCommitment
+ * @return
+ */
 const Commitment &udata::User::getDefaultCommitment() {
     return commitments.at(defaultCommitmentIndex);
 }
-QVector<Commitment>& User:: getCommitments()
-{
+
+/**
+ * @brief User::getCommitments
+ * @return
+ */
+QVector<Commitment> &User::getCommitments() {
     return commitments;
 }
-void User::addCommitment(Commitment& newCommitment)
-{
+
+/**
+ * @brief User::addCommitment
+ * @param newCommitment
+ */
+void User::addCommitment(Commitment &newCommitment) {
     commitments.push_back(newCommitment);
     UdataUtils::saveUserData(*getInstance());
 }
 
-void User::addSession(Session& newSession)
-{
+/**
+ * @brief User::addSession
+ * @param newSession
+ */
+void User::addSession(Session &newSession) {
     Commitment c = commitments.at(currentCommitment);
     c.getSessions().push_back(newSession);
     UdataUtils::saveUserData(*getInstance());
 }
 
+/**
+ * @brief udata::User::setDefaultCommitment
+ * @param c
+ */
 void udata::User::setDefaultCommitment(const Commitment &c) {
     int i = 0;
     bool found = false;
-    /*
+
+#define OUT
+#ifndef OUT
     for (i = 0; i < commitments.size(); i++) {
         if (c == commitments.at(i)) {
             found = true;
@@ -53,26 +92,51 @@ void udata::User::setDefaultCommitment(const Commitment &c) {
         commitments.push_back(c);
         defaultCommitmentIndex = commitments.size() - 1;
     }
-    */
+#endif
 }
-void User::setUsername(QString& name)
-{
+
+/**
+ * @brief User::setUsername
+ * @param name
+ */
+void User::setUsername(QString &name) {
     userName = name;
 }
-QString& User::getUsername(){
+
+/**
+ * @brief User::getUsername
+ * @return
+ */
+QString &User::getUsername() {
     return userName;
 }
-QDataStream& udata::operator<<(QDataStream &out, User &newUser)
-{
-    out<<newUser.commitments<<newUser.defaultCommitmentIndex<<newUser.userName;
+
+/**
+ * @brief udata::operator <<
+ * @param out
+ * @param newUser
+ * @return
+ */
+QDataStream &udata::operator<<(QDataStream &out, User &newUser) {
+    out << newUser.commitments << newUser.defaultCommitmentIndex << newUser.userName;
     return out;
 }
-QDataStream &udata::operator>>(QDataStream &in, User &newUser)
-{
-    in>>newUser.commitments>>newUser.defaultCommitmentIndex>>newUser.userName;
+
+/**
+ * @brief udata::operator >>
+ * @param in
+ * @param newUser
+ * @return
+ */
+QDataStream &udata::operator>>(QDataStream &in, User &newUser) {
+    in >> newUser.commitments >> newUser.defaultCommitmentIndex >> newUser.userName;
     return in;
 }
-User* User::getInstance()
-{
+
+/**
+ * @brief User::getInstance
+ * @return
+ */
+User *User::getInstance() {
     return thisInstance;
 }

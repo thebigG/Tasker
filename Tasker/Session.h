@@ -2,9 +2,14 @@
 #define SESSION_H
 #include "Task.h"
 #include <QDataStream>
+
 namespace udata {
 class Session;
 }
+
+/**
+ * @brief The udata::Session class
+ */
 class udata::Session {
 public:
     Session();

@@ -29,14 +29,17 @@
 #ifndef AUDIOMACHINE_H
 #define AUDIOMACHINE_H
 
+#include <AudioDevice.h>
 #include <QAudioInput>
 #include <QFile>
-#include <AudioDevice.h>
 
 namespace Engine {
 class AudioMachine;
 }
 
+/**
+ * @brief The Engine::AudioMachine class
+ */
 class Engine::AudioMachine : public QObject {
     Q_OBJECT
 
@@ -44,8 +47,8 @@ public:
     AudioMachine();
     ~AudioMachine();
 
-    AudioDevice*& getAudioDevice();
-    QAudioInput*& getQAudioInput();
+    AudioDevice *&getAudioDevice();
+    QAudioInput *&getQAudioInput();
 public slots:
     void handleStateChanged(QAudio::State);
     void stopRecording();

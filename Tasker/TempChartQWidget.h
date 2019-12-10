@@ -14,6 +14,9 @@
 
 QT_CHARTS_USE_NAMESPACE
 
+/**
+ * @brief The TempChartQWidget class
+ */
 class TempChartQWidget : public QWidget {
     Q_OBJECT
 

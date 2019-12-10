@@ -1,14 +1,13 @@
 #ifndef TASK_H
 #define TASK_H
+
 #include "QObject"
 #include "QVector"
 #include <Listener.h>
 #include <QDataStream>
 #include <QFile>
 #include <QString>
-/**
- *
- */
+
 namespace udata {
 class Task;
 }

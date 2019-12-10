@@ -2,14 +2,20 @@
 #include "ui_CreateCommitmentQWidget.h"
 #include <CommStatsQWidget.h>
 #include <Commitment.h>
+#include <Listener.h>
 #include <QDebug>
 #include <QObject>
 #include <StatsUtility.h>
 #include <User.h>
 #include <mainui.h>
-#include <Listener.h>
+
 using namespace util;
 using namespace udata;
+
+/**
+ * @brief CreateCommitmentQWidget::CreateCommitmentQWidget
+ * @param parent
+ */
 CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
 : QWidget(parent), ui(new Ui::CreateCommitmentQWidget) {
     ui->setupUi(this);
@@ -23,49 +29,87 @@ CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
             this, SLOT(dropDownTaskSlot(const QString &)));
 }
 
+/**
+ * @brief CreateCommitmentQWidget::~CreateCommitmentQWidget
+ */
 CreateCommitmentQWidget::~CreateCommitmentQWidget() {
     delete ui;
 }
+
+/**
+ * @brief CreateCommitmentQWidget::getUI
+ * @return
+ */
 Ui::CreateCommitmentQWidget *CreateCommitmentQWidget::getUI() {
     return ui;
 }
+
+/**
+ * @brief CreateCommitmentQWidget::backButtonSlot
+ */
 void CreateCommitmentQWidget::backButtonSlot() {
     this->hide();
     MainUI::getInstance()->show();
 }
+
+/**
+ * @brief CreateCommitmentQWidget::createCommitmentButtonSlot
+ */
 void CreateCommitmentQWidget::createCommitmentButtonSlot() {
     this->hide();
     QVector<Session> sessions{};
     QVector<Engine::Listener::ListenerType> listeners;
-    if(this->ui->checkKeyboardQCheckBox->checkState() == Qt::Checked )
-    {
+    if (this->ui->checkKeyboardQCheckBox->checkState() == Qt::Checked) {
         listeners.push_back(Engine::Listener::ListenerType::keyboard);
     }
-    if(this->ui->checkMicQCheckBox->checkState() == Qt::Checked )
-    {
+    if (this->ui->checkMicQCheckBox->checkState() == Qt::Checked) {
         listeners.push_back(Engine::Listener::ListenerType::audio);
     }
-    Task newTask{ui->dropDownTaskQComboBox->currentText(), listeners};
-    sessions.push_back(Session{newTask});
+    Task newTask{ ui->dropDownTaskQComboBox->currentText(), listeners };
+    sessions.push_back(Session{ newTask });
     Commitment temp{ this->getCommitmentName(), this->getStartDate(),
-                     this->getEndDate(), this->getInterval(), sessions};
+                     this->getEndDate(), this->getInterval(), sessions };
     udata::User::getInstance()->addCommitment(temp);
     CommStatsQWidget *wc = MainUI::getInstance()->getCommStats();
     wc->show();
 }
 
+/**
+ * @brief CreateCommitmentQWidget::getKeyboardCheckBox
+ * @return
+ */
 QCheckBox *CreateCommitmentQWidget::getKeyboardCheckBox() {
     return ui->checkKeyboardQCheckBox;
 }
+
+/**
+ * @brief CreateCommitmentQWidget::getCommitmentName
+ * @return
+ */
 QString CreateCommitmentQWidget::getCommitmentName() {
     return ui->commitmentNameQLineEdit->text();
 }
+
+/**
+ * @brief CreateCommitmentQWidget::getStartDate
+ * @return
+ */
 QDate CreateCommitmentQWidget::getStartDate() {
     return ui->dateStartQDateEdit->date();
 }
+
+/**
+ * @brief CreateCommitmentQWidget::getEndDate
+ * @return
+ */
 QDate CreateCommitmentQWidget::getEndDate() {
     return ui->dateEndQDateEdit->date();
 }
+
+/**
+ * @brief CreateCommitmentQWidget::getInterval
+ * @return
+ */
 util::Interval CreateCommitmentQWidget::getInterval() {
     util::Interval interval{};
     long long int size, frequency;
@@ -87,10 +131,20 @@ util::Interval CreateCommitmentQWidget::getInterval() {
     interval.frequency = frequency;
     return interval;
 }
+
+/**
+ * @brief CreateCommitmentQWidget::getAudioCheckBox
+ * @return
+ */
 QCheckBox *CreateCommitmentQWidget::getAudioCheckBox() {
     ui->qtyQLabel;
     return ui->checkMicQCheckBox;
 }
+
+/**
+ * @brief CreateCommitmentQWidget::dropDownTaskSlot
+ * @param arg1
+ */
 void CreateCommitmentQWidget::dropDownTaskSlot(const QString &arg1) {
     if (arg1 == QString(WRITING_STRING)) {
         this->getKeyboardCheckBox()->setCheckState(Qt::CheckState{ Qt::Checked });
@@ -104,6 +158,9 @@ void CreateCommitmentQWidget::dropDownTaskSlot(const QString &arg1) {
     }
 }
 
+/**
+ * @brief CreateCommitmentQWidget::on_createCommitmentQFrame_destroyed
+ */
 void CreateCommitmentQWidget::on_createCommitmentQFrame_destroyed() {
     delete udata::User::getInstance();
 }

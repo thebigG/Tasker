@@ -29,9 +29,12 @@
 #include "AudioThread.h"
 #include <QDebug>
 
-using Engine::AudioThread;
 using Engine::AudioMachine;
+using Engine::AudioThread;
 
+/**
+ * @brief AudioThread::AudioThread
+ */
 AudioThread::AudioThread() : audioMachine(nullptr), audioLevel(nullptr) {
     connect(&qThread, &QThread::started, this, &AudioThread::updateState);
 
@@ -39,24 +42,41 @@ AudioThread::AudioThread() : audioMachine(nullptr), audioLevel(nullptr) {
     qThread.start();
 }
 
+/**
+ * @brief AudioThread::~AudioThread
+ */
 AudioThread::~AudioThread() {
     delete audioMachine;
 }
 
-QThread& AudioThread::getQThread() {
+/**
+ * @brief AudioThread::getQThread
+ * @return
+ */
+QThread &AudioThread::getQThread() {
     return qThread;
 }
 
-AudioMachine*& AudioThread::getAudioMachine() {
+/**
+ * @brief AudioThread::getAudioMachine
+ * @return
+ */
+AudioMachine *&AudioThread::getAudioMachine() {
     return audioMachine;
 }
 
+/**
+ * @brief AudioThread::getAudioLevel
+ * @return
+ */
 qreal AudioThread::getAudioLevel() {
     return audioLevel == nullptr ? 0.0 : (*audioLevel);
 }
 
+/**
+ * @brief AudioThread::updateState
+ */
 void AudioThread::updateState() {
     audioMachine = new AudioMachine();
     audioLevel = &(audioMachine->getAudioDevice()->getDeviceLevel());
 }
-

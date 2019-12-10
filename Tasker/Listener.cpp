@@ -1,6 +1,7 @@
 #include "Listener.h"
 
 using namespace Engine;
+
 /**
  * @brief Engine::Listener::Listener
  *        default constructor
@@ -12,11 +13,18 @@ Listener::Listener() {
     productiveTime = 0;
     unproductiveTime = 0;
 }
+
+/**
+ * @brief Listener::intToListenerType
+ * @param enumInt
+ * @return
+ */
 Listener::ListenerType Listener::intToListenerType(int enumInt) {
     if (int(ListenerType::keyboard) < enumInt || int(ListenerType::none) > enumInt)
         return ListenerType(enumInt);
     return ListenerType::none;
 }
+
 /**
  * @brief Engine::Listener::~Listener
  *        destructor
@@ -34,10 +42,10 @@ Listener::~Listener() {
  *
  * @param state ListenerState, unproductive or productive
  */
-
 void Listener::setState(Listener::ListenerState newState) {
     currentState = newState;
 }
+
 /**
  * @brief Engine::Listener::getSlack
  *        returns slack value,

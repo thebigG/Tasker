@@ -3,34 +3,62 @@
 #include <QDataStream>
 #include <QFile>
 #include <QtCore>
+
 using namespace udata;
+
+/**
+ * @brief Task::Task
+ */
 Task::Task() {
 }
 
+/**
+ * @brief Task::Task
+ * @param newName
+ */
 Task::Task(QString newName) {
     name = newName;
 }
 
+/**
+ * @brief Task::Task
+ * @param newName
+ * @param listeners
+ */
 Task::Task(QString newName, QVector<Engine::Listener::ListenerType> listeners) {
 
     setName(newName);
     setListeners(listeners);
 }
 
+/**
+ * @brief Task::getName
+ * @return
+ */
 QString &Task::getName() {
     return name;
 }
+
 /**
-   sets the name test
+ * @brief Task::setName
+ * @param value
  */
 void Task::setName(QString value) {
     this->name = QString(value);
 }
 
+/**
+ * @brief Task::getListeners
+ * @return
+ */
 QVector<Engine::Listener::ListenerType> &Task::getListeners() {
     return listeners;
 }
 
+/**
+ * @brief Task::setListeners
+ * @param newListeners
+ */
 void Task::setListeners(const QVector<Engine::Listener::ListenerType> newListeners) {
     for (Engine::Listener::ListenerType l : newListeners) {
         listeners.push_back(l);

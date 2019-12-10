@@ -13,6 +13,9 @@ namespace Ui {
 class TaskerUIMainWindowQWidget;
 }
 
+/**
+ * @brief The TaskerUIMainWindowQWidget class
+ */
 class TaskerUIMainWindowQWidget : public QWidget {
     Q_OBJECT
 

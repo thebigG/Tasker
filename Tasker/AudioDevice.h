@@ -36,6 +36,9 @@ namespace Engine {
 class AudioDevice;
 };
 
+/**
+ * @brief The Engine::AudioDevice class
+ */
 class Engine::AudioDevice : public QIODevice {
 public:
     AudioDevice(const QAudioFormat newFormat);
@@ -43,10 +46,10 @@ public:
 
     void setMinAmplitude(qreal minAmplitude);
 
-    QAudioFormat& getQAudioFormat();
-    qreal& getDeviceLevel();
-    qreal& getMinAmplitude();
-    quint32& getMaxAmplitude();
+    QAudioFormat &getQAudioFormat();
+    qreal &getDeviceLevel();
+    qreal &getMinAmplitude();
+    quint32 &getMaxAmplitude();
 
     static quint32 getMin(quint32 a, quint32 b);
 

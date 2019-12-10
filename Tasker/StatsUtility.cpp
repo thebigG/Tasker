@@ -1,8 +1,6 @@
 #include "StatsUtility.h"
 #include <QDebug>
 
-
-
 /**
  * @brief util::StatsUtility::toMinutes
  * @param seconds quantity of seconds

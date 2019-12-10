@@ -5,11 +5,21 @@
 #include <QProcess>
 
 using namespace udata;
+
 QString udata::UdataUtils::userFilePath = "";
+
+/**
+ * @brief UdataUtils::UdataUtils
+ */
 UdataUtils::UdataUtils() {
+
 }
 
-void UdataUtils::saveUserData(User& newUser) {
+/**
+ * @brief UdataUtils::saveUserData
+ * @param newUser
+ */
+void UdataUtils::saveUserData(User &newUser) {
 
     QFile file(userFilePath);
     if (!file.open(QIODevice::WriteOnly)) {
@@ -22,7 +32,12 @@ void UdataUtils::saveUserData(User& newUser) {
     file.flush();
     file.close();
 }
-void UdataUtils::loadUserData(User& newUser) {
+
+/**
+ * @brief UdataUtils::loadUserData
+ * @param newUser
+ */
+void UdataUtils::loadUserData(User &newUser) {
 
     QFile file(UdataUtils::userFilePath);
     if (!file.open(QIODevice::ReadOnly)) {
@@ -32,14 +47,17 @@ void UdataUtils::loadUserData(User& newUser) {
 
     QDataStream in(&file);
     in.setVersion(QDataStream::Qt_5_1);
-    qDebug()<<"loading data";
+    qDebug() << "loading data";
     in >> newUser;
     file.close();
 }
 
+/**
+ * @brief UdataUtils::getUsername
+ * @return
+ */
 QString UdataUtils::getUsername() {
-    if(!userFilePath.isEmpty())
-    {
+    if (!userFilePath.isEmpty()) {
         return userFilePath;
     }
 #ifdef Q_OS_UNIX
@@ -53,6 +71,7 @@ QString UdataUtils::getUsername() {
     return "";
 #endif
 }
+
 /**
  * @brief UdataUtils::prepFiles prepares files and directories necessary to
  * store commitment data on disk the very first time the user opens tasker
@@ -64,7 +83,8 @@ int UdataUtils::prepFiles() {
     QString const newDir{ QString(HOME_FOLDER_NAME) + QDir::separator() +
                           userName + QDir::separator() + USER_FOLDER_NAME };
 #elif defined(Q_OS_OSX)
-    QString const newDir(QDir::separator() + QString("Users") + QDir::separator() + userName + QDir::separator() + USER_FOLDER_NAME);
+    QString const newDir(QDir::separator() + QString("Users") + QDir::separator() +
+                         userName + QDir::separator() + USER_FOLDER_NAME);
     qDebug() << newDir;
 #endif
     QDir temp = QDir::current();
@@ -78,7 +98,7 @@ int UdataUtils::prepFiles() {
     } else {
         return -1;
     }
-    QFile newFile{taskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION)};
+    QFile newFile{ taskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION) };
     if (!newFile.open(QIODevice::WriteOnly)) {
         return -1;
     }
@@ -87,6 +107,6 @@ int UdataUtils::prepFiles() {
     User::getInstance()->setUsername(userName);
     userFilePath = taskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
     saveUserData(*User::getInstance());
-    qDebug()<<"prepared files at:"<<userFilePath;
+    qDebug() << "prepared files at:" << userFilePath;
     return 0;
 }

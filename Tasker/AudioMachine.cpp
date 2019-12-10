@@ -32,9 +32,12 @@
 #include <QThread>
 #include <QTimer>
 
-using Engine::AudioMachine;
 using Engine::AudioDevice;
+using Engine::AudioMachine;
 
+/**
+ * @brief AudioMachine::AudioMachine
+ */
 AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
     QAudioFormat format;
 
@@ -80,19 +83,34 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
     // Records audio for 3000ms
 }
 
+/**
+ * @brief AudioMachine::~AudioMachine
+ */
 AudioMachine::~AudioMachine() {
     delete qAudioInput;
     delete audioDevice;
 }
 
-AudioDevice*& AudioMachine::getAudioDevice() {
+/**
+ * @brief AudioMachine::getAudioDevice
+ * @return
+ */
+AudioDevice *&AudioMachine::getAudioDevice() {
     return audioDevice;
 }
 
-QAudioInput*& AudioMachine::getQAudioInput() {
+/**
+ * @brief AudioMachine::getQAudioInput
+ * @return
+ */
+QAudioInput *&AudioMachine::getQAudioInput() {
     return qAudioInput;
 }
 
+/**
+ * @brief AudioMachine::handleStateChanged
+ * @param newState
+ */
 void AudioMachine::handleStateChanged(QAudio::State newState) {
     switch (newState) {
     case QAudio::StoppedState:
@@ -116,6 +134,9 @@ void AudioMachine::handleStateChanged(QAudio::State newState) {
     }
 }
 
+/**
+ * @brief AudioMachine::stopRecording
+ */
 void AudioMachine::stopRecording() {
     qAudioInput->stop();
     audioDevice->close();
@@ -125,5 +146,4 @@ void AudioMachine::stopRecording() {
 
     delete audioDevice;
     audioDevice = nullptr;
-
 }

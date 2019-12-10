@@ -35,52 +35,91 @@
 using Engine::AudioListener;
 using Engine::Listener;
 
+/**
+ * @brief AudioListener::AudioListener
+ */
 AudioListener::AudioListener()
-: Listener::Listener(), audioListenerState(AudioListenerState::OFF), audioThread(nullptr), audioThreshold(0.0) {
+: Listener::Listener(), audioListenerState(AudioListenerState::OFF),
+  audioThread(nullptr), audioThreshold(0.0) {
     audioThreshold = 0.01;
 }
 
+/**
+ * @brief AudioListener::~AudioListener
+ */
 AudioListener::~AudioListener() {
     Listener::~Listener();
 }
 
+/**
+ * @brief AudioListener::setAudioThreshold
+ * @param audioThreshold
+ */
 void AudioListener::setAudioThreshold(qreal audioThreshold) {
     this->audioThreshold = audioThreshold;
 }
 
-qreal& AudioListener::getAudioThreshold() {
+/**
+ * @brief AudioListener::getAudioThreshold
+ * @return
+ */
+qreal &AudioListener::getAudioThreshold() {
     return audioThreshold;
 }
 
+/**
+ * @brief AudioListener::start
+ */
 void AudioListener::start() {
     // start listening
     startListening();
 }
 
+/**
+ * @brief AudioListener::end
+ */
 void AudioListener::end() {
     // stop listening, for end of session
     audioThread->getQThread().exit();
     audioListenerState = AudioListenerState::OFF;
 }
 
+/**
+ * @brief AudioListener::pause
+ */
 void AudioListener::pause() {
     // TODO pause
     // suspend listening, but don't quit
 }
 
+/**
+ * @brief AudioListener::update
+ */
 void AudioListener::update() {
     // TODO update
     // change input device
 }
 
+/**
+ * @brief AudioListener::cleanup
+ */
 void AudioListener::cleanup() {
     delete audioThread;
 }
 
+/**
+ * @brief AudioListener::listen
+ * @return
+ */
 Listener::ListenerState AudioListener::listen() {
     return Listener::getState();
 }
 
+/**
+ * @brief AudioListener::startListening
+ * @param delay
+ * @return
+ */
 int AudioListener::startListening(unsigned long int delay) {
     audioThread = new AudioThread;
     // must pass in audio device type at some point to thread.
@@ -98,9 +137,9 @@ int AudioListener::startListening(unsigned long int delay) {
             if (audioThread->getAudioMachine()->getAudioDevice()) {
                 audioThread->getAudioMachine()->getQAudioInput()->setVolume(0.0);
                 while (audioThread->getAudioMachine()->getAudioDevice()->getDeviceLevel() == 0.0) {
-
                 }
-                audioThread->getAudioMachine()->getAudioDevice()->setMinAmplitude(audioThread->getAudioMachine()->getAudioDevice()->getDeviceLevel());
+                audioThread->getAudioMachine()->getAudioDevice()->setMinAmplitude(
+                    audioThread->getAudioMachine()->getAudioDevice()->getDeviceLevel());
                 audioThread->getAudioMachine()->getQAudioInput()->setVolume(1.0);
                 break;
             }
@@ -110,7 +149,9 @@ int AudioListener::startListening(unsigned long int delay) {
     while (true) {
         ListenerState state;
 
-        state = audioThread->getAudioLevel() > audioThreshold ? ListenerState::productive : ListenerState::unproductive;
+        state = audioThread->getAudioLevel() > audioThreshold ?
+                    ListenerState::productive :
+                    ListenerState::unproductive;
         setState(state);
 
         qDebug() << "listener level: " << audioThread->getAudioLevel();
