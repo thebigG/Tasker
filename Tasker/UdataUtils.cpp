@@ -42,15 +42,16 @@ QString UdataUtils::getUsername() {
     {
         return userFilePath;
     }
-#ifdef Q_OS_LINUX
+#ifdef Q_OS_UNIX
     QProcess getUsername;
     QString output;
     getUsername.start("whoami");
     getUsername.waitForFinished();
     output = QString(getUsername.readAllStandardOutput());
     return output.remove(output.length() - 1, 2); // clean up new line character from standard output
-#endif
+#else
     return "";
+#endif
 }
 /**
  * @brief UdataUtils::prepFiles prepares files and directories necessary to
@@ -59,8 +60,13 @@ QString UdataUtils::getUsername() {
  */
 int UdataUtils::prepFiles() {
     QString userName = getUsername();
+#if defined(Q_OS_LINUX)
     QString const newDir{ QString(HOME_FOLDER_NAME) + QDir::separator() +
                           userName + QDir::separator() + USER_FOLDER_NAME };
+#elif defined(Q_OS_OSX)
+    QString const newDir(QDir::separator() + QString("Users") + QDir::separator() + userName + QDir::separator() + USER_FOLDER_NAME);
+    qDebug() << newDir;
+#endif
     QDir temp = QDir::current();
     QDir taskerFolder{ newDir };
     if (taskerFolder.exists()) {

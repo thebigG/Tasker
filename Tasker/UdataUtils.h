@@ -3,7 +3,7 @@
 #include <QtGlobal>
 #include <Task.h>
 #include <User.h>
-#ifdef Q_OS_LINUX
+#ifdef Q_OS_UNIX
 #define USERDATA_DIR "."
 #define HOME_FOLDER_NAME "/home"
 #define USER_FOLDER_NAME ".TaskerData"
