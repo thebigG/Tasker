@@ -25,7 +25,6 @@ public:
     void createSeries();
     void showLegendSpinbox();
     void hideLegendSpinbox();
-
 public Q_SLOTS:
     void toggleAttached();
     void addBarset();

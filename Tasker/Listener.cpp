@@ -1,5 +1,5 @@
 #include "Listener.h"
-
+#include <QtDebug>
 using namespace Engine;
 
 /**
@@ -32,9 +32,9 @@ Listener::ListenerType Listener::intToListenerType(int enumInt) {
 Listener::~Listener() {
     checkStateDelay = 0.0;
     slack = 0.0;
-
     productiveTime = 0;
     unproductiveTime = 0;
+    qDebug()<<"Listener destrtuctor";
 }
 
 /**

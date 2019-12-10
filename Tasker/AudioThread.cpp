@@ -37,7 +37,7 @@ using Engine::AudioThread;
  */
 AudioThread::AudioThread() : audioMachine(nullptr), audioLevel(nullptr) {
     connect(&qThread, &QThread::started, this, &AudioThread::updateState);
-
+    qDebug() << "AudioThread constructor thread id: << " << QThread::currentThreadId();
     this->moveToThread(&qThread);
     qThread.start();
 }
@@ -78,5 +78,6 @@ qreal AudioThread::getAudioLevel() {
  */
 void AudioThread::updateState() {
     audioMachine = new AudioMachine();
+    qDebug() << "AudioThread updateState() thread id: << " << QThread::currentThreadId();
     audioLevel = &(audioMachine->getAudioDevice()->getDeviceLevel());
 }
