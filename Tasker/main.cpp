@@ -55,11 +55,11 @@ int main(int argc, char *argv[]) {
     widget = MainUI::getInstance();
     widget->show();
 
-    /*
+
     Timer myTimer(Listener::ListenerType::audio);
     myTimer.start();
     qDebug() << "main: << " << QThread::currentThreadId();
-    */
+
 
     return a.exec();
 }
