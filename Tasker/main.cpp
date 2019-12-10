@@ -50,12 +50,10 @@ int main(int argc, char *argv[]) {
 //    qDebug()<<"task on commitment:"<<t.getName();
 //    qDebug()<<"start date:"<<c.getDateStart();
 //    qDebug()<<"end date:"<<c.getDateEnd();
-
-
    MainUI::getInstance()->show();
     Timer myTimer(Listener::ListenerType::audio);
     myTimer.start();
-    qDebug() << "main: << " << QThread::currentThreadId();
+    qDebug() << "main thread id: << " << QThread::currentThreadId();
 
     return a.exec();
 }

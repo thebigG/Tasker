@@ -47,7 +47,6 @@ public:
 
     AudioListener();
     ~AudioListener() override;
-
     void setAudioThreshold(qreal audioThreshold);
     qreal& getAudioThreshold();
 

@@ -10,7 +10,7 @@ namespace Engine {
 class Listener;
 }
 
-class Engine::Listener : public QObject {
+class Engine::Listener : public QThread {
     Q_OBJECT
 public:
     enum class ListenerState { unproductive, productive };
@@ -28,7 +28,7 @@ public:
 
 public:
     Listener();
-    virtual ~Listener();
+    ~Listener();
     virtual void start() = 0;
     virtual void end() = 0;
     virtual void pause() = 0;

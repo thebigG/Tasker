@@ -21,7 +21,7 @@ private:
     int currentProductiveTime;
     int currentUnproductiveTime;
     udata::Session currentSession;
-    QTime time;
+//    QTime time;
     Listener *listener;
     const QString objectName = "Timer";
     QThread listenerThread;

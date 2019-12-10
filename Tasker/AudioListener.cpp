@@ -41,7 +41,8 @@ AudioListener::AudioListener()
 }
 
 AudioListener::~AudioListener() {
-    Listener::~Listener();
+//    ~Listener();
+qDebug()<<"AudioListener destructor";
 }
 
 void AudioListener::setAudioThreshold(qreal audioThreshold) {
@@ -91,6 +92,8 @@ int AudioListener::startListening(unsigned long int delay) {
     // function i want to run, &AudioListener::cleanup);
 
     connect(&audioThread->getQThread(), &QThread::finished, this, &AudioListener::cleanup);
+    qDebug() << "From startListening on Listener.cpp: " << QThread::currentThreadId();
+    this->moveToThread(&audioThread->getQThread());
     audioListenerState = AudioListenerState::ON;
 
     while (true) {
@@ -106,19 +109,19 @@ int AudioListener::startListening(unsigned long int delay) {
             }
         }
     }
-
+    qDebug() << "AudioListener updateState() thread id: << " << QThread::currentThreadId();
     while (true) {
         ListenerState state;
 
         state = audioThread->getAudioLevel() > audioThreshold ? ListenerState::productive : ListenerState::unproductive;
         setState(state);
 
-        qDebug() << "listener level: " << audioThread->getAudioLevel();
+//        qDebug() << "listener level: " << audioThread->getAudioLevel();
 
         if (state == ListenerState::productive) {
-            qDebug() << "status: productive";
+//            qDebug() << "status: productive";
         } else {
-            qDebug() << "status: unproductive";
+//            qDebug() << "status: unproductive";
         }
 
         QThread::sleep(BASE_DELAY + delay);
