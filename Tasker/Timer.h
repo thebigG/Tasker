@@ -23,10 +23,12 @@ private:
     int currentProductiveTime;
     int currentUnproductiveTime;
     udata::Session currentSession;
-//    QTime time;
+    QTime clock{0,0,0};
     Listener *listener;
     const QString objectName = "Timer";
     QThread listenerThread;
+    QThread thisThread;
+    QTimer* timer;
     virtual void run();
 
 public:
@@ -49,6 +51,7 @@ public:
 
 public slots:
     void timeSlot();
+    void startBackgroundTimer();
 signals:
     void startListener();
 };

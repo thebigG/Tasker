@@ -90,3 +90,10 @@ double util::StatsUtility::calculateUnproductivePercentage(int64_t secondsTotal,
 
     return result;
 }
+
+long long int util::StatsUtility::milliToSeconds(long long int milliSeconds)
+{
+    return milliSeconds/1000;
+}
+
+

@@ -29,7 +29,7 @@ public:
     static int64_t toDays(int64_t seconds);
     static int64_t toWeeks(int64_t seconds);
     static int64_t toMonths(int64_t seconds);
-
+    static long long int milliToSeconds(long long int);
     static double calculateProductivePercentage(int64_t secondsTotal, int64_t secondsProductive);
     static double calculateUnproductivePercentage(int64_t secondsTotal, int64_t secondsProductive);
 

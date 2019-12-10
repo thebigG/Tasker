@@ -1,0 +1,67 @@
+<html><head><title>Timer.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /home/fast-alchemist/Tasker/Tasker/Timer.h</h3>
+<SCRIPT>
+defaultStatus = "File: /home/fast-alchemist/Tasker/Tasker/Timer.h";
+top.document.title  = "Timer.h";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="preproc">#ifndef <a href="dictionary_T.html#375">TIMER_H</a></span>
+<a name="2"><font size=-1>2     </font></a><span class="preproc">#define <a href="dictionary_T.html#375">TIMER_H</a></span>
+<a name="3"><font size=-1>3     </font></a><span class="preproc"></span>
+<a name="4"><font size=-1>4     </font></a><span class="preproc">#include </span><span class="string">&quot;Session.h&quot;</span>
+<a name="5"><font size=-1>5     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;QObject&gt;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;QThread&gt;</span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;QTime&gt;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;KeyboardListener.h&gt;</span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span>
+<a name="11"><font size=-1>11     </font></a><span class="string"></span><span class="keyword">namespace </span><span class="default">Engine {</span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span><span class="keyword">class <a href="dictionary_E.html#288">Timer</a></span><span class="default">;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default">}</span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> * @brief The Engine::Timer class</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"> * @note I had to remove the start() method from Timer.</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"> * It was conflicting with QThread's start() method.</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"> */</span>
+<a name="20"><font size=-1>20     </font></a><span class="comment"></span><span class="keyword">class </span><span class="default">Engine::<a href="dictionary_E.html#288">Timer</a> : </span><span class="keyword">public </span><span class="default">QThread {</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">    Q_OBJECT</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="keyword">private</span><span class="default">:</span>
+<a name="23"><font size=-1>23     </font></a><span class="default">    </span><span class="keyword">int </span><span class="default">currentProductiveTime;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">    </span><span class="keyword">int <a href="dictionary_E.html#350">currentUnproductiveTime</a></span><span class="default">;</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">    udata::<a href="dictionary_U.html#37">Session</a> currentSession;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="comment">//    QTime time;</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment">    <a href="dictionary_E.html#234">Listener</a> </span><span class="default">*<a href="dictionary_E.html#356">listener</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">    </span><span class="keyword">const </span><span class="default">QString objectName = </span><span class="string">&quot;Timer&quot;</span><span class="default">;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">    QThread listenerThread;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">    </span><span class="keyword">virtual void <a href="dictionary_E.html#363">run</a></span><span class="default">();</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span><span class="keyword">public</span><span class="default">:</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">    <a href="dictionary_E.html#344">Timer</a>();</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">    <a href="dictionary_E.html#345">Timer</a>(<a href="dictionary_E.html#234">Listener</a>::<a href="dictionary_E.html#287">ListenerType</a>);</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">    ~<a href="dictionary_E.html#372">Timer</a>();</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">    </span><span class="keyword">void <a href="dictionary_E.html#370">stop</a></span><span class="default">();</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">    </span><span class="keyword">void <a href="dictionary_E.html#362">pause</a></span><span class="default">();</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">    </span><span class="keyword">void <a href="dictionary_E.html#368">startConnect</a></span><span class="default">();</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">    QTime <a href="dictionary_E.html#351">getProductiveTime</a>();</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">    QTime <a href="dictionary_E.html#355">getUnproductiveTime</a>();</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">    QTime <a href="dictionary_E.html#353">getRealTime</a>();</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">    QTime <a href="dictionary_E.html#352">getProductiveTimeLeft</a>();</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">    QTime <a href="dictionary_E.html#354">getRealTimeLeft</a>();</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">    <a href="dictionary_E.html#234">Listener</a>::<a href="dictionary_E.html#287">ListenerType</a> <a href="dictionary_E.html#358">listenerType</a>;</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    QTime <a href="dictionary_E.html#364">setProductiveTime</a>(QTime *);</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">    QTime <a href="dictionary_E.html#366">setRealTime</a>(QTime *);</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">    </span><span class="keyword">void <a href="dictionary_E.html#369">startTimer</a></span><span class="default">();</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">    QTime* time;</span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span>
+<a name="50"><font size=-1>50     </font></a><span class="default"></span><span class="keyword">public </span><span class="default">slots:</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">    </span><span class="keyword">void </span><span class="default">timeSlot();</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">signals:</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">    </span><span class="keyword">void </span><span class="default">startListener();</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">};</span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span>
+<a name="56"><font size=-1>56     </font></a><span class="default"></span><span class="preproc">#endif </span><span class="comment">// TIMER_H</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment"></span>
+</pre></body></html>

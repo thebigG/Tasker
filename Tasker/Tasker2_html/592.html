@@ -1,0 +1,87 @@
+<html><head><title>main.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /home/fast-alchemist/Tasker/Tasker/main.cpp</h3>
+<SCRIPT>
+defaultStatus = "File: /home/fast-alchemist/Tasker/Tasker/main.cpp";
+top.document.title  = "main.cpp";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="preproc">#include </span><span class="string">&quot;AudioListener.h&quot;</span>
+<a name="2"><font size=-1>2     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;CommStatsQWidget.h&quot;</span>
+<a name="3"><font size=-1>3     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;CreateCommitmentQWidget.h&quot;</span>
+<a name="4"><font size=-1>4     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;Interval.h&quot;</span>
+<a name="5"><font size=-1>5     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;StatsUtility.h&quot;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;Task.h&quot;</span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;TaskerUIMainWindowQWidget.h&quot;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;User.h&quot;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;KeyboardListener.h&gt;</span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;QApplication&gt;</span>
+<a name="11"><font size=-1>11     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;QDebug&gt;</span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;QFile&gt;</span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;QObject&gt;</span>
+<a name="14"><font size=-1>14     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;QThreadPool&gt;</span>
+<a name="15"><font size=-1>15     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;Qt&gt;</span>
+<a name="16"><font size=-1>16     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;QtCore&gt;</span>
+<a name="17"><font size=-1>17     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;Timer.h&gt;</span>
+<a name="18"><font size=-1>18     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;UdataUtils.h&gt;</span>
+<a name="19"><font size=-1>19     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cstdio&gt;</span>
+<a name="20"><font size=-1>20     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cstdlib&gt;</span>
+<a name="21"><font size=-1>21     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;iostream&gt;</span>
+<a name="22"><font size=-1>22     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;mainui.h&gt;</span>
+<a name="23"><font size=-1>23     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;stdio.h&gt;</span>
+<a name="24"><font size=-1>24     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;stdlib.h&gt;</span>
+<a name="25"><font size=-1>25     </font></a><span class="string"></span>
+<a name="26"><font size=-1>26     </font></a><span class="string"></span><span class="keyword">using </span><span class="default">std::cout;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span><span class="keyword">using </span><span class="default">std::endl;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="keyword">using namespace </span><span class="default">Engine;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span><span class="keyword">using namespace </span><span class="default">udata;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span><span class="keyword">using namespace </span><span class="default">std;</span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span><span class="keyword">int </span><span class="default">main(</span><span class="keyword">int </span><span class="default">argc, </span><span class="keyword">char </span><span class="default">*argv[]) {</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">    QApplication a(argc, argv);</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span>
+<a name="36"><font size=-1>36     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(UdataUtils::prepFiles() == </span><span class="number">0</span><span class="default">) {</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">        qDebug() &lt;&lt; </span><span class="string">&quot;files was allocated successfully&quot;</span><span class="default">;</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">    } </span><span class="keyword">else </span><span class="default">{</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">        qDebug() &lt;&lt; </span><span class="string">&quot;prepFiles failed&quot;</span><span class="default">;</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">    }</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span>
+<a name="42"><font size=-1>42     </font></a><span class="default">    TaskerUIMainWindowQWidget *widget = nullptr;</span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span>
+<a name="44"><font size=-1>44     </font></a><span class="default">    </span><span class="comment">// qDebug()&lt;&lt;&quot;user name:&quot;&lt;&lt;User::getInstance()-&gt;getUsername();</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment"></span>
+<a name="46"><font size=-1>46     </font></a><span class="comment">    // Commitment c = User::getInstance()-&gt;getCommitments().at(0);</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment">    // c.getName();</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment">    // QVector&lt;Session&gt; sessions = c.getSessions();</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment">    // Task t = sessions.at(0).getTask();</span>
+<a name="50"><font size=-1>50     </font></a><span class="comment">    // qDebug()&lt;&lt;&quot;commitment on disk:&quot;&lt;&lt;c.getName();</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment">    // qDebug()&lt;&lt;&quot;task on commitment:&quot;&lt;&lt;t.getName();</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment">    // qDebug()&lt;&lt;&quot;start date:&quot;&lt;&lt;c.getDateStart();</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment">    // qDebug()&lt;&lt;&quot;end date:&quot;&lt;&lt;c.getDateEnd();</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment"></span>
+<a name="55"><font size=-1>55     </font></a><span class="comment">    </span><span class="default">widget = MainUI::getInstance();</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">    widget-&gt;show();</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">    </span><span class="comment">//Run this block for audio listener</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment">    //The data for audio listener is printed on the writeData function which</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment">    //is located on AudioDevice.cpp</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">/*</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment">    Timer myTimer(Listener::ListenerType::audio);</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment">    myTimer.start();</span>
+<a name="63"><font size=-1>63     </font></a><span class="comment">  */</span>
+<a name="64"><font size=-1>64     </font></a><span class="comment">    </span><span class="default">qDebug() &lt;&lt; </span><span class="string">&quot;main: &lt;&lt; &quot; </span><span class="default">&lt;&lt; QThread::currentThreadId();</span>
+<a name="65"><font size=-1>65     </font></a><span class="default"></span>
+<a name="66"><font size=-1>66     </font></a><span class="default">    </span><span class="comment">//</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment">    /*</span>
+<a name="68"><font size=-1>68     </font></a><span class="comment">     * Run this block for keybaard listener</span>
+<a name="69"><font size=-1>69     </font></a><span class="comment">     *This one only runs on linux. And when executed on linux, run with sudo permission.</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment">    Timer myTimer(Listener::ListenerType::keyboard);</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment">    myTimer.start();</span>
+<a name="72"><font size=-1>72     </font></a><span class="comment">    qDebug() &lt;&lt; &quot;main: &lt;&lt; &quot; &lt;&lt; QThread::currentThreadId();</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment">*/</span>
+<a name="74"><font size=-1>74     </font></a><span class="comment"></span>
+<a name="75"><font size=-1>75     </font></a><span class="comment">    </span><span class="keyword">return </span><span class="default">a.exec();</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">}</span>
+<a name="77"><font size=-1>77     </font></a><span class="default"></span>
+</pre></body></html>

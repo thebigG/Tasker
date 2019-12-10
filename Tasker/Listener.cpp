@@ -9,7 +9,7 @@ using namespace Engine;
 Listener::Listener() {
     checkStateDelay = 0.0;
     slack = 0.0;
-    currentState = Listener::ListenerState::unproductive;
+    state = Listener::ListenerState::unproductive;
     productiveTime = 0;
     unproductiveTime = 0;
 }
@@ -43,7 +43,7 @@ Listener::~Listener() {
  * @param state ListenerState, unproductive or productive
  */
 void Listener::setState(Listener::ListenerState newState) {
-    currentState = newState;
+    state = newState;
 }
 
 /**
@@ -66,7 +66,7 @@ double Listener::getSlack() {
  *         Engine::Listener::ListenerState::productive
  */
 Listener::ListenerState Listener::getState() {
-    return Listener::ListenerState::unproductive;
+    return state;
 }
 
 /**

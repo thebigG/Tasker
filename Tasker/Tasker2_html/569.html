@@ -1,0 +1,97 @@
+<html><head><title>Task.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /home/fast-alchemist/Tasker/Tasker/Task.cpp</h3>
+<SCRIPT>
+defaultStatus = "File: /home/fast-alchemist/Tasker/Tasker/Task.cpp";
+top.document.title  = "Task.cpp";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="preproc">#include </span><span class="string">&quot;Task.h&quot;</span>
+<a name="2"><font size=-1>2     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;QString&quot;</span>
+<a name="3"><font size=-1>3     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;QDataStream&gt;</span>
+<a name="4"><font size=-1>4     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;QFile&gt;</span>
+<a name="5"><font size=-1>5     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;QtCore&gt;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="keyword">using namespace </span><span class="default">udata;</span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * @brief Task::Task</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> */</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"><a href="dictionary_U.html#190">Task</a></span><span class="default">::<a href="dictionary_U.html#570">Task</a>() {</span>
+<a name="13"><font size=-1>13     </font></a><span class="default">}</span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> * @brief Task::Task</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"> * @param newName</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"> */</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"><a href="dictionary_U.html#190">Task</a></span><span class="default">::<a href="dictionary_U.html#571">Task</a>(QString <a href="dictionary_N.html#572">newName</a>) {</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">    name = newName;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">}</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> * @brief Task::Task</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"> * @param newName</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"> * @param listeners</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"> */</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment"><a href="dictionary_U.html#190">Task</a></span><span class="default">::<a href="dictionary_U.html#573">Task</a>(QString <a href="dictionary_N.html#575">newName</a>, QVector&lt;Engine::Listener::ListenerType&gt; <a href="dictionary_L.html#574">listeners</a>) {</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span>
+<a name="30"><font size=-1>30     </font></a><span class="default">    setName(newName);</span>
+<a name="31"><font size=-1>31     </font></a><span class="default">    setListeners(listeners);</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">}</span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment"> * @brief Task::getName</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"> * @return</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment"> */</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"></span><span class="default">QString &amp;<a href="dictionary_U.html#190">Task</a>::<a href="dictionary_U.html#577">getName</a>() {</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">    </span><span class="keyword">return </span><span class="default">name;</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">}</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="43"><font size=-1>43     </font></a><span class="comment"> * @brief Task::setName</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment"> * @param value</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment"> */</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment"></span><span class="keyword">void <a href="dictionary_U.html#190">Task</a></span><span class="default">::<a href="dictionary_U.html#581">setName</a>(QString <a href="dictionary_V.html#582">value</a>) {</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">    </span><span class="keyword">this</span><span class="default">-&gt;name = QString(value);</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">}</span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span>
+<a name="50"><font size=-1>50     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment"> * @brief Task::getListeners</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment"> * @return</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment"> */</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment"></span><span class="default">QVector&lt;Engine::Listener::ListenerType&gt; &amp;<a href="dictionary_U.html#190">Task</a>::<a href="dictionary_U.html#576">getListeners</a>() {</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">    </span><span class="keyword">return </span><span class="default">listeners;</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">}</span>
+<a name="57"><font size=-1>57     </font></a><span class="default"></span>
+<a name="58"><font size=-1>58     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment"> * @brief Task::setListeners</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment"> * @param newListeners</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment"> */</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment"></span><span class="keyword">void <a href="dictionary_U.html#190">Task</a></span><span class="default">::<a href="dictionary_U.html#578">setListeners</a>(</span><span class="keyword">const </span><span class="default">QVector&lt;Engine::Listener::ListenerType&gt; <a href="dictionary_N.html#580">newListeners</a>) {</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">    </span><span class="keyword">for </span><span class="default">(Engine::<a href="dictionary_E.html#234">Listener</a>::<a href="dictionary_E.html#287">ListenerType</a> <a href="dictionary_L.html#579">l</a> : newListeners) {</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">        listeners.push_back(l);</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">    }</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">}</span>
+<a name="67"><font size=-1>67     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="68"><font size=-1>68     </font></a><span class="comment"> * @brief operator &gt;&gt; This grabs the task data from the data stream(a file) and writes it to newTask.</span>
+<a name="69"><font size=-1>69     </font></a><span class="comment"> * @param in The data stream where where the data is.</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment"> * @param newTask The task object in memory.</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment"> * @return</span>
+<a name="72"><font size=-1>72     </font></a><span class="comment"> */</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment"></span><span class="default">QDataStream &amp;udata::</span><span class="keyword">operator</span><span class="default">&gt;&gt;(QDataStream &amp;<a href="dictionary_I.html#587">in</a>, udata::<a href="dictionary_U.html#190">Task</a> &amp;<a href="dictionary_N.html#588">newTask</a>) {</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">    in &gt;&gt; newTask.name &gt;&gt; newTask.listeners;</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">    </span><span class="keyword">return </span><span class="default">in;</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">}</span>
+<a name="77"><font size=-1>77     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="78"><font size=-1>78     </font></a><span class="comment"> * @brief udata::operator &lt;&lt; This writes the data from task into the data stream out(a file).</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment"> * @param out The file on disk(data stream).</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment"> * @param newTask The in-memory task to be written to file.</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment"> * @return The data stream(this can be very useful for error checking).</span>
+<a name="82"><font size=-1>82     </font></a><span class="comment"> */</span>
+<a name="83"><font size=-1>83     </font></a><span class="comment"></span><span class="default">QDataStream &amp;udata::</span><span class="keyword">operator</span><span class="default">&lt;&lt;(QDataStream &amp;<a href="dictionary_O.html#585">out</a>, </span><span class="keyword">const </span><span class="default">udata::<a href="dictionary_U.html#190">Task</a> &amp;<a href="dictionary_N.html#584">newTask</a>) {</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">    out &lt;&lt; newTask.name &lt;&lt; newTask.listeners;</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">    </span><span class="keyword">return </span><span class="default">out;</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">}</span>
+<a name="87"><font size=-1>87     </font></a><span class="default"></span>
+</pre></body></html>

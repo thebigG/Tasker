@@ -39,7 +39,7 @@ public:
     virtual void update() = 0;
     static ListenerType intToListenerType(int enumToInt);
     virtual Listener::ListenerState listen() = 0;
-    ListenerState currentState;
+
     double getSlack();
     void setState(ListenerState);
     ListenerState getState();

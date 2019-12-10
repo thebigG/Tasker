@@ -134,9 +134,9 @@ int AudioListener::startListening(unsigned long int delay) {
 //    connect();
     qDebug() << "From startListening on Listener.cpp: " << QThread::currentThreadId();
     audioThread->moveToThread(&audioThread->getQThread());
-
+    qDebug() << "From startListening on Listener.cpp: after connect" << QThread::currentThreadId();
     audioListenerState = AudioListenerState::ON;
-
+    audioThread->getQThread().start();
     while (true) {
         if (audioThread->getAudioMachine()) {
             if (audioThread->getAudioMachine()->getAudioDevice()) {
@@ -162,9 +162,9 @@ int AudioListener::startListening(unsigned long int delay) {
 //        qDebug() << "listener level: " << audioThread->getAudioLevel();
 
         if (state == ListenerState::productive) {
-//            qDebug() << "status: productive";
+            qDebug() << "status: productive";
         } else {
-//            qDebug() << "status: unproductive";
+            qDebug() << "status: unproductive";
         }
 
         QThread::sleep(BASE_DELAY + delay);

@@ -1,0 +1,22 @@
+<html><head><title>timerthread.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /home/fast-alchemist/Tasker/Tasker/timerthread.cpp</h3>
+<SCRIPT>
+defaultStatus = "File: /home/fast-alchemist/Tasker/Tasker/timerthread.cpp";
+top.document.title  = "timerthread.cpp";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="preproc">#include </span><span class="string">&quot;timerthread.h&quot;</span>
+<a name="2"><font size=-1>2     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;Listener.h&gt;</span>
+<a name="3"><font size=-1>3     </font></a><span class="string"></span>
+<a name="4"><font size=-1>4     </font></a><span class="string"><a href="dictionary_T.html#292">TimerThread</a></span><span class="default">::<a href="dictionary_T.html#293">TimerThread</a>(<a href="dictionary_E.html#234">Listener</a>::<a href="dictionary_E.html#287">ListenerType</a> <a href="dictionary_N.html#294">newListener</a>): <a href="dictionary_T.html#299">listener</a>{<a href="dictionary_N.html#294">newListener</a>}</span>
+<a name="5"><font size=-1>5     </font></a><span class="default">{</span>
+<a name="6"><font size=-1>6     </font></a><span class="default">}</span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span><span class="keyword">void <a href="dictionary_T.html#292">TimerThread</a></span><span class="default">::<a href="dictionary_T.html#304">run</a>()</span>
+<a name="8"><font size=-1>8     </font></a><span class="default">{</span>
+<a name="9"><font size=-1>9     </font></a><span class="default">    <a href="dictionary_T.html#305">timerThread</a> = </span><span class="keyword">new <a href="dictionary_E.html#345">Timer</a></span><span class="default">(<a href="dictionary_T.html#299">listener</a>);</span>
+<a name="10"><font size=-1>10     </font></a><span class="default">    exec();</span>
+<a name="11"><font size=-1>11     </font></a><span class="default">}</span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span>
+</pre></body></html>
