@@ -154,7 +154,7 @@ int UdataUtils::prepFiles() {
     userFilePath = newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
     saveUserData(*User::getInstance());
     qDebug() << "prepared files at:" << userFilePath;
-    }
+
     return 0;
 }
 QString UdataUtils::getNotRootUser()

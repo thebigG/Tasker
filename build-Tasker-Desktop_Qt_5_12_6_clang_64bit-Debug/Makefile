@@ -71,7 +71,8 @@ SOURCES       = ../Tasker/AudioDevice.cpp \
 		../Tasker/UdataUtils.cpp \
 		../Tasker/User.cpp \
 		../Tasker/mainui.cpp \
-		../Tasker/main.cpp moc_AudioListener.cpp \
+		../Tasker/main.cpp \
+		../Tasker/timerthread.cpp moc_AudioListener.cpp \
 		moc_AudioMachine.cpp \
 		moc_AudioThread.cpp \
 		moc_CommStatsQWidget.cpp \
@@ -102,6 +103,7 @@ OBJECTS       = AudioDevice.o \
 		User.o \
 		mainui.o \
 		main.o \
+		timerthread.o \
 		moc_AudioListener.o \
 		moc_AudioMachine.o \
 		moc_AudioThread.o \
@@ -278,7 +280,6 @@ DIST          = /Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/spec_p
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/qt_config.prf \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/spec_post.prf \
-		../Tasker/.qmake.stash \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/toolchain.prf \
@@ -329,7 +330,8 @@ DIST          = /Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/spec_p
 		../Tasker/TimerWindowQWidget.h \
 		../Tasker/UdataUtils.h \
 		../Tasker/mainui.h \
-		../Tasker/User.h ../Tasker/AudioDevice.cpp \
+		../Tasker/User.h \
+		../Tasker/timerthread.h ../Tasker/AudioDevice.cpp \
 		../Tasker/AudioListener.cpp \
 		../Tasker/AudioMachine.cpp \
 		../Tasker/AudioThread.cpp \
@@ -348,7 +350,8 @@ DIST          = /Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/spec_p
 		../Tasker/UdataUtils.cpp \
 		../Tasker/User.cpp \
 		../Tasker/mainui.cpp \
-		../Tasker/main.cpp
+		../Tasker/main.cpp \
+		../Tasker/timerthread.cpp
 QMAKE_TARGET  = Tasker
 DESTDIR       = 
 TARGET        = Tasker.app/Contents/MacOS/Tasker
@@ -536,7 +539,6 @@ Makefile: ../Tasker/Tasker.pro /Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/qt_config.prf \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/mac/sdk.prf \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/toolchain.prf \
@@ -739,7 +741,6 @@ Makefile: ../Tasker/Tasker.pro /Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/
 /Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/qt_config.prf:
 /Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/macx-clang/qmake.conf:
 /Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/exclusive_builds.prf:
 /Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/mac/sdk.prf:
 /Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/toolchain.prf:
@@ -806,8 +807,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/AudioDevice.h ../Tasker/AudioListener.h ../Tasker/AudioMachine.h ../Tasker/AudioThread.h ../Tasker/CommStatsQWidget.h ../Tasker/Commitment.h ../Tasker/CreateCommitmentQWidget.h ../Tasker/Listener.h ../Tasker/KeyboardListener.h ../Tasker/Session.h ../Tasker/Task.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/Timer.h ../Tasker/TimerWindowQWidget.h ../Tasker/Interval.h ../Tasker/StatsUtility.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/TimerWindowQWidget.h ../Tasker/UdataUtils.h ../Tasker/mainui.h ../Tasker/User.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Tasker/AudioDevice.cpp ../Tasker/AudioListener.cpp ../Tasker/AudioMachine.cpp ../Tasker/AudioThread.cpp ../Tasker/CommStatsQWidget.cpp ../Tasker/Commitment.cpp ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Listener.cpp ../Tasker/KeyboardListener.cpp ../Tasker/Session.cpp ../Tasker/Task.cpp ../Tasker/StatsUtility.cpp ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/TempChartQWidget.cpp ../Tasker/Timer.cpp ../Tasker/TimerWindowQWidget.cpp ../Tasker/UdataUtils.cpp ../Tasker/User.cpp ../Tasker/mainui.cpp ../Tasker/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/AudioDevice.h ../Tasker/AudioListener.h ../Tasker/AudioMachine.h ../Tasker/AudioThread.h ../Tasker/CommStatsQWidget.h ../Tasker/Commitment.h ../Tasker/CreateCommitmentQWidget.h ../Tasker/Listener.h ../Tasker/KeyboardListener.h ../Tasker/Session.h ../Tasker/Task.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/Timer.h ../Tasker/TimerWindowQWidget.h ../Tasker/Interval.h ../Tasker/StatsUtility.h ../Tasker/TaskerUIMainWindowQWidget.h ../Tasker/TempChartQWidget.h ../Tasker/TimerWindowQWidget.h ../Tasker/UdataUtils.h ../Tasker/mainui.h ../Tasker/User.h ../Tasker/timerthread.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Tasker/AudioDevice.cpp ../Tasker/AudioListener.cpp ../Tasker/AudioMachine.cpp ../Tasker/AudioThread.cpp ../Tasker/CommStatsQWidget.cpp ../Tasker/Commitment.cpp ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Listener.cpp ../Tasker/KeyboardListener.cpp ../Tasker/Session.cpp ../Tasker/Task.cpp ../Tasker/StatsUtility.cpp ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/TempChartQWidget.cpp ../Tasker/Timer.cpp ../Tasker/TimerWindowQWidget.cpp ../Tasker/UdataUtils.cpp ../Tasker/User.cpp ../Tasker/mainui.cpp ../Tasker/main.cpp ../Tasker/timerthread.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Tasker/CommStatsQWidget.ui ../Tasker/CreateCommitmentQWidget.ui ../Tasker/TaskerUIMainWindowQWidget.ui ../Tasker/TimerWindowQWidget.ui $(DISTDIR)/
 
 
@@ -818,7 +819,6 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r Tasker.app
-	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -851,36 +851,36 @@ moc_AudioListener.cpp: ../Tasker/AudioListener.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudiodeviceinfo.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
-		../Tasker/Listener.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../Tasker/AudioThread.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QObject \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
-		../Tasker/AudioThread.h \
 		../Tasker/AudioMachine.h \
 		../Tasker/AudioDevice.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioFormat \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioformat.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QIODevice \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../Tasker/Listener.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
 		moc_predefs.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/bin/moc
 	/Users/gemuelealudino/Qt/5.12.6/clang_64/bin/moc $(DEFINES) --include /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/build-Tasker-Desktop_Qt_5_12_6_clang_64bit-Debug/moc_predefs.h -I/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/macx-clang -I/Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCharts.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtNetwork.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtTest.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include -F/Users/gemuelealudino/Qt/5.12.6/clang_64/lib ../Tasker/AudioListener.h -o moc_AudioListener.cpp
 
 moc_AudioMachine.cpp: ../Tasker/AudioMachine.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../Tasker/AudioDevice.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioFormat \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioformat.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QIODevice \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		moc_predefs.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/bin/moc
 	/Users/gemuelealudino/Qt/5.12.6/clang_64/bin/moc $(DEFINES) --include /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/build-Tasker-Desktop_Qt_5_12_6_clang_64bit-Debug/moc_predefs.h -I/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/macx-clang -I/Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCharts.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtNetwork.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtTest.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include -F/Users/gemuelealudino/Qt/5.12.6/clang_64/lib ../Tasker/AudioMachine.h -o moc_AudioMachine.cpp
@@ -891,20 +891,40 @@ moc_AudioThread.cpp: ../Tasker/AudioThread.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		../Tasker/AudioMachine.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../Tasker/AudioDevice.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioFormat \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioformat.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QIODevice \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		moc_predefs.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/bin/moc
 	/Users/gemuelealudino/Qt/5.12.6/clang_64/bin/moc $(DEFINES) --include /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/build-Tasker-Desktop_Qt_5_12_6_clang_64bit-Debug/moc_predefs.h -I/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/macx-clang -I/Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCharts.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtNetwork.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtTest.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include -F/Users/gemuelealudino/Qt/5.12.6/clang_64/lib ../Tasker/AudioThread.h -o moc_AudioThread.cpp
 
 moc_CommStatsQWidget.cpp: ../Tasker/CommStatsQWidget.h \
+		../Tasker/User.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../Tasker/Commitment.h \
+		../Tasker/Interval.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDate \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QString \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../Tasker/Session.h \
+		../Tasker/Task.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../Tasker/Listener.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		moc_predefs.h \
@@ -912,17 +932,17 @@ moc_CommStatsQWidget.cpp: ../Tasker/CommStatsQWidget.h \
 	/Users/gemuelealudino/Qt/5.12.6/clang_64/bin/moc $(DEFINES) --include /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/build-Tasker-Desktop_Qt_5_12_6_clang_64bit-Debug/moc_predefs.h -I/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/macx-clang -I/Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCharts.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtNetwork.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtTest.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include -F/Users/gemuelealudino/Qt/5.12.6/clang_64/lib ../Tasker/CommStatsQWidget.h -o moc_CommStatsQWidget.cpp
 
 moc_CreateCommitmentQWidget.cpp: ../Tasker/CreateCommitmentQWidget.h \
+		../Tasker/Interval.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/QIntValidator \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
-		../Tasker/Interval.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/QIntValidator \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		moc_predefs.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/bin/moc
 	/Users/gemuelealudino/Qt/5.12.6/clang_64/bin/moc $(DEFINES) --include /Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/build-Tasker-Desktop_Qt_5_12_6_clang_64bit-Debug/moc_predefs.h -I/Users/gemuelealudino/Qt/5.12.6/clang_64/mkspecs/macx-clang -I/Users/gemuelealudino/Developer/C++/RutgersUniversity/SoftwareEngineering/Tasker/Tasker -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCharts.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtNetwork.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtTest.framework/Headers -I/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include -F/Users/gemuelealudino/Qt/5.12.6/clang_64/lib ../Tasker/CreateCommitmentQWidget.h -o moc_CreateCommitmentQWidget.cpp
@@ -1130,18 +1150,37 @@ moc_KeyboardListener.cpp: ../Tasker/KeyboardListener.h \
 
 moc_TaskerUIMainWindowQWidget.cpp: ../Tasker/TaskerUIMainWindowQWidget.h \
 		../Tasker/CommStatsQWidget.h \
+		../Tasker/User.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../Tasker/Commitment.h \
+		../Tasker/Interval.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDate \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QString \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../Tasker/Session.h \
+		../Tasker/Task.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../Tasker/Listener.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../Tasker/CreateCommitmentQWidget.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/QIntValidator \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
-		../Tasker/Interval.h \
 		../Tasker/TimerWindowQWidget.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QFrame \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
@@ -1359,18 +1398,37 @@ moc_TimerWindowQWidget.cpp: ../Tasker/TimerWindowQWidget.h \
 
 moc_TaskerUIMainWindowQWidget.cpp: ../Tasker/TaskerUIMainWindowQWidget.h \
 		../Tasker/CommStatsQWidget.h \
+		../Tasker/User.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../Tasker/Commitment.h \
+		../Tasker/Interval.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDate \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QString \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../Tasker/Session.h \
+		../Tasker/Task.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../Tasker/Listener.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../Tasker/CreateCommitmentQWidget.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/QIntValidator \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
-		../Tasker/Interval.h \
 		../Tasker/TimerWindowQWidget.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QFrame \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
@@ -1618,36 +1676,36 @@ AudioListener.o: ../Tasker/AudioListener.cpp ../Tasker/AudioListener.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudiodeviceinfo.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
-		../Tasker/Listener.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../Tasker/AudioThread.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QObject \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
-		../Tasker/AudioThread.h \
 		../Tasker/AudioMachine.h \
 		../Tasker/AudioDevice.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioFormat \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioformat.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QIODevice \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../Tasker/Listener.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AudioListener.o ../Tasker/AudioListener.cpp
 
 AudioMachine.o: ../Tasker/AudioMachine.cpp ../Tasker/AudioMachine.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../Tasker/AudioDevice.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioFormat \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioformat.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QIODevice \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
@@ -1662,44 +1720,25 @@ AudioThread.o: ../Tasker/AudioThread.cpp ../Tasker/AudioThread.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		../Tasker/AudioMachine.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../Tasker/AudioDevice.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioFormat \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioformat.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QIODevice \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AudioThread.o ../Tasker/AudioThread.cpp
 
 CommStatsQWidget.o: ../Tasker/CommStatsQWidget.cpp ../Tasker/CommStatsQWidget.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		ui_CommStatsQWidget.h \
-		../Tasker/CreateCommitmentQWidget.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/QIntValidator \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
-		../Tasker/Interval.h \
-		../Tasker/mainui.h \
-		../Tasker/TaskerUIMainWindowQWidget.h \
-		../Tasker/TimerWindowQWidget.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QFrame \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		../Tasker/User.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QVector \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		../Tasker/Commitment.h \
+		../Tasker/Interval.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDate \
@@ -1715,7 +1754,28 @@ CommStatsQWidget.o: ../Tasker/CommStatsQWidget.cpp ../Tasker/CommStatsQWidget.h 
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
-		../Tasker/TempChartQWidget.h
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		ui_CommStatsQWidget.h \
+		../Tasker/CreateCommitmentQWidget.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/QIntValidator \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../Tasker/mainui.h \
+		../Tasker/TaskerUIMainWindowQWidget.h \
+		../Tasker/TimerWindowQWidget.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QFrame \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../Tasker/TempChartQWidget.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CommStatsQWidget.o ../Tasker/CommStatsQWidget.cpp
 
 Commitment.o: ../Tasker/Commitment.cpp ../Tasker/Commitment.h \
@@ -1742,19 +1802,22 @@ Commitment.o: ../Tasker/Commitment.cpp ../Tasker/Commitment.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Commitment.o ../Tasker/Commitment.cpp
 
 CreateCommitmentQWidget.o: ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/CreateCommitmentQWidget.h \
+		../Tasker/Interval.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/QIntValidator \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
-		../Tasker/Interval.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/QIntValidator \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		ui_CreateCommitmentQWidget.h \
 		../Tasker/CommStatsQWidget.h \
+		../Tasker/User.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		../Tasker/Commitment.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
@@ -1766,8 +1829,6 @@ CreateCommitmentQWidget.o: ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Creat
 		../Tasker/Task.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QObject \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QVector \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		../Tasker/Listener.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
@@ -1776,7 +1837,6 @@ CreateCommitmentQWidget.o: ../Tasker/CreateCommitmentQWidget.cpp ../Tasker/Creat
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDebug \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../Tasker/StatsUtility.h \
-		../Tasker/User.h \
 		../Tasker/mainui.h \
 		../Tasker/TaskerUIMainWindowQWidget.h \
 		../Tasker/TimerWindowQWidget.h \
@@ -1794,7 +1854,9 @@ Listener.o: ../Tasker/Listener.cpp ../Tasker/Listener.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QObject \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QtDebug \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Listener.o ../Tasker/Listener.cpp
 
 KeyboardListener.o: ../Tasker/KeyboardListener.cpp ../Tasker/KeyboardListener.h \
@@ -2369,28 +2431,11 @@ StatsUtility.o: ../Tasker/StatsUtility.cpp ../Tasker/StatsUtility.h \
 
 TaskerUIMainWindowQWidget.o: ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/TaskerUIMainWindowQWidget.h \
 		../Tasker/CommStatsQWidget.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QWidget \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
-		../Tasker/CreateCommitmentQWidget.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/QIntValidator \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
-		../Tasker/Interval.h \
-		../Tasker/TimerWindowQWidget.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QFrame \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		ui_TaskerUIMainWindowQWidget.h \
 		../Tasker/User.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QVector \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		../Tasker/Commitment.h \
+		../Tasker/Interval.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDate \
@@ -2406,6 +2451,23 @@ TaskerUIMainWindowQWidget.o: ../Tasker/TaskerUIMainWindowQWidget.cpp ../Tasker/T
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../Tasker/CreateCommitmentQWidget.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/QIntValidator \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../Tasker/TimerWindowQWidget.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QFrame \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		ui_TaskerUIMainWindowQWidget.h \
 		../Tasker/mainui.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o TaskerUIMainWindowQWidget.o ../Tasker/TaskerUIMainWindowQWidget.cpp
 
@@ -2646,12 +2708,12 @@ TimerWindowQWidget.o: ../Tasker/TimerWindowQWidget.cpp ../Tasker/TimerWindowQWid
 		../Tasker/CreateCommitmentQWidget.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/QIntValidator \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QFrame \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
@@ -2719,18 +2781,37 @@ User.o: ../Tasker/User.cpp ../Tasker/User.h \
 mainui.o: ../Tasker/mainui.cpp ../Tasker/mainui.h \
 		../Tasker/TaskerUIMainWindowQWidget.h \
 		../Tasker/CommStatsQWidget.h \
+		../Tasker/User.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../Tasker/Commitment.h \
+		../Tasker/Interval.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDate \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QString \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../Tasker/Session.h \
+		../Tasker/Task.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../Tasker/Listener.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../Tasker/CreateCommitmentQWidget.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/QIntValidator \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
-		../Tasker/Interval.h \
 		../Tasker/TimerWindowQWidget.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QFrame \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
@@ -2743,52 +2824,52 @@ main.o: ../Tasker/main.cpp ../Tasker/AudioListener.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudiodeviceinfo.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioInput \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioinput.h \
-		../Tasker/Listener.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../Tasker/AudioThread.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QObject \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
-		../Tasker/AudioThread.h \
 		../Tasker/AudioMachine.h \
 		../Tasker/AudioDevice.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/QAudioFormat \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtMultimedia.framework/Headers/qaudioformat.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QIODevice \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../Tasker/Listener.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
 		../Tasker/CommStatsQWidget.h \
+		../Tasker/User.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../Tasker/Commitment.h \
+		../Tasker/Interval.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDate \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QString \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../Tasker/Session.h \
+		../Tasker/Task.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../Tasker/CreateCommitmentQWidget.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/QIntValidator \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtGui.framework/Headers/qvalidator.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QDateEdit \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qdatetimeedit.h \
-		../Tasker/Interval.h \
 		../Tasker/StatsUtility.h \
-		../Tasker/Task.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QVector \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvector.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QString \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		../Tasker/TaskerUIMainWindowQWidget.h \
 		../Tasker/TimerWindowQWidget.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QFrame \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		../Tasker/User.h \
-		../Tasker/Commitment.h \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDate \
-		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
-		../Tasker/Session.h \
 		../Tasker/KeyboardListener.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QtCore \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qglobal.h \
@@ -2971,6 +3052,199 @@ main.o: ../Tasker/main.cpp ../Tasker/AudioListener.h \
 		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QtGlobal \
 		../Tasker/mainui.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Tasker/main.cpp
+
+timerthread.o: ../Tasker/timerthread.cpp ../Tasker/timerthread.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QThread \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../Tasker/Timer.h \
+		../Tasker/Session.h \
+		../Tasker/Task.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		../Tasker/Listener.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QDataStream \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatastream.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QFile \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QString \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QTime \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../Tasker/KeyboardListener.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/QtCore \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qglobal.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qabstractanimation.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qabstracteventdispatcher.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qabstractnativeeventfilter.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qabstractproxymodel.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qabstractstate.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qabstracttransition.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qalgorithms.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qanimationgroup.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qarraydata.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qarraydataops.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qarraydatapointer.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qatomic.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qbasictimer.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qbitarray.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qbuffer.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qbytearray.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qbytearraylist.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qbytearraymatcher.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcache.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcborarray.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcborcommon.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcbormap.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcborstream.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcborvalue.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qchar.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcollator.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcommandlineoption.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcommandlineparser.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcompilerdetection.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcontainerfwd.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcontiguouscache.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcoreapplication.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcoreevent.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qcryptographichash.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdeadlinetimer.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qdiriterator.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qeasingcurve.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qelapsedtimer.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qendian.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qeventloop.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qeventtransition.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qexception.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfactoryinterface.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfiledevice.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfileinfo.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfileselector.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfilesystemwatcher.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfinalstate.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qflags.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfuture.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfutureinterface.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfuturesynchronizer.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qfuturewatcher.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qgenericatomic.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qglobalstatic.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qhash.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qhashfunctions.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qhistorystate.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qidentityproxymodel.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qiodevice.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qisenum.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qitemselectionmodel.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qiterator.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qjsonarray.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qjsondocument.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qjsonobject.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qjsonvalue.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qlibrary.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qlibraryinfo.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qline.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qlinkedlist.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qlocale.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qlockfile.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qloggingcategory.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qmap.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qmargins.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qmessageauthenticationcode.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qmetaobject.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qmetatype.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qmimedata.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qmimedatabase.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qmimetype.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qmutex.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qnamespace.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qnumeric.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qobjectcleanuphandler.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qobjectdefs.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qoperatingsystemversion.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qpair.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qparallelanimationgroup.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qpauseanimation.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qplugin.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qpluginloader.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qpointer.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qprocess.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qprocessordetection.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qpropertyanimation.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qqueue.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qrandom.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qreadwritelock.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qrect.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qrefcount.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qregexp.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qregularexpression.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qresource.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qresultstore.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qrunnable.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsavefile.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qscopedpointer.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qscopedvaluerollback.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qscopeguard.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsemaphore.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsequentialanimationgroup.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qset.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsettings.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qshareddata.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsharedmemory.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsharedpointer.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsignaltransition.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsize.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsocketnotifier.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsortfilterproxymodel.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstack.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstandardpaths.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstate.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstatemachine.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstorageinfo.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstringalgorithms.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstringbuilder.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstringlistmodel.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstringliteral.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstringmatcher.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qstringview.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsysinfo.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsystemdetection.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qsystemsemaphore.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qtemporarydir.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qtemporaryfile.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qtextboundaryfinder.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qtextcodec.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthreadpool.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qthreadstorage.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qtimeline.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qtimezone.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qtranslator.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qtypeinfo.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qtypetraits.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qurl.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qurlquery.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/quuid.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvariantanimation.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qvarlengtharray.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qversionnumber.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qversiontagging.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qwaitcondition.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qwineventnotifier.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qxmlstream.h \
+		/Users/gemuelealudino/Qt/5.12.6/clang_64/lib/QtCore.framework/Headers/qtcoreversion.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o timerthread.o ../Tasker/timerthread.cpp
 
 moc_AudioListener.o: moc_AudioListener.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_AudioListener.o moc_AudioListener.cpp

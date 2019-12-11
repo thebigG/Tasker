@@ -15,7 +15,6 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpinBox>
@@ -37,9 +36,6 @@ public:
     QCheckBox *audioQCheckBox;
     QCheckBox *keyboardQCheckBox;
     QLabel *listenersQLabel;
-    QFrame *realTimeQFrame;
-    QLabel *realTimeLabel;
-    QLineEdit *realTimeDurationQLineEdit;
     QFrame *realTimeAlertQFrame;
     QLabel *realTimeAlertQLabel;
     QRadioButton *realTimeAlertWhenFinishedQRadioButton;
@@ -51,12 +47,11 @@ public:
     QRadioButton *productionTimeOffQRadioButton;
     QRadioButton *productionTimeWaitForPauseQRadioButton;
     QFrame *productionTimerQFrame;
-    QSpinBox *productionTimeMillisecondsQSpinBox;
     QLabel *productionTimeQLabel;
-    QSpinBox *productionTimeSecondsQSpinBox;
     QSpinBox *productionTimeHoursQSpinBox;
     QSpinBox *productionTimeMinutesQSpinBox;
     QLabel *productionTimeDescriptionsQLabel;
+    QSpinBox *productionTimeSecondsQSpinBox;
 
     void setupUi(QWidget *TimerWindowQWidget)
     {
@@ -107,19 +102,6 @@ public:
         listenersQLabel = new QLabel(taskListenersQFrame);
         listenersQLabel->setObjectName(QString::fromUtf8("listenersQLabel"));
         listenersQLabel->setGeometry(QRect(0, 30, 58, 16));
-        realTimeQFrame = new QFrame(timerWindowQFrame);
-        realTimeQFrame->setObjectName(QString::fromUtf8("realTimeQFrame"));
-        realTimeQFrame->setGeometry(QRect(40, 170, 151, 21));
-        realTimeQFrame->setFrameShape(QFrame::NoFrame);
-        realTimeQFrame->setFrameShadow(QFrame::Raised);
-        realTimeLabel = new QLabel(realTimeQFrame);
-        realTimeLabel->setObjectName(QString::fromUtf8("realTimeLabel"));
-        realTimeLabel->setGeometry(QRect(0, 0, 81, 25));
-        realTimeDurationQLineEdit = new QLineEdit(realTimeQFrame);
-        realTimeDurationQLineEdit->setObjectName(QString::fromUtf8("realTimeDurationQLineEdit"));
-        realTimeDurationQLineEdit->setGeometry(QRect(70, 0, 81, 25));
-        realTimeDurationQLineEdit->setInputMethodHints(Qt::ImhTime);
-        realTimeDurationQLineEdit->setMaxLength(11);
         realTimeAlertQFrame = new QFrame(timerWindowQFrame);
         realTimeAlertQFrame->setObjectName(QString::fromUtf8("realTimeAlertQFrame"));
         realTimeAlertQFrame->setGeometry(QRect(200, 210, 141, 71));
@@ -159,45 +141,38 @@ public:
         productionTimerQFrame->setGeometry(QRect(60, 70, 251, 101));
         productionTimerQFrame->setFrameShape(QFrame::NoFrame);
         productionTimerQFrame->setFrameShadow(QFrame::Raised);
-        productionTimeMillisecondsQSpinBox = new QSpinBox(productionTimerQFrame);
-        productionTimeMillisecondsQSpinBox->setObjectName(QString::fromUtf8("productionTimeMillisecondsQSpinBox"));
-        productionTimeMillisecondsQSpinBox->setGeometry(QRect(180, 20, 61, 51));
-        QFont font1;
-        font1.setPointSize(24);
-        productionTimeMillisecondsQSpinBox->setFont(font1);
-        productionTimeMillisecondsQSpinBox->setFrame(false);
-        productionTimeMillisecondsQSpinBox->setMaximum(59);
-        productionTimeMillisecondsQSpinBox->setValue(0);
         productionTimeQLabel = new QLabel(productionTimerQFrame);
         productionTimeQLabel->setObjectName(QString::fromUtf8("productionTimeQLabel"));
         productionTimeQLabel->setGeometry(QRect(0, 0, 151, 16));
-        QFont font2;
-        font2.setBold(true);
-        font2.setWeight(75);
-        productionTimeQLabel->setFont(font2);
-        productionTimeSecondsQSpinBox = new QSpinBox(productionTimerQFrame);
-        productionTimeSecondsQSpinBox->setObjectName(QString::fromUtf8("productionTimeSecondsQSpinBox"));
-        productionTimeSecondsQSpinBox->setGeometry(QRect(120, 20, 61, 51));
-        productionTimeSecondsQSpinBox->setFont(font1);
-        productionTimeSecondsQSpinBox->setFrame(false);
-        productionTimeSecondsQSpinBox->setMaximum(59);
-        productionTimeSecondsQSpinBox->setValue(0);
+        QFont font1;
+        font1.setBold(true);
+        font1.setWeight(75);
+        productionTimeQLabel->setFont(font1);
         productionTimeHoursQSpinBox = new QSpinBox(productionTimerQFrame);
         productionTimeHoursQSpinBox->setObjectName(QString::fromUtf8("productionTimeHoursQSpinBox"));
         productionTimeHoursQSpinBox->setGeometry(QRect(0, 20, 61, 51));
-        productionTimeHoursQSpinBox->setFont(font1);
+        QFont font2;
+        font2.setPointSize(24);
+        productionTimeHoursQSpinBox->setFont(font2);
         productionTimeHoursQSpinBox->setFrame(false);
         productionTimeHoursQSpinBox->setValue(0);
         productionTimeMinutesQSpinBox = new QSpinBox(productionTimerQFrame);
         productionTimeMinutesQSpinBox->setObjectName(QString::fromUtf8("productionTimeMinutesQSpinBox"));
         productionTimeMinutesQSpinBox->setGeometry(QRect(60, 20, 61, 51));
-        productionTimeMinutesQSpinBox->setFont(font1);
+        productionTimeMinutesQSpinBox->setFont(font2);
         productionTimeMinutesQSpinBox->setFrame(false);
         productionTimeMinutesQSpinBox->setMaximum(59);
         productionTimeMinutesQSpinBox->setValue(0);
         productionTimeDescriptionsQLabel = new QLabel(productionTimerQFrame);
         productionTimeDescriptionsQLabel->setObjectName(QString::fromUtf8("productionTimeDescriptionsQLabel"));
-        productionTimeDescriptionsQLabel->setGeometry(QRect(0, 70, 231, 16));
+        productionTimeDescriptionsQLabel->setGeometry(QRect(0, 70, 171, 16));
+        productionTimeSecondsQSpinBox = new QSpinBox(productionTimerQFrame);
+        productionTimeSecondsQSpinBox->setObjectName(QString::fromUtf8("productionTimeSecondsQSpinBox"));
+        productionTimeSecondsQSpinBox->setGeometry(QRect(120, 20, 61, 51));
+        productionTimeSecondsQSpinBox->setFont(font2);
+        productionTimeSecondsQSpinBox->setFrame(false);
+        productionTimeSecondsQSpinBox->setMaximum(59);
+        productionTimeSecondsQSpinBox->setValue(0);
 
         retranslateUi(TimerWindowQWidget);
 
@@ -220,8 +195,6 @@ public:
         audioQCheckBox->setText(QApplication::translate("TimerWindowQWidget", "Mic", nullptr));
         keyboardQCheckBox->setText(QApplication::translate("TimerWindowQWidget", "Keyboard", nullptr));
         listenersQLabel->setText(QApplication::translate("TimerWindowQWidget", "Listeners:", nullptr));
-        realTimeLabel->setText(QApplication::translate("TimerWindowQWidget", "Real Time: ", nullptr));
-        realTimeDurationQLineEdit->setText(QApplication::translate("TimerWindowQWidget", "00:00:00:00", nullptr));
         realTimeAlertQLabel->setText(QApplication::translate("TimerWindowQWidget", "Real-time Timer Alert", nullptr));
         realTimeAlertWhenFinishedQRadioButton->setText(QApplication::translate("TimerWindowQWidget", "Alert when finished", nullptr));
         realTimeOffQRadioButton->setText(QApplication::translate("TimerWindowQWidget", "Off", nullptr));
@@ -236,15 +209,7 @@ public:
         productionTimeWaitForPauseQRadioButton->setToolTip(QApplication::translate("TimerWindowQWidget", "Waits for you to pause your work before alerting you that your time is up", nullptr));
 #endif // QT_NO_TOOLTIP
         productionTimeWaitForPauseQRadioButton->setText(QApplication::translate("TimerWindowQWidget", "Wait for pause", nullptr));
-#ifndef QT_NO_TOOLTIP
-        productionTimeMillisecondsQSpinBox->setToolTip(QApplication::translate("TimerWindowQWidget", "Milliseconds", nullptr));
-#endif // QT_NO_TOOLTIP
-        productionTimeMillisecondsQSpinBox->setPrefix(QApplication::translate("TimerWindowQWidget", ":", nullptr));
-        productionTimeQLabel->setText(QApplication::translate("TimerWindowQWidget", "Production Time", nullptr));
-#ifndef QT_NO_TOOLTIP
-        productionTimeSecondsQSpinBox->setToolTip(QApplication::translate("TimerWindowQWidget", "Seconds", nullptr));
-#endif // QT_NO_TOOLTIP
-        productionTimeSecondsQSpinBox->setPrefix(QApplication::translate("TimerWindowQWidget", ":", nullptr));
+        productionTimeQLabel->setText(QApplication::translate("TimerWindowQWidget", "Goal", nullptr));
 #ifndef QT_NO_TOOLTIP
         productionTimeHoursQSpinBox->setToolTip(QApplication::translate("TimerWindowQWidget", "Hours", nullptr));
 #endif // QT_NO_TOOLTIP
@@ -252,7 +217,11 @@ public:
         productionTimeMinutesQSpinBox->setToolTip(QApplication::translate("TimerWindowQWidget", "Minutes", nullptr));
 #endif // QT_NO_TOOLTIP
         productionTimeMinutesQSpinBox->setPrefix(QApplication::translate("TimerWindowQWidget", ":", nullptr));
-        productionTimeDescriptionsQLabel->setText(QApplication::translate("TimerWindowQWidget", "Hrs           Min           Sec          mSec", nullptr));
+        productionTimeDescriptionsQLabel->setText(QApplication::translate("TimerWindowQWidget", "Hrs         Mins           Secs", nullptr));
+#ifndef QT_NO_TOOLTIP
+        productionTimeSecondsQSpinBox->setToolTip(QApplication::translate("TimerWindowQWidget", "Minutes", nullptr));
+#endif // QT_NO_TOOLTIP
+        productionTimeSecondsQSpinBox->setPrefix(QApplication::translate("TimerWindowQWidget", ":", nullptr));
     } // retranslateUi
 
 };
