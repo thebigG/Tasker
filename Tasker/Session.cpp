@@ -16,9 +16,9 @@ Session::Session() {
  * @param goalLength
  */
 Session::Session(Task newTask, long long int goalLength)
-: task{ newTask }, length{ goalLength } {
-    if (length < ZERO) {
-        length = ZERO;
+: task{ newTask }, goal{ goalLength } {
+    if (goal < ZERO) {
+        goal = ZERO;
     }
 }
 /**
@@ -28,6 +28,7 @@ Session::Session(Task newTask, long long int goalLength)
  * @note Be aware that different sessions have different tasks.
  */
 Session::Session(Task newTask) : task{ newTask } {
+    goal = -1;
     length = -1;
 }
 

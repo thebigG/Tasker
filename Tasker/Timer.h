@@ -6,6 +6,7 @@
 #include <QThread>
 #include <QTime>
 #define TIMER_TICK 1000 //in milliseconds
+#define HOUR 60
 #include <KeyboardListener.h>
 
 namespace Engine {
@@ -48,6 +49,10 @@ public:
     int getUnproductiveTime();
     void startTimer();
     int getTotalTimeElapsed();
+    QTime getClock();
+    QString getProductiveStatus();
+    QString getUnproductiveStatus();
+    QString getTimeElapsedStatus();
 
 public slots:
     void timeSlot();

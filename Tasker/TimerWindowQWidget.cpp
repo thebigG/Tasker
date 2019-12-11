@@ -9,6 +9,7 @@
 #include <QString>
 #include <Listener.h>
 #include <Timer.h>
+#include <livesession.h>
 using namespace udata;
 using namespace Engine;
 /**
@@ -51,7 +52,10 @@ void TimerWindowQWidget::startTimerButtonSlot()
     Task newTask{getTaskName(), newListsners};
     Session newSession{newTask, goal};
     Engine::Timer::getInstance()->initTimer(newListsners.at(0), newSession);
-    Engine::Timer::getInstance()->start();
+    LiveSession* s = new LiveSession{};
+    s->show();
+
+//    Engine::Timer::getInstance()->start();
 }
 QString TimerWindowQWidget::getTaskName()
 {
