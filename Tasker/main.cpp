@@ -56,8 +56,8 @@ int main(int argc, char *argv[]) {
     widget = MainUI::getInstance();
     widget->show();
 
-    Timer::getInstance()->initTimer(Listener::ListenerType::keyboard, Session{});
-    Timer::getInstance()->start();
+//    Timer::getInstance()->initTimer(Listener::ListenerType::keyboard, Session{});
+//    Timer::getInstance()->start();
 //    qDebug() << "main: << " << QThread::currentThreadId();
 
 

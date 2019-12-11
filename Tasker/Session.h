@@ -33,8 +33,11 @@ public:
     long long getLength() const;
     void setLength(long long int value);
 
+    void setGoal(int);
+    long long int getGoal();
 private:
     Task task;
+    long long int goal;
     long long int productiveTime;
     long long int unproductiveTime;
     QString notes;

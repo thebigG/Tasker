@@ -151,3 +151,12 @@ long long Session::getLength() const {
 void Session::setLength(long long value) {
     length = value;
 }
+long long int Session::getGoal()
+{
+    return goal;
+}
+
+void Session::setGoal(int newGoal)
+{
+    goal  = newGoal;
+}

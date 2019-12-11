@@ -16,11 +16,14 @@ class TimerWindowQWidget : public QWidget {
 public:
     explicit TimerWindowQWidget(QWidget *parent = nullptr);
     ~TimerWindowQWidget();
+    QString getTaskName();
 
 private slots:
     //    void on_backQPushButton_clicked();
     void backButtonSlot();
+    void startTimerButtonSlot();
     void on_timerWindowQFrame_destroyed();
+    void dropDownTaskSlot(const QString &arg1);
 
 private:
     Ui::TimerWindowQWidget *ui;

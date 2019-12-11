@@ -51,6 +51,7 @@ public:
     QSpinBox *productionTimeHoursQSpinBox;
     QSpinBox *productionTimeMinutesQSpinBox;
     QLabel *productionTimeDescriptionsQLabel;
+    QSpinBox *productionTimeSecondsQSpinBox;
 
     void setupUi(QWidget *TimerWindowQWidget)
     {
@@ -164,7 +165,14 @@ public:
         productionTimeMinutesQSpinBox->setValue(0);
         productionTimeDescriptionsQLabel = new QLabel(productionTimerQFrame);
         productionTimeDescriptionsQLabel->setObjectName(QString::fromUtf8("productionTimeDescriptionsQLabel"));
-        productionTimeDescriptionsQLabel->setGeometry(QRect(0, 70, 111, 16));
+        productionTimeDescriptionsQLabel->setGeometry(QRect(0, 70, 171, 16));
+        productionTimeSecondsQSpinBox = new QSpinBox(productionTimerQFrame);
+        productionTimeSecondsQSpinBox->setObjectName(QString::fromUtf8("productionTimeSecondsQSpinBox"));
+        productionTimeSecondsQSpinBox->setGeometry(QRect(120, 20, 61, 51));
+        productionTimeSecondsQSpinBox->setFont(font2);
+        productionTimeSecondsQSpinBox->setFrame(false);
+        productionTimeSecondsQSpinBox->setMaximum(59);
+        productionTimeSecondsQSpinBox->setValue(0);
 
         retranslateUi(TimerWindowQWidget);
 
@@ -209,7 +217,11 @@ public:
         productionTimeMinutesQSpinBox->setToolTip(QApplication::translate("TimerWindowQWidget", "Minutes", nullptr));
 #endif // QT_NO_TOOLTIP
         productionTimeMinutesQSpinBox->setPrefix(QApplication::translate("TimerWindowQWidget", ":", nullptr));
-        productionTimeDescriptionsQLabel->setText(QApplication::translate("TimerWindowQWidget", "Hrs           Min ", nullptr));
+        productionTimeDescriptionsQLabel->setText(QApplication::translate("TimerWindowQWidget", "Hrs         Mins           Secs", nullptr));
+#ifndef QT_NO_TOOLTIP
+        productionTimeSecondsQSpinBox->setToolTip(QApplication::translate("TimerWindowQWidget", "Minutes", nullptr));
+#endif // QT_NO_TOOLTIP
+        productionTimeSecondsQSpinBox->setPrefix(QApplication::translate("TimerWindowQWidget", ":", nullptr));
     } // retranslateUi
 
 };

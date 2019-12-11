@@ -17,6 +17,10 @@ Timer *Timer::thisInstance = new Timer();
 Timer::Timer() {
     currentProductiveTime = 0;
     currentUnproductiveTime = 0;
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &Timer::startBackgroundTimer);
+    connect(this, &Timer::stopTimer, this , &Timer::stopTimerSlot);
+    qDebug()<<"productive time from constructor:"<<currentProductiveTime;
 }
 /**
  * @brief Timer::Timer
@@ -31,6 +35,10 @@ Timer::Timer(Listener::ListenerType newListenerType,Session newSession ) {
     listenerType = newListenerType;
     currentProductiveTime = 0;
     currentUnproductiveTime = 0;
+//    timer = new QTimer(this);
+//    connect(timer, &QTimer::timeout, this, &Timer::startBackgroundTimer);
+    connect(this, &Timer::stopTimer, this , &Timer::stopTimerSlot);
+//    timer->start(1000);
     qDebug() << "Timer() constructor#2 ";
 //    connect(&listenerThread, &QThread::started, listener, &Listener::start);
     qDebug() << "Timer() constructor#3";
@@ -80,7 +88,7 @@ void Timer::startTimer() {
     qDebug()<<"before listener->start()";
     qDebug()<<"after listener->start()";
     /**
-        This block code is WORKS!
+        This block of code  WORKS!
         DO NOT DELETE THIS BLOCK OF CODE. IT IS PERFECT!
         Specifically the statements regarding the listener and
         listenerThread. I'm talking about the next 3 lines of code.
@@ -88,19 +96,20 @@ void Timer::startTimer() {
     connect(&listenerThread, &QThread::started, listener, &Listener::start);
     listener->moveToThread(&listenerThread);
     listenerThread.start();
-    clock.start();
+
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Timer::startBackgroundTimer);
-    timer->start(3000);
-
+    clock.start();
+    timer->start(TIMER_TICK);
 }
 
 void Timer::startBackgroundTimer()
 {
-    int goal = 100;
+//    int goal = 20;
     qDebug()<<"checking state";
     Listener::ListenerState currentState;
     long long int elapsedSeconds  = StatsUtility::milliToSeconds(clock.restart());
+    qDebug()<<"current clock:"<<clock.elapsed();
     if(listener->getState() == Listener::ListenerState::productive)
     {
 
@@ -115,9 +124,17 @@ void Timer::startBackgroundTimer()
         currentState = Listener::ListenerState::unproductive;
         qDebug()<<"state:unproductive";
     }
+
     qDebug()<<"productive time:"<<currentProductiveTime;
     qDebug()<<"unproductive time:"<<currentUnproductiveTime;
     qDebug()<<"Total Elapsed time:"<<getTotalTimeElapsed();
+    qDebug()<<"current goal"<<productiveTimeGoal;
+    if(currentProductiveTime==productiveTimeGoal)
+    {
+        qDebug()<<">>>>>>>>>>>>>>>>>>goal was reached";
+//        timer->stop();
+        emit stopTimer();
+    }
 }
 
 /**
@@ -129,13 +146,7 @@ void Timer::timeSlot() {
     qDebug() << "current thread id Timer timeSlot:" << QThread::currentThreadId();
 }
 
-/**
- * @brief Timer::getRealTime
- * @return
- */
-QTime Timer::getRealTime() { // not implemented
-    return QTime::currentTime();
-}
+
 int Timer::getTotalTimeElapsed()
 {
     return currentUnproductiveTime + currentProductiveTime;
@@ -151,6 +162,7 @@ Timer* Timer::getInstance()
 void Timer::setCurrentSession(Session newSession)
 {
     currentSession = newSession;
+    productiveTimeGoal = currentSession.getGoal();
 }
 void Timer::setListener(Listener::ListenerType newListenerType)
 {
@@ -160,4 +172,9 @@ void Timer::initTimer(Listener::ListenerType newListener, udata::Session newSess
 {
     thisInstance->setCurrentSession(newSession);
     thisInstance->setListener(newListener);
+
+}
+void Timer::stopTimerSlot()
+{
+    timer->stop();
 }

@@ -5,7 +5,7 @@
 #include <QObject>
 #include <QThread>
 #include <QTime>
-
+#define TIMER_TICK 1000 //in milliseconds
 #include <KeyboardListener.h>
 
 namespace Engine {
@@ -22,6 +22,7 @@ class Engine::Timer : public QThread {
 private:
     int currentProductiveTime;
     int currentUnproductiveTime;
+    long long int productiveTimeGoal;
     udata::Session currentSession;
     QTime clock{0,0,0};
     static Timer *thisInstance;
@@ -43,22 +44,20 @@ public:
     void setCurrentSession(udata::Session);
     void setListener(Listener::ListenerType);
     void startConnect();
-    QTime getProductiveTime();
-    QTime getUnproductiveTime();
-    QTime getRealTime();
-    QTime getProductiveTimeLeft();
-    QTime getRealTimeLeft();
-    QTime setProductiveTime(QTime *);
-    QTime setRealTime(QTime *);
+    int getProductiveTime();
+    int getUnproductiveTime();
     void startTimer();
-    QTime* time;
     int getTotalTimeElapsed();
 
 public slots:
     void timeSlot();
+    void stopTimerSlot();
     void startBackgroundTimer();
 signals:
     void startListener();
+    void stopTimer();
+    void tick();
+
 };
 
 #endif // TIMER_H
