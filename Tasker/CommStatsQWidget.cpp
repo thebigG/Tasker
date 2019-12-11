@@ -6,11 +6,16 @@
 #include "TempChartQWidget.h"
 
 #include <QDebug>
+#include "Timer.h"
 
 #include <QtCharts/QBarSeries>
 
 using udata::Commitment;
 using udata::User;
+using udata::Session;
+using Engine::Listener;
+using Engine::Listener;
+
 
 /**
  * @brief CommStatsQWidget::CommStatsQWidget
@@ -68,4 +73,59 @@ void CommStatsQWidget::addCommitmentButtonSlot() {
  */
 void CommStatsQWidget::on_statsQFrame_destroyed() {
     delete udata::User::getInstance();
+}
+
+void CommStatsQWidget::update() {
+
+
+        QVector<Commitment> c_vec = User::getInstance()->getCommitments();
+
+
+
+
+        auto it = c_vec.begin();
+        while (it != c_vec.end()) {
+            Commitment c = (*it);
+
+            auto s_vec = c.getSessions();
+            auto s_it = s_vec.begin();
+
+            QTreeWidget *w = ui->commitmentsQTreeWidget;
+
+            QTreeWidgetItem *item = new QTreeWidgetItem(QStringList() << c.getName() << ": " << c.getDateStart().toString());
+
+            while (s_it != s_vec.end()) {
+                Session s = (*s_it);
+
+
+
+                ++s_it;
+            }
+
+            ++it;
+
+            w->addTopLevelItem(item);
+        }
+
+}
+
+void CommStatsQWidget::on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+    QString commitmentName = item->text(column);
+
+    auto c_vec = User::getInstance()->getCommitments();
+    auto c_it = c_vec.begin();
+
+    while (c_it != c_vec.end()) {
+        Commitment c = (*c_it);
+
+        if (c.getName() == commitmentName) {
+            qDebug() << c.getName();
+
+            auto t = MainUI::getInstance()->getTimerWindow();
+            t->show();
+        }
+
+        ++c_it;
+    }
 }

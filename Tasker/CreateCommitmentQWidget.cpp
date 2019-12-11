@@ -71,6 +71,8 @@ void CreateCommitmentQWidget::createCommitmentButtonSlot() {
                      this->getEndDate(), this->getInterval(), sessions };
     udata::User::getInstance()->addCommitment(temp);
     CommStatsQWidget *wc = MainUI::getInstance()->getCommStats();
+
+    wc->update();
     wc->show();
 }
 

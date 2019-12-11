@@ -3,6 +3,7 @@
 
 #include "User.h"
 #include <QWidget>
+#include <QTreeWidget>
 
 namespace Ui {
 class CommStatsQWidget;
@@ -18,10 +19,13 @@ public:
     explicit CommStatsQWidget(QWidget *parent = nullptr);
     ~CommStatsQWidget();
     void func();
+    void update();
 
 private slots:
     void addCommitmentButtonSlot();
     void on_statsQFrame_destroyed();
+
+    void on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
 private:
     Ui::CommStatsQWidget *ui;
