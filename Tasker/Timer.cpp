@@ -37,6 +37,7 @@ Timer::Timer(Listener::ListenerType newListenerType,Session newSession ) {
     currentUnproductiveTime = 0;
 //    timer = new QTimer(this);
 //    connect(timer, &QTimer::timeout, this, &Timer::startBackgroundTimer);
+    timer = new QTimer(this);
     connect(this, &Timer::stopTimer, this , &Timer::stopTimerSlot);
 //    timer->start(1000);
     qDebug() << "Timer() constructor#2 ";
@@ -73,6 +74,7 @@ Timer::~Timer() {
 void Timer::run()
 {
     qDebug()<<"run method on Timer:"<<QThread::currentThreadId();
+
     startTimer();
     exec();
 
@@ -96,11 +98,12 @@ void Timer::startTimer() {
     connect(&listenerThread, &QThread::started, listener, &Listener::start);
     listener->moveToThread(&listenerThread);
     listenerThread.start();
-
-    timer = new QTimer(this);
+    qDebug()<<"startTimer#1";
     connect(timer, &QTimer::timeout, this, &Timer::startBackgroundTimer);
+    qDebug()<<"startTimer#2";
     clock.start();
-    timer->start(TIMER_TICK);
+    qDebug()<<"startTimer#3";
+    qDebug()<<"startTimer#4";
 }
 
 void Timer::startBackgroundTimer()
@@ -135,6 +138,7 @@ void Timer::startBackgroundTimer()
 //        timer->stop();
         emit stopTimer();
     }
+    emit tick();
 }
 
 /**
@@ -172,9 +176,101 @@ void Timer::initTimer(Listener::ListenerType newListener, udata::Session newSess
 {
     thisInstance->setCurrentSession(newSession);
     thisInstance->setListener(newListener);
+    timer->start(TIMER_TICK);
+    this->start();
 
 }
 void Timer::stopTimerSlot()
 {
     timer->stop();
+}
+QTime Timer::getClock()
+{
+    return clock;
+}
+QString Timer::getProductiveStatus()
+{
+    long long int productiveMinutes = StatsUtility::toMinutes(currentProductiveTime);
+    qDebug()<<"productive time on UI:"<<currentProductiveTime;
+    QString result;
+    int resultProductive =  currentProductiveTime;
+    if(resultProductive>HOUR)
+    {
+        resultProductive += currentProductiveTime -  (productiveMinutes * HOUR);
+    }
+    else if(resultProductive %  HOUR == 0)
+    {
+        resultProductive = 0;
+
+    }
+
+    result = QString::number( productiveMinutes)+ ":" + QString::number(resultProductive);
+    if(productiveMinutes==ZERO)
+    {
+
+    }
+    else
+    {
+
+    }
+    return  result;
+}
+
+
+
+QString Timer::getUnproductiveStatus()
+{
+    long long int productiveMinutes = StatsUtility::toMinutes(currentUnproductiveTime);
+    qDebug()<<"productive time on UI:"<<currentUnproductiveTime;
+    QString result;
+    int resultProductive =  currentUnproductiveTime;
+    if(resultProductive>HOUR)
+    {
+        resultProductive += currentUnproductiveTime -  (productiveMinutes * HOUR);
+    }
+    else if(resultProductive %  HOUR == 0)
+    {
+        resultProductive = 0;
+
+    }
+
+    result = QString::number( productiveMinutes)+ ":" + QString::number(resultProductive);
+    if(productiveMinutes==ZERO)
+    {
+
+    }
+    else
+    {
+
+    }
+    return  result;
+}
+
+
+QString Timer::getTimeElapsedStatus()
+{
+    long long int productiveMinutes = StatsUtility::toMinutes(getTotalTimeElapsed());
+    qDebug()<<"productive time on UI:"<<getTotalTimeElapsed();
+    QString result;
+    int resultProductive =  getTotalTimeElapsed();
+    if(resultProductive>HOUR)
+    {
+        resultProductive += getTotalTimeElapsed() -  (productiveMinutes * HOUR);
+    }
+    else if(resultProductive %  HOUR == 0)
+    {
+        resultProductive = 0;
+
+    }
+
+    result = QString::number( productiveMinutes)+ ":" + QString::number(resultProductive);
+    if(productiveMinutes==ZERO)
+    {
+
+    }
+    else
+    {
+
+    }
+    return  result;
 }

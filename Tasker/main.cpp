@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <QStandardPaths>
+#include <livesession.h>
 using std::cout;
 using std::endl;
 

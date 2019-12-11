@@ -37,6 +37,7 @@ SOURCES += \
     TimerWindowQWidget.cpp \
     UdataUtils.cpp \
     User.cpp \
+    livesession.cpp \
     mainui.cpp \
     main.cpp \
     timerthread.cpp
@@ -63,6 +64,7 @@ HEADERS += \
     TempChartQWidget.h \
     TimerWindowQWidget.h \
     UdataUtils.h \
+    livesession.h \
     mainui.h \
     User.h \
     timerthread.h
@@ -71,7 +73,8 @@ FORMS += \
     CommStatsQWidget.ui \
     CreateCommitmentQWidget.ui \
     TaskerUIMainWindowQWidget.ui \
-    TimerWindowQWidget.ui
+    TimerWindowQWidget.ui \
+    livesession.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
