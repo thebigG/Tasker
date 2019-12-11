@@ -24,8 +24,9 @@ private:
     int currentUnproductiveTime;
     udata::Session currentSession;
     QTime clock{0,0,0};
+    static Timer *thisInstance;
     Listener *listener;
-    const QString objectName = "Timer";
+    Listener::ListenerType listenerType;
     QThread listenerThread;
     QThread thisThread;
     QTimer* timer;
@@ -33,21 +34,25 @@ private:
 
 public:
     Timer();
-    Timer(Listener::ListenerType);
+    Timer(Listener::ListenerType, udata::Session);
+    static Timer* getInstance();
+    void initTimer(Listener::ListenerType, udata::Session);
     ~Timer();
     void stop();
     void pause();
+    void setCurrentSession(udata::Session);
+    void setListener(Listener::ListenerType);
     void startConnect();
     QTime getProductiveTime();
     QTime getUnproductiveTime();
     QTime getRealTime();
     QTime getProductiveTimeLeft();
     QTime getRealTimeLeft();
-    Listener::ListenerType listenerType;
     QTime setProductiveTime(QTime *);
     QTime setRealTime(QTime *);
     void startTimer();
     QTime* time;
+    int getTotalTimeElapsed();
 
 public slots:
     void timeSlot();

@@ -6,6 +6,6 @@ TimerThread::TimerThread(Listener::ListenerType newListener): listener{newListen
 }
 void TimerThread::run()
 {
-    timerThread = new Timer(listener);
+//    timerThread = new Timer(listener);
     exec();
 }

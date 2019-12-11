@@ -180,54 +180,6 @@
      </property>
     </widget>
    </widget>
-   <widget class="QFrame" name="realTimeQFrame">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>170</y>
-      <width>151</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="realTimeLabel">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>81</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Real Time: </string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="realTimeDurationQLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>0</y>
-       <width>81</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <property name="inputMethodHints">
-      <set>Qt::ImhTime</set>
-     </property>
-     <property name="text">
-      <string>00:00:00:00</string>
-     </property>
-     <property name="maxLength">
-      <number>11</number>
-     </property>
-    </widget>
-   </widget>
    <widget class="QFrame" name="realTimeAlertQFrame">
     <property name="geometry">
      <rect>
@@ -385,36 +337,6 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QSpinBox" name="productionTimeMillisecondsQSpinBox">
-     <property name="geometry">
-      <rect>
-       <x>180</x>
-       <y>20</y>
-       <width>61</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>24</pointsize>
-      </font>
-     </property>
-     <property name="toolTip">
-      <string>Milliseconds</string>
-     </property>
-     <property name="frame">
-      <bool>false</bool>
-     </property>
-     <property name="prefix">
-      <string>:</string>
-     </property>
-     <property name="maximum">
-      <number>59</number>
-     </property>
-     <property name="value">
-      <number>0</number>
-     </property>
-    </widget>
     <widget class="QLabel" name="productionTimeQLabel">
      <property name="geometry">
       <rect>
@@ -431,37 +353,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Production Time</string>
-     </property>
-    </widget>
-    <widget class="QSpinBox" name="productionTimeSecondsQSpinBox">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>20</y>
-       <width>61</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>24</pointsize>
-      </font>
-     </property>
-     <property name="toolTip">
-      <string>Seconds</string>
-     </property>
-     <property name="frame">
-      <bool>false</bool>
-     </property>
-     <property name="prefix">
-      <string>:</string>
-     </property>
-     <property name="maximum">
-      <number>59</number>
-     </property>
-     <property name="value">
-      <number>0</number>
+      <string>Goal</string>
      </property>
     </widget>
     <widget class="QSpinBox" name="productionTimeHoursQSpinBox">
@@ -523,12 +415,12 @@
       <rect>
        <x>0</x>
        <y>70</y>
-       <width>231</width>
+       <width>111</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>Hrs           Min           Sec          mSec</string>
+      <string>Hrs           Min </string>
      </property>
     </widget>
    </widget>

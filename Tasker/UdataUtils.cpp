@@ -60,13 +60,30 @@ QString UdataUtils::getUsername() {
     if (!userFilePath.isEmpty()) {
         return userFilePath;
     }
+qDebug()<<"#2";
 #ifdef Q_OS_UNIX
+    qDebug()<<"#3";
     QProcess getUsername;
+    qDebug()<<"#4";
     QString output;
+    qDebug()<<"#5";
     getUsername.start("whoami");
+    qDebug()<<"#6";
     getUsername.waitForFinished();
+    qDebug()<<"#7";
     output = QString(getUsername.readAllStandardOutput());
-    return output.remove(output.length() - 1, 2); // clean up new line character from standard output
+    qDebug()<<"#8";
+    QString name = output.remove(output.length() - 1, 2);
+    qDebug()<<"#9";
+    if(name =="root")
+    {
+        qDebug()<<"#10";
+//        qDebug()<<;
+        output = QString(getUsername.readAllStandardOutput());
+        name = getNotRootUser();
+    }
+    qDebug()<<"#11";
+    return name; // clean up new line character from standard output
 #else
     return "";
 #endif
@@ -78,35 +95,72 @@ QString UdataUtils::getUsername() {
  * @return 0 on Success. Otherwise -1. Will start defining error codes ASAP.
  */
 int UdataUtils::prepFiles() {
+    qDebug()<<"#1";
     QString userName = getUsername();
+    qDebug()<<"#3";
 #if defined(Q_OS_LINUX)
     QString const newDir{ QString(HOME_FOLDER_NAME) + QDir::separator() +
                           userName + QDir::separator() + USER_FOLDER_NAME };
+    if(userName == ROOT_USER)
+    {
+        QDir newTaskerFolder{ newDir };
+        if (newTaskerFolder.exists()) {
+            userFilePath = newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
+            loadUserData(*User::getInstance());
+            return 0;
+        }
+        QProcess mkdirProcess{};
+        mkdirProcess.start(QString(MKDIR_COMMAND) + newDir);
+        mkdirProcess.waitForFinished();
+        QFile newFile{ newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION) };
+        if (!newFile.open(QIODevice::WriteOnly)) {
+            return -1;
+        }
+        newFile.close();
+        newFile.flush();
+        User::getInstance()->setUsername(userName);
+        userFilePath = newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
+        saveUserData(*User::getInstance());
+        qDebug() << "prepared files at:" << userFilePath;
+
+    }
+    else{
 #elif defined(Q_OS_OSX)
     QString const newDir(QDir::separator() + QString("Users") + QDir::separator() +
                          userName + QDir::separator() + USER_FOLDER_NAME);
     qDebug() << newDir;
 #endif
     QDir temp = QDir::current();
-    QDir taskerFolder{ newDir };
-    if (taskerFolder.exists()) {
-        userFilePath = taskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
+    QDir newTaskerFolder{ newDir };
+    if (newTaskerFolder.exists()) {
+        userFilePath = newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
         loadUserData(*User::getInstance());
         return 0;
     }
-    if (taskerFolder.mkdir(newDir)) {
+    if (newTaskerFolder.mkdir(newDir)) {
     } else {
+        qDebug()<<"mkdir failed:"<<newDir;
         return -1;
     }
-    QFile newFile{ taskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION) };
+
+
+    QFile newFile{ newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION) };
     if (!newFile.open(QIODevice::WriteOnly)) {
         return -1;
     }
     newFile.close();
     newFile.flush();
     User::getInstance()->setUsername(userName);
-    userFilePath = taskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
+    userFilePath = newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
     saveUserData(*User::getInstance());
     qDebug() << "prepared files at:" << userFilePath;
+    }
     return 0;
+}
+QString UdataUtils::getNotRootUser()
+{
+    QDir homeDir{HOME_FOLDER_NAME};
+    QString user =  homeDir.entryList().at(2);
+    return user;
+
 }

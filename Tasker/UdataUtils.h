@@ -10,6 +10,8 @@
 #define HOME_FOLDER_NAME "/home"
 #define USER_FOLDER_NAME ".TaskerData"
 #define TASKER_FILE_EXTENSION ".tasker"
+#define MKDIR_COMMAND "mkdir "
+#define ROOT_USER "root"
 #endif
 
 namespace udata {
@@ -30,6 +32,8 @@ public:
     static void loadUserData(User &);
     static int prepFiles();
     static QString getUsername();
+    static QString taskerFolder;
     static QString userFilePath;
+    static QString getNotRootUser();
 };
 #endif
