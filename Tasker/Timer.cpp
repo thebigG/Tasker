@@ -5,7 +5,7 @@
 #include <QThread>
 #include <QDebug>
 #include <QTime>
-
+#include <mainui.h>
 
 using namespace Engine;
 using namespace util;
@@ -182,6 +182,7 @@ void Timer::initTimer(Listener::ListenerType newListener, udata::Session newSess
 }
 void Timer::stopTimerSlot()
 {
+    emit congrats();
     timer->stop();
 }
 QTime Timer::getClock()

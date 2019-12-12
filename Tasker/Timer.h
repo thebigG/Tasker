@@ -62,6 +62,7 @@ signals:
     void startListener();
     void stopTimer();
     void tick();
+    void congrats();
 
 };
 

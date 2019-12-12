@@ -16,6 +16,7 @@ public:
     ~LiveSession();
 private slots:
     void updateTimeUI();
+    void congratsSlot();
     void on_productiveTimeValue_linkActivated(const QString &link);
 
 private:

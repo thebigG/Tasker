@@ -48,6 +48,7 @@ void TimerWindowQWidget::startTimerButtonSlot()
     }
     int goal = this->ui->productionTimeHoursQSpinBox->value() * SECONDS_IN_HOUR;
     goal += this->ui->productionTimeMinutesQSpinBox->value() * SECONDS_IN_MINUTE;
+    goal += this->ui->productionTimeSecondsQSpinBox->value();
     qDebug()<<"new goal"<<goal;
     Task newTask{getTaskName(), newListsners};
     Session newSession{newTask, goal};

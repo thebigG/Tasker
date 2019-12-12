@@ -11,16 +11,21 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>0</string>
   </property>
   <widget class="QLabel" name="productiveTimeQLabel">
    <property name="geometry">
     <rect>
      <x>37</x>
      <y>30</y>
-     <width>101</width>
+     <width>161</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Productive Time:</string>
@@ -31,9 +36,14 @@
     <rect>
      <x>30</x>
      <y>70</y>
-     <width>121</width>
+     <width>171</width>
      <height>16</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Unproductive Time:</string>
@@ -42,11 +52,16 @@
   <widget class="QLabel" name="sessionLengthQLabel">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>40</x>
      <y>100</y>
-     <width>71</width>
+     <width>101</width>
      <height>16</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>Total Time:</string>
@@ -55,11 +70,16 @@
   <widget class="QLabel" name="productiveTime">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>200</x>
      <y>30</y>
      <width>58</width>
      <height>16</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>00:00</string>
@@ -68,11 +88,16 @@
   <widget class="QLabel" name="unproductiveTimeValue">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>210</x>
      <y>70</y>
      <width>58</width>
      <height>16</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>00:00</string>
@@ -81,14 +106,37 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>140</x>
+     <x>210</x>
      <y>100</y>
      <width>58</width>
      <height>16</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>00:00</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="congratsMessageLabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>230</y>
+     <width>371</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Congrats! You've completed your session!</string>
    </property>
   </widget>
  </widget>
