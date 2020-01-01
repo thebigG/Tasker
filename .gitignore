@@ -7,6 +7,7 @@
 *.obj
 *.elf
 build/*.o
+build-Tasker*
 
 # Linker output
 *.ilk
