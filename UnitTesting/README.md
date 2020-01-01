@@ -1,0 +1,3 @@
+#Testing
+
+Given that this started as a school project, we were required to write unit tests for our code. Each of the folders in this directory are unit tests that were made using Qt's unit testing framework. As of the moment, I'm not 100% sure if we'll keep on taking this approach as Tasker evloves. But IF we do keep on writing unit tests for Tasker, ALL and EVERY test should be under this folder.
