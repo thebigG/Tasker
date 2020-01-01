@@ -1,6 +1,6 @@
 # Tasker
 
-**Pitch**
+## Pitch
 
 Many people(including us) have creative pursuits; projects we want allocate time for; goals to accomplish. In our team, I write; Gem(a contributor to the project) plays music. It’s always been hard for us, and we suspect for many other people, to stay on task. More specifically, it’s even harder to keep track of one’s progress. The timers of our world—smartphones, desktops, etc—aren’t designed to accurately time the tasks we do.
 
@@ -8,4 +8,14 @@ One of the reasons for this is that human error is inevitable. A writer like mys
 
 Even though my timer counted 30 minutes, I only did 15 minutes of writing. This is not ideal. Tasker aims to solve this problem, or at the very least make our timers more accurate (hence mitigating human errors) by binding our timers to hardware.
 
-This means that while a session is opened in Tasker, it will be detecting hardware interaction. We **DO NOT** record keybaord strokes or sound. We buffer it temporarily and throw it away once we run it througb some logic.
+This means that while a session is opened in Tasker, it will be detecting hardware interaction. We **DO NOT** record keybaord strokes or sound. We buffer it temporarily and throw it away once we run it through some logic.
+
+## How do I help?
+
+Tasker is built using Qt 5 using c++. So you need to be comfortable using those technologies. If you aren't that's cool, we're still learning!
+
+To get started I highly recommend these resources:
+[Programming: Principles and Practice Using C++](https://www.amazon.com/Programming-Principles-Practice-Using-2nd/dp/0321992784/ref=sr_1_1?keywords=Programming%3A+Principles+and+Practice+Using+C%2B%2B&qid=1577916888&sr=8-1) 
+[https://doc.qt.io/](https://doc.qt.io/) 
+[https://www.youtube.com/user/TheChernoProject](https://www.youtube.com/user/TheChernoProject) 
+https://www.qt.io/download-qt-installer
