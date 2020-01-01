@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['_7elistener_80',['~Listener',['../classEngine_1_1Listener.html#a285fe9a52da33c20a0a252f06df36446',1,'Engine::Listener']]]
+  ['handlestatechanged_246',['handleStateChanged',['../classEngine_1_1AudioMachine.html#a8744c607df59a81defbe482fc4b20683',1,'Engine::AudioMachine']]],
+  ['hidelegendspinbox_247',['hideLegendSpinbox',['../classTempChartQWidget.html#acdf106e58d37000518a744e23714f07c',1,'TempChartQWidget']]]
 ];

@@ -69,38 +69,63 @@ $(function() {
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CREATECOMMITMENT_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CREATECOMMITMENT_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QCheckBox&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QIntValidator&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QWidget&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>Ui {</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">class </span><a class="code" href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a>;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classCreateCommitmentQWidget.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a> : <span class="keyword">public</span> QWidget {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a>(QWidget *parent = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    ~<a class="code" href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a>();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    QCheckBox *getKeyboardCheckBox();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    QCheckBox *getAudioCheckBox();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    QValidator *validator;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;Interval.h&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QCheckBox&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QDateEdit&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QIntValidator&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QLineEdit&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QWidget&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define WRITING_STRING &quot;Writing&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define MUSIC_STRING &quot;Compose Music&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define CUSTOM_STRING &quot;Custom&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>Ui {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">class </span><a class="code" href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classCreateCommitmentQWidget.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a> : <span class="keyword">public</span> QWidget {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">private</span> slots:</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> on_backQPushButton_clicked();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> on_createCommitmentQPushButton_clicked();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> on_dropDownTaskQComboBox_activated(<span class="keyword">const</span> QString &amp;arg1);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    Ui::CreateCommitmentQWidget *ui;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif // CREATECOMMITMENT_H</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classCreateCommitmentQWidget.html#a55dd9a3cb48e0ee9d0026f6d72bff024">CreateCommitmentQWidget</a>(QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classCreateCommitmentQWidget.html#a527c0e493670cf0741910c7984a18f96">~CreateCommitmentQWidget</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    QCheckBox *<a class="code" href="classCreateCommitmentQWidget.html#a38aaee2e89f2bad2d3781d825335a863">getKeyboardCheckBox</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    QCheckBox *<a class="code" href="classCreateCommitmentQWidget.html#aa6c938930fffb63839d1f6d5143559cd">getAudioCheckBox</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    Ui::CreateCommitmentQWidget *<a class="code" href="classCreateCommitmentQWidget.html#a358a37c2970a4c3a927f22ac084138c6">getUI</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    QValidator *validator;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    QString <a class="code" href="classCreateCommitmentQWidget.html#aceb75eb68c000f361a55d299f73b8907">getCommitmentName</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    QDate <a class="code" href="classCreateCommitmentQWidget.html#a9184e07d3759420fa6a7d0d5d3921e63">getStartDate</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    QDate <a class="code" href="classCreateCommitmentQWidget.html#a5f7592c06beda4865e4c9c928783d228">getEndDate</a>();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="structutil_1_1Interval.html">util::Interval</a> <a class="code" href="classCreateCommitmentQWidget.html#af57ea70dd4938f0b4704d56383184bf2">getInterval</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCreateCommitmentQWidget.html#a2fc80c8cc63201d051b7e9b41a5e43d3">dropDownTaskSlot</a>(<span class="keyword">const</span> QString &amp;);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCreateCommitmentQWidget.html#a44fe1d290360c6bf9d70eddcf5dabffe">createCommitmentButtonSlot</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCreateCommitmentQWidget.html#abec13842329aeff677ce80656ca8adef">backButtonSlot</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCreateCommitmentQWidget.html#a2ce37f2d702c5d07ffdc26bdac142fd7">on_createCommitmentQFrame_destroyed</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    Ui::CreateCommitmentQWidget *ui;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif // CREATECOMMITMENT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassCreateCommitmentQWidget_html"><div class="ttname"><a href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a></div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.h:12</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html_abec13842329aeff677ce80656ca8adef"><div class="ttname"><a href="classCreateCommitmentQWidget.html#abec13842329aeff677ce80656ca8adef">CreateCommitmentQWidget::backButtonSlot</a></div><div class="ttdeci">void backButtonSlot()</div><div class="ttdoc">CreateCommitmentQWidget::backButtonSlot.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.cpp:50</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html_a9184e07d3759420fa6a7d0d5d3921e63"><div class="ttname"><a href="classCreateCommitmentQWidget.html#a9184e07d3759420fa6a7d0d5d3921e63">CreateCommitmentQWidget::getStartDate</a></div><div class="ttdeci">QDate getStartDate()</div><div class="ttdoc">CreateCommitmentQWidget::getStartDate.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.cpp:99</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html_a44fe1d290360c6bf9d70eddcf5dabffe"><div class="ttname"><a href="classCreateCommitmentQWidget.html#a44fe1d290360c6bf9d70eddcf5dabffe">CreateCommitmentQWidget::createCommitmentButtonSlot</a></div><div class="ttdeci">void createCommitmentButtonSlot()</div><div class="ttdoc">CreateCommitmentQWidget::createCommitmentButtonSlot.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.cpp:58</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html_aa6c938930fffb63839d1f6d5143559cd"><div class="ttname"><a href="classCreateCommitmentQWidget.html#aa6c938930fffb63839d1f6d5143559cd">CreateCommitmentQWidget::getAudioCheckBox</a></div><div class="ttdeci">QCheckBox * getAudioCheckBox()</div><div class="ttdoc">CreateCommitmentQWidget::getAudioCheckBox.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.cpp:141</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html_a38aaee2e89f2bad2d3781d825335a863"><div class="ttname"><a href="classCreateCommitmentQWidget.html#a38aaee2e89f2bad2d3781d825335a863">CreateCommitmentQWidget::getKeyboardCheckBox</a></div><div class="ttdeci">QCheckBox * getKeyboardCheckBox()</div><div class="ttdoc">CreateCommitmentQWidget::getKeyboardCheckBox.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.cpp:83</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html_a55dd9a3cb48e0ee9d0026f6d72bff024"><div class="ttname"><a href="classCreateCommitmentQWidget.html#a55dd9a3cb48e0ee9d0026f6d72bff024">CreateCommitmentQWidget::CreateCommitmentQWidget</a></div><div class="ttdeci">CreateCommitmentQWidget(QWidget *parent=nullptr)</div><div class="ttdoc">CreateCommitmentQWidget::CreateCommitmentQWidget.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.cpp:19</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html_a2ce37f2d702c5d07ffdc26bdac142fd7"><div class="ttname"><a href="classCreateCommitmentQWidget.html#a2ce37f2d702c5d07ffdc26bdac142fd7">CreateCommitmentQWidget::on_createCommitmentQFrame_destroyed</a></div><div class="ttdeci">void on_createCommitmentQFrame_destroyed()</div><div class="ttdoc">CreateCommitmentQWidget::on_createCommitmentQFrame_destroyed.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.cpp:166</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html_a527c0e493670cf0741910c7984a18f96"><div class="ttname"><a href="classCreateCommitmentQWidget.html#a527c0e493670cf0741910c7984a18f96">CreateCommitmentQWidget::~CreateCommitmentQWidget</a></div><div class="ttdeci">~CreateCommitmentQWidget()</div><div class="ttdoc">CreateCommitmentQWidget::~CreateCommitmentQWidget.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.cpp:35</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html_a358a37c2970a4c3a927f22ac084138c6"><div class="ttname"><a href="classCreateCommitmentQWidget.html#a358a37c2970a4c3a927f22ac084138c6">CreateCommitmentQWidget::getUI</a></div><div class="ttdeci">Ui::CreateCommitmentQWidget * getUI()</div><div class="ttdoc">CreateCommitmentQWidget::getUI.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.cpp:43</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html_a5f7592c06beda4865e4c9c928783d228"><div class="ttname"><a href="classCreateCommitmentQWidget.html#a5f7592c06beda4865e4c9c928783d228">CreateCommitmentQWidget::getEndDate</a></div><div class="ttdeci">QDate getEndDate()</div><div class="ttdoc">CreateCommitmentQWidget::getEndDate.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.cpp:107</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html_af57ea70dd4938f0b4704d56383184bf2"><div class="ttname"><a href="classCreateCommitmentQWidget.html#af57ea70dd4938f0b4704d56383184bf2">CreateCommitmentQWidget::getInterval</a></div><div class="ttdeci">util::Interval getInterval()</div><div class="ttdoc">CreateCommitmentQWidget::getInterval.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.cpp:115</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html"><div class="ttname"><a href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a></div><div class="ttdoc">The CreateCommitmentQWidget class.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.h:21</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html_aceb75eb68c000f361a55d299f73b8907"><div class="ttname"><a href="classCreateCommitmentQWidget.html#aceb75eb68c000f361a55d299f73b8907">CreateCommitmentQWidget::getCommitmentName</a></div><div class="ttdeci">QString getCommitmentName()</div><div class="ttdoc">CreateCommitmentQWidget::getCommitmentName.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.cpp:91</div></div>
+<div class="ttc" id="astructutil_1_1Interval_html"><div class="ttname"><a href="structutil_1_1Interval.html">util::Interval</a></div><div class="ttdoc">The util::Interval struct.</div><div class="ttdef"><b>Definition:</b> Interval.h:13</div></div>
+<div class="ttc" id="aclassCreateCommitmentQWidget_html_a2fc80c8cc63201d051b7e9b41a5e43d3"><div class="ttname"><a href="classCreateCommitmentQWidget.html#a2fc80c8cc63201d051b7e9b41a5e43d3">CreateCommitmentQWidget::dropDownTaskSlot</a></div><div class="ttdeci">void dropDownTaskSlot(const QString &amp;)</div><div class="ttdoc">CreateCommitmentQWidget::dropDownTaskSlot.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.cpp:150</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
