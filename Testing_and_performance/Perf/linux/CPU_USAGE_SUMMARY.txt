@@ -1,0 +1,28 @@
+What is happening inside the CPU? (These stats are relative  only to functions/stack traces that interact with Tasker in  some way)
+
+Keyboard Listener CPU Stats for a 3 minute session:
+
+Tasker process:76% CPU of time slice
+Qthread managers(event handlers):4.41%
+QxcbEventReader and polling(plus everything else):16%
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+What is happening inside the CPU? (Audio Edition)
+
+Audio Listener CPU Stats for a 3 minute session(No sleep):
+
+Tasker process:0.57% CPU of time slice
+Qthread managers(event handlers):98%
+QxcbEventReader and polling(plus everything else):~0%
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+What is happening inside the CPU? (Audio Edition)
+
+Audio Listener CPU Stats for a 3 minute session(Yes sleep):
+
+Tasker process:33.4% CPU of time slice
+Qthread managers(event handlers):12.82%
+QxcbEventReader and polling:~5%
+
