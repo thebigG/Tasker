@@ -12,6 +12,10 @@ This means that while a session is opened in Tasker, it will be detecting hardwa
 
 ## How do I help?
 
+**Please do not work on master. Always work on and push your changes to the release branch.**
+
+Once you've tested your chnages on release branch locally, **let people know first** before merging onto master. The master branch should only have the last stable version of Tasker. 
+
 Tasker is built using Qt 5 using c++. So you need to be comfortable using those technologies. If you aren't that's cool, we're still learning!
 
 To get started I highly recommend these resources:
