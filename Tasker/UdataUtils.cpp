@@ -157,7 +157,7 @@ int UdataUtils::prepFiles() {
 
     return 0;
 }
-}
+
 QString UdataUtils::getNotRootUser()
 {
     QDir homeDir{HOME_FOLDER_NAME};
