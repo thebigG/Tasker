@@ -16,6 +16,9 @@ Tasker is built using Qt 5 using c++. So you need to be comfortable using those 
 
 To get started I highly recommend these resources:
 [Programming: Principles and Practice Using C++](https://www.amazon.com/Programming-Principles-Practice-Using-2nd/dp/0321992784/ref=sr_1_1?keywords=Programming%3A+Principles+and+Practice+Using+C%2B%2B&qid=1577916888&sr=8-1) 
+
 [https://doc.qt.io/](https://doc.qt.io/) 
+
 [https://www.youtube.com/user/TheChernoProject](https://www.youtube.com/user/TheChernoProject) 
-https://www.qt.io/download-qt-installer
+
+[https://www.qt.io/download-qt-installer](https://www.qt.io/download-qt-installer) 
