@@ -27,3 +27,9 @@ To get started I highly recommend these resources:
 [https://www.youtube.com/user/TheChernoProject](https://www.youtube.com/user/TheChernoProject) 
 
 [https://www.qt.io/download-qt-installer](https://www.qt.io/download-qt-installer) 
+
+
+
+
+#How do I run tasker?
+Look at the readme under the "bin" folder.
