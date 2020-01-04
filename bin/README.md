@@ -2,7 +2,7 @@
 
 One of the major issues with running Tasker on linux is the fact that in linux one has run it under sudo. This is obviously a huge security hole. To mitigate the risks in linux, the proper way of doing it is to write an action policy for Tasker. Which is what I did. Of course, if you clone the repo you won't automatically have an action policy written to your linux desktop just by cloning the repo. Don't worry, I've automated most of the process!
 
-Once you have the repo cloned, open your terminal and  following the following steps:
+Once you have the repo cloned, open your terminal and  follow these steps:
 
 **1.** go to the bin folder:
 
@@ -26,6 +26,7 @@ If the policy is setup correctly (which is step2) then your computer will prompt
 
 There will always be an executable on the bin folder which is the "Tasker" file. Now, if you want to run your own Tasker binary because you recompiled a new version all you have to do is replace the old "Tasker" file with your new shiny recompiled one, and it should work just fine!
 
+Bare in mind that for now I've tested this script only on Ubuntu-based distros.
 
 
 

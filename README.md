@@ -31,5 +31,5 @@ To get started I highly recommend these resources:
 
 
 
-#How do I run tasker?
+# How do I run tasker?
 Look at the readme under the "bin" folder.
