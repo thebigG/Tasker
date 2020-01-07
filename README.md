@@ -46,7 +46,7 @@ Leve 3= This bug is a nasty one and SHOULD not be shipped in any version of Task
 
 |Bug Name   |Level   |Description  | Tested platform(s)  |
 |---|---|---|--|
-| Qt Leak  | 1  | If you run Tasker, under something like valgrind and you get something like "possibly/definitley" lost blocks/bytes on AND the function  stack trace  ends in some class like "ui_TimerWindowQWidget.h:" |  Linux Mint 19.2 Tina  base: Ubuntu 18.04 bionic    |
+| Qt Leak  | 1  | If you run Tasker, under something like valgrind and you get something like "possibly/definitley" lost blocks/bytes on AND the function  stack trace  ends in some class like "ui_TimerWindowQWidget.h:", then you're probably fine. This has to do with Qt's shutdown cleanup libraries.  |  Linux Mint 19.2 Tina  base: Ubuntu 18.04 bionic    |
 |Commitment padding   | 2  | This one also came from valgrind. If you see something like, "Syscall param write(buf) points to uninitialised byte(s)", it's probably not a big deal. As far as we know, this has to do with padding QDataStream adds when serializing. Still gonna consider this bug level 2 as we look into this further.  | Linux Mint 19.2 Tina  base: Ubuntu 18.04 bionic 	|
 |   |   |   |	|
 
