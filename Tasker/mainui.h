@@ -1,6 +1,6 @@
 #ifndef MAINUI_H
 #define MAINUI_H
-
+#include <memory>
 #include <TaskerUIMainWindowQWidget.h>
 
 /**
@@ -9,10 +9,12 @@
 class MainUI {
 private:
     MainUI();
-    static TaskerUIMainWindowQWidget *Instance;
+    static TaskerUIMainWindowQWidget* Instance;
 
 public:
     static TaskerUIMainWindowQWidget *getInstance();
+//    static int getRefCount();
+     ~MainUI();
 };
 
 #endif // MAINUI_H

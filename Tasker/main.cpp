@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
         qDebug() << "prepFiles failed";
     }
 
-    TaskerUIMainWindowQWidget *widget = nullptr;
+     TaskerUIMainWindowQWidget *widget = nullptr;
 //    QDir homeDir{HOME_FOLDER_NAME};
 //    qDebug()<<"home dir:" <<homeDir.entryList().at(2);
 //     qDebug()<<"user name:"<<User::getInstance()->getUsername();
@@ -55,6 +55,8 @@ int main(int argc, char *argv[]) {
 //     qDebug()<<"end date:"<<c.getDateEnd();
 //    qDebug()<<"standard path:" <<QStandardPaths::displayName(QStandardPaths::HomeLocation);
     widget = MainUI::getInstance();
+//    shared_ptr<TaskerUIMainWindowQWidget> mainUIPointer;
+//    mainUIPointer.reset(widget);
     widget->show();
 
 //    Timer::getInstance()->initTimer(Listener::ListenerType::keyboard, Session{});

@@ -24,10 +24,10 @@ public:
     ~TaskerUIMainWindowQWidget();
 
     QPushButton *getButton();
-    CreateCommitmentQWidget *getCreateCommitment();
+    CreateCommitmentQWidget& getCreateCommitment();
     QFrame *getWelcomeFrame();
-    CommStatsQWidget *getCommStats();
-    TimerWindowQWidget *getTimerWindow();
+    CommStatsQWidget& getCommStats();
+    TimerWindowQWidget& getTimerWindow();
 
 public:
     Ui::TaskerUIMainWindowQWidget *ui;
@@ -38,9 +38,9 @@ private slots:
     void on_welcomeQFrame_destroyed();
 
 private:
-    CreateCommitmentQWidget *x;
-    CommStatsQWidget *wc;
-    TimerWindowQWidget *tw;
+    CreateCommitmentQWidget x;
+    CommStatsQWidget wc;
+    TimerWindowQWidget tw;
 };
 
 #endif // TASKERUIMAINWINDOW_H

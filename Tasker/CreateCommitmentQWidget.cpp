@@ -19,8 +19,8 @@ using namespace udata;
 CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
 : QWidget(parent), ui(new Ui::CreateCommitmentQWidget) {
     ui->setupUi(this);
-    validator = new QIntValidator(0, 999, this);
-    ui->qtyQLineEdit->setValidator(validator);
+//    validator = new QIntValidator(0, 999, this);
+    ui->qtyQLineEdit->setValidator(&validator);
     connect(this->getUI()->createCommitmentQPushButton, &QPushButton::clicked,
             this, &CreateCommitmentQWidget::createCommitmentButtonSlot);
     connect(this->getUI()->backQPushButton, &QPushButton::clicked, this,
@@ -33,7 +33,9 @@ CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
  * @brief CreateCommitmentQWidget::~CreateCommitmentQWidget
  */
 CreateCommitmentQWidget::~CreateCommitmentQWidget() {
+    qDebug()<<"CreateCommitmentQWidget#1";
     delete ui;
+    qDebug()<<"CreateCommitmentQWidget#2";
 }
 
 /**
@@ -70,10 +72,10 @@ void CreateCommitmentQWidget::createCommitmentButtonSlot() {
     Commitment temp{ this->getCommitmentName(), this->getStartDate(),
                      this->getEndDate(), this->getInterval(), sessions };
     udata::User::getInstance()->addCommitment(temp);
-    CommStatsQWidget *wc = MainUI::getInstance()->getCommStats();
+    CommStatsQWidget& wc = MainUI::getInstance()->getCommStats();
 
-    wc->update();
-    wc->show();
+    wc.update();
+    wc.show();
 }
 
 /**
@@ -164,5 +166,6 @@ void CreateCommitmentQWidget::dropDownTaskSlot(const QString &arg1) {
  * @brief CreateCommitmentQWidget::on_createCommitmentQFrame_destroyed
  */
 void CreateCommitmentQWidget::on_createCommitmentQFrame_destroyed() {
-    delete udata::User::getInstance();
+    qDebug()<<"on_createCommitmentQFrame_destroyed#1";
+//    delete udata::User::getInstance();
 }

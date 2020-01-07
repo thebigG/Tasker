@@ -25,14 +25,14 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
 : QWidget(parent), ui(new Ui::CommStatsQWidget) {
     ui->setupUi(this);
 
-    TempChartQWidget *mw = new TempChartQWidget;
+//    TempChartQWidget *mw = new TempChartQWidget;
     connect(this->ui->addCommitmentQCommandLinkButton, &QCommandLinkButton::clicked,
             this, &CommStatsQWidget::addCommitmentButtonSlot);
     QFrame *fstats = ui->statsQFrame;
 
-    auto layout = new QVBoxLayout();
-    layout->addWidget(mw);
-    fstats->setLayout(layout);
+//    auto layout = new QVBoxLayout();
+    layout.addWidget(&mw);
+    fstats->setLayout(&layout);
 
     /*
     {
@@ -56,7 +56,9 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
  * @brief CommStatsQWidget::~CommStatsQWidget
  */
 CommStatsQWidget::~CommStatsQWidget() {
+    qDebug()<<"CommStatsQWidget destructor#1";
     delete ui;
+    qDebug()<<"CommStatsQWidget destructor#2";
 }
 
 /**
@@ -64,15 +66,17 @@ CommStatsQWidget::~CommStatsQWidget() {
  */
 void CommStatsQWidget::addCommitmentButtonSlot() {
     this->hide();
-    CreateCommitmentQWidget *cc = MainUI::getInstance()->getCreateCommitment();
-    cc->show();
+    CreateCommitmentQWidget& cc = MainUI::getInstance()->getCreateCommitment();
+    cc.show();
 }
 
 /**
  * @brief CommStatsQWidget::on_statsQFrame_destroyed
  */
 void CommStatsQWidget::on_statsQFrame_destroyed() {
-    delete udata::User::getInstance();
+    qDebug()<<"delete udata::User::getInstance() on on_statsQFrame_destroyed#1";
+//    delete udata::User::getInstance();
+    qDebug()<<"delete udata::User::getInstance() on on_statsQFrame_destroyed2";
 }
 
 void CommStatsQWidget::update() {
@@ -122,8 +126,8 @@ void CommStatsQWidget::on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetIt
         if (c.getName() == commitmentName) {
             qDebug() << c.getName();
 
-            auto t = MainUI::getInstance()->getTimerWindow();
-            t->show();
+            TimerWindowQWidget& t = MainUI::getInstance()->getTimerWindow();
+            t.show();
         }
 
         ++c_it;

@@ -33,3 +33,21 @@ To get started I highly recommend these resources:
 
 # How do I run tasker?
 Look at the readme under the "bin" folder.
+
+
+# Bugs
+Being a complex API, Qt certainly has many quirks. The table below shows some known bugs, and the level of severity of these bugs.
+
+Level 1= This bug is not critical. It is shipped in the current version of Tasker. These "bugs" don't really break  anything.
+
+Level 2= This bug is somewhat critical. This might or might not be shipped in the Tasker executable. See details of these in the bug table.
+
+Leve 3= This bug is a nasty one and SHOULD not be shipped in any version of Tasker.
+
+|Bug Name   |Level   |Description  | Tested platform(s)  |
+|---|---|---|--|
+| Qt Leak  | 1  | If you run Tasker, under something like valgrind and you get something like "possibly/definitley" lost blocks/bytes on AND the function  stack trace  ends in some class like "ui_TimerWindowQWidget.h:" |  Linux Mint 19.2 Tina  base: Ubuntu 18.04 bionic    |
+|Commitment padding   | 2  | This one also came from valgrind. If you see something like, "Syscall param write(buf) points to uninitialised byte(s)", it's probably not a big deal. As far as we know, this has to do with padding QDataStream adds when serializing. Still gonna consider this bug level 2 as we look into this further.  | Linux Mint 19.2 Tina  base: Ubuntu 18.04 bionic 	|
+|   |   |   |	|
+
+

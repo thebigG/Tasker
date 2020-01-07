@@ -28,7 +28,7 @@ public:
     QCheckBox *getKeyboardCheckBox();
     QCheckBox *getAudioCheckBox();
     Ui::CreateCommitmentQWidget *getUI();
-    QValidator *validator;
+    QIntValidator validator{(0, 999, this)};
     QString getCommitmentName();
     QDate getStartDate();
     QDate getEndDate();

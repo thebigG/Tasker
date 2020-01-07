@@ -2,6 +2,7 @@
 #define WIDGET_COMMSTATS_H
 
 #include "User.h"
+#include "TempChartQWidget.h"
 #include <QWidget>
 #include <QTreeWidget>
 
@@ -24,11 +25,12 @@ public:
 private slots:
     void addCommitmentButtonSlot();
     void on_statsQFrame_destroyed();
-
     void on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
 private:
     Ui::CommStatsQWidget *ui;
+    TempChartQWidget mw{};
+    QVBoxLayout layout{};
 };
 
 #endif // WIDGET_COMMSTATS_H

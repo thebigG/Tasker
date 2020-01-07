@@ -11,20 +11,20 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QWidget>
+#include <QPushButton>
 
 QT_CHARTS_USE_NAMESPACE
 
-/**
- * @brief The TempChartQWidget class
- */
 class TempChartQWidget : public QWidget {
     Q_OBJECT
 
 public:
     explicit TempChartQWidget(QWidget *parent = nullptr);
+    ~TempChartQWidget();
     void createSeries();
     void showLegendSpinbox();
     void hideLegendSpinbox();
+
 public Q_SLOTS:
     void toggleAttached();
     void addBarset();
@@ -39,22 +39,23 @@ public Q_SLOTS:
     void updateLegendLayout();
 
 private:
-    QChart *m_chart;
-    QBarSeries *m_series;
 
-    QChartView *m_chartView;
-    QGridLayout *m_mainLayout;
-    QGridLayout *m_buttonLayout;
-    QGridLayout *m_fontLayout;
+    QChart m_chart;
+    QBarSeries m_series;
+//    QBarSet barSet;
+    QChartView m_chartView;
+    QGridLayout m_mainLayout;
+    QGridLayout m_buttonLayout;
+//    QGridLayout m_fontLayout; It looks like it works without using this field.
 
-    QDoubleSpinBox *m_fontSize;
+    QDoubleSpinBox m_fontSize;
 
     // For detached layout
-    QGroupBox *m_legendSettings;
-    QDoubleSpinBox *m_legendPosX;
-    QDoubleSpinBox *m_legendPosY;
-    QDoubleSpinBox *m_legendWidth;
-    QDoubleSpinBox *m_legendHeight;
+    QGroupBox m_legendSettings{"Detached legend"};
+    QDoubleSpinBox m_legendPosX;
+    QDoubleSpinBox m_legendPosY;
+    QDoubleSpinBox m_legendWidth;
+    QDoubleSpinBox m_legendHeight;
 };
 
 #endif // MAINWIDGET_H

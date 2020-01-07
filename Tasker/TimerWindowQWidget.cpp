@@ -66,14 +66,18 @@ QString TimerWindowQWidget::getTaskName()
  * @brief TimerWindowQWidget::~TimerWindowQWidget
  */
 TimerWindowQWidget::~TimerWindowQWidget() {
+    qDebug()<<"TimerWindowQWidget destructor#1";
     delete ui;
+    qDebug()<<"TimerWindowQWidget destructor#2";
 }
 
 /**
  * @brief TimerWindowQWidget::on_timerWindowQFrame_destroyed
  */
 void TimerWindowQWidget::on_timerWindowQFrame_destroyed() {
+    qDebug()<<" udata::User::getInstance() on on_timerWindowQFrame_destroyed()#1";
     delete udata::User::getInstance();
+    qDebug()<<" udata::User::getInstance() on on_timerWindowQFrame_destroyed()#2";
 }
 
 
