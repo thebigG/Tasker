@@ -6,7 +6,14 @@
 #include "Task.h"
 #include "TaskerUIMainWindowQWidget.h"
 #include "User.h"
-#include <KeyboardListener.h>
+#include "UdataUtils.h"
+#include "KeyboardListener.h"
+#include "Timer.h"
+#include "livesession.h"
+#include "mainui.h"
+
+#include "objctest.h"
+
 #include <QApplication>
 #include <QDebug>
 #include <QFile>
@@ -14,16 +21,12 @@
 #include <QThreadPool>
 #include <Qt>
 #include <QtCore>
-#include <Timer.h>
-#include <UdataUtils.h>
+#include <QStandardPaths>
+
+#include <iostream>
 #include <cstdio>
 #include <cstdlib>
-#include <iostream>
-#include <mainui.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <QStandardPaths>
-#include <livesession.h>
+
 using std::cout;
 using std::endl;
 
