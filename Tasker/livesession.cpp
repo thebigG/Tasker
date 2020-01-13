@@ -12,23 +12,23 @@ LiveSession::LiveSession(QWidget *parent) :
             this, &LiveSession::updateTimeUI);
     connect(Engine::Timer::getInstance(), &Timer::Timer::congrats,
             this, &LiveSession::congratsSlot);
-
+    ui->congratsMessageLabel->setText("");
+    this->setWindowTitle("Live Session");
 //    this->ui->productiveTime
     qDebug()<<"text on label:" + ui->productiveTime->text();
 }
 void LiveSession::updateTimeUI()
 {
-    ui->congratsMessageLabel->hide();
+    qDebug()<<"livession thread id:"<<QThread::currentThreadId();
     ui->productiveTime->setText( Timer::getInstance()->getProductiveStatus());
     ui->unproductiveTimeValue->setText(Timer::getInstance()->getUnproductiveStatus());
     ui->label->setText(Timer::getInstance()->getTimeElapsedStatus());
-    this->setWindowTitle("Live Session");
 
 }
 void LiveSession::congratsSlot()
 {
-    qDebug()<<"";
-    ui->congratsMessageLabel->show();
+    qDebug()<<"congrats on livession++++++";
+    ui->congratsMessageLabel->setText("Congrats! You've completed your session!");
 }
 LiveSession::~LiveSession()
 {

@@ -6,7 +6,7 @@
 #include <QThread>
 #include <QTime>
 #define TIMER_TICK 1000 //in milliseconds
-#define HOUR 60
+#define MINUTE 60 //in seconds
 #include <KeyboardListener.h>
 
 namespace Engine {
@@ -27,6 +27,10 @@ private:
     udata::Session currentSession;
     QTime clock{0,0,0};
     static Timer *thisInstance;
+    int productiveSignalCount = 0;
+    int unProductiveSignalCount = 0;
+    long startTimeStamp;
+
     Listener *listener;
     Listener::ListenerType listenerType;
     QThread listenerThread;

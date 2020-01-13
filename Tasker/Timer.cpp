@@ -10,7 +10,7 @@
 using namespace Engine;
 using namespace util;
 using namespace udata;
-Timer *Timer::thisInstance = new Timer();
+Timer *Timer::thisInstance;
 /**
  * @brief Timer::Timer
  */
@@ -36,7 +36,7 @@ Timer::Timer(Listener::ListenerType newListenerType,Session newSession ) {
     currentProductiveTime = 0;
     currentUnproductiveTime = 0;
 //    timer = new QTimer(this);
-//    connect(timer, &QTimer::timeout, this, &Timer::startBackgroundTimer);
+    connect(timer, &QTimer::timeout, this, &Timer::startBackgroundTimer);
     timer = new QTimer(this);
     connect(this, &Timer::stopTimer, this , &Timer::stopTimerSlot);
 //    timer->start(1000);
@@ -89,8 +89,8 @@ void Timer::startTimer() {
     }
     qDebug()<<"before listener->start()";
     qDebug()<<"after listener->start()";
-    connect(listener, &Listener::productive, this, &Timer::productiveSlot);
-    connect(listener, &Listener::unProductive, this, &Timer::unProductiveSlot);
+//    connect(listener, &Listener::productive, this, &Timer::productiveSlot);
+//    connect(listener, &Listener::unProductive, this, &Timer::unProductiveSlot);
     /**
         This block of code  WORKS!
         DO NOT DELETE THIS BLOCK OF CODE. IT IS PERFECT!
@@ -101,7 +101,7 @@ void Timer::startTimer() {
     listener->moveToThread(&listenerThread);
     listenerThread.start();
     qDebug()<<"startTimer#1";
-    connect(timer, &QTimer::timeout, this, &Timer::startBackgroundTimer);
+//    connect(timer, &QTimer::timeout, this, &Timer::startBackgroundTimer);
     qDebug()<<"startTimer#2";
     clock.start();
     qDebug()<<"startTimer#3";
@@ -111,21 +111,23 @@ void Timer::startTimer() {
 void Timer::startBackgroundTimer()
 {
 //    int goal = 20;
+    qDebug()<<"background timer thread id:"<<QThread::currentThreadId();
     qDebug()<<"checking state";
     Listener::ListenerState currentState;
     long long int elapsedSeconds  = StatsUtility::milliToSeconds(clock.restart());
     qDebug()<<"current clock:"<<clock.elapsed();
+    qDebug()<<"elapsedSeconds:"<<elapsedSeconds;
     if(listener->getState() == Listener::ListenerState::productive)
     {
 
-        currentProductiveTime += elapsedSeconds;
+        currentProductiveTime += 1;
         currentState = Listener::ListenerState::productive;
         qDebug()<<"state: productive";
         qDebug()<<"elapsed time:"<<elapsedSeconds<<" seconds";
     }
     else
     {
-        currentUnproductiveTime += elapsedSeconds;
+        currentUnproductiveTime += 1;
         currentState = Listener::ListenerState::unproductive;
         qDebug()<<"state:unproductive";
     }
@@ -178,17 +180,26 @@ void Timer::initTimer(Listener::ListenerType newListener, udata::Session newSess
 {
     thisInstance->setCurrentSession(newSession);
     thisInstance->setListener(newListener);
+    startTimeStamp = clock.elapsed();
     timer->start(TIMER_TICK);
     this->start();
 
 }
 void Timer::productiveSlot()
 {
+    startBackgroundTimer();
+//  long long int elapsedSeconds  = StatsUtility::milliToSeconds(clock.restart());
+    productiveSignalCount++;
     qDebug()<<"<<<<<<<productive signal>>>>>>";
+    qDebug()<<"productive signal count:"<<this->productiveSignalCount;
 }
 void Timer::unProductiveSlot()
 {
+//    long long int elapsedSeconds  = StatsUtility::milliToSeconds(clock.restart());
+    unProductiveSignalCount++;
+    startBackgroundTimer();
     qDebug()<<"*****Unproductive signal*******";
+    qDebug()<<"unProductive signal count:"<<this->unProductiveSignalCount;
 }
 void Timer::stopTimerSlot()
 {
@@ -205,11 +216,11 @@ QString Timer::getProductiveStatus()
     qDebug()<<"productive time on UI:"<<currentProductiveTime;
     QString result;
     int resultProductive =  currentProductiveTime;
-    if(resultProductive>HOUR)
+    if(resultProductive>MINUTE)
     {
-        resultProductive += currentProductiveTime -  (productiveMinutes * HOUR);
+        resultProductive = currentProductiveTime -  (productiveMinutes * MINUTE);
     }
-    else if(resultProductive %  HOUR == 0)
+    else if(resultProductive %  MINUTE == 0)
     {
         resultProductive = 0;
 
@@ -235,17 +246,18 @@ QString Timer::getUnproductiveStatus()
     qDebug()<<"productive time on UI:"<<currentUnproductiveTime;
     QString result;
     int resultProductive =  currentUnproductiveTime;
-    if(resultProductive>HOUR)
+    if(currentUnproductiveTime>MINUTE)
     {
-        resultProductive += currentUnproductiveTime -  (productiveMinutes * HOUR);
+        resultProductive = currentUnproductiveTime -  (productiveMinutes * MINUTE);
     }
-    else if(resultProductive %  HOUR == 0)
+    else if(resultProductive %  MINUTE == 0)
     {
         resultProductive = 0;
 
     }
 
     result = QString::number( productiveMinutes)+ ":" + QString::number(resultProductive);
+    qDebug()<<"result unproductive time:"<<result;
     if(productiveMinutes==ZERO)
     {
 
@@ -264,11 +276,11 @@ QString Timer::getTimeElapsedStatus()
     qDebug()<<"productive time on UI:"<<getTotalTimeElapsed();
     QString result;
     int resultProductive =  getTotalTimeElapsed();
-    if(resultProductive>HOUR)
+    if(resultProductive>MINUTE)
     {
-        resultProductive += getTotalTimeElapsed() -  (productiveMinutes * HOUR);
+        resultProductive = getTotalTimeElapsed() -  (productiveMinutes * MINUTE);
     }
-    else if(resultProductive %  HOUR == 0)
+    else if(resultProductive %  MINUTE == 0)
     {
         resultProductive = 0;
 
