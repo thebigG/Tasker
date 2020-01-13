@@ -108,6 +108,7 @@ int KeyboardListener::startListening(unsigned long int delay) {
     while (1) {
         setState(ListenerState::unproductive);
         state = ListenerState::unproductive;
+        emit unProductive();
         qDebug() << "waitting on keyboard...:unproductive state\n";
         n = read(fd, &ev, sizeof ev);
         qDebug()<<"returning from read() call";
@@ -124,6 +125,7 @@ int KeyboardListener::startListening(unsigned long int delay) {
             int val = ev.value;
             setState(ListenerState::productive);
             state=  ListenerState::productive;
+            emit productive();
 //            printf("%s 0x%04x (%d)\n", evval[ev.value], (int)ev.code, (int)ev.code);
             qDebug() << "key pressed: productive state\n";
             QThread::sleep(2);

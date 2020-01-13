@@ -89,6 +89,8 @@ void Timer::startTimer() {
     }
     qDebug()<<"before listener->start()";
     qDebug()<<"after listener->start()";
+    connect(listener, &Listener::productive, this, &Timer::productiveSlot);
+    connect(listener, &Listener::unProductive, this, &Timer::unProductiveSlot);
     /**
         This block of code  WORKS!
         DO NOT DELETE THIS BLOCK OF CODE. IT IS PERFECT!
@@ -179,6 +181,14 @@ void Timer::initTimer(Listener::ListenerType newListener, udata::Session newSess
     timer->start(TIMER_TICK);
     this->start();
 
+}
+void Timer::productiveSlot()
+{
+    qDebug()<<"<<<<<<<productive signal>>>>>>";
+}
+void Timer::unProductiveSlot()
+{
+    qDebug()<<"*****Unproductive signal*******";
 }
 void Timer::stopTimerSlot()
 {

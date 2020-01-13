@@ -55,6 +55,7 @@ public:
 protected:
     Listener::ListenerState state;
 
+
 private:
     double checkStateDelay;
     double slack;
@@ -98,6 +99,9 @@ private:
         newListener = intToListenerType(enumValue);
         return in;
     }
+signals:
+    void productive();
+    void unProductive();
 };
 
 #endif // LISTENER_H

@@ -58,6 +58,8 @@ public slots:
     void timeSlot();
     void stopTimerSlot();
     void startBackgroundTimer();
+    void productiveSlot();
+    void unProductiveSlot();
 signals:
     void startListener();
     void stopTimer();
