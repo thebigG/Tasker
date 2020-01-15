@@ -21,16 +21,24 @@ class Timer;
 class Engine::Timer : public QThread {
     Q_OBJECT
 private:
-    int currentProductiveTime;
-    int currentUnproductiveTime;
+    int currentProductiveTime = 0;
+    int currentUnproductiveTime = 0;
     long long int productiveTimeGoal;
     udata::Session currentSession;
     QTime clock{0,0,0};
     static Timer *thisInstance;
+
     int productiveSignalCount = 0;
     int unProductiveSignalCount = 0;
     long startTimeStamp;
-
+    int niceness;
+    long long tickCount = 0;      //Every "tick" is usually a second, or whatever the value of TIMER_TICK is in milliseconds
+    long long producitveTickCount = 0;
+    long long unProducitveTickCount = 0;
+    int lastProductiveTick = 0; //The last point in time(on which tick) where the Timer was productive
+    int lastUnproductiveTick = 0;
+    int productiveTimeSurplus = 1; //For how many EXTRA ticks does productiveTime get incremented. Depends on niceness
+    int unproductiveTimeSurplus = 1;
     Listener *listener;
     Listener::ListenerType listenerType;
     QThread listenerThread;
@@ -39,7 +47,7 @@ private:
     virtual void run();
 
 public:
-    Timer();
+    Timer(int newNiceness  = 5);
     Timer(Listener::ListenerType, udata::Session);
     static Timer* getInstance();
     void initTimer(Listener::ListenerType, udata::Session);

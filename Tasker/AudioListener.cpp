@@ -30,7 +30,7 @@
 #include <QDebug>
 #include <cstdio>
 
-#define BASE_DELAY 2
+
 
 using Engine::AudioListener;
 using Engine::Listener;

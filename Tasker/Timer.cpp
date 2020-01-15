@@ -14,7 +14,7 @@ Timer *Timer::thisInstance;
 /**
  * @brief Timer::Timer
  */
-Timer::Timer() {
+Timer::Timer(int newNiceness) {
     currentProductiveTime = 0;
     currentUnproductiveTime = 0;
     timer = new QTimer(this);
@@ -35,21 +35,13 @@ Timer::Timer(Listener::ListenerType newListenerType,Session newSession ) {
     listenerType = newListenerType;
     currentProductiveTime = 0;
     currentUnproductiveTime = 0;
-//    timer = new QTimer(this);
+
     connect(timer, &QTimer::timeout, this, &Timer::startBackgroundTimer);
     timer = new QTimer(this);
     connect(this, &Timer::stopTimer, this , &Timer::stopTimerSlot);
-//    timer->start(1000);
     qDebug() << "Timer() constructor#2 ";
-//    connect(&listenerThread, &QThread::started, listener, &Listener::start);
     qDebug() << "Timer() constructor#3";
-//    listener->moveToThread(&listenerThread);
     qDebug() << "Timer() constructor#4";
-//    listenerThread.start();
-//    connect(&listenerThread, &QThread::started, this, &Timer::startTimer);
-//    listener->moveToThread(&listenerThread);
-//    listenerThread.start();
-//    listenerThread.start();
     qDebug()<< "Timer() constructor after start(): "<<currentThreadId();
 }
 
@@ -89,8 +81,6 @@ void Timer::startTimer() {
     }
     qDebug()<<"before listener->start()";
     qDebug()<<"after listener->start()";
-//    connect(listener, &Listener::productive, this, &Timer::productiveSlot);
-//    connect(listener, &Listener::unProductive, this, &Timer::unProductiveSlot);
     /**
         This block of code  WORKS!
         DO NOT DELETE THIS BLOCK OF CODE. IT IS PERFECT!
@@ -101,34 +91,42 @@ void Timer::startTimer() {
     listener->moveToThread(&listenerThread);
     listenerThread.start();
     qDebug()<<"startTimer#1";
-//    connect(timer, &QTimer::timeout, this, &Timer::startBackgroundTimer);
     qDebug()<<"startTimer#2";
     clock.start();
     qDebug()<<"startTimer#3";
     qDebug()<<"startTimer#4";
 }
-
+/**
+ * @brief Timer::startBackgroundTimer
+ * This is a time-sensitive function. Whatever it executes, it MUST return
+ * within 1 second.
+ */
 void Timer::startBackgroundTimer()
 {
-//    int goal = 20;
     qDebug()<<"background timer thread id:"<<QThread::currentThreadId();
     qDebug()<<"checking state";
     Listener::ListenerState currentState;
     long long int elapsedSeconds  = StatsUtility::milliToSeconds(clock.restart());
     qDebug()<<"current clock:"<<clock.elapsed();
     qDebug()<<"elapsedSeconds:"<<elapsedSeconds;
+    int tickDelta;
     if(listener->getState() == Listener::ListenerState::productive)
     {
 
+        tickDelta = tickCount - producitveTickCount;
         currentProductiveTime += 1;
         currentState = Listener::ListenerState::productive;
         qDebug()<<"state: productive";
         qDebug()<<"elapsed time:"<<elapsedSeconds<<" seconds";
+        producitveTickCount += 1;
+        lastProductiveTick = tickCount;
     }
     else
     {
-        currentUnproductiveTime += 1;
+        currentUnproductiveTime += unproductiveTimeSurplus;
         currentState = Listener::ListenerState::unproductive;
+        unProducitveTickCount += 1;
+        lastUnproductiveTick = tickCount;
         qDebug()<<"state:unproductive";
     }
 
@@ -142,6 +140,7 @@ void Timer::startBackgroundTimer()
 //        timer->stop();
         emit stopTimer();
     }
+    tickCount++;
     emit tick();
 }
 
@@ -185,19 +184,41 @@ void Timer::initTimer(Listener::ListenerType newListener, udata::Session newSess
     this->start();
 
 }
+/**
+ * @brief Timer::productiveSlot
+ *
+ * Called every time the listener emits the prductive signal.
+ * This function can be used to crunch more stats on hardware interaction.
+ * For example; we could keep internal productive counters on timer
+ * and give the user data such as "you were most productive
+ * on the first 10 minutes of the session" because there was a constant increment
+ * on your productive signal count. I think the possibility are endless, in terms of data,
+ * depending on the context, whether they're writing or practicing music.
+ *
+ */
 void Timer::productiveSlot()
 {
-    startBackgroundTimer();
-//  long long int elapsedSeconds  = StatsUtility::milliToSeconds(clock.restart());
+//    startBackgroundTimer();
     productiveSignalCount++;
     qDebug()<<"<<<<<<<productive signal>>>>>>";
     qDebug()<<"productive signal count:"<<this->productiveSignalCount;
 }
+/**
+ * @brief Timer::unProductiveSlot
+ *Called every time the listener emits the unProductive signal.
+ * This function can be used to crunch more stats on hardware interaction.
+ * For example; we could keep internal unProductive counters on Timer
+ * and give the user data such as "you were least productive
+ * on the first 10 minutes of the session" because there was a constant increment
+ * on your productive signal count. That's just a silly example, but I think the possibility are endless,
+ * in terms of data,
+ * depending on the context, whether they're writing or practicing music.
+ *
+ */
 void Timer::unProductiveSlot()
 {
-//    long long int elapsedSeconds  = StatsUtility::milliToSeconds(clock.restart());
     unProductiveSignalCount++;
-    startBackgroundTimer();
+//    startBackgroundTimer();
     qDebug()<<"*****Unproductive signal*******";
     qDebug()<<"unProductive signal count:"<<this->unProductiveSignalCount;
 }

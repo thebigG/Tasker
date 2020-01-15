@@ -6,7 +6,7 @@
 #include <QObject>
 #include <QThread>
 #include <cstdint>
-
+#define BASE_DELAY 2
 namespace Engine {
 class Listener;
 }
@@ -99,6 +99,8 @@ private:
         newListener = intToListenerType(enumValue);
         return in;
     }
+public slots:
+//    void tickSlot();
 signals:
     void productive();
     void unProductive();

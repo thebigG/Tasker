@@ -39,10 +39,14 @@ Listener::~Listener() {
 
 /**
  * @brief Engine::Listener::setState
- *
  * @param state ListenerState, unproductive or productive
+ * This method emits the productive or unProductive signal,
+ * depending on the state passed.
  */
 void Listener::setState(Listener::ListenerState newState) {
+      newState == ListenerState::productive ?
+      emit  productive():
+      emit unProductive();
     state = newState;
 }
 
