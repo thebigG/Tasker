@@ -2,13 +2,13 @@
 #include "CommStatsQWidget.h"
 #include "CreateCommitmentQWidget.h"
 #include "Interval.h"
+#include "KeyboardListener.h"
 #include "StatsUtility.h"
 #include "Task.h"
 #include "TaskerUIMainWindowQWidget.h"
-#include "User.h"
-#include "UdataUtils.h"
-#include "KeyboardListener.h"
 #include "Timer.h"
+#include "UdataUtils.h"
+#include "User.h"
 #include "livesession.h"
 #include "mainui.h"
 
@@ -18,15 +18,15 @@
 #include <QDebug>
 #include <QFile>
 #include <QObject>
+#include <QStandardPaths>
 #include <QThreadPool>
 #include <Qt>
 #include <QtCore>
-#include <QStandardPaths>
 
-#include <iostream>
+#include <QObject>
 #include <cstdio>
 #include <cstdlib>
-#include <QObject>
+#include <iostream>
 
 using std::cout;
 using std::endl;
@@ -34,8 +34,6 @@ using std::endl;
 using namespace Engine;
 using namespace udata;
 using namespace std;
-
-
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);

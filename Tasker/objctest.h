@@ -34,19 +34,15 @@
 #if defined(Q_OS_OSX)
 #include <Carbon/Carbon.h>
 #include <ctype.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-#include <mach/mach_port.h>
-#include <mach/mach_interface.h>
 #include <mach/mach_init.h>
+#include <mach/mach_interface.h>
+#include <mach/mach_port.h>
 
-#include <IOKit/pwr_mgt/IOPMLib.h>
 #include <IOKit/IOMessage.h>
-
-
-
-
+#include <IOKit/pwr_mgt/IOPMLib.h>
 
 #endif // Q_OS_OSX
 

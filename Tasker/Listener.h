@@ -55,7 +55,6 @@ public:
 protected:
     Listener::ListenerState state;
 
-
 private:
     double checkStateDelay;
     double slack;
@@ -100,7 +99,7 @@ private:
         return in;
     }
 public slots:
-//    void tickSlot();
+    //    void tickSlot();
 signals:
     void productive();
     void unProductive();

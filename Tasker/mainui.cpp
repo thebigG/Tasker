@@ -1,8 +1,8 @@
 #include "mainui.h"
-#include <User.h>
-#include <UdataUtils.h>
 #include <QDebug>
-TaskerUIMainWindowQWidget* MainUI::Instance = nullptr;
+#include <UdataUtils.h>
+#include <User.h>
+TaskerUIMainWindowQWidget *MainUI::Instance = nullptr;
 
 using namespace udata;
 /**
@@ -21,11 +21,10 @@ TaskerUIMainWindowQWidget *MainUI::getInstance() {
     }
     return Instance;
 }
-MainUI::~MainUI()
-{
-    qDebug()<<"MainUI destructor#1\n";
+MainUI::~MainUI() {
+    qDebug() << "MainUI destructor#1\n";
     delete Instance;
-    qDebug()<<"MainUI destructor#2";
+    qDebug() << "MainUI destructor#2";
 }
 /**
  * @brief MainUI::saveTaskerState
@@ -34,8 +33,7 @@ MainUI::~MainUI()
  * that the user has changed since the last time that state was loaded.
  * This is called every time the application is about to be closed.
  */
-void MainUI::saveTaskerStateSlot()
-{
-    qDebug()<<"Saving state";
+void MainUI::saveTaskerStateSlot() {
+    qDebug() << "Saving state";
     UdataUtils::saveUserData(*User::getInstance());
 }

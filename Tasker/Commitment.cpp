@@ -46,7 +46,7 @@ Commitment::Commitment(QString newName, QDate newStart, QDate newEnd, util::Inte
  * @return
  */
 const QString &Commitment::getName() const {
-    return  name;
+    return name;
 }
 
 /**

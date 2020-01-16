@@ -24,10 +24,10 @@ public:
     ~TaskerUIMainWindowQWidget();
 
     QPushButton *getButton();
-    CreateCommitmentQWidget& getCreateCommitment();
+    CreateCommitmentQWidget &getCreateCommitment();
     QFrame *getWelcomeFrame();
-    CommStatsQWidget& getCommStats();
-    TimerWindowQWidget& getTimerWindow();
+    CommStatsQWidget &getCommStats();
+    TimerWindowQWidget &getTimerWindow();
 
 public:
     Ui::TaskerUIMainWindowQWidget *ui;

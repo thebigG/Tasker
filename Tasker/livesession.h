@@ -7,8 +7,7 @@ namespace Ui {
 class LiveSession;
 }
 
-class LiveSession : public QWidget
-{
+class LiveSession : public QWidget {
     Q_OBJECT
 
 public:

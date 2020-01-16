@@ -5,37 +5,35 @@
 
 #include "TempChartQWidget.h"
 
-#include <QDebug>
 #include "Timer.h"
+#include <QDebug>
 
 #include <QtCharts/QBarSeries>
 
+using Engine::Listener;
 using udata::Commitment;
-using udata::User;
 using udata::Session;
-using Engine::Listener;
-using Engine::Listener;
-
+using udata::User;
 
 /**
  * @brief CommStatsQWidget::CommStatsQWidget
  * @param parent
  */
 CommStatsQWidget::CommStatsQWidget(QWidget *parent)
-: QWidget(parent), ui(new Ui::CommStatsQWidget)  {
+: QWidget(parent), ui(new Ui::CommStatsQWidget) {
     ui->setupUi(this);
-    connect(ui->addCommitmentQPushButton, &QPushButton::clicked,
-            this, &CommStatsQWidget::addCommitmentButtonSlot);
-    connect(ui->removeCommitmentQPushButton, &QPushButton::clicked,
-            this, &CommStatsQWidget::removeCommitmentButtonSlot);
-    connect(ui->commitmentsQTreeWidget, &QTreeWidget::currentItemChanged,
-            this,&CommStatsQWidget::currentCommitmentChangedSlot);
-//    TempChartQWidget *mw = new TempChartQWidget;
-//    connect(this->ui->addCommitmentQCommandLinkButton, &QCommandLinkButton::clicked,
-//            this, &CommStatsQWidget::addCommitmentButtonSlot);
-//    QFrame *fstats = ui->statsQFrame;
+    connect(ui->addCommitmentQPushButton, &QPushButton::clicked, this,
+            &CommStatsQWidget::addCommitmentButtonSlot);
+    connect(ui->removeCommitmentQPushButton, &QPushButton::clicked, this,
+            &CommStatsQWidget::removeCommitmentButtonSlot);
+    connect(ui->commitmentsQTreeWidget, &QTreeWidget::currentItemChanged, this,
+            &CommStatsQWidget::currentCommitmentChangedSlot);
+    //    TempChartQWidget *mw = new TempChartQWidget;
+    //    connect(this->ui->addCommitmentQCommandLinkButton, &QCommandLinkButton::clicked,
+    //            this, &CommStatsQWidget::addCommitmentButtonSlot);
+    //    QFrame *fstats = ui->statsQFrame;
 
-//    auto layout = new QVBoxLayout();
+    //    auto layout = new QVBoxLayout();
 
     /*
     {
@@ -59,9 +57,9 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
  * @brief CommStatsQWidget::~CommStatsQWidget
  */
 CommStatsQWidget::~CommStatsQWidget() {
-    qDebug()<<"CommStatsQWidget destructor#1";
+    qDebug() << "CommStatsQWidget destructor#1";
     delete ui;
-    qDebug()<<"CommStatsQWidget destructor#2";
+    qDebug() << "CommStatsQWidget destructor#2";
 }
 
 /**
@@ -69,63 +67,61 @@ CommStatsQWidget::~CommStatsQWidget() {
  */
 void CommStatsQWidget::addCommitmentButtonSlot() {
     this->hide();
-    CreateCommitmentQWidget& cc = MainUI::getInstance()->getCreateCommitment();
+    CreateCommitmentQWidget &cc = MainUI::getInstance()->getCreateCommitment();
     cc.show();
 }
-void CommStatsQWidget::removeCommitmentButtonSlot()
-{
-    qDebug()<<"deleting#1:"<<selectedCommitmentIndex;
+void CommStatsQWidget::removeCommitmentButtonSlot() {
+    qDebug() << "deleting#1:" << selectedCommitmentIndex;
     int tempIndex = selectedCommitmentIndex;
-    if(selectedCommitmentIndex==(User::getInstance()->getCommitments().size() - 1 ))
-    {
+    if (selectedCommitmentIndex == (User::getInstance()->getCommitments().size() - 1)) {
         selectedCommitmentIndex--;
     }
     User::getInstance()->getCommitments().removeAt(tempIndex);
-    isDelete = true; //This is for the currentItemChanged signal, which gets emitted by delete keyword
+    isDelete = true; // This is for the currentItemChanged signal, which gets emitted by delete keyword
     delete ui->commitmentsQTreeWidget->topLevelItem(tempIndex);
-    qDebug()<<"deleting#2:"<<tempIndex;
-    qDebug()<<"deleting#3:"<<tempIndex;
+    qDebug() << "deleting#2:" << tempIndex;
+    qDebug() << "deleting#3:" << tempIndex;
 }
 
 /**
  * @brief CommStatsQWidget::on_statsQFrame_destroyed
  */
 void CommStatsQWidget::on_statsQFrame_destroyed() {
-    qDebug()<<"delete udata::User::getInstance() on on_statsQFrame_destroyed#1";
-//    delete udata::User::getInstance();
-    qDebug()<<"delete udata::User::getInstance() on on_statsQFrame_destroyed2";
+    qDebug()
+        << "delete udata::User::getInstance() on on_statsQFrame_destroyed#1";
+    //    delete udata::User::getInstance();
+    qDebug()
+        << "delete udata::User::getInstance() on on_statsQFrame_destroyed2";
 }
 
 void CommStatsQWidget::update() {
-        QVector<Commitment>& c_vec = User::getInstance()->getCommitments();
-        auto it = c_vec.begin();
-        while (it != c_vec.end()) {
-            Commitment c = (*it);
+    QVector<Commitment> &c_vec = User::getInstance()->getCommitments();
+    auto it = c_vec.begin();
+    while (it != c_vec.end()) {
+        Commitment c = (*it);
 
-            auto s_vec = c.getSessions();
-            auto s_it = s_vec.begin();
+        auto s_vec = c.getSessions();
+        auto s_it = s_vec.begin();
 
-            QTreeWidget *w = ui->commitmentsQTreeWidget;
+        QTreeWidget *w = ui->commitmentsQTreeWidget;
 
-            QTreeWidgetItem *item = new QTreeWidgetItem(QStringList() << c.getName() << ": " << c.getDateStart().toString());
+        QTreeWidgetItem *item = new QTreeWidgetItem(
+            QStringList() << c.getName() << ": " << c.getDateStart().toString());
 
-            while (s_it != s_vec.end()) {
-                Session s = (*s_it);
+        while (s_it != s_vec.end()) {
+            Session s = (*s_it);
 
-
-
-                ++s_it;
-            }
-
-            ++it;
-
-            w->addTopLevelItem(item);
+            ++s_it;
         }
 
+        ++it;
+
+        w->addTopLevelItem(item);
+    }
 }
 
-void CommStatsQWidget::on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
-{
+void CommStatsQWidget::on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetItem *item,
+                                                                   int column) {
     QString commitmentName = item->text(column);
 
     auto c_vec = User::getInstance()->getCommitments();
@@ -137,34 +133,33 @@ void CommStatsQWidget::on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetIt
         if (c.getName() == commitmentName) {
             qDebug() << c.getName();
 
-            TimerWindowQWidget& t = MainUI::getInstance()->getTimerWindow();
+            TimerWindowQWidget &t = MainUI::getInstance()->getTimerWindow();
             t.show();
         }
 
         ++c_it;
     }
 }
-void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem* current, QTreeWidgetItem *previous)
-{
-//    QList<QTreeWidgetItem*> items = ui->commitmentsQTreeWidget->selectedItems();
-    if(isDelete)
-    {
-        isDelete =false;
+void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
+                                                    QTreeWidgetItem *previous) {
+    //    QList<QTreeWidgetItem*> items = ui->commitmentsQTreeWidget->selectedItems();
+    if (isDelete) {
+        isDelete = false;
         return;
     }
-    if(current == previous)
-    {
-        qDebug()<<"SAME OBJECT";
+    if (current == previous) {
+        qDebug() << "SAME OBJECT";
     }
     int currentIndex = 0;
-    currentIndex  = ui->commitmentsQTreeWidget->indexOfTopLevelItem(current);
-    if(currentIndex==-1)
-    {
-        qDebug()<<"NEGATIVE";
-       currentIndex  = ui->commitmentsQTreeWidget->indexOfTopLevelItem(current->parent());
+    currentIndex = ui->commitmentsQTreeWidget->indexOfTopLevelItem(current);
+    if (currentIndex == -1) {
+        qDebug() << "NEGATIVE";
+        currentIndex =
+            ui->commitmentsQTreeWidget->indexOfTopLevelItem(current->parent());
     }
 
-    selectedCommitmentIndex =currentIndex;
-    qDebug()<<"changed commitment index:"<<currentIndex;
-    qDebug()<<"changed commitment name:"<<User::getInstance()->getCommitments().at(currentIndex).getName();
+    selectedCommitmentIndex = currentIndex;
+    qDebug() << "changed commitment index:" << currentIndex;
+    qDebug() << "changed commitment name:"
+             << User::getInstance()->getCommitments().at(currentIndex).getName();
 }

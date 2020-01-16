@@ -15,7 +15,7 @@ QT_CHARTS_USE_NAMESPACE
 TempChartQWidget::TempChartQWidget(QWidget *parent) : QWidget(parent) {
     // Create buttons for ui
 
-//    m_buttonLayout = new QGridLayout();
+    //    m_buttonLayout = new QGridLayout();
 
     QPushButton *detachLegendButton = new QPushButton("Toggle attached");
     connect(detachLegendButton, &QPushButton::clicked, this, &TempChartQWidget::toggleAttached);
@@ -40,10 +40,10 @@ TempChartQWidget::TempChartQWidget(QWidget *parent) : QWidget(parent) {
     connect(italicButton, &QPushButton::clicked, this, &TempChartQWidget::toggleItalic);
     m_buttonLayout.addWidget(italicButton, 9, 0);
 
-//    m_legendPosX = new QDoubleSpinBox();
-//    m_legendPosY = new QDoubleSpinBox();
-//    m_legendWidth = new QDoubleSpinBox();
-//    m_legendHeight = new QDoubleSpinBox();
+    //    m_legendPosX = new QDoubleSpinBox();
+    //    m_legendPosY = new QDoubleSpinBox();
+    //    m_legendWidth = new QDoubleSpinBox();
+    //    m_legendHeight = new QDoubleSpinBox();
 
     connect(&m_legendPosX,
             static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
@@ -63,18 +63,18 @@ TempChartQWidget::TempChartQWidget(QWidget *parent) : QWidget(parent) {
     legendLayout->addRow("VPos", &m_legendPosY);
     legendLayout->addRow("Width", &m_legendWidth);
     legendLayout->addRow("Height", &m_legendHeight);
-//    m_legendSettings = new QGroupBox("Detached legend");
+    //    m_legendSettings = new QGroupBox("Detached legend");
     m_legendSettings.setLayout(legendLayout);
     m_buttonLayout.addWidget(&m_legendSettings);
     m_legendSettings.setVisible(false);
 
     // Create chart view with the chart
-//    m_chart = new QChart();
-//    m_chartView = new QChartView(m_chart, this); //
+    //    m_chart = new QChart();
+    //    m_chartView = new QChartView(m_chart, this); //
     m_chartView.setParent(this);
     m_chartView.setChart(&m_chart);
     // Create spinbox to modify font size
-//    m_fontSize = new QDoubleSpinBox();
+    //    m_fontSize = new QDoubleSpinBox();
     m_fontSize.setValue(m_chart.legend()->font().pointSizeF());
     connect(&m_fontSize,
             static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged),
@@ -84,7 +84,7 @@ TempChartQWidget::TempChartQWidget(QWidget *parent) : QWidget(parent) {
     fontLayout->addRow("Legend font size", &m_fontSize);
 
     // Create layout for grid and detached legend
-//    m_mainLayout = new QGridLayout();
+    //    m_mainLayout = new QGridLayout();
     /*
     m_mainLayout->addLayout(m_buttonLayout, 0, 0);
     */
@@ -98,7 +98,7 @@ TempChartQWidget::TempChartQWidget(QWidget *parent) : QWidget(parent) {
 }
 
 void TempChartQWidget::createSeries() {
-//    m_series = new QBarSeries();
+    //    m_series = new QBarSeries();
     addBarset();
     addBarset();
     addBarset();
@@ -162,7 +162,8 @@ void TempChartQWidget::toggleAttached() {
 }
 
 void TempChartQWidget::addBarset() {
-    QBarSet *barSet = new QBarSet(QString("session ") + QString::number(m_series.count()));
+    QBarSet *barSet =
+        new QBarSet(QString("session ") + QString::number(m_series.count()));
     qreal delta = m_series.count() * 0.1;
     *barSet << 1 + delta << 2 + delta << 3 + delta << 4 + delta;
     m_series.append(barSet);
@@ -222,16 +223,13 @@ void TempChartQWidget::fontSizeChanged() {
 
 void TempChartQWidget::updateLegendLayout() {
     //![4]
-    m_chart.legend()->setGeometry(
-        QRectF(m_legendPosX.value(), m_legendPosY.value(),
-               m_legendWidth.value(), m_legendHeight.value()));
+    m_chart.legend()->setGeometry(QRectF(m_legendPosX.value(), m_legendPosY.value(),
+                                         m_legendWidth.value(), m_legendHeight.value()));
     m_chart.legend()->update();
     //![4]
 }
 
-TempChartQWidget::~TempChartQWidget()
-{
+TempChartQWidget::~TempChartQWidget() {
     qDebug("destructor TempChartQWidget#1");
-//    delete ui;
-
+    //    delete ui;
 }

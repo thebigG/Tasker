@@ -34,7 +34,7 @@ Listener::~Listener() {
     slack = 0.0;
     productiveTime = 0;
     unproductiveTime = 0;
-    qDebug()<<"Listener destrtuctor";
+    qDebug() << "Listener destrtuctor";
 }
 
 /**
@@ -44,9 +44,7 @@ Listener::~Listener() {
  * depending on the state passed.
  */
 void Listener::setState(Listener::ListenerState newState) {
-      newState == ListenerState::productive ?
-      emit  productive():
-      emit unProductive();
+    newState == ListenerState::productive ? emit productive() : emit unProductive();
     state = newState;
 }
 

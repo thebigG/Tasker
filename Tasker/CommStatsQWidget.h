@@ -1,10 +1,10 @@
 #ifndef WIDGET_COMMSTATS_H
 #define WIDGET_COMMSTATS_H
 
-#include "User.h"
 #include "TempChartQWidget.h"
-#include <QWidget>
+#include "User.h"
 #include <QTreeWidget>
+#include <QWidget>
 namespace Ui {
 class CommStatsQWidget;
 }
@@ -24,14 +24,14 @@ public:
 private slots:
     void addCommitmentButtonSlot();
     void removeCommitmentButtonSlot();
-    void currentCommitmentChangedSlot(QTreeWidgetItem*, QTreeWidgetItem*);
+    void currentCommitmentChangedSlot(QTreeWidgetItem *, QTreeWidgetItem *);
     void on_statsQFrame_destroyed();
     void on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
 private:
     Ui::CommStatsQWidget *ui;
     bool isDelete = false;
-//    TempChartQWidget mw{};
+    //    TempChartQWidget mw{};
     int selectedCommitmentIndex = 0;
     QVBoxLayout layout{};
 };

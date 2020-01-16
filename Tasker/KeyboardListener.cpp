@@ -86,7 +86,7 @@ void KeyboardListener::setKeyboardPathsOnLinux(int deviceIndex) {
         }
     }
     activeKeyboardPath = LNUX_DEV_PATH + keyboardPaths.at(deviceIndex);
-    qDebug()<<"active path for keyboard:"<<activeKeyboardPath;
+    qDebug() << "active path for keyboard:" << activeKeyboardPath;
 #endif // setKeyboardPathsOnLinux
 }
 
@@ -104,14 +104,14 @@ int KeyboardListener::startListening(unsigned long int delay) {
     struct input_event ev;
     ssize_t n;
     int fd;
-//      emit unProductive();
+    //      emit unProductive();
     fd = open(dev, O_RDONLY);
     while (1) {
         setState(ListenerState::unproductive);
-//        state = ListenerState::unproductive;
+        //        state = ListenerState::unproductive;
         qDebug() << "waitting on keyboard...:unproductive state\n";
         n = read(fd, &ev, sizeof ev);
-        qDebug()<<"returning from read() call";
+        qDebug() << "returning from read() call";
         if (n == -1) {
             if (errno == EINTR)
                 continue;
@@ -124,16 +124,14 @@ int KeyboardListener::startListening(unsigned long int delay) {
         if (ev.type == EV_KEY && ev.value >= 0) {
             int val = ev.value;
             setState(ListenerState::productive);
-//            state=  ListenerState::productive;
-//            emit productive();
-//            printf("%s 0x%04x (%d)\n", evval[ev.value], (int)ev.code, (int)ev.code);
+            //            state=  ListenerState::productive;
+            //            emit productive();
+            //            printf("%s 0x%04x (%d)\n", evval[ev.value], (int)ev.code, (int)ev.code);
             qDebug() << "key pressed: productive state\n";
             QThread::sleep(BASE_DELAY);
 
-        }
-        else
-        {
-//            emit unProductive();
+        } else {
+            //            emit unProductive();
         }
     }
     fflush(stdout);

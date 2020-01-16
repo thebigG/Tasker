@@ -35,6 +35,7 @@ public:
 
     void setGoal(int);
     long long int getGoal();
+
 private:
     Task task;
     long long int goal;

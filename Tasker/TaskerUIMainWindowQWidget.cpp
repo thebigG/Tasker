@@ -2,11 +2,11 @@
 #include "TaskerUIMainWindowQWidget.h"
 #include "ui_TaskerUIMainWindowQWidget.h"
 
+#include <QDebug>
 #include <User.h>
 #include <mainui.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <QDebug>
 #define TASKTER_TITLE "Tasker"
 
 /**
@@ -16,10 +16,10 @@
 TaskerUIMainWindowQWidget::TaskerUIMainWindowQWidget(QWidget *parent)
 : QWidget(parent), ui(new Ui::TaskerUIMainWindowQWidget) {
     ui->setupUi(this);
-//    x = new CreateCommitmentQWidget();
+    //    x = new CreateCommitmentQWidget();
     this->setWindowTitle(TASKTER_TITLE);
-//    wc = new CommStatsQWidget();
-//    tw = new TimerWindowQWidget();
+    //    wc = new CommStatsQWidget();
+    //    tw = new TimerWindowQWidget();
     connect(this->ui->makeCommitmentQPushButton, &QPushButton::clicked, this,
             &TaskerUIMainWindowQWidget::makeCommitmentButtonSlot);
     connect(this->ui->quickSessionQPushButton, &QPushButton::clicked, this,
@@ -38,7 +38,7 @@ QPushButton *TaskerUIMainWindowQWidget::getButton() {
  * @brief TaskerUIMainWindowQWidget::getCreateCommitment
  * @return
  */
-CreateCommitmentQWidget& TaskerUIMainWindowQWidget::getCreateCommitment() {
+CreateCommitmentQWidget &TaskerUIMainWindowQWidget::getCreateCommitment() {
     return x;
 }
 
@@ -47,7 +47,7 @@ CreateCommitmentQWidget& TaskerUIMainWindowQWidget::getCreateCommitment() {
  */
 void TaskerUIMainWindowQWidget::quickSessionButtonSlot() {
     this->hide();
-    TimerWindowQWidget& tw = MainUI::getInstance()->getTimerWindow();
+    TimerWindowQWidget &tw = MainUI::getInstance()->getTimerWindow();
     tw.show();
 }
 
@@ -71,7 +71,7 @@ QFrame *TaskerUIMainWindowQWidget::getWelcomeFrame() {
  * @brief TaskerUIMainWindowQWidget::getCommStats
  * @return
  */
-CommStatsQWidget& TaskerUIMainWindowQWidget::getCommStats() {
+CommStatsQWidget &TaskerUIMainWindowQWidget::getCommStats() {
     return wc;
 }
 
@@ -79,7 +79,7 @@ CommStatsQWidget& TaskerUIMainWindowQWidget::getCommStats() {
  * @brief TaskerUIMainWindowQWidget::getTimerWindow
  * @return
  */
-TimerWindowQWidget& TaskerUIMainWindowQWidget::getTimerWindow() {
+TimerWindowQWidget &TaskerUIMainWindowQWidget::getTimerWindow() {
     return tw;
 }
 
@@ -87,25 +87,24 @@ TimerWindowQWidget& TaskerUIMainWindowQWidget::getTimerWindow() {
  * @brief TaskerUIMainWindowQWidget::~TaskerUIMainWindowQWidget
  */
 TaskerUIMainWindowQWidget::~TaskerUIMainWindowQWidget() {
-//    qDebug()<<"delete on main window#1";
-//    delete tw;
-//    qDebug()<<"delete on main window#2";
-//    delete wc;
-//    qDebug()<<"delete on main window#3";
-//    delete x;
-//    qDebug()<<"delete on main window#4";
-    qDebug()<<"destructor on TaskerUIMainWindowQWidget#1";
+    //    qDebug()<<"delete on main window#1";
+    //    delete tw;
+    //    qDebug()<<"delete on main window#2";
+    //    delete wc;
+    //    qDebug()<<"delete on main window#3";
+    //    delete x;
+    //    qDebug()<<"delete on main window#4";
+    qDebug() << "destructor on TaskerUIMainWindowQWidget#1";
     delete ui;
     delete MainUI::getInstance();
-    qDebug()<<"destructor on TaskerUIMainWindowQWidget#2";
-//    qDebug()<<"ref count for mainui:"<<MainUI::getRefCount();
-
+    qDebug() << "destructor on TaskerUIMainWindowQWidget#2";
+    //    qDebug()<<"ref count for mainui:"<<MainUI::getRefCount();
 }
 
 /**
  * @brief TaskerUIMainWindowQWidget::on_welcomeQFrame_destroyed
  */
 void TaskerUIMainWindowQWidget::on_welcomeQFrame_destroyed() {
-    qDebug()<<"udata::User::getInstance() on on_welcomeQFrame_destroyed#1";
-//    delete udata::User::getInstance();
+    qDebug() << "udata::User::getInstance() on on_welcomeQFrame_destroyed#1";
+    //    delete udata::User::getInstance();
 }

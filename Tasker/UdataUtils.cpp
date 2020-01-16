@@ -71,37 +71,37 @@ QString UdataUtils::getUsername() {
     if (!userFilePath.isEmpty()) {
         name = userFilePath;
     } else {
-       qDebug() << "#2";
+        qDebug() << "#2";
 
 #ifdef Q_OS_UNIX
-       qDebug() << "#3";
-       QProcess getUsername;
+        qDebug() << "#3";
+        QProcess getUsername;
 
-       qDebug() << "#4";
-       QString output = "";
+        qDebug() << "#4";
+        QString output = "";
 
-       qDebug() << "#5";
-       getUsername.start("whoami");
+        qDebug() << "#5";
+        getUsername.start("whoami");
 
-       qDebug() << "#6";
-       getUsername.waitForFinished();
+        qDebug() << "#6";
+        getUsername.waitForFinished();
 
-       qDebug() << "#7";
-       output = QString(getUsername.readAllStandardOutput());
+        qDebug() << "#7";
+        output = QString(getUsername.readAllStandardOutput());
 
-       qDebug() << "#8";
-       name = output.remove(output.length() - 1, 2);
+        qDebug() << "#8";
+        name = output.remove(output.length() - 1, 2);
 
-       qDebug() << "#9";
+        qDebug() << "#9";
 
-       if (name == "root") {
-           qDebug() << "#10";
-           output = QString(getUsername.readAllStandardOutput());
-           name = getNotRootUser();
-       }
+        if (name == "root") {
+            qDebug() << "#10";
+            output = QString(getUsername.readAllStandardOutput());
+            name = getNotRootUser();
+        }
 #else
-    // no implementation yet
-    name = "";
+        // no implementation yet
+        name = "";
 #endif
     }
 

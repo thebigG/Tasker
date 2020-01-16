@@ -1,6 +1,7 @@
 #ifndef MAINWIDGET_H
 #define MAINWIDGET_H
 
+#include <QPushButton>
 #include <QtCharts/QBarSeries>
 #include <QtCharts/QChart>
 #include <QtCharts/QChartGlobal>
@@ -11,7 +12,6 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QWidget>
-#include <QPushButton>
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -39,19 +39,18 @@ public Q_SLOTS:
     void updateLegendLayout();
 
 private:
-
     QChart m_chart;
     QBarSeries m_series;
-//    QBarSet barSet;
+    //    QBarSet barSet;
     QChartView m_chartView;
     QGridLayout m_mainLayout;
     QGridLayout m_buttonLayout;
-//    QGridLayout m_fontLayout; It looks like it works without using this field.
+    //    QGridLayout m_fontLayout; It looks like it works without using this field.
 
     QDoubleSpinBox m_fontSize;
 
     // For detached layout
-    QGroupBox m_legendSettings{"Detached legend"};
+    QGroupBox m_legendSettings{ "Detached legend" };
     QDoubleSpinBox m_legendPosX;
     QDoubleSpinBox m_legendPosY;
     QDoubleSpinBox m_legendWidth;
