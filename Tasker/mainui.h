@@ -13,8 +13,9 @@ private:
 
 public:
     static TaskerUIMainWindowQWidget *getInstance();
-//    static int getRefCount();
      ~MainUI();
+public slots:
+    static void saveTaskerStateSlot();
 };
 
 #endif // MAINUI_H

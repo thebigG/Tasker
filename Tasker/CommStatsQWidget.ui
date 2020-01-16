@@ -78,50 +78,6 @@
       <string>COMMITMENTS</string>
      </property>
     </column>
-    <item>
-     <property name="text">
-      <string>Untitled Commitment 0</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>Session 0 (00/00/00)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Session 1 (00/00/00)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Session 2 (00/00/00)</string>
-      </property>
-     </item>
-    </item>
-    <item>
-     <property name="text">
-      <string>Untitled Commitment 1</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>(no commitments yet)</string>
-      </property>
-      <property name="font">
-       <font>
-        <italic>true</italic>
-       </font>
-      </property>
-      <property name="background">
-       <brush brushstyle="NoBrush">
-        <color alpha="255">
-         <red>108</red>
-         <green>108</green>
-         <blue>108</blue>
-        </color>
-       </brush>
-      </property>
-     </item>
-    </item>
    </widget>
   </widget>
   <widget class="QFrame" name="overviewStatsNotesMediaQFrame">
@@ -309,22 +265,6 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QFrame" name="statsQFrame">
-    <property name="geometry">
-     <rect>
-      <x>-10</x>
-      <y>120</y>
-      <width>1021</width>
-      <height>391</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-   </widget>
    <widget class="QFrame" name="notesMediaQFrame">
     <property name="geometry">
      <rect>
@@ -368,8 +308,8 @@
        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.SF NS Text';&quot;&gt;(write some notes here...)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.SF NS Text'; font-size:13pt;&quot;&gt;(write some notes here...)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QListWidget" name="filesQListWidget">
@@ -471,10 +411,10 @@ p, li { white-space: pre-wrap; }
   <widget class="QFrame" name="topBarQFrame">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1281</width>
-     <height>41</height>
+     <x>-20</x>
+     <y>-10</y>
+     <width>381</width>
+     <height>42</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -483,38 +423,28 @@ p, li { white-space: pre-wrap; }
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QCommandLinkButton" name="addCommitmentQCommandLinkButton">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>141</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Add new commitment</string>
-    </property>
-   </widget>
-   <widget class="QCommandLinkButton" name="removeCommitmentQCommandLinkButton">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>0</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Remove commitment</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>20</width>
-      <height>20</height>
-     </size>
-    </property>
-   </widget>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QPushButton" name="addCommitmentQPushButton">
+      <property name="text">
+       <string>Add new commitment</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="removeCommitmentQPushButton">
+      <property name="text">
+       <string>Remove commitment</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

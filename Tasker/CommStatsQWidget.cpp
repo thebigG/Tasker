@@ -22,17 +22,20 @@ using Engine::Listener;
  * @param parent
  */
 CommStatsQWidget::CommStatsQWidget(QWidget *parent)
-: QWidget(parent), ui(new Ui::CommStatsQWidget) {
+: QWidget(parent), ui(new Ui::CommStatsQWidget)  {
     ui->setupUi(this);
-
-//    TempChartQWidget *mw = new TempChartQWidget;
-    connect(this->ui->addCommitmentQCommandLinkButton, &QCommandLinkButton::clicked,
+    connect(ui->addCommitmentQPushButton, &QPushButton::clicked,
             this, &CommStatsQWidget::addCommitmentButtonSlot);
-    QFrame *fstats = ui->statsQFrame;
+    connect(ui->removeCommitmentQPushButton, &QPushButton::clicked,
+            this, &CommStatsQWidget::removeCommitmentButtonSlot);
+    connect(ui->commitmentsQTreeWidget, &QTreeWidget::currentItemChanged,
+            this,&CommStatsQWidget::currentCommitmentChangedSlot);
+//    TempChartQWidget *mw = new TempChartQWidget;
+//    connect(this->ui->addCommitmentQCommandLinkButton, &QCommandLinkButton::clicked,
+//            this, &CommStatsQWidget::addCommitmentButtonSlot);
+//    QFrame *fstats = ui->statsQFrame;
 
 //    auto layout = new QVBoxLayout();
-    layout.addWidget(&mw);
-    fstats->setLayout(&layout);
 
     /*
     {
@@ -69,6 +72,20 @@ void CommStatsQWidget::addCommitmentButtonSlot() {
     CreateCommitmentQWidget& cc = MainUI::getInstance()->getCreateCommitment();
     cc.show();
 }
+void CommStatsQWidget::removeCommitmentButtonSlot()
+{
+    qDebug()<<"deleting#1:"<<selectedCommitmentIndex;
+    int tempIndex = selectedCommitmentIndex;
+    if(selectedCommitmentIndex==(User::getInstance()->getCommitments().size() - 1 ))
+    {
+        selectedCommitmentIndex--;
+    }
+    User::getInstance()->getCommitments().removeAt(tempIndex);
+    isDelete = true; //This is for the currentItemChanged signal, which gets emitted by delete keyword
+    delete ui->commitmentsQTreeWidget->topLevelItem(tempIndex);
+    qDebug()<<"deleting#2:"<<tempIndex;
+    qDebug()<<"deleting#3:"<<tempIndex;
+}
 
 /**
  * @brief CommStatsQWidget::on_statsQFrame_destroyed
@@ -80,13 +97,7 @@ void CommStatsQWidget::on_statsQFrame_destroyed() {
 }
 
 void CommStatsQWidget::update() {
-
-
-        QVector<Commitment> c_vec = User::getInstance()->getCommitments();
-
-
-
-
+        QVector<Commitment>& c_vec = User::getInstance()->getCommitments();
         auto it = c_vec.begin();
         while (it != c_vec.end()) {
             Commitment c = (*it);
@@ -132,4 +143,28 @@ void CommStatsQWidget::on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetIt
 
         ++c_it;
     }
+}
+void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem* current, QTreeWidgetItem *previous)
+{
+//    QList<QTreeWidgetItem*> items = ui->commitmentsQTreeWidget->selectedItems();
+    if(isDelete)
+    {
+        isDelete =false;
+        return;
+    }
+    if(current == previous)
+    {
+        qDebug()<<"SAME OBJECT";
+    }
+    int currentIndex = 0;
+    currentIndex  = ui->commitmentsQTreeWidget->indexOfTopLevelItem(current);
+    if(currentIndex==-1)
+    {
+        qDebug()<<"NEGATIVE";
+       currentIndex  = ui->commitmentsQTreeWidget->indexOfTopLevelItem(current->parent());
+    }
+
+    selectedCommitmentIndex =currentIndex;
+    qDebug()<<"changed commitment index:"<<currentIndex;
+    qDebug()<<"changed commitment name:"<<User::getInstance()->getCommitments().at(currentIndex).getName();
 }

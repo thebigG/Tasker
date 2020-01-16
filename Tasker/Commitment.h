@@ -33,7 +33,7 @@ public:
     void setDateEnd(QDate value);
     QVector<Session> &getSessions();
     void setSessions(QVector<udata::Session> value);
-    QString &getName();
+    const QString &getName() const;
     friend QDataStream &operator<<(QDataStream &out, const udata::Commitment &newCommitment);
     friend QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
 };

@@ -5,7 +5,6 @@
 #include "TempChartQWidget.h"
 #include <QWidget>
 #include <QTreeWidget>
-
 namespace Ui {
 class CommStatsQWidget;
 }
@@ -24,12 +23,16 @@ public:
 
 private slots:
     void addCommitmentButtonSlot();
+    void removeCommitmentButtonSlot();
+    void currentCommitmentChangedSlot(QTreeWidgetItem*, QTreeWidgetItem*);
     void on_statsQFrame_destroyed();
     void on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
 private:
     Ui::CommStatsQWidget *ui;
-    TempChartQWidget mw{};
+    bool isDelete = false;
+//    TempChartQWidget mw{};
+    int selectedCommitmentIndex = 0;
     QVBoxLayout layout{};
 };
 

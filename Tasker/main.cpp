@@ -26,6 +26,7 @@
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
+#include <QObject>
 
 using std::cout;
 using std::endl;
@@ -33,6 +34,8 @@ using std::endl;
 using namespace Engine;
 using namespace udata;
 using namespace std;
+
+
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
@@ -42,11 +45,9 @@ int main(int argc, char *argv[]) {
     } else {
         qDebug() << "prepFiles failed";
     }
-
-     TaskerUIMainWindowQWidget *widget = nullptr;
+    QObject::connect(&a, &QGuiApplication::lastWindowClosed, &MainUI::saveTaskerStateSlot);
+    TaskerUIMainWindowQWidget *widget = nullptr;
     widget = MainUI::getInstance();
     widget->show();
-
-
     return a.exec();
 }

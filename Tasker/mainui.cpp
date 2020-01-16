@@ -1,7 +1,10 @@
 #include "mainui.h"
+#include <User.h>
+#include <UdataUtils.h>
 #include <QDebug>
 TaskerUIMainWindowQWidget* MainUI::Instance = nullptr;
 
+using namespace udata;
 /**
  * @brief MainUI::MainUI
  */
@@ -15,9 +18,7 @@ MainUI::MainUI() {
 TaskerUIMainWindowQWidget *MainUI::getInstance() {
     if (Instance == nullptr) {
         Instance = new TaskerUIMainWindowQWidget();
-        qDebug()<<"making shared pointer";
     }
-//    qDebug()<<"Main window ref count"<<Instance.use_count();
     return Instance;
 }
 MainUI::~MainUI()
@@ -26,8 +27,15 @@ MainUI::~MainUI()
     delete Instance;
     qDebug()<<"MainUI destructor#2";
 }
-
-//int MainUI::getRefCount()
-//{
-//    return Instance.use_count();
-//}
+/**
+ * @brief MainUI::saveTaskerState
+ * Stores the state of Tasker on disk.
+ * This includes all commitments,sessions or anything
+ * that the user has changed since the last time that state was loaded.
+ * This is called every time the application is about to be closed.
+ */
+void MainUI::saveTaskerStateSlot()
+{
+    qDebug()<<"Saving state";
+    UdataUtils::saveUserData(*User::getInstance());
+}
