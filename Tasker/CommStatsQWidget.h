@@ -3,8 +3,10 @@
 
 #include "TempChartQWidget.h"
 #include "User.h"
+#include <CreateCommitmentQWidget.h>
 #include <QTreeWidget>
 #include <QWidget>
+#include <TimerWindowQWidget.h>
 namespace Ui {
 class CommStatsQWidget;
 }
@@ -17,6 +19,8 @@ class CommStatsQWidget : public QWidget {
 
 public:
     explicit CommStatsQWidget(QWidget *parent = nullptr);
+    TimerWindowQWidget &getTimerWindow();
+    CreateCommitmentQWidget &getCreateCommitment();
     ~CommStatsQWidget();
     void func();
     void update();
@@ -25,6 +29,7 @@ private slots:
     void addCommitmentButtonSlot();
     void removeCommitmentButtonSlot();
     void currentCommitmentChangedSlot(QTreeWidgetItem *, QTreeWidgetItem *);
+    void newLiveSessionSlot();
     void on_statsQFrame_destroyed();
     void on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
@@ -34,6 +39,8 @@ private:
     //    TempChartQWidget mw{};
     int selectedCommitmentIndex = 0;
     QVBoxLayout layout{};
+    CreateCommitmentQWidget createCommimentWindow;
+    TimerWindowQWidget timerWindow;
 };
 
 #endif // WIDGET_COMMSTATS_H

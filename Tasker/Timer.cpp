@@ -6,7 +6,8 @@
 #include <QTime>
 #include <StatsUtility.h>
 #include <mainui.h>
-
+#include <TaskerPerf/perftimer.h>
+#include <iostream>
 using namespace Engine;
 using namespace util;
 using namespace udata;
@@ -18,7 +19,7 @@ Timer::Timer(int newNiceness) {
     currentProductiveTime = 0;
     currentUnproductiveTime = 0;
     timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &Timer::startBackgroundTimer);
+    connect(timer, &QTimer::timeout, this, &Timer::tickUpdate);
     connect(this, &Timer::stopTimer, this, &Timer::stopTimerSlot);
     qDebug() << "productive time from constructor:" << currentProductiveTime;
 }
@@ -36,7 +37,7 @@ Timer::Timer(Listener::ListenerType newListenerType, Session newSession) {
     currentProductiveTime = 0;
     currentUnproductiveTime = 0;
 
-    connect(timer, &QTimer::timeout, this, &Timer::startBackgroundTimer);
+    connect(timer, &QTimer::timeout, this, &Timer::tickUpdate);
     timer = new QTimer(this);
     connect(this, &Timer::stopTimer, this, &Timer::stopTimerSlot);
     qDebug() << "Timer() constructor#2 ";
@@ -95,25 +96,27 @@ void Timer::startTimer() {
     qDebug() << "startTimer#4";
 }
 /**
- * @brief Timer::startBackgroundTimer
+ * @brief Timer::tickUpdate
  * This is a time-sensitive function. Whatever it executes, it MUST return
  * within 1 second.
+ * Current latency=
  */
-void Timer::startBackgroundTimer() {
-    qDebug() << "background timer thread id:" << QThread::currentThreadId();
-    qDebug() << "checking state";
+void Timer::tickUpdate() {
+//    qDebug() << "background timer thread id:" << QThread::currentThreadId();
+//    qDebug() << "checking state";
+//    Perf::PerfTimer newPerfTimer{};
     Listener::ListenerState currentState;
-    long long int elapsedSeconds = StatsUtility::milliToSeconds(clock.restart());
-    qDebug() << "current clock:" << clock.elapsed();
-    qDebug() << "elapsedSeconds:" << elapsedSeconds;
+//    long long int elapsedSeconds = StatsUtility::milliToSeconds(clock.restart());
+//    qDebug() << "current clock:" << clock.elapsed();
+//    qDebug() << "elapsedSeconds:" << elapsedSeconds;
     int tickDelta;
     if (listener->getState() == Listener::ListenerState::productive) {
 
         tickDelta = tickCount - producitveTickCount;
         currentProductiveTime += 1;
         currentState = Listener::ListenerState::productive;
-        qDebug() << "state: productive";
-        qDebug() << "elapsed time:" << elapsedSeconds << " seconds";
+//        qDebug() << "state: productive";
+//        qDebug() << "elapsed time:" << elapsedSeconds << " seconds";
         producitveTickCount += 1;
         lastProductiveTick = tickCount;
     } else {
@@ -121,19 +124,22 @@ void Timer::startBackgroundTimer() {
         currentState = Listener::ListenerState::unproductive;
         unProducitveTickCount += 1;
         lastUnproductiveTick = tickCount;
-        qDebug() << "state:unproductive";
+//        qDebug() << "state:unproductive";
     }
 
-    qDebug() << "productive time:" << currentProductiveTime;
-    qDebug() << "unproductive time:" << currentUnproductiveTime;
-    qDebug() << "Total Elapsed time:" << getTotalTimeElapsed();
-    qDebug() << "current goal" << productiveTimeGoal;
+//    qDebug() << "productive time:" << currentProductiveTime;
+//    qDebug() << "unproductive time:" << currentUnproductiveTime;
+//    qDebug() << "Total Elapsed time:" << getTotalTimeElapsed();
+//    qDebug() << "current goal" << productiveTimeGoal;
     if (currentProductiveTime == productiveTimeGoal) {
-        qDebug() << ">>>>>>>>>>>>>>>>>>goal was reached";
-        //        timer->stop();
+//        qDebug() << ">>>>>>>>>>>>>>>>>>goal was reached";
+        timer->stop();
         emit stopTimer();
     }
     tickCount++;
+//    QThread::msleep(12);
+    newPerfTimer.stop();
+    qDebug()<<"tick took this long(nanoseconds):"<<newPerfTimer.duration;
     emit tick();
 }
 

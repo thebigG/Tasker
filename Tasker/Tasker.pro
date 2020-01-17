@@ -32,6 +32,7 @@ SOURCES += \
     Session.cpp \
     Task.cpp \
     StatsUtility.cpp \
+    TaskerPerf/perftimer.cpp \
     TaskerUIMainWindowQWidget.cpp \
     TempChartQWidget.cpp \
     Timer.cpp \
@@ -56,6 +57,7 @@ HEADERS += \
     KeyboardListener.h \
     Session.h \
     Task.h \
+    TaskerPerf/perftimer.h \
     TaskerUIMainWindowQWidget.h \
     TempChartQWidget.h \
     Timer.h \
@@ -83,3 +85,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    TaskerPerf/README.md

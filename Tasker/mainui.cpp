@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <UdataUtils.h>
 #include <User.h>
-TaskerUIMainWindowQWidget *MainUI::Instance = nullptr;
+CommStatsQWidget *MainUI::Instance = nullptr;
 
 using namespace udata;
 /**
@@ -15,9 +15,9 @@ MainUI::MainUI() {
  * @brief MainUI::getInstance
  * @return
  */
-TaskerUIMainWindowQWidget *MainUI::getInstance() {
+CommStatsQWidget *MainUI::getInstance() {
     if (Instance == nullptr) {
-        Instance = new TaskerUIMainWindowQWidget();
+        Instance = new CommStatsQWidget();
     }
     return Instance;
 }

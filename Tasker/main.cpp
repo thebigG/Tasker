@@ -28,6 +28,8 @@
 #include <cstdlib>
 #include <iostream>
 
+
+#include <TaskerPerf/perftimer.h>
 using std::cout;
 using std::endl;
 
@@ -43,9 +45,11 @@ int main(int argc, char *argv[]) {
     } else {
         qDebug() << "prepFiles failed";
     }
+    Perf::PerfTimer();
     QObject::connect(&a, &QGuiApplication::lastWindowClosed, &MainUI::saveTaskerStateSlot);
-    TaskerUIMainWindowQWidget *widget = nullptr;
+    CommStatsQWidget *widget = nullptr;
     widget = MainUI::getInstance();
+    widget->update();
     widget->show();
     return a.exec();
 }

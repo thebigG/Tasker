@@ -8,7 +8,7 @@
 #define TIMER_TICK 1000 // in milliseconds
 #define MINUTE 60 // in seconds
 #include <KeyboardListener.h>
-
+#include <TaskerPerf/perftimer.h>
 namespace Engine {
 class Timer;
 }
@@ -27,7 +27,7 @@ private:
     udata::Session currentSession;
     QTime clock{ 0, 0, 0 };
     static Timer *thisInstance;
-
+    Perf::PerfTimer newPerfTimer{};
     int productiveSignalCount = 0;
     int unProductiveSignalCount = 0;
     long startTimeStamp;
@@ -71,7 +71,7 @@ public:
 public slots:
     void timeSlot();
     void stopTimerSlot();
-    void startBackgroundTimer();
+    void tickUpdate();
     void productiveSlot();
     void unProductiveSlot();
 signals:

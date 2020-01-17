@@ -9,10 +9,10 @@
 class MainUI {
 private:
     MainUI();
-    static TaskerUIMainWindowQWidget *Instance;
+    static CommStatsQWidget *Instance;
 
 public:
-    static TaskerUIMainWindowQWidget *getInstance();
+    static CommStatsQWidget *getInstance();
     ~MainUI();
 public slots:
     static void saveTaskerStateSlot();

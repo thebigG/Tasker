@@ -28,6 +28,8 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
             &CommStatsQWidget::removeCommitmentButtonSlot);
     connect(ui->commitmentsQTreeWidget, &QTreeWidget::currentItemChanged, this,
             &CommStatsQWidget::currentCommitmentChangedSlot);
+    connect(ui->liveSessionQPushButton, &QPushButton::clicked,this,
+            &CommStatsQWidget::newLiveSessionSlot);
     //    TempChartQWidget *mw = new TempChartQWidget;
     //    connect(this->ui->addCommitmentQCommandLinkButton, &QCommandLinkButton::clicked,
     //            this, &CommStatsQWidget::addCommitmentButtonSlot);
@@ -67,8 +69,9 @@ CommStatsQWidget::~CommStatsQWidget() {
  */
 void CommStatsQWidget::addCommitmentButtonSlot() {
     this->hide();
-    CreateCommitmentQWidget &cc = MainUI::getInstance()->getCreateCommitment();
-    cc.show();
+//    CreateCommitmentQWidget &cc = MainUI::getInstance()->getCreateCommitment();
+//    cc.show();
+    this->createCommimentWindow.show();
 }
 void CommStatsQWidget::removeCommitmentButtonSlot() {
     qDebug() << "deleting#1:" << selectedCommitmentIndex;
@@ -142,7 +145,6 @@ void CommStatsQWidget::on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetIt
 }
 void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
                                                     QTreeWidgetItem *previous) {
-    //    QList<QTreeWidgetItem*> items = ui->commitmentsQTreeWidget->selectedItems();
     if (isDelete) {
         isDelete = false;
         return;
@@ -162,4 +164,17 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
     qDebug() << "changed commitment index:" << currentIndex;
     qDebug() << "changed commitment name:"
              << User::getInstance()->getCommitments().at(currentIndex).getName();
+}
+void  CommStatsQWidget::newLiveSessionSlot()
+{
+    this->hide();
+    this->getTimerWindow().show();
+}
+TimerWindowQWidget& CommStatsQWidget::getTimerWindow()
+{
+    return timerWindow;
+}
+CreateCommitmentQWidget& CommStatsQWidget::getCreateCommitment()
+{
+    return createCommimentWindow;
 }
