@@ -14,11 +14,22 @@ LiveSession::LiveSession(QWidget *parent)
     //    this->ui->productiveTime
     qDebug() << "text on label:" + ui->productiveTime->text();
 }
+/**
+ * @brief LiveSession::updateTimeUI
+ * This is a time-sensitive function.
+ * It MUST return within 1 second.
+ * current latency(average)=75,000 nanoseconds
+ * I believe this latency can be reduced with some optimizations I'll be
+ * making later.
+ */
 void LiveSession::updateTimeUI() {
-    qDebug() << "livession thread id:" << QThread::currentThreadId();
+    qDebug() << "livession threadid:" << QThread::currentThreadId();
+    liveSessionPerfTimer.restart();
     ui->productiveTime->setText(Timer::getInstance()->getProductiveStatus());
     ui->unproductiveTimeValue->setText(Timer::getInstance()->getUnproductiveStatus());
     ui->label->setText(Timer::getInstance()->getTimeElapsedStatus());
+    liveSessionPerfTimer.stop();
+    qDebug()<<"updateTimeUI latency:"<<liveSessionPerfTimer.duration;
 }
 void LiveSession::congratsSlot() {
     qDebug() << "congrats on livession++++++";

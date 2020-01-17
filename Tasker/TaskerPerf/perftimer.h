@@ -16,17 +16,22 @@ private:
 public:
     PerfTimer(int newDurationRecordSize = 100);
     std::vector<long long> durationRecord;
+    void restart();
+    double duration;
+    int durationRecordSize;
+    ~PerfTimer();
     /**
      * @brief Perf::PerfTimer::stop
      * Calculates the duration since either the object was constructed or
      * restart() was called.
+     * This is inlined to reduce any miniscule latency of the function call itself.
      */
     inline void stop()
     {
-
+    if(durationRecord.size()<durationRecordSize)
+    {
     end = std::chrono::high_resolution_clock::now();
     durationRecord.push_back(std::chrono::duration_cast<std::chrono::nanoseconds>(end-start).count());
-//    start =  std::chrono::high_resolution_clock::now();
     long long sum = 0 ;
     for(long long tempDuration: durationRecord)
     {
@@ -34,12 +39,11 @@ public:
     }
 
     qDebug()<<"vector:"<<durationRecord;
-//    duration = sum/durationRecord.size();
-    duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+    duration = sum/durationRecord.size();
+//    duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
     }
-    void restart();
-    long duration;
-    ~PerfTimer();
+    }
+
 };
 
 #endif // PERFTIMER_H

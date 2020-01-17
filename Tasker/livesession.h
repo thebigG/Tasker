@@ -2,7 +2,7 @@
 #define LIVESESSION_H
 
 #include <QWidget>
-
+#include <TaskerPerf/perftimer.h>
 namespace Ui {
 class LiveSession;
 }
@@ -18,8 +18,10 @@ private slots:
     void congratsSlot();
     void on_productiveTimeValue_linkActivated(const QString &link);
 
+
 private:
     Ui::LiveSession *ui;
+    Perf::PerfTimer liveSessionPerfTimer{};
 };
 
 #endif // LIVESESSION_H
