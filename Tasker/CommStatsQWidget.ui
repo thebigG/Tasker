@@ -343,7 +343,7 @@ p, li { white-space: pre-wrap; }
        </property>
       </item>
      </widget>
-     <widget class="QCommandLinkButton" name="addFileQCommandLinkButton">
+     <widget class="QPushButton" name="addFileQPushButton">
       <property name="geometry">
        <rect>
         <x>850</x>
@@ -356,7 +356,7 @@ p, li { white-space: pre-wrap; }
        <string>Add file</string>
       </property>
      </widget>
-     <widget class="QCommandLinkButton" name="removeFileQCommandLinkButton">
+     <widget class="QPushButton" name="removeFileQPushButton">
       <property name="geometry">
        <rect>
         <x>850</x>
