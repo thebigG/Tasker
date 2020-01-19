@@ -2,7 +2,9 @@ QT       += charts
 QT       += core gui
 QT += multimedia
 QT += testlib
- QT += multimedia
+QT += multimedia
+QMAKE_CXXFLAGS += "-fno-sized-deallocation"
+
 #QMAKE_CXXFLAGS += lobjc
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
