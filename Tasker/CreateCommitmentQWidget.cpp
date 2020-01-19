@@ -27,6 +27,9 @@ CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
             &CreateCommitmentQWidget::backButtonSlot);
     connect(this->getUI()->dropDownTaskQComboBox, SIGNAL(activated(const QString &)),
             this, SLOT(dropDownTaskSlot(const QString &)));
+    QFontMetrics thisFont{ this->ui->commitmentNameQLabel->font()};
+    qDebug()<<"font height="<<thisFont.height();
+    qDebug()<<"average width font="<<thisFont.averageCharWidth();
 }
 
 /**
