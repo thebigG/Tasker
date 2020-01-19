@@ -25,6 +25,8 @@ TimerWindowQWidget::TimerWindowQWidget(QWidget *parent)
     connect(this->ui->taskQComboBox, SIGNAL(activated(const QString &)), this,
             SLOT(dropDownTaskSlot(const QString &)));
     this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{ Qt::Checked });
+    qDebug()<<"label name:"<<this->ui->timerQLabel;
+//    qDebug()<<"layout child:"<<this->ui->gridLayout->itemAtPosition(0,0)->widget();
 }
 
 /**
@@ -44,7 +46,6 @@ void TimerWindowQWidget::startTimerButtonSlot() {
     }
     int goal = this->ui->productionTimeHoursQSpinBox->value() * SECONDS_IN_HOUR;
     goal += this->ui->productionTimeMinutesQSpinBox->value() * SECONDS_IN_MINUTE;
-    goal += this->ui->productionTimeSecondsQSpinBox->value();
     qDebug() << "new goal" << goal;
     Task newTask{ getTaskName(), newListsners };
     Session newSession{ newTask, goal };
