@@ -23,13 +23,12 @@ LiveSession::LiveSession(QWidget *parent)
  * making later.
  */
 void LiveSession::updateTimeUI() {
-    qDebug() << "livession threadid:" << QThread::currentThreadId();
     liveSessionPerfTimer.restart();
     ui->productiveTime->setText(Timer::getInstance()->getProductiveStatus());
     ui->unproductiveTimeValue->setText(Timer::getInstance()->getUnproductiveStatus());
     ui->label->setText(Timer::getInstance()->getTimeElapsedStatus());
     liveSessionPerfTimer.stop();
-    qDebug()<<"updateTimeUI latency:"<<liveSessionPerfTimer.duration;
+    qDebug()<<"updateTimeUI latency#4:"<<liveSessionPerfTimer.duration;
 }
 void LiveSession::congratsSlot() {
     qDebug() << "congrats on livession++++++";
@@ -40,5 +39,3 @@ LiveSession::~LiveSession() {
     delete ui;
 }
 
-void LiveSession::on_productiveTimeValue_linkActivated(const QString &link) {
-}

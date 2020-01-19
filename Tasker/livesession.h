@@ -16,12 +16,14 @@ public:
 private slots:
     void updateTimeUI();
     void congratsSlot();
-    void on_productiveTimeValue_linkActivated(const QString &link);
 
 
 private:
     Ui::LiveSession *ui;
     Perf::PerfTimer liveSessionPerfTimer{};
+    Perf::PerfTimer liveSessionPerfTimer1{};
+    Perf::PerfTimer liveSessionPerfTimer2{};
+    Perf::PerfTimer liveSessionPerfTimer3{};
 };
 
 #endif // LIVESESSION_H

@@ -21,7 +21,6 @@ Timer::Timer(int newNiceness) {
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Timer::tickUpdate);
     connect(this, &Timer::stopTimer, this, &Timer::stopTimerSlot);
-    qDebug() << "productive time from constructor:" << currentProductiveTime;
 }
 /**
  * @brief Timer::Timer
@@ -40,9 +39,6 @@ Timer::Timer(Listener::ListenerType newListenerType, Session newSession) {
     connect(timer, &QTimer::timeout, this, &Timer::tickUpdate);
     timer = new QTimer(this);
     connect(this, &Timer::stopTimer, this, &Timer::stopTimerSlot);
-    qDebug() << "Timer() constructor#2 ";
-    qDebug() << "Timer() constructor#3";
-    qDebug() << "Timer() constructor#4";
     qDebug() << "Timer() constructor after start(): " << currentThreadId();
 }
 
@@ -78,8 +74,6 @@ void Timer::startTimer() {
     } else if (listenerType == Listener::ListenerType::audio) {
         listener = new AudioListener();
     }
-    qDebug() << "before listener->start()";
-    qDebug() << "after listener->start()";
     /**
         This block of code  WORKS!
         DO NOT DELETE THIS BLOCK OF CODE. IT IS PERFECT!
@@ -89,68 +83,41 @@ void Timer::startTimer() {
     connect(&listenerThread, &QThread::started, listener, &Listener::start);
     listener->moveToThread(&listenerThread);
     listenerThread.start();
-    qDebug() << "startTimer#1";
-    qDebug() << "startTimer#2";
-    clock.start();
-    qDebug() << "startTimer#3";
-    qDebug() << "startTimer#4";
 }
 /**
  * @brief Timer::tickUpdate
  * This is a time-sensitive function. Whatever it executes, it MUST return
  * within 1 second.
- * Current latency(average)= 1000 nanoseconds
+ * Current latency(average)= 14000 nanoseconds
  */
 void Timer::tickUpdate() {
-    qDebug() << "tickUpdate  thread id:" << QThread::currentThreadId();
-//    qDebug() << "checking state";
-//    Perf::PerfTimer newPerfTimer{};
     newPerfTimer.restart();
-//    Listener::ListenerState currentState;
-//    long long int elapsedSeconds = StatsUtility::milliToSeconds(clock.restart());
-//    qDebug() << "current clock:" << clock.elapsed();
-//    qDebug() << "elapsedSeconds:" << elapsedSeconds;
     int tickDelta;
     if (listener->getState() == Listener::ListenerState::productive) {
 
         tickDelta = tickCount - producitveTickCount;
         currentProductiveTime += 1;
-//        currentState = Listener::ListenerState::productive;
-//        qDebug() << "state: productive";
-//        qDebug() << "elapsed time:" << elapsedSeconds << " seconds";
         producitveTickCount += 1;
         lastProductiveTick = tickCount;
     } else {
         currentUnproductiveTime += unproductiveTimeSurplus;
-//        currentState = Listener::ListenerState::unproductive;
         unProducitveTickCount += 1;
         lastUnproductiveTick = tickCount;
-//        qDebug() << "state:unproductive";
     }
-
-//    qDebug() << "productive time:" << currentProductiveTime;
-//    qDebug() << "unproductive time:" << currentUnproductiveTime;
-//    qDebug() << "Total Elapsed time:" << getTotalTimeElapsed();
-//    qDebug() << "current goal" << productiveTimeGoal;
+    totalTimeElapsed = currentProductiveTime + currentUnproductiveTime;
     if (currentProductiveTime == productiveTimeGoal) {
-//        qDebug() << ">>>>>>>>>>>>>>>>>>goal was reached";
         timer->stop();
         emit stopTimer();
     }
+    updateProductiveStatus();
+    updateUnproductiveStatus();
+    updateTimeElapsedStatus();
     tickCount++;
     newPerfTimer.stop();
     qDebug()<<"tick update on Timer took this long(nanoseconds):"<<newPerfTimer.duration;
     emit tick();
 }
 
-/**
- * @brief Timer::timeSlot
- */
-
-void Timer::timeSlot() {
-    qDebug() << "Time slot func :)";
-    qDebug() << "current thread id Timer timeSlot:" << QThread::currentThreadId();
-}
 
 int Timer::getTotalTimeElapsed() {
     return currentUnproductiveTime + currentProductiveTime;
@@ -171,7 +138,6 @@ void Timer::setListener(Listener::ListenerType newListenerType) {
 void Timer::initTimer(Listener::ListenerType newListener, udata::Session newSession) {
     thisInstance->setCurrentSession(newSession);
     thisInstance->setListener(newListener);
-    startTimeStamp = clock.elapsed();
     timer->start(TIMER_TICK);
     this->start();
 }
@@ -183,15 +149,12 @@ void Timer::initTimer(Listener::ListenerType newListener, udata::Session newSess
  * For example; we could keep internal productive counters on timer
  * and give the user data such as "you were most productive
  * on the first 10 minutes of the session" because there was a constant increment
- * on your productive signal count. I think the possibility are endless, in terms of data,
+ * on your productive signal count. I think the possibilities are endless, in terms of data,
  * depending on the context, whether they're writing or practicing music.
  *
  */
 void Timer::productiveSlot() {
-    //    startBackgroundTimer();
     productiveSignalCount++;
-    qDebug() << "<<<<<<<productive signal>>>>>>";
-    qDebug() << "productive signal count:" << this->productiveSignalCount;
 }
 /**
  * @brief Timer::unProductiveSlot
@@ -199,36 +162,22 @@ void Timer::productiveSlot() {
  * This function can be used to crunch more stats on hardware interaction.
  * For example; we could keep internal unProductive counters on Timer
  * and give the user data such as "you were least productive
- * on the first 10 minutes of the session" because there was a constant increment
- * on your productive signal count. That's just a silly example, but I think the possibility are endless,
+ * on the first 10 minutes of the session" because there was a constant decrement
+ * on your productive signal count. That's just a silly example, but I think the possibilities are endless,
  * in terms of data,
  * depending on the context, whether they're writing or practicing music.
  *
  */
 void Timer::unProductiveSlot() {
     unProductiveSignalCount++;
-    //    startBackgroundTimer();
-    qDebug() << "*****Unproductive signal*******";
-    qDebug() << "unProductive signal count:" << this->unProductiveSignalCount;
 }
 void Timer::stopTimerSlot() {
     emit congrats();
     timer->stop();
 }
-QTime Timer::getClock() {
-    return clock;
-}
-/**
- * @brief Timer::getProductiveStatus
- * @return
- * @todo Try moving this functionality(and the other two get functions) to tickupdate so that the UI doesn't do this directly.
- * This will allow for optimizations. We can make strings and some variables part of the class to avoid re-creation of objects.
- * We can also return the reference of the string to avoid expensive() copies.
- */
-QString Timer::getProductiveStatus() {
+void Timer::updateProductiveStatus()
+{
     long long int productiveMinutes = StatsUtility::toMinutes(currentProductiveTime);
-//    qDebug() << "productive time on UI:" << currentProductiveTime;
-    QString result;
     int resultProductive = currentProductiveTime;
     if (resultProductive > MINUTE) {
         resultProductive = currentProductiveTime - (productiveMinutes * MINUTE);
@@ -236,18 +185,24 @@ QString Timer::getProductiveStatus() {
         resultProductive = 0;
     }
 
-    result = QString::number(productiveMinutes) + ":" + QString::number(resultProductive);
+    productiveStatus = QString::number(productiveMinutes) + ":" + QString::number(resultProductive);
     if (productiveMinutes == ZERO) {
 
     } else {
     }
-    return result;
 }
+/**
+ * @brief Timer::getProductiveStatus
+ * @return the productime time status(the string representation)
+ * of the current productive time count.
+ */
+QString& Timer::getProductiveStatus() {
+    return productiveStatus;
+}
+void Timer::updateUnproductiveStatus()
+{
 
-QString Timer::getUnproductiveStatus() {
     long long int productiveMinutes = StatsUtility::toMinutes(currentUnproductiveTime);
-//    qDebug() << "productive time on UI:" << currentUnproductiveTime;
-    QString result;
     int resultProductive = currentUnproductiveTime;
     if (currentUnproductiveTime > MINUTE) {
         resultProductive = currentUnproductiveTime - (productiveMinutes * MINUTE);
@@ -255,30 +210,25 @@ QString Timer::getUnproductiveStatus() {
         resultProductive = 0;
     }
 
-    result = QString::number(productiveMinutes) + ":" + QString::number(resultProductive);
-//    qDebug() << "result unproductive time:" << result;
-    if (productiveMinutes == ZERO) {
-
-    } else {
-    }
-    return result;
+    UnproductiveStatus = QString::number(productiveMinutes) + ":" + QString::number(resultProductive);
+}
+QString& Timer::getUnproductiveStatus() {
+    return UnproductiveStatus;
 }
 
-QString Timer::getTimeElapsedStatus() {
-    long long int productiveMinutes = StatsUtility::toMinutes(getTotalTimeElapsed());
-//    qDebug() << "productive time on UI:" << getTotalTimeElapsed();
-    QString result;
-    int resultProductive = getTotalTimeElapsed();
+
+void Timer::updateTimeElapsedStatus()
+{
+    long long int productiveMinutes = StatsUtility::toMinutes(totalTimeElapsed);
+    int resultProductive = totalTimeElapsed;
     if (resultProductive > MINUTE) {
-        resultProductive = getTotalTimeElapsed() - (productiveMinutes * MINUTE);
+        resultProductive = totalTimeElapsed - (productiveMinutes * MINUTE);
     } else if (resultProductive % MINUTE == 0) {
         resultProductive = 0;
     }
 
-    result = QString::number(productiveMinutes) + ":" + QString::number(resultProductive);
-    if (productiveMinutes == ZERO) {
-
-    } else {
-    }
-    return result;
+    TimeElapsedStatus = QString::number(productiveMinutes) + ":" + QString::number(resultProductive);
+}
+QString& Timer::getTimeElapsedStatus() {
+    return TimeElapsedStatus;
 }

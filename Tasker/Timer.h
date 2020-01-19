@@ -23,9 +23,9 @@ class Engine::Timer : public QThread {
 private:
     int currentProductiveTime = 0;
     int currentUnproductiveTime = 0;
+    int totalTimeElapsed = 0;
     long long int productiveTimeGoal;
     udata::Session currentSession;
-    QTime clock{ 0, 0, 0 };
     static Timer *thisInstance;
     Perf::PerfTimer newPerfTimer{};
     int productiveSignalCount = 0;
@@ -46,6 +46,12 @@ private:
     QThread listenerThread;
     QThread thisThread;
     QTimer *timer;
+    void updateProductiveStatus();
+    QString productiveStatus;
+    void updateUnproductiveStatus();
+    QString UnproductiveStatus;
+    void updateTimeElapsedStatus();
+    QString TimeElapsedStatus;
     virtual void run();
 
 public:
@@ -64,12 +70,11 @@ public:
     void startTimer();
     int getTotalTimeElapsed();
     QTime getClock();
-    QString getProductiveStatus();
-    QString getUnproductiveStatus();
-    QString getTimeElapsedStatus();
+    QString& getProductiveStatus();
+    QString& getUnproductiveStatus();
+    QString& getTimeElapsedStatus();
 
 public slots:
-    void timeSlot();
     void stopTimerSlot();
     void tickUpdate();
     void productiveSlot();

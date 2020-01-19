@@ -24,8 +24,28 @@ class StatsUtility;
  */
 class util::StatsUtility {
 public:
-    static int64_t toMinutes(int64_t seconds);
-    static int64_t toHours(int64_t seconds);
+     /**
+ * @brief util::StatsUtility::toMinutes
+ * @param seconds quantity of seconds
+ *
+ * @return -1 if seconds is negative, otherwise quantity of minutes from seconds
+ */
+inline static int64_t toMinutes(int64_t seconds) {
+    int64_t result = -1;
+    return (result = seconds < 0 ? result : seconds / SECONDS_IN_MINUTE);
+}
+
+/**
+ * @brief util::StatsUtility::toHours
+ * @param seconds quantity of seconds
+ *
+ * @return -1 if seconds is negative, otherwise quantity of hours from soconds
+ */
+
+    static inline int64_t toHours(int64_t seconds) {
+        int64_t result = -1;
+        return (result = seconds < 0 ? result : seconds / SECONDS_IN_HOUR);
+    }
     static int64_t toDays(int64_t seconds);
     static int64_t toWeeks(int64_t seconds);
     static int64_t toMonths(int64_t seconds);
