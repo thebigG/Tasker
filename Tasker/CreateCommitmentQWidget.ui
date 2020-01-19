@@ -39,7 +39,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -51,7 +51,7 @@
    <widget class="QLineEdit" name="commitmentNameQLineEdit">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>190</x>
       <y>40</y>
       <width>221</width>
       <height>20</height>
@@ -166,9 +166,9 @@
    <widget class="QLabel" name="perQLabel">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>210</x>
       <y>190</y>
-      <width>21</width>
+      <width>41</width>
       <height>25</height>
      </rect>
     </property>
