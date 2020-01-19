@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-""""
+"""
 This script sets up the sudo policy for Tasker on linux.
 If you have an Ubuntu-based distro, this should go smoothly.
 The script has been tested on Linux Mint 19.2 Cinnamon
-""""
+"""
 from os import path
 import subprocess
 import xml.etree.ElementTree as ET
