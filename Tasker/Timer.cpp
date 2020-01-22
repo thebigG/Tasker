@@ -25,7 +25,7 @@ Timer::Timer(int newNiceness) {
 /**
  * @brief Timer::Timer
  * @param newListenerType This tells timer what type of listener to instantiate.
- * It's not prettiest way of doing this, but at least we're not doing
+ * It's not the prettiest way of doing this, but at least we're not doing
  * weird/prone-to-bugs type probing at runtime, like dynamic_cast nonsense.
  *
  */
