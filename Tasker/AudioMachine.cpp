@@ -27,8 +27,7 @@
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 #include "AudioMachine.h"
-
-#include <QDebug>
+#include <TaskerPerf/perftimer.h>
 #include <QThread>
 #include <QTimer>
 
@@ -59,8 +58,7 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
     QAudioDeviceInfo info = QAudioDeviceInfo::defaultInputDevice();
 
     if (!info.isFormatSupported(format)) {
-        qWarning()
-            << "Default format not supported, trying to use the nearest.";
+        qDebug( "Default format not supported, trying to use the nearest.");
         format = info.nearestFormat(format);
     }
 
@@ -72,15 +70,13 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
     // qDebug()<<"audiomachine thread:"<<QThread::currentThreadId();
 
     // show device name on console
-    qDebug() << info.deviceName();
+    qDebug()<<info.deviceName();
 
     qAudioInput->start(audioDevice);
 
     qAudioInput->setVolume(0.0);
     audioDevice->setMinAmplitude(audioDevice->getDeviceLevel());
     qAudioInput->setVolume(1.0);
-
-    // Records audio for 3000ms
 }
 
 /**
@@ -118,15 +114,14 @@ void AudioMachine::handleStateChanged(QAudio::State newState) {
             // Error handling
         } else {
             // Finished recording
-            qDebug() << "stopped state";
+            qDebug("stopped state");
         }
 
         break;
 
     case QAudio::ActiveState:
         // Started recording - read from IO device
-        qDebug() << "active state";
-        break;
+        qDebug("active state");
 
     default:
         // ... other cases as appropriate

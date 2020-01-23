@@ -38,7 +38,7 @@ public:
         sum += tempDuration;
     }
 
-    qDebug()<<"vector:"<<durationRecord;
+//    TASKER_LOG("vector:"+QString::nu;
     duration = sum/durationRecord.size();
 //    duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
     }

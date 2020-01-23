@@ -27,6 +27,7 @@
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 #include "AudioListener.h"
+#include "TaskerPerf/perftimer.h"
 #include <QDebug>
 #include <cstdio>
 
@@ -130,10 +131,11 @@ int AudioListener::startListening(unsigned long int delay) {
 
     connect(&audioThread->getQThread(), &QThread::finished, this, &AudioListener::cleanup);
     //    connect();
-    qDebug() << "From startListening on Listener.cpp: " << QThread::currentThreadId();
+
+     qDebug()<<"From startListening on Listener.cpp: "<<QThread::currentThreadId();
     audioThread->moveToThread(&audioThread->getQThread());
-    qDebug() << "From startListening on Listener.cpp: after connect"
-             << QThread::currentThreadId();
+    qDebug()<<"From startListening on Listener.cpp: after connect:%d"
+             <<QThread::currentThreadId();
     audioListenerState = AudioListenerState::ON;
     audioThread->getQThread().start();
     while (true) {
@@ -149,8 +151,8 @@ int AudioListener::startListening(unsigned long int delay) {
             }
         }
     }
-    qDebug() << "AudioListener updateState() thread id: << "
-             << QThread::currentThreadId();
+    qDebug()<<"AudioListener updateState() thread id: %d"<<
+             QThread::currentThreadId();
     while (true) {
         ListenerState state;
 
@@ -162,9 +164,9 @@ int AudioListener::startListening(unsigned long int delay) {
         //        qDebug() << "listener level: " << audioThread->getAudioLevel();
 
         if (state == ListenerState::productive) {
-            qDebug() << "status: productive";
+            qDebug("status: productive");
         } else {
-            qDebug() << "status: unproductive";
+            qDebug("status: unproductive");
         }
 
         QThread::sleep(BASE_DELAY + delay);

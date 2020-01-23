@@ -59,9 +59,9 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
  * @brief CommStatsQWidget::~CommStatsQWidget
  */
 CommStatsQWidget::~CommStatsQWidget() {
-    qDebug() << "CommStatsQWidget destructor#1";
+    qDebug("CommStatsQWidget destructor#1");
     delete ui;
-    qDebug() << "CommStatsQWidget destructor#2";
+    qDebug("CommStatsQWidget destructor#2");
 }
 
 /**
@@ -74,7 +74,7 @@ void CommStatsQWidget::addCommitmentButtonSlot() {
     this->createCommimentWindow.show();
 }
 void CommStatsQWidget::removeCommitmentButtonSlot() {
-    qDebug() << "deleting#1:" << selectedCommitmentIndex;
+//    TASKER_LOG("deleting#1:" << selectedCommitmentIndex);
     int tempIndex = selectedCommitmentIndex;
     if (selectedCommitmentIndex == (User::getInstance()->getCommitments().size() - 1)) {
         selectedCommitmentIndex--;

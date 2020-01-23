@@ -27,9 +27,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-
-
 #include <TaskerPerf/perftimer.h>
+
 using std::cout;
 using std::endl;
 
@@ -37,17 +36,21 @@ using namespace Engine;
 using namespace udata;
 using namespace std;
 
+
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
 
     if (UdataUtils::prepFiles() == 0) {
-        qDebug() << "files was allocated successfully";
+        qDebug("files was allocated successfully");
     } else {
-        qDebug() << "prepFiles failed";
+        qDebug("prepFiles failed");
     }
+#ifdef __TASKER_DEBUG__
     Perf::PerfTimer();
+#endif
     QObject::connect(&a, &QGuiApplication::lastWindowClosed, &MainUI::saveTaskerStateSlot);
     CommStatsQWidget *widget = nullptr;
+    qDebug("debug mode####");
     widget = MainUI::getInstance();
     widget->update();
     widget->show();

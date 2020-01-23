@@ -27,6 +27,7 @@
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 #include "AudioThread.h"
+#include "TaskerPerf/perftimer.h"
 #include <QDebug>
 
 using Engine::AudioMachine;
@@ -37,7 +38,7 @@ using Engine::AudioThread;
  */
 AudioThread::AudioThread() : audioMachine(nullptr), audioLevel(nullptr) {
     connect(&qThread, &QThread::started, this, &AudioThread::updateState);
-    qDebug() << "AudioThread constructor thread id: << " << QThread::currentThreadId();
+    qDebug("AudioThread constructor thread id: %d",  QThread::currentThreadId());
     this->moveToThread(&qThread);
     qThread.start();
 }
@@ -78,6 +79,6 @@ qreal AudioThread::getAudioLevel() {
  */
 void AudioThread::updateState() {
     audioMachine = new AudioMachine();
-    qDebug() << "AudioThread updateState() thread id: << " << QThread::currentThreadId();
+    qDebug("AudioThread updateState() thread id: %d", QThread::currentThreadId());
     audioLevel = &(audioMachine->getAudioDevice()->getDeviceLevel());
 }

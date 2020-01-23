@@ -4,7 +4,8 @@ QT += multimedia
 QT += testlib
 QT += multimedia
 QMAKE_CXXFLAGS += "-fno-sized-deallocation"
-
+#Print the debug messages ONLY in release mode
+CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 #QMAKE_CXXFLAGS += lobjc
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
