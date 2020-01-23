@@ -65,7 +65,7 @@ If you always want to see qDebug() messages, you can always comment out this lin
 
 	#CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 
-Once you comment that out, all of the qDebug statements will show up, even in release mode.
+Once you comment that line(with a "#" like above) all of the qDebug statements will show up, even in release mode.
 
 
 Tasker does have its own debug flag, it is called "\_\_TASKER_DEBUG\_\_". This flag is only active if you are in "Debug" mode. Under the hood this is just a macro that could be used like this in some debug situation:
