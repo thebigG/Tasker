@@ -45,12 +45,9 @@ int main(int argc, char *argv[]) {
     } else {
         qDebug("prepFiles failed");
     }
-#ifdef __TASKER_DEBUG__
-    Perf::PerfTimer();
-#endif
     QObject::connect(&a, &QGuiApplication::lastWindowClosed, &MainUI::saveTaskerStateSlot);
     CommStatsQWidget *widget = nullptr;
-    qDebug("debug mode####");
+    qDebug("Tasker Debug mode");
     widget = MainUI::getInstance();
     widget->update();
     widget->show();
