@@ -3,7 +3,6 @@
 #include <CreateCommitmentQWidget.h>
 #include <mainui.h>
 
-#include "TempChartQWidget.h"
 
 #include "Timer.h"
 #include <QDebug>

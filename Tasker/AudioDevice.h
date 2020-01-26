@@ -29,7 +29,7 @@
 #ifndef AUDIODEVICE_H
 #define AUDIODEVICE_H
 
-#include <QAudioFormat>
+#include <QtMultimedia>
 #include <QIODevice>
 
 namespace Engine {

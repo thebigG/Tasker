@@ -56,7 +56,13 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
 
     // assign audio device here
     QAudioDeviceInfo info = QAudioDeviceInfo::defaultInputDevice();
+    QList<QAudioDeviceInfo> devices = QAudioDeviceInfo::availableDevices(QAudio::Mode::AudioInput);
 
+    qDebug()<<"Available Devices:";
+    for(QAudioDeviceInfo i: devices)
+    {
+        qDebug()<<"device info:"<<i.isNull();
+    }
     if (!info.isFormatSupported(format)) {
         qDebug( "Default format not supported, trying to use the nearest.");
         format = info.nearestFormat(format);

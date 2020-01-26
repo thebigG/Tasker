@@ -1,7 +1,5 @@
 #ifndef WIDGET_COMMSTATS_H
 #define WIDGET_COMMSTATS_H
-
-#include "TempChartQWidget.h"
 #include "User.h"
 #include <CreateCommitmentQWidget.h>
 #include <QTreeWidget>
@@ -38,7 +36,7 @@ private:
     bool isDelete = false;
     //    TempChartQWidget mw{};
     int selectedCommitmentIndex = 0;
-    QVBoxLayout layout{};
+//    QVBoxLayout layout{};
     CreateCommitmentQWidget createCommimentWindow;
     TimerWindowQWidget timerWindow;
 };

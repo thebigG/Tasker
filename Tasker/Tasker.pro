@@ -1,8 +1,16 @@
 QT += core gui
 QT += multimedia
 QT += testlib
-QT += charts
+#QT += charts
+#DO NOT delete the next includepath line! If you do, things WILL break on linux
+linux-g++*{
+INCLUDEPATH += /usr/include/x86_64-linux-gnu/qt5
+}
+
+QT += multimedia
 QMAKE_CXXFLAGS += "-fno-sized-deallocation"
+#CONFIG += static
+#QMAKE_LFLAGS += -Xlinker -Bstatic
 #Print the debug messages ONLY in release mode
 CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 #QMAKE_CXXFLAGS += lobjc
@@ -36,7 +44,6 @@ SOURCES += \
     StatsUtility.cpp \
     TaskerPerf/perftimer.cpp \
     TaskerUIMainWindowQWidget.cpp \
-    TempChartQWidget.cpp \
     Timer.cpp \
     TimerWindowQWidget.cpp \
     UdataUtils.cpp \
@@ -61,13 +68,11 @@ HEADERS += \
     Task.h \
     TaskerPerf/perftimer.h \
     TaskerUIMainWindowQWidget.h \
-    TempChartQWidget.h \
     Timer.h \
     TimerWindowQWidget.h \
     Interval.h \
     StatsUtility.h \
     TaskerUIMainWindowQWidget.h \
-    TempChartQWidget.h \
     TimerWindowQWidget.h \
     UdataUtils.h \
     livesession.h \
