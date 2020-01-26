@@ -1,5 +1,5 @@
-QT       += charts
-QT       += core gui
+QT += charts
+QT += core gui
 QT += multimedia
 QT += testlib
 QT += multimedia

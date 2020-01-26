@@ -11,9 +11,7 @@
 #include "User.h"
 #include "livesession.h"
 #include "mainui.h"
-
 #include "objctest.h"
-
 #include <QApplication>
 #include <QDebug>
 #include <QFile>
@@ -22,7 +20,6 @@
 #include <QThreadPool>
 #include <Qt>
 #include <QtCore>
-
 #include <QObject>
 #include <cstdio>
 #include <cstdlib>
