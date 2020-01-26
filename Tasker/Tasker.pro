@@ -1,8 +1,7 @@
-QT += charts
 QT += core gui
 QT += multimedia
 QT += testlib
-QT += multimedia
+QT += charts
 QMAKE_CXXFLAGS += "-fno-sized-deallocation"
 #Print the debug messages ONLY in release mode
 CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
