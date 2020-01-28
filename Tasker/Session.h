@@ -5,6 +5,8 @@
 
 namespace udata {
 class Session;
+QDataStream &operator<<(QDataStream &out, const udata::Session &newSession);
+QDataStream &operator>>(QDataStream &in, udata::Session &newSession);
 }
 
 /**

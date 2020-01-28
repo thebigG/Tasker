@@ -1,6 +1,15 @@
 QT += core gui
 QT += multimedia
 QT += testlib
+
+unix:{
+    # suppress the default RPATH if you wish
+    QMAKE_LFLAGS_RPATH=
+    # add your own with quoting gyrations to make sure $ORIGIN gets to the command line unexpanded
+    QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN/lib\'"
+}
+
+
 #QT += charts
 #DO NOT delete the next includepath line! If you do, things WILL break on linux
 linux-g++*{
@@ -8,8 +17,8 @@ INCLUDEPATH += /usr/include/x86_64-linux-gnu/qt5
 }
 
 QT += multimedia
-QMAKE_CXXFLAGS += "-fno-sized-deallocation"
-#CONFIG += static
+#QMAKE_CXXFLAGS += "-fno-sized-deallocation"
+CONFIG += static
 #QMAKE_LFLAGS += -Xlinker -Bstatic
 #Print the debug messages ONLY in release mode
 CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT

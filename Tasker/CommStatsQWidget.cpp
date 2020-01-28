@@ -7,7 +7,7 @@
 #include "Timer.h"
 #include <QDebug>
 
-#include <QtCharts/QBarSeries>
+//#include <QtCharts/QBarSeries>
 
 using Engine::Listener;
 using udata::Commitment;
