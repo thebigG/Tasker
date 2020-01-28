@@ -8,7 +8,7 @@ One of the reasons for this is that human error is inevitable. A writer like mys
 
 Even though my timer counted 30 minutes, I only did 15 minutes of writing. This is not ideal. Tasker aims to solve this problem, or at the very least make our timers more accurate (hence mitigating human errors) by binding our timers to hardware.
 
-This means that while a session is opened in Tasker, it will be detecting hardware interaction. We **DO NOT** record keybaord strokes or sound. We buffer it temporarily and throw it away once we run it through some logic.
+This means that while a session is opened in Tasker, it will be detecting hardware interaction. We **DO NOT** record keyboard strokes or sound. We buffer it temporarily and throw it away once we run it through some logic.
 
 ## How do I help?
 
