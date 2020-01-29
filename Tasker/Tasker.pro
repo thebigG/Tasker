@@ -60,7 +60,7 @@ SOURCES += \
     livesession.cpp \
     mainui.cpp \
     main.cpp \
-    objctest.mm \
+#    objctest.mm \
     timerthread.cpp
 
 HEADERS += \

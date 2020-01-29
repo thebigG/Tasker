@@ -11,7 +11,7 @@
 #include "User.h"
 #include "livesession.h"
 #include "mainui.h"
-#include "objctest.h"
+//#include "objctest.h"
 #include <QApplication>
 #include <QDebug>
 #include <QFile>
