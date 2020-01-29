@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/thebigG/Tasker.svg?branch=release)](https://travis-ci.com/thebigG/Tasker)
 # Tasker
 
 ## Pitch
