@@ -5,4 +5,5 @@ rm *.pro.user
 rm moc_*.*
 rm qrc_*.*
 rm ui_*.*
+cd ..
 rm -r TravisCIBuild
