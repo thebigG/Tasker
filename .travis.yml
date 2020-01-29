@@ -17,4 +17,4 @@ install:
   - sudo apt-get install -qq g++-5 # C++11
 
 script:
-  - sudo ./build.sh
+  - source ./build.sh
