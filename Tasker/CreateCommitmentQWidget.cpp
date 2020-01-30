@@ -23,7 +23,7 @@ CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
     ui->qtyQLineEdit->setValidator(&validator);
     connect(this->getUI()->commitmentBottomOptionsContainer->findChild<QPushButton*>("createCommitmentQPushButton_2"), &QPushButton::clicked,
             this, &CreateCommitmentQWidget::createCommitmentButtonSlot);
-    connect(this->getUI()->commitmentBottomOptionsContainer->findChild<QPushButton*>("backQPushButton"), &QPushButton::clicked, this,
+    connect(this->getUI()->commitmentBottomOptionsContainer->findChild<QPushButton*>("backQPushButton_2"), &QPushButton::clicked, this,
             &CreateCommitmentQWidget::backButtonSlot);
     QFontMetrics thisFont{ this->ui->commitmentNameQLabel->font()};
     qDebug()<<"font height="<<thisFont.height();
@@ -51,6 +51,7 @@ Ui::CreateCommitmentQWidget *CreateCommitmentQWidget::getUI() {
  * @brief CreateCommitmentQWidget::backButtonSlot
  */
 void CreateCommitmentQWidget::backButtonSlot() {
+    qDebug()<<"Listener for back button";
     this->hide();
     MainUI::getInstance()->show();
 }
