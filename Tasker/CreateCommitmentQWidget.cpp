@@ -21,12 +21,10 @@ CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
     ui->setupUi(this);
     //    validator = new QIntValidator(0, 999, this);
     ui->qtyQLineEdit->setValidator(&validator);
-    connect(this->getUI()->createCommitmentQPushButton, &QPushButton::clicked,
+    connect(this->getUI()->commitmentBottomOptionsContainer->findChild<QPushButton*>("createCommitmentQPushButton_2"), &QPushButton::clicked,
             this, &CreateCommitmentQWidget::createCommitmentButtonSlot);
-    connect(this->getUI()->backQPushButton, &QPushButton::clicked, this,
+    connect(this->getUI()->commitmentBottomOptionsContainer->findChild<QPushButton*>("backQPushButton"), &QPushButton::clicked, this,
             &CreateCommitmentQWidget::backButtonSlot);
-    connect(this->getUI()->dropDownTaskQComboBox, SIGNAL(activated(const QString &)),
-            this, SLOT(dropDownTaskSlot(const QString &)));
     QFontMetrics thisFont{ this->ui->commitmentNameQLabel->font()};
     qDebug()<<"font height="<<thisFont.height();
     qDebug()<<"average width font="<<thisFont.averageCharWidth();
@@ -63,14 +61,14 @@ void CreateCommitmentQWidget::backButtonSlot() {
 void CreateCommitmentQWidget::createCommitmentButtonSlot() {
     this->hide();
     QVector<Session> sessions{};
-    QVector<Engine::Listener::ListenerType> listeners;
-    if (this->ui->checkKeyboardQCheckBox->checkState() == Qt::Checked) {
-        listeners.push_back(Engine::Listener::ListenerType::keyboard);
-    }
-    if (this->ui->checkMicQCheckBox->checkState() == Qt::Checked) {
-        listeners.push_back(Engine::Listener::ListenerType::audio);
-    }
-    Task newTask{ ui->dropDownTaskQComboBox->currentText(), listeners };
+//    QVector<Engine::Listener::ListenerType> listeners;
+//    if (this->ui->checkKeyboardQCheckBox->checkState() == Qt::Checked) {
+//        listeners.push_back(Engine::Listener::ListenerType::keyboard);
+//    }
+//    if (this->ui->checkMicQCheckBox->checkState() == Qt::Checked) {
+//        listeners.push_back(Engine::Listener::ListenerType::audio);
+//    }
+    Task newTask{""};
     sessions.push_back(Session{ newTask });
     Commitment temp{ this->getCommitmentName(), this->getStartDate(),
                      this->getEndDate(), this->getInterval(), sessions };
@@ -78,15 +76,6 @@ void CreateCommitmentQWidget::createCommitmentButtonSlot() {
     MainUI::getInstance()->update();
     MainUI::getInstance()->show();
 }
-
-/**
- * @brief CreateCommitmentQWidget::getKeyboardCheckBox
- * @return
- */
-QCheckBox *CreateCommitmentQWidget::getKeyboardCheckBox() {
-    return ui->checkKeyboardQCheckBox;
-}
-
 /**
  * @brief CreateCommitmentQWidget::getCommitmentName
  * @return
@@ -141,27 +130,9 @@ util::Interval CreateCommitmentQWidget::getInterval() {
  * @brief CreateCommitmentQWidget::getAudioCheckBox
  * @return
  */
-QCheckBox *CreateCommitmentQWidget::getAudioCheckBox() {
-    ui->qtyQLabel;
-    return ui->checkMicQCheckBox;
-}
 
-/**
- * @brief CreateCommitmentQWidget::dropDownTaskSlot
- * @param arg1
- */
-void CreateCommitmentQWidget::dropDownTaskSlot(const QString &arg1) {
-    if (arg1 == QString(WRITING_STRING)) {
-        this->getKeyboardCheckBox()->setCheckState(Qt::CheckState{ Qt::Checked });
-        this->getAudioCheckBox()->setCheckState(Qt::CheckState{ Qt::Unchecked });
-    } else if (arg1 == QString(MUSIC_STRING)) {
-        this->getAudioCheckBox()->setCheckState(Qt::CheckState{ Qt::Checked });
-        this->getKeyboardCheckBox()->setCheckState(Qt::CheckState{ Qt::Unchecked });
-    } else if (arg1 == QString(CUSTOM_STRING)) {
-        this->getAudioCheckBox()->setCheckState(Qt::CheckState{ Qt::Unchecked });
-        this->getKeyboardCheckBox()->setCheckState(Qt::CheckState{ Qt::Unchecked });
-    }
-}
+
+
 
 /**
  * @brief CreateCommitmentQWidget::on_createCommitmentQFrame_destroyed

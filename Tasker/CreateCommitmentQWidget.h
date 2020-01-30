@@ -24,9 +24,6 @@ class CreateCommitmentQWidget : public QWidget {
 public:
     explicit CreateCommitmentQWidget(QWidget *parent = nullptr);
     ~CreateCommitmentQWidget();
-
-    QCheckBox *getKeyboardCheckBox();
-    QCheckBox *getAudioCheckBox();
     Ui::CreateCommitmentQWidget *getUI();
     QIntValidator validator{ (0, 999, this) };
     QString getCommitmentName();
@@ -35,7 +32,6 @@ public:
     util::Interval getInterval();
 
 private slots:
-    void dropDownTaskSlot(const QString &);
     void createCommitmentButtonSlot();
     void backButtonSlot();
     void on_createCommitmentQFrame_destroyed();

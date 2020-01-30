@@ -327,21 +327,6 @@ p, li { white-space: pre-wrap; }
       <property name="selectionMode">
        <enum>QAbstractItemView::ExtendedSelection</enum>
       </property>
-      <item>
-       <property name="text">
-        <string>file_0.mp3</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>file_1.jpg</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>file_2.cpp</string>
-       </property>
-      </item>
      </widget>
      <widget class="QPushButton" name="addFileQPushButton">
       <property name="geometry">
