@@ -21,11 +21,14 @@ CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
     ui->setupUi(this);
     //    validator = new QIntValidator(0, 999, this);
     ui->qtyQLineEdit->setValidator(&validator);
-    connect(this->getUI()->commitmentBottomOptionsContainer->findChild<QPushButton*>("createCommitmentQPushButton_2"), &QPushButton::clicked,
+
+    connect(this->getUI()->createCommitmentQPushButton_2, &QPushButton::clicked,
             this, &CreateCommitmentQWidget::createCommitmentButtonSlot);
-    connect(this->getUI()->commitmentBottomOptionsContainer->findChild<QPushButton*>("backQPushButton_2"), &QPushButton::clicked, this,
+    connect(this->getUI()->backQPushButton_2, &QPushButton::clicked, this,
             &CreateCommitmentQWidget::backButtonSlot);
     QFontMetrics thisFont{ this->ui->commitmentNameQLabel->font()};
+    connect(this->getUI()->noEndDateQCheckBox, &QCheckBox::stateChanged,
+            this, &CreateCommitmentQWidget::noEndDateCheckSlot);
     qDebug()<<"font height="<<thisFont.height();
     qDebug()<<"average width font="<<thisFont.averageCharWidth();
 }
@@ -55,6 +58,20 @@ void CreateCommitmentQWidget::backButtonSlot() {
     this->hide();
     MainUI::getInstance()->show();
 }
+void CreateCommitmentQWidget::noEndDateCheckSlot(int State)
+{
+    qDebug("Checkbox signal#1");
+    if(this->getUI()->noEndDateQCheckBox->isChecked())
+    {
+      this->getUI()->dateEndQDateEdit->setDisabled(true);
+      qDebug("Checkbox signal#2");
+    }
+    else
+    {
+        this->getUI()->dateEndQDateEdit->setDisabled(false);
+    }
+
+}
 
 /**
  * @brief CreateCommitmentQWidget::createCommitmentButtonSlot
@@ -72,7 +89,7 @@ void CreateCommitmentQWidget::createCommitmentButtonSlot() {
     Task newTask{""};
     sessions.push_back(Session{ newTask });
     Commitment temp{ this->getCommitmentName(), this->getStartDate(),
-                     this->getEndDate(), this->getInterval(), sessions };
+                     this->getEndDate(), this->getInterval(), sessions, udata::CommitmentType::WEEKLY };
     udata::User::getInstance()->addCommitment(temp);
     MainUI::getInstance()->update();
     MainUI::getInstance()->show();
@@ -115,15 +132,9 @@ util::Interval CreateCommitmentQWidget::getInterval() {
     } else if (currentSizeLabel == HOURS_STRING) {
         size = SECONDS_IN_HOUR * ui->qtyQLineEdit->text().toInt();
     }
-    if (currentFrequencyLabel == DAY_STRING) {
-        frequency = SECONDS_IN_DAY;
-    } else if (currentFrequencyLabel == WEEK_STRING) {
-        frequency = SECONDS_IN_WEEK;
-    } else if (currentFrequencyLabel == MONTH_STRING) {
-        frequency = SECONDS_IN_30_DAYS;
-    }
+
     interval.size = size;
-    interval.frequency = frequency;
+    interval.weeklyFrequency = ui->dropDownUnitsRightQComboBox->currentIndex() + 1;
     return interval;
 }
 

@@ -34,6 +34,7 @@ public:
 private slots:
     void createCommitmentButtonSlot();
     void backButtonSlot();
+    void noEndDateCheckSlot(int);
     void on_createCommitmentQFrame_destroyed();
 
 private:

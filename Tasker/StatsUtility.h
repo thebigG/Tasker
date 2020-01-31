@@ -2,7 +2,8 @@
 #define STATSUTILITY_H
 
 #include <cstdint>
-
+#include <QDate>
+#include <Session.h>
 #define ZERO 0
 #define MINUTES_STRING "Minute(s)"
 #define HOURS_STRING "Hour(s)"
@@ -17,7 +18,24 @@
 
 namespace util {
 class StatsUtility;
+struct TimeWindow;
+//QDataStream &operator<<(QDataStream &out, const TimeWindow);
+//QDataStream &operator>>(QDataStream &in, TimeWindow &);
 }
+struct util::TimeWindow
+{
+QDate startDate;
+QDate endDate;
+QVector<udata::Session> sessions;
+};
+//QDataStream& util::operator<<(QDataStream &out, const util::TimeWindow t)
+//{
+//return out;
+//}
+//QDataStream& util::operator>>(QDataStream &in, util::TimeWindow &t)
+//{
+//return in;
+//}
 
 /**
  * @brief The util::StatsUtility class
@@ -57,15 +75,5 @@ private:
     StatsUtility();
     ~StatsUtility();
 };
-
-template <typename T>
-T min(T x, T y) {
-    return x > y ? y : x;
-}
-
-template <typename T>
-T max(T x, T y) {
-    return x > y ? x : y;
-}
 
 #endif // STATSUTILITY_H

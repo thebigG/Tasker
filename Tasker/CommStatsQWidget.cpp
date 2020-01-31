@@ -102,7 +102,7 @@ void CommStatsQWidget::update() {
     while (it != c_vec.end()) {
         Commitment c = (*it);
 
-        auto s_vec = c.getSessions();
+        auto s_vec = c.getAllSessions();
         auto s_it = s_vec.begin();
 
         QTreeWidget *w = ui->commitmentsQTreeWidget;

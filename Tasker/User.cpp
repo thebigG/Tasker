@@ -66,7 +66,7 @@ void User::addCommitment(Commitment &newCommitment) {
  */
 void User::addSession(Session &newSession) {
     Commitment c = commitments.at(currentCommitment);
-    c.getSessions().push_back(newSession);
+    c.getAllSessions().push_back(newSession);
     UdataUtils::saveUserData(*getInstance());
 }
 

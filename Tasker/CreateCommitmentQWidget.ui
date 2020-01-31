@@ -58,8 +58,11 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="3" column="1">
        <widget class="QDateEdit" name="dateEndQDateEdit"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QDateEdit" name="dateStartQDateEdit"/>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="dateStartQLabel">
@@ -73,8 +76,12 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QDateEdit" name="dateStartQDateEdit"/>
+      <item row="3" column="2">
+       <widget class="QCheckBox" name="noEndDateQCheckBox">
+        <property name="text">
+         <string>No End Date</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -123,7 +130,7 @@
         </property>
         <item>
          <property name="text">
-          <string>Everyday</string>
+          <string>Once a week</string>
          </property>
         </item>
         <item>
@@ -149,6 +156,11 @@
         <item>
          <property name="text">
           <string>Six times a week</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Everyday</string>
          </property>
         </item>
        </widget>
