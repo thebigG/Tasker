@@ -89,7 +89,7 @@
    <item>
     <widget class="QWidget" name="commitmentFrequencyContainer" native="true">
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="1" column="0">
+      <item row="2" column="0">
        <widget class="QLineEdit" name="qtyQLineEdit">
         <property name="maximumSize">
          <size>
@@ -102,7 +102,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="2" column="1">
        <widget class="QComboBox" name="dropDownUnitsLeftQComboBox">
         <property name="font">
          <font>
@@ -121,7 +121,7 @@
         </item>
        </widget>
       </item>
-      <item row="1" column="2">
+      <item row="2" column="2">
        <widget class="QComboBox" name="dropDownUnitsRightQComboBox">
         <property name="font">
          <font>
@@ -165,7 +165,16 @@
         </item>
        </widget>
       </item>
-      <item row="0" column="0">
+      <item row="1" column="1">
+       <widget class="QComboBox" name="commitmentMode">
+        <item>
+         <property name="text">
+          <string>Weekly</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0">
        <widget class="QLabel" name="qtyQLabel">
         <property name="font">
          <font>
@@ -174,30 +183,6 @@
         </property>
         <property name="text">
          <string>Frequency</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="unitsLeftQLabel">
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLabel" name="unitsRightQLabel">
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string/>
         </property>
        </widget>
       </item>

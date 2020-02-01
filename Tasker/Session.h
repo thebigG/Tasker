@@ -2,6 +2,7 @@
 #define SESSION_H
 #include "Task.h"
 #include <QDataStream>
+#include <QDate>
 
 namespace udata {
 class Session;
@@ -15,7 +16,7 @@ QDataStream &operator>>(QDataStream &in, udata::Session &newSession);
 class udata::Session {
 public:
     Session();
-    Session(Task newTask, long long goalLength);
+    Session(Task newTask, long long goalLength, QDate date);
     Session(Task);
     const Task &getTask() const;
     void setTask(Task value);
@@ -46,7 +47,7 @@ private:
     QString notes;
     QVector<QString> media;
     long long int length;
-
+    QDate date;
     friend QDataStream &operator<<(QDataStream &out, const udata::Session &newSession);
     friend QDataStream &operator>>(QDataStream &in, udata::Session &newSession);
 };

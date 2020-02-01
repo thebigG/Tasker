@@ -15,8 +15,8 @@ Session::Session() {
  * @param newTask
  * @param goalLength
  */
-Session::Session(Task newTask, long long int goalLength)
-: task{ newTask }, goal{ goalLength } {
+Session::Session(Task newTask, long long int goalLength, QDate newDate)
+    : task{ newTask }, goal{ goalLength }, date{newDate} {
     if (goal < ZERO) {
         goal = ZERO;
     }

@@ -10,11 +10,13 @@
 namespace udata {
 class Commitment;
 enum class CommitmentType;
-QDataStream &operator<<(QDataStream &out, const util::Interval &);
-QDataStream &operator>>(QDataStream &in, util::Interval &);
+QDataStream &operator<<(QDataStream &out, const util::CommitmentFrequency &);
+QDataStream &operator>>(QDataStream &in, util::CommitmentFrequency &);
 QDataStream &operator<<(QDataStream &out, const udata::Commitment &newCommitment);
 QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
-} // namespace udata
+QDataStream &operator<<(QDataStream &out, const util::TimeWindow&);
+QDataStream &operator>>(QDataStream &in, util::TimeWindow &);
+}
 
 /**
  * @brief The udata::Commitment class
@@ -22,14 +24,15 @@ QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
 enum class udata::CommitmentType
 {
   WEEKLY,
-  MONTHLY
+  MONTHLY,
+  Custom
 };
 class udata::Commitment {
 private:
     QString name;
     QDate dateStart;
     QDate dateEnd;
-    util::Interval interval;
+    util::CommitmentFrequency interval;
 //    QVector<Session> sessions;
     QVector<util::TimeWindow> commitmentWindows; /**For now these are just a commitment's lifespan divided into weeks.\
                                             But hopefully it's clear that this time window can also be something
@@ -42,10 +45,12 @@ private:
                                             twice, thrice, four times a week, etc.
                                             */
     CommitmentType Type;
+    bool noEndDate;
 public:
     Commitment();
-    Commitment(QString newName, QDate newStart, QDate newEnd, util::Interval, QVector<Session> newSessions, CommitmentType type);
-    Commitment(QString newName, QDate newStart, QDate newEnd, util::Interval, CommitmentType type);
+    Commitment(QString newName, QDate newStart, QDate newEnd, util::CommitmentFrequency, QVector<Session> newSessions, CommitmentType type,
+               bool noEndDate);
+    Commitment(QString newName, QDate newStart, QDate newEnd, util::CommitmentFrequency, CommitmentType type);
     QDate &getDateStart();
     void setDateStart(QDate value);
     QDate &getDateEnd();
@@ -57,6 +62,8 @@ public:
     CommitmentType getType();
     friend QDataStream&operator<<(QDataStream &out, const udata::Commitment &newCommitment);
    friend QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
+//   friend QDataStream&operator<<(QDataStream &out, const util::TimeWindow &newTimeWindow);
+//  friend QDataStream &operator>>(QDataStream &in, util::TimeWindow &newTimeWindow);
 };
 
 #endif // COMMITMENT_H

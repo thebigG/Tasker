@@ -29,7 +29,7 @@ public:
     QString getCommitmentName();
     QDate getStartDate();
     QDate getEndDate();
-    util::Interval getInterval();
+    util::CommitmentFrequency getInterval();
 
 private slots:
     void createCommitmentButtonSlot();

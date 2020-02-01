@@ -88,8 +88,10 @@ void CreateCommitmentQWidget::createCommitmentButtonSlot() {
 //    }
     Task newTask{""};
     sessions.push_back(Session{ newTask });
+
     Commitment temp{ this->getCommitmentName(), this->getStartDate(),
-                     this->getEndDate(), this->getInterval(), sessions, udata::CommitmentType::WEEKLY };
+                     this->getEndDate(), this->getInterval(), sessions, udata::CommitmentType::WEEKLY,
+                   this->getUI()->noEndDateQCheckBox->isChecked()};
     udata::User::getInstance()->addCommitment(temp);
     MainUI::getInstance()->update();
     MainUI::getInstance()->show();
@@ -122,8 +124,8 @@ QDate CreateCommitmentQWidget::getEndDate() {
  * @brief CreateCommitmentQWidget::getInterval
  * @return
  */
-util::Interval CreateCommitmentQWidget::getInterval() {
-    util::Interval interval{};
+util::CommitmentFrequency CreateCommitmentQWidget::getInterval() {
+    util::CommitmentFrequency interval{};
     long long int size, frequency;
     QString currentSizeLabel = ui->dropDownUnitsLeftQComboBox->currentText();
     QString currentFrequencyLabel = ui->dropDownUnitsRightQComboBox->currentText();
@@ -133,8 +135,8 @@ util::Interval CreateCommitmentQWidget::getInterval() {
         size = SECONDS_IN_HOUR * ui->qtyQLineEdit->text().toInt();
     }
 
-    interval.size = size;
-    interval.weeklyFrequency = ui->dropDownUnitsRightQComboBox->currentIndex() + 1;
+    interval.time = size;
+    interval.Frequency = ui->dropDownUnitsRightQComboBox->currentIndex() + 1;
     return interval;
 }
 

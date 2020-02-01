@@ -48,7 +48,7 @@ void TimerWindowQWidget::startTimerButtonSlot() {
     goal += this->ui->productionTimeMinutesQSpinBox->value() * SECONDS_IN_MINUTE;
     qDebug() << "new goal" << goal;
     Task newTask{ getTaskName(), newListsners };
-    Session newSession{ newTask, goal };
+    Session newSession{ newTask, goal, QDate::currentDate() };
     Engine::Timer::getInstance()->initTimer(newListsners.at(0), newSession);
     LiveSession *s = new LiveSession{};
     s->show();

@@ -13,11 +13,14 @@ Commitment::Commitment() {
 Commitment::Commitment(QString newName,
                        QDate newStart,
                        QDate newEnd,
-                       util::Interval newInterval,
+                       util::CommitmentFrequency newInterval,
                        QVector<Session> newSessions,
-                       CommitmentType newType)
+                       CommitmentType newType,
+                       bool newNoEndDate)
 : name{ newName }, dateStart{ newStart }, dateEnd{ newEnd },
-  interval{ newInterval }, commitmentWindows{}, Type{newType} {
+  interval{ newInterval }, commitmentWindows{}, Type{newType},
+  noEndDate{newNoEndDate}
+{
     if (dateStart < QDate::currentDate()) {
         dateStart = QDate::currentDate();
     }
@@ -25,7 +28,7 @@ Commitment::Commitment(QString newName,
         dateEnd = dateStart;
     }
 
-//    commitmentWindows.push_back(util::TimeWindow{.startDate=dateStart, .sessions=newSessions});
+    commitmentWindows.push_back(util::TimeWindow{.startDate=dateStart,.endDate = dateEnd , .sessions=newSessions});
 }
 
 /**
@@ -35,7 +38,7 @@ Commitment::Commitment(QString newName,
  * @param newEnd
  * @param newInterval
  */
-Commitment::Commitment(QString newName, QDate newStart, QDate newEnd, util::Interval newInterval, CommitmentType newType)
+Commitment::Commitment(QString newName, QDate newStart, QDate newEnd, util::CommitmentFrequency newInterval, CommitmentType newType)
 : name{ newName }, dateStart{ newStart }, dateEnd{ newEnd }, interval{ newInterval },
 Type{newType}
 {
@@ -68,8 +71,8 @@ const QString &Commitment::getName() const {
  * @param newInterval
  * @return out(data stream). This can be very useful to catch errors.
  */
-QDataStream &udata::operator<<(QDataStream &out, const util::Interval &newInterval) {
-    out << newInterval.size << newInterval.weeklyFrequency;
+QDataStream &udata::operator<<(QDataStream &out, const util::CommitmentFrequency &newInterval) {
+    out << newInterval.time << newInterval.Frequency;
     return out;
 }
 
@@ -80,8 +83,8 @@ QDataStream &udata::operator<<(QDataStream &out, const util::Interval &newInterv
  * @param newInterval An interval to write to.
  * @return The in data stream. Useful for error-checking.
  */
-QDataStream &udata::operator>>(QDataStream &in, util::Interval &newInterval) {
-    in >> newInterval.size >> newInterval.weeklyFrequency;
+QDataStream &udata::operator>>(QDataStream &in, util::CommitmentFrequency &newInterval) {
+    in >> newInterval.time >> newInterval.Frequency;
     return in;
 }
 
@@ -93,8 +96,8 @@ QDataStream &udata::operator>>(QDataStream &in, util::Interval &newInterval) {
  */
 QDataStream &udata::operator<<(QDataStream &out, const udata::Commitment &newCommitment) {
     unsigned long long int size, frequency;
-    size = newCommitment.interval.size;
-    frequency = newCommitment.interval.weeklyFrequency;
+    size = newCommitment.interval.time;
+    frequency = newCommitment.interval.Frequency;
     out << newCommitment.name << newCommitment.dateStart << newCommitment.dateEnd
         << newCommitment.interval ;//<< newCommitment.commitmentWindows;
     return out;
@@ -107,7 +110,7 @@ QDataStream &udata::operator<<(QDataStream &out, const udata::Commitment &newCom
  * @return The data stream out. Very useful for error-checking.
  */
 QDataStream &udata::operator>>(QDataStream &in, udata::Commitment &newCommitment) {
-    util::Interval commitmentInterval;
+    util::CommitmentFrequency commitmentInterval;
     QString commitmentName;
     QDate commitmentDateStart;
     QDate commitmentDateEnd;
@@ -121,7 +124,14 @@ QDataStream &udata::operator>>(QDataStream &in, udata::Commitment &newCommitment
 //    newCommitment.commitmentWindows = commitmentSessions;
     return in;
 }
-
+QDataStream& udata::operator<<(QDataStream &out, const util::TimeWindow &newTimeWindow)
+{
+    return out;
+}
+QDataStream & udata::operator>>(QDataStream &in, util::TimeWindow &newTimeWindow)
+{
+    return in;
+}
 /**
  * @brief Commitment::getDateStart
  * @return
