@@ -1,4 +1,5 @@
-#Running Tasker
+
+# Running Tasker
 
 One of the major issues with running Tasker on linux is the fact that in linux one has run it under sudo. This is obviously a huge security hole. To mitigate the risks in linux, the proper way of doing it is to write an action policy for Tasker. Which is what I did. Of course, if you clone the repo you won't automatically have an action policy written to your linux desktop just by cloning the repo. Don't worry, I've automated most of the process!
 
