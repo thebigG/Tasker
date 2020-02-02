@@ -79,13 +79,6 @@ void CreateCommitmentQWidget::noEndDateCheckSlot(int State)
 void CreateCommitmentQWidget::createCommitmentButtonSlot() {
     this->hide();
     QVector<Session> sessions{};
-//    QVector<Engine::Listener::ListenerType> listeners;
-//    if (this->ui->checkKeyboardQCheckBox->checkState() == Qt::Checked) {
-//        listeners.push_back(Engine::Listener::ListenerType::keyboard);
-//    }
-//    if (this->ui->checkMicQCheckBox->checkState() == Qt::Checked) {
-//        listeners.push_back(Engine::Listener::ListenerType::audio);
-//    }
     Task newTask{""};
     sessions.push_back(Session{ newTask });
 
@@ -124,8 +117,8 @@ QDate CreateCommitmentQWidget::getEndDate() {
  * @brief CreateCommitmentQWidget::getInterval
  * @return
  */
-util::CommitmentFrequency CreateCommitmentQWidget::getInterval() {
-    util::CommitmentFrequency interval{};
+udata::CommitmentFrequency CreateCommitmentQWidget::getInterval() {
+    udata::CommitmentFrequency interval{};
     long long int size, frequency;
     QString currentSizeLabel = ui->dropDownUnitsLeftQComboBox->currentText();
     QString currentFrequencyLabel = ui->dropDownUnitsRightQComboBox->currentText();

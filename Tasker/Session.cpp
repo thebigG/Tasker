@@ -159,3 +159,7 @@ long long int Session::getGoal() {
 void Session::setGoal(int newGoal) {
     goal = newGoal;
 }
+QDate Session::getDate()
+{
+    return date;
+}

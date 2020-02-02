@@ -1,7 +1,6 @@
 #ifndef CREATECOMMITMENT_H
 #define CREATECOMMITMENT_H
-
-#include <Interval.h>
+#include <Commitment.h>
 #include <QCheckBox>
 #include <QDateEdit>
 #include <QIntValidator>
@@ -29,7 +28,7 @@ public:
     QString getCommitmentName();
     QDate getStartDate();
     QDate getEndDate();
-    util::CommitmentFrequency getInterval();
+    udata::CommitmentFrequency getInterval();
 
 private slots:
     void createCommitmentButtonSlot();

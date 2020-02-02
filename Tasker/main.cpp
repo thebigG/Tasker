@@ -1,7 +1,6 @@
 #include "AudioListener.h"
 #include "CommStatsQWidget.h"
 #include "CreateCommitmentQWidget.h"
-#include "Interval.h"
 #include "KeyboardListener.h"
 #include "StatsUtility.h"
 #include "Task.h"

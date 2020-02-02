@@ -79,7 +79,6 @@ HEADERS += \
     TaskerUIMainWindowQWidget.h \
     Timer.h \
     TimerWindowQWidget.h \
-    Interval.h \
     StatsUtility.h \
     TaskerUIMainWindowQWidget.h \
     TimerWindowQWidget.h \
