@@ -1,6 +1,7 @@
 #include "Commitment.h"
 #include <QDebug>
 #include <Session.h>
+#include <QtMath>
 
 using namespace udata;
 
@@ -14,7 +15,6 @@ Commitment::Commitment(QString newName,
                        QDate newStart,
                        QDate newEnd,
                        udata::CommitmentFrequency newInterval,
-                       QVector<Session> newSessions,
                        CommitmentType newType,
                        bool newNoEndDate)
 : name{ newName }, dateStart{ newStart }, dateEnd{ newEnd },
@@ -27,6 +27,7 @@ Commitment::Commitment(QString newName,
     if (dateEnd < dateStart) {
         dateEnd = dateStart;
     }
+    updateCommitmentWindows();
 
 }
 
@@ -53,6 +54,7 @@ void Commitment::setType(CommitmentType newType)
 Type = newType;
 }
 CommitmentType Commitment::getType()
+const
 {
     return Type;
 }
@@ -63,12 +65,74 @@ CommitmentType Commitment::getType()
 const QString &Commitment::getName() const {
     return name;
 }
-void Commitment::addCommitmentWindow(Session newSession)
+/**
+ * @brief Commitment::updateCommitmentWindows
+ * I don't think this method makes a lot of sense.
+ * I think the functionality of this can be replaced with something like
+ * addSession(Session newSession) and have that method
+ * check the validity of commitmentWindows with updateCommitmentWindows
+ * @param newSession
+ */
+void Commitment::updateCommitmentWindows(Session newSession)
 {
  if(commitmentWindows.isEmpty())
  {
-commitmentWindows.push_back(util::TimeWindow{.startDate=dateStart,.endDate = dateStart.addDays(interval.Frequency) , .sessions=QVector<Session>{newSession}});
+commitmentWindows.push_back(util::TimeWindow{.startDate=dateStart,.endDate = dateStart.addDays(interval.frequency) , .sessions=QVector<Session>{newSession}});
  }
+}
+/**
+ * @brief Commitment::updateCommitmentWindows
+ * Updates the current Commitment Time Windows by adding necessary ones
+ * to the internal QVector, if needed.
+ * For example; Imagine Alice sets a commitment to write 30 minutes four times a week.
+ * Also assum that she goes missing for three weeks on vacation and comes back to Tasker.
+ * This method, which is called when Tasker starts on loadUser(), will
+ * update all of those three missing CommitmentWindows, which is 3 in this case(three weeks).
+ *This would of course be also very useful when a Commitment Window is closed;
+ * in the beginning of a new week, a new Commitment TimeWindow is added that will be closed in seven more days.
+ */
+void Commitment::updateCommitmentWindows()
+{
+    QDate currentDate = QDate::currentDate();
+    if(commitmentWindows.isEmpty())
+    {
+      commitmentWindows.push_back(util::TimeWindow{});
+      util::TimeWindow& newWindow = commitmentWindows.last();
+      newWindow.startDate.setDate(currentDate.year(), currentDate.month(),
+                                  currentDate.day());
+      currentDate = currentDate.addDays(interval.timeWindowSize);
+      newWindow.endDate.setDate(currentDate.year(),currentDate.month(),
+                                currentDate.day());
+    }
+    else
+    {
+        util::TimeWindow& lastWindow = commitmentWindows.last();
+        if(currentDate<=lastWindow.endDate)
+        {
+            return;
+        }
+        currentDate.setDate(lastWindow.endDate.year(),lastWindow.endDate.month(),
+                            lastWindow.endDate.day());
+        currentDate = currentDate.addDays(1);
+        float NumberOfTimeWindows =qCeil((currentDate.day() - lastWindow.endDate.day())/(interval.timeWindowSize));
+        for(int i =0 ;i<NumberOfTimeWindows;i++)
+        {
+            commitmentWindows.push_back(util::TimeWindow{});
+            util::TimeWindow& newWindow = commitmentWindows.last();
+            newWindow.startDate.setDate(currentDate.year(), currentDate.month(),
+                                        currentDate.day());
+            currentDate = currentDate.addDays(interval.timeWindowSize);
+            newWindow.endDate.setDate(currentDate.year(),currentDate.month(),
+                                      currentDate.day());
+        }
+
+    }
+
+}
+QVector<util::TimeWindow>& Commitment::getCommitmentWindows()
+const
+{
+    return commitmentWindows;
 }
 /**
  * @brief udata::operator << This writes an interval to a data stream(file).
@@ -77,7 +141,7 @@ commitmentWindows.push_back(util::TimeWindow{.startDate=dateStart,.endDate = dat
  * @return out(data stream). This can be very useful to catch errors.
  */
 QDataStream &udata::operator<<(QDataStream &out, const udata::CommitmentFrequency &newInterval) {
-    out << newInterval.time << newInterval.Frequency;
+    out << newInterval.time << newInterval.frequency<<newInterval.timeWindowSize;
     return out;
 }
 
@@ -89,7 +153,7 @@ QDataStream &udata::operator<<(QDataStream &out, const udata::CommitmentFrequenc
  * @return The in data stream. Useful for error-checking.
  */
 QDataStream &udata::operator>>(QDataStream &in, udata::CommitmentFrequency &newInterval) {
-    in >> newInterval.time >> newInterval.Frequency;
+    in >> newInterval.time >> newInterval.frequency>>newInterval.timeWindowSize;
     return in;
 }
 
@@ -100,9 +164,6 @@ QDataStream &udata::operator>>(QDataStream &in, udata::CommitmentFrequency &newI
  * @return The data stream. Very useful for error checking.
  */
 QDataStream &udata::operator<<(QDataStream &out, const udata::Commitment &newCommitment) {
-    unsigned long long int size, frequency;
-    size = newCommitment.interval.time;
-    frequency = newCommitment.interval.Frequency;
     out << newCommitment.name << newCommitment.dateStart << newCommitment.dateEnd
         << newCommitment.interval<<newCommitment.Type<<newCommitment.noEndDate<< newCommitment.commitmentWindows;
     return out;
@@ -222,7 +283,7 @@ QString Commitment::summary() const
         summary += "End Date:None" ;
     }
     summary += "Goal time:"+ QString::number(interval.time) + "\n";
-    summary += "Frequency"+ QString::number(interval.Frequency)+ "\n";
+    summary += "Frequency"+ QString::number(interval.frequency)+ "\n";
     summary += "current Time Window:\nBegin:" +
                 commitmentWindows.last().startDate.toString()
                 +"\nEnd:"

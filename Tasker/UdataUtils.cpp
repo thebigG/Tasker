@@ -56,8 +56,11 @@ void UdataUtils::loadUserData(User &newUser) {
     in.setVersion(QDataStream::Qt_5_1);
     qDebug() << "loading data#1";
     in >> newUser;
+    if(!newUser.getCommitments().isEmpty())
+    {
     newCommitment = newUser.getCommitments().at(0);
     qDebug()<<"Commitment summary:"<<newUser.getCommitments().at(0).summary();
+    }
     qDebug() << "loading data#2";
     file.close();
 }

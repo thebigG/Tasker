@@ -42,8 +42,18 @@ enum class udata::CommitmentType
  * struct util:CommitmentFrequency
  * {
  * time = 1800 //30 minutes in seconds
- * Frequency  = 7 // In the case of twice a week, this value would be 2, 1 for once a week, etc.
+ * frequency = 1;
+ * timeWindowSize  = 1;
+ *  //The frequency variable  represents how many times and the timeWindowSize\
+ * variablerepresents the size of the time
  * }
+ * In the case of twice a week:
+ * frequency = 2
+ * timeWindowSize = 7
+ *
+ * In the case of three times a week:
+ * frequency = 3
+ * timeWindowSize = 7
  *Just because Alice specified the Frequency to be 7, it DOES NOT mean that there will 7
  * sessions. It just means that was Alice's optimal goal, and this can be displayed in the
  * viewer(UI) as one sees fit. There could very much be the case where Alice decides \
@@ -58,7 +68,8 @@ enum class udata::CommitmentType
  */
 struct udata::CommitmentFrequency {
     long long time = 0; // in seconds
-    long long Frequency = 0; //This should be part of a QPair(?)
+    int frequency = 0;
+    int timeWindowSize =0; // in days
 };
 class udata::Commitment {
 private:
@@ -66,8 +77,7 @@ private:
     QDate dateStart;
     QDate dateEnd;
     CommitmentFrequency interval;
-//    QVector<Session> sessions;
-    QVector<util::TimeWindow> commitmentWindows; /**For now these are just a commitment's lifespan divided into weeks.\
+    mutable QVector<util::TimeWindow> commitmentWindows; /**For now these are just a commitment's lifespan divided into weeks.\
                                             But hopefully it's clear that this time window can also be something
                                             like a month, or an arbitray number like 3 days.
                                             Each TimeWindow is the frame of time the user has to complete their
@@ -81,7 +91,7 @@ private:
     bool noEndDate;
 public:
     Commitment();
-    Commitment(QString newName, QDate newStart, QDate newEnd, udata::CommitmentFrequency, QVector<Session> newSessions, CommitmentType type,
+    Commitment(QString newName, QDate newStart, QDate newEnd, udata::CommitmentFrequency, CommitmentType type,
                bool noEndDate);
     Commitment(QString newName, QDate newStart, QDate newEnd, udata::CommitmentFrequency, CommitmentType type);
     QDate &getDateStart();
@@ -92,9 +102,11 @@ public:
     void setSessions(QVector<udata::Session> value);
     const QString &getName() const;
     void setType(CommitmentType);
-    CommitmentType getType();
+    CommitmentType getType() const;
     QString summary() const;
-    void addCommitmentWindow(Session);
+    void updateCommitmentWindows(Session);
+    void updateCommitmentWindows();
+    QVector<util::TimeWindow>& getCommitmentWindows() const ;
     friend QDataStream&operator<<(QDataStream &out, const udata::Commitment &newCommitment);
    friend QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
 //   friend QDataStream&operator<<(QDataStream &out, const util::TimeWindow &newTimeWindow);

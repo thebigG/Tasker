@@ -78,12 +78,9 @@ void CreateCommitmentQWidget::noEndDateCheckSlot(int State)
  */
 void CreateCommitmentQWidget::createCommitmentButtonSlot() {
     this->hide();
-    QVector<Session> sessions{};
-    Task newTask{""};
-    sessions.push_back(Session{ newTask });
 
     Commitment temp{ this->getCommitmentName(), this->getStartDate(),
-                     this->getEndDate(), this->getInterval(), sessions, udata::CommitmentType::WEEKLY,
+                     this->getEndDate(), this->getInterval(), this->getType(),
                    this->getUI()->noEndDateQCheckBox->isChecked()};
     udata::User::getInstance()->addCommitment(temp);
     MainUI::getInstance()->update();
@@ -129,8 +126,23 @@ udata::CommitmentFrequency CreateCommitmentQWidget::getInterval() {
     }
 
     interval.time = size;
-    interval.Frequency = ui->dropDownUnitsRightQComboBox->currentIndex() + 1;
+    interval.frequency = ui->dropDownUnitsRightQComboBox->currentIndex() + 1;
+
     return interval;
+}
+udata::CommitmentType CreateCommitmentQWidget::getType()
+{
+    switch(this->getUI()->commitmentMode->currentIndex())
+    {
+    case 0:
+        return udata::CommitmentType::WEEKLY;
+        break;
+    case 1:
+        return udata::CommitmentType::MONTHLY;
+        break;
+    default:
+        return udata::CommitmentType::Custom;
+    }
 }
 
 /**
