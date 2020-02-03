@@ -57,7 +57,7 @@ Leve 3= This bug is a nasty one and SHOULD not be shipped in any version of Task
 
 Tasker is built and baked into the Qt ecosystem. This is a design choice. Qt can be an intimidating framework to newcomers so before you start to debug make sure you are familiar with the Qt ecosystem, this includes the C++ API AND tools such as Qt Creator. 
 
-By default the project is set up to ignore qDebug() statements if your ennviroment is in "Debug" mode. If you switch to release/profile or any other mode that is not Debug, the qDebug statements are removed by Qt Creator when you build your executable:
+By default the project is set up to print qDebug() statements only if your ennviroment is in "Debug" mode. If you switch to release/profile or any other mode that is not Debug, the qDebug statements are removed by Qt Creator when you build your executable:
 
 <img src="Images/Debugging/Switch Profile.png" alt="" />
 
