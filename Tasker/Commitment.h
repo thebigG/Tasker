@@ -1,3 +1,10 @@
+/**
+ *  @file       Commitment.h
+ *  @brief      Header file for udata::Commitment
+ *
+ *  @author     Lorenzo Gomez
+ *  @date       02 Feb 2020
+ */
 #ifndef COMMITMENT_H
 #define COMMITMENT_H
 #include <QDataStream>
@@ -6,7 +13,12 @@
 #include <Session.h>
 #include <StatsUtility.h>
 #include <QPair>
+/**
+ *@brief The udata namespace has anything related to
+ * data that persistent for users such as Commitment, Task, Session etc.
+ */
 namespace udata {
+
 class Commitment;
 enum class CommitmentType;
 struct CommitmentFrequency;
@@ -71,6 +83,57 @@ struct udata::CommitmentFrequency {
     int frequency = 0;
     int timeWindowSize =0; // in days
 };
+/**
+ * @brief The udata::Commitment class
+ * A Commitment is a commitment that the user commits to.
+ * A Commitment is composed of TimeWindows called "commitmentWindows". Each
+ * one of these describes a time range/span for a list of "sessions".
+ * Each one of these sessions is composed of a task the user decides to do as part
+ * of the commitment with a frequency that is represented by interval, which
+ * is a CommitmentFrequency type.
+ *
+ * For example;
+ * Imagine Alice creates a commitment she calls, "Alice in Wonderland".
+ * In this commitment she decides to commit to that Task, which is the task of
+ * writing. She decides she wants to do this for 30 minutes
+ * five times a week. Let's assume this commitment was started on
+ *  1 January, 1864 and Alice knew she would finish her book(commitment)
+ * on 26 November, 1865.
+ * This case woud look like this:
+ * Commitment Name: "Alice in Winderland"
+ * Start date: January 1st, 1865,
+ * End Date: November 26, 1865,
+ * CommitmentFrequency:{
+ * time  = 1800 //seconds,
+ * frequency = 5 //,
+ * timeWindowSize = 7 //in days
+ * },
+ * commitmentWindows:{
+ * 1st week(determined by timeWindowSize in CommitmentFrequency, which is seven days):{
+ *    startDate = "January 1st, 1865",
+ *    endDate = "January 7th, 1865"
+ *    [Session1, Session2, SessionN...]
+ *    },
+ * 2nd week:
+ *      {
+ *    startDate = "January 8th, 1865",
+ *    endDate = "January 14th, 1865"
+ *    [Session1, Session2, SessionN...]
+ * }
+ * ,
+ * ...
+ * nth Week(last week):
+ *      {
+ *    startDate = "November 20th, 1865"
+ *    endDate = "November 26th, 1865
+ *    [Session1, Session2, SessionN...]
+ *    }
+ * },
+ * Type : CommitmentType::Weekly,
+ * noEndDate : false
+ *
+ *
+ */
 class udata::Commitment {
 private:
     QString name;

@@ -85,7 +85,7 @@ commitmentWindows.push_back(util::TimeWindow{.startDate=dateStart,.endDate = dat
  * Updates the current Commitment Time Windows by adding necessary ones
  * to the internal QVector, if needed.
  * For example; Imagine Alice sets a commitment to write 30 minutes four times a week.
- * Also assum that she goes missing for three weeks on vacation and comes back to Tasker.
+ * Also assume that she goes missing for three weeks on vacation and comes back to Tasker.
  * This method, which is called when Tasker starts on loadUser(), will
  * update all of those three missing CommitmentWindows, which is 3 in this case(three weeks).
  *This would of course be also very useful when a Commitment Window is closed;

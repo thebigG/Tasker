@@ -15,7 +15,12 @@
 #define SECONDS_IN_DAY 86400
 #define SECONDS_IN_WEEK 604800
 #define SECONDS_IN_30_DAYS 2592000
-
+/**
+ *@brief The util namespace has
+ * everything that is no more than "utillity" for Tasker.
+ * Things like conversion functions that convert
+ * seconds to hours shall be in this namespace.
+ */
 namespace util {
 class StatsUtility;
 struct TimeWindow;

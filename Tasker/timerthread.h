@@ -3,15 +3,14 @@
 #include <Listener.h>
 #include <QThread>
 #include <Timer.h>
-using namespace Engine;
 class TimerThread : public QThread {
 public:
-    TimerThread(Listener::ListenerType newListener);
+    TimerThread(Engine::Listener::ListenerType newListener);
     virtual void run();
 
 private:
     Engine::Timer *timerThread;
-    Listener::ListenerType listener;
+    Engine::Listener::ListenerType listener;
 };
 
 #endif // TIMERTHREAD_H
