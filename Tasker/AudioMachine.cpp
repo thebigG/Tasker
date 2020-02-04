@@ -27,9 +27,9 @@
  *  THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 #include "AudioMachine.h"
-#include <TaskerPerf/perftimer.h>
 #include <QThread>
 #include <QTimer>
+#include <TaskerPerf/perftimer.h>
 
 using Engine::AudioDevice;
 using Engine::AudioMachine;
@@ -56,15 +56,15 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
 
     // assign audio device here
     QAudioDeviceInfo info = QAudioDeviceInfo::defaultInputDevice();
-    QList<QAudioDeviceInfo> devices = QAudioDeviceInfo::availableDevices(QAudio::Mode::AudioInput);
+    QList<QAudioDeviceInfo> devices =
+        QAudioDeviceInfo::availableDevices(QAudio::Mode::AudioInput);
 
-    qDebug()<<"Available Devices:";
-    for(QAudioDeviceInfo i: devices)
-    {
-        qDebug()<<"device info:"<<i.isNull();
+    qDebug() << "Available Devices:";
+    for (QAudioDeviceInfo i : devices) {
+        qDebug() << "device info:" << i.isNull();
     }
     if (!info.isFormatSupported(format)) {
-        qDebug( "Default format not supported, trying to use the nearest.");
+        qDebug("Default format not supported, trying to use the nearest.");
         format = info.nearestFormat(format);
     }
 
@@ -76,7 +76,7 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
     // qDebug()<<"audiomachine thread:"<<QThread::currentThreadId();
 
     // show device name on console
-    qDebug()<<info.deviceName();
+    qDebug() << info.deviceName();
 
     qAudioInput->start(audioDevice);
 

@@ -8,12 +8,14 @@ unix:{
     # add your own with quoting gyrations to make sure $ORIGIN gets to the command line unexpanded
     QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN/lib\'"
 }
-
-
-#QT += charts
 #DO NOT delete the next includepath line! If you do, things WILL break on linux
 linux-g++*{
 INCLUDEPATH += /usr/include/x86_64-linux-gnu/qt5
+}
+macx
+{
+    SOURCES +=   objctest.mm
+    HEADERS += objctest.h
 }
 
 QT += multimedia
@@ -59,9 +61,7 @@ SOURCES += \
     User.cpp \
     livesession.cpp \
     mainui.cpp \
-    main.cpp \
-#    objctest.mm \
-    timerthread.cpp
+    main.cpp
 
 HEADERS += \
     AudioDevice.h \
@@ -86,8 +86,7 @@ HEADERS += \
     livesession.h \
     mainui.h \
     User.h \
-    objctest.h \
-    timerthread.h
+
 
 FORMS += \
     CommStatsQWidget.ui \

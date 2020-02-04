@@ -36,6 +36,8 @@ private slots:
     void backButtonSlot();
     void noEndDateCheckSlot(int);
     void on_createCommitmentQFrame_destroyed();
+    void currentIndexCommitmentModeComboBoxSlot(const QString &);
+    void currentIndexFrequencyComboBoxSlot(const QString &);
 
 private:
     Ui::CreateCommitmentQWidget *ui;

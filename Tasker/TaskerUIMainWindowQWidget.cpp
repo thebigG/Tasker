@@ -47,7 +47,7 @@ CreateCommitmentQWidget &TaskerUIMainWindowQWidget::getCreateCommitment() {
  */
 void TaskerUIMainWindowQWidget::quickSessionButtonSlot() {
     this->hide();
-//    TimerWindowQWidget &tw = MainUI::getInstance()->getTimerWindow();
+    //    TimerWindowQWidget &tw = MainUI::getInstance()->getTimerWindow();
     tw.show();
 }
 
@@ -56,7 +56,7 @@ void TaskerUIMainWindowQWidget::quickSessionButtonSlot() {
  */
 void TaskerUIMainWindowQWidget::makeCommitmentButtonSlot() {
     MainUI::getInstance()->hide();
-//    MainUI::getInstance()->getCreateCommitment().show();
+    //    MainUI::getInstance()->getCreateCommitment().show();
 }
 
 /**

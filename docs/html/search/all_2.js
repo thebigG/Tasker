@@ -3,7 +3,7 @@ var searchData=
   ['calculateproductivepercentage_15',['calculateProductivePercentage',['../classutil_1_1StatsUtility.html#a1556c3650019332538bb4d41dc5856df',1,'util::StatsUtility']]],
   ['calculateunproductivepercentage_16',['calculateUnproductivePercentage',['../classutil_1_1StatsUtility.html#a1c69e04f902bc84787c420b2dee3c4a4',1,'util::StatsUtility']]],
   ['cleanup_17',['cleanup',['../classEngine_1_1AudioListener.html#a46f3953ec807adf3b010947fdc645a42',1,'Engine::AudioListener']]],
-  ['commitment_18',['Commitment',['../classudata_1_1Commitment.html',1,'udata::Commitment'],['../classudata_1_1Commitment.html#a03a4562c94749bce3a53a9a5b0e22a9f',1,'udata::Commitment::Commitment()'],['../classudata_1_1Commitment.html#a03f9466ed655bd68d276a2ad858905cb',1,'udata::Commitment::Commitment(QString newName, QDate newStart, QDate newEnd, udata::CommitmentFrequency, CommitmentType type)']]],
+  ['commitment_18',['Commitment',['../classudata_1_1Commitment.html',1,'udata::Commitment'],['../classudata_1_1Commitment.html#a03a4562c94749bce3a53a9a5b0e22a9f',1,'udata::Commitment::Commitment()']]],
   ['commitment_2eh_19',['Commitment.h',['../Commitment_8h.html',1,'']]],
   ['commitmentfrequency_20',['CommitmentFrequency',['../structudata_1_1CommitmentFrequency.html',1,'udata']]],
   ['commitmenttype_21',['CommitmentType',['../namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14',1,'udata']]],

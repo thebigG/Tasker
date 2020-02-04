@@ -8,7 +8,7 @@ namespace udata {
 class Session;
 QDataStream &operator<<(QDataStream &out, const udata::Session &newSession);
 QDataStream &operator>>(QDataStream &in, udata::Session &newSession);
-}
+} // namespace udata
 
 /**
  * @brief The udata::Session class
@@ -40,6 +40,7 @@ public:
     long long int getGoal();
 
     QDate getDate();
+
 private:
     Task task;
     long long int goal;

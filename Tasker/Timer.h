@@ -70,9 +70,9 @@ public:
     void startTimer();
     int getTotalTimeElapsed();
     QTime getClock();
-    QString& getProductiveStatus();
-    QString& getUnproductiveStatus();
-    QString& getTimeElapsedStatus();
+    QString &getProductiveStatus();
+    QString &getUnproductiveStatus();
+    QString &getTimeElapsedStatus();
 
 public slots:
     void stopTimerSlot();

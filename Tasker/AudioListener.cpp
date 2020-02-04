@@ -132,10 +132,10 @@ int AudioListener::startListening(unsigned long int delay) {
     connect(&audioThread->getQThread(), &QThread::finished, this, &AudioListener::cleanup);
     //    connect();
 
-     qDebug()<<"From startListening on Listener.cpp: "<<QThread::currentThreadId();
+    qDebug() << "From startListening on Listener.cpp: " << QThread::currentThreadId();
     audioThread->moveToThread(&audioThread->getQThread());
-    qDebug()<<"From startListening on Listener.cpp: after connect:%d"
-             <<QThread::currentThreadId();
+    qDebug() << "From startListening on Listener.cpp: after connect:%d"
+             << QThread::currentThreadId();
     audioListenerState = AudioListenerState::ON;
     audioThread->getQThread().start();
     while (true) {
@@ -151,8 +151,7 @@ int AudioListener::startListening(unsigned long int delay) {
             }
         }
     }
-    qDebug()<<"AudioListener updateState() thread id: %d"<<
-             QThread::currentThreadId();
+    qDebug() << "AudioListener updateState() thread id: %d" << QThread::currentThreadId();
     while (true) {
         ListenerState state;
 

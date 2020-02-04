@@ -16,7 +16,7 @@ Session::Session() {
  * @param goalLength
  */
 Session::Session(Task newTask, long long int goalLength, QDate newDate)
-    : task{ newTask }, goal{ goalLength }, date{newDate} {
+: task{ newTask }, goal{ goalLength }, date{ newDate } {
     if (goal < ZERO) {
         goal = ZERO;
     }
@@ -159,7 +159,6 @@ long long int Session::getGoal() {
 void Session::setGoal(int newGoal) {
     goal = newGoal;
 }
-QDate Session::getDate()
-{
+QDate Session::getDate() {
     return date;
 }

@@ -9,10 +9,10 @@
 #define COMMITMENT_H
 #include <QDataStream>
 #include <QDate>
+#include <QPair>
 #include <QString>
 #include <Session.h>
 #include <StatsUtility.h>
-#include <QPair>
 /**
  *@brief The udata namespace has anything related to
  * data that persistent for users such as Commitment, Task, Session etc.
@@ -26,21 +26,16 @@ QDataStream &operator<<(QDataStream &out, const CommitmentFrequency &);
 QDataStream &operator>>(QDataStream &in, CommitmentFrequency &);
 QDataStream &operator<<(QDataStream &out, const udata::Commitment &newCommitment);
 QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
-QDataStream &operator<<(QDataStream &out, const util::TimeWindow&);
+QDataStream &operator<<(QDataStream &out, const util::TimeWindow &);
 QDataStream &operator>>(QDataStream &in, util::TimeWindow &);
-QDataStream &operator<<(QDataStream &out, const CommitmentType&);
-QDataStream &operator>>(QDataStream &in, CommitmentType&);
-}
+QDataStream &operator<<(QDataStream &out, const CommitmentType &);
+QDataStream &operator>>(QDataStream &in, CommitmentType &);
+} // namespace udata
 
 /**
  * @brief The udata::Commitment class
  */
-enum class udata::CommitmentType
-{
-  WEEKLY,
-  MONTHLY,
-  Custom
-};
+enum class udata::CommitmentType { WEEKLY, MONTHLY, Custom };
 /**
  * @brief The util::CommitmentFrequency struct represents \
  * the time the user aims to spend per session(time) on each commitment \
@@ -81,7 +76,7 @@ enum class udata::CommitmentType
 struct udata::CommitmentFrequency {
     long long time = 0; // in seconds
     int frequency = 0;
-    int timeWindowSize =0; // in days
+    int timeWindowSize = 0; // in days
 };
 /**
  * @brief The udata::Commitment class
@@ -139,24 +134,29 @@ private:
     QString name;
     QDate dateStart;
     QDate dateEnd;
-    CommitmentFrequency interval;
-    mutable QVector<util::TimeWindow> commitmentWindows; /**For now these are just a commitment's lifespan divided into weeks.\
-                                            But hopefully it's clear that this time window can also be something
-                                            like a month, or an arbitray number like 3 days.
-                                            Each TimeWindow is the frame of time the user has to complete their
-                                            sessions for that time period.
-                                            For example;a commitment that is a once-a-week type
-                                            will give the user a time window of seven days
-                                            to complete that one session. Same goes for
-                                            twice, thrice, four times a week, etc.
-                                            */
+    CommitmentFrequency frequency;
+    mutable QVector<util::TimeWindow>
+        commitmentWindows; /**For now these are just a commitment's lifespan
+              divided into weeks.\ But hopefully it's clear that this time
+              window can also be something like a month, or an arbitray number
+              like 3 days. Each TimeWindow is the frame of time the user has to
+              complete their sessions for that time period. For example;a
+              commitment that is a once-a-week type will give the user a time
+              window of seven days to complete that one session. Same goes for
+              twice, thrice, four times a week, etc.
+              */
     CommitmentType Type;
     bool noEndDate;
+    bool done = false;
+
 public:
     Commitment();
-    Commitment(QString newName, QDate newStart, QDate newEnd, udata::CommitmentFrequency, CommitmentType type,
+    Commitment(QString newName,
+               QDate newStart,
+               QDate newEnd,
+               udata::CommitmentFrequency,
+               CommitmentType type,
                bool noEndDate);
-    Commitment(QString newName, QDate newStart, QDate newEnd, udata::CommitmentFrequency, CommitmentType type);
     QDate &getDateStart();
     void setDateStart(QDate value);
     QDate &getDateEnd();
@@ -169,11 +169,14 @@ public:
     QString summary() const;
     void updateCommitmentWindows(Session);
     void updateCommitmentWindows();
-    QVector<util::TimeWindow>& getCommitmentWindows() const ;
-    friend QDataStream&operator<<(QDataStream &out, const udata::Commitment &newCommitment);
-   friend QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
-//   friend QDataStream&operator<<(QDataStream &out, const util::TimeWindow &newTimeWindow);
-//  friend QDataStream &operator>>(QDataStream &in, util::TimeWindow &newTimeWindow);
+    void update();
+    bool isDone();
+    void setDone(bool);
+    QVector<util::TimeWindow> &getCommitmentWindows() const;
+    friend QDataStream &operator<<(QDataStream &out, const udata::Commitment &newCommitment);
+    friend QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
+    //   friend QDataStream&operator<<(QDataStream &out, const util::TimeWindow &newTimeWindow);
+    //  friend QDataStream &operator>>(QDataStream &in, util::TimeWindow &newTimeWindow);
 };
 
 #endif // COMMITMENT_H

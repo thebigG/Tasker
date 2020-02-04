@@ -1,15 +1,19 @@
 #ifndef STATSUTILITY_H
 #define STATSUTILITY_H
 
-#include <cstdint>
 #include <QDate>
 #include <Session.h>
+#include <cstdint>
+#define WEEK_SIZE 7
+#define MONTH_SIZE 30
 #define ZERO 0
 #define MINUTES_STRING "Minute(s)"
 #define HOURS_STRING "Hour(s)"
 #define DAY_STRING "Day"
 #define WEEK_STRING "Week"
 #define MONTH_STRING "Month"
+#define EVERYDAY_STRING "Everyday"
+#define WEEKLY_STRING "Weekly"
 #define SECONDS_IN_MINUTE 60
 #define SECONDS_IN_HOUR 3600
 #define SECONDS_IN_DAY 86400
@@ -24,22 +28,21 @@
 namespace util {
 class StatsUtility;
 struct TimeWindow;
-//QDataStream &operator<<(QDataStream &out, const TimeWindow);
-//QDataStream &operator>>(QDataStream &in, TimeWindow &);
-}
-struct util::TimeWindow
-{
-QDate startDate;
-QDate endDate;
-QVector<udata::Session> sessions;
+// QDataStream &operator<<(QDataStream &out, const TimeWindow);
+// QDataStream &operator>>(QDataStream &in, TimeWindow &);
+} // namespace util
+struct util::TimeWindow {
+    QDate startDate;
+    QDate endDate;
+    QVector<udata::Session> sessions;
 };
-//QDataStream& util::operator<<(QDataStream &out, const util::TimeWindow t)
+// QDataStream& util::operator<<(QDataStream &out, const util::TimeWindow t)
 //{
-//return out;
+// return out;
 //}
-//QDataStream& util::operator>>(QDataStream &in, util::TimeWindow &t)
+// QDataStream& util::operator>>(QDataStream &in, util::TimeWindow &t)
 //{
-//return in;
+// return in;
 //}
 
 /**
@@ -47,23 +50,23 @@ QVector<udata::Session> sessions;
  */
 class util::StatsUtility {
 public:
-     /**
- * @brief util::StatsUtility::toMinutes
- * @param seconds quantity of seconds
- *
- * @return -1 if seconds is negative, otherwise quantity of minutes from seconds
- */
-inline static int64_t toMinutes(int64_t seconds) {
-    int64_t result = -1;
-    return (result = seconds < 0 ? result : seconds / SECONDS_IN_MINUTE);
-}
+    /**
+     * @brief util::StatsUtility::toMinutes
+     * @param seconds quantity of seconds
+     *
+     * @return -1 if seconds is negative, otherwise quantity of minutes from seconds
+     */
+    inline static int64_t toMinutes(int64_t seconds) {
+        int64_t result = -1;
+        return (result = seconds < 0 ? result : seconds / SECONDS_IN_MINUTE);
+    }
 
-/**
- * @brief util::StatsUtility::toHours
- * @param seconds quantity of seconds
- *
- * @return -1 if seconds is negative, otherwise quantity of hours from soconds
- */
+    /**
+     * @brief util::StatsUtility::toHours
+     * @param seconds quantity of seconds
+     *
+     * @return -1 if seconds is negative, otherwise quantity of hours from soconds
+     */
 
     static inline int64_t toHours(int64_t seconds) {
         int64_t result = -1;

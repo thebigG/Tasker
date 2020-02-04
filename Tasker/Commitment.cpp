@@ -1,7 +1,7 @@
 #include "Commitment.h"
 #include <QDebug>
-#include <Session.h>
 #include <QtMath>
+#include <Session.h>
 
 using namespace udata;
 
@@ -17,10 +17,8 @@ Commitment::Commitment(QString newName,
                        udata::CommitmentFrequency newInterval,
                        CommitmentType newType,
                        bool newNoEndDate)
-: name{ newName }, dateStart{ newStart }, dateEnd{ newEnd },
-  interval{ newInterval }, commitmentWindows{}, Type{newType},
-  noEndDate{newNoEndDate}
-{
+: name{ newName }, dateStart{ newStart }, dateEnd{ newEnd }, frequency{ newInterval },
+  commitmentWindows{}, Type{ newType }, noEndDate{ newNoEndDate } {
     if (dateStart < QDate::currentDate()) {
         dateStart = QDate::currentDate();
     }
@@ -28,34 +26,11 @@ Commitment::Commitment(QString newName,
         dateEnd = dateStart;
     }
     updateCommitmentWindows();
-
 }
-
-/**
- * @brief Commitment::Commitment
- * @param newName
- * @param newStart
- * @param newEnd
- * @param newInterval
- */
-Commitment::Commitment(QString newName, QDate newStart, QDate newEnd, udata::CommitmentFrequency newInterval, CommitmentType newType)
-: name{ newName }, dateStart{ newStart }, dateEnd{ newEnd }, interval{ newInterval },
-Type{newType}
-{
-    if (dateStart < QDate::currentDate()) {
-        dateStart = QDate::currentDate();
-    }
-    if (dateEnd < dateStart) {
-        dateEnd = dateStart;
-    }
+void Commitment::setType(CommitmentType newType) {
+    Type = newType;
 }
-void Commitment::setType(CommitmentType newType)
-{
-Type = newType;
-}
-CommitmentType Commitment::getType()
-const
-{
+CommitmentType Commitment::getType() const {
     return Type;
 }
 /**
@@ -73,65 +48,99 @@ const QString &Commitment::getName() const {
  * check the validity of commitmentWindows with updateCommitmentWindows
  * @param newSession
  */
-void Commitment::updateCommitmentWindows(Session newSession)
-{
- if(commitmentWindows.isEmpty())
- {
-commitmentWindows.push_back(util::TimeWindow{.startDate=dateStart,.endDate = dateStart.addDays(interval.frequency) , .sessions=QVector<Session>{newSession}});
- }
+void Commitment::updateCommitmentWindows(Session newSession) {
+    if (commitmentWindows.isEmpty()) {
+        commitmentWindows.push_back(
+            util::TimeWindow{ .startDate = dateStart,
+                              .endDate = dateStart.addDays(frequency.frequency),
+                              .sessions = QVector<Session>{ newSession } });
+    }
 }
 /**
  * @brief Commitment::updateCommitmentWindows
  * Updates the current Commitment Time Windows by adding necessary ones
  * to the internal QVector, if needed.
- * For example; Imagine Alice sets a commitment to write 30 minutes four times a week.
- * Also assume that she goes missing for three weeks on vacation and comes back to Tasker.
- * This method, which is called when Tasker starts on loadUser(), will
- * update all of those three missing CommitmentWindows, which is 3 in this case(three weeks).
- *This would of course be also very useful when a Commitment Window is closed;
- * in the beginning of a new week, a new Commitment TimeWindow is added that will be closed in seven more days.
+ * For example; Imagine Alice sets a commitment to write 30 minutes four times a
+ *week. Also assume that she goes missing for three weeks on vacation and comes
+ *back to Tasker. This method, which is called when Tasker starts on loadUser(),
+ *will update all of those three missing CommitmentWindows, which is 3 in this
+ *case(three weeks). This would of course be also very useful when a Commitment
+ *Window is closed; in the beginning of a new week, a new Commitment TimeWindow
+ *is added that will be closed in seven more days.
  */
-void Commitment::updateCommitmentWindows()
-{
+void Commitment::updateCommitmentWindows() {
     QDate currentDate = QDate::currentDate();
-    if(commitmentWindows.isEmpty())
-    {
-      commitmentWindows.push_back(util::TimeWindow{});
-      util::TimeWindow& newWindow = commitmentWindows.last();
-      newWindow.startDate.setDate(currentDate.year(), currentDate.month(),
+    if (commitmentWindows.isEmpty()) {
+        commitmentWindows.push_back(util::TimeWindow{});
+        util::TimeWindow &newWindow = commitmentWindows.last();
+        newWindow.startDate.setDate(currentDate.year(), currentDate.month(),
+                                    currentDate.day());
+        currentDate = currentDate.addDays(frequency.timeWindowSize);
+        newWindow.endDate.setDate(currentDate.year(), currentDate.month(),
                                   currentDate.day());
-      currentDate = currentDate.addDays(interval.timeWindowSize);
-      newWindow.endDate.setDate(currentDate.year(),currentDate.month(),
-                                currentDate.day());
-    }
-    else
-    {
-        util::TimeWindow& lastWindow = commitmentWindows.last();
-        if(currentDate<=lastWindow.endDate)
-        {
+    } else {
+        util::TimeWindow &lastWindow = commitmentWindows.last();
+        if (currentDate <= lastWindow.endDate) {
             return;
         }
-        currentDate.setDate(lastWindow.endDate.year(),lastWindow.endDate.month(),
-                            lastWindow.endDate.day());
+        currentDate.setDate(lastWindow.endDate.year(),
+                            lastWindow.endDate.month(), lastWindow.endDate.day());
         currentDate = currentDate.addDays(1);
-        float NumberOfTimeWindows =qCeil((currentDate.day() - lastWindow.endDate.day())/(interval.timeWindowSize));
-        for(int i =0 ;i<NumberOfTimeWindows;i++)
-        {
+        float NumberOfTimeWindows =
+            qCeil((currentDate.day() - lastWindow.endDate.day()) / (frequency.timeWindowSize));
+        for (int i = 0; i < NumberOfTimeWindows; i++) {
             commitmentWindows.push_back(util::TimeWindow{});
-            util::TimeWindow& newWindow = commitmentWindows.last();
+            util::TimeWindow &newWindow = commitmentWindows.last();
             newWindow.startDate.setDate(currentDate.year(), currentDate.month(),
                                         currentDate.day());
-            currentDate = currentDate.addDays(interval.timeWindowSize);
-            newWindow.endDate.setDate(currentDate.year(),currentDate.month(),
+            currentDate = currentDate.addDays(frequency.timeWindowSize);
+            newWindow.endDate.setDate(currentDate.year(), currentDate.month(),
                                       currentDate.day());
         }
-
     }
-
 }
-QVector<util::TimeWindow>& Commitment::getCommitmentWindows()
-const
-{
+/**
+ * @brief Commitment::update updates the state of this commitment.
+ * This method update st
+ */
+void Commitment::update() {
+    updateCommitmentWindows();
+    if (noEndDate) {
+        done = false;
+        return;
+    }
+    if (commitmentWindows.last().endDate >= dateEnd) {
+        done = true;
+    }
+    return;
+}
+void Commitment::setDone(bool newDone) {
+    done = newDone;
+}
+/**
+ * @brief Commitment::isDone
+ * A commitment is considered "done" when all
+ * of its TimeWindows are "closed", whether the user completed
+ * all of the tasks they commmited to or not.
+ * For example; suppose that Alice  made a commitment called "Alice in Wonderland"
+ * and she set out to write four times week for a whole month.
+ * Suppose her start date is "January 1st, 2020"
+ * and her end date is "January 30th, 2020".
+ *
+ * Also suppose she only wrote for two of those weeks.
+ * Whe she comes back to use Tasker on January 31st, the
+ * Commitment "Alice in Wonderland" will be considered "done".
+ * Meaning this function, in that case, will return true.
+ *
+ * @note Commitments that have noEndDate set to "true" are never considered "done".
+ * In such case, this function will always return "false".
+ * @return true if this commitment is "done". Otherwise, it returns false.
+ */
+bool Commitment::isDone() {
+    update();
+    return done;
+}
+QVector<util::TimeWindow> &Commitment::getCommitmentWindows() const {
     return commitmentWindows;
 }
 /**
@@ -141,7 +150,7 @@ const
  * @return out(data stream). This can be very useful to catch errors.
  */
 QDataStream &udata::operator<<(QDataStream &out, const udata::CommitmentFrequency &newInterval) {
-    out << newInterval.time << newInterval.frequency<<newInterval.timeWindowSize;
+    out << newInterval.time << newInterval.frequency << newInterval.timeWindowSize;
     return out;
 }
 
@@ -153,7 +162,7 @@ QDataStream &udata::operator<<(QDataStream &out, const udata::CommitmentFrequenc
  * @return The in data stream. Useful for error-checking.
  */
 QDataStream &udata::operator>>(QDataStream &in, udata::CommitmentFrequency &newInterval) {
-    in >> newInterval.time >> newInterval.frequency>>newInterval.timeWindowSize;
+    in >> newInterval.time >> newInterval.frequency >> newInterval.timeWindowSize;
     return in;
 }
 
@@ -165,7 +174,8 @@ QDataStream &udata::operator>>(QDataStream &in, udata::CommitmentFrequency &newI
  */
 QDataStream &udata::operator<<(QDataStream &out, const udata::Commitment &newCommitment) {
     out << newCommitment.name << newCommitment.dateStart << newCommitment.dateEnd
-        << newCommitment.interval<<newCommitment.Type<<newCommitment.noEndDate<< newCommitment.commitmentWindows;
+        << newCommitment.frequency << newCommitment.Type << newCommitment.noEndDate
+        << newCommitment.commitmentWindows << newCommitment.done;
     return out;
 }
 
@@ -183,40 +193,38 @@ QDataStream &udata::operator>>(QDataStream &in, udata::Commitment &newCommitment
     QVector<util::TimeWindow> newTimeWindows;
     CommitmentType newType;
     bool newNoEndDate;
+    bool newDone;
     in >> commitmentName >> commitmentDateStart >> commitmentDateEnd >>
-        commitmentInterval>>newType>>newNoEndDate>>newTimeWindows;
+        commitmentInterval >> newType >> newNoEndDate >> newTimeWindows >> newDone;
     newCommitment.name = commitmentName;
     newCommitment.dateStart = commitmentDateStart;
     newCommitment.dateEnd = commitmentDateEnd;
-    newCommitment.interval = commitmentInterval;
+    newCommitment.frequency = commitmentInterval;
     newCommitment.Type = newType;
     newCommitment.commitmentWindows = newTimeWindows;
+    newCommitment.done = newDone;
     return in;
 }
-QDataStream& udata::operator<<(QDataStream &out, const util::TimeWindow &newTimeWindow)
-{
-    out<<newTimeWindow.startDate<<newTimeWindow.endDate<<newTimeWindow.sessions;
+QDataStream &udata::operator<<(QDataStream &out, const util::TimeWindow &newTimeWindow) {
+    out << newTimeWindow.startDate << newTimeWindow.endDate << newTimeWindow.sessions;
     return out;
 }
-QDataStream & udata::operator>>(QDataStream &in, util::TimeWindow &newTimeWindow)
-{
+QDataStream &udata::operator>>(QDataStream &in, util::TimeWindow &newTimeWindow) {
     QDate newStartDate, newEndDate;
     QVector<Session> newSessions;
-    in>>newStartDate>>newEndDate>>newSessions;
+    in >> newStartDate >> newEndDate >> newSessions;
     newTimeWindow.startDate = newStartDate;
     newTimeWindow.endDate = newEndDate;
     newTimeWindow.sessions = newSessions;
     return in;
 }
-QDataStream &udata::operator<<(QDataStream &out, const CommitmentType& newCommitmentType)
-{
-    out<<(int)newCommitmentType;
+QDataStream &udata::operator<<(QDataStream &out, const CommitmentType &newCommitmentType) {
+    out << (int)newCommitmentType;
     return out;
 }
-QDataStream &udata::operator>>(QDataStream &in, CommitmentType& newCommitmentType)
-{
+QDataStream &udata::operator>>(QDataStream &in, CommitmentType &newCommitmentType) {
     int Type;
-    in>>Type;
+    in >> Type;
     newCommitmentType = (CommitmentType)Type;
     return in;
 }
@@ -260,34 +268,27 @@ void Commitment::setDateEnd(QDate value) {
  */
 QVector<Session> Commitment::getAllSessions() {
     QVector<Session> allSessions{};
-    for(util::TimeWindow t: commitmentWindows )
-    {
-        for(Session s: t.sessions)
-        {
+    for (util::TimeWindow t : commitmentWindows) {
+        for (Session s : t.sessions) {
             allSessions.push_back(s);
         }
     }
     return allSessions;
 }
-QString Commitment::summary() const
-{
+QString Commitment::summary() const {
     QString summary;
     summary += "Name:" + name + "\n";
     summary += "Start Date:" + dateStart.toString();
-    if(!noEndDate)
-    {
+    if (!noEndDate) {
         summary += "End Date:" + dateEnd.toString();
+    } else {
+        summary += "End Date:None";
     }
-    else
-    {
-        summary += "End Date:None" ;
-    }
-    summary += "Goal time:"+ QString::number(interval.time) + "\n";
-    summary += "Frequency"+ QString::number(interval.frequency)+ "\n";
-    summary += "current Time Window:\nBegin:" +
-                commitmentWindows.last().startDate.toString()
-                +"\nEnd:"
-                +  commitmentWindows.last().endDate.toString() +"\n";
+    summary += "Goal time:" + QString::number(frequency.time) + "\n";
+    summary += "Frequency" + QString::number(frequency.frequency) + "\n";
+    summary +=
+        "current Time Window:\nBegin:" + commitmentWindows.last().startDate.toString() +
+        "\nEnd:" + commitmentWindows.last().endDate.toString() + "\n" + "Done:" + done;
     return summary;
 }
 /**
@@ -295,5 +296,4 @@ QString Commitment::summary() const
  * @param value
  */
 void Commitment::setSessions(QVector<Session> value) {
-
 }

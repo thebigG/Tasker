@@ -3,7 +3,6 @@
 #include <CreateCommitmentQWidget.h>
 #include <mainui.h>
 
-
 #include "Timer.h"
 #include <QDebug>
 
@@ -27,7 +26,7 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
             &CommStatsQWidget::removeCommitmentButtonSlot);
     connect(ui->commitmentsQTreeWidget, &QTreeWidget::currentItemChanged, this,
             &CommStatsQWidget::currentCommitmentChangedSlot);
-    connect(ui->liveSessionQPushButton, &QPushButton::clicked,this,
+    connect(ui->liveSessionQPushButton, &QPushButton::clicked, this,
             &CommStatsQWidget::newLiveSessionSlot);
     //    TempChartQWidget *mw = new TempChartQWidget;
     //    connect(this->ui->addCommitmentQCommandLinkButton, &QCommandLinkButton::clicked,
@@ -68,12 +67,12 @@ CommStatsQWidget::~CommStatsQWidget() {
  */
 void CommStatsQWidget::addCommitmentButtonSlot() {
     this->hide();
-//    CreateCommitmentQWidget &cc = MainUI::getInstance()->getCreateCommitment();
-//    cc.show();
+    //    CreateCommitmentQWidget &cc =
+    //    MainUI::getInstance()->getCreateCommitment(); cc.show();
     this->createCommimentWindow.show();
 }
 void CommStatsQWidget::removeCommitmentButtonSlot() {
-//    TASKER_LOG("deleting#1:" << selectedCommitmentIndex);
+    //    TASKER_LOG("deleting#1:" << selectedCommitmentIndex);
     int tempIndex = selectedCommitmentIndex;
     if (selectedCommitmentIndex == (User::getInstance()->getCommitments().size() - 1)) {
         selectedCommitmentIndex--;
@@ -164,16 +163,13 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
     qDebug() << "changed commitment name:"
              << User::getInstance()->getCommitments().at(currentIndex).getName();
 }
-void  CommStatsQWidget::newLiveSessionSlot()
-{
+void CommStatsQWidget::newLiveSessionSlot() {
     this->hide();
     this->getTimerWindow().show();
 }
-TimerWindowQWidget& CommStatsQWidget::getTimerWindow()
-{
+TimerWindowQWidget &CommStatsQWidget::getTimerWindow() {
     return timerWindow;
 }
-CreateCommitmentQWidget& CommStatsQWidget::getCreateCommitment()
-{
+CreateCommitmentQWidget &CommStatsQWidget::getCreateCommitment() {
     return createCommimentWindow;
 }

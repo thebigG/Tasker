@@ -36,7 +36,7 @@ private:
     bool isDelete = false;
     //    TempChartQWidget mw{};
     int selectedCommitmentIndex = 0;
-//    QVBoxLayout layout{};
+    //    QVBoxLayout layout{};
     CreateCommitmentQWidget createCommimentWindow;
     TimerWindowQWidget timerWindow;
 };

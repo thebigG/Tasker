@@ -28,7 +28,7 @@ void LiveSession::updateTimeUI() {
     ui->unproductiveTimeValue->setText(Timer::getInstance()->getUnproductiveStatus());
     ui->label->setText(Timer::getInstance()->getTimeElapsedStatus());
     liveSessionPerfTimer.stop();
-    qDebug()<<"updateTimeUI latency#4:"<<liveSessionPerfTimer.duration;
+    qDebug() << "updateTimeUI latency#4:" << liveSessionPerfTimer.duration;
 }
 void LiveSession::congratsSlot() {
     qDebug() << "congrats on livession++++++";
@@ -38,4 +38,3 @@ void LiveSession::congratsSlot() {
 LiveSession::~LiveSession() {
     delete ui;
 }
-

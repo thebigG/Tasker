@@ -17,7 +17,6 @@ private slots:
     void updateTimeUI();
     void congratsSlot();
 
-
 private:
     Ui::LiveSession *ui;
     Perf::PerfTimer liveSessionPerfTimer{};

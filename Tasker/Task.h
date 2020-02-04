@@ -12,7 +12,7 @@ namespace udata {
 class Task;
 QDataStream &operator<<(QDataStream &out, const udata::Task &newTask);
 QDataStream &operator>>(QDataStream &in, udata::Task &newTask);
-}
+} // namespace udata
 
 /**
  * @brief The udata::Task class

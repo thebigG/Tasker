@@ -46,6 +46,13 @@
    <item>
     <widget class="QWidget" name="commitmentDateContainer" native="true">
      <layout class="QGridLayout" name="gridLayout">
+      <item row="3" column="2">
+       <widget class="QCheckBox" name="noEndDateQCheckBox">
+        <property name="text">
+         <string>No End Date</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="1">
        <widget class="QLabel" name="dateEndQLabel">
         <property name="font">
@@ -61,9 +68,6 @@
       <item row="3" column="1">
        <widget class="QDateEdit" name="dateEndQDateEdit"/>
       </item>
-      <item row="3" column="0">
-       <widget class="QDateEdit" name="dateStartQDateEdit"/>
-      </item>
       <item row="0" column="0">
        <widget class="QLabel" name="dateStartQLabel">
         <property name="font">
@@ -76,18 +80,26 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="2">
-       <widget class="QCheckBox" name="noEndDateQCheckBox">
-        <property name="text">
-         <string>No End Date</string>
-        </property>
-       </widget>
+      <item row="3" column="0">
+       <widget class="QDateEdit" name="dateStartQDateEdit"/>
       </item>
      </layout>
     </widget>
    </item>
    <item>
-    <widget class="QWidget" name="commitmentFrequencyContainer" native="true">
+    <widget class="QGroupBox" name="commitmentFrequencyContainer">
+     <property name="title">
+      <string>Frequency</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="2" column="0">
        <widget class="QLineEdit" name="qtyQLineEdit">
@@ -102,8 +114,22 @@
         </property>
        </widget>
       </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QComboBox" name="commitmentModeQCombox">
+        <item>
+         <property name="text">
+          <string>Weekly</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Everyday</string>
+         </property>
+        </item>
+       </widget>
+      </item>
       <item row="2" column="1">
-       <widget class="QComboBox" name="dropDownUnitsLeftQComboBox">
+       <widget class="QComboBox" name="frequencyTimeQComboBox">
         <property name="font">
          <font>
           <pointsize>12</pointsize>
@@ -122,7 +148,7 @@
        </widget>
       </item>
       <item row="2" column="2">
-       <widget class="QComboBox" name="dropDownUnitsRightQComboBox">
+       <widget class="QComboBox" name="frequencyQComboBox">
         <property name="font">
          <font>
           <pointsize>12</pointsize>
@@ -163,27 +189,6 @@
           <string>Everyday</string>
          </property>
         </item>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QComboBox" name="commitmentMode">
-        <item>
-         <property name="text">
-          <string>Weekly</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="qtyQLabel">
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Frequency</string>
-        </property>
        </widget>
       </item>
      </layout>

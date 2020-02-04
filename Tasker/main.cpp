@@ -19,11 +19,10 @@
 #include <QThreadPool>
 #include <Qt>
 #include <QtCore>
-#include <QObject>
+#include <TaskerPerf/perftimer.h>
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-#include <TaskerPerf/perftimer.h>
 
 using std::cout;
 using std::endl;
@@ -31,7 +30,6 @@ using std::endl;
 using namespace Engine;
 using namespace udata;
 using namespace std;
-
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);

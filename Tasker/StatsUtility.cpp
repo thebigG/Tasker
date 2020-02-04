@@ -7,7 +7,7 @@
  *
  * @return -1 if seconds is negative, otherwise quantity of minutes from seconds
  */
-//inline int64_t util::StatsUtility::toMinutes(int64_t seconds) {
+// inline int64_t util::StatsUtility::toMinutes(int64_t seconds) {
 //    int64_t result = -1;
 //    return (result = seconds < 0 ? result : seconds / SECONDS_IN_MINUTE);
 //}
@@ -18,7 +18,7 @@
  *
  * @return -1 if seconds is negative, otherwise quantity of hours from soconds
  */
-//int64_t util::StatsUtility::toHours(int64_t seconds) {
+// int64_t util::StatsUtility::toHours(int64_t seconds) {
 //    int64_t result = -1;
 //    return (result = seconds < 0 ? result : seconds / SECONDS_IN_HOUR);
 //}

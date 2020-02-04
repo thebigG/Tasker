@@ -5,9 +5,9 @@
 #include <QThread>
 #include <QTime>
 #include <StatsUtility.h>
-#include <mainui.h>
 #include <TaskerPerf/perftimer.h>
 #include <iostream>
+#include <mainui.h>
 using namespace Engine;
 using namespace util;
 using namespace udata;
@@ -114,10 +114,10 @@ void Timer::tickUpdate() {
     updateTimeElapsedStatus();
     tickCount++;
     newPerfTimer.stop();
-    qDebug()<<"tick update on Timer took this long(nanoseconds):"<<newPerfTimer.duration;
+    qDebug() << "tick update on Timer took this long(nanoseconds):"
+             << newPerfTimer.duration;
     emit tick();
 }
-
 
 int Timer::getTotalTimeElapsed() {
     return currentUnproductiveTime + currentProductiveTime;
@@ -175,8 +175,7 @@ void Timer::stopTimerSlot() {
     emit congrats();
     timer->stop();
 }
-void Timer::updateProductiveStatus()
-{
+void Timer::updateProductiveStatus() {
     long long int productiveMinutes = StatsUtility::toMinutes(currentProductiveTime);
     int resultProductive = currentProductiveTime;
     if (resultProductive > MINUTE) {
@@ -185,7 +184,8 @@ void Timer::updateProductiveStatus()
         resultProductive = 0;
     }
 
-    productiveStatus = QString::number(productiveMinutes) + ":" + QString::number(resultProductive);
+    productiveStatus = QString::number(productiveMinutes) + ":" +
+                       QString::number(resultProductive);
     if (productiveMinutes == ZERO) {
 
     } else {
@@ -196,11 +196,10 @@ void Timer::updateProductiveStatus()
  * @return the productime time status(the string representation)
  * of the current productive time count.
  */
-QString& Timer::getProductiveStatus() {
+QString &Timer::getProductiveStatus() {
     return productiveStatus;
 }
-void Timer::updateUnproductiveStatus()
-{
+void Timer::updateUnproductiveStatus() {
 
     long long int productiveMinutes = StatsUtility::toMinutes(currentUnproductiveTime);
     int resultProductive = currentUnproductiveTime;
@@ -210,15 +209,14 @@ void Timer::updateUnproductiveStatus()
         resultProductive = 0;
     }
 
-    UnproductiveStatus = QString::number(productiveMinutes) + ":" + QString::number(resultProductive);
+    UnproductiveStatus = QString::number(productiveMinutes) + ":" +
+                         QString::number(resultProductive);
 }
-QString& Timer::getUnproductiveStatus() {
+QString &Timer::getUnproductiveStatus() {
     return UnproductiveStatus;
 }
 
-
-void Timer::updateTimeElapsedStatus()
-{
+void Timer::updateTimeElapsedStatus() {
     long long int productiveMinutes = StatsUtility::toMinutes(totalTimeElapsed);
     int resultProductive = totalTimeElapsed;
     if (resultProductive > MINUTE) {
@@ -227,8 +225,9 @@ void Timer::updateTimeElapsedStatus()
         resultProductive = 0;
     }
 
-    TimeElapsedStatus = QString::number(productiveMinutes) + ":" + QString::number(resultProductive);
+    TimeElapsedStatus = QString::number(productiveMinutes) + ":" +
+                        QString::number(resultProductive);
 }
-QString& Timer::getTimeElapsedStatus() {
+QString &Timer::getTimeElapsedStatus() {
     return TimeElapsedStatus;
 }

@@ -29,9 +29,27 @@
 #ifndef AUDIODEVICE_H
 #define AUDIODEVICE_H
 
-#include <QtMultimedia>
 #include <QIODevice>
-
+#include <QtMultimedia>
+/**
+ *@brief The Engine namespace has all of the
+ *Hardware Listeners and classes that make up the "Engine" of Tasker
+ * When it comes to detecting user interaction with hardware
+ * such as KeyboardListener, AudioListener, Timer and any other class that directly
+ * aid these entities such as AudioDevice.
+ * Listener classes are platform-dependent. Given that they work
+ * very close to hardware, you will probably find a lot of macros
+ * that test whether the OS is Linux, MacOS, Windows, etc.
+ *
+ * Right now these listeners have been developed mostly with Linux in mind.
+ * The only one that is "cross-platform" is the AudioListener, however, I haven't tested it
+ * thoroughly on other platforms such MacOS or Windows.
+ * I would love(and plan) to have these listeners work well(specially the KeyboardListener)
+ * on Windows and MacOS, but that's not going to happen in a while, given that my priority is
+ * Linux right now.
+ *
+ * If you have any ideas/want to make hardware listeners for this app, PR and issues are super welcome!
+ */
 namespace Engine {
 class AudioDevice;
 };
