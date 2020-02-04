@@ -14,8 +14,8 @@ INCLUDEPATH += /usr/include/x86_64-linux-gnu/qt5
 }
 macx:
 {
-    SOURCES +=   objctest.mm
-    HEADERS += objctest.h
+#    SOURCES +=   objctest.mm
+#    HEADERS += objctest.h
 }
 
 QT += multimedia
