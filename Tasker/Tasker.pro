@@ -12,7 +12,7 @@ unix:{
 linux-g++*{
 INCLUDEPATH += /usr/include/x86_64-linux-gnu/qt5
 }
-macx
+macx:
 {
     SOURCES +=   objctest.mm
     HEADERS += objctest.h
