@@ -13,7 +13,7 @@ class User;
  * @brief The udata::User class A singleton user for the whole system.
  */
 class udata::User {
-friend std::unique_ptr<User> std::make_unique<User>(QVector<udata::Commitment>&&);
+//friend std::unique_ptr<User> std::make_unique<User>(QVector<udata::Commitment>&&);
 public:
     ~User();
     static User* getInstance();
@@ -34,6 +34,8 @@ private:
     static std::unique_ptr<User> thisInstance;
     int currentCommitment;
     // user preferences?
+//    static std::unique_ptr<User> make_unique(QVector<udata::Commitment>&&);
+    friend std::unique_ptr<User> std::make_unique<User>(QVector<udata::Commitment>&&);
     friend QDataStream &operator>>(QDataStream &in, User &newUser);
     friend QDataStream &operator<<(QDataStream &out, User &newUser);
 };

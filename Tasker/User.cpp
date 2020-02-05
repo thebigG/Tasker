@@ -6,7 +6,7 @@
 
 using namespace udata;
 
-std::unique_ptr<User> User::thisInstance =  std::make_unique<User>(QVector<Commitment>{});
+std::unique_ptr<User> User::thisInstance =  std::make_unique<User>(QVector<Commitment>());
 
 /**
  * @brief User::User
@@ -15,6 +15,11 @@ std::unique_ptr<User> User::thisInstance =  std::make_unique<User>(QVector<Commi
 User::User(QVector<Commitment> newCommitments) {
     commitments = newCommitments;
 }
+
+//std::unique_ptr<User> User::make_unique(QVector<udata::Commitment>&& x)
+//{
+
+//}
 
 /**
  * @brief User::User
