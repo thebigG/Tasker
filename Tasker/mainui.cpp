@@ -2,29 +2,20 @@
 #include <QDebug>
 #include <UdataUtils.h>
 #include <User.h>
-CommStatsQWidget *MainUI::Instance = nullptr;
+std::unique_ptr<CommStatsQWidget> MainUI::Instance;
 
 using namespace udata;
-/**
- * @brief MainUI::MainUI
- */
-MainUI::MainUI() {
-}
 
 /**
  * @brief MainUI::getInstance
  * @return
  */
 CommStatsQWidget *MainUI::getInstance() {
-    if (Instance == nullptr) {
-        Instance = new CommStatsQWidget();
+    if(Instance.get() == nullptr)
+    {
+        Instance = std::make_unique<CommStatsQWidget>();
     }
-    return Instance;
-}
-MainUI::~MainUI() {
-    qDebug() << "MainUI destructor#1\n";
-    delete Instance;
-    qDebug() << "MainUI destructor#2";
+    return Instance.get();
 }
 /**
  * @brief MainUI::saveTaskerState

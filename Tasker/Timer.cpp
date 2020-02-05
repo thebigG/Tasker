@@ -11,15 +11,15 @@
 using namespace Engine;
 using namespace util;
 using namespace udata;
-Timer *Timer::thisInstance;
+std::unique_ptr<Timer> Timer::thisInstance = std::make_unique<Timer>();
 /**
  * @brief Timer::Timer
  */
 Timer::Timer(int newNiceness) {
     currentProductiveTime = 0;
     currentUnproductiveTime = 0;
-    timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &Timer::tickUpdate);
+    timer = std::make_unique<QTimer>(this);
+    connect(timer.get(), &QTimer::timeout, this, &Timer::tickUpdate);
     connect(this, &Timer::stopTimer, this, &Timer::stopTimerSlot);
 }
 /**
@@ -29,27 +29,6 @@ Timer::Timer(int newNiceness) {
  * weird/prone-to-bugs type probing at runtime, like dynamic_cast nonsense.
  *
  */
-Timer::Timer(Listener::ListenerType newListenerType, Session newSession) {
-    qDebug() << "Timer() constructor: " << currentThreadId();
-    currentSession = newSession;
-    listenerType = newListenerType;
-    currentProductiveTime = 0;
-    currentUnproductiveTime = 0;
-
-    connect(timer, &QTimer::timeout, this, &Timer::tickUpdate);
-    timer = new QTimer(this);
-    connect(this, &Timer::stopTimer, this, &Timer::stopTimerSlot);
-    qDebug() << "Timer() constructor after start(): " << currentThreadId();
-}
-
-/**
- * @brief Timer::~Timer
- */
-Timer::~Timer() {
-    if (timer != nullptr)
-        delete timer;
-    delete listener;
-}
 
 /**
  * @brief Timer::run
@@ -70,9 +49,9 @@ void Timer::startTimer() {
     qDebug() << "From work thread: " << currentThreadId();
 
     if (listenerType == Listener::ListenerType::keyboard) {
-        listener = new KeyboardListener();
+        listener = std::make_unique<KeyboardListener>();
     } else if (listenerType == Listener::ListenerType::audio) {
-        listener = new AudioListener();
+        listener = std::make_unique<AudioListener>();
     }
     /**
         This block of code  WORKS!
@@ -80,7 +59,7 @@ void Timer::startTimer() {
         Specifically the statements regarding the listener and
         listenerThread. I'm talking about the next 3 lines of code.
      */
-    connect(&listenerThread, &QThread::started, listener, &Listener::start);
+    connect(&listenerThread, &QThread::started, listener.get(), &Listener::start);
     listener->moveToThread(&listenerThread);
     listenerThread.start();
 }
@@ -123,10 +102,7 @@ int Timer::getTotalTimeElapsed() {
     return currentUnproductiveTime + currentProductiveTime;
 }
 Timer *Timer::getInstance() {
-    if (thisInstance == nullptr) {
-        thisInstance = new Timer();
-    }
-    return thisInstance;
+    return thisInstance.get();
 }
 void Timer::setCurrentSession(Session newSession) {
     currentSession = newSession;
@@ -137,6 +113,7 @@ void Timer::setListener(Listener::ListenerType newListenerType) {
 }
 void Timer::initTimer(Listener::ListenerType newListener, udata::Session newSession) {
     thisInstance->setCurrentSession(newSession);
+//            . setCurrentSession(newSession);
     thisInstance->setListener(newListener);
     timer->start(TIMER_TICK);
     this->start();

@@ -8,8 +8,7 @@
  */
 class MainUI {
 private:
-    MainUI();
-    static CommStatsQWidget *Instance;
+    static std::unique_ptr<CommStatsQWidget> Instance;
 
 public:
     static CommStatsQWidget *getInstance();

@@ -6,7 +6,7 @@
 
 using namespace udata;
 
-User *User::thisInstance = new User(QVector<Commitment>{});
+std::unique_ptr<User> User::thisInstance =  std::make_unique<User>(QVector<Commitment>{});
 
 /**
  * @brief User::User
@@ -137,6 +137,6 @@ QDataStream &udata::operator>>(QDataStream &in, User &newUser) {
  * @brief User::getInstance
  * @return
  */
-User *User::getInstance() {
-    return thisInstance;
+User* User::getInstance() {
+    return thisInstance.get();
 }

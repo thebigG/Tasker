@@ -2,7 +2,7 @@
 #define USERQOBJECT_H
 
 #include <QVector>
-
+#include <memory>
 #include "Commitment.h"
 
 namespace udata {
@@ -14,7 +14,7 @@ class User;
 class udata::User {
 public:
     ~User();
-    static User *getInstance();
+    static User* getInstance();
     const Commitment &getDefaultCommitment();
     void setDefaultCommitment(const Commitment &c);
     QVector<Commitment> &getCommitments();
@@ -22,7 +22,6 @@ public:
     void setUsername(QString &);
     QString &getUsername();
     void addSession(Session &);
-
 private:
     User(QVector<Commitment>);
     User();
@@ -30,12 +29,12 @@ private:
     QVector<Commitment> commitments;
     int defaultCommitmentIndex;
     QString userName;
-    static User *thisInstance;
+    static std::unique_ptr<User> thisInstance;
     int currentCommitment;
     // user preferences?
-
     friend QDataStream &operator>>(QDataStream &in, User &newUser);
     friend QDataStream &operator<<(QDataStream &out, User &newUser);
+    friend std::unique_ptr<User> std::make_unique<User>(QVector<udata::Commitment>&&);
 };
 
 #endif // USER_H

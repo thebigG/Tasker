@@ -9,6 +9,7 @@
 #define MINUTE 60 // in seconds
 #include <KeyboardListener.h>
 #include <TaskerPerf/perftimer.h>
+#include <memory>
 namespace Engine {
 class Timer;
 }
@@ -26,7 +27,7 @@ private:
     int totalTimeElapsed = 0;
     long long int productiveTimeGoal;
     udata::Session currentSession;
-    static Timer *thisInstance;
+    static std::unique_ptr<Timer> thisInstance;
     Perf::PerfTimer newPerfTimer{};
     int productiveSignalCount = 0;
     int unProductiveSignalCount = 0;
@@ -41,11 +42,11 @@ private:
     int productiveTimeSurplus =
         1; // For how many EXTRA ticks does productiveTime get incremented. Depends on niceness
     int unproductiveTimeSurplus = 1;
-    Listener *listener;
+    std::unique_ptr<Listener> listener;
     Listener::ListenerType listenerType;
     QThread listenerThread;
     QThread thisThread;
-    QTimer *timer;
+    std::unique_ptr<QTimer> timer;
     void updateProductiveStatus();
     QString productiveStatus;
     void updateUnproductiveStatus();
@@ -56,10 +57,8 @@ private:
 
 public:
     Timer(int newNiceness = 5);
-    Timer(Listener::ListenerType, udata::Session);
     static Timer *getInstance();
     void initTimer(Listener::ListenerType, udata::Session);
-    ~Timer();
     void stop();
     void pause();
     void setCurrentSession(udata::Session);

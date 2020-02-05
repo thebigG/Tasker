@@ -25,7 +25,7 @@ Commitment::Commitment(QString newName,
     if (dateEnd < dateStart) {
         dateEnd = dateStart;
     }
-    updateCommitmentWindows();
+    update();
 }
 void Commitment::setType(CommitmentType newType) {
     Type = newType;
