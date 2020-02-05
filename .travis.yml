@@ -16,10 +16,5 @@ before_install:
 install:
  - sudo apt-get install -qq g++-7 # C++11
 
- packages:
-    - gcc-7.4
-    - g++-7.4
-    - clang-6.0.0
-
 script:
   - source ./build.sh
