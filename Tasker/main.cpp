@@ -42,6 +42,7 @@ int main(int argc, char *argv[]) {
     QObject::connect(&a, &QGuiApplication::lastWindowClosed, &MainUI::saveTaskerStateSlot);
     CommStatsQWidget *widget = nullptr;
     qDebug("Tasker Debug mode");
+    std::cout<<"version:"<<__cplusplus;
     widget = MainUI::getInstance();
     widget->update();
     widget->show();
