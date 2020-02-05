@@ -3,11 +3,8 @@
 #include <QDebug>
 #include <QVector>
 #include <stdlib.h>
-
 using namespace udata;
-
-std::unique_ptr<User> User::thisInstance =  std::make_unique<User>(QVector<Commitment>());
-
+std::unique_ptr<User> User::thisInstance;
 /**
  * @brief User::User
  * @param newCommitments
@@ -143,5 +140,9 @@ QDataStream &udata::operator>>(QDataStream &in, User &newUser) {
  * @return
  */
 User* User::getInstance() {
+    if(thisInstance.get() ==nullptr)
+    {
+        thisInstance= std::make_unique<User>(QVector<Commitment>());
+    }
     return thisInstance.get();
 }

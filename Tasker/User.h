@@ -7,8 +7,8 @@
 
 namespace udata {
 class User;
-
 }
+
 /**
  * @brief The udata::User class A singleton user for the whole system.
  */
