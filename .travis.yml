@@ -13,8 +13,13 @@ before_install:
   - sudo apt-get -y install qt59-meta-dbg-full
   - source /opt/qt59/bin/qt59-env.sh
 
-install:
-  - sudo apt-get install -qq g++-5 # C++11
+#install:
+#  - sudo apt-get install -qq g++-5 # C++11
+
+ packages:
+    - gcc-7.4
+    - g++-7.4
+    -clang-6.0.0
 
 script:
   - source ./build.sh
