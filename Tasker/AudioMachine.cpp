@@ -51,7 +51,7 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
     // destinationFile.setFileName("/tmp/test.raw");
     // destinationFile.open( QIODevice::WriteOnly | QIODevice::Truncate );
 
-    audioDevice = new AudioDevice(format);
+    audioDevice = std::make_unique<AudioDevice>(format);
     audioDevice->open(QIODevice::WriteOnly);
 
     // assign audio device here
@@ -68,7 +68,7 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
         format = info.nearestFormat(format);
     }
 
-    qAudioInput = new QAudioInput(format, this);
+    qAudioInput = std::make_unique<QAudioInput>(format, this);
     // connect(audio, SIGNAL(stateChanged(QAudio::State)), this, SLOT(handleStateChanged(QAudio::State)));
 
     // QTimer::singleShot(3000, this, SLOT(stopRecording()));
@@ -78,7 +78,7 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
     // show device name on console
     qDebug() << info.deviceName();
 
-    qAudioInput->start(audioDevice);
+    qAudioInput->start(audioDevice.get());
 
     qAudioInput->setVolume(0.0);
     audioDevice->setMinAmplitude(audioDevice->getDeviceLevel());
@@ -89,24 +89,24 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
  * @brief AudioMachine::~AudioMachine
  */
 AudioMachine::~AudioMachine() {
-    delete qAudioInput;
-    delete audioDevice;
+//    delete qAudioInput;
+//    delete audioDevice;
 }
 
 /**
  * @brief AudioMachine::getAudioDevice
  * @return
  */
-AudioDevice *&AudioMachine::getAudioDevice() {
-    return audioDevice;
+AudioDevice* AudioMachine::getAudioDevice() {
+    return audioDevice.get();
 }
 
 /**
  * @brief AudioMachine::getQAudioInput
  * @return
  */
-QAudioInput *&AudioMachine::getQAudioInput() {
-    return qAudioInput;
+QAudioInput& AudioMachine::getQAudioInput() {
+    return *(qAudioInput.get());
 }
 
 /**
@@ -142,9 +142,14 @@ void AudioMachine::stopRecording() {
     qAudioInput->stop();
     audioDevice->close();
 
-    delete qAudioInput;
+//    delete qAudioInput;
     qAudioInput = nullptr;
-
-    delete audioDevice;
     audioDevice = nullptr;
+}
+bool AudioMachine:: isAudioDeviceValid()
+{
+    qDebug()<<"isAudioDeviceValid#1";
+    audioDevice->isOpen();
+    qDebug()<<"isAudioDeviceValid#2";
+    return audioDevice->isOpen();
 }

@@ -33,6 +33,7 @@
 #include <QThread>
 
 #include "AudioMachine.h"
+#include <memory>
 
 namespace Engine {
 class AudioThread;
@@ -50,7 +51,7 @@ public:
     ~AudioThread();
 
     QThread &getQThread();
-    AudioMachine *&getAudioMachine();
+    AudioMachine* getAudioMachine();
     qreal getAudioLevel();
 
 public slots:
@@ -58,8 +59,7 @@ public slots:
 
 private:
     QThread qThread;
-
-    AudioMachine *audioMachine;
+    std::unique_ptr<AudioMachine> audioMachine;
     double *audioLevel;
 };
 

@@ -32,7 +32,7 @@
 #include <AudioDevice.h>
 #include <QAudioInput>
 #include <QFile>
-
+#include <memory>
 namespace Engine {
 class AudioMachine;
 }
@@ -46,16 +46,16 @@ class Engine::AudioMachine : public QObject {
 public:
     AudioMachine();
     ~AudioMachine();
-
-    AudioDevice *&getAudioDevice();
-    QAudioInput *&getQAudioInput();
+    bool isAudioDeviceValid();
+    AudioDevice* getAudioDevice();
+    QAudioInput &getQAudioInput();
 public slots:
     void handleStateChanged(QAudio::State);
     void stopRecording();
 
 private:
-    AudioDevice *audioDevice; // Class member
-    QAudioInput *qAudioInput;
+     std::unique_ptr<AudioDevice> audioDevice; // Class member
+    std::unique_ptr<QAudioInput> qAudioInput;
 };
 
 #endif // AUDIOMACHINE_H

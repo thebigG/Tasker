@@ -37,8 +37,9 @@ using Engine::AudioThread;
  * @brief AudioThread::AudioThread
  */
 AudioThread::AudioThread() : audioMachine(nullptr), audioLevel(nullptr) {
-    connect(&qThread, &QThread::started, this, &AudioThread::updateState);
+    connect(&qThread, &QThread::start, this, &AudioThread::updateState);
     qDebug("AudioThread constructor thread id: %d", QThread::currentThreadId());
+    audioMachine =  std::make_unique<AudioMachine>();
     this->moveToThread(&qThread);
     qThread.start();
 }
@@ -47,7 +48,7 @@ AudioThread::AudioThread() : audioMachine(nullptr), audioLevel(nullptr) {
  * @brief AudioThread::~AudioThread
  */
 AudioThread::~AudioThread() {
-    delete audioMachine;
+//    delete audioMachine;
 }
 
 /**
@@ -62,8 +63,10 @@ QThread &AudioThread::getQThread() {
  * @brief AudioThread::getAudioMachine
  * @return
  */
-AudioMachine *&AudioThread::getAudioMachine() {
-    return audioMachine;
+AudioMachine* AudioThread::getAudioMachine() {
+    qDebug()<<"getAudioMachine#1";
+
+    return audioMachine.get();
 }
 
 /**
@@ -78,7 +81,7 @@ qreal AudioThread::getAudioLevel() {
  * @brief AudioThread::updateState
  */
 void AudioThread::updateState() {
-    audioMachine = new AudioMachine();
+//    audioMachine =  std::make_unique<AudioMachine>();
     qDebug("AudioThread updateState() thread id: %d", QThread::currentThreadId());
     audioLevel = &(audioMachine->getAudioDevice()->getDeviceLevel());
 }
