@@ -20,7 +20,9 @@ macx:
 
 QT += multimedia
 #QMAKE_CXXFLAGS += "-fno-sized-deallocation"
+QMAKE_CXXFLAGS = -std=c++14
 CONFIG += static
+CONFIG += -std=c++14
 #QMAKE_LFLAGS += -Xlinker -Bstatic
 #Print the debug messages ONLY in release mode
 CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
