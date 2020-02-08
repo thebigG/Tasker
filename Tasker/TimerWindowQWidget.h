@@ -2,7 +2,8 @@
 #define TIMERWINDOW_H
 
 #include <QWidget>
-
+#include <livesession.h>
+#include <memory>
 namespace Ui {
 class TimerWindowQWidget;
 }
@@ -27,6 +28,7 @@ private slots:
 
 private:
     Ui::TimerWindowQWidget *ui;
+    std::unique_ptr<LiveSession>  liveTimer;
 };
 
 #endif // TIMERWINDOW_H

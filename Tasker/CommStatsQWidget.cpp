@@ -105,7 +105,8 @@ void CommStatsQWidget::update() {
         auto s_it = s_vec.begin();
 
         QTreeWidget *w = ui->commitmentsQTreeWidget;
-
+        //Removing this new() call will require more thinking
+        // and considering a redesign of commStatsQwidget as a whole
         QTreeWidgetItem *item = new QTreeWidgetItem(
             QStringList() << c.getName() << ": " << c.getDateStart().toString());
 

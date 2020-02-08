@@ -122,6 +122,7 @@ QAudioFormat &AudioDevice::getQAudioFormat() {
  * @return
  */
 qreal &AudioDevice::getDeviceLevel() {
+    qDebug()<<"device level:"<<deviceLevel;
     return deviceLevel;
 }
 
@@ -228,6 +229,7 @@ qint64 AudioDevice::writeData(const char *data, qint64 len) {
         captureValue = (qreal(maxValue) / maxAmplitude);
         deviceLevel = captureValue - minAmplitude;
     }
+    qDebug()<<"device level in writeData:"<<deviceLevel;
     return len;
 }
 

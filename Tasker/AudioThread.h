@@ -48,8 +48,6 @@ class Engine::AudioThread : public QObject {
 public:
     AudioThread();
     // Need alternative constructor for audio device type
-    ~AudioThread();
-
     QThread &getQThread();
     AudioMachine* getAudioMachine();
     qreal getAudioLevel();
@@ -60,7 +58,6 @@ public slots:
 private:
     QThread qThread;
     std::unique_ptr<AudioMachine> audioMachine;
-    double *audioLevel;
 };
 
 #endif // AUDIOTHREAD_H

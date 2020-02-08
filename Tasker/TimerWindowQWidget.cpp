@@ -50,8 +50,8 @@ void TimerWindowQWidget::startTimerButtonSlot() {
     Task newTask{ getTaskName(), newListsners };
     Session newSession{ newTask, goal, QDate::currentDate() };
     Engine::Timer::getInstance()->initTimer(newListsners.at(0), newSession);
-    LiveSession *s = new LiveSession{};
-    s->show();
+    liveTimer = std::make_unique<LiveSession>();
+    liveTimer->show();
 
     //    Engine::Timer::getInstance()->start();
 }

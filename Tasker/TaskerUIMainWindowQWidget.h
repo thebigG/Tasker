@@ -41,6 +41,7 @@ private:
     CreateCommitmentQWidget x;
     CommStatsQWidget wc;
     TimerWindowQWidget tw;
+    LiveSession *s;
 };
 
 #endif // TASKERUIMAINWINDOW_H

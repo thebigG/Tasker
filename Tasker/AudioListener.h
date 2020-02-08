@@ -34,7 +34,7 @@
 
 #include "AudioThread.h"
 #include "Listener.h"
-
+#include <memory>
 namespace Engine {
 class AudioListener;
 }
@@ -49,7 +49,7 @@ public:
     enum class AudioListenerState { ON, OFF };
 
     AudioListener();
-    ~AudioListener() override;
+//    ~AudioListener() override;
     void setAudioThreshold(qreal audioThreshold);
     qreal &getAudioThreshold();
 
@@ -61,14 +61,14 @@ public slots:
     virtual void pause() override;
     virtual void update() override;
 
-    void cleanup();
+//    void cleanup();
 
 signals:
     void signalThread();
 
 private:
     AudioListenerState audioListenerState;
-    AudioThread *audioThread;
+    std::unique_ptr<AudioThread> audioThread;
 
     qreal audioThreshold;
 

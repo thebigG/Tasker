@@ -36,19 +36,11 @@ using Engine::AudioThread;
 /**
  * @brief AudioThread::AudioThread
  */
-AudioThread::AudioThread() : audioMachine(nullptr), audioLevel(nullptr) {
-    connect(&qThread, &QThread::start, this, &AudioThread::updateState);
+AudioThread::AudioThread() : audioMachine(nullptr) {
+    connect(&qThread, &QThread::started, this, &AudioThread::updateState);
     qDebug("AudioThread constructor thread id: %d", QThread::currentThreadId());
-//    audioMachine =  std::make_unique<AudioMachine>();
     this->moveToThread(&qThread);
     qThread.start();
-}
-
-/**
- * @brief AudioThread::~AudioThread
- */
-AudioThread::~AudioThread() {
-//    delete audioMachine;
 }
 
 /**
@@ -61,11 +53,25 @@ QThread &AudioThread::getQThread() {
 
 /**
  * @brief AudioThread::getAudioMachine
- * @return
+ * The audioMachine entity is concurrency-senstive.
+ * This means that it is in the context of qThread.
+ * Because of this, use this method with GREAT caution
+ * and awereness of the fact that even though when this class is innstantiated
+ * audioMachine SHOULD be instantiated by qThread, it is NOT a guarantee.
+ * When it comes to threads, we are at the mercy of the OS.
+ * While it is unlikely,
+ * it is very possible that audioMachine might be have a nullptr value.
+ * So please, ALWAYS do a null check BEFORE using it.
+ *
+ * Since audioMachine a unique_prt(AKA "smart pointer"), you
+ * don't have to call delete, or do any kind of memory-management
+ * nonsense. And please, just don't, if you do the system will crash.
+ * It's why we have smart pointers,
+ * let them do the hard work.
+ * @return a pointer to the audioMachine.
  */
 AudioMachine* AudioThread::getAudioMachine() {
     qDebug()<<"getAudioMachine#1";
-
     return audioMachine.get();
 }
 
@@ -74,14 +80,21 @@ AudioMachine* AudioThread::getAudioMachine() {
  * @return
  */
 qreal AudioThread::getAudioLevel() {
-    return audioLevel == nullptr ? 0.0 : (*audioLevel);
+//    qDebug()<<"current audio level:"<<*audioLevel;
+    return audioMachine->getAudioDevice()->getDeviceLevel();// == nullptr ? 0.0 : (*audioLevel);
 }
 
 /**
  * @brief AudioThread::updateState
+ * audioMachine MUST be instantiated HERE on updateState() in order for it to be
+ * inside qThread's context. DO NOT move it to the constructor.
+ * If it were to be instantiated in the constrcutor, things WILL break.
+ * Specifically, if one instantiated audioMachine in the constructor, you'll have
+ * the AudioListener while(true) loop blocking this Thread and
+ * the we won't be able to detect hardware interaction from AudioMachine.
  */
 void AudioThread::updateState() {
+
     audioMachine =  std::make_unique<AudioMachine>();
     qDebug("AudioThread updateState() thread id: %d", QThread::currentThreadId());
-    audioLevel = &(audioMachine->getAudioDevice()->getDeviceLevel());
 }
