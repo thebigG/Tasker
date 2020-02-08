@@ -18,3 +18,5 @@ matrix:
           packages:
             - clang-6.0
           sources: *sources
+script:
+  build.sh
