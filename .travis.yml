@@ -1,28 +1,21 @@
-language: generic
-os: linux
-matrix:
-  include:
-    - os: linux
-      env: COMPILER_NAME=gcc CXX=g++-7 CC=gcc-7
-      addons:
-        apt:
-          packages:
-            - g++-7
-          sources: &sources
-            - llvm-toolchain-precise-3.8
-            - ubuntu-toolchain-r-test
-    - os: linux
-      env: COMPILER_NAME=clang CXX=clang++-6.0.0 CC=clang-6.0.0
-      addons:
-        apt:
-          packages:
-            - clang-6.0
-          sources: *sources
-
-
+sudo: required
+dist: trusty
+language: cpp
+compiler: g++
+install: export CXX="g++-7"
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-7
+notifications:
+ email:
+  on_success: never
+  on_failure: always
 before_install:
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test # C++11
   - sudo apt-get update -qq
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test # C++14
   - sudo apt-get -y install software-properties-common
   - sudo add-apt-repository -y ppa:beineri/opt-qt597-trusty
   - sudo apt-get -y update
@@ -31,8 +24,4 @@ before_install:
   - sudo apt-get -y install qt59-meta-dbg-full
   - source /opt/qt59/bin/qt59-env.sh
 
-install:
-  - sudo apt-get install -qq g++-5 
-
-script:
-  - source ./build.sh
+script: make --directory "Var & ReadOnly C++"
