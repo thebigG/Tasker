@@ -24,4 +24,4 @@ before_install:
   - sudo apt-get -y install qt59-meta-dbg-full
   - source /opt/qt59/bin/qt59-env.sh
 
-script: make --directory "Var & ReadOnly C++"
+script: source ./build.sh
