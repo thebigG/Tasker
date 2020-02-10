@@ -58,7 +58,6 @@ AudioListener::AudioListener()
 void AudioListener::setAudioThreshold(qreal audioThreshold) {
     this->audioThreshold = audioThreshold;
 }
-https://thebigg.github.io/Tasker/
 /**
  * @brief AudioListener::getAudioThreshold
  * @return
