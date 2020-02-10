@@ -23,5 +23,6 @@ before_install:
   - sudo apt-get -y install qt59-meta-full
   - sudo apt-get -y install qt59-meta-dbg-full
   - source /opt/qt59/bin/qt59-env.sh
+  - sudo update-alternatives --config gcc
 
 script: source ./build.sh
