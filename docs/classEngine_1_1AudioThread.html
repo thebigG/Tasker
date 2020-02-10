@@ -91,7 +91,7 @@ Inheritance diagram for Engine::AudioThread:</div>
 Public Slots</h2></td></tr>
 <tr class="memitem:af1b77545b3e2855dfde766c79e91829b"><td class="memItemLeft" align="right" valign="top"><a id="af1b77545b3e2855dfde766c79e91829b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioThread.html#af1b77545b3e2855dfde766c79e91829b">updateState</a> ()</td></tr>
-<tr class="memdesc:af1b77545b3e2855dfde766c79e91829b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioThread.html#af1b77545b3e2855dfde766c79e91829b" title="AudioThread::updateState.">AudioThread::updateState</a>. <br /></td></tr>
+<tr class="memdesc:af1b77545b3e2855dfde766c79e91829b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioThread.html#af1b77545b3e2855dfde766c79e91829b" title="AudioThread::updateState audioMachine MUST be instantiated HERE on updateState() in order for it to b...">AudioThread::updateState</a> audioMachine MUST be instantiated HERE on <a class="el" href="classEngine_1_1AudioThread.html#af1b77545b3e2855dfde766c79e91829b" title="AudioThread::updateState audioMachine MUST be instantiated HERE on updateState() in order for it to b...">updateState()</a> in order for it to be inside qThread's context. DO NOT move it to the constructor. If it were to be instantiated in the constrcutor, things WILL break. Specifically, if one instantiated audioMachine in the constructor, you'll have the <a class="el" href="classEngine_1_1AudioListener.html" title="The Engine::AudioListener class.">AudioListener</a> while(true) loop blocking this Thread and the we won't be able to detect hardware interaction from <a class="el" href="classEngine_1_1AudioMachine.html" title="The Engine::AudioMachine class.">AudioMachine</a>. <br /></td></tr>
 <tr class="separator:af1b77545b3e2855dfde766c79e91829b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -100,16 +100,12 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioThread.html#a00f4017141af67fff0e85f4d7c1595e3">AudioThread</a> ()</td></tr>
 <tr class="memdesc:a00f4017141af67fff0e85f4d7c1595e3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioThread.html#a00f4017141af67fff0e85f4d7c1595e3" title="AudioThread::AudioThread.">AudioThread::AudioThread</a>. <br /></td></tr>
 <tr class="separator:a00f4017141af67fff0e85f4d7c1595e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77f82466d149b604594a770a99133f9b"><td class="memItemLeft" align="right" valign="top"><a id="a77f82466d149b604594a770a99133f9b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioThread.html#a77f82466d149b604594a770a99133f9b">~AudioThread</a> ()</td></tr>
-<tr class="memdesc:a77f82466d149b604594a770a99133f9b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioThread.html#a77f82466d149b604594a770a99133f9b" title="AudioThread::~AudioThread.">AudioThread::~AudioThread</a>. <br /></td></tr>
-<tr class="separator:a77f82466d149b604594a770a99133f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1a798a6efa637d1c50cf390ac29ba4a"><td class="memItemLeft" align="right" valign="top">QThread &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioThread.html#ac1a798a6efa637d1c50cf390ac29ba4a">getQThread</a> ()</td></tr>
 <tr class="memdesc:ac1a798a6efa637d1c50cf390ac29ba4a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioThread.html#ac1a798a6efa637d1c50cf390ac29ba4a" title="AudioThread::getQThread.">AudioThread::getQThread</a>.  <a href="classEngine_1_1AudioThread.html#ac1a798a6efa637d1c50cf390ac29ba4a">More...</a><br /></td></tr>
 <tr class="separator:ac1a798a6efa637d1c50cf390ac29ba4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2c868bc4178c66026c62b344756e329"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEngine_1_1AudioMachine.html">AudioMachine</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioThread.html#ad2c868bc4178c66026c62b344756e329">getAudioMachine</a> ()</td></tr>
-<tr class="memdesc:ad2c868bc4178c66026c62b344756e329"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioThread.html#ad2c868bc4178c66026c62b344756e329" title="AudioThread::getAudioMachine.">AudioThread::getAudioMachine</a>.  <a href="classEngine_1_1AudioThread.html#ad2c868bc4178c66026c62b344756e329">More...</a><br /></td></tr>
-<tr class="separator:ad2c868bc4178c66026c62b344756e329"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a798d0c5d64318ca4b0e8fc90904c39cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEngine_1_1AudioMachine.html">AudioMachine</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioThread.html#a798d0c5d64318ca4b0e8fc90904c39cf">getAudioMachine</a> ()</td></tr>
+<tr class="memdesc:a798d0c5d64318ca4b0e8fc90904c39cf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioThread.html#a798d0c5d64318ca4b0e8fc90904c39cf" title="AudioThread::getAudioMachine The audioMachine entity is concurrency-senstive. This means that it is i...">AudioThread::getAudioMachine</a> The audioMachine entity is concurrency-senstive. This means that it is in the context of qThread. Because of this, use this method with GREAT caution and awereness of the fact that even though when this class is innstantiated audioMachine SHOULD be instantiated by qThread, it is NOT a guarantee. When it comes to threads, we are at the mercy of the OS. While it is unlikely, it is very possible that audioMachine might be have a nullptr value. So please, ALWAYS do a null check BEFORE using it.  <a href="classEngine_1_1AudioThread.html#a798d0c5d64318ca4b0e8fc90904c39cf">More...</a><br /></td></tr>
+<tr class="separator:a798d0c5d64318ca4b0e8fc90904c39cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e115c6c2951c11fe5f72fa3473695a3"><td class="memItemLeft" align="right" valign="top">qreal&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioThread.html#a5e115c6c2951c11fe5f72fa3473695a3">getAudioLevel</a> ()</td></tr>
 <tr class="memdesc:a5e115c6c2951c11fe5f72fa3473695a3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioThread.html#a5e115c6c2951c11fe5f72fa3473695a3" title="AudioThread::getAudioLevel.">AudioThread::getAudioLevel</a>.  <a href="classEngine_1_1AudioThread.html#a5e115c6c2951c11fe5f72fa3473695a3">More...</a><br /></td></tr>
 <tr class="separator:a5e115c6c2951c11fe5f72fa3473695a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,12 +115,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:aaee72f92d936cb7f63bb0eb1498c9c54"><td class="memItemLeft" align="right" valign="top"><a id="aaee72f92d936cb7f63bb0eb1498c9c54"></a>
 QThread&#160;</td><td class="memItemRight" valign="bottom"><b>qThread</b></td></tr>
 <tr class="separator:aaee72f92d936cb7f63bb0eb1498c9c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1893f70717109361a3dbcfe04d1a528"><td class="memItemLeft" align="right" valign="top"><a id="ad1893f70717109361a3dbcfe04d1a528"></a>
-<a class="el" href="classEngine_1_1AudioMachine.html">AudioMachine</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>audioMachine</b></td></tr>
-<tr class="separator:ad1893f70717109361a3dbcfe04d1a528"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab314ce584536f10fe6b7316ced9da832"><td class="memItemLeft" align="right" valign="top"><a id="ab314ce584536f10fe6b7316ced9da832"></a>
-double *&#160;</td><td class="memItemRight" valign="bottom"><b>audioLevel</b></td></tr>
-<tr class="separator:ab314ce584536f10fe6b7316ced9da832"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57e5f12a204f3ac7f2d71ee874695927"><td class="memItemLeft" align="right" valign="top"><a id="a57e5f12a204f3ac7f2d71ee874695927"></a>
+std::unique_ptr&lt; <a class="el" href="classEngine_1_1AudioMachine.html">AudioMachine</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>audioMachine</b></td></tr>
+<tr class="separator:a57e5f12a204f3ac7f2d71ee874695927"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classEngine_1_1AudioThread.html" title="The Engine::AudioThread class.">Engine::AudioThread</a> class. </p>
@@ -149,14 +142,14 @@ double *&#160;</td><td class="memItemRight" valign="bottom"><b>audioLevel</b></t
 
 </div>
 </div>
-<a id="ad2c868bc4178c66026c62b344756e329"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2c868bc4178c66026c62b344756e329">&#9670;&nbsp;</a></span>getAudioMachine()</h2>
+<a id="a798d0c5d64318ca4b0e8fc90904c39cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a798d0c5d64318ca4b0e8fc90904c39cf">&#9670;&nbsp;</a></span>getAudioMachine()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classEngine_1_1AudioMachine.html">AudioMachine</a> *&amp; AudioThread::getAudioMachine </td>
+          <td class="memname"><a class="el" href="classEngine_1_1AudioMachine.html">AudioMachine</a> * AudioThread::getAudioMachine </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -164,8 +157,8 @@ double *&#160;</td><td class="memItemRight" valign="bottom"><b>audioLevel</b></t
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classEngine_1_1AudioThread.html#ad2c868bc4178c66026c62b344756e329" title="AudioThread::getAudioMachine.">AudioThread::getAudioMachine</a>. </p>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<p><a class="el" href="classEngine_1_1AudioThread.html#a798d0c5d64318ca4b0e8fc90904c39cf" title="AudioThread::getAudioMachine The audioMachine entity is concurrency-senstive. This means that it is i...">AudioThread::getAudioMachine</a> The audioMachine entity is concurrency-senstive. This means that it is in the context of qThread. Because of this, use this method with GREAT caution and awereness of the fact that even though when this class is innstantiated audioMachine SHOULD be instantiated by qThread, it is NOT a guarantee. When it comes to threads, we are at the mercy of the OS. While it is unlikely, it is very possible that audioMachine might be have a nullptr value. So please, ALWAYS do a null check BEFORE using it. </p>
+<p>Since audioMachine a unique_prt(AKA "smart pointer"), you don't have to call delete, or do any kind of memory-management nonsense. And please, just don't, if you do the system will crash. It's why we have smart pointers, let them do the hard work. </p><dl class="section return"><dt>Returns</dt><dd>a pointer to the audioMachine. </dd></dl>
 
 </div>
 </div>

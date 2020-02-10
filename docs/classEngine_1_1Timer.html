@@ -129,16 +129,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a15e1f88f89abe4a940c7253615fabe4d">Timer</a> (int newNiceness=5)</td></tr>
 <tr class="memdesc:a15e1f88f89abe4a940c7253615fabe4d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a15e1f88f89abe4a940c7253615fabe4d" title="Timer::Timer.">Timer::Timer</a>. <br /></td></tr>
 <tr class="separator:a15e1f88f89abe4a940c7253615fabe4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a994ec0e9361fe93a35be6f96561109bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a994ec0e9361fe93a35be6f96561109bd">Timer</a> (<a class="el" href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">Listener::ListenerType</a>, <a class="el" href="classudata_1_1Session.html">udata::Session</a>)</td></tr>
-<tr class="memdesc:a994ec0e9361fe93a35be6f96561109bd"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a15e1f88f89abe4a940c7253615fabe4d" title="Timer::Timer.">Timer::Timer</a>.  <a href="classEngine_1_1Timer.html#a994ec0e9361fe93a35be6f96561109bd">More...</a><br /></td></tr>
-<tr class="separator:a994ec0e9361fe93a35be6f96561109bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fe1dd6f85dd386301e41a4632d6a263"><td class="memItemLeft" align="right" valign="top"><a id="a3fe1dd6f85dd386301e41a4632d6a263"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>initTimer</b> (<a class="el" href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">Listener::ListenerType</a>, <a class="el" href="classudata_1_1Session.html">udata::Session</a>)</td></tr>
 <tr class="separator:a3fe1dd6f85dd386301e41a4632d6a263"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14fa469c4c295c5fa6e66a4ad1092146"><td class="memItemLeft" align="right" valign="top"><a id="a14fa469c4c295c5fa6e66a4ad1092146"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a14fa469c4c295c5fa6e66a4ad1092146">~Timer</a> ()</td></tr>
-<tr class="memdesc:a14fa469c4c295c5fa6e66a4ad1092146"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a14fa469c4c295c5fa6e66a4ad1092146" title="Timer::~Timer.">Timer::~Timer</a>. <br /></td></tr>
-<tr class="separator:a14fa469c4c295c5fa6e66a4ad1092146"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b09cdb6c090ee4e735b219bebccf362"><td class="memItemLeft" align="right" valign="top"><a id="a9b09cdb6c090ee4e735b219bebccf362"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
 <tr class="separator:a9b09cdb6c090ee4e735b219bebccf362"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,9 +188,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>updateUnproductiveSta
 <tr class="memitem:a3114d1693173e728273dc74e635b27fa"><td class="memItemLeft" align="right" valign="top"><a id="a3114d1693173e728273dc74e635b27fa"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateTimeElapsedStatus</b> ()</td></tr>
 <tr class="separator:a3114d1693173e728273dc74e635b27fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1323444ebd7f2c1407518a03a193b5f4"><td class="memItemLeft" align="right" valign="top"><a id="a1323444ebd7f2c1407518a03a193b5f4"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4">run</a> ()</td></tr>
-<tr class="memdesc:a1323444ebd7f2c1407518a03a193b5f4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4" title="Timer::run This function is called when the thread starts. Any and all QObjects(such as Listener) MUS...">Timer::run</a> This function is called when the thread starts. Any and all QObjects(such as Listener) MUST be instantiated inside this method. Otherwise, QT's thread management will NOT consider that QObject as part of the <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class.">Timer</a> thread. The code in &amp;Listener::start, which is the ACTUAL code that listents to hardware, does not run until the startListner() signal is sent. <br /></td></tr>
+<tr class="memitem:a1323444ebd7f2c1407518a03a193b5f4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4">run</a> ()</td></tr>
+<tr class="memdesc:a1323444ebd7f2c1407518a03a193b5f4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a15e1f88f89abe4a940c7253615fabe4d" title="Timer::Timer.">Timer::Timer</a>.  <a href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4">More...</a><br /></td></tr>
 <tr class="separator:a1323444ebd7f2c1407518a03a193b5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -251,9 +243,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>lastUnproductiveTick</
 <tr class="memitem:a41a26c4217d6b2078dba5a6bb4efbfa9"><td class="memItemLeft" align="right" valign="top"><a id="a41a26c4217d6b2078dba5a6bb4efbfa9"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>unproductiveTimeSurplus</b> = 1</td></tr>
 <tr class="separator:a41a26c4217d6b2078dba5a6bb4efbfa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af048ca9e9509b2d0cec5b8b42d0d77c8"><td class="memItemLeft" align="right" valign="top"><a id="af048ca9e9509b2d0cec5b8b42d0d77c8"></a>
-<a class="el" href="classEngine_1_1Listener.html">Listener</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>listener</b></td></tr>
-<tr class="separator:af048ca9e9509b2d0cec5b8b42d0d77c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba795e9b1eaf3233e63e8cd5cd26ceea"><td class="memItemLeft" align="right" valign="top"><a id="aba795e9b1eaf3233e63e8cd5cd26ceea"></a>
+std::unique_ptr&lt; <a class="el" href="classEngine_1_1Listener.html">Listener</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>listener</b></td></tr>
+<tr class="separator:aba795e9b1eaf3233e63e8cd5cd26ceea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b489ab0251956efaa629a5b18d1b656"><td class="memItemLeft" align="right" valign="top"><a id="a5b489ab0251956efaa629a5b18d1b656"></a>
 <a class="el" href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">Listener::ListenerType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>listenerType</b></td></tr>
 <tr class="separator:a5b489ab0251956efaa629a5b18d1b656"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -263,9 +255,9 @@ QThread&#160;</td><td class="memItemRight" valign="bottom"><b>listenerThread</b>
 <tr class="memitem:a27dd0481f598098545207dd46e55baab"><td class="memItemLeft" align="right" valign="top"><a id="a27dd0481f598098545207dd46e55baab"></a>
 QThread&#160;</td><td class="memItemRight" valign="bottom"><b>thisThread</b></td></tr>
 <tr class="separator:a27dd0481f598098545207dd46e55baab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad793974a013820c685263c7436b19412"><td class="memItemLeft" align="right" valign="top"><a id="ad793974a013820c685263c7436b19412"></a>
-QTimer *&#160;</td><td class="memItemRight" valign="bottom"><b>timer</b></td></tr>
-<tr class="separator:ad793974a013820c685263c7436b19412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae36f8354b3c294244b4a75bc3016dff9"><td class="memItemLeft" align="right" valign="top"><a id="ae36f8354b3c294244b4a75bc3016dff9"></a>
+std::unique_ptr&lt; QTimer &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>timer</b></td></tr>
+<tr class="separator:ae36f8354b3c294244b4a75bc3016dff9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad884c3f59a15a4a0d1823037b9bf39f7"><td class="memItemLeft" align="right" valign="top"><a id="ad884c3f59a15a4a0d1823037b9bf39f7"></a>
 QString&#160;</td><td class="memItemRight" valign="bottom"><b>productiveStatus</b></td></tr>
 <tr class="separator:ad884c3f59a15a4a0d1823037b9bf39f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -278,51 +270,14 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>TimeElapsedStatus<
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
-<tr class="memitem:aea3a4651550783b6297fbf68d3cd23a2"><td class="memItemLeft" align="right" valign="top"><a id="aea3a4651550783b6297fbf68d3cd23a2"></a>
-static <a class="el" href="classEngine_1_1Timer.html">Timer</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>thisInstance</b></td></tr>
-<tr class="separator:aea3a4651550783b6297fbf68d3cd23a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d27b8c6c358af1d0ef340b2ccbc0887"><td class="memItemLeft" align="right" valign="top"><a id="a1d27b8c6c358af1d0ef340b2ccbc0887"></a>
+static std::unique_ptr&lt; <a class="el" href="classEngine_1_1Timer.html">Timer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>thisInstance</b> = std::make_unique&lt;<a class="el" href="classEngine_1_1Timer.html">Timer</a>&gt;()</td></tr>
+<tr class="separator:a1d27b8c6c358af1d0ef340b2ccbc0887"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class.">Engine::Timer</a> class. </p>
 <dl class="section note"><dt>Note</dt><dd>I had to remove the start() method from <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class.">Timer</a>. It was conflicting with QThread's start() method. </dd></dl>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a994ec0e9361fe93a35be6f96561109bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a994ec0e9361fe93a35be6f96561109bd">&#9670;&nbsp;</a></span>Timer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Timer::Timer </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">Listener::ListenerType</a>&#160;</td>
-          <td class="paramname"><em>newListenerType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classudata_1_1Session.html">udata::Session</a>&#160;</td>
-          <td class="paramname"><em>newSession</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><a class="el" href="classEngine_1_1Timer.html#a15e1f88f89abe4a940c7253615fabe4d" title="Timer::Timer.">Timer::Timer</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">newListenerType</td><td>This tells timer what type of listener to instantiate. It's not the prettiest way of doing this, but at least we're not doing weird/prone-to-bugs type probing at runtime, like dynamic_cast nonsense. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6d1672c2302c5c43747692f29f041c37"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6d1672c2302c5c43747692f29f041c37">&#9670;&nbsp;</a></span>getProductiveStatus()</h2>
 
@@ -369,6 +324,40 @@ static <a class="el" href="classEngine_1_1Timer.html">Timer</a> *&#160;</td><td 
 <p><a class="el" href="classEngine_1_1Timer.html#a26808f36fda1dfff089b001d7dd0f45a" title="Timer::productiveSlot.">Timer::productiveSlot</a>. </p>
 <p>Called every time the listener emits the prductive signal. This function can be used to crunch more stats on hardware interaction. For example; we could keep internal productive counters on timer and give the user data such as "you were most productive
 on the first 10 minutes of the session" because there was a constant increment on your productive signal count. I think the possibilities are endless, in terms of data, depending on the context, whether they're writing or practicing music. </p>
+
+</div>
+</div>
+<a id="a1323444ebd7f2c1407518a03a193b5f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1323444ebd7f2c1407518a03a193b5f4">&#9670;&nbsp;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Timer::run </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classEngine_1_1Timer.html#a15e1f88f89abe4a940c7253615fabe4d" title="Timer::Timer.">Timer::Timer</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newListenerType</td><td>This tells timer what type of listener to instantiate. It's not the prettiest way of doing this, but at least we're not doing weird/prone-to-bugs type probing at runtime, like dynamic_cast nonsense.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4" title="Timer::Timer.">Timer::run</a> This function is called when the thread starts. Any and all QObjects(such as Listener) MUST be instantiated inside this method. Otherwise, QT's thread management will NOT consider that QObject as part of the <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class.">Timer</a> thread. The code in &amp;Listener::start, which is the ACTUAL code that listents to hardware, does not run until the startListner() signal is sent. </p>
 
 </div>
 </div>

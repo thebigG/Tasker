@@ -77,22 +77,20 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classMainUI.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMainUI.html">MainUI</a> {</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="classMainUI.html#a18aa8f1817d04a2d9977bf152d4e91a2">MainUI</a>();</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">static</span> <a class="code" href="classCommStatsQWidget.html">CommStatsQWidget</a> *Instance;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">static</span> <a class="code" href="classCommStatsQWidget.html">CommStatsQWidget</a> *<a class="code" href="classMainUI.html#a0d5fe74e34d6d27aed90729044f8dd50">getInstance</a>();</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    ~<a class="code" href="classMainUI.html">MainUI</a>();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#a2bb78b07b5a1bd9807f93dbaa29423bf">saveTaskerStateSlot</a>();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;};</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif // MAINUI_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;CommStatsQWidget&gt; Instance;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">static</span> <a class="code" href="classCommStatsQWidget.html">CommStatsQWidget</a> *<a class="code" href="classMainUI.html#a0d5fe74e34d6d27aed90729044f8dd50">getInstance</a>();</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    ~<a class="code" href="classMainUI.html">MainUI</a>();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#a2bb78b07b5a1bd9807f93dbaa29423bf">saveTaskerStateSlot</a>();</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;};</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif // MAINUI_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassMainUI_html_a0d5fe74e34d6d27aed90729044f8dd50"><div class="ttname"><a href="classMainUI.html#a0d5fe74e34d6d27aed90729044f8dd50">MainUI::getInstance</a></div><div class="ttdeci">static CommStatsQWidget * getInstance()</div><div class="ttdoc">MainUI::getInstance.</div><div class="ttdef"><b>Definition:</b> mainui.cpp:18</div></div>
+<div class="ttc" id="aclassMainUI_html_a0d5fe74e34d6d27aed90729044f8dd50"><div class="ttname"><a href="classMainUI.html#a0d5fe74e34d6d27aed90729044f8dd50">MainUI::getInstance</a></div><div class="ttdeci">static CommStatsQWidget * getInstance()</div><div class="ttdoc">MainUI::getInstance.</div><div class="ttdef"><b>Definition:</b> mainui.cpp:13</div></div>
 <div class="ttc" id="aclassMainUI_html"><div class="ttname"><a href="classMainUI.html">MainUI</a></div><div class="ttdoc">The MainUI class.</div><div class="ttdef"><b>Definition:</b> mainui.h:9</div></div>
-<div class="ttc" id="aclassMainUI_html_a18aa8f1817d04a2d9977bf152d4e91a2"><div class="ttname"><a href="classMainUI.html#a18aa8f1817d04a2d9977bf152d4e91a2">MainUI::MainUI</a></div><div class="ttdeci">MainUI()</div><div class="ttdoc">MainUI::MainUI.</div><div class="ttdef"><b>Definition:</b> mainui.cpp:11</div></div>
-<div class="ttc" id="aclassMainUI_html_a2bb78b07b5a1bd9807f93dbaa29423bf"><div class="ttname"><a href="classMainUI.html#a2bb78b07b5a1bd9807f93dbaa29423bf">MainUI::saveTaskerStateSlot</a></div><div class="ttdeci">static void saveTaskerStateSlot()</div><div class="ttdoc">MainUI::saveTaskerState Stores the state of Tasker on disk. This includes all commitments,...</div><div class="ttdef"><b>Definition:</b> mainui.cpp:36</div></div>
+<div class="ttc" id="aclassMainUI_html_a2bb78b07b5a1bd9807f93dbaa29423bf"><div class="ttname"><a href="classMainUI.html#a2bb78b07b5a1bd9807f93dbaa29423bf">MainUI::saveTaskerStateSlot</a></div><div class="ttdeci">static void saveTaskerStateSlot()</div><div class="ttdoc">MainUI::saveTaskerState Stores the state of Tasker on disk. This includes all commitments,...</div><div class="ttdef"><b>Definition:</b> mainui.cpp:27</div></div>
 <div class="ttc" id="aclassCommStatsQWidget_html"><div class="ttname"><a href="classCommStatsQWidget.html">CommStatsQWidget</a></div><div class="ttdoc">The CommStatsQWidget class.</div><div class="ttdef"><b>Definition:</b> CommStatsQWidget.h:15</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
