@@ -22,7 +22,10 @@ before_install:
   - sudo apt-get -y install qt59-meta-minimal
   - sudo apt-get -y install qt59-meta-full
   - sudo apt-get -y install qt59-meta-dbg-full
+  - sudo apt-get update
+  - sudo apt-get install gcc-7 g++-7
   - source /opt/qt59/bin/qt59-env.sh
-  - sudo update-alternatives --config gcc
 
-script: source ./build.sh
+script:
+- gcc-7 --version
+- source ./build.sh
