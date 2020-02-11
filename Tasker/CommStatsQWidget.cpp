@@ -66,7 +66,7 @@ CommStatsQWidget::~CommStatsQWidget() {
  * @brief CommStatsQWidget::addCommitmentButtonSlot
  */
 void CommStatsQWidget::addCommitmentButtonSlot() {
-    this->hide();
+//    this->hide();
     //    CreateCommitmentQWidget &cc =
     //    MainUI::getInstance()->getCreateCommitment(); cc.show();
     this->createCommimentWindow.show();
@@ -74,11 +74,13 @@ void CommStatsQWidget::addCommitmentButtonSlot() {
 void CommStatsQWidget::removeCommitmentButtonSlot() {
     //    TASKER_LOG("deleting#1:" << selectedCommitmentIndex);
     int tempIndex = selectedCommitmentIndex;
+    qDebug()<<"removeCommitmentButtonSlot#1";
     if (selectedCommitmentIndex == (User::getInstance()->getCommitments().size() - 1)) {
         selectedCommitmentIndex--;
     }
     User::getInstance()->getCommitments().removeAt(tempIndex);
     isDelete = true; // This is for the currentItemChanged signal, which gets emitted by delete keyword
+
     delete ui->commitmentsQTreeWidget->topLevelItem(tempIndex);
     qDebug() << "deleting#2:" << tempIndex;
     qDebug() << "deleting#3:" << tempIndex;
@@ -97,6 +99,9 @@ void CommStatsQWidget::on_statsQFrame_destroyed() {
 
 void CommStatsQWidget::update() {
     QVector<Commitment> &c_vec = User::getInstance()->getCommitments();
+    int oldCurrentIndex = selectedCommitmentIndex;
+    ui->commitmentsQTreeWidget->clear();
+    selectedCommitmentIndex = 0;
     auto it = c_vec.begin();
     while (it != c_vec.end()) {
         Commitment c = (*it);
@@ -105,6 +110,7 @@ void CommStatsQWidget::update() {
         auto s_it = s_vec.begin();
 
         QTreeWidget *w = ui->commitmentsQTreeWidget;
+        qDebug()<<"size of tree widget$$$:"<<w->size();
         //Removing this new() call will require more thinking
         // and considering a redesign of commStatsQwidget as a whole
         QTreeWidgetItem *item = new QTreeWidgetItem(
@@ -120,6 +126,7 @@ void CommStatsQWidget::update() {
 
         w->addTopLevelItem(item);
     }
+
 }
 
 void CommStatsQWidget::on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetItem *item,
@@ -141,6 +148,7 @@ void CommStatsQWidget::on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetIt
 
         ++c_it;
     }
+
 }
 void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
                                                     QTreeWidgetItem *previous) {
@@ -155,8 +163,13 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
     currentIndex = ui->commitmentsQTreeWidget->indexOfTopLevelItem(current);
     if (currentIndex == -1) {
         qDebug() << "NEGATIVE";
-        currentIndex =
-            ui->commitmentsQTreeWidget->indexOfTopLevelItem(current->parent());
+        if(current==nullptr)
+        {
+            return;
+        }
+        currentIndex = ui->commitmentsQTreeWidget->indexOfTopLevelItem(current->parent());
+        qDebug() << "NEGATIVE#2";
+//        return;
     }
 
     selectedCommitmentIndex = currentIndex;
