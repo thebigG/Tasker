@@ -1,10 +1,21 @@
 #ifndef WIDGET_COMMSTATS_H
 #define WIDGET_COMMSTATS_H
+#define COMMITMENT_MENU_STRING "Commitment"
+#define NEW_COMMITMENT_STRING "New Commitment"
+#define EDIT_COMMITMENT_STRING "Edit Commitment"
+#define DELETE_COMMITMENT_STRING "Delete Commitment"
+#define SESSION_MENU_STRING "Session"
+#define NEW_SESSION_STRING "New Session"
+#define EDIT_SESSION_STRING "Edit Session"
+#define DELETE_SESSION_STRING "Delete Session"
+
 #include "User.h"
 #include <CreateCommitmentQWidget.h>
 #include <QTreeWidget>
 #include <QWidget>
 #include <TimerWindowQWidget.h>
+#include <QMenu>
+#include <QMenuBar>
 namespace Ui {
 class CommStatsQWidget;
 }
@@ -24,6 +35,9 @@ public:
     void update();
 
 private slots:
+    void newCommitmentSlot(bool);
+    void deleteCommitmentSlot(bool);
+    void newSessionSlot(bool);
     void addCommitmentButtonSlot();
     void removeCommitmentButtonSlot();
     void currentCommitmentChangedSlot(QTreeWidgetItem *, QTreeWidgetItem *);
@@ -39,6 +53,9 @@ private:
     //    QVBoxLayout layout{};
     CreateCommitmentQWidget createCommimentWindow;
     TimerWindowQWidget timerWindow;
+    QMenuBar mainMenuBar;
+    QMenu commitmentMenu{COMMITMENT_MENU_STRING};
+    QMenu sessionMenu{SESSION_MENU_STRING};
 };
 
 #endif // WIDGET_COMMSTATS_H

@@ -20,14 +20,30 @@ using udata::User;
 CommStatsQWidget::CommStatsQWidget(QWidget *parent)
 : QWidget(parent), ui(new Ui::CommStatsQWidget) {
     ui->setupUi(this);
-    connect(ui->addCommitmentQPushButton, &QPushButton::clicked, this,
-            &CommStatsQWidget::addCommitmentButtonSlot);
-    connect(ui->removeCommitmentQPushButton, &QPushButton::clicked, this,
-            &CommStatsQWidget::removeCommitmentButtonSlot);
+//    connect(ui->addCommitmentQPushButton, &QPushButton::clicked, this,
+//            &CommStatsQWidget::addCommitmentButtonSlot);
+//    connect(ui->removeCommitmentQPushButton, &QPushButton::clicked, this,
+//            &CommStatsQWidget::removeCommitmentButtonSlot);
     connect(ui->commitmentsQTreeWidget, &QTreeWidget::currentItemChanged, this,
             &CommStatsQWidget::currentCommitmentChangedSlot);
-    connect(ui->liveSessionQPushButton, &QPushButton::clicked, this,
-            &CommStatsQWidget::newLiveSessionSlot);
+//    connect(ui->liveSessionQPushButton, &QPushButton::clicked, this,
+//            &CommStatsQWidget::newLiveSessionSlot);
+//    this->ui->topBarQWidget->hide();
+    connect(commitmentMenu.addAction(NEW_COMMITMENT_STRING), &QAction::triggered,
+            this, &CommStatsQWidget::newCommitmentSlot);
+//    commitmentMenu.addAction(NEW_COMMITMENT_STRING);
+    connect(commitmentMenu.addAction(DELETE_COMMITMENT_STRING), &QAction::triggered,
+            this, &CommStatsQWidget::deleteCommitmentSlot);
+    commitmentMenu.addAction(EDIT_COMMITMENT_STRING);
+//    commitmentMenu.addAction(DELETE_COMMITMENT_STRING);
+//    sessionMenu.addAction(NEW_SESSION_STRING);
+    connect(sessionMenu.addAction(NEW_SESSION_STRING), &QAction::triggered,
+            this, &CommStatsQWidget::newSessionSlot);
+    sessionMenu.addAction(EDIT_SESSION_STRING);
+    sessionMenu.addAction(DELETE_SESSION_STRING);
+    mainMenuBar.addMenu(&commitmentMenu);
+    mainMenuBar.addMenu(&sessionMenu);
+   this->layout()->setMenuBar(&mainMenuBar);
     //    TempChartQWidget *mw = new TempChartQWidget;
     //    connect(this->ui->addCommitmentQCommandLinkButton, &QCommandLinkButton::clicked,
     //            this, &CommStatsQWidget::addCommitmentButtonSlot);
@@ -53,6 +69,10 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
     // layout will cause a leak
 }
 
+void CommStatsQWidget::newCommitmentSlot(bool checked)
+{
+   this->createCommimentWindow.show();
+}
 /**
  * @brief CommStatsQWidget::~CommStatsQWidget
  */
@@ -69,9 +89,25 @@ void CommStatsQWidget::addCommitmentButtonSlot() {
 //    this->hide();
     //    CreateCommitmentQWidget &cc =
     //    MainUI::getInstance()->getCreateCommitment(); cc.show();
-    this->createCommimentWindow.show();
+//    this->createCommimentWindow.show();
 }
 void CommStatsQWidget::removeCommitmentButtonSlot() {
+    //    TASKER_LOG("deleting#1:" << selectedCommitmentIndex);
+//    int tempIndex = selectedCommitmentIndex;
+//    qDebug()<<"removeCommitmentButtonSlot#1";
+//    if (selectedCommitmentIndex == (User::getInstance()->getCommitments().size() - 1)) {
+//        selectedCommitmentIndex--;
+//    }
+//    User::getInstance()->getCommitments().removeAt(tempIndex);
+//    isDelete = true; // This is for the currentItemChanged signal, which gets emitted by delete keyword
+//    ui->commitmentsQTreeWidget->removeItemWidget(ui->commitmentsQTreeWidget->topLevelItem(tempIndex),0);
+////    delete ui->commitmentsQTreeWidget->topLevelItem(tempIndex);
+//    qDebug() << "deleting#2:" << tempIndex;
+//    qDebug() << "deleting#3:" << tempIndex;
+}
+
+void CommStatsQWidget::deleteCommitmentSlot(bool checked)
+{
     //    TASKER_LOG("deleting#1:" << selectedCommitmentIndex);
     int tempIndex = selectedCommitmentIndex;
     qDebug()<<"removeCommitmentButtonSlot#1";
@@ -80,12 +116,15 @@ void CommStatsQWidget::removeCommitmentButtonSlot() {
     }
     User::getInstance()->getCommitments().removeAt(tempIndex);
     isDelete = true; // This is for the currentItemChanged signal, which gets emitted by delete keyword
-
-    delete ui->commitmentsQTreeWidget->topLevelItem(tempIndex);
+    ui->commitmentsQTreeWidget->removeItemWidget(ui->commitmentsQTreeWidget->topLevelItem(tempIndex),0);
+//    delete ui->commitmentsQTreeWidget->topLevelItem(tempIndex);
     qDebug() << "deleting#2:" << tempIndex;
     qDebug() << "deleting#3:" << tempIndex;
 }
-
+void CommStatsQWidget::newSessionSlot(bool checked)
+{
+    this->getTimerWindow().show();
+}
 /**
  * @brief CommStatsQWidget::on_statsQFrame_destroyed
  */
@@ -178,8 +217,8 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
              << User::getInstance()->getCommitments().at(currentIndex).getName();
 }
 void CommStatsQWidget::newLiveSessionSlot() {
-    this->hide();
-    this->getTimerWindow().show();
+//    this->hide();
+//    this->getTimerWindow().show();
 }
 TimerWindowQWidget &CommStatsQWidget::getTimerWindow() {
     return timerWindow;
