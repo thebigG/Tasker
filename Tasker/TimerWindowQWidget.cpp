@@ -25,8 +25,7 @@ TimerWindowQWidget::TimerWindowQWidget(QWidget *parent)
     connect(this->ui->taskQComboBox, SIGNAL(activated(const QString &)), this,
             SLOT(dropDownTaskSlot(const QString &)));
     this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{ Qt::Checked });
-    qDebug() << "label name:" << this->ui->timerQLabel;
-    //    qDebug()<<"layout child:"<<this->ui->gridLayout->itemAtPosition(0,0)->widget();
+    this->ui->productionTimeMinutesQSpinBox->setValue(30);
 }
 
 /**
