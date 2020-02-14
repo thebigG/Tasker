@@ -65,6 +65,7 @@ Ui::CreateCommitmentQWidget *CreateCommitmentQWidget::getUI() {
 void CreateCommitmentQWidget::backButtonSlot() {
     qDebug() << "Listener for back button";
     this->hide();
+    this->ui->commitmentNameQLineEdit->clear();
     MainUI::getInstance()->show();
 }
 void CreateCommitmentQWidget::noEndDateCheckSlot(int State) {
@@ -96,15 +97,16 @@ void CreateCommitmentQWidget::currentIndexFrequencyComboBoxSlot(const QString &t
  */
 void CreateCommitmentQWidget::createCommitmentButtonSlot() {
     this->hide();
-
     Commitment temp{ this->getCommitmentName(),
                      this->getStartDate(),
                      this->getEndDate(),
                      this->getInterval(),
                      this->getType(),
                      this->getUI()->noEndDateQCheckBox->isChecked() };
+    this->ui->commitmentNameQLineEdit->clear();
     udata::User::getInstance()->addCommitment(temp);
     MainUI::getInstance()->update();
+
     MainUI::getInstance()->show();
 }
 

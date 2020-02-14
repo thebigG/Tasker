@@ -109,6 +109,10 @@ void CommStatsQWidget::removeCommitmentButtonSlot() {
 void CommStatsQWidget::deleteCommitmentSlot(bool checked)
 {
     //    TASKER_LOG("deleting#1:" << selectedCommitmentIndex);
+    if(User::getInstance()->getCommitments().isEmpty())
+    {
+        return;
+    }
     int tempIndex = selectedCommitmentIndex;
     qDebug()<<"removeCommitmentButtonSlot#1";
     if (selectedCommitmentIndex == (User::getInstance()->getCommitments().size() - 1)) {
@@ -116,7 +120,9 @@ void CommStatsQWidget::deleteCommitmentSlot(bool checked)
     }
     User::getInstance()->getCommitments().removeAt(tempIndex);
     isDelete = true; // This is for the currentItemChanged signal, which gets emitted by delete keyword
+
     ui->commitmentsQTreeWidget->removeItemWidget(ui->commitmentsQTreeWidget->topLevelItem(tempIndex),0);
+    MainUI::getInstance()->update();
 //    delete ui->commitmentsQTreeWidget->topLevelItem(tempIndex);
     qDebug() << "deleting#2:" << tempIndex;
     qDebug() << "deleting#3:" << tempIndex;
@@ -141,9 +147,9 @@ void CommStatsQWidget::update() {
     int oldCurrentIndex = selectedCommitmentIndex;
     ui->commitmentsQTreeWidget->clear();
     selectedCommitmentIndex = 0;
-    auto it = c_vec.begin();
-    while (it != c_vec.end()) {
-        Commitment c = (*it);
+    auto commitmentIt = c_vec.begin();
+    while (commitmentIt != c_vec.end()) {
+        Commitment c = (*commitmentIt);
 
         auto s_vec = c.getAllSessions();
         auto s_it = s_vec.begin();
@@ -161,7 +167,7 @@ void CommStatsQWidget::update() {
             ++s_it;
         }
 
-        ++it;
+        ++commitmentIt;
 
         w->addTopLevelItem(item);
     }
