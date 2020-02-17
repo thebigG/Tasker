@@ -56,7 +56,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="commitmentNameQLineEdit"/>
+       <widget class="QLineEdit" name="commitmentNameQLineEdit">
+        <property name="placeholderText">
+         <string>Alice in Wonderland</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
