@@ -151,8 +151,7 @@ DISTFILES += \
 #else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../libs/debug/ -lX11-xcb
 #else:unix: LIBS += -L$$PWD/../libs/ -lX11-xcb
 
-#INCLUDEPATH += $$PWD/../libs
-#DEPENDPATH += $$PWD/../libs
+
 
 #win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../libs/release/libX11-xcb.a
 #else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../libs/debug/libX11-xcb.a
@@ -585,21 +584,23 @@ DISTFILES += \
 
 linux-g++
 {
-LIBS += ../libs/libuiohook.a
-LIBS += ../libs/libXtst.a
-LIBS += ../libs/libX11.a
-LIBS += ../libs/libXt.a
-LIBS += ../libs/libxkbcommon.a
-LIBS += ../libs/libxkbcommon-x11.a
-LIBS += ../libs/libxkbfile.a
-LIBS += ../libs/libXinerama.a
-LIBS += ../libs/libX11-xcb.a
+INCLUDEPATH += ../libs/iohook
+DEPENDPATH += ../libs/iohook
+LIBS += ../libs/iohook/libuiohook.a
+LIBS += ../libs/iohook/libXtst.a
+LIBS += ../libs/iohook/libX11.a
+LIBS += ../libs/iohook/libXt.a
+LIBS += ../libs/iohook/libxkbcommon.a
+LIBS += ../libs/iohook/libxkbcommon-x11.a
+LIBS += ../libs/iohook/libxkbfile.a
+LIBS += ../libs/iohook/libXinerama.a
+LIBS += ../libs/iohook/libX11-xcb.a
 LIBS += -lX11
-LIBS += ../libs/libxcb.a
-LIBS += ../libs/libXau.a
-LIBS += ../libs/libXdmcp.a
+LIBS += ../libs/iohook/libxcb.a
+LIBS += ../libs/iohook/libXau.a
+LIBS += ../libs/iohook/libXdmcp.a
 LIBS += -lICE
 LIBS += -lSM
-LIBS += ../libs/libXext.a
+LIBS += ../libs/iohook/libXext.a
 LIBS += -lxcb-xkb
 }
