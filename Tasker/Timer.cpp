@@ -113,7 +113,6 @@ void Timer::setListener(Listener::ListenerType newListenerType) {
 }
 void Timer::initTimer(Listener::ListenerType newListener, udata::Session newSession) {
     thisInstance->setCurrentSession(newSession);
-//            . setCurrentSession(newSession);
     thisInstance->setListener(newListener);
     timer->start(TIMER_TICK);
     this->start();

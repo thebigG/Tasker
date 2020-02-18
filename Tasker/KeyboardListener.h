@@ -2,12 +2,11 @@
 #define KEYBOARDLISTENER_H
 
 #define LNUX_DEV_PATH "/dev/input/by-id/"
-#define LINUX_KEYBOARD_PATH_KEYWORD                                            \
-    "-kbd" // This is used for regular expression matching
+#define LINUX_KEYBOARD_PATH_KEYWORD "-kbd" // This is used for regular expression matching
 
 #include <Listener.h>
 #include <QtCore>
-
+#include <iohooklib.h>
 static const char *const evval[3] = { "RELEASED", "PRESSED ", "REPEATED" };
 
 namespace Engine {
