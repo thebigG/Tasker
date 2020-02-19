@@ -585,6 +585,7 @@ DISTFILES += \
 linux-g++
 {
 INCLUDEPATH += ../libs/iohook
+INCLUDEPATH += ../libs/iohook/include
 DEPENDPATH += ../libs/iohook
 LIBS += ../libs/iohook/libuiohook.a
 LIBS += ../libs/iohook/libXtst.a

@@ -6,6 +6,14 @@ list of libraries/depdencies for iohook:
 - libxkbcommon
 - libxkbcommon-x11
 - libxkbfile
+- libXext
+
+
+
+
+
+Linux gcc command line:
+ gcc -no-pie  ~/playground/JS/libuiohook/src/demo_hook.c   /usr/local/lib/libuiohook.a /usr/lib/x86_64-linux-gnu/libXtst.a /usr/lib/x86_64-linux-gnu/libX11.a /usr/lib/x86_64-linux-gnu/libXt.a /usr/lib/x86_64-linux-gnu/libxkbcommon.a /usr/lib/x86_64-linux-gnu/libxkbcommon-x11.a /usr/lib/x86_64-linux-gnu/libxkbfile.a /usr/lib/x86_64-linux-gnu/libXinerama.a /usr/lib/x86_64-linux-gnu/libX11-xcb.a   -lX11   /usr/lib/x86_64-linux-gnu/libxcb.a  /usr/lib/x86_64-linux-gnu/libXau.a /usr/lib/x86_64-linux-gnu/libXdmcp.a  -lICE -lSM /usr/lib/x86_64-linux-gnu/libXext.a -lxcb-xkb
 
 
 
