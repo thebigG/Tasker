@@ -112,7 +112,9 @@ void dispatch_proc(uiohook_event * const event) {
                         // NOTE This is the only platform specific error that occurs on hook_stop().
 //                        logger_proc(LOG_LEVEL_ERROR, "Failed to get XRecord context. (%#X)", status);
                         break;
-
+                case UIOHOOK_SUCCESS:
+                    qDebug()<<"hook_stop success!!!!";
+                    status = hook_run();
                     // Default error.
                     case UIOHOOK_FAILURE:
                     default:

@@ -28,7 +28,9 @@ before_install:
   - source /opt/qt59/bin/qt59-env.sh
   - sudo apt install libx11-dev
   - sudo apt install libxcb-xkb-dev
-  - sudo binutils-config x86_64-pc-linux-gnu-2.29.1
+  - sudo apt install binutils-2.26
+  - ld --version
+
 
 script:
 - gcc-7 --version
