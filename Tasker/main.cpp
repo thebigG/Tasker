@@ -23,6 +23,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
+#include "iohooklib.h"
 
 using std::cout;
 using std::endl;
@@ -33,18 +34,18 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-
-    if (UdataUtils::prepFiles() == 0) {
-        qDebug("files was allocated successfully");
-    } else {
-        qDebug("prepFiles failed");
-    }
-    QObject::connect(&a, &QGuiApplication::lastWindowClosed, &MainUI::saveTaskerStateSlot);
-    CommStatsQWidget *widget = nullptr;
-    qDebug("Tasker Debug mode");
-    std::cout<<"version:"<<__cplusplus;
-    widget = MainUI::getInstance();
-    widget->update();
-    widget->show();
+    startHook();
+//    if (UdataUtils::prepFiles() == 0) {
+//        qDebug("files was allocated successfully");
+//    } else {
+//        qDebug("prepFiles failed");
+//    }
+//    QObject::connect(&a, &QGuiApplication::lastWindowClosed, &MainUI::saveTaskerStateSlot);
+//    CommStatsQWidget *widget = nullptr;
+//    qDebug("Tasker Debug mode");
+//    std::cout<<"version:"<<__cplusplus;
+//    widget = MainUI::getInstance();
+//    widget->update();
+//    widget->show();
     return a.exec();
 }

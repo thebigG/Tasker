@@ -1,4 +1,5 @@
 #include "iohooklib.h"
+#include <QDebug>
 int startHook()
 {
     // Set the logger callback for library output.
@@ -99,6 +100,7 @@ void dispatch_proc(uiohook_event * const event) {
         case EVENT_KEY_PRESSED:
             // If the escape key is pressed, naturally terminate the program.
             if (event->data.keyboard.keycode == VC_ESCAPE) {
+                qDebug()<<"escape key pressed$$$$$";
                 int status = hook_stop();
                 switch (status) {
                     // System level errors.
