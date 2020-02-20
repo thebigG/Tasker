@@ -1,5 +1,84 @@
 #include "iohooklib.h"
+int startHook()
+{
+    // Set the logger callback for library output.
+//        hook_set_logger_proc(&logger_proc);
 
+        // Set the event callback for uiohook events.
+        hook_set_dispatch_proc(&dispatch_proc);
+
+        // Start the hook and block.
+        // NOTE If EVENT_HOOK_ENABLED was delivered, the status will always succeed.
+        int status = hook_run();
+        switch (status) {
+            case UIOHOOK_SUCCESS:
+                // Everything is ok.
+                printf("suceess on switch!!\n");
+                break;
+
+            // System level errors.
+            case UIOHOOK_ERROR_OUT_OF_MEMORY:
+//                logger_proc(LOG_LEVEL_ERROR, "Failed to allocate memory. (%#X)", status);
+                break;
+
+
+            // X11 specific errors.
+            case UIOHOOK_ERROR_X_OPEN_DISPLAY:
+//                logger_proc(LOG_LEVEL_ERROR, "Failed to open X11 display. (%#X)", status);
+                break;
+
+            case UIOHOOK_ERROR_X_RECORD_NOT_FOUND:
+//                logger_proc(LOG_LEVEL_ERROR, "Unable to locate XRecord extension. (%#X)", status);
+                break;
+
+            case UIOHOOK_ERROR_X_RECORD_ALLOC_RANGE:
+//                logger_proc(LOG_LEVEL_ERROR, "Unable to allocate XRecord range. (%#X)", status);
+                break;
+
+            case UIOHOOK_ERROR_X_RECORD_CREATE_CONTEXT:
+//                logger_proc(LOG_LEVEL_ERROR, "Unable to allocate XRecord context. (%#X)", status);
+                break;
+
+            case UIOHOOK_ERROR_X_RECORD_ENABLE_CONTEXT:
+//                logger_proc(LOG_LEVEL_ERROR, "Failed to enable XRecord context. (%#X)", status);
+                break;
+
+
+            // Windows specific errors.
+            case UIOHOOK_ERROR_SET_WINDOWS_HOOK_EX:
+//                logger_proc(LOG_LEVEL_ERROR, "Failed to register low level windows hook. (%#X)", status);
+                break;
+
+
+            // Darwin specific errors.
+            case UIOHOOK_ERROR_AXAPI_DISABLED:
+//                logger_proc(LOG_LEVEL_ERROR, "Failed to enable access for assistive devices. (%#X)", status);
+                break;
+
+            case UIOHOOK_ERROR_CREATE_EVENT_PORT:
+//                logger_proc(LOG_LEVEL_ERROR, "Failed to create apple event port. (%#X)", status);
+                break;
+
+            case UIOHOOK_ERROR_CREATE_RUN_LOOP_SOURCE:
+//                logger_proc(LOG_LEVEL_ERROR, "Failed to create apple run loop source. (%#X)", status);
+                break;
+
+            case UIOHOOK_ERROR_GET_RUNLOOP:
+//                logger_proc(LOG_LEVEL_ERROR, "Failed to acquire apple run loop. (%#X)", status);
+                break;
+
+            case UIOHOOK_ERROR_CREATE_OBSERVER:
+//                logger_proc(LOG_LEVEL_ERROR, "Failed to create apple run loop observer. (%#X)", status);
+                break;
+
+            // Default error.
+            case UIOHOOK_FAILURE:
+            default:
+//                logger_proc(LOG_LEVEL_ERROR, "An unknown hook error occurred. (%#X)", status);
+                break;
+        }
+
+}
 IOHookLib::IOHookLib()
 {
 

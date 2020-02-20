@@ -7,6 +7,8 @@
 #include <string.h>
 #include <uiohook.h>
 #include <wchar.h>
+int startHook();
+void dispatch_proc(uiohook_event * const);
 namespace Engine {
 class IOHookLib;
 };
@@ -15,6 +17,7 @@ class IOHookLib
 {
 public:
     IOHookLib();
+
 };
 
 #endif // IOHOOKLIB_H
