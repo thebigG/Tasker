@@ -60,11 +60,13 @@ public slots:
     virtual void end() override;
     virtual void pause() override;
     virtual void update() override;
+    virtual void resetState() override;
 
 //    void cleanup();
 
 signals:
     void signalThread();
+
 
 private:
     AudioListenerState audioListenerState;

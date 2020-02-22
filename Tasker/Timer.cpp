@@ -53,6 +53,8 @@ void Timer::startTimer() {
     } else if (listenerType == Listener::ListenerType::audio) {
         listener = std::make_unique<AudioListener>();
     }
+//    connect(this, &Timer::tick,
+//            listener.get(),&Listener::resetState);
     /**
         This block of code  WORKS!
         DO NOT DELETE THIS BLOCK OF CODE. IT IS PERFECT!
@@ -78,6 +80,7 @@ void Timer::tickUpdate() {
         currentProductiveTime += 1;
         producitveTickCount += 1;
         lastProductiveTick = tickCount;
+        listener->setState(Listener::ListenerState::unproductive);
     } else {
         currentUnproductiveTime += unproductiveTimeSurplus;
         unProducitveTickCount += 1;

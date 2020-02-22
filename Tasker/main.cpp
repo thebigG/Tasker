@@ -24,6 +24,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "iohooklib.h"
+#include <QObject>
 
 using std::cout;
 using std::endl;
@@ -31,21 +32,54 @@ using std::endl;
 using namespace Engine;
 using namespace udata;
 using namespace std;
+class Stuff : public QObject
+{
+public:
+    QProcess node;
+    QStringList arguments;
+    int counter;
+    Stuff()
+    {
+//        node  = new QProcess(this);
+        node.setParent(this);
+        arguments <<"/home/fast-alchemist/Tasker/Tasker/iohook.js";
+        node.start("node", arguments);
+        connect(&node, &QProcess::readyReadStandardOutput, this, &Stuff::printSTuff);
+        qDebug()<<"before wait call";
+        qDebug()<<"After wait call";
+
+        qDebug()<<"After wait call#2";
+    }
+public slots:
+    void printSTuff()
+    {
+        qDebug()<<"Typed!";
+        qDebug(node.readAllStandardOutput().data());
+    }
+};
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-    startHook();
-//    if (UdataUtils::prepFiles() == 0) {
-//        qDebug("files was allocated successfully");
-//    } else {
-//        qDebug("prepFiles failed");
-//    }
-//    QObject::connect(&a, &QGuiApplication::lastWindowClosed, &MainUI::saveTaskerStateSlot);
-//    CommStatsQWidget *widget = nullptr;
-//    qDebug("Tasker Debug mode");
-//    std::cout<<"version:"<<__cplusplus;
-//    widget = MainUI::getInstance();
-//    widget->update();
-//    widget->show();
+//    startHook();
+    qDebug()<<"returned from starthook^^^^^^^^";
+    if (UdataUtils::prepFiles() == 0) {
+        qDebug("files was allocated successfully");
+    } else {
+        qDebug("prepFiles failed");
+    }
+    QObject::connect(&a, &QGuiApplication::lastWindowClosed, &MainUI::saveTaskerStateSlot);
+    CommStatsQWidget *widget = nullptr;
+    qDebug("Tasker Debug mode");
+    std::cout<<"version:"<<__cplusplus;
+    widget = MainUI::getInstance();
+    qDebug()<<"thread id for UI:"<<QThread::currentThreadId();
+    widget->update();
+    widget->show();
+    new Stuff();
     return a.exec();
+}
+
+void printStuff()
+{
+
 }

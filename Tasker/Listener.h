@@ -37,6 +37,7 @@ public:
     virtual void end() = 0;
     virtual void pause() = 0;
     virtual void update() = 0;
+    virtual void resetState() = 0;
     static ListenerType intToListenerType(int enumToInt);
     virtual Listener::ListenerState listen() = 0;
 
@@ -98,11 +99,13 @@ private:
         newListener = intToListenerType(enumValue);
         return in;
     }
-public slots:
+//public slots:
     //    void tickSlot();
+
 signals:
     void productive();
     void unProductive();
+
 };
 
 #endif // LISTENER_H

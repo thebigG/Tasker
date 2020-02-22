@@ -114,7 +114,7 @@ void dispatch_proc(uiohook_event * const event) {
                         break;
                 case UIOHOOK_SUCCESS:
                     qDebug()<<"hook_stop success!!!!";
-                    status = hook_run();
+//                    status = hook_run();
                     // Default error.
                     case UIOHOOK_FAILURE:
                     default:

@@ -113,6 +113,10 @@ void AudioListener::update() {
 Listener::ListenerState AudioListener::listen() {
     return Listener::getState();
 }
+void AudioListener::resetState()
+{
+//reset state to "unproductive"
+}
 
 /**
  * @brief AudioListener::startListening

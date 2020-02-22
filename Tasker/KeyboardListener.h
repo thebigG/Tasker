@@ -25,12 +25,13 @@ public:
     KeyboardListener();
     int startListening(unsigned long int delay = 30);
     Listener::ListenerState listen();
+
 public slots:
     virtual void start();
     virtual void end();
     virtual void pause();
     virtual void update();
-
+    virtual void resetState();
 private:
     QString activeKeyboardPath;
     KeyboardListenerState engineState;
@@ -41,4 +42,6 @@ signals:
     void signalThread();
 };
 
+void hook();
+void dispatch_proc(uiohook_event * const event);
 #endif // KEYBOARDLISTENER_H
