@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
     qDebug()<<"thread id for UI:"<<QThread::currentThreadId();
     widget->update();
     widget->show();
-    new Stuff();
+//    new Stuff();
     return a.exec();
 }
 
