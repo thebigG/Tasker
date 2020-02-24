@@ -40,14 +40,12 @@ public:
     int counter;
     Stuff()
     {
-//        node  = new QProcess(this);
         node.setParent(this);
         arguments <<"/home/fast-alchemist/Tasker/Tasker/iohook.js";
         node.start("node", arguments);
         connect(&node, &QProcess::readyReadStandardOutput, this, &Stuff::printSTuff);
         qDebug()<<"before wait call";
         qDebug()<<"After wait call";
-
         qDebug()<<"After wait call#2";
     }
 public slots:
