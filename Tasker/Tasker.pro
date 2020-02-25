@@ -565,43 +565,28 @@ DISTFILES += \
 #else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../libs/debug/xcb-sync.lib
 #else:unix: PRE_TARGETDEPS += $$PWD/../libs/libxcb-sync.a
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 linux-g++
 {
-INCLUDEPATH += ../libs/iohook
-INCLUDEPATH += ../libs/iohook/include
-DEPENDPATH += ../libs/iohook
-LIBS += ../libs/iohook/libuiohook.a
-LIBS += ../libs/iohook/libXtst.a
-LIBS += ../libs/iohook/libX11.a
-LIBS += ../libs/iohook/libXt.a
-LIBS += ../libs/iohook/libxkbcommon.a
-LIBS += ../libs/iohook/libxkbcommon-x11.a
-LIBS += ../libs/iohook/libxkbfile.a
-LIBS += ../libs/iohook/libXinerama.a
-LIBS += ../libs/iohook/libX11-xcb.a
-LIBS += ../libs/iohook/libX11.so.6
-LIBS += ../libs/iohook/libxcb.a
-LIBS += ../libs/iohook/libXau.a
-LIBS += ../libs/iohook/libXdmcp.a
-LIBS += -lICE
-LIBS += -lSM
-LIBS += ../libs/iohook/libXext.a
-LIBS += -lxcb-xkb
+#Use these if you would like to use iohook as a raw C library, which at the moment is not recommended.
+#These are all static library, so obviously your binary will get bigger if you do this.
+#INCLUDEPATH += ../libs/iohook
+#INCLUDEPATH += ../libs/iohook/include
+#DEPENDPATH += ../libs/iohook
+#LIBS += ../libs/iohook/libuiohook.a
+#LIBS += ../libs/iohook/libXtst.a
+#LIBS += ../libs/iohook/libX11.a
+#LIBS += ../libs/iohook/libXt.a
+#LIBS += ../libs/iohook/libxkbcommon.a
+#LIBS += ../libs/iohook/libxkbcommon-x11.a
+#LIBS += ../libs/iohook/libxkbfile.a
+#LIBS += ../libs/iohook/libXinerama.a
+#LIBS += ../libs/iohook/libX11-xcb.a
+#LIBS += ../libs/iohook/libX11.so.6
+#LIBS += ../libs/iohook/libxcb.a
+#LIBS += ../libs/iohook/libXau.a
+#LIBS += ../libs/iohook/libXdmcp.a
+#LIBS += -lICE
+#LIBS += -lSM
+#LIBS += ../libs/iohook/libXext.a
+#LIBS += -lxcb-xkb
 }

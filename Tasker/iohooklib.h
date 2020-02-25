@@ -7,17 +7,19 @@
 #include <string.h>
 #include <uiohook.h>
 #include <wchar.h>
-int startHook();
-void dispatch_proc(uiohook_event * const);
-namespace Engine {
-class IOHookLib;
-};
+//namespace util {
 
-class IOHookLib
-{
-public:
-    IOHookLib();
+//class IOHookLib;
+//};
+///**
+// * @brief The IOHookLib class has all of the utilities needed to bootstrap iohook
+// * to Tasker. Functions
+// */
+//class IOHookLib
+//{
+//public:
+//    IOHookLib();
 
-};
+//};
 
 #endif // IOHOOKLIB_H

@@ -35,9 +35,6 @@ public slots:
 private:
     QString activeKeyboardPath;
     KeyboardListenerState engineState;
-    void setKeyboardPathsOnLinux(int deviceIndex = 0);
-    QVector<QString> keyboardPaths;
-    const QString objectName = "KeyboardListener";
 signals:
     void signalThread();
 };
