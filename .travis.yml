@@ -30,6 +30,7 @@ before_install:
   - sudo apt install libxcb-xkb-dev
   - sudo apt install binutils-2.26
   - ld --version
+  - sudo apt install clang-format-3.6
 
 
 script:

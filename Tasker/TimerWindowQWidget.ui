@@ -46,17 +46,17 @@
        <widget class="QComboBox" name="taskQComboBox">
         <item>
          <property name="text">
-          <string>Writing</string>
+          <string>Write</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Compose Music</string>
+          <string>Music</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Custom</string>
+          <string>Draw</string>
          </property>
         </item>
        </widget>
@@ -101,50 +101,41 @@
         <property name="checkable">
          <bool>false</bool>
         </property>
-        <widget class="QComboBox" name="audioQComboBox">
-         <property name="geometry">
-          <rect>
-           <x>50</x>
-           <y>70</y>
-           <width>121</width>
-           <height>25</height>
-          </rect>
-         </property>
-         <item>
-          <property name="text">
-           <string>Built-In Mic</string>
-          </property>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="audioQCheckBox">
+           <property name="text">
+            <string>Mic</string>
+           </property>
+          </widget>
          </item>
-        </widget>
-        <widget class="QCheckBox" name="audioQCheckBox">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>70</y>
-           <width>50</width>
-           <height>25</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Mic</string>
-         </property>
-        </widget>
-        <widget class="QCheckBox" name="keyboardQCheckBox">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>50</y>
-           <width>83</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Keyboard</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-        </widget>
+         <item row="2" column="1">
+          <widget class="QComboBox" name="audioQComboBox">
+           <item>
+            <property name="text">
+             <string>Built-In Mic</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="0" colspan="2">
+          <widget class="QCheckBox" name="keyboardQCheckBox">
+           <property name="text">
+            <string>Keyboard</string>
+           </property>
+           <property name="tristate">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="mouseQCheckBox">
+           <property name="text">
+            <string>Mouse</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item row="0" column="1">

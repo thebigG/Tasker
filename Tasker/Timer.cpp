@@ -1,6 +1,6 @@
 #include "Timer.h"
 #include "AudioListener.h"
-#include "KeyboardListener.h"
+#include "XListener.h"
 #include <QDebug>
 #include <QThread>
 #include <QTime>
@@ -49,7 +49,7 @@ void Timer::startTimer() {
     qDebug() << "From work thread: " << currentThreadId();
 
     if (listenerType == Listener::ListenerType::keyboard) {
-        listener = std::make_unique<KeyboardListener>();
+        listener = std::make_unique<XListener>();
     } else if (listenerType == Listener::ListenerType::audio) {
         listener = std::make_unique<AudioListener>();
     }

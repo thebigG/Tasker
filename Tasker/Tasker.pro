@@ -63,7 +63,6 @@ SOURCES += \
     Commitment.cpp \
     CreateCommitmentQWidget.cpp \
     Listener.cpp \
-    KeyboardListener.cpp \
     Session.cpp \
     Task.cpp \
     StatsUtility.cpp \
@@ -73,7 +72,7 @@ SOURCES += \
     TimerWindowQWidget.cpp \
     UdataUtils.cpp \
     User.cpp \
-    iohooklib.cpp \
+    XListener.cpp \
     livesession.cpp \
     mainui.cpp \
     main.cpp
@@ -87,7 +86,6 @@ HEADERS += \
     Commitment.h \
     CreateCommitmentQWidget.h \
     Listener.h \
-    KeyboardListener.h \
     Session.h \
     Task.h \
     TaskerPerf/perftimer.h \
@@ -98,7 +96,7 @@ HEADERS += \
     TaskerUIMainWindowQWidget.h \
     TimerWindowQWidget.h \
     UdataUtils.h \
-    iohooklib.h \
+    XListener.h \
     livesession.h \
     mainui.h \
     User.h \
