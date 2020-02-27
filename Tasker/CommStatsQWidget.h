@@ -11,11 +11,11 @@
 
 #include "User.h"
 #include <CreateCommitmentQWidget.h>
+#include <QMenu>
+#include <QMenuBar>
 #include <QTreeWidget>
 #include <QWidget>
 #include <TimerWindowQWidget.h>
-#include <QMenu>
-#include <QMenuBar>
 namespace Ui {
 class CommStatsQWidget;
 }
@@ -54,8 +54,8 @@ private:
     CreateCommitmentQWidget createCommimentWindow;
     TimerWindowQWidget timerWindow;
     QMenuBar mainMenuBar;
-    QMenu commitmentMenu{COMMITMENT_MENU_STRING};
-    QMenu sessionMenu{SESSION_MENU_STRING};
+    QMenu commitmentMenu{ COMMITMENT_MENU_STRING };
+    QMenu sessionMenu{ SESSION_MENU_STRING };
 };
 
 #endif // WIDGET_COMMSTATS_H

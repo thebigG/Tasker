@@ -46,7 +46,7 @@ AudioListener::AudioListener()
 /**
  * @brief AudioListener::~AudioListener
  */
-//AudioListener::~AudioListener() {
+// AudioListener::~AudioListener() {
 //    //    ~Listener();
 //    qDebug() << "AudioListener destructor";
 //}
@@ -102,7 +102,7 @@ void AudioListener::update() {
 /**
  * @brief AudioListener::cleanup
  */
-//void AudioListener::cleanup() {
+// void AudioListener::cleanup() {
 //    delete audioThread;
 //}
 
@@ -113,9 +113,8 @@ void AudioListener::update() {
 Listener::ListenerState AudioListener::listen() {
     return Listener::getState();
 }
-void AudioListener::resetState()
-{
-//reset state to "unproductive"
+void AudioListener::resetState() {
+    // reset state to "unproductive"
 }
 
 /**
@@ -138,24 +137,22 @@ int AudioListener::startListening(unsigned long int delay) {
 
     audioListenerState = AudioListenerState::ON;
     audioThread->getQThread().start();
-    while(!audioThread->getQThread().isRunning())
-    {
-        qDebug()<<"NOT RUNNING%%%%";
+    while (!audioThread->getQThread().isRunning()) {
+        qDebug() << "NOT RUNNING%%%%";
     }
-    qDebug()<<"AudioListener#1";
-    if(audioThread->getAudioMachine() == nullptr)
-    {
+    qDebug() << "AudioListener#1";
+    if (audioThread->getAudioMachine() == nullptr) {
         qDebug("NULL++++");
     }
-    qDebug()<<"AudioListener#2";
+    qDebug() << "AudioListener#2";
     while (true) {
-        qDebug()<<"AudioListener#3";
+        qDebug() << "AudioListener#3";
         if (audioThread->getAudioMachine()) {
-            qDebug()<<"AudioListener#4";
+            qDebug() << "AudioListener#4";
             if (audioThread->getAudioMachine()->getAudioDevice()->isOpen()) {
                 audioThread->getAudioMachine()->getQAudioInput().setVolume(0.0);
                 while (audioThread->getAudioMachine()->getAudioDevice()->getDeviceLevel() == 0.0) {
-//                    qDebug()<<"Are we stuck here?";
+                    //                    qDebug()<<"Are we stuck here?";
                 }
                 audioThread->getAudioMachine()->getAudioDevice()->setMinAmplitude(
                     audioThread->getAudioMachine()->getAudioDevice()->getDeviceLevel());
@@ -163,7 +160,7 @@ int AudioListener::startListening(unsigned long int delay) {
                 break;
             }
         }
-        qDebug()<<"AudioListener#5";
+        qDebug() << "AudioListener#5";
     }
     qDebug() << "AudioListener updateState() thread id: %d" << QThread::currentThreadId();
     while (true) {

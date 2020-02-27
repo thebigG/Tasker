@@ -20,7 +20,7 @@ Listener::Listener() {
  * @return
  */
 Listener::ListenerType Listener::intToListenerType(int enumInt) {
-    if (int(ListenerType::keyboard) < enumInt || int(ListenerType::none) > enumInt)
+    if (int(ListenerType::X_MOUSE_KEYBOARD) < enumInt || int(ListenerType::none) > enumInt)
         return ListenerType(enumInt);
     return ListenerType::none;
 }

@@ -1,13 +1,13 @@
 #include "AudioListener.h"
 #include "CommStatsQWidget.h"
 #include "CreateCommitmentQWidget.h"
-#include "XListener.h"
 #include "StatsUtility.h"
 #include "Task.h"
 #include "TaskerUIMainWindowQWidget.h"
 #include "Timer.h"
 #include "UdataUtils.h"
 #include "User.h"
+#include "XListener.h"
 #include "livesession.h"
 #include "mainui.h"
 //#include "objctest.h"
@@ -23,7 +23,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-#include <QObject>
 
 using std::cout;
 using std::endl;
@@ -34,7 +33,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-    qDebug()<<"returned from starthook^^^^^^^^";
+    qDebug() << "returned from starthook^^^^^^^^";
     if (UdataUtils::prepFiles() == 0) {
         qDebug("files was allocated successfully");
     } else {
@@ -42,10 +41,10 @@ int main(int argc, char *argv[]) {
     }
     QObject::connect(&a, &QGuiApplication::lastWindowClosed, &MainUI::saveTaskerStateSlot);
     CommStatsQWidget *widget = nullptr;
-    qDebug()<<"Tasker Debug mode";
-    std::cout<<"version:"<<__cplusplus;
+    qDebug() << "Tasker Debug mode";
+    std::cout << "version:" << __cplusplus;
     widget = MainUI::getInstance();
-    qDebug()<<"thread id for UI:"<<QThread::currentThreadId();
+    qDebug() << "thread id for UI:" << QThread::currentThreadId();
     widget->update();
     widget->show();
     return a.exec();

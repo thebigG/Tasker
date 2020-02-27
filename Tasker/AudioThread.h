@@ -49,7 +49,7 @@ public:
     AudioThread();
     // Need alternative constructor for audio device type
     QThread &getQThread();
-    AudioMachine* getAudioMachine();
+    AudioMachine *getAudioMachine();
     qreal getAudioLevel();
 
 public slots:

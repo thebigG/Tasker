@@ -37,11 +37,21 @@ void TimerWindowQWidget::backButtonSlot() {
 }
 void TimerWindowQWidget::startTimerButtonSlot() {
     QVector<Engine::Listener::ListenerType> newListsners;
+    /**
+      TODO: While the UI supports multiple listeners at the same time, the backend DOES NOT.
+      So make sure, for now at least, to NOT allow the user to select
+      more than one listener for the session.
+      Will be adding support for multiple listeners ASAP.
+      */
     if (this->ui->keyboardQCheckBox->checkState() == Qt::CheckState{ Qt::Checked }) {
-        newListsners.push_back(Engine::Listener::ListenerType::keyboard);
+        newListsners.push_back(Engine::Listener::ListenerType::X_KEYBOARD);
     }
     if (this->ui->audioQCheckBox->checkState() == Qt::CheckState{ Qt::Checked }) {
         newListsners.push_back(Engine::Listener::ListenerType::audio);
+    }
+    if(this->ui->mouseQCheckBox->checkState() == Qt::CheckState{Qt::Checked})
+    {
+        newListsners.push_back(Engine::Listener::ListenerType::X_MOUSE);
     }
     int goal = this->ui->productionTimeHoursQSpinBox->value() * SECONDS_IN_HOUR;
     goal += this->ui->productionTimeMinutesQSpinBox->value() * SECONDS_IN_MINUTE;

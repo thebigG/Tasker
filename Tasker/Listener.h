@@ -25,7 +25,9 @@ public:
      * sure that to add them BEFORE none. The none type is used for bounds checking.
      */
     enum class ListenerType {
-        keyboard,
+        X_MOUSE_KEYBOARD,
+        X_MOUSE,
+        X_KEYBOARD,
         audio,
         none
     }; // I had to do this to make QThreads work
@@ -99,13 +101,12 @@ private:
         newListener = intToListenerType(enumValue);
         return in;
     }
-//public slots:
+    // public slots:
     //    void tickSlot();
 
 signals:
     void productive();
     void unProductive();
-
 };
 
 #endif // LISTENER_H

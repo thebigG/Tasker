@@ -70,8 +70,8 @@ QThread &AudioThread::getQThread() {
  * let them do the hard work.
  * @return a pointer to the audioMachine.
  */
-AudioMachine* AudioThread::getAudioMachine() {
-    qDebug()<<"getAudioMachine#1";
+AudioMachine *AudioThread::getAudioMachine() {
+    qDebug() << "getAudioMachine#1";
     return audioMachine.get();
 }
 
@@ -80,8 +80,8 @@ AudioMachine* AudioThread::getAudioMachine() {
  * @return
  */
 qreal AudioThread::getAudioLevel() {
-//    qDebug()<<"current audio level:"<<*audioLevel;
-    return audioMachine->getAudioDevice()->getDeviceLevel();// == nullptr ? 0.0 : (*audioLevel);
+    //    qDebug()<<"current audio level:"<<*audioLevel;
+    return audioMachine->getAudioDevice()->getDeviceLevel(); // == nullptr ? 0.0 : (*audioLevel);
 }
 
 /**
@@ -95,6 +95,6 @@ qreal AudioThread::getAudioLevel() {
  */
 void AudioThread::updateState() {
 
-    audioMachine =  std::make_unique<AudioMachine>();
+    audioMachine = std::make_unique<AudioMachine>();
     qDebug("AudioThread updateState() thread id: %d", QThread::currentThreadId());
 }

@@ -47,14 +47,14 @@ public:
     AudioMachine();
     ~AudioMachine();
     bool isAudioDeviceValid();
-    AudioDevice* getAudioDevice();
+    AudioDevice *getAudioDevice();
     QAudioInput &getQAudioInput();
 public slots:
     void handleStateChanged(QAudio::State);
     void stopRecording();
 
 private:
-     std::unique_ptr<AudioDevice> audioDevice; // Class member
+    std::unique_ptr<AudioDevice> audioDevice; // Class member
     std::unique_ptr<QAudioInput> qAudioInput;
 };
 

@@ -28,7 +28,7 @@ private slots:
 
 private:
     Ui::TimerWindowQWidget *ui;
-    std::unique_ptr<LiveSession>  liveTimer;
+    std::unique_ptr<LiveSession> liveTimer;
 };
 
 #endif // TIMERWINDOW_H

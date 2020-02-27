@@ -11,8 +11,7 @@ using namespace udata;
  * @return
  */
 CommStatsQWidget *MainUI::getInstance() {
-    if(Instance.get() == nullptr)
-    {
+    if (Instance.get() == nullptr) {
         Instance = std::make_unique<CommStatsQWidget>();
     }
     return Instance.get();

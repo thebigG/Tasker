@@ -1,57 +1,72 @@
-#include <XListener.h>
+#include <QApplication>
+#include <QGuiApplication>
 #include <QRegularExpression>
 #include <QThread>
 #include <QtCore>
+#include <XListener.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <QGuiApplication>
-#include <QApplication>
-
-#ifdef Q_OS_LINUX
-#include <linux/input.h>
-#endif
-
 using namespace Engine;
 
-XListener::XListener(Engine::XListenerMode newXMode)
-{
-XMode = newXMode;
-nodeJS.setParent(this);
-nodeJSArguments<<IOHOOK_SCRIPT_PATH;
-switch(XMode)
-{
+XListener::XListener(Engine::XListenerMode newXMode) {
+    XMode = newXMode;
+    nodeJS.setParent(this);
+    nodeJSArguments << IOHOOK_SCRIPT_PATH;
+    switch (XMode) {
     case XListenerMode::MOUSE_AND_KEYBOARD:
-    nodeJSArguments<<IOHOOK_KEYBOARD_AND_MOUSE_MODE;
-    break;
+        qDebug()<<"X#1";
+        nodeJSArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
+        break;
     case XListenerMode::MOUSE:
-    nodeJSArguments<<IOHOOK_MOUSE_MODE;
-    break;
+        nodeJSArguments << IOHOOK_MOUSE_MODE;
+        qDebug()<<"X#1";
+        break;
     case XListenerMode::KEYBOARD:
-    nodeJSArguments<<IOHOOK_KEYBOARD_MODE;
-    break;
-}
+        nodeJSArguments << IOHOOK_KEYBOARD_MODE;
+        break;
+    }
+    connect(&nodeJS, &QProcess::readyReadStandardOutput, this, &XListener::checkXState);
+
 }
 /**
  * @brief XListener::XListener
  */
 XListener::XListener() {
-XMode = XListenerMode::MOUSE_AND_KEYBOARD;
-nodeJS.setParent(this);
-
-nodeJSArguments<<IOHOOK_KEYBOARD_AND_MOUSE_MODE;
-connect(&nodeJS, &QProcess::readyReadStandardOutput, this, &XListener::checkXState);
+    XMode = XListenerMode::MOUSE_AND_KEYBOARD;
+    nodeJS.setParent(this);
+    nodeJSArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
+    connect(&nodeJS, &QProcess::readyReadStandardOutput, this, &XListener::checkXState);
 #ifdef Q_OS_LINUX
 
 #endif // setKeyboardPathsOnLinux
 }
-void XListener::checkXState()
-{
-qDebug()<<"checkXState{yes}-->threadid"<<QThread::currentThreadId();
-setState(ListenerState::productive);
+void XListener::checkXState() {
+    QByteArray Xdata = nodeJS.readAllStandardOutput();
+    Xdata.chop(Xdata.length()-1);
+    QString iohookState{Xdata};
+
+    qDebug()<<"X state="<<iohookState;
+    if(XMode == XListenerMode::MOUSE_AND_KEYBOARD &&  iohookState == IOHOOK_KEYBOARD_AND_MOUSE_MODE)
+    {
+    setState(ListenerState::productive);
+    }
+    else if(XMode == XListenerMode::MOUSE &&  iohookState == IOHOOK_MOUSE_MODE)
+    {
+        setState(ListenerState::productive);
+    }
+    else if(XMode == XListenerMode::KEYBOARD &&  iohookState == IOHOOK_KEYBOARD_MODE)
+    {
+            setState(ListenerState::productive);
+    }
+    else
+    {
+        qDebug()<<"INVALID MODE from IOHOOK***";
+    }
+
 }
 
 /**
@@ -90,17 +105,15 @@ Listener::ListenerState XListener::listen() {
 
     return getState();
 }
-void XListener::resetState()
-{
+void XListener::resetState() {
     setState(ListenerState::unproductive);
-
 }
 
 int XListener::startListening() {
     setState(ListenerState::unproductive);
-    connect(qApp, &QGuiApplication::lastWindowClosed,this ,&XListener::end);
+    connect(qApp, &QGuiApplication::lastWindowClosed, this, &XListener::end);
     nodeJS.start("node", nodeJSArguments);
-    qDebug()<<"startListening{yes}-->threadid"<<QThread::currentThreadId();
+    qDebug() << "startListening{yes}-->threadid" << QThread::currentThreadId();
     return EXIT_FAILURE;
 }
 /**

@@ -13,7 +13,7 @@ User::User(QVector<Commitment> newCommitments) {
     commitments = newCommitments;
 }
 
-//std::unique_ptr<User> User::make_unique(QVector<udata::Commitment>&& x)
+// std::unique_ptr<User> User::make_unique(QVector<udata::Commitment>&& x)
 //{
 
 //}
@@ -139,10 +139,9 @@ QDataStream &udata::operator>>(QDataStream &in, User &newUser) {
  * @brief User::getInstance
  * @return
  */
-User* User::getInstance() {
-    if(thisInstance.get() ==nullptr)
-    {
-        thisInstance= std::make_unique<User>(QVector<Commitment>());
+User *User::getInstance() {
+    if (thisInstance.get() == nullptr) {
+        thisInstance = std::make_unique<User>(QVector<Commitment>());
     }
     return thisInstance.get();
 }

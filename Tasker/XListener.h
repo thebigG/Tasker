@@ -9,12 +9,9 @@
 namespace Engine {
 class XListener;
 enum class XListenerMode;
-}
+} // namespace Engine
 
-enum class Engine::XListenerMode
-{
-MOUSE, KEYBOARD, MOUSE_AND_KEYBOARD
-};
+enum class Engine::XListenerMode { MOUSE, KEYBOARD, MOUSE_AND_KEYBOARD };
 /**
  * @brief The Engine::XListener class
  * This class has the capiblity of detecting mouse and keyboard interaction.
@@ -35,6 +32,7 @@ public slots:
     virtual void update() override;
     virtual void resetState() override;
     void checkXState();
+
 private:
     QProcess nodeJS;
     QStringList nodeJSArguments;

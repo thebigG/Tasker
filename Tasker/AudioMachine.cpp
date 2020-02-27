@@ -89,15 +89,15 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
  * @brief AudioMachine::~AudioMachine
  */
 AudioMachine::~AudioMachine() {
-//    delete qAudioInput;
-//    delete audioDevice;
+    //    delete qAudioInput;
+    //    delete audioDevice;
 }
 
 /**
  * @brief AudioMachine::getAudioDevice
  * @return
  */
-AudioDevice* AudioMachine::getAudioDevice() {
+AudioDevice *AudioMachine::getAudioDevice() {
     return audioDevice.get();
 }
 
@@ -105,7 +105,7 @@ AudioDevice* AudioMachine::getAudioDevice() {
  * @brief AudioMachine::getQAudioInput
  * @return
  */
-QAudioInput& AudioMachine::getQAudioInput() {
+QAudioInput &AudioMachine::getQAudioInput() {
     return *(qAudioInput.get());
 }
 
@@ -142,14 +142,13 @@ void AudioMachine::stopRecording() {
     qAudioInput->stop();
     audioDevice->close();
 
-//    delete qAudioInput;
+    //    delete qAudioInput;
     qAudioInput = nullptr;
     audioDevice = nullptr;
 }
-bool AudioMachine:: isAudioDeviceValid()
-{
-    qDebug()<<"isAudioDeviceValid#1";
+bool AudioMachine::isAudioDeviceValid() {
+    qDebug() << "isAudioDeviceValid#1";
     audioDevice->isOpen();
-    qDebug()<<"isAudioDeviceValid#2";
+    qDebug() << "isAudioDeviceValid#2";
     return audioDevice->isOpen();
 }

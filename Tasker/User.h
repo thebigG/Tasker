@@ -1,9 +1,9 @@
 #ifndef USERQOBJECT_H
 #define USERQOBJECT_H
 
+#include "Commitment.h"
 #include <QVector>
 #include <memory>
-#include "Commitment.h"
 
 namespace udata {
 class User;
@@ -13,10 +13,10 @@ class User;
  * @brief The udata::User class A singleton user for the whole system.
  */
 class udata::User {
-//friend std::unique_ptr<User> std::make_unique<User>(QVector<udata::Commitment>&&);
+    // friend std::unique_ptr<User> std::make_unique<User>(QVector<udata::Commitment>&&);
 public:
     ~User();
-    static User* getInstance();
+    static User *getInstance();
     const Commitment &getDefaultCommitment();
     void setDefaultCommitment(const Commitment &c);
     QVector<Commitment> &getCommitments();
@@ -24,6 +24,7 @@ public:
     void setUsername(QString &);
     QString &getUsername();
     void addSession(Session &);
+
 private:
     User(QVector<Commitment>);
     User();
@@ -34,8 +35,8 @@ private:
     static std::unique_ptr<User> thisInstance;
     int currentCommitment;
     // user preferences?
-//    static std::unique_ptr<User> make_unique(QVector<udata::Commitment>&&);
-    friend std::unique_ptr<User> std::make_unique<User>(QVector<udata::Commitment>&&);
+    //    static std::unique_ptr<User> make_unique(QVector<udata::Commitment>&&);
+    friend std::unique_ptr<User> std::make_unique<User>(QVector<udata::Commitment> &&);
     friend QDataStream &operator>>(QDataStream &in, User &newUser);
     friend QDataStream &operator<<(QDataStream &out, User &newUser);
 };

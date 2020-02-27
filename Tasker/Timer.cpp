@@ -48,13 +48,22 @@ void Timer::run() {
 void Timer::startTimer() {
     qDebug() << "From work thread: " << currentThreadId();
 
-    if (listenerType == Listener::ListenerType::keyboard) {
+    if (listenerType == Listener::ListenerType::X_MOUSE_KEYBOARD) {
         listener = std::make_unique<XListener>();
-    } else if (listenerType == Listener::ListenerType::audio) {
+    }
+    else if(listenerType == Listener::ListenerType::X_MOUSE)
+    {
+        listener = std::make_unique<XListener>(XListenerMode::MOUSE);
+    }
+    else if(listenerType == Listener::ListenerType::X_KEYBOARD)
+    {
+        listener = std::make_unique<XListener>(XListenerMode::KEYBOARD);
+    }
+    else if (listenerType == Listener::ListenerType::audio) {
         listener = std::make_unique<AudioListener>();
     }
-//    connect(this, &Timer::tick,
-//            listener.get(),&Listener::resetState);
+    //    connect(this, &Timer::tick,
+    //            listener.get(),&Listener::resetState);
     /**
         This block of code  WORKS!
         DO NOT DELETE THIS BLOCK OF CODE. IT IS PERFECT!

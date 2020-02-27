@@ -7,8 +7,8 @@
 #include <QTime>
 #define TIMER_TICK 1000 // in milliseconds
 #define MINUTE 60 // in seconds
-#include <XListener.h>
 #include <TaskerPerf/perftimer.h>
+#include <XListener.h>
 #include <memory>
 namespace Engine {
 class Timer;

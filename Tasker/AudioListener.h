@@ -49,7 +49,7 @@ public:
     enum class AudioListenerState { ON, OFF };
 
     AudioListener();
-//    ~AudioListener() override;
+    //    ~AudioListener() override;
     void setAudioThreshold(qreal audioThreshold);
     qreal &getAudioThreshold();
 
@@ -62,11 +62,10 @@ public slots:
     virtual void update() override;
     virtual void resetState() override;
 
-//    void cleanup();
+    //    void cleanup();
 
 signals:
     void signalThread();
-
 
 private:
     AudioListenerState audioListenerState;
