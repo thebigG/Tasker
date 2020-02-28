@@ -82,15 +82,26 @@ void Timer::startTimer() {
  */
 void Timer::tickUpdate() {
     newPerfTimer.restart();
-    int tickDelta;
-    if (listener->getState() == Listener::ListenerState::productive) {
+    /**
+     * @brief productiveTickDelta
+     * This is kind of like a "grace" peroid for
+     * how long the user can go unproductive.
+     */
+    int productiveTickDelta = tickCount - lastProductiveTick;
+    if (listener->getState() == Listener::ListenerState::productive ) {
 
-        tickDelta = tickCount - producitveTickCount;
+
         currentProductiveTime += 1;
         producitveTickCount += 1;
         lastProductiveTick = tickCount;
         listener->setState(Listener::ListenerState::unproductive);
-    } else {
+    }
+    else if(productiveTickDelta<60)
+    {
+        currentProductiveTime += 1;
+        producitveTickCount += 1;
+    }
+    else {
         currentUnproductiveTime += unproductiveTimeSurplus;
         unProducitveTickCount += 1;
         lastUnproductiveTick = tickCount;
