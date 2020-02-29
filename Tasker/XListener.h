@@ -31,7 +31,6 @@ public slots:
     virtual void pause() override;
     virtual void update() override;
     virtual void resetState() override;
-    void checkXState();
 
 private:
     QProcess nodeJS;

@@ -31,8 +31,7 @@
 
 #include <QAudioDeviceInfo>
 #include <QAudioInput>
-
-#include "AudioThread.h"
+#include <AudioMachine.h>
 #include "Listener.h"
 #include <memory>
 namespace Engine {
@@ -69,11 +68,12 @@ signals:
 
 private:
     AudioListenerState audioListenerState;
-    std::unique_ptr<AudioThread> audioThread;
+    std::unique_ptr<AudioMachine> audioSource;
+    qreal audioDelta;
 
     qreal audioThreshold;
-
-    int startListening(unsigned long int delay = 0); // seconds
+    bool profiled = false;
+    int startListening(); // seconds
 };
 
 #endif // AUDIOLISTENER_H

@@ -38,8 +38,9 @@ using Engine::Listener;
  * @brief AudioListener::AudioListener
  */
 AudioListener::AudioListener()
-: Listener::Listener(), audioListenerState(AudioListenerState::OFF),
-  audioThread(nullptr), audioThreshold(0.0) {
+    : Listener::Listener{}, audioListenerState{AudioListenerState::OFF}
+//  audioThread{nullptr}, audioThreshold{0.0}
+{
     audioThreshold = 0.01;
 }
 
@@ -79,7 +80,7 @@ void AudioListener::start() {
  */
 void AudioListener::end() {
     // stop listening, for end of session
-    audioThread->getQThread().exit();
+//    audioThread->getQThread().exit();
     audioListenerState = AudioListenerState::OFF;
 }
 
@@ -97,14 +98,30 @@ void AudioListener::pause() {
 void AudioListener::update() {
     // TODO update
     // change input device
-}
+    if(!profiled)
+    {
+        audioSource->getQAudioInput().setVolume(0.0);
+        audioSource->getAudioDevice()->setMinAmplitude(
+                    audioSource->getAudioDevice()->getDeviceLevel());
+        audioSource->getQAudioInput().setVolume(1.0);
+        profiled = true;
+    }
+            ListenerState state;
 
-/**
- * @brief AudioListener::cleanup
- */
-// void AudioListener::cleanup() {
-//    delete audioThread;
-//}
+            state = audioSource->getAudioDevice() ->getDeviceLevel()> audioThreshold ?
+                        ListenerState::productive :
+                        ListenerState::unproductive;
+            setState(state);
+
+            qDebug() << "listener level: " << audioSource->getAudioDevice() ->getDeviceLevel();
+
+            if (state == ListenerState::productive) {
+                qDebug("audio status: productive");
+            } else {
+                qDebug("audio status: unproductive");
+            }
+
+}
 
 /**
  * @brief AudioListener::listen
@@ -115,6 +132,7 @@ Listener::ListenerState AudioListener::listen() {
 }
 void AudioListener::resetState() {
     // reset state to "unproductive"
+    setState(ListenerState::unproductive);
 }
 
 /**
@@ -122,65 +140,21 @@ void AudioListener::resetState() {
  * @param delay
  * @return
  */
-int AudioListener::startListening(unsigned long int delay) {
-    audioThread = std::make_unique<AudioThread>();
-    // must pass in audio device type at some point to thread.
-    // connect(address of thread object, &thisThread,
-    // signal want to run, &QThread::finished,
-    // object that contains slot, this
-    // function i want to run, &AudioListener::cleanup);
-
+int AudioListener::startListening()
+{
+    audioSource = std::make_unique<AudioMachine>();
     qDebug() << "From startListening on Listener.cpp: " << QThread::currentThreadId();
-    audioThread->moveToThread(&audioThread->getQThread());
     qDebug() << "From startListening on Listener.cpp: after connect:%d"
              << QThread::currentThreadId();
-
     audioListenerState = AudioListenerState::ON;
-    audioThread->getQThread().start();
-    while (!audioThread->getQThread().isRunning()) {
-        qDebug() << "NOT RUNNING%%%%";
-    }
     qDebug() << "AudioListener#1";
-    if (audioThread->getAudioMachine() == nullptr) {
+    if (audioSource== nullptr) {
         qDebug("NULL++++");
     }
     qDebug() << "AudioListener#2";
-    while (true) {
-        qDebug() << "AudioListener#3";
-        if (audioThread->getAudioMachine()) {
-            qDebug() << "AudioListener#4";
-            if (audioThread->getAudioMachine()->getAudioDevice()->isOpen()) {
-                audioThread->getAudioMachine()->getQAudioInput().setVolume(0.0);
-                while (audioThread->getAudioMachine()->getAudioDevice()->getDeviceLevel() == 0.0) {
-                    //                    qDebug()<<"Are we stuck here?";
-                }
-                audioThread->getAudioMachine()->getAudioDevice()->setMinAmplitude(
-                    audioThread->getAudioMachine()->getAudioDevice()->getDeviceLevel());
-                audioThread->getAudioMachine()->getQAudioInput().setVolume(1.0);
-                break;
-            }
-        }
-        qDebug() << "AudioListener#5";
-    }
+    connect(audioSource->getAudioDevice(), &AudioDevice::audioRead,
+            this, &AudioListener::update);
     qDebug() << "AudioListener updateState() thread id: %d" << QThread::currentThreadId();
-    while (true) {
-        ListenerState state;
-
-        state = audioThread->getAudioLevel() > audioThreshold ?
-                    ListenerState::productive :
-                    ListenerState::unproductive;
-        setState(state);
-
-        //        qDebug() << "listener level: " << audioThread->getAudioLevel();
-
-        if (state == ListenerState::productive) {
-            qDebug("status: productive");
-        } else {
-            qDebug("status: unproductive");
-        }
-
-        QThread::sleep(BASE_DELAY + delay);
-    }
 
     return EXIT_SUCCESS;
 }

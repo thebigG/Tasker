@@ -79,7 +79,7 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
     qDebug() << info.deviceName();
 
     qAudioInput->start(audioDevice.get());
-
+    qDebug()<<"audio state-->"<<qAudioInput->state();
     qAudioInput->setVolume(0.0);
     audioDevice->setMinAmplitude(audioDevice->getDeviceLevel());
     qAudioInput->setVolume(1.0);

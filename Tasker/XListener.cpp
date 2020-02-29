@@ -29,7 +29,7 @@ XListener::XListener(Engine::XListenerMode newXMode) {
         nodeJSArguments << IOHOOK_KEYBOARD_MODE;
         break;
     }
-    connect(&nodeJS, &QProcess::readyReadStandardOutput, this, &XListener::checkXState);
+    connect(&nodeJS, &QProcess::readyReadStandardOutput, this, &XListener::update);
 
 }
 /**
@@ -39,34 +39,10 @@ XListener::XListener() {
     XMode = XListenerMode::MOUSE_AND_KEYBOARD;
     nodeJS.setParent(this);
     nodeJSArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
-    connect(&nodeJS, &QProcess::readyReadStandardOutput, this, &XListener::checkXState);
+    connect(&nodeJS, &QProcess::readyReadStandardOutput, this, &XListener::update);
 #ifdef Q_OS_LINUX
 
 #endif // setKeyboardPathsOnLinux
-}
-void XListener::checkXState() {
-    QByteArray Xdata = nodeJS.readAllStandardOutput();
-    Xdata.chop(Xdata.length()-1);
-    QString iohookState{Xdata};
-
-    qDebug()<<"X state="<<iohookState;
-    if(XMode == XListenerMode::MOUSE_AND_KEYBOARD &&  iohookState == IOHOOK_KEYBOARD_AND_MOUSE_MODE)
-    {
-    setState(ListenerState::productive);
-    }
-    else if(XMode == XListenerMode::MOUSE &&  iohookState == IOHOOK_MOUSE_MODE)
-    {
-        setState(ListenerState::productive);
-    }
-    else if(XMode == XListenerMode::KEYBOARD &&  iohookState == IOHOOK_KEYBOARD_MODE)
-    {
-            setState(ListenerState::productive);
-    }
-    else
-    {
-        qDebug()<<"INVALID MODE from IOHOOK***";
-    }
-
 }
 
 /**
@@ -89,12 +65,34 @@ void XListener::end() {
  * @brief KeyboardListener::pause
  */
 void XListener::pause() {
+
 }
 
 /**
  * @brief KeyboardListener::update
  */
 void XListener::update() {
+    QByteArray Xdata = nodeJS.readAllStandardOutput();
+    Xdata.chop(Xdata.length()-1);
+    QString iohookState{Xdata};
+
+    qDebug()<<"X state="<<iohookState;
+    if(XMode == XListenerMode::MOUSE_AND_KEYBOARD &&  iohookState == IOHOOK_KEYBOARD_AND_MOUSE_MODE)
+    {
+    setState(ListenerState::productive);
+    }
+    else if(XMode == XListenerMode::MOUSE &&  iohookState == IOHOOK_MOUSE_MODE)
+    {
+        setState(ListenerState::productive);
+    }
+    else if(XMode == XListenerMode::KEYBOARD &&  iohookState == IOHOOK_KEYBOARD_MODE)
+    {
+            setState(ListenerState::productive);
+    }
+    else
+    {
+        qDebug()<<"INVALID MODE from IOHOOK***";
+    }
 }
 
 /**

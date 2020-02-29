@@ -58,6 +58,7 @@ class AudioDevice;
  * @brief The Engine::AudioDevice class
  */
 class Engine::AudioDevice : public QIODevice {
+    Q_OBJECT
 public:
     AudioDevice(const QAudioFormat newFormat);
     ~AudioDevice() override;
@@ -74,6 +75,9 @@ public:
 public slots:
     qint64 readData(char *data, qint64 maxlen) override;
     qint64 writeData(const char *data, qint64 len) override;
+
+signals:
+    void audioRead();
 
 private:
     QAudioFormat qAudioFormat;

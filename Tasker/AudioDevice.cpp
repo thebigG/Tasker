@@ -229,7 +229,10 @@ qint64 AudioDevice::writeData(const char *data, qint64 len) {
         captureValue = (qreal(maxValue) / maxAmplitude);
         deviceLevel = captureValue - minAmplitude;
     }
+    emit audioRead();
     qDebug() << "device level in writeData:" << deviceLevel;
+    qDebug()<<"capture value="<<captureValue;
+    qDebug()<<"min amplitude="<<getMinAmplitude();
     return len;
 }
 

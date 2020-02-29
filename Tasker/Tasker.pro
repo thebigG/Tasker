@@ -58,7 +58,6 @@ SOURCES += \
     AudioDevice.cpp \
     AudioListener.cpp \
     AudioMachine.cpp \
-    AudioThread.cpp \
     CommStatsQWidget.cpp \
     Commitment.cpp \
     CreateCommitmentQWidget.cpp \
@@ -81,7 +80,6 @@ HEADERS += \
     AudioDevice.h \
     AudioListener.h \
     AudioMachine.h \
-    AudioThread.h \
     CommStatsQWidget.h \
     Commitment.h \
     CreateCommitmentQWidget.h \
