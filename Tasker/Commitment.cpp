@@ -1,4 +1,5 @@
 #include "Commitment.h"
+#include <QtGlobal>
 #include <QDebug>
 #include <QtMath>
 #include <Session.h>
@@ -27,6 +28,24 @@ Commitment::Commitment(QString newName,
     }
     update();
 }
+#if defined(Q_OS_OSX)
+QDataStream &operator<<(QDataStream& out, QVector<util::TimeWindow>& timeWindows)
+{
+    for(util::TimeWindow t: timeWindows)
+    {
+        out<<t;
+    }
+    return out;
+}
+QDataStream &operator>>(QDataStream& in, QVector<util::TimeWindow>& timeWindows)
+{
+    for(util::TimeWindow t: timeWindows)
+    {
+        in>>t;
+    }
+    return in;
+}
+#endif
 void Commitment::setType(CommitmentType newType) {
     Type = newType;
 }
