@@ -14,22 +14,22 @@ using namespace Engine;
 
 XListener::XListener(Engine::XListenerMode newXMode) {
     XMode = newXMode;
-    nodeJS.setParent(this);
-    nodeJSArguments << IOHOOK_SCRIPT_PATH;
+    xHook.setParent(this);
     switch (XMode) {
     case XListenerMode::MOUSE_AND_KEYBOARD:
         qDebug()<<"X#1";
-        nodeJSArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
+        xHookArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
         break;
     case XListenerMode::MOUSE:
-        nodeJSArguments << IOHOOK_MOUSE_MODE;
-        qDebug()<<"X#1";
+        xHookArguments << IOHOOK_MOUSE_MODE;
+        qDebug()<<"X#2";
         break;
     case XListenerMode::KEYBOARD:
-        nodeJSArguments << IOHOOK_KEYBOARD_MODE;
+        xHookArguments << IOHOOK_KEYBOARD_MODE;
+        qDebug()<<"X#3";
         break;
     }
-    connect(&nodeJS, &QProcess::readyReadStandardOutput, this, &XListener::update);
+    connect(&xHook, &QProcess::readyReadStandardOutput, this, &XListener::update);
 
 }
 /**
@@ -37,9 +37,9 @@ XListener::XListener(Engine::XListenerMode newXMode) {
  */
 XListener::XListener() {
     XMode = XListenerMode::MOUSE_AND_KEYBOARD;
-    nodeJS.setParent(this);
-    nodeJSArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
-    connect(&nodeJS, &QProcess::readyReadStandardOutput, this, &XListener::update);
+    xHook.setParent(this);
+    xHookArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
+    connect(&xHook, &QProcess::readyReadStandardOutput, this, &XListener::update);
 #ifdef Q_OS_LINUX
 
 #endif // setKeyboardPathsOnLinux
@@ -58,7 +58,7 @@ void XListener::start() {
  * @brief KeyboardListener::end
  */
 void XListener::end() {
-    nodeJS.kill();
+    xHook.kill();
 }
 
 /**
@@ -72,7 +72,8 @@ void XListener::pause() {
  * @brief KeyboardListener::update
  */
 void XListener::update() {
-    QByteArray Xdata = nodeJS.readAllStandardOutput();
+    QByteArray Xdata = xHook.readAllStandardOutput();
+    qDebug()<<"update XHook";
     Xdata.chop(Xdata.length()-1);
     QString iohookState{Xdata};
 
@@ -110,7 +111,7 @@ void XListener::resetState() {
 int XListener::startListening() {
     setState(ListenerState::unproductive);
     connect(qApp, &QGuiApplication::lastWindowClosed, this, &XListener::end);
-    nodeJS.start("node", nodeJSArguments);
+    xHook.start(IOHOOK_SCRIPT_PATH, xHookArguments);
     qDebug() << "startListening{yes}-->threadid" << QThread::currentThreadId();
     return EXIT_FAILURE;
 }

@@ -2,10 +2,19 @@
 #define KEYBOARDLISTENER_H
 #include <Listener.h>
 #include <QtCore>
-#define IOHOOK_SCRIPT_PATH "../libs/iohook/iohook.js"
-#define IOHOOK_MOUSE_MODE "m"
-#define IOHOOK_KEYBOARD_MODE "k"
-#define IOHOOK_KEYBOARD_AND_MOUSE_MODE "mk"
+#if defined(Q_OS_LINUX)
+#define IOHOOK_SCRIPT_PATH "../libs/linux/iohook/XListenerHook"
+#endif
+#if defined(Q_OS_OSX)
+#define IOHOOK_SCRIPT_PATH "../libs/macOS/iohook/XListenerHook"
+#endif
+#if defined(Q_OS_WIN)
+#define IOHOOK_SCRIPT_PATH "../libs/windows/iohook/XListenerHook"
+#endif
+#define IOHOOK_MOUSE_MODE "0"
+#define IOHOOK_KEYBOARD_MODE "1"
+#define IOHOOK_KEYBOARD_AND_MOUSE_MODE "2"
+#define IOHOOK_MOUSE_DRAGGED "3"
 namespace Engine {
 class XListener;
 enum class XListenerMode;
@@ -33,8 +42,8 @@ public slots:
     virtual void resetState() override;
 
 private:
-    QProcess nodeJS;
-    QStringList nodeJSArguments;
+    QProcess xHook;
+    QStringList xHookArguments;
     XListenerMode XMode;
 
 signals:
