@@ -6,7 +6,7 @@
 #define IOHOOK_SCRIPT_PATH "../libs/linux/iohook/XListenerHook"
 #endif
 #if defined(Q_OS_OSX)
-#define IOHOOK_SCRIPT_PATH "../libs/macOS/iohook/XListenerHook"
+#define IOHOOK_SCRIPT_PATH "../Resources/XListenerHook"
 #endif
 #if defined(Q_OS_WIN)
 #define IOHOOK_SCRIPT_PATH "../libs/windows/iohook/XListenerHook"
