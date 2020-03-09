@@ -296,18 +296,28 @@ QVector<Session> Commitment::getAllSessions() {
 }
 QString Commitment::summary() const {
     QString summary;
+    qDebug()<<"summary#1";
     summary += "Name:" + name + "\n";
+    qDebug()<<"summary#2";
     summary += "Start Date:" + dateStart.toString();
+    qDebug()<<"summary#3";
     if (!noEndDate) {
         summary += "End Date:" + dateEnd.toString();
     } else {
         summary += "End Date:None";
     }
+    qDebug()<<"summary#4";
     summary += "Goal time:" + QString::number(frequency.time) + "\n";
+    qDebug()<<"summary#5";
     summary += "Frequency" + QString::number(frequency.frequency) + "\n";
+    qDebug()<<"summary#6";
+    if(!commitmentWindows.isEmpty())
+    {
     summary +=
         "current Time Window:\nBegin:" + commitmentWindows.last().startDate.toString() +
-        "\nEnd:" + commitmentWindows.last().endDate.toString() + "\n" + "Done:" + done;
+
+            "\nEnd:" + commitmentWindows.last().endDate.toString() + "\n" + "Done:" + done;
+    }
     return summary;
 }
 /**

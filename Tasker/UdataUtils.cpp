@@ -56,9 +56,15 @@ void UdataUtils::loadUserData(User &newUser) {
     in.setVersion(QDataStream::Qt_5_1);
     qDebug() << "loading data#1";
     in >> newUser;
+    qDebug()<<"neUser data:"<<newUser.getCommitments().length();
     if (!newUser.getCommitments().isEmpty()) {
         newCommitment = newUser.getCommitments().at(0);
         qDebug() << "Commitment summary:" << newUser.getCommitments().at(0).summary();
+    }
+    else
+    {
+        file.close();
+        return;
     }
     qDebug() << "loading data#2";
     file.close();
@@ -171,6 +177,7 @@ int UdataUtils::prepFiles() {
 
         if (newTaskerFolder.exists()) {
             userFilePath = newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
+            qDebug()<<"exists@@@@";
             loadUserData(*User::getInstance());
 
             status = 0;

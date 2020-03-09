@@ -1,6 +1,7 @@
 QT += core gui
 QT += multimedia
 QT += testlib
+QT += charts
 #QMAKE_CXXFLAGS +=  -lXt
 #QMAKE_CXXFLAGS += -lX11
 QMAKE_LFLAGS += -no-pie
@@ -71,6 +72,7 @@ SOURCES += \
     TimerWindowQWidget.cpp \
     UdataUtils.cpp \
     User.cpp \
+    WeeklySnaphot.cpp \
     XListener.cpp \
     livesession.cpp \
     mainui.cpp \
@@ -94,6 +96,7 @@ HEADERS += \
     TaskerUIMainWindowQWidget.h \
     TimerWindowQWidget.h \
     UdataUtils.h \
+    WeeklySnaphott.h \
     XListener.h \
     livesession.h \
     mainui.h \
