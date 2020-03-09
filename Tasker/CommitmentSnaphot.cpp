@@ -1,14 +1,15 @@
-#include "WeeklySnaphott.h"
+#include "CommitmentSnapshot.h"
 
-WeeklySnaphot::WeeklySnaphot(int numberOfBars)
+WeeklySnaphot::WeeklySnaphot(int numberOfBars, QString customCategories)
 {
 //    sets.push_back(QBarSet("Test#1"));
-    *sets.last() <<12;
+    *sets.last() <<12<<10<<3<<23<<7<<15<<12<<20;
     series.append(sets.last());
     chart.addSeries(&series);
     chart.setTitle("Simple barchart example");
     chart.setAnimationOptions(QChart::SeriesAnimations);
-    categories << "Jan";
+    categories << "Mon"<<"Tuesday"<<"Wednesday"<<"Thursday"<<"Friday"
+               <<"Saturday"<<customCategories;
     x.append(categories);
     chart.addAxis(&x, Qt::AlignBottom);
     series.attachAxis(&x);

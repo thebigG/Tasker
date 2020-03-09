@@ -20,7 +20,7 @@ public:
     QChartView view;
 
 public:
-    WeeklySnaphot(int numberOfBars = 7);
+    WeeklySnaphot(int numberOfBars = 7, QString customeCatgeory ="Sunday");
 
 
 };

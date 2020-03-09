@@ -61,6 +61,7 @@ SOURCES += \
     AudioMachine.cpp \
     CommStatsQWidget.cpp \
     Commitment.cpp \
+    CommitmentSnaphot.cpp \
     CreateCommitmentQWidget.cpp \
     Listener.cpp \
     Session.cpp \
@@ -72,7 +73,6 @@ SOURCES += \
     TimerWindowQWidget.cpp \
     UdataUtils.cpp \
     User.cpp \
-    WeeklySnaphot.cpp \
     XListener.cpp \
     livesession.cpp \
     mainui.cpp \
@@ -84,6 +84,7 @@ HEADERS += \
     AudioMachine.h \
     CommStatsQWidget.h \
     Commitment.h \
+    CommitmentSnapshot.h \
     CreateCommitmentQWidget.h \
     Listener.h \
     Session.h \
@@ -96,7 +97,6 @@ HEADERS += \
     TaskerUIMainWindowQWidget.h \
     TimerWindowQWidget.h \
     UdataUtils.h \
-    WeeklySnaphott.h \
     XListener.h \
     livesession.h \
     mainui.h \

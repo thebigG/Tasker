@@ -24,7 +24,9 @@
 #include <cstdlib>
 #include <iostream>
 #include <QMainWindow>
-#include <WeeklySnaphott.h>
+#include <CommitmentSnapshot.h>
+#include <QPushButton>
+#include <QGridLayout>
 
 using std::cout;
 using std::endl;
@@ -50,9 +52,23 @@ int main(int argc, char *argv[]) {
 //    widget->update();
 //    widget->show();
     QMainWindow window;
-    WeeklySnaphot* chart = new WeeklySnaphot();
-    window.setCentralWidget(&chart->view);
-    window.resize(420, 300);
+    QPushButton* clickMe = new QPushButton("clickMe!");
+    window.setLayout(new QGridLayout());
+    QVector<WeeklySnaphot*>* charts = new QVector<WeeklySnaphot*>(0);
+    charts->push_back(new WeeklySnaphot{7,"Custom"});
+    charts->push_back(new WeeklySnaphot{7,"Sunday"});
+    WeeklySnaphot* chart = new WeeklySnaphot(7,"Custom");
+    clickMe->setVisible(true);
+    QObject::connect(clickMe,&QPushButton::clicked, [clickMe, charts]
+    {
+        qDebug()<<"Hello click!!!"<<charts->length();
+        charts->at(0)->view.setChart(&charts->at(1)->chart);
+
+    });
+//    window.setCentralWidget(&charts->last()->view);
+    window.layout()->addWidget(clickMe);
+    window.layout()->addWidget(&charts->at(0)->view);
+    window.resize(500, 300);
     window.show();
     return a.exec();
 }
