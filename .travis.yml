@@ -25,6 +25,7 @@ jobs:
       - sudo apt-get -y install qt59-meta-minimal
       - sudo apt-get -y install qt59-meta-full
       - sudo apt-get -y install qt59-meta-dbg-full
+      - sudo apt install libqt5charts5 libqt5charts5-dev
       - sudo apt-get update
       - sudo apt-get install gcc-7 g++-7
       - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7
@@ -34,12 +35,12 @@ jobs:
       - sudo apt install binutils-2.26
       - ld --version
       - sudo apt install clang-format-3.6
-      - git clone https://github.com/qt/qtcharts
-      - cd qtcharts
-      - git checkout 5.9
-      - qmake
-      - make
-      - cd ..
+      # - git clone https://github.com/qt/qtcharts
+      # - cd qtcharts
+      # - git checkout 5.9
+      # - qmake
+      # - make
+      # - cd ..
 
 
     script:
