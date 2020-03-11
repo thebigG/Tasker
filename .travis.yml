@@ -38,7 +38,7 @@ jobs:
       - git checkout 5.9
       - qmake
       - make
-      - make install
+      - sudo make install
       - cd ..
 
 
