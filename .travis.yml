@@ -1,39 +1,42 @@
-sudo: required
-dist: trusty
-language: cpp
-compiler: g++
-install: export CXX="g++-7"
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-7
-notifications:
- email:
-  on_success: never
-  on_failure: always
-before_install:
-  - sudo apt-get update -qq
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test # C++14
-  - sudo apt-get -y install software-properties-common
-  - sudo add-apt-repository -y ppa:beineri/opt-qt597-trusty
-  - sudo apt-get -y update
-  - sudo apt-get -y install qt59-meta-minimal
-  - sudo apt-get -y install qt59-meta-full
-  - sudo apt-get -y install qt59-meta-dbg-full
-  - sudo apt-get update
-  - sudo apt-get install gcc-7 g++-7
-  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7
-  - source /opt/qt59/bin/qt59-env.sh
-  - sudo apt install libx11-dev
-  - sudo apt install libxcb-xkb-dev
-  - sudo apt install binutils-2.26
-  - ld --version
-  - sudo apt install clang-format-3.6
+jobs:
+  include:
+  - os: linux
+    sudo: required
+    dist: trusty
+    language: cpp
+    compiler: g++
+    install: export CXX="g++-7"
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-7
+    notifications:
+     email:
+      on_success: never
+      on_failure: always
+    before_install:
+      - sudo apt-get update -qq
+      - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test # C++14
+      - sudo apt-get -y install software-properties-common
+      - sudo add-apt-repository -y ppa:beineri/opt-qt597-trusty
+      - sudo apt-get -y update
+      - sudo apt-get -y install qt59-meta-minimal
+      - sudo apt-get -y install qt59-meta-full
+      - sudo apt-get -y install qt59-meta-dbg-full
+      - sudo apt-get update
+      - sudo apt-get install gcc-7 g++-7
+      - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7
+      - source /opt/qt59/bin/qt59-env.sh
+      - sudo apt install libx11-dev
+      - sudo apt install libxcb-xkb-dev
+      - sudo apt install binutils-2.26
+      - ld --version
+      - sudo apt install clang-format-3.6
 
 
-script:
-- gcc-7 --version
-- gcc --version
-- source ./build.sh
+    script:
+    - gcc-7 --version
+    - gcc --version
+    - source ./build.sh
