@@ -34,6 +34,12 @@ jobs:
       - sudo apt install binutils-2.26
       - ld --version
       - sudo apt install clang-format-3.6
+      - git clone https://github.com/qt/qtcharts
+      - cd qtcharts
+      - git checkout 5.9
+      - qmake
+      - make
+      - cd ..
 
 
     script:
