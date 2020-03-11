@@ -34,7 +34,7 @@ using std::endl;
 using namespace Engine;
 using namespace udata;
 using namespace std;
-
+using namespace QtCharts;
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
 //    qDebug() << "returned from starthook^^^^^^^^";
