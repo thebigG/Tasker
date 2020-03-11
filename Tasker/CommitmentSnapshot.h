@@ -1,6 +1,7 @@
 #ifndef WEEKLYSNAPHOT_H
 #define WEEKLYSNAPHOT_H
 #include <QVector>
+#include <QtCharts>
 #include <QtCharts/QBarSeries>
 #include <QtCharts/QBarSet>
 #include <QtCharts/QChart>
