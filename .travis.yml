@@ -2,7 +2,7 @@ jobs:
   include:
   - os: linux
     sudo: required
-    dist: trusty
+    dist: xenial
     language: cpp
     compiler: g++
     install: export CXX="g++-7"
