@@ -21,7 +21,6 @@ jobs:
       - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test # C++14
       - sudo apt-get -y install software-properties-common
       - sudo add-apt-repository -y ppa:beineri/opt-qt597-trusty
-      - sudo apt-get -y update
       - sudo apt-get -y install qt59-meta-minimal
       - sudo apt-get -y install qt59-meta-full
       - sudo apt-get -y install qt59-meta-dbg-full
