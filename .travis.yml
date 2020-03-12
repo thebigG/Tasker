@@ -47,5 +47,7 @@ jobs:
     - gcc --version
     - source ./build.sh
   - os: osx
+    before_install:
+      - brew install qt5
     script:
       - source ./build_macOS.sh
