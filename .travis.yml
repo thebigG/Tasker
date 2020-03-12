@@ -46,6 +46,6 @@ jobs:
     - gcc-7 --version
     - gcc --version
     - source ./build.sh
-  - os osx:
+  - os: osx
     script:
       - source ./build_macOS.sh
