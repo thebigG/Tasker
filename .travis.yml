@@ -1,6 +1,6 @@
 jobs:
   include:
-  - os: linux
+  # - os: linux
     # sudo: required
     # dist: trusty
     # language: cpp
@@ -50,4 +50,4 @@ jobs:
     before_install:
       - brew install qt5
     script:
-      - source ./build_macOS.sh
+      - source ./build.sh
