@@ -23,8 +23,13 @@ User::User(QVector<Commitment> newCommitments) {
  */
 User::User() {
 }
+void User::updateCurrentCommitment(int newCommitmentIndex)
+{
+    currentCommitment = newCommitmentIndex;
+}
 
 /**
+
  * @brief User::User
  * @param newUsername
  */

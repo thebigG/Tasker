@@ -24,6 +24,7 @@ public:
     void setUsername(QString &);
     QString &getUsername();
     void addSession(Session &);
+    void updateCurrentCommitment(int newCommitmentIndex);
 
 private:
     User(QVector<Commitment>);

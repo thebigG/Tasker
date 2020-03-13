@@ -216,6 +216,7 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
     qDebug() << "changed commitment index:" << currentIndex;
     qDebug() << "changed commitment name:"
              << User::getInstance()->getCommitments().at(currentIndex).getName();
+    User::getInstance()->updateCurrentCommitment(selectedCommitmentIndex);
 }
 void CommStatsQWidget::newLiveSessionSlot() {
     //    this->hide();

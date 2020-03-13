@@ -93,7 +93,13 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QWidget" name="commStatsHubQWidget" native="true"/>
+    <widget class="QWidget" name="commStatsHubQWidget" native="true">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QWidget" name="CommitmentSnaphotQWidget" native="true"/>
+      </item>
+     </layout>
+    </widget>
    </item>
   </layout>
  </widget>

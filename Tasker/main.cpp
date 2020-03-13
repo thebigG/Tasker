@@ -54,15 +54,16 @@ int main(int argc, char *argv[]) {
     QMainWindow window;
     QPushButton* clickMe = new QPushButton("clickMe!");
     window.setLayout(new QGridLayout());
-    QVector<WeeklySnaphot*>* charts = new QVector<WeeklySnaphot*>(0);
-    charts->push_back(new WeeklySnaphot{7,"Custom"});
-    charts->push_back(new WeeklySnaphot{7,"Sunday"});
-    WeeklySnaphot* chart = new WeeklySnaphot(7,"Custom");
+    QVector<CommitmentSnaphot*>* charts = new QVector<CommitmentSnaphot*>(0);
+    charts->push_back(new CommitmentSnaphot{7,"Custom"});
+    charts->push_back(new CommitmentSnaphot{7,"Sunday"});
+    CommitmentSnaphot* chart = new CommitmentSnaphot(7,"Custom");
     clickMe->setVisible(true);
     QObject::connect(clickMe,&QPushButton::clicked, [clickMe, charts]
     {
         qDebug()<<"Hello click!!!"<<charts->length();
-        charts->at(0)->view.setChart(&charts->at(1)->chart);
+//        charts->at(0)->view.setChart(&charts->at(1)->chart);
+        charts->at(0)->sets.last()->replace(0,5);
 
     });
 //    window.setCentralWidget(&charts->last()->view);

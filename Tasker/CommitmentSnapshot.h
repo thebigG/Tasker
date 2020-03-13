@@ -8,10 +8,13 @@
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
 #include <QtCharts/QChartView>
+#include <memory>
 QT_CHARTS_USE_NAMESPACE
-class WeeklySnaphot
+class CommitmentSnaphot
 {
 public:
+    std::unique_ptr<QBarSet> productiveBarSet = std::make_unique<QBarSet>("Productive");
+    std::unique_ptr<QBarSet> unproductiveBarSet = std::make_unique<QBarSet>("Unproductive");
     QVector<QBarSet*> sets{new QBarSet{"Test#1"}};
     QBarSeries series;
     QChart chart;
@@ -21,7 +24,7 @@ public:
     QChartView view;
 
 public:
-    WeeklySnaphot(int numberOfBars = 7, QString customeCatgeory ="Sunday");
+    CommitmentSnaphot(int numberOfBars = 7, QString customeCatgeory ="Sunday");
 
 
 };
