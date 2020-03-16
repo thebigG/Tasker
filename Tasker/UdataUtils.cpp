@@ -69,7 +69,8 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int m
 
 }
 #else
-void UdataUtils::generateRandomCommitment()
+void UdataUtils::generateRandomCommitment(QString name, int numberOfTimeWindows, int minProductiveTime, int maxProductiveTime,
+                                          int minUnproducitveTime, int maxUnproductiveTime))
 {
 
 }
