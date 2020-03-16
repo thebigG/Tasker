@@ -60,7 +60,10 @@ public:
         int64_t result = -1;
         return (result = seconds < 0 ? result : seconds / SECONDS_IN_MINUTE);
     }
-
+    inline static int64_t minutesToSeconds(int64_t Minutes) {
+        int64_t result = -1;
+        return (result = Minutes < 0 ? result : Minutes * SECONDS_IN_MINUTE);
+    }
     /**
      * @brief util::StatsUtility::toHours
      * @param seconds quantity of seconds

@@ -4,7 +4,9 @@
 #include <QDir>
 #include <QFile>
 #include <QProcess>
-
+#include "StatsUtility.h"
+#include <random>
+#include <iostream>
 using udata::UdataUtils;
 
 QString udata::UdataUtils::userFilePath = "";
@@ -14,6 +16,64 @@ QString udata::UdataUtils::userFilePath = "";
  */
 UdataUtils::UdataUtils() {
 }
+
+#ifdef __TASKER_DEBUG__
+void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int minProductiveTime, int maxProductiveTime,
+                                    int minUnproducitveTime, int maxUnproductiveTime)
+{
+    Commitment newCommitment{};
+    newCommitment.setName(name);
+
+    QVector<util::TimeWindow> timeWindows(numberOfTimeWindows);
+    QDate today = QDate::currentDate();
+    newCommitment.setDateStart(today);
+
+    std::random_device rd;  //Will be used to obtain a seed for the random number engine
+    std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+    std::uniform_int_distribution<> dis;
+//    dis = std::uniform_int_distribution<int>(util::StatsUtility(minProductiveTime),util::StatsUtility::toMinutes(maxProductiveTime));
+    CommitmentFrequency temptFrequency;
+    temptFrequency.timeWindowSize  =7;
+    temptFrequency.time = maxProductiveTime;
+    dis = std::uniform_int_distribution<int>(1,7);
+    temptFrequency.frequency = dis(gen);
+    util::TimeWindow newTimeWindow;
+    QVector<Session> newSessions;
+    QDate sessionDate;
+    Session newSession;
+    newCommitment.setDateEnd(today.addDays(numberOfTimeWindows*temptFrequency.timeWindowSize));
+    newCommitment.setFrequency(temptFrequency.time,temptFrequency.frequency,temptFrequency.timeWindowSize);
+    for(int i =0;i<numberOfTimeWindows;i++)
+    {
+        newTimeWindow.startDate = today;
+        sessionDate = today;
+        for(int j =0;j<temptFrequency.frequency;j++)
+        {
+            newSession = Session(Task{}, temptFrequency.time, sessionDate);
+            dis = std::uniform_int_distribution<int>(minProductiveTime, maxProductiveTime);
+            newSession.setProductiveTime(dis(gen));
+            dis = std::uniform_int_distribution<int>(minUnproducitveTime, maxUnproductiveTime);
+            newSession.setUnproductiveTime(dis(gen));
+            newSessions.append(newSession);
+            sessionDate =  sessionDate.addDays(1);
+
+
+        }
+       newTimeWindow.endDate = today.addDays(7);
+       newTimeWindow.sessions = newSessions;
+       timeWindows.append(newTimeWindow);
+       today = newTimeWindow.endDate.addDays(1);
+    }
+    newCommitment.setCommitmentWindows(timeWindows);
+    User::getInstance()->addCommitment(newCommitment);
+
+}
+#else
+void UdataUtils::generateRandomCommitment()
+{
+
+}
+#endif
 
 /**
  * @brief UdataUtils::saveUserData

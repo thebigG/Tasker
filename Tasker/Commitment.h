@@ -163,20 +163,24 @@ public:
     void setDateEnd(QDate value);
     QVector<Session> getAllSessions();
     void setSessions(QVector<udata::Session> value);
+    void setName(QString);
     const QString &getName() const;
     void setType(CommitmentType);
-    CommitmentType getType() const;
+    CommitmentType& getType();
     QString summary() const;
     void updateCommitmentWindows(Session);
     void updateCommitmentWindows();
     void update();
     bool isDone();
     void setDone(bool);
+    void setFrequency(long long newTime, int newFrequency, int newTimeWinowSize);
+    void setNoEndDate(bool);
+    bool hasEndDate();
+    CommitmentFrequency& getFrequency();
+    void setCommitmentWindows(QVector<util::TimeWindow>& newCommitmentWindows);
     QVector<util::TimeWindow> &getCommitmentWindows() const;
     friend QDataStream &operator<<(QDataStream &out, const udata::Commitment &newCommitment);
     friend QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
-    //   friend QDataStream&operator<<(QDataStream &out, const util::TimeWindow &newTimeWindow);
-    //  friend QDataStream &operator>>(QDataStream &in, util::TimeWindow &newTimeWindow);
 };
 
 #endif // COMMITMENT_H

@@ -37,39 +37,43 @@ using namespace std;
 using namespace QtCharts;
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-//    qDebug() << "returned from starthook^^^^^^^^";
-//    if (UdataUtils::prepFiles() == 0) {
-//        qDebug("files was allocated successfully");
-//    } else {
-//        qDebug("prepFiles failed");
-//    }
-//    QObject::connect(&a, &QGuiApplication::lastWindowClosed, &MainUI::saveTaskerStateSlot);
-//    CommStatsQWidget *widget = nullptr;
-//    qDebug() << "Tasker Debug mode";
-//    std::cout << "version:" << __cplusplus;
-//    widget = MainUI::getInstance();
-//    qDebug() << "thread id for UI:" << QThread::currentThreadId();
-//    widget->update();
-//    widget->show();
-    QMainWindow window;
-    QPushButton* clickMe = new QPushButton("clickMe!");
-    window.setLayout(new QGridLayout());
-    QVector<CommitmentSnaphot*>* charts = new QVector<CommitmentSnaphot*>(0);
-    charts->push_back(new CommitmentSnaphot{7,"Custom"});
-    charts->push_back(new CommitmentSnaphot{7,"Sunday"});
-    CommitmentSnaphot* chart = new CommitmentSnaphot(7,"Custom");
-    clickMe->setVisible(true);
-    QObject::connect(clickMe,&QPushButton::clicked, [clickMe, charts]
-    {
-        qDebug()<<"Hello click!!!"<<charts->length();
-//        charts->at(0)->view.setChart(&charts->at(1)->chart);
-        charts->at(0)->sets.last()->replace(0,5);
+    qDebug() << "returned from starthook^^^^^^^^";
+    if (UdataUtils::prepFiles() == 0) {
+        qDebug("files was allocated successfully");
+    } else {
+        qDebug("prepFiles failed");
+    }
+    UdataUtils::generateCommitment("Generated", 8, util::StatsUtility::minutesToSeconds(10),
+                                   util::StatsUtility::minutesToSeconds(90),
+                                   util::StatsUtility::minutesToSeconds(0),
+                                   util::StatsUtility::minutesToSeconds(45));
+    qDebug() << "Commitment summary:" << User::getInstance()->getCommitments().at(0).summary();
+    QObject::connect(&a, &QGuiApplication::lastWindowClosed, &MainUI::saveTaskerStateSlot);
+    CommStatsQWidget *widget = nullptr;
+    qDebug() << "Tasker Debug mode";
+    std::cout << "version:" << __cplusplus;
+    widget = MainUI::getInstance();
+    qDebug() << "thread id for UI:" << QThread::currentThreadId();
+    widget->update();
+    widget->show();
+//    QMainWindow window;
+//    QPushButton* clickMe = new QPushButton("clickMe!");
+//    window.setLayout(new QGridLayout());
+//    QVector<CommitmentSnaphot*>* charts = new QVector<CommitmentSnaphot*>(0);
+//    charts->push_back(new CommitmentSnaphot{7,"Custom"});
+//    charts->push_back(new CommitmentSnaphot{7,"Sunday"});
+//    CommitmentSnaphot* chart = new CommitmentSnaphot(7,"Custom");
+//    clickMe->setVisible(true);
+//    QObject::connect(clickMe,&QPushButton::clicked, [clickMe, charts]
+//    {
+//        qDebug()<<"Hello click!!!"<<charts->length();
+////        charts->at(0)->view.setChart(&charts->at(1)->chart);
 
-    });
-//    window.setCentralWidget(&charts->last()->view);
-    window.layout()->addWidget(clickMe);
-    window.layout()->addWidget(&charts->at(0)->view);
-    window.resize(500, 300);
-    window.show();
+//    });
+////    window.setCentralWidget(&charts->last()->view);
+//    window.layout()->addWidget(clickMe);
+//    window.layout()->addWidget(&charts->at(0)->view);
+//    window.resize(500, 300);
+//    window.show();
     return a.exec();
 }

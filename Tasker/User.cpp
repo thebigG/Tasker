@@ -27,6 +27,10 @@ void User::updateCurrentCommitment(int newCommitmentIndex)
 {
     currentCommitment = newCommitmentIndex;
 }
+Commitment& User::getCurrentCommitment()
+{
+    return commitments[currentCommitment];
+}
 
 /**
 

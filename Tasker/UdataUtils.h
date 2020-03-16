@@ -16,8 +16,8 @@
 
 namespace udata {
 class UdataUtils;
-// static const QString USERDATA_FILEPATH = "";
-} // namespace udata
+
+}
 
 /**
  * @brief The udata::UdataUtils class
@@ -28,6 +28,10 @@ private:
     static bool firstTimer();
 
 public:
+    #ifdef __TASKER_DEBUG__
+    static void generateCommitment(QString name, int numberOfTimeWindows, int minProductiveTime, int maxProductiveTime,
+                                   int minUnproducitveTime, int maxUnproductiveTime);
+    #endif
     static void saveUserData(User &);
     static void loadUserData(User &);
     static int prepFiles();

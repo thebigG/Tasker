@@ -15,7 +15,6 @@ class CommitmentSnaphot
 public:
     std::unique_ptr<QBarSet> productiveBarSet = std::make_unique<QBarSet>("Productive");
     std::unique_ptr<QBarSet> unproductiveBarSet = std::make_unique<QBarSet>("Unproductive");
-    QVector<QBarSet*> sets{new QBarSet{"Test#1"}};
     QBarSeries series;
     QChart chart;
     QStringList categories;

@@ -28,6 +28,17 @@ Commitment::Commitment(QString newName,
     }
     update();
 }
+void Commitment::setFrequency(long long newTime, int newFrequency, int newTimeWinowSize)
+{
+    frequency.time = newTime;
+    frequency.frequency = newFrequency;
+    frequency.timeWindowSize = newTimeWinowSize;
+
+}
+void Commitment::setCommitmentWindows(QVector<util::TimeWindow>& newCommitmentWindows)
+{
+    commitmentWindows = newCommitmentWindows;
+}
 #if defined(Q_OS_OSX)
 QDataStream &operator<<(QDataStream& out, QVector<util::TimeWindow>& timeWindows)
 {
@@ -49,10 +60,24 @@ QDataStream &operator>>(QDataStream& in, QVector<util::TimeWindow>& timeWindows)
 void Commitment::setType(CommitmentType newType) {
     Type = newType;
 }
-CommitmentType Commitment::getType() const {
+CommitmentType &Commitment::getType()  {
     return Type;
 }
+void Commitment::setNoEndDate(bool newNoEndDate)
+{
+    noEndDate = newNoEndDate;
+}
+bool Commitment::hasEndDate()
+{
+    return !noEndDate;
+}
+
+void Commitment::setName(QString newName)
+{
+    name = newName;
+}
 /**
+
  * @brief Commitment::getName
  * @return
  */
