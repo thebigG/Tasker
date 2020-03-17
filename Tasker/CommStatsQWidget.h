@@ -10,12 +10,14 @@
 #define DELETE_SESSION_STRING "Delete Session"
 
 #include "User.h"
+#include <memory>
 #include <CreateCommitmentQWidget.h>
 #include <QMenu>
 #include <QMenuBar>
 #include <QTreeWidget>
 #include <QWidget>
 #include <TimerWindowQWidget.h>
+#include <CommitmentSnapshot.h>
 namespace Ui {
 class CommStatsQWidget;
 }
@@ -38,8 +40,6 @@ private slots:
     void newCommitmentSlot(bool);
     void deleteCommitmentSlot(bool);
     void newSessionSlot(bool);
-    void addCommitmentButtonSlot();
-    void removeCommitmentButtonSlot();
     void currentCommitmentChangedSlot(QTreeWidgetItem *, QTreeWidgetItem *);
     void newLiveSessionSlot();
     void on_statsQFrame_destroyed();
@@ -54,8 +54,10 @@ private:
     CreateCommitmentQWidget createCommimentWindow;
     TimerWindowQWidget timerWindow;
     QMenuBar mainMenuBar;
+    udata::CommitmentSnaphot* snapshot;
     QMenu commitmentMenu{ COMMITMENT_MENU_STRING };
     QMenu sessionMenu{ SESSION_MENU_STRING };
+
 };
 
 #endif // WIDGET_COMMSTATS_H

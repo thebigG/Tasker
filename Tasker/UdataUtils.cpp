@@ -64,6 +64,7 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int m
        timeWindows.append(newTimeWindow);
        today = newTimeWindow.endDate.addDays(1);
     }
+    qDebug()<<"size of generated time windows="<<timeWindows.length();
     newCommitment.setCommitmentWindows(timeWindows);
     User::getInstance()->addCommitment(newCommitment);
 

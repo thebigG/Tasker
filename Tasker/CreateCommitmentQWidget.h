@@ -6,6 +6,7 @@
 #include <QIntValidator>
 #include <QLineEdit>
 #include <QWidget>
+#include <CommitmentSnapshot.h>
 #define WRITING_STRING "Writing"
 #define MUSIC_STRING "Compose Music"
 #define CUSTOM_STRING "Custom"

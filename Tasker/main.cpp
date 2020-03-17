@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
     } else {
         qDebug("prepFiles failed");
     }
-    UdataUtils::generateCommitment("Generated", 8, util::StatsUtility::minutesToSeconds(10),
+    UdataUtils::generateCommitment("Generated#1", 8, util::StatsUtility::minutesToSeconds(10),
                                    util::StatsUtility::minutesToSeconds(90),
                                    util::StatsUtility::minutesToSeconds(0),
                                    util::StatsUtility::minutesToSeconds(45));

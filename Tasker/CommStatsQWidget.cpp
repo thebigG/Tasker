@@ -20,23 +20,13 @@ using udata::User;
 CommStatsQWidget::CommStatsQWidget(QWidget *parent)
 : QWidget(parent), ui(new Ui::CommStatsQWidget) {
     ui->setupUi(this);
-    //    connect(ui->addCommitmentQPushButton, &QPushButton::clicked, this,
-    //            &CommStatsQWidget::addCommitmentButtonSlot);
-    //    connect(ui->removeCommitmentQPushButton, &QPushButton::clicked, this,
-    //            &CommStatsQWidget::removeCommitmentButtonSlot);
     connect(ui->commitmentsQTreeWidget, &QTreeWidget::currentItemChanged, this,
             &CommStatsQWidget::currentCommitmentChangedSlot);
-    //    connect(ui->liveSessionQPushButton, &QPushButton::clicked, this,
-    //            &CommStatsQWidget::newLiveSessionSlot);
-    //    this->ui->topBarQWidget->hide();
     connect(commitmentMenu.addAction(NEW_COMMITMENT_STRING),
             &QAction::triggered, this, &CommStatsQWidget::newCommitmentSlot);
-    //    commitmentMenu.addAction(NEW_COMMITMENT_STRING);
     connect(commitmentMenu.addAction(DELETE_COMMITMENT_STRING),
             &QAction::triggered, this, &CommStatsQWidget::deleteCommitmentSlot);
     commitmentMenu.addAction(EDIT_COMMITMENT_STRING);
-    //    commitmentMenu.addAction(DELETE_COMMITMENT_STRING);
-    //    sessionMenu.addAction(NEW_SESSION_STRING);
     connect(sessionMenu.addAction(NEW_SESSION_STRING), &QAction::triggered,
             this, &CommStatsQWidget::newSessionSlot);
     sessionMenu.addAction(EDIT_SESSION_STRING);
@@ -44,29 +34,9 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
     mainMenuBar.addMenu(&commitmentMenu);
     mainMenuBar.addMenu(&sessionMenu);
     this->layout()->setMenuBar(&mainMenuBar);
-    //    TempChartQWidget *mw = new TempChartQWidget;
-    //    connect(this->ui->addCommitmentQCommandLinkButton, &QCommandLinkButton::clicked,
-    //            this, &CommStatsQWidget::addCommitmentButtonSlot);
-    //    QFrame *fstats = ui->statsQFrame;
-
-    //    auto layout = new QVBoxLayout();
-
-    /*
-    {
-        QVector<Commitment> v = User::getInstance()->getCommitments();
-
-        QVector<Commitment>::iterator it = v.begin();
-        while (it != v.end()) {
-            qDebug() << (*it).getName() << ": " << (*it).getDateStart().toString();
-            ++it;
-        }
-
-        qDebug() << "vector size: " << v.size();
-    }
-    */
-
-    // layout is dynamically allocated..delete it with conditions later
-    // layout will cause a leak
+    this->ui->CommitmentSnaphotQWidget->setLayout(new QGridLayout());
+    snapshot = new udata::CommitmentSnaphot{};
+    this->ui->CommitmentSnaphotQWidget->layout()->addWidget(&snapshot->getView());
 }
 
 void CommStatsQWidget::newCommitmentSlot(bool checked) {
@@ -77,32 +47,9 @@ void CommStatsQWidget::newCommitmentSlot(bool checked) {
  */
 CommStatsQWidget::~CommStatsQWidget() {
     qDebug("CommStatsQWidget destructor#1");
+    delete snapshot;
     delete ui;
     qDebug("CommStatsQWidget destructor#2");
-}
-
-/**
- * @brief CommStatsQWidget::addCommitmentButtonSlot
- */
-void CommStatsQWidget::addCommitmentButtonSlot() {
-    //    this->hide();
-    //    CreateCommitmentQWidget &cc =
-    //    MainUI::getInstance()->getCreateCommitment(); cc.show();
-    //    this->createCommimentWindow.show();
-}
-void CommStatsQWidget::removeCommitmentButtonSlot() {
-    //    TASKER_LOG("deleting#1:" << selectedCommitmentIndex);
-    //    int tempIndex = selectedCommitmentIndex;
-    //    qDebug()<<"removeCommitmentButtonSlot#1";
-    //    if (selectedCommitmentIndex == (User::getInstance()->getCommitments().size() - 1)) {
-    //        selectedCommitmentIndex--;
-    //    }
-    //    User::getInstance()->getCommitments().removeAt(tempIndex);
-    //    isDelete = true; // This is for the currentItemChanged signal, which gets emitted by delete keyword
-    //    ui->commitmentsQTreeWidget->removeItemWidget(ui->commitmentsQTreeWidget->topLevelItem(tempIndex),0);
-    ////    delete ui->commitmentsQTreeWidget->topLevelItem(tempIndex);
-    //    qDebug() << "deleting#2:" << tempIndex;
-    //    qDebug() << "deleting#3:" << tempIndex;
 }
 
 void CommStatsQWidget::deleteCommitmentSlot(bool checked) {
@@ -217,6 +164,11 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
     qDebug() << "changed commitment name:"
              << User::getInstance()->getCommitments().at(currentIndex).getName();
     User::getInstance()->updateCurrentCommitment(selectedCommitmentIndex);
+    if(User::getInstance()->getCommitments().size() != 0)
+    {
+        qDebug()<<"Running???";
+//        snapshot->update(User::getInstance()->getCurrentCommitment());
+    }
 }
 void CommStatsQWidget::newLiveSessionSlot() {
     //    this->hide();

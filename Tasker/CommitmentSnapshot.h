@@ -8,24 +8,31 @@
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
 #include <QtCharts/QChartView>
+#include <Commitment.h>
 #include <memory>
 QT_CHARTS_USE_NAMESPACE
+namespace udata {
+
+
 class CommitmentSnaphot
 {
-public:
-    std::unique_ptr<QBarSet> productiveBarSet = std::make_unique<QBarSet>("Productive");
-    std::unique_ptr<QBarSet> unproductiveBarSet = std::make_unique<QBarSet>("Unproductive");
+private:
+    QBarSet productiveBarSet{"Productive"};
+    QBarSet unproductiveBarSet{"Unproductive"};
     QBarSeries series;
     QChart chart;
     QStringList categories;
     QBarCategoryAxis x;
     QValueAxis y;
     QChartView view;
-
 public:
+    QChartView& getView();
+    void update(Commitment&);
     CommitmentSnaphot(int numberOfBars = 7, QString customeCatgeory ="Sunday");
 
 
-};
 
+
+};
+}
 #endif // WEEKLYSNAPHOT_H

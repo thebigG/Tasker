@@ -187,6 +187,10 @@ bool Commitment::isDone() {
 QVector<util::TimeWindow> &Commitment::getCommitmentWindows() const {
     return commitmentWindows;
 }
+util::TimeWindow& Commitment::getCurrentTimeWindow()
+{
+    return commitmentWindows[commitmentWindows.size()-1];
+}
 /**
  * @brief udata::operator << This writes an interval to a data stream(file).
  * @param out The data stream to write to, the file.
@@ -220,6 +224,7 @@ QDataStream &udata::operator<<(QDataStream &out, const udata::Commitment &newCom
     out << newCommitment.name << newCommitment.dateStart << newCommitment.dateEnd
         << newCommitment.frequency << newCommitment.Type << newCommitment.noEndDate
         << newCommitment.commitmentWindows << newCommitment.done;
+    qDebug()<<"commitment window when saiving size="<<newCommitment.commitmentWindows.size();
     return out;
 }
 
@@ -251,6 +256,7 @@ QDataStream &udata::operator>>(QDataStream &in, udata::Commitment &newCommitment
 }
 QDataStream &udata::operator<<(QDataStream &out, const util::TimeWindow &newTimeWindow) {
     out << newTimeWindow.startDate << newTimeWindow.endDate << newTimeWindow.sessions;
+    qDebug()<<"newTimeWindow startDate=*****************#2";
     return out;
 }
 QDataStream &udata::operator>>(QDataStream &in, util::TimeWindow &newTimeWindow) {
@@ -258,6 +264,7 @@ QDataStream &udata::operator>>(QDataStream &in, util::TimeWindow &newTimeWindow)
     QVector<Session> newSessions;
     in >> newStartDate >> newEndDate >> newSessions;
     newTimeWindow.startDate = newStartDate;
+    qDebug()<<"newTimeWindow startDate=*****************#1";//<<newTimeWindow.startDate;
     newTimeWindow.endDate = newEndDate;
     newTimeWindow.sessions = newSessions;
     return in;
@@ -342,7 +349,9 @@ QString Commitment::summary() const {
         "current Time Window:\nBegin:" + commitmentWindows.last().startDate.toString() +
 
             "\nEnd:" + commitmentWindows.last().endDate.toString() + "\n" + "Done:" + done;
+
     }
+        qDebug()<<"commitmentWindows size="<<commitmentWindows.size();
     return summary;
 }
 /**

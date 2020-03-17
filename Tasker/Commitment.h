@@ -179,6 +179,7 @@ public:
     CommitmentFrequency& getFrequency();
     void setCommitmentWindows(QVector<util::TimeWindow>& newCommitmentWindows);
     QVector<util::TimeWindow> &getCommitmentWindows() const;
+    util::TimeWindow& getCurrentTimeWindow();
     friend QDataStream &operator<<(QDataStream &out, const udata::Commitment &newCommitment);
     friend QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
 };

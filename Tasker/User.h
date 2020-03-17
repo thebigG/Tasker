@@ -35,7 +35,7 @@ private:
     int defaultCommitmentIndex;
     QString userName;
     static std::unique_ptr<User> thisInstance;
-    int currentCommitment;
+    int currentCommitment = 0;
     // user preferences?
     //    static std::unique_ptr<User> make_unique(QVector<udata::Commitment>&&);
     friend std::unique_ptr<User> std::make_unique<User>(QVector<udata::Commitment> &&);
