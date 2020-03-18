@@ -7,12 +7,14 @@
  */
 #ifndef COMMITMENT_H
 #define COMMITMENT_H
+#include <StatsUtility.h>
+#include <Session.h>
 #include <QDataStream>
 #include <QDate>
 #include <QPair>
 #include <QString>
-#include <Session.h>
-#include <StatsUtility.h>
+
+
 /**
  *@brief The udata namespace has anything related to
  * data that persistent for users such as Commitment, Task, Session etc.
@@ -26,7 +28,7 @@ QDataStream &operator<<(QDataStream &out, const CommitmentFrequency &);
 QDataStream &operator>>(QDataStream &in, CommitmentFrequency &);
 QDataStream &operator<<(QDataStream &out, const udata::Commitment &newCommitment);
 QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
-QDataStream &operator<<(QDataStream &out, const util::TimeWindow &);
+QDataStream &operator<<(QDataStream &out, const util::TimeWindow& );
 QDataStream &operator>>(QDataStream &in, util::TimeWindow &);
 QDataStream &operator<<(QDataStream &out, const CommitmentType &);
 QDataStream &operator>>(QDataStream &in, CommitmentType &);
@@ -135,7 +137,7 @@ private:
     QDate dateStart;
     QDate dateEnd;
     CommitmentFrequency frequency;
-    mutable QVector<util::TimeWindow>
+     QVector<util::TimeWindow>
         commitmentWindows; /**For now these are just a commitment's lifespan
               divided into weeks.\ But hopefully it's clear that this time
               window can also be something like a month, or an arbitray number
@@ -178,7 +180,7 @@ public:
     bool hasEndDate();
     CommitmentFrequency& getFrequency();
     void setCommitmentWindows(QVector<util::TimeWindow>& newCommitmentWindows);
-    QVector<util::TimeWindow> &getCommitmentWindows() const;
+    QVector<util::TimeWindow> &getCommitmentWindows() ;
     util::TimeWindow& getCurrentTimeWindow();
     friend QDataStream &operator<<(QDataStream &out, const udata::Commitment &newCommitment);
     friend QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);

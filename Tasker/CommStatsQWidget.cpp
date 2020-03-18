@@ -164,10 +164,10 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
     qDebug() << "changed commitment name:"
              << User::getInstance()->getCommitments().at(currentIndex).getName();
     User::getInstance()->updateCurrentCommitment(selectedCommitmentIndex);
-    if(User::getInstance()->getCommitments().size() != 0)
+    if(User::getInstance()->getCommitments().size() != 0 && User::getInstance()->getCommitments()[0].getCommitmentWindows().length()!=0)
     {
         qDebug()<<"Running???";
-//        snapshot->update(User::getInstance()->getCurrentCommitment());
+        snapshot->update(User::getInstance()->getCurrentCommitment());
     }
 }
 void CommStatsQWidget::newLiveSessionSlot() {

@@ -37,26 +37,34 @@ void Commitment::setFrequency(long long newTime, int newFrequency, int newTimeWi
 }
 void Commitment::setCommitmentWindows(QVector<util::TimeWindow>& newCommitmentWindows)
 {
-    commitmentWindows = newCommitmentWindows;
-}
-#if defined(Q_OS_OSX)
-QDataStream &operator<<(QDataStream& out, QVector<util::TimeWindow>& timeWindows)
-{
-    for(util::TimeWindow t: timeWindows)
+    for(auto windows:newCommitmentWindows)
     {
-        out<<t;
+        commitmentWindows.append(windows);
     }
-    return out;
+    qDebug()<<"setting windows on this commitment-->"<<commitmentWindows.length();
+//    commitmentWindows = newCommitmentWindows;
 }
-QDataStream &operator>>(QDataStream& in, QVector<util::TimeWindow>& timeWindows)
-{
-    for(util::TimeWindow t: timeWindows)
-    {
-        in>>t;
-    }
-    return in;
-}
-#endif
+//#if defined(Q_OS_OSX)
+//QDataStream &operator<<(QDataStream& out,const QVector<util::TimeWindow>& timeWindows)
+//{
+//    qDebug()<<"QDataStream &operator<<(QDataStream& out,const QVector<util::TimeWindow>& timeWindows)";
+//    for(const util::TimeWindow t: timeWindows)
+//    {
+//        out<<t;
+//    }
+//    return out;
+//}
+//QDataStream &operator>>(QDataStream& in, QVector<util::TimeWindow>& timeWindows)
+//{
+//    qDebug()<<"QDataStream &operator>>(QDataStream& in, QVector<util::TimeWindow>& timeWindows";
+//    for(util::TimeWindow t: timeWindows)
+//    {
+
+//        in>>t;
+//    }
+//    return in;
+//}
+//#endif
 void Commitment::setType(CommitmentType newType) {
     Type = newType;
 }
@@ -184,7 +192,7 @@ bool Commitment::isDone() {
     update();
     return done;
 }
-QVector<util::TimeWindow> &Commitment::getCommitmentWindows() const {
+QVector<util::TimeWindow> &Commitment::getCommitmentWindows()  {
     return commitmentWindows;
 }
 util::TimeWindow& Commitment::getCurrentTimeWindow()
@@ -221,10 +229,17 @@ QDataStream &udata::operator>>(QDataStream &in, udata::CommitmentFrequency &newI
  * @return The data stream. Very useful for error checking.
  */
 QDataStream &udata::operator<<(QDataStream &out, const udata::Commitment &newCommitment) {
+        qDebug()<<"QDataStream &udata::operator<<(QDataStream &out, const udata::Commitment &newCommitment)";
     out << newCommitment.name << newCommitment.dateStart << newCommitment.dateEnd
-        << newCommitment.frequency << newCommitment.Type << newCommitment.noEndDate
-        << newCommitment.commitmentWindows << newCommitment.done;
+        << newCommitment.frequency << newCommitment.Type << newCommitment.noEndDate;
+    out<<newCommitment.commitmentWindows.size();
+        for(const auto w: newCommitment.commitmentWindows)
+    {
+    out<<w;
+    }
+        out<< newCommitment.done;
     qDebug()<<"commitment window when saiving size="<<newCommitment.commitmentWindows.size();
+
     return out;
 }
 
@@ -240,11 +255,23 @@ QDataStream &udata::operator>>(QDataStream &in, udata::Commitment &newCommitment
     QDate commitmentDateStart;
     QDate commitmentDateEnd;
     QVector<util::TimeWindow> newTimeWindows;
+    qDebug()<<"QDataStream &udata::operator>>(QDataStream &in, udata::Commitment &newCommitment) ";
     CommitmentType newType;
     bool newNoEndDate;
     bool newDone;
     in >> commitmentName >> commitmentDateStart >> commitmentDateEnd >>
-        commitmentInterval >> newType >> newNoEndDate >> newTimeWindows >> newDone;
+        commitmentInterval >> newType >> newNoEndDate;
+    int count  = 0;
+    in>>count;
+    for(int i =0;i<count;i++)
+    {
+        util::TimeWindow temp{};
+        in>>temp;
+        newTimeWindows.append(temp);
+    }
+
+        in>> newDone;
+
     newCommitment.name = commitmentName;
     newCommitment.dateStart = commitmentDateStart;
     newCommitment.dateEnd = commitmentDateEnd;
@@ -254,7 +281,7 @@ QDataStream &udata::operator>>(QDataStream &in, udata::Commitment &newCommitment
     newCommitment.done = newDone;
     return in;
 }
-QDataStream &udata::operator<<(QDataStream &out, const util::TimeWindow &newTimeWindow) {
+QDataStream &udata::operator<<(QDataStream &out,  const util::TimeWindow& newTimeWindow) {
     out << newTimeWindow.startDate << newTimeWindow.endDate << newTimeWindow.sessions;
     qDebug()<<"newTimeWindow startDate=*****************#2";
     return out;
@@ -266,7 +293,11 @@ QDataStream &udata::operator>>(QDataStream &in, util::TimeWindow &newTimeWindow)
     newTimeWindow.startDate = newStartDate;
     qDebug()<<"newTimeWindow startDate=*****************#1";//<<newTimeWindow.startDate;
     newTimeWindow.endDate = newEndDate;
-    newTimeWindow.sessions = newSessions;
+    for(auto s: newSessions)
+    {
+        newTimeWindow.sessions.append(s);
+    }
+//    newTimeWindow.sessions = newSessions;
     return in;
 }
 QDataStream &udata::operator<<(QDataStream &out, const CommitmentType &newCommitmentType) {

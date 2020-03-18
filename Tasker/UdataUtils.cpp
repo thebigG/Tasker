@@ -24,7 +24,7 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int m
     Commitment newCommitment{};
     newCommitment.setName(name);
 
-    QVector<util::TimeWindow> timeWindows(numberOfTimeWindows);
+    QVector<util::TimeWindow> timeWindows{};
     QDate today = QDate::currentDate();
     newCommitment.setDateStart(today);
 
@@ -37,12 +37,15 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int m
     temptFrequency.time = maxProductiveTime;
     dis = std::uniform_int_distribution<int>(1,7);
     temptFrequency.frequency = dis(gen);
+    qDebug()<<"frequency="<<temptFrequency.frequency;
     util::TimeWindow newTimeWindow;
     QVector<Session> newSessions;
     QDate sessionDate;
     Session newSession;
     newCommitment.setDateEnd(today.addDays(numberOfTimeWindows*temptFrequency.timeWindowSize));
     newCommitment.setFrequency(temptFrequency.time,temptFrequency.frequency,temptFrequency.timeWindowSize);
+    qDebug()<<"numberofTimeWindows="<<numberOfTimeWindows;
+    qDebug()<<"size of vector="<<timeWindows.length();
     for(int i =0;i<numberOfTimeWindows;i++)
     {
         newTimeWindow.startDate = today;
@@ -63,6 +66,8 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int m
        newTimeWindow.sessions = newSessions;
        timeWindows.append(newTimeWindow);
        today = newTimeWindow.endDate.addDays(1);
+       qDebug()<<"size of vector="<<timeWindows.length();
+
     }
     qDebug()<<"size of generated time windows="<<timeWindows.length();
     newCommitment.setCommitmentWindows(timeWindows);
