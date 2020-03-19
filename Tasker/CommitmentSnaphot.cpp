@@ -1,10 +1,15 @@
 #include "CommitmentSnapshot.h"
+#include <StatsUtility.h>
 
 udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars, QString customCategories)
 {
 //    sets.push_back(QBarSet("Test#1"));
     productiveBarSet<<12<<10<<3<<23<<7<<15<<12<<20;
     unproductiveBarSet<<2<<3<<0<<4<<2<<1<<1<<2;
+    qDebug()<<"size of barset="<<sizeof(QBarSet);
+    qDebug()<<"size of bar_series="<<sizeof(QBarSeries);
+    qDebug()<<"size of QBarCategoryAxis="<<sizeof(QBarCategoryAxis);
+    qDebug()<<"size of QValueAxis="<<sizeof(QValueAxis);
     series.append(&productiveBarSet);
     series.append(&unproductiveBarSet);
     chart.addSeries(&series);
@@ -35,38 +40,28 @@ QChartView& udata::CommitmentSnaphot::getView()
 }
 void udata::CommitmentSnaphot::update(Commitment& updateData)
 {
-    for(Session s: updateData.getCurrentTimeWindow().sessions)
+    qDebug()<<"breaks here???#1";
+    series.take(&productiveBarSet);
+    series.take(&unproductiveBarSet);
+    unproductiveBarSet.setParent(nullptr);
+    productiveBarSet.setParent(nullptr);
+    for(int i =0;i<updateData.getCurrentTimeWindow().sessions.length();i++)
     {
-        *series.barSets()[0]<< s.getProductiveTime();
-
-        qDebug()<<"productive time"<<s.getProductiveTime();
+        qDebug()<<"breaks here???2";
+        productiveBarSet.replace(i,
+                                 util::StatsUtility::toMinutes(updateData.getCurrentTimeWindow().sessions[i].getProductiveTime()));
+        unproductiveBarSet.replace(i,
+                                 util::StatsUtility::toMinutes(updateData.getCurrentTimeWindow().sessions[i].getUnproductiveTime()));
+        qDebug()<<"breaks here???3";
     }
-        series.attachAxis(&x);
-    series.detachAxis(&x);
-    unproductiveBarSet<<2<<3<<0<<4<<2<<1<<1<<2;
-//    series.append(&productiveBarSet);
-//    series.append(&unproductiveBarSet);
-//    chart.addSeries(&series);
+ qDebug()<<"breaks here???4";
+ series.append(&productiveBarSet);
+ series.append(&unproductiveBarSet);
+ qDebug()<<"breaks here???5";
     chart.removeSeries(&series);
     chart.addSeries(&series);
     chart.setTitle(updateData.getName());
-    chart.setAnimationOptions(QChart::SeriesAnimations);
-//    categories << "Mon"<<"Tuesday"<<"Wednesday"<<"Thursday"<<"Friday"
-//               <<"Saturday"<<"Sunday";
-//    x.append(categories);
-//    chart.addAxis(&x, Qt::AlignBottom);
-
-
-//    y.setRange(1,100);
-//    y.setLabelFormat("%d Minutes");
-//    chart.addAxis(&y, Qt::AlignLeft);
-//    series.attachAxis(&y);
-
-    chart.legend()->setVisible(true);
     chart.legend()->setAlignment(Qt::AlignBottom);
-
-//    view.setChart(&chart);
-    view.update();
     view.setRenderHint(QPainter::Antialiasing);
 }
 
