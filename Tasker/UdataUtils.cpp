@@ -34,7 +34,7 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int m
 //    dis = std::uniform_int_distribution<int>(util::StatsUtility(minProductiveTime),util::StatsUtility::toMinutes(maxProductiveTime));
     CommitmentFrequency temptFrequency;
     temptFrequency.timeWindowSize  =7;
-    temptFrequency.time = maxProductiveTime;
+    temptFrequency.goal = maxProductiveTime;
     dis = std::uniform_int_distribution<int>(1,7);
     temptFrequency.frequency = dis(gen);
     qDebug()<<"frequency="<<temptFrequency.frequency;
@@ -43,7 +43,7 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int m
     QDate sessionDate;
     Session newSession;
     newCommitment.setDateEnd(today.addDays(numberOfTimeWindows*temptFrequency.timeWindowSize));
-    newCommitment.setFrequency(temptFrequency.time,temptFrequency.frequency,temptFrequency.timeWindowSize);
+    newCommitment.setFrequency(temptFrequency.goal,temptFrequency.frequency,temptFrequency.timeWindowSize);
     qDebug()<<"numberofTimeWindows="<<numberOfTimeWindows;
     qDebug()<<"size of vector="<<timeWindows.length();
     for(int i =0;i<numberOfTimeWindows;i++)
@@ -52,7 +52,7 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int m
         sessionDate = today;
         for(int j =0;j<temptFrequency.frequency;j++)
         {
-            newSession = Session(Task{}, temptFrequency.time, sessionDate);
+            newSession = Session(Task{}, temptFrequency.goal, sessionDate);
             dis = std::uniform_int_distribution<int>(minProductiveTime, maxProductiveTime);
             newSession.setProductiveTime(dis(gen));
             dis = std::uniform_int_distribution<int>(minUnproducitveTime, maxUnproductiveTime);

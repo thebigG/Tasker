@@ -10,6 +10,7 @@
 #include <QtCharts/QChartView>
 #include <Commitment.h>
 #include <memory>
+#define MAX_TITLE_CHARS 81
 QT_CHARTS_USE_NAMESPACE
 namespace udata {
 
@@ -25,9 +26,10 @@ private:
     QBarCategoryAxis x;
     QValueAxis y;
     QChartView view;
+    QFont chartFont;
 public:
     QChartView& getView();
-    void update(Commitment&);
+    void update(Commitment& updateData, int currentTimeWindow);
     CommitmentSnaphot(int numberOfBars = 7, QString customeCatgeory ="Sunday");
 
 

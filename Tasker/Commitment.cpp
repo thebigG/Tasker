@@ -30,7 +30,7 @@ Commitment::Commitment(QString newName,
 }
 void Commitment::setFrequency(long long newTime, int newFrequency, int newTimeWinowSize)
 {
-    frequency.time = newTime;
+    frequency.goal = newTime;
     frequency.frequency = newFrequency;
     frequency.timeWindowSize = newTimeWinowSize;
 
@@ -206,7 +206,7 @@ util::TimeWindow& Commitment::getCurrentTimeWindow()
  * @return out(data stream). This can be very useful to catch errors.
  */
 QDataStream &udata::operator<<(QDataStream &out, const udata::CommitmentFrequency &newInterval) {
-    out << newInterval.time << newInterval.frequency << newInterval.timeWindowSize;
+    out << newInterval.goal << newInterval.frequency << newInterval.timeWindowSize;
     return out;
 }
 
@@ -218,7 +218,7 @@ QDataStream &udata::operator<<(QDataStream &out, const udata::CommitmentFrequenc
  * @return The in data stream. Useful for error-checking.
  */
 QDataStream &udata::operator>>(QDataStream &in, udata::CommitmentFrequency &newInterval) {
-    in >> newInterval.time >> newInterval.frequency >> newInterval.timeWindowSize;
+    in >> newInterval.goal >> newInterval.frequency >> newInterval.timeWindowSize;
     return in;
 }
 
@@ -370,7 +370,7 @@ QString Commitment::summary() const {
         summary += "End Date:None";
     }
     qDebug()<<"summary#4";
-    summary += "Goal time:" + QString::number(frequency.time) + "\n";
+    summary += "Goal time:" + QString::number(frequency.goal) + "\n";
     qDebug()<<"summary#5";
     summary += "Frequency" + QString::number(frequency.frequency) + "\n";
     qDebug()<<"summary#6";
@@ -384,6 +384,10 @@ QString Commitment::summary() const {
     }
         qDebug()<<"commitmentWindows size="<<commitmentWindows.size();
     return summary;
+}
+CommitmentFrequency& Commitment::getFrequency()
+{
+    return frequency;
 }
 /**
  * @brief Commitment::setSessions

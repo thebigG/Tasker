@@ -94,9 +94,22 @@
    </item>
    <item row="0" column="1">
     <widget class="QWidget" name="commStatsHubQWidget" native="true">
+     <property name="maximumSize">
+      <size>
+       <width>600</width>
+       <height>800</height>
+      </size>
+     </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
-       <widget class="QWidget" name="CommitmentSnaphotQWidget" native="true"/>
+       <widget class="QWidget" name="CommitmentSnaphotQWidget" native="true">
+        <property name="maximumSize">
+         <size>
+          <width>600</width>
+          <height>800</height>
+         </size>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

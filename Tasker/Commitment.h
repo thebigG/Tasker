@@ -76,7 +76,7 @@ enum class udata::CommitmentType { WEEKLY, MONTHLY, Custom };
  * does NOT manage itself. The udata::Commitment class is the manager of this struct.
  */
 struct udata::CommitmentFrequency {
-    long long time = 0; // in seconds
+    long long goal = 0; // in seconds
     int frequency = 0;
     int timeWindowSize = 0; // in days
 };

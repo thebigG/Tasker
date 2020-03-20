@@ -148,7 +148,7 @@ udata::CommitmentFrequency CreateCommitmentQWidget::getInterval() {
         size = SECONDS_IN_HOUR * ui->qtyQLineEdit->text().toInt();
     }
 
-    interval.time = size;
+    interval.goal = size;
     interval.frequency = ui->frequencyQComboBox->currentIndex() + 1;
     switch (getType()) {
     case udata::CommitmentType::WEEKLY:

@@ -36,6 +36,7 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
     this->layout()->setMenuBar(&mainMenuBar);
     this->ui->CommitmentSnaphotQWidget->setLayout(new QGridLayout());
     snapshot = new udata::CommitmentSnaphot{};
+
     this->ui->CommitmentSnaphotQWidget->layout()->addWidget(&snapshot->getView());
 }
 
@@ -167,7 +168,7 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
     if(User::getInstance()->getCommitments().size() != 0 && User::getInstance()->getCommitments()[0].getCommitmentWindows().length()!=0)
     {
         qDebug()<<"Running???";
-        snapshot->update(User::getInstance()->getCurrentCommitment());
+        snapshot->update(User::getInstance()->getCurrentCommitment(), 0);
     }
 }
 void CommStatsQWidget::newLiveSessionSlot() {
