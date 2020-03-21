@@ -4,9 +4,8 @@
 udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars, QString customCategories)
 {
 //    sets.push_back(QBarSet("Test#1"));
-    productiveBarSet<<12<<10<<3<<23<<7<<15<<12<<20;
-
-    unproductiveBarSet<<2<<3<<0<<4<<2<<1<<1<<2;
+    productiveBarSet<<0<<0<<0<<0<<0<<0<<0;
+    unproductiveBarSet<<0<<0<<0<<0<<0<<0<<0;
     qDebug()<<"size of barset="<<sizeof(QBarSet);
     qDebug()<<"size of bar_series="<<sizeof(QBarSeries);
     qDebug()<<"size of QBarCategoryAxis="<<sizeof(QBarCategoryAxis);
@@ -43,6 +42,13 @@ QChartView& udata::CommitmentSnaphot::getView()
 {
     return view;
 }
+/**
+  This function assumes that the sessions in updateDate
+  are sorted from oldest to newest.
+ * @brief udata::CommitmentSnaphot::update
+ * @param updateData
+ * @param currentTimeWindow
+ */
 void udata::CommitmentSnaphot::update(Commitment& updateData, int currentTimeWindow)
 {
     qDebug()<<"breaks here???#1";
@@ -50,14 +56,36 @@ void udata::CommitmentSnaphot::update(Commitment& updateData, int currentTimeWin
     series.take(&unproductiveBarSet);
     unproductiveBarSet.setParent(nullptr);
     productiveBarSet.setParent(nullptr);
-    for(int i =0;i<updateData.getCommitmentWindows().at(currentTimeWindow).sessions.length();i++)
+    if(updateData.getType() == udata::CommitmentType::WEEKLY)
+    {
+    for(int i =0;i<7;i++)
     {
         qDebug()<<"breaks here???2";
         productiveBarSet.replace(i,
-                                 util::StatsUtility::toMinutes(updateData.getCurrentTimeWindow().sessions[i].getProductiveTime()));
+                                 0);
         unproductiveBarSet.replace(i,
+                                 0);
+        qDebug()<<"breaks here???3";
+    }
+    }
+    qDebug()<<"number of Sessions-->"<<updateData.getCommitmentWindows().at(currentTimeWindow).sessions.length();
+    for(int i =0;i<updateData.getCurrentTimeWindow().sessions.length();i++)
+    {
+        qDebug()<<"breaks here???2";
+        qDebug()<<"session date-->"<<updateData.getCurrentTimeWindow().sessions[i].getDate();
+        qDebug()<<"session date diff-->"<<updateData.getCurrentTimeWindow().sessions[i].getDate().daysInMonth() -
+                  updateData.getCurrentTimeWindow().startDate.daysInMonth()-1;
+        productiveBarSet.replace(updateData.getCurrentTimeWindow().sessions[i].getDate().daysInMonth() -
+                                 updateData.getCurrentTimeWindow().startDate.daysInMonth()-1,
+                                 util::StatsUtility::toMinutes(updateData.getCurrentTimeWindow().sessions[i].getProductiveTime()));
+        unproductiveBarSet.replace(updateData.getCurrentTimeWindow().sessions[i].getDate().daysInMonth() -
+                                   updateData.getCurrentTimeWindow().startDate.daysInMonth()-1,
                                  util::StatsUtility::toMinutes(updateData.getCurrentTimeWindow().sessions[i].getUnproductiveTime()));
         qDebug()<<"breaks here???3";
+    }
+    for(int i =0 ;i<updateData.getFrequency().frequency;i++)
+    {
+
     }
  qDebug()<<"breaks here???4";
 
@@ -80,12 +108,9 @@ void udata::CommitmentSnaphot::update(Commitment& updateData, int currentTimeWin
     {
         dateRange.insert(0, "&nbsp;");
     }
-    dateRange.insert(0,"&lt;");
-//    QString d = dateRange.leftJustified(remainingChars/2,'&nbsp');
-//    QString b = dateRange.rightJustified(remainingChars/2,'&nbsp');
+//    dateRange.insert(0,"&lt;");
     qDebug()<<"length of title="<<chart.title().length();
-    dateRange.append("&gt;");
-
+//    dateRange.append("&gt;");
     chart.setTitle(dateRange);
 
     chart.legend()->setAlignment(Qt::AlignBottom);

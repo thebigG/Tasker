@@ -43,11 +43,11 @@ int main(int argc, char *argv[]) {
     } else {
         qDebug("prepFiles failed");
     }
-//    UdataUtils::generateCommitment("Generated#100", 8, util::StatsUtility::minutesToSeconds(10),
-//                                   util::StatsUtility::minutesToSeconds(90),
-//                                   util::StatsUtility::minutesToSeconds(0),
-//                                   util::StatsUtility::minutesToSeconds(45));
-    qDebug() << "Commitment summary:" << User::getInstance()->getCommitments().at(0).summary();
+    UdataUtils::generateCommitment("Generated#101", 8, util::StatsUtility::minutesToSeconds(10),
+                                   util::StatsUtility::minutesToSeconds(90),
+                                   util::StatsUtility::minutesToSeconds(0),
+                                   util::StatsUtility::minutesToSeconds(45));
+//    qDebug() << "Commitment summary:" << User::getInstance()->getCommitments().at(0).summary();
     QObject::connect(&a, &QGuiApplication::lastWindowClosed, &MainUI::saveTaskerStateSlot);
     CommStatsQWidget *widget = nullptr;
     qDebug() << "Tasker Debug mode";

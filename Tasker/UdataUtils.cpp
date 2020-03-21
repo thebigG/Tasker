@@ -59,10 +59,8 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int m
             newSession.setUnproductiveTime(dis(gen));
             newSessions.append(newSession);
             sessionDate =  sessionDate.addDays(1);
-
-
         }
-       newTimeWindow.endDate = today.addDays(7);
+       newTimeWindow.endDate = today.addDays(6);
        newTimeWindow.sessions = newSessions;
        timeWindows.append(newTimeWindow);
        today = newTimeWindow.endDate.addDays(1);
@@ -71,6 +69,7 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int m
     }
     qDebug()<<"size of generated time windows="<<timeWindows.length();
     newCommitment.setCommitmentWindows(timeWindows);
+    qDebug()<<"size of generated sessions="<<newCommitment.getCommitmentWindows().at(0).sessions.length();
     User::getInstance()->addCommitment(newCommitment);
 
 }

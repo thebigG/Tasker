@@ -12,8 +12,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1000</width>
-    <height>800</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -97,7 +97,7 @@
      <property name="maximumSize">
       <size>
        <width>600</width>
-       <height>800</height>
+       <height>750</height>
       </size>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">

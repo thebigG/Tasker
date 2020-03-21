@@ -69,11 +69,6 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
     }
 
     qAudioInput = std::make_unique<QAudioInput>(format, this);
-    // connect(audio, SIGNAL(stateChanged(QAudio::State)), this, SLOT(handleStateChanged(QAudio::State)));
-
-    // QTimer::singleShot(3000, this, SLOT(stopRecording()));
-    // qDebug()<<"calling start on destinationFile ";
-    // qDebug()<<"audiomachine thread:"<<QThread::currentThreadId();
 
     // show device name on console
     qDebug() << info.deviceName();
