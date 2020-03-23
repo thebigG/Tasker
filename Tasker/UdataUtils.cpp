@@ -97,7 +97,8 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
                                     int minProductiveTime,
                                     int maxProductiveTime,
                                     int minUnproducitveTime,
-                                    int maxUnproductiveTime) {}
+                                    int maxUnproductiveTime,
+                                    CommitmentType type) {}
 #endif
 
 /**
