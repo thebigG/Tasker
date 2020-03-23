@@ -16,7 +16,6 @@
 
 namespace udata {
 class UdataUtils;
-
 }
 
 /**
@@ -24,18 +23,20 @@ class UdataUtils;
  */
 class udata::UdataUtils {
 private:
-    UdataUtils();
-    static bool firstTimer();
+  UdataUtils();
+  static bool firstTimer();
 
 public:
-    static void generateCommitment(QString name, int numberOfTimeWindows, int minProductiveTime, int maxProductiveTime,
-                                   int minUnproducitveTime, int maxUnproductiveTime);
-    static void saveUserData(User &);
-    static void loadUserData(User &);
-    static int prepFiles();
-    static QString getUsername();
-    static QString taskerFolder;
-    static QString userFilePath;
-    static QString getNotRootUser();
+  static void generateCommitment(QString name, int numberOfTimeWindows,
+                                 int minProductiveTime, int maxProductiveTime,
+                                 int minUnproducitveTime,
+                                 int maxUnproductiveTime, CommitmentType type);
+  static void saveUserData(User &);
+  static void loadUserData(User &);
+  static int prepFiles();
+  static QString getUsername();
+  static QString taskerFolder;
+  static QString userFilePath;
+  static QString getNotRootUser();
 };
 #endif

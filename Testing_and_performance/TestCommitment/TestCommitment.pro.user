@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.0, 2020-01-01T15:53:25. -->
+<!-- Written by QtCreator 4.11.0, 2020-03-22T21:42:09. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -285,8 +285,9 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/fast-alchemist/Tasker/TestCommitment/TestCommitment.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/fast-alchemist/Tasker/TestCommitment/TestCommitment.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">TestCommitment2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/fast-alchemist/Tasker/Testing_and_performance/TestCommitment/TestCommitment.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/fast-alchemist/Tasker/Testing_and_performance/TestCommitment/TestCommitment.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>

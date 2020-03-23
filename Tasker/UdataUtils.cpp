@@ -1,12 +1,12 @@
 #include "UdataUtils.h"
 
+#include "StatsUtility.h"
 #include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QProcess>
-#include "StatsUtility.h"
-#include <random>
 #include <iostream>
+#include <random>
 using udata::UdataUtils;
 
 QString udata::UdataUtils::userFilePath = "";
@@ -14,71 +14,90 @@ QString udata::UdataUtils::userFilePath = "";
 /**
  * @brief UdataUtils::UdataUtils
  */
-UdataUtils::UdataUtils() {
-}
+UdataUtils::UdataUtils() {}
 
 #ifdef __TASKER_DEBUG__
-void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int minProductiveTime, int maxProductiveTime,
-                                    int minUnproducitveTime, int maxUnproductiveTime)
-{
-    Commitment newCommitment{};
-    newCommitment.setName(name);
+void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
+                                    int minProductiveTime,
+                                    int maxProductiveTime,
+                                    int minUnproducitveTime,
+                                    int maxUnproductiveTime,
+                                    CommitmentType type) {
+  Commitment newCommitment{};
+  newCommitment.setName(name);
 
-    QVector<util::TimeWindow> timeWindows{};
-    QDate today = QDate::currentDate();
-    newCommitment.setDateStart(today);
-
-    std::random_device rd;  //Will be used to obtain a seed for the random number engine
-    std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-    std::uniform_int_distribution<> dis;
-//    dis = std::uniform_int_distribution<int>(util::StatsUtility(minProductiveTime),util::StatsUtility::toMinutes(maxProductiveTime));
-    CommitmentFrequency temptFrequency;
-    temptFrequency.timeWindowSize  =7;
-    temptFrequency.goal = maxProductiveTime;
-    dis = std::uniform_int_distribution<int>(1,7);
-    temptFrequency.frequency = dis(gen);
-    qDebug()<<"frequency="<<temptFrequency.frequency;
-    util::TimeWindow newTimeWindow;
-    QVector<Session> newSessions;
-    QDate sessionDate;
-    Session newSession;
-    newCommitment.setDateEnd(today.addDays(numberOfTimeWindows*temptFrequency.timeWindowSize));
-    newCommitment.setFrequency(temptFrequency.goal,temptFrequency.frequency,temptFrequency.timeWindowSize);
-    qDebug()<<"numberofTimeWindows="<<numberOfTimeWindows;
-    qDebug()<<"size of vector="<<timeWindows.length();
-    for(int i =0;i<numberOfTimeWindows;i++)
-    {
-        newTimeWindow.startDate = today;
-        sessionDate = today;
-        for(int j =0;j<temptFrequency.frequency;j++)
-        {
-            newSession = Session(Task{}, temptFrequency.goal, sessionDate);
-            dis = std::uniform_int_distribution<int>(minProductiveTime, maxProductiveTime);
-            newSession.setProductiveTime(dis(gen));
-            dis = std::uniform_int_distribution<int>(minUnproducitveTime, maxUnproductiveTime);
-            newSession.setUnproductiveTime(dis(gen));
-            newSessions.append(newSession);
-            sessionDate =  sessionDate.addDays(1);
-        }
-       newTimeWindow.endDate = today.addDays(6);
-       newTimeWindow.sessions = newSessions;
-       timeWindows.append(newTimeWindow);
-       today = newTimeWindow.endDate.addDays(1);
-       qDebug()<<"size of vector="<<timeWindows.length();
-
+  QVector<util::TimeWindow> timeWindows{};
+  QDate today = QDate::currentDate();
+  newCommitment.setDateStart(today);
+  newCommitment.setType(type);
+  std::random_device
+      rd; // Will be used to obtain a seed for the random number engine
+  std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
+  std::uniform_int_distribution<> dis;
+  //    dis =
+  //    std::uniform_int_distribution<int>(util::StatsUtility(minProductiveTime),util::StatsUtility::toMinutes(maxProductiveTime));
+  CommitmentFrequency temptFrequency;
+  temptFrequency.timeWindowSize = 7;
+  temptFrequency.goal = maxProductiveTime;
+  dis = std::uniform_int_distribution<int>(1, 7);
+  temptFrequency.frequency = dis(gen);
+  qDebug() << "frequency=" << temptFrequency.frequency;
+  util::TimeWindow newTimeWindow;
+  QVector<Session> newSessions;
+  QDate sessionDate;
+  std::vector<QDate> sessionDates{};
+  //  sessionDates.
+  Session newSession;
+  newCommitment.setDateEnd(
+      today.addDays(numberOfTimeWindows * temptFrequency.timeWindowSize));
+  newCommitment.setFrequency(temptFrequency.goal, temptFrequency.frequency,
+                             temptFrequency.timeWindowSize);
+  qDebug() << "numberofTimeWindows=" << numberOfTimeWindows;
+  qDebug() << "size of vector=" << timeWindows.length();
+  int tempDaysCount = 0;
+  for (int i = 0; i < numberOfTimeWindows; i++) {
+    newTimeWindow.startDate = today;
+    sessionDate = today;
+    for (int j = 0; j < temptFrequency.frequency; j++) {
+      newSession = Session(Task{}, temptFrequency.goal, sessionDate);
+      sessionDates.push_back(newSession.getDate());
+      dis = std::uniform_int_distribution<int>(minProductiveTime,
+                                               maxProductiveTime);
+      newSession.setProductiveTime(dis(gen));
+      dis = std::uniform_int_distribution<int>(minUnproducitveTime,
+                                               maxUnproductiveTime);
+      newSession.setUnproductiveTime(dis(gen));
+      newSessions.append(newSession);
+      dis = std::uniform_int_distribution<int>(1, 6);
+      tempDaysCount = dis(gen);
+      // Keep generating a new count if it bleeds into the next time
+      // window(week)
+      while (sessionDate.addDays(tempDaysCount) > today.addDays(6) &&
+             std::find(std::begin(sessionDates), std::end(sessionDates),
+                       sessionDate.addDays(tempDaysCount)) !=
+                 std::end(sessionDates)) {
+        tempDaysCount = dis(gen);
+      }
+      sessionDate = sessionDate.addDays(tempDaysCount);
     }
-    qDebug()<<"size of generated time windows="<<timeWindows.length();
-    newCommitment.setCommitmentWindows(timeWindows);
-    qDebug()<<"size of generated sessions="<<newCommitment.getCommitmentWindows().at(0).sessions.length();
-    User::getInstance()->addCommitment(newCommitment);
-
+    newTimeWindow.endDate = today.addDays(6);
+    newTimeWindow.sessions = newSessions;
+    timeWindows.append(newTimeWindow);
+    today = newTimeWindow.endDate.addDays(1);
+    qDebug() << "size of vector=" << timeWindows.length();
+  }
+  qDebug() << "size of generated time windows=" << timeWindows.length();
+  newCommitment.setCommitmentWindows(timeWindows);
+  qDebug() << "size of generated sessions="
+           << newCommitment.getCommitmentWindows().at(0).sessions.length();
+  User::getInstance()->addCommitment(newCommitment);
 }
 #else
-void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int minProductiveTime, int maxProductiveTime,
-                                          int minUnproducitveTime, int maxUnproductiveTime)
-{
-
-}
+void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
+                                    int minProductiveTime,
+                                    int maxProductiveTime,
+                                    int minUnproducitveTime,
+                                    int maxUnproductiveTime) {}
 #endif
 
 /**
@@ -88,20 +107,20 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows, int m
  */
 void UdataUtils::saveUserData(User &newUser) {
 
-    QFile file(userFilePath);
+  QFile file(userFilePath);
 
-    if (!file.open(QIODevice::WriteOnly)) {
-        qDebug() << "Could not open " << userFilePath;
-        return;
-    }
+  if (!file.open(QIODevice::WriteOnly)) {
+    qDebug() << "Could not open " << userFilePath;
+    return;
+  }
 
-    QDataStream out(&file);
+  QDataStream out(&file);
 
-    out.setVersion(QDataStream::Qt_5_1);
-    out << newUser;
+  out.setVersion(QDataStream::Qt_5_1);
+  out << newUser;
 
-    file.flush();
-    file.close();
+  file.flush();
+  file.close();
 }
 
 /**
@@ -110,30 +129,29 @@ void UdataUtils::saveUserData(User &newUser) {
  * @param newUser
  */
 void UdataUtils::loadUserData(User &newUser) {
-    QFile file(UdataUtils::userFilePath);
+  QFile file(UdataUtils::userFilePath);
 
-    if (!file.open(QIODevice::ReadOnly)) {
-        qDebug() << "Could not open " << userFilePath;
-        return;
-    }
+  if (!file.open(QIODevice::ReadOnly)) {
+    qDebug() << "Could not open " << userFilePath;
+    return;
+  }
 
-    QDataStream in(&file);
-    Commitment newCommitment;
-    in.setVersion(QDataStream::Qt_5_1);
-    qDebug() << "loading data#1";
-    in >> newUser;
-    qDebug()<<"neUser data:"<<newUser.getCommitments().length();
-    if (!newUser.getCommitments().isEmpty()) {
-        newCommitment = newUser.getCommitments().at(0);
-        qDebug() << "Commitment summary:" << newUser.getCommitments().at(0).summary();
-    }
-    else
-    {
-        file.close();
-        return;
-    }
-    qDebug() << "loading data#2";
+  QDataStream in(&file);
+  Commitment newCommitment;
+  in.setVersion(QDataStream::Qt_5_1);
+  qDebug() << "loading data#1";
+  in >> newUser;
+  qDebug() << "neUser data:" << newUser.getCommitments().length();
+  if (!newUser.getCommitments().isEmpty()) {
+    newCommitment = newUser.getCommitments().at(0);
+    qDebug() << "Commitment summary:"
+             << newUser.getCommitments().at(0).summary();
+  } else {
     file.close();
+    return;
+  }
+  qDebug() << "loading data#2";
+  file.close();
 }
 
 /**
@@ -142,47 +160,47 @@ void UdataUtils::loadUserData(User &newUser) {
  * @return
  */
 QString UdataUtils::getUsername() {
-    QString name = "";
+  QString name = "";
 
-    if (!userFilePath.isEmpty()) {
-        name = userFilePath;
-    } else {
-        qDebug() << "#2";
+  if (!userFilePath.isEmpty()) {
+    name = userFilePath;
+  } else {
+    qDebug() << "#2";
 
 #ifdef Q_OS_UNIX
-        qDebug() << "#3";
-        QProcess getUsername;
+    qDebug() << "#3";
+    QProcess getUsername;
 
-        qDebug() << "#4";
-        QString output = "";
+    qDebug() << "#4";
+    QString output = "";
 
-        qDebug() << "#5";
-        getUsername.start("whoami");
+    qDebug() << "#5";
+    getUsername.start("whoami");
 
-        qDebug() << "#6";
-        getUsername.waitForFinished();
+    qDebug() << "#6";
+    getUsername.waitForFinished();
 
-        qDebug() << "#7";
-        output = QString(getUsername.readAllStandardOutput());
+    qDebug() << "#7";
+    output = QString(getUsername.readAllStandardOutput());
 
-        qDebug() << "#8";
-        name = output.remove(output.length() - 1, 2);
+    qDebug() << "#8";
+    name = output.remove(output.length() - 1, 2);
 
-        qDebug() << "#9";
+    qDebug() << "#9";
 
-        if (name == "root") {
-            qDebug() << "#10";
-            output = QString(getUsername.readAllStandardOutput());
-            name = getNotRootUser();
-        }
-#else
-        // no implementation yet
-        name = "";
-#endif
+    if (name == "root") {
+      qDebug() << "#10";
+      output = QString(getUsername.readAllStandardOutput());
+      name = getNotRootUser();
     }
+#else
+    // no implementation yet
+    name = "";
+#endif
+  }
 
-    qDebug() << "#11";
-    return name;
+  qDebug() << "#11";
+  return name;
 }
 
 /**
@@ -192,92 +210,99 @@ QString UdataUtils::getUsername() {
  * @return 0 on Success. Otherwise -1. Will start defining error codes ASAP.
  */
 int UdataUtils::prepFiles() {
-    int status = 0;
+  int status = 0;
 
-    qDebug() << "#1";
-    QString userName = getUsername();
-    qDebug() << "#3";
+  qDebug() << "#1";
+  QString userName = getUsername();
+  qDebug() << "#3";
 
 #if defined(Q_OS_LINUX)
-    const QString newDir{ QString(HOME_FOLDER_NAME) + QDir::separator() +
-                          userName + QDir::separator() + USER_FOLDER_NAME };
+  const QString newDir{QString(HOME_FOLDER_NAME) + QDir::separator() +
+                       userName + QDir::separator() + USER_FOLDER_NAME};
 #elif defined(Q_OS_OSX)
-    const QString newDir(QDir::separator() + QString("Users") + QDir::separator() +
-                         userName + QDir::separator() + USER_FOLDER_NAME);
+  const QString newDir(QDir::separator() + QString("Users") +
+                       QDir::separator() + userName + QDir::separator() +
+                       USER_FOLDER_NAME);
 #endif
-    qDebug() << newDir;
+  qDebug() << newDir;
 
-    if (userName == ROOT_USER) {
-        QDir newTaskerFolder{ newDir };
+  if (userName == ROOT_USER) {
+    QDir newTaskerFolder{newDir};
 
-        if (newTaskerFolder.exists()) {
-            userFilePath = newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
-            loadUserData(*User::getInstance());
+    if (newTaskerFolder.exists()) {
+      userFilePath =
+          newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
+      loadUserData(*User::getInstance());
 
-            status = 0;
-        } else {
-            QProcess mkdirProcess{};
-
-            mkdirProcess.start(QString(MKDIR_COMMAND) + newDir);
-            mkdirProcess.waitForFinished();
-
-            QFile newFile{ newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION) };
-
-            if (!newFile.open(QIODevice::WriteOnly)) {
-                status = -1;
-            } else {
-                newFile.close();
-                newFile.flush();
-
-                User::getInstance()->setUsername(userName);
-                userFilePath = newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
-
-                saveUserData(*User::getInstance());
-
-                qDebug() << "prepared files at:" << userFilePath;
-            }
-        }
+      status = 0;
     } else {
-        QDir temp = QDir::current();
-        QDir newTaskerFolder{ newDir };
+      QProcess mkdirProcess{};
 
-        if (newTaskerFolder.exists()) {
-            userFilePath = newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
-            qDebug()<<"exists@@@@";
-            loadUserData(*User::getInstance());
+      mkdirProcess.start(QString(MKDIR_COMMAND) + newDir);
+      mkdirProcess.waitForFinished();
 
-            status = 0;
-        } else {
-            if (newTaskerFolder.mkdir(newDir)) {
-                QFile newFile{ newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION) };
+      QFile newFile{
+          newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION)};
 
-                if (!newFile.open(QIODevice::WriteOnly)) {
-                    status = -1;
-                } else {
-                    newFile.close();
-                    newFile.flush();
+      if (!newFile.open(QIODevice::WriteOnly)) {
+        status = -1;
+      } else {
+        newFile.close();
+        newFile.flush();
 
-                    User::getInstance()->setUsername(userName);
-                    userFilePath = newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
+        User::getInstance()->setUsername(userName);
+        userFilePath =
+            newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
 
-                    saveUserData(*User::getInstance());
-                    qDebug() << "prepared files at:" << userFilePath;
+        saveUserData(*User::getInstance());
 
-                    status = 0;
-                }
-            } else {
-                qDebug() << "mkdir failed:" << newDir;
-                status = -1;
-            }
-        }
+        qDebug() << "prepared files at:" << userFilePath;
+      }
     }
+  } else {
+    QDir temp = QDir::current();
+    QDir newTaskerFolder{newDir};
 
-    return status;
+    if (newTaskerFolder.exists()) {
+      userFilePath =
+          newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
+      qDebug() << "exists@@@@";
+      loadUserData(*User::getInstance());
+
+      status = 0;
+    } else {
+      if (newTaskerFolder.mkdir(newDir)) {
+        QFile newFile{
+            newTaskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION)};
+
+        if (!newFile.open(QIODevice::WriteOnly)) {
+          status = -1;
+        } else {
+          newFile.close();
+          newFile.flush();
+
+          User::getInstance()->setUsername(userName);
+          userFilePath = newTaskerFolder.absoluteFilePath(
+              userName + TASKER_FILE_EXTENSION);
+
+          saveUserData(*User::getInstance());
+          qDebug() << "prepared files at:" << userFilePath;
+
+          status = 0;
+        }
+      } else {
+        qDebug() << "mkdir failed:" << newDir;
+        status = -1;
+      }
+    }
+  }
+
+  return status;
 }
 
 QString UdataUtils::getNotRootUser() {
-    QDir homeDir{ HOME_FOLDER_NAME };
-    QString user = homeDir.entryList().at(2);
+  QDir homeDir{HOME_FOLDER_NAME};
+  QString user = homeDir.entryList().at(2);
 
-    return user;
+  return user;
 }
