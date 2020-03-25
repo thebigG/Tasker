@@ -2,7 +2,7 @@
 #include "ui_CommStatsQWidget.h"
 #include <CreateCommitmentQWidget.h>
 #include <mainui.h>
-
+//#define TRAVIS_CI 1
 #include "Timer.h"
 #include <QDebug>
 
@@ -38,22 +38,15 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   snapshot = new udata::CommitmentSnaphot{};
 
   this->ui->CommitmentSnaphotQWidget->layout()->addWidget(&snapshot->getView());
-  //  this->ui->CommitmentSnaphotQWidget->layout()->setSpacing(0);
-  //  this->layout()->setSpacing(0);
-  //  this->layout()->setMargin(0);
-  //  p = this->ui->avg->palette();
-  //  QLabel prodLabel =
+#ifdef TRAVIS_CI
   QPalette p = this->ui->AvgProductiveTime->palette();
   p.setColor(this->ui->AvgProductiveTime->backgroundRole(),
              snapshot->getProductiveQBarSet().color());
-  //  this->ui->CommitmentInfoStatsQWidget->findChild<QLabel>("AvgProductiveTime")
-  //      .setPalette(p);
-  //  this->ui->CommitmentInfoStatsQWidget->setAutoFillBackground(true);
-  //  this->ui->CommitmentInfoStatsQWidget->setPalette(p);
   this->ui->AvgProductiveTime->setAutoFillBackground(true);
   this->ui->AvgProductiveTime->setPalette(p);
+#endif
+
   this->layout()->setContentsMargins(0, 0, 0, 0);
-  //  this->ui->commStatsHubQWidget->layout()->setContentsMargins(0, 0, 0, 0);
 }
 
 void CommStatsQWidget::newCommitmentSlot(bool checked) {
