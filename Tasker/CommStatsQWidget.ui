@@ -111,8 +111,18 @@
        <widget class="QWidget" name="CommitmentSnaphotQWidget" native="true">
         <property name="maximumSize">
          <size>
-          <width>1000</width>
+          <width>600</width>
           <height>600</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QWidget" name="CommitmentInfoStatsQWidget" native="true">
+        <property name="maximumSize">
+         <size>
+          <width>600</width>
+          <height>200</height>
          </size>
         </property>
        </widget>

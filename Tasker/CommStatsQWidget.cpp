@@ -2,7 +2,7 @@
 #include "ui_CommStatsQWidget.h"
 #include <CreateCommitmentQWidget.h>
 #include <mainui.h>
-//#define TRAVIS_CI 1
+#define TRAVIS_CI 1
 #include "Timer.h"
 #include <QDebug>
 
@@ -39,11 +39,11 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
 
   this->ui->CommitmentSnaphotQWidget->layout()->addWidget(&snapshot->getView());
 #ifdef TRAVIS_CI
-  QPalette p = this->ui->AvgProductiveTime->palette();
-  p.setColor(this->ui->AvgProductiveTime->backgroundRole(),
+  QPalette p = this->ui->CommitmentInfoStatsQWidget->palette();
+  p.setColor(this->ui->CommitmentInfoStatsQWidget->backgroundRole(),
              snapshot->getProductiveQBarSet().color());
-  this->ui->AvgProductiveTime->setAutoFillBackground(true);
-  this->ui->AvgProductiveTime->setPalette(p);
+  this->ui->CommitmentInfoStatsQWidget->setAutoFillBackground(true);
+  this->ui->CommitmentInfoStatsQWidget->setPalette(p);
 #endif
 
   this->layout()->setContentsMargins(0, 0, 0, 0);
