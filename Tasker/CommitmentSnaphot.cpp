@@ -16,11 +16,12 @@ udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
   chart.setTitle("Simple barchart example");
   chart.setAnimationOptions(QChart::SeriesAnimations);
   categories << "Mon"
-             << "Tuesday"
-             << "Wednesday"
-             << "Thursday"
-             << "Friday"
-             << "Saturday" << customCategories;
+             << "Tue"
+             << "Wed"
+             << "Thu"
+             << "Fri"
+             << "Sat"
+             << "Sun";
   x.append(categories);
   chart.addAxis(&x, Qt::AlignBottom);
   series.attachAxis(&x);
@@ -54,12 +55,21 @@ QChartView &udata::CommitmentSnaphot::getView() { return view; }
 void udata::CommitmentSnaphot::update(Commitment &updateData,
                                       int currentTimeWindow) {
   qDebug() << "breaks here???#1";
+  util::TimeWindow currentWindow =
+      updateData.getCommitmentWindows().at(currentTimeWindow);
+  QDate dayOfTheWeek = QDate{currentWindow.startDate};
+  x.clear();
   if (updateData.getType() == udata::CommitmentType::WEEKLY) {
     for (int i = 0; i < WEEK_SIZE; i++) {
       qDebug() << "breaks here???2";
       productiveBarSet.replace(i, 0);
       unproductiveBarSet.replace(i, 0);
-
+      qDebug() << "breaks here???2";
+      x.append(dayOfTheWeek.toString("ddd"));
+      qDebug() << "Catgeory fori:" << i << "=" << categories.at(i);
+      qDebug() << "day of week=" << dayOfTheWeek.toString("ddd");
+      dayOfTheWeek = dayOfTheWeek.addDays(1);
+      qDebug() << "breaks here???3";
       qDebug() << "breaks here???3";
     }
   }
@@ -71,8 +81,7 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
            << updateData.getCommitmentWindows()
                   .at(currentTimeWindow)
                   .sessions.length();
-  util::TimeWindow currentWindow =
-      updateData.getCommitmentWindows().at(currentTimeWindow);
+
   for (int i = 0; i < updateData.getCommitmentWindows()
                           .at(currentTimeWindow)
                           .sessions.length();
@@ -108,8 +117,10 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
   series.append(&productiveBarSet);
   series.append(&unproductiveBarSet);
   series.detachAxis(&y);
+  series.detachAxis(&x);
   y.setRange(0, util::StatsUtility::toMinutes(updateData.getFrequency().goal));
   series.attachAxis(&y);
+  series.attachAxis(&x);
   qDebug() << "breaks here???5";
   chart.removeSeries(&series);
   chart.addSeries(&series);
@@ -130,9 +141,16 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
   //    dateRange.insert(0,"&lt;");
   qDebug() << "length of title=" << chart.title().length();
   //    dateRange.append("&gt;");
-  //  chart.setTitle(dateRange);
-  chart.setTitle(updateData.getName());
+  chart.setTitle(dateRange);
+  //  chart.setTitle(updateData.getName());
 
   chart.legend()->setAlignment(Qt::AlignBottom);
   view.setRenderHint(QPainter::Antialiasing);
+}
+
+QBarSet &udata::CommitmentSnaphot::getProductiveQBarSet() {
+  return productiveBarSet;
+}
+QBarSet &udata::CommitmentSnaphot::getUnproducitveQbarSet() {
+  return unproductiveBarSet;
 }

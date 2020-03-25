@@ -43,11 +43,12 @@ int main(int argc, char *argv[]) {
   } else {
     qDebug("prepFiles failed");
   }
-  UdataUtils::generateCommitment(
-      "Generated#103", 8, util::StatsUtility::minutesToSeconds(10),
-      util::StatsUtility::minutesToSeconds(90),
-      util::StatsUtility::minutesToSeconds(0),
-      util::StatsUtility::minutesToSeconds(45), udata::CommitmentType::WEEKLY);
+  //  UdataUtils::generateCommitment(
+  //      "Generated#104", 8, util::StatsUtility::minutesToSeconds(10),
+  //      util::StatsUtility::minutesToSeconds(150),
+  //      util::StatsUtility::minutesToSeconds(0),
+  //      util::StatsUtility::minutesToSeconds(45),
+  //      udata::CommitmentType::WEEKLY);
   //    qDebug() << "Commitment summary:" <<
   //    User::getInstance()->getCommitments().at(0).summary();
   QObject::connect(&a, &QGuiApplication::lastWindowClosed,
