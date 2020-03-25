@@ -37,7 +37,6 @@ using namespace std;
 using namespace QtCharts;
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
-  qDebug() << "returned from starthook^^^^^^^^";
   if (UdataUtils::prepFiles() == 0) {
     qDebug("files was allocated successfully");
   } else {
