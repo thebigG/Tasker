@@ -143,7 +143,9 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
   //    dateRange.append("&gt;");
   chart.setTitle(dateRange);
   //  chart.setTitle(updateData.getName());
-
+  productiveTimeAverage = productiveBarSet.sum() / productiveBarSet.count();
+  unproductiveTimeAverage =
+      unproductiveBarSet.sum() / unproductiveBarSet.count();
   chart.legend()->setAlignment(Qt::AlignBottom);
   view.setRenderHint(QPainter::Antialiasing);
 }
@@ -153,4 +155,11 @@ QBarSet &udata::CommitmentSnaphot::getProductiveQBarSet() {
 }
 QBarSet &udata::CommitmentSnaphot::getUnproducitveQbarSet() {
   return unproductiveBarSet;
+}
+double udata::CommitmentSnaphot::getProductiveTimeAverage() {
+  return productiveTimeAverage;
+}
+
+double udata::CommitmentSnaphot::getUnproductiveTimeAverage() {
+  return unproductiveTimeAverage;
 }

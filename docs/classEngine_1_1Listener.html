@@ -91,8 +91,8 @@ Inheritance diagram for Engine::Listener:</div>
  <div class="center">
   <img src="classEngine_1_1Listener.png" usemap="#Engine::Listener_map" alt=""/>
   <map id="Engine::Listener_map" name="Engine::Listener_map">
-<area href="classEngine_1_1AudioListener.html" title="The Engine::AudioListener class." alt="Engine::AudioListener" shape="rect" coords="0,112,157,136"/>
-<area href="classEngine_1_1KeyboardListener.html" title="The Engine::KeyboardListener class." alt="Engine::KeyboardListener" shape="rect" coords="167,112,324,136"/>
+<area href="classEngine_1_1AudioListener.html" title="The Engine::AudioListener class." alt="Engine::AudioListener" shape="rect" coords="0,112,135,136"/>
+<area href="classEngine_1_1XListener.html" title="The Engine::XListener class This class has the capiblity of detecting mouse and keyboard interaction." alt="Engine::XListener" shape="rect" coords="145,112,280,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -102,9 +102,14 @@ Public Types</h2></td></tr>
 <b>productive</b>
  }</td></tr>
 <tr class="separator:a7b3e66a922a80a1a63f5ca7a6de1f32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04028eb58d8908d22d5e9faa24876b19"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">ListenerType</a> { <b>keyboard</b>, 
+<tr class="memitem:a04028eb58d8908d22d5e9faa24876b19"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">ListenerType</a> { <br />
+&#160;&#160;<b>X_MOUSE_KEYBOARD</b>, 
+<b>X_MOUSE</b>, 
+<b>X_KEYBOARD</b>, 
 <b>audio</b>, 
-<b>none</b>
+<br />
+&#160;&#160;<b>none</b>
+<br />
  }</td></tr>
 <tr class="memdesc:a04028eb58d8908d22d5e9faa24876b19"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ListenerType enum This enum used for <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class.">Timer</a> to know which listener it is going to instantiate.  <a href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">More...</a><br /></td></tr>
 <tr class="separator:a04028eb58d8908d22d5e9faa24876b19"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +145,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>pause</b> ()=
 <tr class="memitem:a680ddf3487db40f0a7e08f0ab1a957dc"><td class="memItemLeft" align="right" valign="top"><a id="a680ddf3487db40f0a7e08f0ab1a957dc"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()=0</td></tr>
 <tr class="separator:a680ddf3487db40f0a7e08f0ab1a957dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96eda8bb09b802d2a6dbea2927ab83be"><td class="memItemLeft" align="right" valign="top"><a id="a96eda8bb09b802d2a6dbea2927ab83be"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>resetState</b> ()=0</td></tr>
+<tr class="separator:a96eda8bb09b802d2a6dbea2927ab83be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd34447f8b743ab102095823fe761e01"><td class="memItemLeft" align="right" valign="top"><a id="afd34447f8b743ab102095823fe761e01"></a>
 virtual Listener::ListenerState&#160;</td><td class="memItemRight" valign="bottom"><b>listen</b> ()=0</td></tr>
 <tr class="separator:afd34447f8b743ab102095823fe761e01"><td class="memSeparator" colspan="2">&#160;</td></tr>

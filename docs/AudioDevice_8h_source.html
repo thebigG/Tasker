@@ -81,35 +81,39 @@ $(function() {
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classEngine_1_1AudioDevice.html">   60</a></span>&#160;<span class="keyword">class </span><a class="code" href="classEngine_1_1AudioDevice.html">Engine::AudioDevice</a> : <span class="keyword">public</span> QIODevice {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="classEngine_1_1AudioDevice.html#a0a9afd7db98e43e305ac73deec7b9cb1">AudioDevice</a>(<span class="keyword">const</span> QAudioFormat newFormat);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="classEngine_1_1AudioDevice.html#a810634313d1f092e28983d2b42c70600">~AudioDevice</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEngine_1_1AudioDevice.html#a636165665f12e0e596d8c7b53405f406">setMinAmplitude</a>(qreal minAmplitude);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    QAudioFormat &amp;<a class="code" href="classEngine_1_1AudioDevice.html#a542998cc265a89db41ee4126f1b890c3">getQAudioFormat</a>();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    qreal &amp;<a class="code" href="classEngine_1_1AudioDevice.html#af4156ae067bb16a994e56e7284db1734">getDeviceLevel</a>();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    qreal &amp;<a class="code" href="classEngine_1_1AudioDevice.html#a4484b310e14adeedf30f5a31ad5d9bf7">getMinAmplitude</a>();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    quint32 &amp;<a class="code" href="classEngine_1_1AudioDevice.html#acc9908e13b8605521aacd38edf583cc5">getMaxAmplitude</a>();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">static</span> quint32 <a class="code" href="classEngine_1_1AudioDevice.html#ad3c8663206e7e972ad43d65aeb3d0676">getMin</a>(quint32 a, quint32 b);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    qint64 <a class="code" href="classEngine_1_1AudioDevice.html#aa860e92a6d7710c4fa620c5ec12b4576">readData</a>(<span class="keywordtype">char</span> *data, qint64 maxlen) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    qint64 <a class="code" href="classEngine_1_1AudioDevice.html#a160c28c4cc1270e5d80f4d8fb9a680bf">writeData</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *data, qint64 len) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    QAudioFormat qAudioFormat;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    qreal deviceLevel;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    qreal minAmplitude;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    quint32 maxAmplitude;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif // AUDIODEVICE_H</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="classEngine_1_1AudioDevice.html#a0a9afd7db98e43e305ac73deec7b9cb1">AudioDevice</a>(<span class="keyword">const</span> QAudioFormat newFormat);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="classEngine_1_1AudioDevice.html#a810634313d1f092e28983d2b42c70600">~AudioDevice</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classEngine_1_1AudioDevice.html#a636165665f12e0e596d8c7b53405f406">setMinAmplitude</a>(qreal minAmplitude);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    QAudioFormat &amp;<a class="code" href="classEngine_1_1AudioDevice.html#a542998cc265a89db41ee4126f1b890c3">getQAudioFormat</a>();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    qreal &amp;<a class="code" href="classEngine_1_1AudioDevice.html#af4156ae067bb16a994e56e7284db1734">getDeviceLevel</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    qreal &amp;<a class="code" href="classEngine_1_1AudioDevice.html#a4484b310e14adeedf30f5a31ad5d9bf7">getMinAmplitude</a>();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    quint32 &amp;<a class="code" href="classEngine_1_1AudioDevice.html#acc9908e13b8605521aacd38edf583cc5">getMaxAmplitude</a>();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">static</span> quint32 <a class="code" href="classEngine_1_1AudioDevice.html#ad3c8663206e7e972ad43d65aeb3d0676">getMin</a>(quint32 a, quint32 b);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    qint64 <a class="code" href="classEngine_1_1AudioDevice.html#aa860e92a6d7710c4fa620c5ec12b4576">readData</a>(<span class="keywordtype">char</span> *data, qint64 maxlen) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    qint64 <a class="code" href="classEngine_1_1AudioDevice.html#a160c28c4cc1270e5d80f4d8fb9a680bf">writeData</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *data, qint64 len) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;signals:</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> audioRead();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    QAudioFormat qAudioFormat;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    qreal deviceLevel;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    qreal minAmplitude;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    quint32 maxAmplitude;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;};</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif // AUDIODEVICE_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassEngine_1_1AudioDevice_html_ad3c8663206e7e972ad43d65aeb3d0676"><div class="ttname"><a href="classEngine_1_1AudioDevice.html#ad3c8663206e7e972ad43d65aeb3d0676">Engine::AudioDevice::getMin</a></div><div class="ttdeci">static quint32 getMin(quint32 a, quint32 b)</div><div class="ttdoc">AudioDevice::getMin.</div><div class="ttdef"><b>Definition:</b> AudioDevice.cpp:242</div></div>
+<div class="ttc" id="aclassEngine_1_1AudioDevice_html_ad3c8663206e7e972ad43d65aeb3d0676"><div class="ttname"><a href="classEngine_1_1AudioDevice.html#ad3c8663206e7e972ad43d65aeb3d0676">Engine::AudioDevice::getMin</a></div><div class="ttdeci">static quint32 getMin(quint32 a, quint32 b)</div><div class="ttdoc">AudioDevice::getMin.</div><div class="ttdef"><b>Definition:</b> AudioDevice.cpp:245</div></div>
 <div class="ttc" id="aclassEngine_1_1AudioDevice_html_af4156ae067bb16a994e56e7284db1734"><div class="ttname"><a href="classEngine_1_1AudioDevice.html#af4156ae067bb16a994e56e7284db1734">Engine::AudioDevice::getDeviceLevel</a></div><div class="ttdeci">qreal &amp; getDeviceLevel()</div><div class="ttdoc">AudioDevice::getDeviceLevel.</div><div class="ttdef"><b>Definition:</b> AudioDevice.cpp:124</div></div>
 <div class="ttc" id="aclassEngine_1_1AudioDevice_html_a636165665f12e0e596d8c7b53405f406"><div class="ttname"><a href="classEngine_1_1AudioDevice.html#a636165665f12e0e596d8c7b53405f406">Engine::AudioDevice::setMinAmplitude</a></div><div class="ttdeci">void setMinAmplitude(qreal minAmplitude)</div><div class="ttdoc">AudioDevice::setMinAmplitude.</div><div class="ttdef"><b>Definition:</b> AudioDevice.cpp:108</div></div>
 <div class="ttc" id="aclassEngine_1_1AudioDevice_html_a810634313d1f092e28983d2b42c70600"><div class="ttname"><a href="classEngine_1_1AudioDevice.html#a810634313d1f092e28983d2b42c70600">Engine::AudioDevice::~AudioDevice</a></div><div class="ttdeci">~AudioDevice() override</div><div class="ttdoc">AudioDevice::~AudioDevice.</div><div class="ttdef"><b>Definition:</b> AudioDevice.cpp:98</div></div>

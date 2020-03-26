@@ -25,11 +25,16 @@ private:
   QValueAxis y;
   QChartView view;
   QFont chartFont;
+  double productiveTimeAverage = 0;
+  double unproductiveTimeAverage = 0;
 
 public:
   QChartView &getView();
   QBarSet &getProductiveQBarSet();
   QBarSet &getUnproducitveQbarSet();
+  double getProductiveTimeAverage();
+  double getUnproductiveTimeAverage();
+
   void update(Commitment &updateData, int currentTimeWindow);
   CommitmentSnaphot(int numberOfBars = 7, QString customeCatgeory = "Sunday");
 };

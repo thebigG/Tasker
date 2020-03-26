@@ -108,15 +108,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a014722d5f45d7ae791a475b76fd24047"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1Commitment.html#a014722d5f45d7ae791a475b76fd24047">setSessions</a> (QVector&lt; <a class="el" href="classudata_1_1Session.html">udata::Session</a> &gt; value)</td></tr>
 <tr class="memdesc:a014722d5f45d7ae791a475b76fd24047"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#a014722d5f45d7ae791a475b76fd24047" title="Commitment::setSessions.">Commitment::setSessions</a>.  <a href="classudata_1_1Commitment.html#a014722d5f45d7ae791a475b76fd24047">More...</a><br /></td></tr>
 <tr class="separator:a014722d5f45d7ae791a475b76fd24047"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09ce12dc9119e4d49f0da2b04ae1f866"><td class="memItemLeft" align="right" valign="top"><a id="a09ce12dc9119e4d49f0da2b04ae1f866"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (QString)</td></tr>
+<tr class="separator:a09ce12dc9119e4d49f0da2b04ae1f866"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ba78f4d714e9cf2e1fe158543d882f8"><td class="memItemLeft" align="right" valign="top">const QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1Commitment.html#a2ba78f4d714e9cf2e1fe158543d882f8">getName</a> () const</td></tr>
 <tr class="memdesc:a2ba78f4d714e9cf2e1fe158543d882f8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#a2ba78f4d714e9cf2e1fe158543d882f8" title="Commitment::getName.">Commitment::getName</a>.  <a href="classudata_1_1Commitment.html#a2ba78f4d714e9cf2e1fe158543d882f8">More...</a><br /></td></tr>
 <tr class="separator:a2ba78f4d714e9cf2e1fe158543d882f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88745608edef8b011fe5d38870bd616b"><td class="memItemLeft" align="right" valign="top"><a id="a88745608edef8b011fe5d38870bd616b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setType</b> (<a class="el" href="namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14">CommitmentType</a>)</td></tr>
 <tr class="separator:a88745608edef8b011fe5d38870bd616b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87186c1fd50457cc1aaddd267c1e327f"><td class="memItemLeft" align="right" valign="top"><a id="a87186c1fd50457cc1aaddd267c1e327f"></a>
-<a class="el" href="namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14">CommitmentType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> () const</td></tr>
-<tr class="separator:a87186c1fd50457cc1aaddd267c1e327f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9cafe8788602da9417f80a4f8545310"><td class="memItemLeft" align="right" valign="top"><a id="ad9cafe8788602da9417f80a4f8545310"></a>
+<a class="el" href="namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14">CommitmentType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> ()</td></tr>
+<tr class="separator:ad9cafe8788602da9417f80a4f8545310"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2450d5beda0274bff3e55bdecd441170"><td class="memItemLeft" align="right" valign="top"><a id="a2450d5beda0274bff3e55bdecd441170"></a>
 QString&#160;</td><td class="memItemRight" valign="bottom"><b>summary</b> () const</td></tr>
 <tr class="separator:a2450d5beda0274bff3e55bdecd441170"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,14 +135,33 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memdesc:ab5df80c128dc7642a1c4203eb3766fdc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#ab5df80c128dc7642a1c4203eb3766fdc" title="Commitment::update updates the state of this commitment. This method update st.">Commitment::update</a> updates the state of this commitment. This method update st. <br /></td></tr>
 <tr class="separator:ab5df80c128dc7642a1c4203eb3766fdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bc59a4e2ad37a353e0bbda1ec64fca2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1Commitment.html#a7bc59a4e2ad37a353e0bbda1ec64fca2">isDone</a> ()</td></tr>
-<tr class="memdesc:a7bc59a4e2ad37a353e0bbda1ec64fca2"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#a7bc59a4e2ad37a353e0bbda1ec64fca2" title="Commitment::isDone A commitment is considered &quot;done&quot; when all of its TimeWindows are &quot;closed&quot;,...">Commitment::isDone</a> A commitment is considered "done" when all of its TimeWindows are "closed", whether the user completed all of the tasks they commmited to or not. For example; suppose that Alice made a commitment called "Alice in Wonderland" and she set out to write four times week for a whole month. Suppose her start date is "January 1st, 2020" and her end date is "January 30th, 2020".  <a href="classudata_1_1Commitment.html#a7bc59a4e2ad37a353e0bbda1ec64fca2">More...</a><br /></td></tr>
+<tr class="memdesc:a7bc59a4e2ad37a353e0bbda1ec64fca2"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#a7bc59a4e2ad37a353e0bbda1ec64fca2" title="Commitment::isDone A commitment is considered &quot;done&quot; when all of its TimeWindows are &quot;closed&quot;,...">Commitment::isDone</a> A commitment is considered "done" when all of its TimeWindows are "closed", whether the user completed all of the tasks they commmited to or not. For example; suppose that Alice made a commitment called "Alice in
+Wonderland" and she set out to write four times week for a whole month. Suppose her start date is "January 1st, 2020" and her end date is "January 30th, 2020".  <a href="classudata_1_1Commitment.html#a7bc59a4e2ad37a353e0bbda1ec64fca2">More...</a><br /></td></tr>
 <tr class="separator:a7bc59a4e2ad37a353e0bbda1ec64fca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6aac6edb4bbce0af376d718c6f9f656"><td class="memItemLeft" align="right" valign="top"><a id="ae6aac6edb4bbce0af376d718c6f9f656"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setDone</b> (bool)</td></tr>
 <tr class="separator:ae6aac6edb4bbce0af376d718c6f9f656"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4332ab3d28e79d8b4e41c92fe3459e9"><td class="memItemLeft" align="right" valign="top"><a id="ac4332ab3d28e79d8b4e41c92fe3459e9"></a>
-QVector&lt; <a class="el" href="structutil_1_1TimeWindow.html">util::TimeWindow</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCommitmentWindows</b> () const</td></tr>
-<tr class="separator:ac4332ab3d28e79d8b4e41c92fe3459e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a257a1b30e4975d9fcfe4dc9e8d4be254"><td class="memItemLeft" align="right" valign="top"><a id="a257a1b30e4975d9fcfe4dc9e8d4be254"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setFrequency</b> (long long newTime, int newFrequency, int newTimeWinowSize)</td></tr>
+<tr class="separator:a257a1b30e4975d9fcfe4dc9e8d4be254"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d971798fb1168652d5f858da3b2390e"><td class="memItemLeft" align="right" valign="top"><a id="a7d971798fb1168652d5f858da3b2390e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setNoEndDate</b> (bool)</td></tr>
+<tr class="separator:a7d971798fb1168652d5f858da3b2390e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba382bc4a308e0c62883fb0fa80713a"><td class="memItemLeft" align="right" valign="top"><a id="a4ba382bc4a308e0c62883fb0fa80713a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasEndDate</b> ()</td></tr>
+<tr class="separator:a4ba382bc4a308e0c62883fb0fa80713a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac71c5fdd97ec474d27d8f6e2e5f78f75"><td class="memItemLeft" align="right" valign="top"><a id="ac71c5fdd97ec474d27d8f6e2e5f78f75"></a>
+<a class="el" href="structudata_1_1CommitmentFrequency.html">CommitmentFrequency</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getFrequency</b> ()</td></tr>
+<tr class="separator:ac71c5fdd97ec474d27d8f6e2e5f78f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55e01cbf72434e94570af80dd7e71e99"><td class="memItemLeft" align="right" valign="top"><a id="a55e01cbf72434e94570af80dd7e71e99"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setCommitmentWindows</b> (QVector&lt; <a class="el" href="structutil_1_1TimeWindow.html">util::TimeWindow</a> &gt; &amp;newCommitmentWindows)</td></tr>
+<tr class="separator:a55e01cbf72434e94570af80dd7e71e99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8078071dc907f9e886367b4e796b78c3"><td class="memItemLeft" align="right" valign="top"><a id="a8078071dc907f9e886367b4e796b78c3"></a>
+QVector&lt; <a class="el" href="structutil_1_1TimeWindow.html">util::TimeWindow</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCommitmentWindows</b> ()</td></tr>
+<tr class="separator:a8078071dc907f9e886367b4e796b78c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06337d8eac46e6dbd95222ad6f52bdbc"><td class="memItemLeft" align="right" valign="top"><a id="a06337d8eac46e6dbd95222ad6f52bdbc"></a>
+<a class="el" href="structutil_1_1TimeWindow.html">util::TimeWindow</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentTimeWindow</b> ()</td></tr>
+<tr class="separator:a06337d8eac46e6dbd95222ad6f52bdbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -275,7 +297,8 @@ QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classudata_1_1Commitment.html#a7bc59a4e2ad37a353e0bbda1ec64fca2" title="Commitment::isDone A commitment is considered &quot;done&quot; when all of its TimeWindows are &quot;closed&quot;,...">Commitment::isDone</a> A commitment is considered "done" when all of its TimeWindows are "closed", whether the user completed all of the tasks they commmited to or not. For example; suppose that Alice made a commitment called "Alice in Wonderland" and she set out to write four times week for a whole month. Suppose her start date is "January 1st, 2020" and her end date is "January 30th, 2020". </p>
+<p><a class="el" href="classudata_1_1Commitment.html#a7bc59a4e2ad37a353e0bbda1ec64fca2" title="Commitment::isDone A commitment is considered &quot;done&quot; when all of its TimeWindows are &quot;closed&quot;,...">Commitment::isDone</a> A commitment is considered "done" when all of its TimeWindows are "closed", whether the user completed all of the tasks they commmited to or not. For example; suppose that Alice made a commitment called "Alice in
+Wonderland" and she set out to write four times week for a whole month. Suppose her start date is "January 1st, 2020" and her end date is "January 30th, 2020". </p>
 <p>Also suppose she only wrote for two of those weeks. Whe she comes back to use Tasker on January 31st, the <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> "Alice in Wonderland" will be considered "done". Meaning this function, in that case, will return true.</p>
 <dl class="section note"><dt>Note</dt><dd>Commitments that have noEndDate set to "true" are never considered "done". In such case, this function will always return "false". </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>true if this commitment is "done". Otherwise, it returns false. </dd></dl>

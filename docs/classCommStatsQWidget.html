@@ -72,7 +72,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class.">CommStatsQWidget</a> class.  
+<p>The <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a> class is the main hub where the data for Commitments is displayed. Whether that be charts, averages, current commitments and their sessions, it is all displayed by <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a>. This clas just displays data, it doesn't really "manipulate" it except for the cases where one might need to convert minutes to seconds, seconds to hours, etc. All data "manipulation" is done for the sake of UI design, not data management. All data management should be left to Classes such as Commitment, Session, Task, etc.  
  <a href="classCommStatsQWidget.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="CommStatsQWidget_8h_source.html">CommStatsQWidget.h</a>&gt;</code></p>
@@ -107,13 +107,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></t
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-slots"></a>
 Private Slots</h2></td></tr>
-<tr class="memitem:aea5b41a69123f233e33ea31a141e0468"><td class="memItemLeft" align="right" valign="top"><a id="aea5b41a69123f233e33ea31a141e0468"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommStatsQWidget.html#aea5b41a69123f233e33ea31a141e0468">addCommitmentButtonSlot</a> ()</td></tr>
-<tr class="memdesc:aea5b41a69123f233e33ea31a141e0468"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCommStatsQWidget.html#aea5b41a69123f233e33ea31a141e0468" title="CommStatsQWidget::addCommitmentButtonSlot.">CommStatsQWidget::addCommitmentButtonSlot</a>. <br /></td></tr>
-<tr class="separator:aea5b41a69123f233e33ea31a141e0468"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61fb3f74336ebbe32b5534472aaabd61"><td class="memItemLeft" align="right" valign="top"><a id="a61fb3f74336ebbe32b5534472aaabd61"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removeCommitmentButtonSlot</b> ()</td></tr>
-<tr class="separator:a61fb3f74336ebbe32b5534472aaabd61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af684a71655743b8f72f36b608a0b1dfb"><td class="memItemLeft" align="right" valign="top"><a id="af684a71655743b8f72f36b608a0b1dfb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>newCommitmentSlot</b> (bool)</td></tr>
+<tr class="separator:af684a71655743b8f72f36b608a0b1dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af08c8abc8b13249a523342d92af37893"><td class="memItemLeft" align="right" valign="top"><a id="af08c8abc8b13249a523342d92af37893"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>deleteCommitmentSlot</b> (bool)</td></tr>
+<tr class="separator:af08c8abc8b13249a523342d92af37893"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa39b9da2ae3560a7774f451250b82cb7"><td class="memItemLeft" align="right" valign="top"><a id="aa39b9da2ae3560a7774f451250b82cb7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>newSessionSlot</b> (bool)</td></tr>
+<tr class="separator:aa39b9da2ae3560a7774f451250b82cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b50689bf8adc88cf84cea5b6beaac2c"><td class="memItemLeft" align="right" valign="top"><a id="a1b50689bf8adc88cf84cea5b6beaac2c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>currentCommitmentChangedSlot</b> (QTreeWidgetItem *, QTreeWidgetItem *)</td></tr>
 <tr class="separator:a1b50689bf8adc88cf84cea5b6beaac2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,6 +138,9 @@ Ui::CommStatsQWidget *&#160;</td><td class="memItemRight" valign="bottom"><b>ui<
 <tr class="memitem:a60861c5fc267b326235e94bcb83fca5e"><td class="memItemLeft" align="right" valign="top"><a id="a60861c5fc267b326235e94bcb83fca5e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isDelete</b> = false</td></tr>
 <tr class="separator:a60861c5fc267b326235e94bcb83fca5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8b41be901a4970f79221bd98f3d2acb"><td class="memItemLeft" align="right" valign="top"><a id="ae8b41be901a4970f79221bd98f3d2acb"></a>
+QPalette&#160;</td><td class="memItemRight" valign="bottom"><b>p</b></td></tr>
+<tr class="separator:ae8b41be901a4970f79221bd98f3d2acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1d92c64c2b715bb9d77468935ffb655"><td class="memItemLeft" align="right" valign="top"><a id="ac1d92c64c2b715bb9d77468935ffb655"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>selectedCommitmentIndex</b> = 0</td></tr>
 <tr class="separator:ac1d92c64c2b715bb9d77468935ffb655"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,9 +150,22 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>selectedCommitmentInde
 <tr class="memitem:a6431dc9c59c7343a089c354039d49334"><td class="memItemLeft" align="right" valign="top"><a id="a6431dc9c59c7343a089c354039d49334"></a>
 <a class="el" href="classTimerWindowQWidget.html">TimerWindowQWidget</a>&#160;</td><td class="memItemRight" valign="bottom"><b>timerWindow</b></td></tr>
 <tr class="separator:a6431dc9c59c7343a089c354039d49334"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb80ac08ab4e16da2d29cc49b16eb89a"><td class="memItemLeft" align="right" valign="top"><a id="adb80ac08ab4e16da2d29cc49b16eb89a"></a>
+QMenuBar&#160;</td><td class="memItemRight" valign="bottom"><b>mainMenuBar</b></td></tr>
+<tr class="separator:adb80ac08ab4e16da2d29cc49b16eb89a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0168e3c2125ccd68bfc2b33e9678941a"><td class="memItemLeft" align="right" valign="top"><a id="a0168e3c2125ccd68bfc2b33e9678941a"></a>
+<a class="el" href="classudata_1_1CommitmentSnaphot.html">udata::CommitmentSnaphot</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>snapshot</b></td></tr>
+<tr class="separator:a0168e3c2125ccd68bfc2b33e9678941a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a867a204db39d140b9697892644698454"><td class="memItemLeft" align="right" valign="top"><a id="a867a204db39d140b9697892644698454"></a>
+QMenu&#160;</td><td class="memItemRight" valign="bottom"><b>commitmentMenu</b> {COMMITMENT_MENU_STRING}</td></tr>
+<tr class="separator:a867a204db39d140b9697892644698454"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf0b4dbed681c35b4e54d51a20383991"><td class="memItemLeft" align="right" valign="top"><a id="aaf0b4dbed681c35b4e54d51a20383991"></a>
+QMenu&#160;</td><td class="memItemRight" valign="bottom"><b>sessionMenu</b> {SESSION_MENU_STRING}</td></tr>
+<tr class="separator:aaf0b4dbed681c35b4e54d51a20383991"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class.">CommStatsQWidget</a> class. </p>
+<div class="textblock"><p>The <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a> class is the main hub where the data for Commitments is displayed. Whether that be charts, averages, current commitments and their sessions, it is all displayed by <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a>. This clas just displays data, it doesn't really "manipulate" it except for the cases where one might need to convert minutes to seconds, seconds to hours, etc. All data "manipulation" is done for the sake of UI design, not data management. All data management should be left to Classes such as Commitment, Session, Task, etc. </p>
+<dl class="section note"><dt>Note</dt><dd>Beware of manipulating palettes on Qt Designer. It can cause backwards comptability problems(specifically might break the build for Ubuntu 14.04) when changing the palette manually on Qt Designer. It lookes like it is ok to manipulate palettes via code by calling methods like QWidget.setPalette(), but not through the Qt Designer editor. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afd5012897d300955162c969174646bd5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afd5012897d300955162c969174646bd5">&#9670;&nbsp;</a></span>CommStatsQWidget()</h2>

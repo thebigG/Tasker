@@ -23,7 +23,20 @@ class CommStatsQWidget;
 }
 
 /**
- * @brief The CommStatsQWidget class
+ * @brief The CommStatsQWidget class is the main hub where the data for
+ * Commitments is displayed. Whether that be charts, averages, current
+ * commitments and their sessions, it is all displayed by CommStatsQWidget.
+ * This clas just displays data, it doesn't really "manipulate" it
+ * except for the cases where one might need to convert minutes to seconds,
+ * seconds to hours, etc. All data "manipulation" is done for the sake of UI
+ * design, not data management. All data management should be left to Classes
+ * such as Commitment, Session, Task, etc.
+ *
+ * @note Beware of manipulating palettes on Qt Designer.
+ * It can cause backwards comptability problems(specifically might break the
+ * build for Ubuntu 14.04) when changing the palette manually on Qt Designer. It
+ * lookes like it is ok to manipulate palettes via code by calling methods like
+ * QWidget.setPalette(), but not through the Qt Designer editor.
  */
 class CommStatsQWidget : public QWidget {
   Q_OBJECT
