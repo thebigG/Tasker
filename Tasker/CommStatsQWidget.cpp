@@ -18,7 +18,7 @@ using udata::User;
  * @param parent
  */
 CommStatsQWidget::CommStatsQWidget(QWidget *parent)
-    : QWidget(parent), ui(new Ui::CommStatsQWidget) {
+    : QMainWindow(parent), ui(new Ui::CommStatsQWidget) {
   ui->setupUi(this);
   connect(ui->commitmentsQTreeWidget, &QTreeWidget::currentItemChanged, this,
           &CommStatsQWidget::currentCommitmentChangedSlot);
@@ -36,8 +36,9 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   this->layout()->setMenuBar(&mainMenuBar);
   this->ui->CommitmentSnaphotQWidget->setLayout(new QGridLayout());
   snapshot = new udata::CommitmentSnaphot{};
-
-  this->ui->CommitmentSnaphotQWidget->layout()->addWidget(&snapshot->getView());
+  this->setLayout(new QGridLayout);
+  this->layout()->addWidget(this->ui->CommitmentSnaphotQWidget);
+  this->layout()->addWidget(&snapshot->getView());
 #ifdef TRAVIS_CI
   QPalette p = this->ui->CommitmentInfoStatsQWidget->palette();
   p.setColor(this->ui->CommitmentInfoStatsQWidget->backgroundRole(),
@@ -45,7 +46,7 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   this->ui->CommitmentInfoStatsQWidget->setAutoFillBackground(true);
   this->ui->CommitmentInfoStatsQWidget->setPalette(p);
 #endif
-
+  this->layout()->setSpacing(0);
   this->layout()->setContentsMargins(0, 0, 0, 0);
 }
 

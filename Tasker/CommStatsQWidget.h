@@ -38,7 +38,7 @@ class CommStatsQWidget;
  * lookes like it is ok to manipulate palettes via code by calling methods like
  * QWidget.setPalette(), but not through the Qt Designer editor.
  */
-class CommStatsQWidget : public QWidget {
+class CommStatsQWidget : public QMainWindow {
   Q_OBJECT
 
 public:
