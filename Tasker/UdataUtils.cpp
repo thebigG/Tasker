@@ -16,7 +16,7 @@ QString udata::UdataUtils::userFilePath = "";
  */
 UdataUtils::UdataUtils() {}
 
-#ifdef __TASKER_DEBUG__
+//#ifdef __TASKER_DEBUG__
 void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
                                     int minProductiveTime,
                                     int maxProductiveTime,
@@ -92,14 +92,14 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
            << newCommitment.getCommitmentWindows().at(0).sessions.length();
   User::getInstance()->addCommitment(newCommitment);
 }
-#else
-void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
-                                    int minProductiveTime,
-                                    int maxProductiveTime,
-                                    int minUnproducitveTime,
-                                    int maxUnproductiveTime,
-                                    CommitmentType type) {}
-#endif
+//#else
+//void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
+//                                    int minProductiveTime,
+//                                    int maxProductiveTime,
+//                                    int minUnproducitveTime,
+//                                    int maxUnproductiveTime,
+//                                    CommitmentType type) {}
+//#endif
 
 /**
  * @brief UdataUtils::saveUserData
