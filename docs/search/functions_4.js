@@ -14,7 +14,7 @@ var searchData=
   ['getdefaultcommitment_193',['getDefaultCommitment',['../classudata_1_1User.html#a2dbcdbe1c54d0f5f293109043f5c6e02',1,'udata::User']]],
   ['getdevicelevel_194',['getDeviceLevel',['../classEngine_1_1AudioDevice.html#af4156ae067bb16a994e56e7284db1734',1,'Engine::AudioDevice']]],
   ['getenddate_195',['getEndDate',['../classCreateCommitmentQWidget.html#a5f7592c06beda4865e4c9c928783d228',1,'CreateCommitmentQWidget']]],
-  ['getinstance_196',['getInstance',['../classMainUI.html#a0d5fe74e34d6d27aed90729044f8dd50',1,'MainUI::getInstance()'],['../classudata_1_1User.html#accb7d55963940bd9e5fb6bb434d1290f',1,'udata::User::getInstance()']]],
+  ['getinstance_196',['getInstance',['../classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d',1,'MainUI::getInstance()'],['../classudata_1_1User.html#accb7d55963940bd9e5fb6bb434d1290f',1,'udata::User::getInstance()']]],
   ['getinterval_197',['getInterval',['../classCreateCommitmentQWidget.html#a703a055f0b7e38f20368a2c85b475d09',1,'CreateCommitmentQWidget']]],
   ['getlength_198',['getLength',['../classudata_1_1Session.html#a465f4697e6ca472c002c55fadaeb17c2',1,'udata::Session']]],
   ['getlisteners_199',['getListeners',['../classudata_1_1Task.html#a6af77b673262d1fe58dd38091f923321',1,'udata::Task']]],

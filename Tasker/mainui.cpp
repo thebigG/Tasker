@@ -1,20 +1,36 @@
 #include "mainui.h"
-#include <QDebug>
+
 #include <UdataUtils.h>
 #include <User.h>
-std::unique_ptr<CommStatsQWidget> MainUI::Instance;
+
+#include <QDebug>
+std::unique_ptr<MainUI> MainUI::mainHub;
 
 using namespace udata;
+
+MainUI::MainUI() {
+  commitmentHub.update();
+  statusBar()->hide();
+  this->menuBar()->hide();
+  this->layout()->setContentsMargins(0, 0, 0, 0);
+  this->layout()->setSpacing(0);
+  commitmentHub.layout()->setSpacing(0);
+  commitmentHub.setContentsMargins(0, 0, 0, 0);
+  this->setCentralWidget(&commitmentHub);
+  this->statusBar()->hide();
+}
+
+CommStatsQWidget& MainUI::getCommitmentHub() { return commitmentHub; }
 
 /**
  * @brief MainUI::getInstance
  * @return
  */
-CommStatsQWidget *MainUI::getInstance() {
-    if (Instance.get() == nullptr) {
-        Instance = std::make_unique<CommStatsQWidget>();
-    }
-    return Instance.get();
+MainUI* MainUI::getInstance() {
+  if (mainHub.get() == nullptr) {
+    mainHub = std::make_unique<MainUI>();
+  }
+  return mainHub.get();
 }
 /**
  * @brief MainUI::saveTaskerState
@@ -24,6 +40,6 @@ CommStatsQWidget *MainUI::getInstance() {
  * This is called every time the application is about to be closed.
  */
 void MainUI::saveTaskerStateSlot() {
-    qDebug() << "Saving state";
-    UdataUtils::saveUserData(*User::getInstance());
+  qDebug() << "Saving state";
+  UdataUtils::saveUserData(*User::getInstance());
 }

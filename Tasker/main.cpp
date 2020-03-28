@@ -38,27 +38,27 @@ using namespace QtCharts;
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
   if (UdataUtils::prepFiles() == 0) {
-    qDebug("files was allocated successfully");
+    qDebug("files were loaded successfully");
   } else {
     qDebug("prepFiles failed");
+    return -1;
   }
 
-    UdataUtils::generateCommitment(
-        "Generated#104", 8, util::StatsUtility::minutesToSeconds(10),
-        util::StatsUtility::minutesToSeconds(150),
-        util::StatsUtility::minutesToSeconds(0),
-        util::StatsUtility::minutesToSeconds(45),
-        udata::CommitmentType::WEEKLY);
-      qDebug() << "Commitment summary:" <<
-      User::getInstance()->getCommitments().at(0).summary();
+//    UdataUtils::generateCommitment(
+//        "Generated#104", 8, util::StatsUtility::minutesToSeconds(10),
+//        util::StatsUtility::minutesToSeconds(150),
+//        util::StatsUtility::minutesToSeconds(0),
+//        util::StatsUtility::minutesToSeconds(45),
+//        udata::CommitmentType::WEEKLY);
+//      qDebug() << "Commitment summary:" <<
+//      User::getInstance()->getCommitments().at(0).summary();
   QObject::connect(&a, &QGuiApplication::lastWindowClosed,
                    &MainUI::saveTaskerStateSlot);
-  CommStatsQWidget *widget = nullptr;
+  MainUI *widget = nullptr;
   qDebug() << "Tasker Debug mode";
-  std::cout << "version:" << __cplusplus;
+  std::cout << "c++ version:" << __cplusplus;
   widget = MainUI::getInstance();
   qDebug() << "thread id for UI:" << QThread::currentThreadId();
-  widget->update();
   widget->show();
   return a.exec();
 }

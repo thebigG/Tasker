@@ -18,7 +18,7 @@ using udata::User;
  * @param parent
  */
 CommStatsQWidget::CommStatsQWidget(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::CommStatsQWidget) {
+    : QWidget(parent), ui(new Ui::CommStatsQWidget) {
   ui->setupUi(this);
   connect(ui->commitmentsQTreeWidget, &QTreeWidget::currentItemChanged, this,
           &CommStatsQWidget::currentCommitmentChangedSlot);
@@ -33,12 +33,14 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   sessionMenu.addAction(DELETE_SESSION_STRING);
   mainMenuBar.addMenu(&commitmentMenu);
   mainMenuBar.addMenu(&sessionMenu);
-  this->layout()->setMenuBar(&mainMenuBar);
+//  this->layout()->setMenuBar(&mainMenuBar);
   this->ui->CommitmentSnaphotQWidget->setLayout(new QGridLayout());
   snapshot = new udata::CommitmentSnaphot{};
-  this->setLayout(new QGridLayout);
-  this->layout()->addWidget(this->ui->CommitmentSnaphotQWidget);
-  this->layout()->addWidget(&snapshot->getView());
+  this->ui->CommitmentSnaphotQWidget->layout()->setSpacing(0);
+//  this->setLayout(new QGridLayout);
+//  this->layout()->addWidget(this->ui->CommitmentSnaphotQWidget);
+  this->ui->CommitmentSnaphotQWidget->layout()->addWidget(&snapshot->getView());
+//  this->ui->commitmentsQTreeWidget->layout()->setContentsMargins(0,0,0,0);
 #ifdef TRAVIS_CI
   QPalette p = this->ui->CommitmentInfoStatsQWidget->palette();
   p.setColor(this->ui->CommitmentInfoStatsQWidget->backgroundRole(),
@@ -141,7 +143,7 @@ void CommStatsQWidget::on_commitmentsQTreeWidget_itemDoubleClicked(
     if (c.getName() == commitmentName) {
       qDebug() << c.getName();
 
-      TimerWindowQWidget &t = MainUI::getInstance()->getTimerWindow();
+      TimerWindowQWidget &t = MainUI::getInstance()->getCommitmentHub().getTimerWindow();
       t.show();
     }
 
