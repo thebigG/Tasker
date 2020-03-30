@@ -18,6 +18,9 @@ class MainUI : public QMainWindow {
  private:
   static std::unique_ptr<MainUI> mainHub;
   CommStatsQWidget commitmentHub{};
+  QMenuBar mainMenuBar;
+  QMenu commitmentMenu{COMMITMENT_MENU_STRING};
+  QMenu sessionMenu{SESSION_MENU_STRING};
 
  public:
   static MainUI* getInstance();

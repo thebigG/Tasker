@@ -39,7 +39,7 @@ CONFIG += -std=c++14
 CONFIG(debug, debug|release)
 {
 DEFINES+=__TASKER_DEBUG__
-DEFINES += QT_NO_DEBUG_OUTPUT
+#DEFINES += QT_NO_DEBUG_OUTPUT
 }
 #QMAKE_LFLAGS += -Xlinker -Bstatic
 #Print the debug messages ONLY in release mode

@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a Whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a Whole. One can think as this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes,context menus and look-and-feel of the entire UI.  
+<p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a whole. One can think as this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes,context menus and look-and-feel of the entire UI.  
  <a href="classMainUI.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="mainui_8h_source.html">mainui.h</a>&gt;</code></p>
@@ -109,6 +109,15 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:af9b5063c3a4bcf840dd90d808751a254"><td class="memItemLeft" align="right" valign="top"><a id="af9b5063c3a4bcf840dd90d808751a254"></a>
 <a class="el" href="classCommStatsQWidget.html">CommStatsQWidget</a>&#160;</td><td class="memItemRight" valign="bottom"><b>commitmentHub</b> {}</td></tr>
 <tr class="separator:af9b5063c3a4bcf840dd90d808751a254"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2511c419d66bf2bd8bf8e3027362e5d"><td class="memItemLeft" align="right" valign="top"><a id="ad2511c419d66bf2bd8bf8e3027362e5d"></a>
+QMenuBar&#160;</td><td class="memItemRight" valign="bottom"><b>mainMenuBar</b></td></tr>
+<tr class="separator:ad2511c419d66bf2bd8bf8e3027362e5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7448cf5a5631a4fc03aa78c8a7d385e"><td class="memItemLeft" align="right" valign="top"><a id="ae7448cf5a5631a4fc03aa78c8a7d385e"></a>
+QMenu&#160;</td><td class="memItemRight" valign="bottom"><b>commitmentMenu</b> {COMMITMENT_MENU_STRING}</td></tr>
+<tr class="separator:ae7448cf5a5631a4fc03aa78c8a7d385e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9df3d3e801ac955c62a5ce2f0cc999a9"><td class="memItemLeft" align="right" valign="top"><a id="a9df3d3e801ac955c62a5ce2f0cc999a9"></a>
+QMenu&#160;</td><td class="memItemRight" valign="bottom"><b>sessionMenu</b> {SESSION_MENU_STRING}</td></tr>
+<tr class="separator:a9df3d3e801ac955c62a5ce2f0cc999a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -117,7 +126,7 @@ static std::unique_ptr&lt; <a class="el" href="classMainUI.html">MainUI</a> &gt;
 <tr class="separator:a5977d77626d6faef80f3e1f347449952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a Whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a Whole. One can think as this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes,context menus and look-and-feel of the entire UI. </p>
+<div class="textblock"><p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a whole. One can think as this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes,context menus and look-and-feel of the entire UI. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="adacd428c44ae710fb9f6e7a36b8ac87d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adacd428c44ae710fb9f6e7a36b8ac87d">&#9670;&nbsp;</a></span>getInstance()</h2>

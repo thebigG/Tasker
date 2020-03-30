@@ -9,15 +9,17 @@
 #define EDIT_SESSION_STRING "Edit Session"
 #define DELETE_SESSION_STRING "Delete Session"
 
-#include "User.h"
 #include <CommitmentSnapshot.h>
 #include <CreateCommitmentQWidget.h>
+#include <TimerWindowQWidget.h>
+
 #include <QMenu>
 #include <QMenuBar>
 #include <QTreeWidget>
 #include <QWidget>
-#include <TimerWindowQWidget.h>
 #include <memory>
+
+#include "User.h"
 namespace Ui {
 class CommStatsQWidget;
 }
@@ -41,7 +43,7 @@ class CommStatsQWidget;
 class CommStatsQWidget : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   explicit CommStatsQWidget(QWidget *parent = nullptr);
   TimerWindowQWidget &getTimerWindow();
   CreateCommitmentQWidget &getCreateCommitment();
@@ -49,7 +51,7 @@ public:
   void func();
   void update();
 
-private slots:
+ public slots:
   void newCommitmentSlot(bool);
   void deleteCommitmentSlot(bool);
   void newSessionSlot(bool);
@@ -59,7 +61,7 @@ private slots:
   void on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetItem *item,
                                                    int column);
 
-private:
+ private:
   Ui::CommStatsQWidget *ui;
   bool isDelete = false;
   QPalette p;
@@ -68,10 +70,7 @@ private:
   //    QVBoxLayout layout{};
   CreateCommitmentQWidget createCommimentWindow;
   TimerWindowQWidget timerWindow;
-  QMenuBar mainMenuBar;
-  udata::CommitmentSnaphot *snapshot;
-  QMenu commitmentMenu{COMMITMENT_MENU_STRING};
-  QMenu sessionMenu{SESSION_MENU_STRING};
+  udata::CommitmentSnaphot snapshot;
 };
 
-#endif // WIDGET_COMMSTATS_H
+#endif  // WIDGET_COMMSTATS_H

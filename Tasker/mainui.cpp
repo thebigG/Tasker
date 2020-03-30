@@ -10,8 +10,19 @@ using namespace udata;
 
 MainUI::MainUI() {
   commitmentHub.update();
-  statusBar()->hide();
-  this->menuBar()->hide();
+  connect(commitmentMenu.addAction(NEW_COMMITMENT_STRING), &QAction::triggered,
+          &commitmentHub, &CommStatsQWidget::newCommitmentSlot);
+  connect(commitmentMenu.addAction(DELETE_COMMITMENT_STRING),
+          &QAction::triggered, &commitmentHub,
+          &CommStatsQWidget::deleteCommitmentSlot);
+  commitmentMenu.addAction(EDIT_COMMITMENT_STRING);
+  connect(sessionMenu.addAction(NEW_SESSION_STRING), &QAction::triggered,
+          &commitmentHub, &CommStatsQWidget::newSessionSlot);
+  sessionMenu.addAction(EDIT_SESSION_STRING);
+  sessionMenu.addAction(DELETE_SESSION_STRING);
+  mainMenuBar.addMenu(&commitmentMenu);
+  mainMenuBar.addMenu(&sessionMenu);
+  this->setMenuBar(&mainMenuBar);
   this->layout()->setContentsMargins(0, 0, 0, 0);
   this->layout()->setSpacing(0);
   commitmentHub.layout()->setSpacing(0);

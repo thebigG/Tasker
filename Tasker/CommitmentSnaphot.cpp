@@ -1,8 +1,11 @@
-#include "CommitmentSnapshot.h"
 #include <StatsUtility.h>
 
+#include "CommitmentSnapshot.h"
+
 udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
-                                            QString customCategories) {
+                                            QString customCategories)
+    : QWidget() {
+  productiveTimeAvgLabel.setText("Weekly Average Productive Time");
   //    sets.push_back(QBarSet("Test#1"));
   productiveBarSet << 0 << 0 << 0 << 0 << 0 << 0 << 0;
   unproductiveBarSet << 0 << 0 << 0 << 0 << 0 << 0 << 0;
@@ -40,13 +43,30 @@ udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
   chart.setTitleFont(chartFont);
   view.setChart(&chart);
   qDebug() << "size of view" << view.size();
-
+  this->setLayout(new QGridLayout());
+  detailsWidget.setLayout(new QGridLayout());
   view.setRenderHint(QPainter::Antialiasing);
+  this->layout()->addWidget(&getView());
+  QPalette p = view.palette();
+  view.palette();
+  p.setColor(QPalette::ColorRole::Background, Qt::white);
+  this->setAutoFillBackground(true);
+  //  this->setPalette(p);
+  this->setPalette(p);
+  QPalette labelPalette = productiveTimeAvgLabel.palette();
+  labelPalette.setColor(QPalette::ColorRole::Foreground,
+                        productiveBarSet.color());
+  productiveTimeAvgLabel.setPalette(labelPalette);
+  static_cast<QGridLayout *>(detailsWidget.layout())
+      ->addWidget(&productiveTimeAvgLabel, 0, 0);
+  static_cast<QGridLayout *>(this->layout())->addWidget(&detailsWidget, 1, 0);
+  //  static_cast<QGridLayout
+  //  *>(this->layout())->addWidget(productiveTimeAvgLabel);
 }
 
 QChartView &udata::CommitmentSnaphot::getView() { return view; }
 /**
-  This function assumes that the sessions in updateDate
+  This function assumes that the sessions in updateData
   are sorted from oldest to newest.
  * @brief udata::CommitmentSnaphot::update
  * @param updateData
@@ -55,6 +75,8 @@ QChartView &udata::CommitmentSnaphot::getView() { return view; }
 void udata::CommitmentSnaphot::update(Commitment &updateData,
                                       int currentTimeWindow) {
   qDebug() << "breaks here???#1";
+  qDebug() << "Color of view"
+           << view.palette().color(QPalette::ColorRole::Background);
   util::TimeWindow currentWindow =
       updateData.getCommitmentWindows().at(currentTimeWindow);
   QDate dayOfTheWeek = QDate{currentWindow.startDate};
@@ -116,6 +138,7 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
 
   series.append(&productiveBarSet);
   series.append(&unproductiveBarSet);
+
   series.detachAxis(&y);
   series.detachAxis(&x);
   y.setRange(0, util::StatsUtility::toMinutes(updateData.getFrequency().goal));
@@ -131,6 +154,7 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
                     updateData.getCommitmentWindows()
                         .at(currentTimeWindow)
                         .endDate.toString()};
+  // ugly hack; will remove as soon as I can
   int remainingChars = MAX_TITLE_CHARS - dateRange.length() - 9;
   for (int i = 0; i < (remainingChars) / 2; i += 6) {
     dateRange.append("&nbsp;");
@@ -146,6 +170,10 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
   productiveTimeAverage = productiveBarSet.sum() / productiveBarSet.count();
   unproductiveTimeAverage =
       unproductiveBarSet.sum() / unproductiveBarSet.count();
+  productiveRatio = productiveBarSet.sum() / productiveBarSet.sum() +
+                    unproductiveBarSet.sum();
+  unproductiveRatio = unproductiveBarSet.sum() / productiveBarSet.sum() +
+                      unproductiveBarSet.sum();
   chart.legend()->setAlignment(Qt::AlignBottom);
   view.setRenderHint(QPainter::Antialiasing);
 }
