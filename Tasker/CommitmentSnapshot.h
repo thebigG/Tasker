@@ -1,6 +1,7 @@
 #ifndef WEEKLYSNAPHOT_H
 #define WEEKLYSNAPHOT_H
 #include <Commitment.h>
+#include <TaskerPerf/perftimer.h>
 
 #include <QVector>
 #include <QtCharts/QBarCategoryAxis>
@@ -33,6 +34,8 @@ class CommitmentSnaphot : public QWidget {
   double unproductiveTimeAverage = 0;
   double productiveRatio;
   double unproductiveRatio;
+
+  Perf::PerfTimer newPerfTimer{};
 
  public:
   QChartView &getView();

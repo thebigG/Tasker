@@ -71,6 +71,7 @@ class CommStatsQWidget : public QWidget {
   CreateCommitmentQWidget createCommimentWindow;
   TimerWindowQWidget timerWindow;
   udata::CommitmentSnaphot snapshot;
+  Perf::PerfTimer newPerfTimer{};
 };
 
 #endif  // WIDGET_COMMSTATS_H

@@ -12,6 +12,8 @@
 #include "mainui.h"
 //#include "objctest.h"
 #include <CommitmentSnapshot.h>
+#include <TaskerPerf/perftimer.h>
+
 #include <QApplication>
 #include <QDebug>
 #include <QFile>
@@ -23,7 +25,6 @@
 #include <QThreadPool>
 #include <Qt>
 #include <QtCore>
-#include <TaskerPerf/perftimer.h>
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
@@ -44,14 +45,14 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
-//    UdataUtils::generateCommitment(
-//        "Generated#104", 8, util::StatsUtility::minutesToSeconds(10),
-//        util::StatsUtility::minutesToSeconds(150),
-//        util::StatsUtility::minutesToSeconds(0),
-//        util::StatsUtility::minutesToSeconds(45),
-//        udata::CommitmentType::WEEKLY);
-//      qDebug() << "Commitment summary:" <<
-//      User::getInstance()->getCommitments().at(0).summary();
+  //  UdataUtils::generateCommitment(
+  //      "Generated#13", 8, util::StatsUtility::minutesToSeconds(10),
+  //      util::StatsUtility::minutesToSeconds(30),
+  //      util::StatsUtility::minutesToSeconds(0),
+  //      util::StatsUtility::minutesToSeconds(15),
+  //      udata::CommitmentType::WEEKLY);
+  //  qDebug() << "Commitment summary:"
+  //           << User::getInstance()->getCommitments().at(0).summary();
   QObject::connect(&a, &QGuiApplication::lastWindowClosed,
                    &MainUI::saveTaskerStateSlot);
   MainUI *widget = nullptr;

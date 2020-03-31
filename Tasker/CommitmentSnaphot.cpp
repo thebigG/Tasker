@@ -5,9 +5,8 @@
 udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
                                             QString customCategories)
     : QWidget() {
-  productiveTimeAvgLabel.setText("Weekly Average Productive Time");
   //    sets.push_back(QBarSet("Test#1"));
-  productiveBarSet << 0 << 0 << 0 << 0 << 0 << 0 << 0;
+  productiveBarSet << 95 << 0 << 0 << 0 << 0 << 0 << 0;
   unproductiveBarSet << 0 << 0 << 0 << 0 << 0 << 0 << 0;
   qDebug() << "size of barset=" << sizeof(QBarSet);
   qDebug() << "size of bar_series=" << sizeof(QBarSeries);
@@ -28,8 +27,8 @@ udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
   x.append(categories);
   chart.addAxis(&x, Qt::AlignBottom);
   series.attachAxis(&x);
-  y.setRange(1, 50);
-  y.setMax(50);
+  y.setRange(1, 100);
+  //  y.setMax(50);
   y.setTickCount(3);
   y.setLabelFormat("%d Mins");
   chart.addAxis(&y, Qt::AlignLeft);
@@ -68,60 +67,67 @@ QChartView &udata::CommitmentSnaphot::getView() { return view; }
 /**
   This function assumes that the sessions in updateData
   are sorted from oldest to newest.
+ * This is a time-sensitive function. Whatever it executes, it MUST return
+ * within 250 milliseconds, which is human perception threshold.
  * @brief udata::CommitmentSnaphot::update
  * @param updateData
  * @param currentTimeWindow
  */
 void udata::CommitmentSnaphot::update(Commitment &updateData,
                                       int currentTimeWindow) {
-  qDebug() << "breaks here???#1";
-  qDebug() << "Color of view"
-           << view.palette().color(QPalette::ColorRole::Background);
+  //  newPerfTimer.restart();
+  //  qDebug() << "breaks here???#1";
+  //  qDebug() << "Color of view"
+  //  << view.palette().color(QPalette::ColorRole::Background);
   util::TimeWindow currentWindow =
       updateData.getCommitmentWindows().at(currentTimeWindow);
   QDate dayOfTheWeek = QDate{currentWindow.startDate};
   x.clear();
   if (updateData.getType() == udata::CommitmentType::WEEKLY) {
     for (int i = 0; i < WEEK_SIZE; i++) {
-      qDebug() << "breaks here???2";
+      //      qDebug() << "breaks here???2";
       productiveBarSet.replace(i, 0);
       unproductiveBarSet.replace(i, 0);
-      qDebug() << "breaks here???2";
+      //      qDebug() << "breaks here???2";
       x.append(dayOfTheWeek.toString("ddd"));
-      qDebug() << "Catgeory fori:" << i << "=" << categories.at(i);
-      qDebug() << "day of week=" << dayOfTheWeek.toString("ddd");
+      //      qDebug() << "Catgeory fori:" << i << "=" << categories.at(i);
+      //      qDebug() << "day of week=" << dayOfTheWeek.toString("ddd");
       dayOfTheWeek = dayOfTheWeek.addDays(1);
-      qDebug() << "breaks here???3";
-      qDebug() << "breaks here???3";
+      //      qDebug() << "breaks here???3";
+      //      qDebug() << "breaks here???3";
     }
   }
   series.take(&productiveBarSet);
   series.take(&unproductiveBarSet);
   unproductiveBarSet.setParent(nullptr);
   productiveBarSet.setParent(nullptr);
-  qDebug() << "number of Sessions-->"
-           << updateData.getCommitmentWindows()
-                  .at(currentTimeWindow)
-                  .sessions.length();
+  //  qDebug() << "number of Sessions-->"
+  //           << updateData.getCommitmentWindows()
+  //                  .at(currentTimeWindow)
+  //                  .sessions.length();
 
   for (int i = 0; i < updateData.getCommitmentWindows()
                           .at(currentTimeWindow)
                           .sessions.length();
        i++) {
-    qDebug() << "breaks here???2";
-    qDebug() << "length o";
-    qDebug() << "current index on update snapshot loop" << i;
-    qDebug()
-        << "start date-->"
-        << updateData.getCommitmentWindows().at(currentTimeWindow).startDate;
-    qDebug() << "session date-->" << currentWindow.sessions[i].getDate();
-    qDebug() << "session date diff-->"
-             << currentWindow.sessions[i].getDate().day() -
-                    currentWindow.startDate.day();
-    qDebug() << "day in session=" << currentWindow.sessions[i].getDate().day();
+    qDebug() << "productive time in seconds"
+             << currentWindow.sessions[i].getProductiveTime();
+    //    qDebug() << "breaks here???2";
+    //    qDebug() << "length o";
+    //    qDebug() << "current index on update snapshot loop" << i;
+    //    qDebug()
+    //        << "start date-->"
+    //        <<
+    //        updateData.getCommitmentWindows().at(currentTimeWindow).startDate;
+    //    qDebug() << "session date-->" << currentWindow.sessions[i].getDate();
+    //    qDebug() << "session date diff-->"
+    //             << currentWindow.sessions[i].getDate().day() -
+    //                    currentWindow.startDate.day();
+    //    qDebug() << "day in session=" <<
+    //    currentWindow.sessions[i].getDate().day();
     //      qDebug() << "day in start
     //      "date=" <<
-    currentWindow.startDate.day();
+    //    currentWindow.startDate.day();
     productiveBarSet.replace(
         currentWindow.sessions.at(i).getDate().day() -
             currentWindow.startDate.day(),
@@ -132,9 +138,9 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
             currentWindow.startDate.day(),
         util::StatsUtility::toMinutes(
             currentWindow.sessions[i].getUnproductiveTime()));
-    qDebug() << "breaks here???3";
+    //    qDebug() << "breaks here???3";
   }
-  qDebug() << "breaks here???4";
+  //  qDebug() << "breaks here???4";
 
   series.append(&productiveBarSet);
   series.append(&unproductiveBarSet);
@@ -142,9 +148,11 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
   series.detachAxis(&y);
   series.detachAxis(&x);
   y.setRange(0, util::StatsUtility::toMinutes(updateData.getFrequency().goal));
+  //  qDebug() << "minor tick count" << y.minorTickCount();
+  //  y.setTickCount(util::StatsUtility::toMinutes(updateData.getFrequency().goal));
   series.attachAxis(&y);
   series.attachAxis(&x);
-  qDebug() << "breaks here???5";
+  //  qDebug() << "breaks here???5";
   chart.removeSeries(&series);
   chart.addSeries(&series);
   QString dateRange{updateData.getCommitmentWindows()
@@ -155,6 +163,7 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
                         .at(currentTimeWindow)
                         .endDate.toString()};
   // ugly hack; will remove as soon as I can
+  // Add spaces to center the tiltle of chart(it's in HTML)
   int remainingChars = MAX_TITLE_CHARS - dateRange.length() - 9;
   for (int i = 0; i < (remainingChars) / 2; i += 6) {
     dateRange.append("&nbsp;");
@@ -163,17 +172,31 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
     dateRange.insert(0, "&nbsp;");
   }
   //    dateRange.insert(0,"&lt;");
-  qDebug() << "length of title=" << chart.title().length();
+  //  qDebug() << "length of title=" << chart.title().length();
   //    dateRange.append("&gt;");
   chart.setTitle(dateRange);
   //  chart.setTitle(updateData.getName());
-  productiveTimeAverage = productiveBarSet.sum() / productiveBarSet.count();
+  productiveTimeAverage =
+      productiveBarSet.sum() /
+      updateData.getCommitmentWindows().at(currentTimeWindow).sessions.length();
+  qDebug() << "productiveBarSet.sum()=" << productiveBarSet.sum();
+  qDebug() << "updateData.getCommitmentWindows().at(currentTimeWindow)."
+              "sessions.length()="
+           << updateData.getCommitmentWindows()
+                  .at(currentTimeWindow)
+                  .sessions.length();
+  for (int i = 0; i < productiveBarSet.count(); i++) {
+    qDebug() << "for i=" << i << "productive value" << productiveBarSet.at(i);
+  }
   unproductiveTimeAverage =
       unproductiveBarSet.sum() / unproductiveBarSet.count();
   productiveRatio = productiveBarSet.sum() / productiveBarSet.sum() +
                     unproductiveBarSet.sum();
   unproductiveRatio = unproductiveBarSet.sum() / productiveBarSet.sum() +
                       unproductiveBarSet.sum();
+  QString temp{};
+  temp.append(QString::number(productiveTimeAverage));
+  productiveTimeAvgLabel.setText(temp);
   chart.legend()->setAlignment(Qt::AlignBottom);
   view.setRenderHint(QPainter::Antialiasing);
 }
