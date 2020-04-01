@@ -1,13 +1,16 @@
 #include "Timer.h"
-#include "AudioListener.h"
-#include "XListener.h"
+
+#include <StatsUtility.h>
+#include <TaskerPerf/perftimer.h>
+#include <mainui.h>
+
 #include <QDebug>
 #include <QThread>
 #include <QTime>
-#include <StatsUtility.h>
-#include <TaskerPerf/perftimer.h>
 #include <iostream>
-#include <mainui.h>
+
+#include "AudioListener.h"
+#include "XListener.h"
 using namespace Engine;
 using namespace util;
 using namespace udata;
@@ -63,7 +66,7 @@ void Timer::startTimer() {
 /**
  * @brief Timer::tickUpdate
  * This is a time-sensitive function. Whatever it executes, it MUST return
- * within 1 second.
+ * within 250 milliseconds, which is human perception threshold.
  * Current latency(average)= 14000 nanoseconds
  */
 void Timer::tickUpdate() {
@@ -72,10 +75,10 @@ void Timer::tickUpdate() {
    * @brief productiveTickDelta
    * This is kind of like a "grace" peroid for
    * how long the user can go unproductive.
+   * This is 60 seconds for now. Will adjust as I test things out.
    */
   int productiveTickDelta = tickCount - lastProductiveTick;
   if (listener->getState() == Listener::ListenerState::productive) {
-
     currentProductiveTime += 1;
     producitveTickCount += 1;
     lastProductiveTick = tickCount;
@@ -98,7 +101,7 @@ void Timer::tickUpdate() {
   updateTimeElapsedStatus();
   tickCount++;
   newPerfTimer.stop();
-  qDebug() << "tick update on Timer took this long(nanoseconds):"
+  qDebug() << "tick update on Timer took this long(milliseconds):"
            << newPerfTimer.duration;
   emit tick();
 }
@@ -176,7 +179,6 @@ void Timer::updateProductiveStatus() {
  */
 QString &Timer::getProductiveStatus() { return productiveStatus; }
 void Timer::updateUnproductiveStatus() {
-
   long long int productiveMinutes =
       StatsUtility::toMinutes(currentUnproductiveTime);
   int resultProductive = currentUnproductiveTime;

@@ -36,9 +36,13 @@ QMAKE_CXXFLAGS += "-pthread"
 QMAKE_CXXFLAGS = -std=c++14
 CONFIG += static
 CONFIG += -std=c++14
+CONFIG(debug, debug|release)
+{
+DEFINES+=__TASKER_DEBUG__
+#DEFINES += QT_NO_DEBUG_OUTPUT
+}
 #QMAKE_LFLAGS += -Xlinker -Bstatic
 #Print the debug messages ONLY in release mode
-CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 #QMAKE_CXXFLAGS += lobjc
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -118,7 +122,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     TaskerPerf/README.md
 
-
+QMAKE_LFLAGS += -Wl,-rpath,@loader_path/../,-rpath,@executable_path/../,-rpath,@executable_path/../Frameworks
+QMAKE_LFLAGS += -Wl,-rpath,@loader_path/$$REL_PATH_TO_LIBS,-rpath,@loader_path/$$REL_PATH_TO_PLUGINS
 #win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../libs/release/ -luiohook
 #else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../libs/debug/ -luiohook
 #else:unix: LIBS += -L$$PWD/../libs/ -luiohook

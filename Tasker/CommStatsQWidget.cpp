@@ -1,10 +1,13 @@
 #include "CommStatsQWidget.h"
-#include "ui_CommStatsQWidget.h"
+
 #include <CreateCommitmentQWidget.h>
 #include <mainui.h>
+
+#include "ui_CommStatsQWidget.h"
 #define TRAVIS_CI 1
-#include "Timer.h"
 #include <QDebug>
+
+#include "Timer.h"
 
 //#include <QtCharts/QBarSeries>
 
@@ -22,30 +25,20 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   ui->setupUi(this);
   connect(ui->commitmentsQTreeWidget, &QTreeWidget::currentItemChanged, this,
           &CommStatsQWidget::currentCommitmentChangedSlot);
-  connect(commitmentMenu.addAction(NEW_COMMITMENT_STRING), &QAction::triggered,
-          this, &CommStatsQWidget::newCommitmentSlot);
-  connect(commitmentMenu.addAction(DELETE_COMMITMENT_STRING),
-          &QAction::triggered, this, &CommStatsQWidget::deleteCommitmentSlot);
-  commitmentMenu.addAction(EDIT_COMMITMENT_STRING);
-  connect(sessionMenu.addAction(NEW_SESSION_STRING), &QAction::triggered, this,
-          &CommStatsQWidget::newSessionSlot);
-  sessionMenu.addAction(EDIT_SESSION_STRING);
-  sessionMenu.addAction(DELETE_SESSION_STRING);
-  mainMenuBar.addMenu(&commitmentMenu);
-  mainMenuBar.addMenu(&sessionMenu);
-  this->layout()->setMenuBar(&mainMenuBar);
-  this->ui->CommitmentSnaphotQWidget->setLayout(new QGridLayout());
-  snapshot = new udata::CommitmentSnaphot{};
+  snapshot.setMaximumSize(600, 600);
+  static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
+      ->addWidget(&snapshot, 0, 0);
 
-  this->ui->CommitmentSnaphotQWidget->layout()->addWidget(&snapshot->getView());
+  static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
+      ->addWidget(this->ui->CommitmentInfoStatsQWidget, 1, 0);
 #ifdef TRAVIS_CI
   QPalette p = this->ui->CommitmentInfoStatsQWidget->palette();
   p.setColor(this->ui->CommitmentInfoStatsQWidget->backgroundRole(),
-             snapshot->getProductiveQBarSet().color());
+             snapshot.getProductiveQBarSet().color());
   this->ui->CommitmentInfoStatsQWidget->setAutoFillBackground(true);
   this->ui->CommitmentInfoStatsQWidget->setPalette(p);
 #endif
-
+  this->layout()->setSpacing(0);
   this->layout()->setContentsMargins(0, 0, 0, 0);
 }
 
@@ -57,7 +50,6 @@ void CommStatsQWidget::newCommitmentSlot(bool checked) {
  */
 CommStatsQWidget::~CommStatsQWidget() {
   qDebug("CommStatsQWidget destructor#1");
-  delete snapshot;
   delete ui;
   qDebug("CommStatsQWidget destructor#2");
 }
@@ -74,8 +66,8 @@ void CommStatsQWidget::deleteCommitmentSlot(bool checked) {
     selectedCommitmentIndex--;
   }
   User::getInstance()->getCommitments().removeAt(tempIndex);
-  isDelete = true; // This is for the currentItemChanged signal, which gets
-                   // emitted by delete keyword
+  isDelete = true;  // This is for the currentItemChanged signal, which gets
+                    // emitted by delete keyword
 
   ui->commitmentsQTreeWidget->removeItemWidget(
       ui->commitmentsQTreeWidget->topLevelItem(tempIndex), 0);
@@ -140,7 +132,8 @@ void CommStatsQWidget::on_commitmentsQTreeWidget_itemDoubleClicked(
     if (c.getName() == commitmentName) {
       qDebug() << c.getName();
 
-      TimerWindowQWidget &t = MainUI::getInstance()->getTimerWindow();
+      TimerWindowQWidget &t =
+          MainUI::getInstance()->getCommitmentHub().getTimerWindow();
       t.show();
     }
 
@@ -180,7 +173,11 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
               .getCommitmentWindows()
               .length() != 0) {
     qDebug() << "Running???";
-    snapshot->update(User::getInstance()->getCurrentCommitment(), 0);
+    newPerfTimer.restart();
+    snapshot.update(User::getInstance()->getCurrentCommitment(), 0);
+    newPerfTimer.stop();
+    qDebug() << "duration of chart update=" << newPerfTimer.duration
+             << "milliseconds";
   }
 }
 void CommStatsQWidget::newLiveSessionSlot() {

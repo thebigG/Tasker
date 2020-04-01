@@ -1,6 +1,8 @@
 #ifndef WEEKLYSNAPHOT_H
 #define WEEKLYSNAPHOT_H
 #include <Commitment.h>
+#include <TaskerPerf/perftimer.h>
+
 #include <QVector>
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QBarSeries>
@@ -14,8 +16,8 @@
 QT_CHARTS_USE_NAMESPACE
 namespace udata {
 
-class CommitmentSnaphot {
-private:
+class CommitmentSnaphot : public QWidget {
+ private:
   QBarSet productiveBarSet{"Productive"};
   QBarSet unproductiveBarSet{"Unproductive"};
   QBarSeries series;
@@ -25,10 +27,19 @@ private:
   QValueAxis y;
   QChartView view;
   QFont chartFont;
+  QWidget detailsWidget;
+  QLabel productiveTimeAvgLabel;
+  QLabel unproductiveTimeAvgLabel;
   double productiveTimeAverage = 0;
   double unproductiveTimeAverage = 0;
+  double productiveRatio;
+  double unproductiveRatio;
 
-public:
+  int getWeekDayIndex(int dateWindowStart, int sessionDay);
+
+  Perf::PerfTimer newPerfTimer{};
+
+ public:
   QChartView &getView();
   QBarSet &getProductiveQBarSet();
   QBarSet &getUnproducitveQbarSet();
@@ -38,5 +49,5 @@ public:
   void update(Commitment &updateData, int currentTimeWindow);
   CommitmentSnaphot(int numberOfBars = 7, QString customeCatgeory = "Sunday");
 };
-} // namespace udata
-#endif // WEEKLYSNAPHOT_H
+}  // namespace udata
+#endif  // WEEKLYSNAPHOT_H

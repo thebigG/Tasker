@@ -27,7 +27,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
-    <number>9</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
     <number>0</number>
@@ -47,7 +47,7 @@
       <bool>true</bool>
      </property>
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -61,11 +61,11 @@
      <property name="maximumSize">
       <size>
        <width>800</width>
-       <height>800</height>
+       <height>1000</height>
       </size>
      </property>
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::NoFrame</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Plain</enum>
@@ -89,7 +89,7 @@
       <enum>QAbstractItemView::SingleSelection</enum>
      </property>
      <attribute name="headerVisible">
-      <bool>false</bool>
+      <bool>true</bool>
      </attribute>
      <column>
       <property name="text">
@@ -103,21 +103,14 @@
      <property name="maximumSize">
       <size>
        <width>600</width>
-       <height>750</height>
+       <height>800</height>
       </size>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
+      <property name="topMargin">
+       <number>0</number>
+      </property>
       <item row="0" column="0">
-       <widget class="QWidget" name="CommitmentSnaphotQWidget" native="true">
-        <property name="maximumSize">
-         <size>
-          <width>600</width>
-          <height>600</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
        <widget class="QWidget" name="CommitmentInfoStatsQWidget" native="true">
         <property name="maximumSize">
          <size>

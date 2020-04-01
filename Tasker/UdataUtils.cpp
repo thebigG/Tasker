@@ -1,12 +1,13 @@
 #include "UdataUtils.h"
 
-#include "StatsUtility.h"
 #include <QDebug>
 #include <QDir>
 #include <QFile>
 #include <QProcess>
 #include <iostream>
 #include <random>
+
+#include "StatsUtility.h"
 using udata::UdataUtils;
 
 QString udata::UdataUtils::userFilePath = "";
@@ -31,8 +32,8 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
   newCommitment.setDateStart(today);
   newCommitment.setType(type);
   std::random_device
-      rd; // Will be used to obtain a seed for the random number engine
-  std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
+      rd;  // Will be used to obtain a seed for the random number engine
+  std::mt19937 gen(rd());  // Standard mersenne_twister_engine seeded with rd()
   std::uniform_int_distribution<> dis;
   //    dis =
   //    std::uniform_int_distribution<int>(util::StatsUtility(minProductiveTime),util::StatsUtility::toMinutes(maxProductiveTime));
@@ -63,7 +64,9 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
       sessionDates.push_back(newSession.getDate());
       dis = std::uniform_int_distribution<int>(minProductiveTime,
                                                maxProductiveTime);
-      newSession.setProductiveTime(dis(gen));
+      int temp = dis(gen);
+      qDebug() << "new productive for new sessio=" << temp;
+      newSession.setProductiveTime(temp);
       dis = std::uniform_int_distribution<int>(minUnproducitveTime,
                                                maxUnproductiveTime);
       newSession.setUnproductiveTime(dis(gen));
@@ -84,7 +87,7 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
     newTimeWindow.sessions = newSessions;
     timeWindows.append(newTimeWindow);
     today = newTimeWindow.endDate.addDays(1);
-    qDebug() << "size of vector=" << timeWindows.length();
+    qDebug() << "size of vector for time windows=" << timeWindows.length();
   }
   qDebug() << "size of generated time windows=" << timeWindows.length();
   newCommitment.setCommitmentWindows(timeWindows);
@@ -107,7 +110,6 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
  * @param newUser
  */
 void UdataUtils::saveUserData(User &newUser) {
-
   QFile file(userFilePath);
 
   if (!file.open(QIODevice::WriteOnly)) {

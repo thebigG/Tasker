@@ -64,7 +64,9 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classMainUI-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -72,10 +74,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classMainUI.html" title="The MainUI class.">MainUI</a> class.  
+<p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a whole. One can think as this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes,context menus and look-and-feel of the entire UI.  
  <a href="classMainUI.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="mainui_8h_source.html">mainui.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for MainUI:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classMainUI.png" alt=""/>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
@@ -84,23 +92,44 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 <tr class="memdesc:a2bb78b07b5a1bd9807f93dbaa29423bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">MainUI::saveTaskerState Stores the state of Tasker on disk. This includes all commitments,sessions or anything that the user has changed since the last time that state was loaded. This is called every time the application is about to be closed. <br /></td></tr>
 <tr class="separator:a2bb78b07b5a1bd9807f93dbaa29423bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6ad0a629be70c502b2654bf5b5dd03ab"><td class="memItemLeft" align="right" valign="top"><a id="a6ad0a629be70c502b2654bf5b5dd03ab"></a>
+<a class="el" href="classCommStatsQWidget.html">CommStatsQWidget</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCommitmentHub</b> ()</td></tr>
+<tr class="separator:a6ad0a629be70c502b2654bf5b5dd03ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a0d5fe74e34d6d27aed90729044f8dd50"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classCommStatsQWidget.html">CommStatsQWidget</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainUI.html#a0d5fe74e34d6d27aed90729044f8dd50">getInstance</a> ()</td></tr>
-<tr class="memdesc:a0d5fe74e34d6d27aed90729044f8dd50"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMainUI.html#a0d5fe74e34d6d27aed90729044f8dd50" title="MainUI::getInstance.">MainUI::getInstance</a>.  <a href="classMainUI.html#a0d5fe74e34d6d27aed90729044f8dd50">More...</a><br /></td></tr>
-<tr class="separator:a0d5fe74e34d6d27aed90729044f8dd50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adacd428c44ae710fb9f6e7a36b8ac87d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMainUI.html">MainUI</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d">getInstance</a> ()</td></tr>
+<tr class="memdesc:adacd428c44ae710fb9f6e7a36b8ac87d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d" title="MainUI::getInstance.">MainUI::getInstance</a>.  <a href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d">More...</a><br /></td></tr>
+<tr class="separator:adacd428c44ae710fb9f6e7a36b8ac87d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:af9b5063c3a4bcf840dd90d808751a254"><td class="memItemLeft" align="right" valign="top"><a id="af9b5063c3a4bcf840dd90d808751a254"></a>
+<a class="el" href="classCommStatsQWidget.html">CommStatsQWidget</a>&#160;</td><td class="memItemRight" valign="bottom"><b>commitmentHub</b> {}</td></tr>
+<tr class="separator:af9b5063c3a4bcf840dd90d808751a254"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2511c419d66bf2bd8bf8e3027362e5d"><td class="memItemLeft" align="right" valign="top"><a id="ad2511c419d66bf2bd8bf8e3027362e5d"></a>
+QMenuBar&#160;</td><td class="memItemRight" valign="bottom"><b>mainMenuBar</b></td></tr>
+<tr class="separator:ad2511c419d66bf2bd8bf8e3027362e5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7448cf5a5631a4fc03aa78c8a7d385e"><td class="memItemLeft" align="right" valign="top"><a id="ae7448cf5a5631a4fc03aa78c8a7d385e"></a>
+QMenu&#160;</td><td class="memItemRight" valign="bottom"><b>commitmentMenu</b> {COMMITMENT_MENU_STRING}</td></tr>
+<tr class="separator:ae7448cf5a5631a4fc03aa78c8a7d385e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9df3d3e801ac955c62a5ce2f0cc999a9"><td class="memItemLeft" align="right" valign="top"><a id="a9df3d3e801ac955c62a5ce2f0cc999a9"></a>
+QMenu&#160;</td><td class="memItemRight" valign="bottom"><b>sessionMenu</b> {SESSION_MENU_STRING}</td></tr>
+<tr class="separator:a9df3d3e801ac955c62a5ce2f0cc999a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
-<tr class="memitem:a680622542ac4d54adfddb02b6e65bfa1"><td class="memItemLeft" align="right" valign="top"><a id="a680622542ac4d54adfddb02b6e65bfa1"></a>
-static std::unique_ptr&lt; <a class="el" href="classCommStatsQWidget.html">CommStatsQWidget</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Instance</b></td></tr>
-<tr class="separator:a680622542ac4d54adfddb02b6e65bfa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5977d77626d6faef80f3e1f347449952"><td class="memItemLeft" align="right" valign="top"><a id="a5977d77626d6faef80f3e1f347449952"></a>
+static std::unique_ptr&lt; <a class="el" href="classMainUI.html">MainUI</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mainHub</b></td></tr>
+<tr class="separator:a5977d77626d6faef80f3e1f347449952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classMainUI.html" title="The MainUI class.">MainUI</a> class. </p>
+<div class="textblock"><p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a whole. One can think as this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes,context menus and look-and-feel of the entire UI. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0d5fe74e34d6d27aed90729044f8dd50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d5fe74e34d6d27aed90729044f8dd50">&#9670;&nbsp;</a></span>getInstance()</h2>
+<a id="adacd428c44ae710fb9f6e7a36b8ac87d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adacd428c44ae710fb9f6e7a36b8ac87d">&#9670;&nbsp;</a></span>getInstance()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -109,7 +138,7 @@ static std::unique_ptr&lt; <a class="el" href="classCommStatsQWidget.html">CommS
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCommStatsQWidget.html">CommStatsQWidget</a> * MainUI::getInstance </td>
+          <td class="memname"><a class="el" href="classMainUI.html">MainUI</a> * MainUI::getInstance </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -122,7 +151,7 @@ static std::unique_ptr&lt; <a class="el" href="classCommStatsQWidget.html">CommS
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classMainUI.html#a0d5fe74e34d6d27aed90729044f8dd50" title="MainUI::getInstance.">MainUI::getInstance</a>. </p>
+<p><a class="el" href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d" title="MainUI::getInstance.">MainUI::getInstance</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>

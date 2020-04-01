@@ -74,6 +74,12 @@ $(function() {
 <div class="title">udata::CommitmentSnaphot Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Inheritance diagram for udata::CommitmentSnaphot:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classudata_1_1CommitmentSnaphot.png" alt=""/>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -128,12 +134,27 @@ QChartView&#160;</td><td class="memItemRight" valign="bottom"><b>view</b></td></
 <tr class="memitem:a3820dfcfcdfc3ebecb5ab25a4943b38b"><td class="memItemLeft" align="right" valign="top"><a id="a3820dfcfcdfc3ebecb5ab25a4943b38b"></a>
 QFont&#160;</td><td class="memItemRight" valign="bottom"><b>chartFont</b></td></tr>
 <tr class="separator:a3820dfcfcdfc3ebecb5ab25a4943b38b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88fc536ade3b0418f553fdcb6f933808"><td class="memItemLeft" align="right" valign="top"><a id="a88fc536ade3b0418f553fdcb6f933808"></a>
+QWidget&#160;</td><td class="memItemRight" valign="bottom"><b>detailsWidget</b></td></tr>
+<tr class="separator:a88fc536ade3b0418f553fdcb6f933808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7eb5b36408e0191c794b594420dfe717"><td class="memItemLeft" align="right" valign="top"><a id="a7eb5b36408e0191c794b594420dfe717"></a>
+QLabel&#160;</td><td class="memItemRight" valign="bottom"><b>productiveTimeAvgLabel</b></td></tr>
+<tr class="separator:a7eb5b36408e0191c794b594420dfe717"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75a5f7f7f5c5277823ea9ed12d9165f4"><td class="memItemLeft" align="right" valign="top"><a id="a75a5f7f7f5c5277823ea9ed12d9165f4"></a>
+QLabel&#160;</td><td class="memItemRight" valign="bottom"><b>unproductiveTimeAvgLabel</b></td></tr>
+<tr class="separator:a75a5f7f7f5c5277823ea9ed12d9165f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa99bde93757b9449369e31bb0f1fe459"><td class="memItemLeft" align="right" valign="top"><a id="aa99bde93757b9449369e31bb0f1fe459"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>productiveTimeAverage</b> = 0</td></tr>
 <tr class="separator:aa99bde93757b9449369e31bb0f1fe459"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd549fa4e5c5389bafd8dbf5ee548e28"><td class="memItemLeft" align="right" valign="top"><a id="acd549fa4e5c5389bafd8dbf5ee548e28"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>unproductiveTimeAverage</b> = 0</td></tr>
 <tr class="separator:acd549fa4e5c5389bafd8dbf5ee548e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee98f7612c108b4ba6d3f548944fdc99"><td class="memItemLeft" align="right" valign="top"><a id="aee98f7612c108b4ba6d3f548944fdc99"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>productiveRatio</b></td></tr>
+<tr class="separator:aee98f7612c108b4ba6d3f548944fdc99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cf877c669c75b5459f55222310b024b"><td class="memItemLeft" align="right" valign="top"><a id="a8cf877c669c75b5459f55222310b024b"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>unproductiveRatio</b></td></tr>
+<tr class="separator:a8cf877c669c75b5459f55222310b024b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac74d2898d5aad25504d80974701dadb8"></a>
@@ -163,7 +184,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>unproductiveTimeAve
 </div><div class="memdoc">
 
 <p><a class="el" href="classudata_1_1CommitmentSnaphot.html#ac74d2898d5aad25504d80974701dadb8" title="udata::CommitmentSnaphot::update">udata::CommitmentSnaphot::update</a> </p>
-<p>This function assumes that the sessions in updateDate are sorted from oldest to newest. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>This function assumes that the sessions in updateData are sorted from oldest to newest. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">updateData</td><td></td></tr>
     <tr><td class="paramname">currentTimeWindow</td><td></td></tr>
