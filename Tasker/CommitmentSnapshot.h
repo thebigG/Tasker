@@ -35,6 +35,8 @@ class CommitmentSnaphot : public QWidget {
   double productiveRatio;
   double unproductiveRatio;
 
+  int getWeekDayIndex(int dateWindowStart, int sessionDay);
+
   Perf::PerfTimer newPerfTimer{};
 
  public:

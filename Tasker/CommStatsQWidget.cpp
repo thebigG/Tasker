@@ -174,7 +174,7 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
               .length() != 0) {
     qDebug() << "Running???";
     newPerfTimer.restart();
-    //    snapshot.update(User::getInstance()->getCurrentCommitment(), 0);
+    snapshot.update(User::getInstance()->getCurrentCommitment(), 0);
     newPerfTimer.stop();
     qDebug() << "duration of chart update=" << newPerfTimer.duration
              << "milliseconds";
