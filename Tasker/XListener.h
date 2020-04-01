@@ -26,28 +26,28 @@ enum class Engine::XListenerMode { MOUSE, KEYBOARD, MOUSE_AND_KEYBOARD };
  * This class has the capiblity of detecting mouse and keyboard interaction.
  */
 class Engine::XListener : public Listener {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    XListener();
-    XListener(Engine::XListenerMode);
-    int startListening();
-    Listener::ListenerState listen() override;
+  XListener();
+  XListener(Engine::XListenerMode);
+  int startListening();
+  Listener::ListenerState listen() override;
 
 public slots:
-    virtual void start() override;
-    virtual void end() override;
-    virtual void pause() override;
-    virtual void update() override;
-    virtual void resetState() override;
+  virtual void start() override;
+  virtual void end() override;
+  virtual void pause() override;
+  virtual void update() override;
+  virtual void resetState() override;
 
 private:
-    QProcess xHook;
-    QStringList xHookArguments;
-    XListenerMode XMode;
+  QProcess xHook;
+  QStringList xHookArguments;
+  XListenerMode XMode;
 
 signals:
-    void signalThread();
+  void signalThread();
 };
 
 void hook();

@@ -13,107 +13,88 @@
 using namespace Engine;
 
 XListener::XListener(Engine::XListenerMode newXMode) {
-    XMode = newXMode;
-    xHook.setParent(this);
-    switch (XMode) {
-    case XListenerMode::MOUSE_AND_KEYBOARD:
-        qDebug()<<"X#1";
-        xHookArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
-        break;
-    case XListenerMode::MOUSE:
-        xHookArguments << IOHOOK_MOUSE_MODE;
-        qDebug()<<"X#2";
-        break;
-    case XListenerMode::KEYBOARD:
-        xHookArguments << IOHOOK_KEYBOARD_MODE;
-        qDebug()<<"X#3";
-        break;
-    }
-    connect(&xHook, &QProcess::readyReadStandardOutput, this, &XListener::update);
-
+  XMode = newXMode;
+  xHook.setParent(this);
+  switch (XMode) {
+  case XListenerMode::MOUSE_AND_KEYBOARD:
+    xHookArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
+    break;
+  case XListenerMode::MOUSE:
+    xHookArguments << IOHOOK_MOUSE_MODE;
+    break;
+  case XListenerMode::KEYBOARD:
+    xHookArguments << IOHOOK_KEYBOARD_MODE;
+    break;
+  }
+  connect(&xHook, &QProcess::readyReadStandardOutput, this, &XListener::update);
 }
 /**
  * @brief XListener::XListener
  */
 XListener::XListener() {
-    XMode = XListenerMode::MOUSE_AND_KEYBOARD;
-    xHook.setParent(this);
-    xHookArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
-    connect(&xHook, &QProcess::readyReadStandardOutput, this, &XListener::update);
-#ifdef Q_OS_LINUX
-
-#endif // setKeyboardPathsOnLinux
+  XMode = XListenerMode::MOUSE_AND_KEYBOARD;
+  xHook.setParent(this);
+  xHookArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
+  connect(&xHook, &QProcess::readyReadStandardOutput, this, &XListener::update);
 }
 
 /**
  * @brief KeyboardListener::start
  */
-void XListener::start() {
-    qDebug() << "start function :)";
-    qDebug() << "current thread id keyBoardListner class:" << QThread::currentThreadId();
-    startListening();
-}
+void XListener::start() { startListening(); }
 
 /**
  * @brief KeyboardListener::end
  */
-void XListener::end() {
-    xHook.kill();
-}
+void XListener::end() { xHook.kill(); }
 
 /**
  * @brief KeyboardListener::pause
+ *
  */
-void XListener::pause() {
-
-}
+void XListener::pause() {}
 
 /**
  * @brief KeyboardListener::update
+ * This method is called every time xHook process writes to standrd output.
+ * It's essentially IPC.
+ *
  */
 void XListener::update() {
-    QByteArray Xdata = xHook.readAllStandardOutput();
-    qDebug()<<"update XHook";
-    Xdata.chop(Xdata.length()-1);
-    QString iohookState{Xdata};
-
-    qDebug()<<"X state="<<iohookState;
-    if(XMode == XListenerMode::MOUSE_AND_KEYBOARD &&  iohookState == IOHOOK_KEYBOARD_AND_MOUSE_MODE)
-    {
+  QByteArray Xdata = xHook.readAllStandardOutput();
+  Xdata.chop(Xdata.length() - 1);
+  QString iohookState{Xdata};
+  if (XMode == XListenerMode::MOUSE_AND_KEYBOARD &&
+      iohookState == IOHOOK_KEYBOARD_AND_MOUSE_MODE) {
     setState(ListenerState::productive);
-    }
-    else if(XMode == XListenerMode::MOUSE &&  iohookState == IOHOOK_MOUSE_MODE)
-    {
-        setState(ListenerState::productive);
-    }
-    else if(XMode == XListenerMode::KEYBOARD &&  iohookState == IOHOOK_KEYBOARD_MODE)
-    {
-            setState(ListenerState::productive);
-    }
-    else
-    {
-        qDebug()<<"INVALID MODE from IOHOOK***";
-    }
+  } else if (XMode == XListenerMode::MOUSE &&
+             iohookState == IOHOOK_MOUSE_MODE) {
+    setState(ListenerState::productive);
+  } else if (XMode == XListenerMode::KEYBOARD &&
+             iohookState == IOHOOK_KEYBOARD_MODE) {
+    setState(ListenerState::productive);
+  } else {
+  }
 }
 
 /**
  * @brief KeyboardListener::listen
  * @return
  */
-Listener::ListenerState XListener::listen() {
+Listener::ListenerState XListener::listen() { return getState(); }
+void XListener::resetState() { setState(ListenerState::unproductive); }
 
-    return getState();
-}
-void XListener::resetState() {
-    setState(ListenerState::unproductive);
-}
-
+/**
+ * @brief XListener::startListening
+ * Spawn process which is a hardware hook for mouse, keyboard or both
+ * @return
+ */
 int XListener::startListening() {
-    setState(ListenerState::unproductive);
-    connect(qApp, &QGuiApplication::lastWindowClosed, this, &XListener::end);
-    xHook.start(IOHOOK_SCRIPT_PATH, xHookArguments);
-    qDebug() << "startListening{yes}-->threadid" << QThread::currentThreadId();
-    return EXIT_FAILURE;
+  setState(ListenerState::unproductive);
+  // Kill xHook process when this process ends
+  connect(qApp, &QGuiApplication::lastWindowClosed, this, &XListener::end);
+  xHook.start(IOHOOK_SCRIPT_PATH, xHookArguments);
+  return 0;
 }
 /**
 
