@@ -75,95 +75,52 @@ QChartView &udata::CommitmentSnaphot::getView() { return view; }
  */
 void udata::CommitmentSnaphot::update(Commitment &updateData,
                                       int currentTimeWindow) {
-  //  newPerfTimer.restart();
-  //  qDebug() << "breaks here???#1";
-  //  qDebug() << "Color of view"
-  //  << view.palette().color(QPalette::ColorRole::Background);
   util::TimeWindow currentWindow =
       updateData.getCommitmentWindows().at(currentTimeWindow);
   QDate dayOfTheWeek = QDate{currentWindow.startDate};
   x.clear();
   if (updateData.getType() == udata::CommitmentType::WEEKLY) {
     for (int i = 0; i < WEEK_SIZE; i++) {
-      //      qDebug() << "breaks here???2";
       productiveBarSet.replace(i, 0);
       unproductiveBarSet.replace(i, 0);
-      //      qDebug() << "breaks here???2";
       x.append(dayOfTheWeek.toString("ddd"));
-      //      qDebug() << "Catgeory fori:" << i << "=" << categories.at(i);
-      //      qDebug() << "day of week=" << dayOfTheWeek.toString("ddd");
       dayOfTheWeek = dayOfTheWeek.addDays(1);
-      //      qDebug() << "breaks here???3";
-      //      qDebug() << "breaks here???3";
     }
   }
+  /* Need to reset the state of the bars in order to re-render them with new
+   * values
+   */
   series.take(&productiveBarSet);
   series.take(&unproductiveBarSet);
   unproductiveBarSet.setParent(nullptr);
   productiveBarSet.setParent(nullptr);
-  //  qDebug() << "number of Sessions-->"
-  //           << updateData.getCommitmentWindows()
-  //                  .at(currentTimeWindow)
-  //                  .sessions.length();
 
-  for (int i = 0; i < updateData.getCommitmentWindows()
-                          .at(currentTimeWindow)
-                          .sessions.length();
-       i++) {
+  for (int i = 0; i < currentWindow.sessions.length(); i++) {
     qDebug() << "productive time in minutes"
              << util::StatsUtility::toMinutes(
                     currentWindow.sessions[i].getProductiveTime());
-    //    qDebug() << "breaks here???2";
-    //    qDebug() << "length o";
-    //    qDebug() << "current index on update snapshot loop" << i;
-    //    qDebug()
-    //        << "start date-->"
-    //        <<
-    //        updateData.getCommitmentWindows().at(currentTimeWindow).startDate;
-    //    qDebug() << "session date-->" << currentWindow.sessions[i].getDate();
+    qDebug() << "unproducive time in minutes"
+             << util::StatsUtility::toMinutes(
+                    currentWindow.sessions[i].getUnproductiveTime());
     qDebug() << "session date diff-->"
-             << currentWindow.sessions[i].getDate().day() -
-                    currentWindow.startDate.day();
+             << currentWindow.startDate.daysTo(
+                    currentWindow.sessions.at(i).getDate());
     qDebug() << "day in session=" << currentWindow.sessions[i].getDate().day();
     qDebug() << "day in start"
              << "date=" << currentWindow.startDate.day();
     productiveBarSet.replace(
-        currentWindow.sessions.at(i)
-            .getDate()
-            .addDays(-currentWindow.startDate.day())
-            .day(),
+        currentWindow.startDate.daysTo(currentWindow.sessions.at(i).getDate()),
         util::StatsUtility::toMinutes(
             currentWindow.sessions[i].getProductiveTime()));
     unproductiveBarSet.replace(
-        currentWindow.sessions[i]
-            .getDate()
-            .addDays(-currentWindow.startDate.day())
-            .day(),
+        currentWindow.startDate.daysTo(currentWindow.sessions.at(i).getDate()),
         util::StatsUtility::toMinutes(
             currentWindow.sessions[i].getUnproductiveTime()));
-    //    qDebug() << "breaks here???3";
   }
-  //  qDebug() << "breaks here???4";
 
   series.append(&productiveBarSet);
   series.append(&unproductiveBarSet);
-
-  if (series.detachAxis(&y)) {
-    qDebug() << "y detach true";
-  } else {
-    qDebug() << "y detach false";
-  }
-  //  series.detachAxis(&x);
-
   y.setRange(0, util::StatsUtility::toMinutes(updateData.getFrequency().goal));
-  //  qDebug() << "minor tick count" << y.minorTickCount();
-  //  y.setTickCount(util::StatsUtility::toMinutes(updateData.getFrequency().goal));
-  //  series.attachAxis(&y);
-  //  series.attachAxis(&x);
-  //  qDebug() << "breaks here???5";
-  //  chart.removeSeries(&series);
-  // This might be a problem
-  //  chart.addSeries(&series);
   QString dateRange{updateData.getCommitmentWindows()
                         .at(currentTimeWindow)
                         .startDate.toString() +
@@ -180,11 +137,8 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
   for (int i = 0; i < (remainingChars) / (2); i += 6) {
     dateRange.insert(0, "&nbsp;");
   }
-  //    dateRange.insert(0,"&lt;");
-  //  qDebug() << "length of title=" << chart.title().length();
-  //    dateRange.append("&gt;");
+
   chart.setTitle(dateRange);
-  //  chart.setTitle(updateData.getName());
   productiveTimeAverage =
       productiveBarSet.sum() / currentWindow.sessions.length();
   qDebug() << "productiveBarSet.sum()=" << productiveBarSet.sum();
@@ -207,10 +161,9 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
   view.setRenderHint(QPainter::Antialiasing);
 }
 
-int udata::CommitmentSnaphot::getWeekDayIndex(int dateWindowStart,
-                                              int sessionDay) {
-  //  if () {
-  //  }
+int udata::CommitmentSnaphot::getWeekDayIndex(QDate dateWindowStart,
+                                              QDate sessionDay) {
+  //    sessionDay.
 }
 QBarSet &udata::CommitmentSnaphot::getProductiveQBarSet() {
   return productiveBarSet;

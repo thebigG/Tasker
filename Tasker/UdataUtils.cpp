@@ -32,8 +32,8 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
   newCommitment.setDateStart(today);
   newCommitment.setType(type);
   std::random_device
-      rd;  // Will be used to obtain a seed for the random number engine
-  std::mt19937 gen(rd());  // Standard mersenne_twister_engine seeded with rd()
+      rd; // Will be used to obtain a seed for the random number engine
+  std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
   std::uniform_int_distribution<> dis;
   //    dis =
   //    std::uniform_int_distribution<int>(util::StatsUtility(minProductiveTime),util::StatsUtility::toMinutes(maxProductiveTime));
@@ -75,13 +75,15 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
       tempDaysCount = dis(gen);
       // Keep generating a new count if it bleeds into the next time
       // window(week)
-      while (sessionDate.addDays(tempDaysCount) > today.addDays(6) &&
+      while (today.addDays(tempDaysCount) > today.addDays(6) ||
              std::find(std::begin(sessionDates), std::end(sessionDates),
-                       sessionDate.addDays(tempDaysCount)) !=
+                       today.addDays(tempDaysCount)) !=
                  std::end(sessionDates)) {
         tempDaysCount = dis(gen);
       }
-      sessionDate = sessionDate.addDays(tempDaysCount);
+      sessionDate = today.addDays(tempDaysCount);
+      qDebug() << "start date for this window=" << newTimeWindow.startDate;
+      qDebug() << "sessionDate=" << sessionDate;
     }
     newTimeWindow.endDate = today.addDays(6);
     newTimeWindow.sessions = newSessions;
