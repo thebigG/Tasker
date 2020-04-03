@@ -5,9 +5,9 @@
 
 #include "ui_CommStatsQWidget.h"
 #define TRAVIS_CI 1
-#include <QDebug>
-
 #include "Timer.h"
+#include <QDebug>
+#include <iostream>
 
 //#include <QtCharts/QBarSeries>
 
@@ -66,8 +66,8 @@ void CommStatsQWidget::deleteCommitmentSlot(bool checked) {
     selectedCommitmentIndex--;
   }
   User::getInstance()->getCommitments().removeAt(tempIndex);
-  isDelete = true;  // This is for the currentItemChanged signal, which gets
-                    // emitted by delete keyword
+  isDelete = true; // This is for the currentItemChanged signal, which gets
+                   // emitted by delete keyword
 
   ui->commitmentsQTreeWidget->removeItemWidget(
       ui->commitmentsQTreeWidget->topLevelItem(tempIndex), 0);
@@ -178,6 +178,9 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
     newPerfTimer.stop();
     qDebug() << "duration of chart update=" << newPerfTimer.duration
              << "milliseconds";
+    QTextStream(stdout) << "(cout)duration of chart update="
+                        << newPerfTimer.duration << "milliseconds";
+    ;
   }
 }
 void CommStatsQWidget::newLiveSessionSlot() {

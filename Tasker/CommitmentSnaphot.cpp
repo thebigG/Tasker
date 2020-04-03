@@ -47,7 +47,6 @@ udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
   view.setRenderHint(QPainter::Antialiasing);
   this->layout()->addWidget(&getView());
   QPalette p = view.palette();
-  view.palette();
   p.setColor(QPalette::ColorRole::Background, Qt::white);
   this->setAutoFillBackground(true);
   //  this->setPalette(p);
@@ -56,8 +55,14 @@ udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
   labelPalette.setColor(QPalette::ColorRole::Foreground,
                         productiveBarSet.color());
   productiveTimeAvgLabel.setPalette(labelPalette);
+  labelPalette = unproductiveTimeAvgLabel.palette();
+  labelPalette.setColor(QPalette::ColorRole::Foreground,
+                        unproductiveBarSet.color());
+  unproductiveTimeAvgLabel.setPalette(labelPalette);
   static_cast<QGridLayout *>(detailsWidget.layout())
       ->addWidget(&productiveTimeAvgLabel, 0, 0);
+  static_cast<QGridLayout *>(detailsWidget.layout())
+      ->addWidget(&unproductiveTimeAvgLabel, 0, 1);
   static_cast<QGridLayout *>(this->layout())->addWidget(&detailsWidget, 1, 0);
   //  static_cast<QGridLayout
   //  *>(this->layout())->addWidget(productiveTimeAvgLabel);
@@ -69,6 +74,7 @@ QChartView &udata::CommitmentSnaphot::getView() { return view; }
   are sorted from oldest to newest.
  * This is a time-sensitive function. Whatever it executes, it MUST return
  * within 250 milliseconds, which is human perception threshold.
+ * Current latency(average)=15 milliseconds.
  * @brief udata::CommitmentSnaphot::update
  * @param updateData
  * @param currentTimeWindow
@@ -94,7 +100,7 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
   series.take(&unproductiveBarSet);
   unproductiveBarSet.setParent(nullptr);
   productiveBarSet.setParent(nullptr);
-
+  int temp = 0;
   for (int i = 0; i < currentWindow.sessions.length(); i++) {
     qDebug() << "productive time in minutes"
              << util::StatsUtility::toMinutes(
@@ -104,18 +110,18 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
                     currentWindow.sessions[i].getUnproductiveTime());
     qDebug() << "session date diff-->"
              << currentWindow.startDate.daysTo(
-                    currentWindow.sessions.at(i).getDate());
+                    currentWindow.sessions[i].getDate());
     qDebug() << "day in session=" << currentWindow.sessions[i].getDate().day();
     qDebug() << "day in start"
              << "date=" << currentWindow.startDate.day();
+    temp = getWeekDayIndex(currentWindow.startDate,
+                           currentWindow.sessions[i].getDate());
     productiveBarSet.replace(
-        currentWindow.startDate.daysTo(currentWindow.sessions.at(i).getDate()),
-        util::StatsUtility::toMinutes(
-            currentWindow.sessions[i].getProductiveTime()));
+        temp, util::StatsUtility::toMinutes(
+                  currentWindow.sessions[i].getProductiveTime()));
     unproductiveBarSet.replace(
-        currentWindow.startDate.daysTo(currentWindow.sessions.at(i).getDate()),
-        util::StatsUtility::toMinutes(
-            currentWindow.sessions[i].getUnproductiveTime()));
+        temp, util::StatsUtility::toMinutes(
+                  currentWindow.sessions[i].getUnproductiveTime()));
   }
 
   series.append(&productiveBarSet);
@@ -128,42 +134,58 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
                     updateData.getCommitmentWindows()
                         .at(currentTimeWindow)
                         .endDate.toString()};
-  // ugly hack; will remove as soon as I can
-  // Add spaces to center the tiltle of chart(it's in HTML)
-  int remainingChars = MAX_TITLE_CHARS - dateRange.length() - 9;
-  for (int i = 0; i < (remainingChars) / 2; i += 6) {
-    dateRange.append("&nbsp;");
-  }
-  for (int i = 0; i < (remainingChars) / (2); i += 6) {
-    dateRange.insert(0, "&nbsp;");
-  }
 
   chart.setTitle(dateRange);
   productiveTimeAverage =
       productiveBarSet.sum() / currentWindow.sessions.length();
-  qDebug() << "productiveBarSet.sum()=" << productiveBarSet.sum();
-  qDebug() << "currentWindow.sessions.length()"
-           << currentWindow.sessions.length();
-  for (int i = 0; i < productiveBarSet.count(); i++) {
-    qDebug() << "for i=" << i << "productive valuee for bar"
-             << productiveBarSet.at(i);
-  }
   unproductiveTimeAverage =
-      unproductiveBarSet.sum() / unproductiveBarSet.count();
+      unproductiveBarSet.sum() / currentWindow.sessions.length();
   productiveRatio = productiveBarSet.sum() / productiveBarSet.sum() +
                     unproductiveBarSet.sum();
   unproductiveRatio = unproductiveBarSet.sum() / productiveBarSet.sum() +
                       unproductiveBarSet.sum();
-  QString temp{};
-  temp.append(QString::number(productiveTimeAverage));
-  productiveTimeAvgLabel.setText(temp);
+  //  Format average productive time
+  productibeTimeAvgText.fill(' ');
+  int numberOfHours = (int)productiveTimeAverage / MINUTES_IN_HOUR;
+  temp = QString::number(numberOfHours).length();
+  productibeTimeAvgText.insert(0, QString::number(numberOfHours));
+  productibeTimeAvgText.insert(temp, 'h');
+  temp = temp + 1;
+  productibeTimeAvgText.insert(
+      temp, QString::number((int)productiveTimeAverage -
+                            numberOfHours * MINUTES_IN_HOUR));
+  temp += QString::number((int)productiveTimeAverage -
+                          numberOfHours * MINUTES_IN_HOUR)
+              .length();
+  productibeTimeAvgText.insert(temp, 'm');
+  temp = temp + 1;
+  productibeTimeAvgText.insert(temp, " in Productive Average");
+  productiveTimeAvgLabel.setText(productibeTimeAvgText);
+  // For average unproductive time
+  unproductibeTimeAvgText.fill(' ');
+  numberOfHours = (int)unproductiveTimeAverage / MINUTES_IN_HOUR;
+  temp = QString::number(numberOfHours).length();
+  unproductibeTimeAvgText.insert(0, QString::number(numberOfHours));
+  unproductibeTimeAvgText.insert(temp, 'h');
+  temp = temp + 1;
+  unproductibeTimeAvgText.insert(
+      temp, QString::number((int)unproductiveTimeAverage -
+                            numberOfHours * MINUTES_IN_HOUR));
+  temp += QString::number((int)unproductiveTimeAverage -
+                          numberOfHours * MINUTES_IN_HOUR)
+              .length();
+  unproductibeTimeAvgText.insert(temp, 'm');
+  temp = temp + 1;
+  unproductibeTimeAvgText.insert(temp, " in Unproductive Average");
+  //  temp.append(QString::number(productiveTimeAverage));
+  unproductiveTimeAvgLabel.setText(unproductibeTimeAvgText);
   chart.legend()->setAlignment(Qt::AlignBottom);
   view.setRenderHint(QPainter::Antialiasing);
 }
 
-int udata::CommitmentSnaphot::getWeekDayIndex(QDate dateWindowStart,
-                                              QDate sessionDay) {
-  //    sessionDay.
+int udata::CommitmentSnaphot::getWeekDayIndex(QDate &dateWindowStart,
+                                              QDate &sessionDay) {
+  return dateWindowStart.daysTo(sessionDay);
 }
 QBarSet &udata::CommitmentSnaphot::getProductiveQBarSet() {
   return productiveBarSet;

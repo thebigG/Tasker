@@ -47,9 +47,9 @@ int main(int argc, char *argv[]) {
 
   //  UdataUtils::generateCommitment(
   //      "Generated#13", 8, util::StatsUtility::minutesToSeconds(10),
-  //      util::StatsUtility::minutesToSeconds(40),
+  //      util::StatsUtility::minutesToSeconds(100),
   //      util::StatsUtility::minutesToSeconds(0),
-  //      util::StatsUtility::minutesToSeconds(15),
+  //      util::StatsUtility::minutesToSeconds(25),
   //      udata::CommitmentType::WEEKLY);
   //  qDebug() << "Commitment summary:"
   //           << User::getInstance()->getCommitments().at(0).summary();

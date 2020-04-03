@@ -36,10 +36,20 @@ QMAKE_CXXFLAGS += "-pthread"
 QMAKE_CXXFLAGS = -std=c++14
 CONFIG += static
 CONFIG += -std=c++14
-CONFIG(debug, debug|release)
+#CONFIG(debug, debug)
+#{
+#DEFINES+=__TASKER_DEBUG__
+#DEFINES += QT_NO_DEBUG_OUTPUT
+#}
+debug
 {
 DEFINES+=__TASKER_DEBUG__
-#DEFINES += QT_NO_DEBUG_OUTPUT
+DEFINES += QT_NO_DEBUG_OUTPUT
+}
+!debug
+{
+DEFINES -= QT_NO_DEBUG_OUTPUT
+DEFINES -=__TASKER_DEBUG__
 }
 #QMAKE_LFLAGS += -Xlinker -Bstatic
 #Print the debug messages ONLY in release mode

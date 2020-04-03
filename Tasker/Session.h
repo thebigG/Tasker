@@ -39,7 +39,7 @@ public:
   void setGoal(int);
   long long int getGoal();
 
-  QDate getDate() const;
+  QDate &getDate();
 
 private:
   Task task;

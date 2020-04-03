@@ -30,12 +30,14 @@ private:
   QWidget detailsWidget;
   QLabel productiveTimeAvgLabel;
   QLabel unproductiveTimeAvgLabel;
+  QString productibeTimeAvgText{20, ' '};
+  QString unproductibeTimeAvgText{20, ' '};
   double productiveTimeAverage = 0;
   double unproductiveTimeAverage = 0;
   double productiveRatio;
   double unproductiveRatio;
 
-  int getWeekDayIndex(QDate dateWindowStart, QDate sessionDay);
+  int getWeekDayIndex(QDate &dateWindowStart, QDate &sessionDay);
 
   Perf::PerfTimer newPerfTimer{};
 
