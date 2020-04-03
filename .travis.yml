@@ -8,8 +8,7 @@ jobs:
     install: export CXX="g++-7"
     addons:
       apt:
-        sources:
-        - ubuntu-toolchain-r-test
+        sourceline: "ppa:ubuntu-toolchain-r/test"
         packages:
         - g++-7
     notifications:
