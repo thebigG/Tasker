@@ -6,6 +6,7 @@ udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
                                             QString customCategories)
     : QWidget() {
   //    sets.push_back(QBarSet("Test#1"));
+
   productiveBarSet << 95 << 0 << 0 << 0 << 0 << 0 << 0;
   unproductiveBarSet << 0 << 0 << 0 << 0 << 0 << 0 << 0;
   qDebug() << "size of barset=" << sizeof(QBarSet);
@@ -28,12 +29,20 @@ udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
   chart.addAxis(&x, Qt::AlignBottom);
   series.attachAxis(&x);
   y.setRange(1, 100);
+  nextSnapshotLabel.setText(">");
+  previousSnaphotLabel.setText("<");
+  nextSnapshotLabel.setMaximumSize(20, 20);
+  previousSnaphotLabel.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+  previousSnaphotLabel.setMaximumSize(20, 20);
+  qDebug() << "previous label size policy="
+           << previousSnaphotLabel.sizePolicy();
+
   //  y.setMax(50);
   y.setTickCount(3);
   y.setLabelFormat("%d Mins");
   chart.addAxis(&y, Qt::AlignLeft);
   series.attachAxis(&y);
-  qDebug() << "default bar width=" << series.barWidth();
+  qDebug() << "default bar width constructor=" << series.barWidth();
   series.setBarWidth(1);
   chart.legend()->setVisible(true);
   chart.legend()->setAlignment(Qt::AlignBottom);
@@ -42,10 +51,19 @@ udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
   chart.setTitleFont(chartFont);
   view.setChart(&chart);
   qDebug() << "size of view" << view.size();
+  view.setMinimumSize(view.size());
+  //  view.setSizeIncrement(QSizePolicy::Ignored, QSizePolicy::Expanding);
+  view.setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Expanding);
   this->setLayout(new QGridLayout());
   detailsWidget.setLayout(new QGridLayout());
   view.setRenderHint(QPainter::Antialiasing);
-  this->layout()->addWidget(&getView());
+  static_cast<QGridLayout *>(this->layout())
+      ->addWidget(&previousSnaphotLabel, 0, 0);
+  this->layout()->setContentsMargins(0, 0, 0, 0);
+  this->layout()->setSpacing(0);
+  static_cast<QGridLayout *>(this->layout())->addWidget(&getView(), 0, 1);
+  //  static_cast<QGridLayout *>(this->layout())
+  //     ->addWidget(&nextSnapshotLabel, 0, 2);
   QPalette p = view.palette();
   p.setColor(QPalette::ColorRole::Background, Qt::white);
   this->setAutoFillBackground(true);
@@ -55,6 +73,7 @@ udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
   labelPalette.setColor(QPalette::ColorRole::Foreground,
                         productiveBarSet.color());
   productiveTimeAvgLabel.setPalette(labelPalette);
+
   labelPalette = unproductiveTimeAvgLabel.palette();
   labelPalette.setColor(QPalette::ColorRole::Foreground,
                         unproductiveBarSet.color());
@@ -181,6 +200,13 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
   unproductiveTimeAvgLabel.setText(unproductibeTimeAvgText);
   chart.legend()->setAlignment(Qt::AlignBottom);
   view.setRenderHint(QPainter::Antialiasing);
+  qDebug() << "default bar width update=" << series.barWidth();
+  qDebug() << "previous label size hint" << previousSnaphotLabel.sizeHint();
+  qDebug() << "previous label size policy="
+           << previousSnaphotLabel.sizePolicy();
+  qDebug() << "view size" << view.size();
+
+  qDebug() << "view size policy" << view.sizePolicy();
 }
 
 int udata::CommitmentSnaphot::getWeekDayIndex(QDate &dateWindowStart,
@@ -199,4 +225,10 @@ double udata::CommitmentSnaphot::getProductiveTimeAverage() {
 
 double udata::CommitmentSnaphot::getUnproductiveTimeAverage() {
   return unproductiveTimeAverage;
+}
+QPushButton &udata::CommitmentSnaphot::getNextSnapshotLabel() {
+  return nextSnapshotLabel;
+}
+QPushButton &udata::CommitmentSnaphot::getPreviousSnaphotLabel() {
+  return previousSnaphotLabel;
 }

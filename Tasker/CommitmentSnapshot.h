@@ -17,7 +17,7 @@ QT_CHARTS_USE_NAMESPACE
 namespace udata {
 
 class CommitmentSnaphot : public QWidget {
-private:
+ private:
   QBarSet productiveBarSet{"Productive"};
   QBarSet unproductiveBarSet{"Unproductive"};
   QBarSeries series;
@@ -30,26 +30,29 @@ private:
   QWidget detailsWidget;
   QLabel productiveTimeAvgLabel;
   QLabel unproductiveTimeAvgLabel;
+  QPushButton previousSnaphotLabel;
+  QPushButton nextSnapshotLabel;
   QString productibeTimeAvgText{20, ' '};
   QString unproductibeTimeAvgText{20, ' '};
   double productiveTimeAverage = 0;
   double unproductiveTimeAverage = 0;
   double productiveRatio;
   double unproductiveRatio;
-
   int getWeekDayIndex(QDate &dateWindowStart, QDate &sessionDay);
 
   Perf::PerfTimer newPerfTimer{};
 
-public:
+ public:
   QChartView &getView();
   QBarSet &getProductiveQBarSet();
   QBarSet &getUnproducitveQbarSet();
   double getProductiveTimeAverage();
   double getUnproductiveTimeAverage();
-
-  void update(Commitment &updateData, int currentTimeWindow);
   CommitmentSnaphot(int numberOfBars = 7, QString customeCatgeory = "Sunday");
+  void update(Commitment &updateData, int currentTimeWindow);
+  QPushButton &getNextSnapshotLabel();
+  QPushButton &getPreviousSnaphotLabel();
 };
-} // namespace udata
-#endif // WEEKLYSNAPHOT_H
+
+}  // namespace udata
+#endif  // WEEKLYSNAPHOT_H

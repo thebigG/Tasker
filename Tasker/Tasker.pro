@@ -25,37 +25,55 @@ linux-g++*{
 #LIBS += -L../libs -lX11
 INCLUDEPATH += /usr/include/x86_64-linux-gnu/qt5
 }
-macx:
-{
-#    SOURCES +=   objctest.mm
-#    HEADERS += objctest.h
-}
+#macx:
+#{
+#debug
+#{
+#DEFINES+=__TASKER_DEBUG__
+#DEFINES += QT_NO_DEBUG_OUTPUT
+#}
+#!debug
+#{
+#DEFINES -= QT_NO_DEBUG_OUTPUT
+#DEFINES -=__TASKER_DEBUG__
+#}
+##    SOURCES +=   objctest.mm
+##    HEADERS += objctest.h
+#}
 
 QT += multimedia
 QMAKE_CXXFLAGS += "-pthread"
 QMAKE_CXXFLAGS = -std=c++14
 CONFIG += static
 CONFIG += -std=c++14
-#CONFIG(debug, debug)
+
+#CONFIG+=CONFIG(debug, debug|release)
 #{
 #DEFINES+=__TASKER_DEBUG__
 #DEFINES += QT_NO_DEBUG_OUTPUT
 #}
-debug
-{
-DEFINES+=__TASKER_DEBUG__
-DEFINES += QT_NO_DEBUG_OUTPUT
-}
-!debug
-{
-DEFINES -= QT_NO_DEBUG_OUTPUT
-DEFINES -=__TASKER_DEBUG__
-}
+#CONFIG(release, debug|release)
+#{
+##DEFINES -=__TASKER_DEBUG__
+#DEFINES += QT_NO_DEBUG_OUTPUT
+#}
+#debug
+#{
+#DEFINES+=__TASKER_DEBUG__
+#DEFINES += QT_NO_DEBUG_OUTPUT
+#}
+#!debug
+#{
+#DEFINES -= QT_NO_DEBUG_OUTPUT
+#DEFINES -=__TASKER_DEBUG__
+#}
 #QMAKE_LFLAGS += -Xlinker -Bstatic
 #Print the debug messages ONLY in release mode
 #QMAKE_CXXFLAGS += lobjc
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+debug: DEFINES += __TASKER_DEBUG__
+!debug: DEFINES -= __TASKER_DEBUG__
 CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
