@@ -25,12 +25,22 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   ui->setupUi(this);
   connect(ui->commitmentsQTreeWidget, &QTreeWidget::currentItemChanged, this,
           &CommStatsQWidget::currentCommitmentChangedSlot);
+  connect(ui->prevSnaphot, &QPushButton::clicked, this,
+          &CommStatsQWidget::previousSnapshot);
+  connect(ui->nextSnapshot, &QPushButton::clicked, this,
+          &CommStatsQWidget::nextSnapshot);
   snapshot.setMaximumSize(600, 600);
   static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
-      ->addWidget(&snapshot, 0, 0);
-
+      ->addWidget(this->ui->prevSnaphot, 0, 0);
   static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
-      ->addWidget(this->ui->CommitmentInfoStatsQWidget, 1, 0);
+      ->addWidget(&snapshot, 0, 1);
+  static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
+      ->addWidget(this->ui->CommitmentInfoStatsQWidget, 1, 1);
+//          (this->ui->prev,0,0);
+//  static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
+//      ->setSpacing(0);
+//  static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
+//      ->setContentsMargins(0, 0, 0, 0);
 #ifdef TRAVIS_CI
   QPalette p = this->ui->CommitmentInfoStatsQWidget->palette();
   p.setColor(this->ui->CommitmentInfoStatsQWidget->backgroundRole(),
@@ -174,7 +184,7 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
               .length() != 0) {
     qDebug() << "Running???";
     newPerfTimer.restart();
-    snapshot.update(User::getInstance()->getCurrentCommitment(), 0);
+    //    snapshot.update(User::getInstance()->getCurrentCommitment(), 0);
     newPerfTimer.stop();
     qDebug() << "duration of chart update=" << newPerfTimer.duration
              << "milliseconds";
@@ -190,4 +200,30 @@ void CommStatsQWidget::newLiveSessionSlot() {
 TimerWindowQWidget &CommStatsQWidget::getTimerWindow() { return timerWindow; }
 CreateCommitmentQWidget &CommStatsQWidget::getCreateCommitment() {
   return createCommimentWindow;
+}
+void CommStatsQWidget::previousSnapshot() {
+  if (currentTimeWindow - 1 >= 0) {
+    currentTimeWindow = currentTimeWindow - 1;
+  }
+  snapshot.update(
+      User::getInstance()
+          ->getCurrentCommitment()
+          .getCommitmentWindows()[currentTimeWindow],
+      User::getInstance()->getCurrentCommitment().getType(),
+      User::getInstance()->getCurrentCommitment().getFrequency().goal);
+}
+
+void CommStatsQWidget::nextSnapshot() {
+  if (currentTimeWindow + 1 < User::getInstance()
+                                  ->getCurrentCommitment()
+                                  .getCommitmentWindows()
+                                  .length()) {
+    currentTimeWindow = currentTimeWindow + 1;
+  }
+  snapshot.update(
+      User::getInstance()
+          ->getCurrentCommitment()
+          .getCommitmentWindows()[currentTimeWindow],
+      User::getInstance()->getCurrentCommitment().getType(),
+      User::getInstance()->getCurrentCommitment().getFrequency().goal);
 }

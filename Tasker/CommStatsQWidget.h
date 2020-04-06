@@ -43,7 +43,7 @@ class CommStatsQWidget;
 class CommStatsQWidget : public QWidget {
   Q_OBJECT
 
- public:
+public:
   explicit CommStatsQWidget(QWidget *parent = nullptr);
   TimerWindowQWidget &getTimerWindow();
   CreateCommitmentQWidget &getCreateCommitment();
@@ -51,7 +51,7 @@ class CommStatsQWidget : public QWidget {
   void func();
   void update();
 
- public slots:
+public slots:
   void newCommitmentSlot(bool);
   void deleteCommitmentSlot(bool);
   void newSessionSlot(bool);
@@ -60,13 +60,18 @@ class CommStatsQWidget : public QWidget {
   void on_statsQFrame_destroyed();
   void on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetItem *item,
                                                    int column);
+private slots:
+  void previousSnapshot();
+  void nextSnapshot();
 
- private:
+private:
   Ui::CommStatsQWidget *ui;
   bool isDelete = false;
   QPalette p;
   //    TempChartQWidget mw{};
   int selectedCommitmentIndex = 0;
+  int currentTimeWindow = 0;
+
   //    QVBoxLayout layout{};
   CreateCommitmentQWidget createCommimentWindow;
   TimerWindowQWidget timerWindow;
@@ -74,4 +79,4 @@ class CommStatsQWidget : public QWidget {
   Perf::PerfTimer newPerfTimer{};
 };
 
-#endif  // WIDGET_COMMSTATS_H
+#endif // WIDGET_COMMSTATS_H

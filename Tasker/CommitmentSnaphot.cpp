@@ -51,17 +51,28 @@ udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
   chart.setTitleFont(chartFont);
   view.setChart(&chart);
   qDebug() << "size of view" << view.size();
-  view.setMinimumSize(view.size());
+  qDebug() << "size of chart" << chart.size();
+  //  view.setMinimumSize(view.size());
+  //  chart.setMinimumSize(view.size().width() + 100, view.size().height());
+  //  chart.setPreferredSize(view.size());
+  //  chart.layout()->setContentsMargins(0, 0, 0, 0);
+  //  chart.layout()->activate();
+  //  chart.setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  qDebug() << "size policy for chart" << chart.sizePolicy();
+  //  chart.setSizePolicy();
   //  view.setSizeIncrement(QSizePolicy::Ignored, QSizePolicy::Expanding);
-  view.setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Expanding);
+  //  view.setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Expanding);
   this->setLayout(new QGridLayout());
+  //  static_cast<QGridLayout *>(this->layout())->setHorizontalSpacing(0);
   detailsWidget.setLayout(new QGridLayout());
   view.setRenderHint(QPainter::Antialiasing);
-  static_cast<QGridLayout *>(this->layout())
-      ->addWidget(&previousSnaphotLabel, 0, 0);
+  getView().setAlignment(Qt::AlignCenter);
+  //  static_cast<QGridLayout *>(this->layout())
+  //      ->addWidget(&previousSnaphotLabel, 0, 0);
   this->layout()->setContentsMargins(0, 0, 0, 0);
   this->layout()->setSpacing(0);
-  static_cast<QGridLayout *>(this->layout())->addWidget(&getView(), 0, 1);
+  static_cast<QGridLayout *>(this->layout())->setHorizontalSpacing(0);
+  static_cast<QGridLayout *>(this->layout())->addWidget(&getView(), 0, 0);
   //  static_cast<QGridLayout *>(this->layout())
   //     ->addWidget(&nextSnapshotLabel, 0, 2);
   QPalette p = view.palette();
@@ -98,13 +109,14 @@ QChartView &udata::CommitmentSnaphot::getView() { return view; }
  * @param updateData
  * @param currentTimeWindow
  */
-void udata::CommitmentSnaphot::update(Commitment &updateData,
-                                      int currentTimeWindow) {
-  util::TimeWindow currentWindow =
-      updateData.getCommitmentWindows().at(currentTimeWindow);
+void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
+                                      udata::CommitmentType type,
+                                      int commitmentGoal) {
+  //  util::TimeWindow currentWindow =
+  //      updateData.getCommitmentWindows().at(currentTimeWindow);
   QDate dayOfTheWeek = QDate{currentWindow.startDate};
   x.clear();
-  if (updateData.getType() == udata::CommitmentType::WEEKLY) {
+  if (type == udata::CommitmentType::WEEKLY) {
     for (int i = 0; i < WEEK_SIZE; i++) {
       productiveBarSet.replace(i, 0);
       unproductiveBarSet.replace(i, 0);
@@ -145,14 +157,9 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
 
   series.append(&productiveBarSet);
   series.append(&unproductiveBarSet);
-  y.setRange(0, util::StatsUtility::toMinutes(updateData.getFrequency().goal));
-  QString dateRange{updateData.getCommitmentWindows()
-                        .at(currentTimeWindow)
-                        .startDate.toString() +
-                    "--" +
-                    updateData.getCommitmentWindows()
-                        .at(currentTimeWindow)
-                        .endDate.toString()};
+  y.setRange(0, util::StatsUtility::toMinutes(commitmentGoal));
+  QString dateRange{currentWindow.startDate.toString() + "--" +
+                    currentWindow.endDate.toString()};
 
   chart.setTitle(dateRange);
   productiveTimeAverage =
@@ -207,6 +214,11 @@ void udata::CommitmentSnaphot::update(Commitment &updateData,
   qDebug() << "view size" << view.size();
 
   qDebug() << "view size policy" << view.sizePolicy();
+  qDebug() << "horizontal spacing"
+           << static_cast<QGridLayout *>(this->layout())->horizontalSpacing();
+  qDebug() << "size hint of view in " << view.sizeHint();
+  qDebug() << "size of chart in update" << chart.size();
+  view.setMinimumSize(492, 528);
 }
 
 int udata::CommitmentSnaphot::getWeekDayIndex(QDate &dateWindowStart,
