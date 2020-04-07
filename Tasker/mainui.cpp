@@ -10,6 +10,7 @@ using namespace udata;
 
 MainUI::MainUI() {
   commitmentHub.update();
+
   connect(commitmentMenu.addAction(NEW_COMMITMENT_STRING), &QAction::triggered,
           &commitmentHub, &CommStatsQWidget::newCommitmentSlot);
   connect(commitmentMenu.addAction(DELETE_COMMITMENT_STRING),
@@ -18,6 +19,7 @@ MainUI::MainUI() {
   commitmentMenu.addAction(EDIT_COMMITMENT_STRING);
   connect(sessionMenu.addAction(NEW_SESSION_STRING), &QAction::triggered,
           &commitmentHub, &CommStatsQWidget::newSessionSlot);
+  commitmentMenu.actions().at(0)->setShortcut(QKeySequence::New);
   sessionMenu.addAction(EDIT_SESSION_STRING);
   sessionMenu.addAction(DELETE_SESSION_STRING);
   mainMenuBar.addMenu(&commitmentMenu);
@@ -31,13 +33,17 @@ MainUI::MainUI() {
   this->statusBar()->hide();
 }
 
-CommStatsQWidget& MainUI::getCommitmentHub() { return commitmentHub; }
+void MainUI::update() {
+  QMainWindow::update();
+  commitmentHub.update();
+}
+CommStatsQWidget &MainUI::getCommitmentHub() { return commitmentHub; }
 
 /**
  * @brief MainUI::getInstance
  * @return
  */
-MainUI* MainUI::getInstance() {
+MainUI *MainUI::getInstance() {
   if (mainHub.get() == nullptr) {
     mainHub = std::make_unique<MainUI>();
   }

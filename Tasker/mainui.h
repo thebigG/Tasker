@@ -15,19 +15,20 @@
  */
 class MainUI : public QMainWindow {
   Q_OBJECT
- private:
+private:
   static std::unique_ptr<MainUI> mainHub;
   CommStatsQWidget commitmentHub{};
   QMenuBar mainMenuBar;
   QMenu commitmentMenu{COMMITMENT_MENU_STRING};
   QMenu sessionMenu{SESSION_MENU_STRING};
 
- public:
-  static MainUI* getInstance();
-  CommStatsQWidget& getCommitmentHub();
+public:
+  static MainUI *getInstance();
+  void update();
+  CommStatsQWidget &getCommitmentHub();
   MainUI();
- public slots:
+public slots:
   static void saveTaskerStateSlot();
 };
 
-#endif  // MAINUI_H
+#endif // MAINUI_H

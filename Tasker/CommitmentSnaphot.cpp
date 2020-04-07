@@ -67,6 +67,7 @@ udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
   detailsWidget.setLayout(new QGridLayout());
   view.setRenderHint(QPainter::Antialiasing);
   getView().setAlignment(Qt::AlignCenter);
+
   //  static_cast<QGridLayout *>(this->layout())
   //      ->addWidget(&previousSnaphotLabel, 0, 0);
   this->layout()->setContentsMargins(0, 0, 0, 0);
@@ -84,11 +85,17 @@ udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
   labelPalette.setColor(QPalette::ColorRole::Foreground,
                         productiveBarSet.color());
   productiveTimeAvgLabel.setPalette(labelPalette);
-
+  //  chartFont = productiveTimeAvgLabel.font();
+  chartFont.setBold(true);
+  chartFont.setPointSize(chartFont.pointSize() - 2);
+  //  chartFont.setBold(true);
+  //  productiveTimeAvgLabel.set
+  productiveTimeAvgLabel.setFont(chartFont);
   labelPalette = unproductiveTimeAvgLabel.palette();
   labelPalette.setColor(QPalette::ColorRole::Foreground,
                         unproductiveBarSet.color());
   unproductiveTimeAvgLabel.setPalette(labelPalette);
+  unproductiveTimeAvgLabel.setFont(chartFont);
   static_cast<QGridLayout *>(detailsWidget.layout())
       ->addWidget(&productiveTimeAvgLabel, 0, 0);
   static_cast<QGridLayout *>(detailsWidget.layout())
@@ -186,7 +193,7 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
               .length();
   productibeTimeAvgText.insert(temp, 'm');
   temp = temp + 1;
-  productibeTimeAvgText.insert(temp, " in Productive Average");
+  productibeTimeAvgText.insert(temp, " in Productive Avg");
   productiveTimeAvgLabel.setText(productibeTimeAvgText);
   // For average unproductive time
   unproductibeTimeAvgText.fill(' ');
@@ -203,7 +210,7 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
               .length();
   unproductibeTimeAvgText.insert(temp, 'm');
   temp = temp + 1;
-  unproductibeTimeAvgText.insert(temp, " in Unproductive Average");
+  unproductibeTimeAvgText.insert(temp, " in Unproductive Avg");
   //  temp.append(QString::number(productiveTimeAverage));
   unproductiveTimeAvgLabel.setText(unproductibeTimeAvgText);
   chart.legend()->setAlignment(Qt::AlignBottom);

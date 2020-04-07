@@ -29,7 +29,10 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
           &CommStatsQWidget::previousSnapshot);
   connect(ui->nextSnapshot, &QPushButton::clicked, this,
           &CommStatsQWidget::nextSnapshot);
-  snapshot.setMaximumSize(600, 600);
+  //  snapshot.setMaximumSize(600, 600);
+  qDebug() << "size of snapshot=" << snapshot.size();
+  qDebug() << "size polocy of snapshot" << snapshot.sizePolicy();
+  //  snapshot.setMaximumHeight(400);
   static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
       ->addWidget(this->ui->prevSnaphot, 0, 0);
   static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
@@ -44,7 +47,7 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
 #ifdef TRAVIS_CI
   QPalette p = this->ui->CommitmentInfoStatsQWidget->palette();
   p.setColor(this->ui->CommitmentInfoStatsQWidget->backgroundRole(),
-             snapshot.getProductiveQBarSet().color());
+             snapshot.palette().color(QPalette::ColorRole::Background));
   this->ui->CommitmentInfoStatsQWidget->setAutoFillBackground(true);
   this->ui->CommitmentInfoStatsQWidget->setPalette(p);
 #endif
@@ -99,12 +102,13 @@ void CommStatsQWidget::on_statsQFrame_destroyed() {
 }
 
 void CommStatsQWidget::update() {
-  QVector<Commitment> &c_vec = User::getInstance()->getCommitments();
+  QVector<Commitment> &commitments = User::getInstance()->getCommitments();
   int oldCurrentIndex = selectedCommitmentIndex;
   ui->commitmentsQTreeWidget->clear();
   selectedCommitmentIndex = 0;
-  auto commitmentIt = c_vec.begin();
-  while (commitmentIt != c_vec.end()) {
+  auto commitmentIt = commitments.begin();
+  qDebug() << "calling update on commstats++++++++++++_";
+  while (commitmentIt != commitments.end()) {
     Commitment c = (*commitmentIt);
 
     auto s_vec = c.getAllSessions();
@@ -152,6 +156,7 @@ void CommStatsQWidget::on_commitmentsQTreeWidget_itemDoubleClicked(
 }
 void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
                                                     QTreeWidgetItem *previous) {
+  qDebug() << "currentCommitmentChangedSlot#1";
   if (isDelete) {
     isDelete = false;
     return;
@@ -234,6 +239,7 @@ void CommStatsQWidget::nextSnapshot() {
   updateSnapshot();
 }
 void CommStatsQWidget::updateSnapshot() {
+  qDebug() << "updateSnapshot#1";
   snapshot.update(
       User::getInstance()
           ->getCurrentCommitment()
