@@ -1,4 +1,4 @@
-#include "AudioListener.h"
+#include "AudioHook.h"
 #include "CommStatsQWidget.h"
 #include "CreateCommitmentQWidget.h"
 #include "StatsUtility.h"
@@ -7,10 +7,9 @@
 #include "Timer.h"
 #include "UdataUtils.h"
 #include "User.h"
-#include "XListener.h"
+#include "XHook.h"
 #include "livesession.h"
 #include "mainui.h"
-//#include "objctest.h"
 #include <CommitmentSnapshot.h>
 #include <TaskerPerf/perftimer.h>
 

@@ -3,7 +3,7 @@
 
 #include "QObject"
 #include "QVector"
-#include <Listener.h>
+#include <Hook.h>
 #include <QDataStream>
 #include <QFile>
 #include <QString>
@@ -21,17 +21,17 @@ QDataStream &operator>>(QDataStream &in, udata::Task &newTask);
 class udata::Task {
 
 private:
-    QVector<Engine::Listener::ListenerType> listeners;
+    QVector<Engine::Hook::HookType> listeners;
     QString name;
 
 public:
     Task();
     Task(QString newName);
-    Task(QString newName, QVector<Engine::Listener::ListenerType> listeners);
+    Task(QString newName, QVector<Engine::Hook::HookType> listeners);
     QString &getName();
     void setName(QString value);
-    QVector<Engine::Listener::ListenerType> &getListeners();
-    void setListeners(QVector<Engine::Listener::ListenerType> value);
+    QVector<Engine::Hook::HookType> &getListeners();
+    void setListeners(QVector<Engine::Hook::HookType> value);
 
     friend QDataStream &operator<<(QDataStream &out, const udata::Task &newTask);
     /**

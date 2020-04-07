@@ -97,7 +97,7 @@ Public Slots</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>stopTimerSlot</b> ()</td></tr>
 <tr class="separator:ad700ca54e4d6d2e932a679cfe233e374"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afebebbf522eda0444060e92c21f09aa4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4">tickUpdate</a> ()</td></tr>
-<tr class="memdesc:afebebbf522eda0444060e92c21f09aa4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4" title="Timer::tickUpdate This is a time-sensitive function. Whatever it executes, it MUST return within 1 se...">Timer::tickUpdate</a> This is a time-sensitive function. Whatever it executes, it MUST return within 1 second. Current latency(average)= 14000 nanoseconds.  <a href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4">More...</a><br /></td></tr>
+<tr class="memdesc:afebebbf522eda0444060e92c21f09aa4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4" title="Timer::tickUpdate This is a time-sensitive function. Whatever it executes, it MUST return within 250 ...">Timer::tickUpdate</a> This is a time-sensitive function. Whatever it executes, it MUST return within 250 milliseconds, which is human perception threshold. Current latency(average)= 14000 nanoseconds.  <a href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4">More...</a><br /></td></tr>
 <tr class="separator:afebebbf522eda0444060e92c21f09aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26808f36fda1dfff089b001d7dd0f45a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a26808f36fda1dfff089b001d7dd0f45a">productiveSlot</a> ()</td></tr>
 <tr class="memdesc:a26808f36fda1dfff089b001d7dd0f45a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a26808f36fda1dfff089b001d7dd0f45a" title="Timer::productiveSlot.">Timer::productiveSlot</a>.  <a href="classEngine_1_1Timer.html#a26808f36fda1dfff089b001d7dd0f45a">More...</a><br /></td></tr>
@@ -109,9 +109,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>stopTimerSlot</b> ()<
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
 Signals</h2></td></tr>
-<tr class="memitem:a54c1edf69c377990a35d342268f05f02"><td class="memItemLeft" align="right" valign="top"><a id="a54c1edf69c377990a35d342268f05f02"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>startListener</b> ()</td></tr>
-<tr class="separator:a54c1edf69c377990a35d342268f05f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eb5001d9eeee6deb2fea02942287015"><td class="memItemLeft" align="right" valign="top"><a id="a9eb5001d9eeee6deb2fea02942287015"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>startHook</b> ()</td></tr>
+<tr class="separator:a9eb5001d9eeee6deb2fea02942287015"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40fa1a13e8403f2efee8fbaa9043c769"><td class="memItemLeft" align="right" valign="top"><a id="a40fa1a13e8403f2efee8fbaa9043c769"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>stopTimer</b> ()</td></tr>
 <tr class="separator:a40fa1a13e8403f2efee8fbaa9043c769"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,9 +128,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a15e1f88f89abe4a940c7253615fabe4d">Timer</a> (int newNiceness=5)</td></tr>
 <tr class="memdesc:a15e1f88f89abe4a940c7253615fabe4d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a15e1f88f89abe4a940c7253615fabe4d" title="Timer::Timer.">Timer::Timer</a>. <br /></td></tr>
 <tr class="separator:a15e1f88f89abe4a940c7253615fabe4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fe1dd6f85dd386301e41a4632d6a263"><td class="memItemLeft" align="right" valign="top"><a id="a3fe1dd6f85dd386301e41a4632d6a263"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initTimer</b> (<a class="el" href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">Listener::ListenerType</a>, <a class="el" href="classudata_1_1Session.html">udata::Session</a>)</td></tr>
-<tr class="separator:a3fe1dd6f85dd386301e41a4632d6a263"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9d150a0450bcfeee60121314696d1bb"><td class="memItemLeft" align="right" valign="top"><a id="af9d150a0450bcfeee60121314696d1bb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>initTimer</b> (<a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Hook::HookType</a>, <a class="el" href="classudata_1_1Session.html">udata::Session</a>)</td></tr>
+<tr class="separator:af9d150a0450bcfeee60121314696d1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b09cdb6c090ee4e735b219bebccf362"><td class="memItemLeft" align="right" valign="top"><a id="a9b09cdb6c090ee4e735b219bebccf362"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
 <tr class="separator:a9b09cdb6c090ee4e735b219bebccf362"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,9 +140,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>pause</b> ()</td></tr
 <tr class="memitem:ab10086b22e26c08660e1ca40a1f71e30"><td class="memItemLeft" align="right" valign="top"><a id="ab10086b22e26c08660e1ca40a1f71e30"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCurrentSession</b> (<a class="el" href="classudata_1_1Session.html">udata::Session</a>)</td></tr>
 <tr class="separator:ab10086b22e26c08660e1ca40a1f71e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae45839ab76a350f8242582f766112204"><td class="memItemLeft" align="right" valign="top"><a id="ae45839ab76a350f8242582f766112204"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setListener</b> (<a class="el" href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">Listener::ListenerType</a>)</td></tr>
-<tr class="separator:ae45839ab76a350f8242582f766112204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57eb2a85b5494c9c674119dd4e8bb54e"><td class="memItemLeft" align="right" valign="top"><a id="a57eb2a85b5494c9c674119dd4e8bb54e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setListener</b> (<a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Hook::HookType</a>)</td></tr>
+<tr class="separator:a57eb2a85b5494c9c674119dd4e8bb54e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80b8a70eade13fca7c08ce21f3064737"><td class="memItemLeft" align="right" valign="top"><a id="a80b8a70eade13fca7c08ce21f3064737"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>startConnect</b> ()</td></tr>
 <tr class="separator:a80b8a70eade13fca7c08ce21f3064737"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -187,8 +187,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>updateUnproductiveSta
 <tr class="memitem:a3114d1693173e728273dc74e635b27fa"><td class="memItemLeft" align="right" valign="top"><a id="a3114d1693173e728273dc74e635b27fa"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateTimeElapsedStatus</b> ()</td></tr>
 <tr class="separator:a3114d1693173e728273dc74e635b27fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1323444ebd7f2c1407518a03a193b5f4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4">run</a> ()</td></tr>
-<tr class="memdesc:a1323444ebd7f2c1407518a03a193b5f4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a15e1f88f89abe4a940c7253615fabe4d" title="Timer::Timer.">Timer::Timer</a>.  <a href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4">More...</a><br /></td></tr>
+<tr class="memitem:a1323444ebd7f2c1407518a03a193b5f4"><td class="memItemLeft" align="right" valign="top"><a id="a1323444ebd7f2c1407518a03a193b5f4"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4">run</a> ()</td></tr>
+<tr class="memdesc:a1323444ebd7f2c1407518a03a193b5f4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4" title="Timer::run This function is called when the thread starts. Any and all QObjects(such as Hook) MUST be...">Timer::run</a> This function is called when the thread starts. Any and all QObjects(such as Hook) MUST be instantiated inside this method. Otherwise, QT's thread management will NOT consider that QObject as part of the <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class.">Timer</a> thread. The code in &amp;Hook::start, which is the ACTUAL code that hook to hardware, does not run until the startHook() signal is sent. <br /></td></tr>
 <tr class="separator:a1323444ebd7f2c1407518a03a193b5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -237,17 +238,18 @@ long long&#160;</td><td class="memItemRight" valign="bottom"><b>unProducitveTick
 <tr class="memitem:a7c6da5b8ad5b1727fb53511823569eab"><td class="memItemLeft" align="right" valign="top"><a id="a7c6da5b8ad5b1727fb53511823569eab"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>lastUnproductiveTick</b> = 0</td></tr>
 <tr class="separator:a7c6da5b8ad5b1727fb53511823569eab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac75f15c2d0935c38f55947e7d1a7272d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><b>productiveTimeSurplus</b></td></tr>
+<tr class="memitem:ac75f15c2d0935c38f55947e7d1a7272d"><td class="memItemLeft" align="right" valign="top"><a id="ac75f15c2d0935c38f55947e7d1a7272d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>productiveTimeSurplus</b> = 1</td></tr>
 <tr class="separator:ac75f15c2d0935c38f55947e7d1a7272d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41a26c4217d6b2078dba5a6bb4efbfa9"><td class="memItemLeft" align="right" valign="top"><a id="a41a26c4217d6b2078dba5a6bb4efbfa9"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>unproductiveTimeSurplus</b> = 1</td></tr>
 <tr class="separator:a41a26c4217d6b2078dba5a6bb4efbfa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba795e9b1eaf3233e63e8cd5cd26ceea"><td class="memItemLeft" align="right" valign="top"><a id="aba795e9b1eaf3233e63e8cd5cd26ceea"></a>
-std::unique_ptr&lt; <a class="el" href="classEngine_1_1Listener.html">Listener</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>listener</b></td></tr>
-<tr class="separator:aba795e9b1eaf3233e63e8cd5cd26ceea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b489ab0251956efaa629a5b18d1b656"><td class="memItemLeft" align="right" valign="top"><a id="a5b489ab0251956efaa629a5b18d1b656"></a>
-<a class="el" href="classEngine_1_1Listener.html#a04028eb58d8908d22d5e9faa24876b19">Listener::ListenerType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>listenerType</b></td></tr>
-<tr class="separator:a5b489ab0251956efaa629a5b18d1b656"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34cb7168649e8d83f34d66dec324f8a6"><td class="memItemLeft" align="right" valign="top"><a id="a34cb7168649e8d83f34d66dec324f8a6"></a>
+std::unique_ptr&lt; <a class="el" href="classEngine_1_1Hook.html">Hook</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>listener</b></td></tr>
+<tr class="separator:a34cb7168649e8d83f34d66dec324f8a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37974672955b7a725ef0d43258bb3980"><td class="memItemLeft" align="right" valign="top"><a id="a37974672955b7a725ef0d43258bb3980"></a>
+<a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Hook::HookType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>listenerType</b></td></tr>
+<tr class="separator:a37974672955b7a725ef0d43258bb3980"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5008b7350fcc839ee9f3a6e782dca69f"><td class="memItemLeft" align="right" valign="top"><a id="a5008b7350fcc839ee9f3a6e782dca69f"></a>
 QThread&#160;</td><td class="memItemRight" valign="bottom"><b>listenerThread</b></td></tr>
 <tr class="separator:a5008b7350fcc839ee9f3a6e782dca69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -326,40 +328,6 @@ on the first 10 minutes of the session" because there was a constant increment o
 
 </div>
 </div>
-<a id="a1323444ebd7f2c1407518a03a193b5f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1323444ebd7f2c1407518a03a193b5f4">&#9670;&nbsp;</a></span>run()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Timer::run </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p><a class="el" href="classEngine_1_1Timer.html#a15e1f88f89abe4a940c7253615fabe4d" title="Timer::Timer.">Timer::Timer</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">newListenerType</td><td>This tells timer what type of listener to instantiate. It's not the prettiest way of doing this, but at least we're not doing weird/prone-to-bugs type probing at runtime, like dynamic_cast nonsense.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4" title="Timer::Timer.">Timer::run</a> This function is called when the thread starts. Any and all QObjects(such as Listener) MUST be instantiated inside this method. Otherwise, QT's thread management will NOT consider that QObject as part of the <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class.">Timer</a> thread. The code in &amp;Listener::start, which is the ACTUAL code that listents to hardware, does not run until the startListner() signal is sent. </p>
-
-</div>
-</div>
 <a id="aa8c887576ec3b0d68c10ebf4097c367c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa8c887576ec3b0d68c10ebf4097c367c">&#9670;&nbsp;</a></span>startTimer()</h2>
 
@@ -401,8 +369,8 @@ on the first 10 minutes of the session" because there was a constant increment o
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4" title="Timer::tickUpdate This is a time-sensitive function. Whatever it executes, it MUST return within 1 se...">Timer::tickUpdate</a> This is a time-sensitive function. Whatever it executes, it MUST return within 1 second. Current latency(average)= 14000 nanoseconds. </p>
-<p>productiveTickDelta This is kind of like a "grace" peroid for how long the user can go unproductive.</p>
+<p><a class="el" href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4" title="Timer::tickUpdate This is a time-sensitive function. Whatever it executes, it MUST return within 250 ...">Timer::tickUpdate</a> This is a time-sensitive function. Whatever it executes, it MUST return within 250 milliseconds, which is human perception threshold. Current latency(average)= 14000 nanoseconds. </p>
+<p>productiveTickDelta This is kind of like a "grace" peroid for how long the user can go unproductive. This is 60 seconds for now. Will adjust as I test things out.</p>
 
 </div>
 </div>
@@ -455,31 +423,7 @@ on the first 10 minutes of the session" because there was a constant increment o
 </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">        0</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ac75f15c2d0935c38f55947e7d1a7272d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac75f15c2d0935c38f55947e7d1a7272d">&#9670;&nbsp;</a></span>productiveTimeSurplus</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Engine::Timer::productiveTimeSurplus</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">        1</div>
+<div class="line">      0</div>
 </div><!-- fragment -->
 </div>
 </div>

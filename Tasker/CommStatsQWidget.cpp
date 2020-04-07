@@ -11,7 +11,7 @@
 
 //#include <QtCharts/QBarSeries>
 
-using Engine::Listener;
+using Engine::Hook;
 using udata::Commitment;
 using udata::Session;
 using udata::User;
@@ -166,6 +166,7 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
     if (current == nullptr) {
       return;
     }
+
     currentIndex =
         ui->commitmentsQTreeWidget->indexOfTopLevelItem(current->parent());
     qDebug() << "NEGATIVE#2";
@@ -184,7 +185,18 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
               .length() != 0) {
     qDebug() << "Running???";
     newPerfTimer.restart();
-    //    snapshot.update(User::getInstance()->getCurrentCommitment(), 0);
+    /*reset the value of currentTimeWindow to the current time window
+     * Since the currently selected commitment has changed
+     *This usually means whatever TimeWindow(such as week) includes the current
+     *date
+     */
+    currentTimeWindow = User::getInstance()
+                            ->getCurrentCommitment()
+                            .getCommitmentWindows()
+                            .length() -
+                        1;
+    updateSnapshot();
+    //            0);
     newPerfTimer.stop();
     qDebug() << "duration of chart update=" << newPerfTimer.duration
              << "milliseconds";
@@ -204,13 +216,10 @@ CreateCommitmentQWidget &CommStatsQWidget::getCreateCommitment() {
 void CommStatsQWidget::previousSnapshot() {
   if (currentTimeWindow - 1 >= 0) {
     currentTimeWindow = currentTimeWindow - 1;
+  } else {
+    return;
   }
-  snapshot.update(
-      User::getInstance()
-          ->getCurrentCommitment()
-          .getCommitmentWindows()[currentTimeWindow],
-      User::getInstance()->getCurrentCommitment().getType(),
-      User::getInstance()->getCurrentCommitment().getFrequency().goal);
+  updateSnapshot();
 }
 
 void CommStatsQWidget::nextSnapshot() {
@@ -219,7 +228,12 @@ void CommStatsQWidget::nextSnapshot() {
                                   .getCommitmentWindows()
                                   .length()) {
     currentTimeWindow = currentTimeWindow + 1;
+  } else {
+    return;
   }
+  updateSnapshot();
+}
+void CommStatsQWidget::updateSnapshot() {
   snapshot.update(
       User::getInstance()
           ->getCurrentCommitment()

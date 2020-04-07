@@ -25,7 +25,7 @@ Task::Task(QString newName) {
  * @param newName
  * @param listeners
  */
-Task::Task(QString newName, QVector<Engine::Listener::ListenerType> listeners) {
+Task::Task(QString newName, QVector<Engine::Hook::HookType> listeners) {
 
     setName(newName);
     setListeners(listeners);
@@ -51,7 +51,7 @@ void Task::setName(QString value) {
  * @brief Task::getListeners
  * @return
  */
-QVector<Engine::Listener::ListenerType> &Task::getListeners() {
+QVector<Engine::Hook::HookType> &Task::getListeners() {
     return listeners;
 }
 
@@ -59,8 +59,8 @@ QVector<Engine::Listener::ListenerType> &Task::getListeners() {
  * @brief Task::setListeners
  * @param newListeners
  */
-void Task::setListeners(const QVector<Engine::Listener::ListenerType> newListeners) {
-    for (Engine::Listener::ListenerType l : newListeners) {
+void Task::setListeners(const QVector<Engine::Hook::HookType> newListeners) {
+    for (Engine::Hook::HookType l : newListeners) {
         listeners.push_back(l);
     }
 }

@@ -115,6 +115,7 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
   //  util::TimeWindow currentWindow =
   //      updateData.getCommitmentWindows().at(currentTimeWindow);
   QDate dayOfTheWeek = QDate{currentWindow.startDate};
+  qDebug() << "_________________________________________________";
   x.clear();
   if (type == udata::CommitmentType::WEEKLY) {
     for (int i = 0; i < WEEK_SIZE; i++) {
@@ -178,10 +179,10 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
   productibeTimeAvgText.insert(temp, 'h');
   temp = temp + 1;
   productibeTimeAvgText.insert(
-      temp, QString::number((int)productiveTimeAverage -
-                            numberOfHours * MINUTES_IN_HOUR));
-  temp += QString::number((int)productiveTimeAverage -
-                          numberOfHours * MINUTES_IN_HOUR)
+      temp, QString::number(((int)productiveTimeAverage) -
+                            (numberOfHours * MINUTES_IN_HOUR)));
+  temp += QString::number(((int)productiveTimeAverage) -
+                          (numberOfHours * MINUTES_IN_HOUR))
               .length();
   productibeTimeAvgText.insert(temp, 'm');
   temp = temp + 1;
@@ -207,6 +208,7 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
   unproductiveTimeAvgLabel.setText(unproductibeTimeAvgText);
   chart.legend()->setAlignment(Qt::AlignBottom);
   view.setRenderHint(QPainter::Antialiasing);
+  qDebug() << "average for productive time=" << productiveTimeAverage;
   qDebug() << "default bar width update=" << series.barWidth();
   qDebug() << "previous label size hint" << previousSnaphotLabel.sizeHint();
   qDebug() << "previous label size policy="
@@ -219,6 +221,7 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
   qDebug() << "size hint of view in " << view.sizeHint();
   qDebug() << "size of chart in update" << chart.size();
   view.setMinimumSize(492, 528);
+  qDebug() << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 }
 
 int udata::CommitmentSnaphot::getWeekDayIndex(QDate &dateWindowStart,

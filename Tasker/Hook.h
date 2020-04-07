@@ -8,27 +8,27 @@
 #include <cstdint>
 #define BASE_DELAY 2
 namespace Engine {
-class Listener;
+class Hook;
 enum class ListenerType;
 QDataStream &operator<<(QDataStream &out, const ListenerType &newListener);
 QDataStream &operator>>(QDataStream &in, ListenerType &newListener);
 } // namespace Engine
 
 /**
- * @brief The Engine::Listener class
+ * @brief Engine::Hook class
  */
-class Engine::Listener : public QObject {
+class Engine::Hook : public QObject {
   Q_OBJECT
 public:
-  enum class ListenerState { unproductive, productive };
+  enum class HookState { unproductive, productive };
   /**
-   * @brief The ListenerType enum
+   * @brief The HookType enum
    * This enum used for Timer to know which listener it is going to instantiate
-   * @note If, for whatever reason, we decide to add ListenerType values make
+   * @note If, for whatever reason, we decide to add HookType values make
    * sure that to add them BEFORE none. The none type is used for bounds
    * checking.
    */
-  enum class ListenerType {
+  enum class HookType {
     X_MOUSE_KEYBOARD,
     X_MOUSE,
     X_KEYBOARD,
@@ -37,18 +37,18 @@ public:
   }; // I had to do this to make QThreads work
 
 public:
-  Listener();
-  ~Listener();
+  Hook();
+  ~Hook();
   virtual void start() = 0;
   virtual void end() = 0;
   virtual void pause() = 0;
   virtual void update() = 0;
   virtual void resetState() = 0;
-  static ListenerType intToListenerType(int enumToInt);
-  virtual Listener::ListenerState listen() = 0;
+  static HookType intToListenerType(int enumToInt);
+  virtual Hook::HookState startHook() = 0;
 
-  void setState(ListenerState);
-  ListenerState getState();
+  void setState(HookState);
+  HookState getState();
 
   // probably not needed...timer keeps track of live session time,
   // when session ends, session will grab this data from timer
@@ -57,7 +57,7 @@ public:
   uint64_t getUnproductiveTime();
 
 protected:
-  Listener::ListenerState state;
+  Hook::HookState state;
 
 private:
   double getCheckStateDelay();
@@ -72,8 +72,7 @@ private:
    * @param newTask
    * @return
    */
-  friend QDataStream &operator<<(QDataStream &out,
-                                 const ListenerType &newListener);
+  friend QDataStream &operator<<(QDataStream &out, const HookType &newListener);
   /**
    * @brief operator >> I'm really sorry about this ugiliness. Apparently,
    * as far as I know, C++ wants me to do it this way in order to access private
@@ -82,7 +81,7 @@ private:
    * @param newTask
    * @return
    */
-  friend QDataStream &operator>>(QDataStream &in, ListenerType &newListener) {
+  friend QDataStream &operator>>(QDataStream &in, HookType &newListener) {
     int enumValue = 0;
     in >> enumValue;
     newListener = intToListenerType(enumValue);

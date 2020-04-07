@@ -1,6 +1,6 @@
 #ifndef KEYBOARDLISTENER_H
 #define KEYBOARDLISTENER_H
-#include <Listener.h>
+#include <Hook.h>
 #include <QtCore>
 #if defined(Q_OS_LINUX)
 #define IOHOOK_SCRIPT_PATH "../libs/linux/iohook/XListenerHook"
@@ -16,23 +16,23 @@
 #define IOHOOK_KEYBOARD_AND_MOUSE_MODE "2"
 #define IOHOOK_MOUSE_DRAGGED "3"
 namespace Engine {
-class XListener;
-enum class XListenerMode;
+class XHook;
+enum class XHookMode;
 } // namespace Engine
 
-enum class Engine::XListenerMode { MOUSE, KEYBOARD, MOUSE_AND_KEYBOARD };
+enum class Engine::XHookMode { MOUSE, KEYBOARD, MOUSE_AND_KEYBOARD };
 /**
  * @brief The Engine::XListener class
  * This class has the capiblity of detecting mouse and keyboard interaction.
  */
-class Engine::XListener : public Listener {
+class Engine::XHook : public Hook {
   Q_OBJECT
 
 public:
-  XListener();
-  XListener(Engine::XListenerMode);
-  int startListening();
-  Listener::ListenerState listen() override;
+  XHook();
+  XHook(Engine::XHookMode);
+  int startXHook();
+  Hook::HookState startHook() override;
 
 public slots:
   virtual void start() override;
@@ -42,9 +42,9 @@ public slots:
   virtual void resetState() override;
 
 private:
-  QProcess xHook;
-  QStringList xHookArguments;
-  XListenerMode XMode;
+  QProcess xChildHook;
+  QStringList xChildHookArguments;
+  XHookMode XMode;
 
 signals:
   void signalThread();

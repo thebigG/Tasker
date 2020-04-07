@@ -1,30 +1,30 @@
 #ifndef AUDIOLISTENER_H
 #define AUDIOLISTENER_H
 
-#include "Listener.h"
+#include "Hook.h"
 #include <AudioMachine.h>
 #include <QAudioDeviceInfo>
 #include <QAudioInput>
 #include <memory>
 namespace Engine {
-class AudioListener;
+class AudioHook;
 }
 
 /**
- * @brief The Engine::AudioListener class
+ * @brief Engine::AudioHook class
  */
-class Engine::AudioListener : public Engine::Listener {
+class Engine::AudioHook : public Engine::Hook {
   Q_OBJECT
 
 public:
   enum class AudioListenerState { ON, OFF };
 
-  AudioListener();
+  AudioHook();
   //    ~AudioListener() override;
   void setAudioThreshold(qreal audioThreshold);
   qreal &getAudioThreshold();
 
-  Listener::ListenerState listen() override;
+  Hook::HookState startHook() override;
 
 public slots:
   virtual void start() override;

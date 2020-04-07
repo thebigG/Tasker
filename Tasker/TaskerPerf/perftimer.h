@@ -9,11 +9,11 @@ class PerfTimer;
 }
 
 class Perf::PerfTimer {
- private:
+private:
   std::chrono::time_point<std::chrono::high_resolution_clock> start;
   std::chrono::time_point<std::chrono::high_resolution_clock> end;
 
- public:
+public:
   PerfTimer(int newDurationRecordSize = 100);
   std::vector<long long> durationRecord;
   void restart();
@@ -31,7 +31,7 @@ class Perf::PerfTimer {
     if (durationRecord.size() < durationRecordSize) {
       end = std::chrono::high_resolution_clock::now();
       durationRecord.push_back(
-          std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
+          std::chrono::duration_cast<std::chrono::microseconds>(end - start)
               .count());
       long long sum = 0;
       for (long long tempDuration : durationRecord) {
@@ -46,4 +46,4 @@ class Perf::PerfTimer {
   }
 };
 
-#endif  // PERFTIMER_H
+#endif // PERFTIMER_H

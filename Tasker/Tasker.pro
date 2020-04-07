@@ -89,13 +89,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     AudioDevice.cpp \
-    AudioListener.cpp \
+    AudioHook.cpp \
     AudioMachine.cpp \
     CommStatsQWidget.cpp \
     Commitment.cpp \
     CommitmentSnaphot.cpp \
     CreateCommitmentQWidget.cpp \
-    Listener.cpp \
+    Hook.cpp \
     Session.cpp \
     Task.cpp \
     StatsUtility.cpp \
@@ -105,20 +105,20 @@ SOURCES += \
     TimerWindowQWidget.cpp \
     UdataUtils.cpp \
     User.cpp \
-    XListener.cpp \
+    XHook.cpp \
     livesession.cpp \
     mainui.cpp \
     main.cpp
 
 HEADERS += \
     AudioDevice.h \
-    AudioListener.h \
+    AudioHook.h \
     AudioMachine.h \
     CommStatsQWidget.h \
     Commitment.h \
     CommitmentSnapshot.h \
     CreateCommitmentQWidget.h \
-    Listener.h \
+    Hook.h \
     Session.h \
     Task.h \
     TaskerPerf/perftimer.h \
@@ -129,7 +129,7 @@ HEADERS += \
     TaskerUIMainWindowQWidget.h \
     TimerWindowQWidget.h \
     UdataUtils.h \
-    XListener.h \
+    XHook.h \
     livesession.h \
     mainui.h \
     User.h \

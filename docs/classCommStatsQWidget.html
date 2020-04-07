@@ -65,6 +65,8 @@ $(function() {
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-slots">Private Slots</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classCommStatsQWidget-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -72,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a> class is the main hub where the data for Commitments is displayed. Whether that be charts, averages, current commitments and their sessions, it is all displayed by <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a>. This clas just displays data, it doesn't really "manipulate" it except for the cases where one might need to convert minutes to seconds, seconds to hours, etc. All data "manipulation" is done for the sake of UI design, not data management. All data management should be left to Classes such as Commitment, Session, Task, etc.  
+<p>The <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a> class is the main hub where the data for Commitments is displayed. Whether that be charts, averages, current commitments and their sessions, it is all displayed by <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a>. This clas just displays data, it doesn't really "manipulate" it except for the cases where one might need to convert minutes to seconds, seconds to hours, etc. All data "manipulation" is done for the sake of UI design, not data management. All data management should be left to Classes such as Commitment, Session, Task, etc. This class is a hybrid of a Controller and Viewer. It is a viewer in the sense that it dispplays all data about commitments and a controller in the sense that it controls much of data navigation. This data navigation includes things like navigating through different snapshots of time windows, secleting different commitments and sessions that belong to those commitments.  
  <a href="classCommStatsQWidget.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="CommStatsQWidget_8h_source.html">CommStatsQWidget.h</a>&gt;</code></p>
@@ -130,6 +132,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>func</b> ()</td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></tr>
 <tr class="separator:ae4925f706c659147b41608ba91f743b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-slots"></a>
+Private Slots</h2></td></tr>
+<tr class="memitem:aada4511198af5eb5b703593dee23e272"><td class="memItemLeft" align="right" valign="top"><a id="aada4511198af5eb5b703593dee23e272"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>previousSnapshot</b> ()</td></tr>
+<tr class="separator:aada4511198af5eb5b703593dee23e272"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe5f2f4950410ebe3c381c98b45daa69"><td class="memItemLeft" align="right" valign="top"><a id="abe5f2f4950410ebe3c381c98b45daa69"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>nextSnapshot</b> ()</td></tr>
+<tr class="separator:abe5f2f4950410ebe3c381c98b45daa69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a93a39d584be4c627c59fc7251992794a"><td class="memItemLeft" align="right" valign="top"><a id="a93a39d584be4c627c59fc7251992794a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateSnapshot</b> ()</td></tr>
+<tr class="separator:a93a39d584be4c627c59fc7251992794a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:aa5a02fa227e329bcc5ddeae9ead09510"><td class="memItemLeft" align="right" valign="top"><a id="aa5a02fa227e329bcc5ddeae9ead09510"></a>
@@ -144,6 +161,9 @@ QPalette&#160;</td><td class="memItemRight" valign="bottom"><b>p</b></td></tr>
 <tr class="memitem:ac1d92c64c2b715bb9d77468935ffb655"><td class="memItemLeft" align="right" valign="top"><a id="ac1d92c64c2b715bb9d77468935ffb655"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>selectedCommitmentIndex</b> = 0</td></tr>
 <tr class="separator:ac1d92c64c2b715bb9d77468935ffb655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73b5c6f6bbecaf0c5da0afd5f386a91d"><td class="memItemLeft" align="right" valign="top"><a id="a73b5c6f6bbecaf0c5da0afd5f386a91d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>currentTimeWindow</b> = 0</td></tr>
+<tr class="separator:a73b5c6f6bbecaf0c5da0afd5f386a91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a635fc757e27b3be9529d68c1a535966b"><td class="memItemLeft" align="right" valign="top"><a id="a635fc757e27b3be9529d68c1a535966b"></a>
 <a class="el" href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createCommimentWindow</b></td></tr>
 <tr class="separator:a635fc757e27b3be9529d68c1a535966b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,9 +173,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>selectedCommitmentInde
 <tr class="memitem:a7d1e3b710addfb0bfac2b028582e9eae"><td class="memItemLeft" align="right" valign="top"><a id="a7d1e3b710addfb0bfac2b028582e9eae"></a>
 <a class="el" href="classudata_1_1CommitmentSnaphot.html">udata::CommitmentSnaphot</a>&#160;</td><td class="memItemRight" valign="bottom"><b>snapshot</b></td></tr>
 <tr class="separator:a7d1e3b710addfb0bfac2b028582e9eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6ba82ea69ab0c5c083a93795c0292a0"><td class="memItemLeft" align="right" valign="top"><a id="ab6ba82ea69ab0c5c083a93795c0292a0"></a>
+Perf::PerfTimer&#160;</td><td class="memItemRight" valign="bottom"><b>newPerfTimer</b> {}</td></tr>
+<tr class="separator:ab6ba82ea69ab0c5c083a93795c0292a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a> class is the main hub where the data for Commitments is displayed. Whether that be charts, averages, current commitments and their sessions, it is all displayed by <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a>. This clas just displays data, it doesn't really "manipulate" it except for the cases where one might need to convert minutes to seconds, seconds to hours, etc. All data "manipulation" is done for the sake of UI design, not data management. All data management should be left to Classes such as Commitment, Session, Task, etc. </p>
+<div class="textblock"><p>The <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a> class is the main hub where the data for Commitments is displayed. Whether that be charts, averages, current commitments and their sessions, it is all displayed by <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a>. This clas just displays data, it doesn't really "manipulate" it except for the cases where one might need to convert minutes to seconds, seconds to hours, etc. All data "manipulation" is done for the sake of UI design, not data management. All data management should be left to Classes such as Commitment, Session, Task, etc. This class is a hybrid of a Controller and Viewer. It is a viewer in the sense that it dispplays all data about commitments and a controller in the sense that it controls much of data navigation. This data navigation includes things like navigating through different snapshots of time windows, secleting different commitments and sessions that belong to those commitments. </p>
 <dl class="section note"><dt>Note</dt><dd>Beware of manipulating palettes on Qt Designer. It can cause backwards comptability problems(specifically might break the build for Ubuntu 14.04) when changing the palette manually on Qt Designer. It lookes like it is ok to manipulate palettes via code by calling methods like QWidget.setPalette(), but not through the Qt Designer editor. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afd5012897d300955162c969174646bd5"></a>

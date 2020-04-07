@@ -32,7 +32,12 @@ class CommStatsQWidget;
  * except for the cases where one might need to convert minutes to seconds,
  * seconds to hours, etc. All data "manipulation" is done for the sake of UI
  * design, not data management. All data management should be left to Classes
- * such as Commitment, Session, Task, etc.
+ * such as Commitment, Session, Task, etc. This class is a hybrid of a
+ * Controller and Viewer. It is a viewer in the sense that it dispplays all data
+ * about commitments and a controller in the sense that it controls much of data
+ * navigation. This data navigation includes things like navigating through
+ * different snapshots of time windows, secleting different commitments and
+ * sessions that belong to those commitments.
  *
  * @note Beware of manipulating palettes on Qt Designer.
  * It can cause backwards comptability problems(specifically might break the
@@ -76,6 +81,7 @@ private:
   CreateCommitmentQWidget createCommimentWindow;
   TimerWindowQWidget timerWindow;
   udata::CommitmentSnaphot snapshot;
+  void updateSnapshot();
   Perf::PerfTimer newPerfTimer{};
 };
 

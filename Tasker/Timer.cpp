@@ -9,8 +9,8 @@
 #include <QTime>
 #include <iostream>
 
-#include "AudioListener.h"
-#include "XListener.h"
+#include "AudioHook.h"
+#include "XHook.h"
 using namespace Engine;
 using namespace util;
 using namespace udata;
@@ -29,10 +29,10 @@ Timer::Timer(int newNiceness) {
 /**
  * @brief Timer::run
  * This function is called when the thread starts.
- *Any and all QObjects(such as Listener) MUST be instantiated inside this
+ *Any and all QObjects(such as Hook) MUST be instantiated inside this
  *method. Otherwise, QT's thread management will NOT consider that QObject as
- *part of the Timer thread. The code in &Listener::start, which is the ACTUAL
- *code that listents to hardware, does not run until the startListner() signal
+ *part of the Timer thread. The code in &Hook::start, which is the ACTUAL
+ *code that hook to hardware, does not run until the startHook() signal
  *is sent.
  */
 void Timer::run() {
@@ -44,14 +44,14 @@ void Timer::run() {
 void Timer::startTimer() {
   qDebug() << "From work thread: " << currentThreadId();
 
-  if (listenerType == Listener::ListenerType::X_MOUSE_KEYBOARD) {
-    listener = std::make_unique<XListener>();
-  } else if (listenerType == Listener::ListenerType::X_MOUSE) {
-    listener = std::make_unique<XListener>(XListenerMode::MOUSE);
-  } else if (listenerType == Listener::ListenerType::X_KEYBOARD) {
-    listener = std::make_unique<XListener>(XListenerMode::KEYBOARD);
-  } else if (listenerType == Listener::ListenerType::audio) {
-    listener = std::make_unique<AudioListener>();
+  if (listenerType == Hook::HookType::X_MOUSE_KEYBOARD) {
+    listener = std::make_unique<XHook>();
+  } else if (listenerType == Hook::HookType::X_MOUSE) {
+    listener = std::make_unique<XHook>(XHookMode::MOUSE);
+  } else if (listenerType == Hook::HookType::X_KEYBOARD) {
+    listener = std::make_unique<XHook>(XHookMode::KEYBOARD);
+  } else if (listenerType == Hook::HookType::audio) {
+    listener = std::make_unique<AudioHook>();
   }
   /**
       This block of code  WORKS!
@@ -59,7 +59,7 @@ void Timer::startTimer() {
       Specifically the statements regarding the listener and
       listenerThread. I'm talking about the next 3 lines of code.
    */
-  connect(&listenerThread, &QThread::started, listener.get(), &Listener::start);
+  connect(&listenerThread, &QThread::started, listener.get(), &Hook::start);
   listener->moveToThread(&listenerThread);
   listenerThread.start();
 }
@@ -78,11 +78,11 @@ void Timer::tickUpdate() {
    * This is 60 seconds for now. Will adjust as I test things out.
    */
   int productiveTickDelta = tickCount - lastProductiveTick;
-  if (listener->getState() == Listener::ListenerState::productive) {
+  if (listener->getState() == Hook::HookState::productive) {
     currentProductiveTime += 1;
     producitveTickCount += 1;
     lastProductiveTick = tickCount;
-    listener->setState(Listener::ListenerState::unproductive);
+    listener->setState(Hook::HookState::unproductive);
   } else if (productiveTickDelta < 60) {
     currentProductiveTime += 1;
     producitveTickCount += 1;
@@ -114,11 +114,10 @@ void Timer::setCurrentSession(Session newSession) {
   currentSession = newSession;
   productiveTimeGoal = currentSession.getGoal();
 }
-void Timer::setListener(Listener::ListenerType newListenerType) {
+void Timer::setListener(Hook::HookType newListenerType) {
   listenerType = newListenerType;
 }
-void Timer::initTimer(Listener::ListenerType newListener,
-                      udata::Session newSession) {
+void Timer::initTimer(Hook::HookType newListener, udata::Session newSession) {
   thisInstance->setCurrentSession(newSession);
   thisInstance->setListener(newListener);
   timer->start(TIMER_TICK);
