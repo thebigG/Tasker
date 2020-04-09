@@ -93,7 +93,12 @@
      </attribute>
      <column>
       <property name="text">
-       <string>COMMITMENTS</string>
+       <string>Name</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Commitment</string>
       </property>
      </column>
     </widget>

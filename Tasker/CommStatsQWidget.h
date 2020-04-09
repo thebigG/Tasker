@@ -52,6 +52,7 @@ public:
   explicit CommStatsQWidget(QWidget *parent = nullptr);
   TimerWindowQWidget &getTimerWindow();
   CreateCommitmentQWidget &getCreateCommitment();
+  void addCommitmentItem(udata::Commitment &newCommitment);
   ~CommStatsQWidget();
   void func();
   void update();

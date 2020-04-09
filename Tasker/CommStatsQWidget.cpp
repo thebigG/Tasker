@@ -29,6 +29,9 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
           &CommStatsQWidget::previousSnapshot);
   connect(ui->nextSnapshot, &QPushButton::clicked, this,
           &CommStatsQWidget::nextSnapshot);
+  this->ui->commitmentsQTreeWidget->setColumnWidth(
+      0, this->ui->commitmentsQTreeWidget->columnWidth(0) + 50);
+  //  qDebug()<<""
   //  snapshot.setMaximumSize(600, 600);
   qDebug() << "size of snapshot=" << snapshot.size();
   qDebug() << "size polocy of snapshot" << snapshot.sizePolicy();
@@ -58,6 +61,11 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
 void CommStatsQWidget::newCommitmentSlot(bool checked) {
   this->createCommimentWindow.show();
 }
+void CommStatsQWidget::addCommitmentItem(udata::Commitment &newCommitment) {
+
+  ui->commitmentsQTreeWidget->addTopLevelItem(
+      new QTreeWidgetItem(QStringList() << newCommitment.getName() << "0%"));
+}
 /**
  * @brief CommStatsQWidget::~CommStatsQWidget
  */
@@ -82,9 +90,18 @@ void CommStatsQWidget::deleteCommitmentSlot(bool checked) {
   isDelete = true; // This is for the currentItemChanged signal, which gets
                    // emitted by delete keyword
 
-  ui->commitmentsQTreeWidget->removeItemWidget(
-      ui->commitmentsQTreeWidget->topLevelItem(tempIndex), 0);
-  MainUI::getInstance()->update();
+  //  ui->commitmentsQTreeWidget->removeItemWidget(
+  //        ui->commitmentsQTreeWidget->topLevelItem(tempIndex), 0);
+  //          ui->commitmentsQTreeWidget->removeItemWidget(
+  //      ui->commitmentsQTreeWidget->currentItem(), 0);
+  qDebug() << "selected item="
+           << ui->commitmentsQTreeWidget->currentItem()->text(0);
+  // I don't want to use delete, but it seems to be the only way to delete these
+  // TreeWidget items
+  delete ui->commitmentsQTreeWidget->takeTopLevelItem(tempIndex);
+  //  takeTopLevelItem
+
+  //  MainUI::getInstance()->update();
   //    delete ui->commitmentsQTreeWidget->topLevelItem(tempIndex);
   qDebug() << "deleting#2:" << tempIndex;
   qDebug() << "deleting#3:" << tempIndex;

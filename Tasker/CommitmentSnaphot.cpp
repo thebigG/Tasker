@@ -132,6 +132,7 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
       dayOfTheWeek = dayOfTheWeek.addDays(1);
     }
   }
+  int numberOfSessions = currentWindow.sessions.length();
   /* Need to reset the state of the bars in order to re-render them with new
    * values
    */
@@ -140,7 +141,7 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
   unproductiveBarSet.setParent(nullptr);
   productiveBarSet.setParent(nullptr);
   int temp = 0;
-  for (int i = 0; i < currentWindow.sessions.length(); i++) {
+  for (int i = 0; i < numberOfSessions; i++) {
     qDebug() << "productive time in minutes"
              << util::StatsUtility::toMinutes(
                     currentWindow.sessions[i].getProductiveTime());
@@ -170,10 +171,11 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
                     currentWindow.endDate.toString()};
 
   chart.setTitle(dateRange);
-  productiveTimeAverage =
-      productiveBarSet.sum() / currentWindow.sessions.length();
-  unproductiveTimeAverage =
-      unproductiveBarSet.sum() / currentWindow.sessions.length();
+  if (numberOfSessions == 0) {
+    numberOfSessions = 1;
+  }
+  productiveTimeAverage = productiveBarSet.sum() / numberOfSessions;
+  unproductiveTimeAverage = unproductiveBarSet.sum() / numberOfSessions;
   productiveRatio = productiveBarSet.sum() / productiveBarSet.sum() +
                     unproductiveBarSet.sum();
   unproductiveRatio = unproductiveBarSet.sum() / productiveBarSet.sum() +

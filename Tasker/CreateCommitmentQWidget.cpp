@@ -108,7 +108,8 @@ void CreateCommitmentQWidget::createCommitmentButtonSlot() {
   this->ui->commitmentNameQLineEdit->clear();
   udata::User::getInstance()->addCommitment(temp);
   qDebug() << "Does this run on createCommitmentButtonSlot?";
-  MainUI::getInstance()->update();
+  MainUI::getInstance()->getCommitmentHub().addCommitmentItem(
+      udata::User::getInstance()->getCommitments().last());
   qDebug() << "Does this run on createCommitmentButtonSlot#2?";
   MainUI::getInstance()->show();
   qDebug() << "Does this run on createCommitmentButtonSlot#3?";
