@@ -16,86 +16,89 @@ using namespace Engine;
  * @param parent
  */
 TimerWindowQWidget::TimerWindowQWidget(QWidget *parent)
-: QWidget(parent), ui(new Ui::TimerWindowQWidget) {
-    ui->setupUi(this);
-    connect(this->ui->backQPushButton, &QPushButton::clicked, this,
-            &TimerWindowQWidget::backButtonSlot);
-    connect(this->ui->startTimerQPushButton, &QPushButton::clicked, this,
-            &TimerWindowQWidget::startTimerButtonSlot);
-    connect(this->ui->taskQComboBox, SIGNAL(activated(const QString &)), this,
-            SLOT(dropDownTaskSlot(const QString &)));
-    this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{ Qt::Checked });
-    this->ui->productionTimeMinutesQSpinBox->setValue(30);
+    : QWidget(parent), ui(new Ui::TimerWindowQWidget) {
+  ui->setupUi(this);
+  connect(this->ui->backQPushButton, &QPushButton::clicked, this,
+          &TimerWindowQWidget::backButtonSlot);
+  connect(this->ui->startTimerQPushButton, &QPushButton::clicked, this,
+          &TimerWindowQWidget::startTimerButtonSlot);
+  connect(this->ui->taskQComboBox, SIGNAL(activated(const QString &)), this,
+          SLOT(dropDownTaskSlot(const QString &)));
+  this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{Qt::Checked});
+  //  this->ui->productionTimeMinutesQSpinBox->setValue(30);
 }
 
 /**
  * @brief TimerWindowQWidget::backButtonSlot
  */
 void TimerWindowQWidget::backButtonSlot() {
-    this->hide();
-    MainUI::getInstance()->show();
+  this->hide();
+  MainUI::getInstance()->show();
 }
 void TimerWindowQWidget::startTimerButtonSlot() {
-    QVector<Engine::Hook::HookType> newListsners;
-    /**
-      TODO: While the UI supports multiple listeners at the same time, the backend DOES NOT.
-      So make sure, for now at least, to NOT allow the user to select
-      more than one listener for the session.
-      Will be adding support for multiple listeners ASAP.
-      */
-    if (this->ui->keyboardQCheckBox->checkState() == Qt::CheckState{ Qt::Checked }) {
-        newListsners.push_back(Engine::Hook::HookType::X_KEYBOARD);
-    }
-    if (this->ui->audioQCheckBox->checkState() == Qt::CheckState{ Qt::Checked }) {
-        newListsners.push_back(Engine::Hook::HookType::audio);
-    }
-    if(this->ui->mouseQCheckBox->checkState() == Qt::CheckState{Qt::Checked})
-    {
-        newListsners.push_back(Engine::Hook::HookType::X_MOUSE);
-    }
-    int goal = this->ui->productionTimeHoursQSpinBox->value() * SECONDS_IN_HOUR;
-    goal += this->ui->productionTimeMinutesQSpinBox->value() * SECONDS_IN_MINUTE;
-    qDebug() << "new goal" << goal;
-    Task newTask{ getTaskName(), newListsners };
-    Session newSession{ newTask, goal, QDate::currentDate() };
-    Engine::Timer::getInstance()->initTimer(newListsners.at(0), newSession);
-    liveTimer = std::make_unique<LiveSession>();
-    liveTimer->show();
+  QVector<Engine::Hook::HookType> newListsners;
+  /**
+    TODO: While the UI supports multiple listeners at the same time, the backend
+    DOES NOT. So make sure, for now at least, to NOT allow the user to select
+    more than one listener for the session.
+    Will be adding support for multiple listeners ASAP.
+    */
+  if (this->ui->keyboardQCheckBox->checkState() ==
+      Qt::CheckState{Qt::Checked}) {
+    newListsners.push_back(Engine::Hook::HookType::X_KEYBOARD);
+  }
+  if (this->ui->audioQCheckBox->checkState() == Qt::CheckState{Qt::Checked}) {
+    newListsners.push_back(Engine::Hook::HookType::audio);
+  }
+  if (this->ui->mouseQCheckBox->checkState() == Qt::CheckState{Qt::Checked}) {
+    newListsners.push_back(Engine::Hook::HookType::X_MOUSE);
+  }
+  int goal = 0;
+  //            this->ui->productionTimeHoursQSpinBox->value() *
+  //            SECONDS_IN_HOUR;
+  //    goal += this->ui->productionTimeMinutesQSpinBox->value() *
+  //    SECONDS_IN_MINUTE;
+  qDebug() << "new goal" << goal;
+  Task newTask{getTaskName(), newListsners};
+  Session newSession{newTask, goal, QDate::currentDate()};
+  Engine::Timer::getInstance()->initTimer(newListsners.at(0), newSession);
+  liveTimer = std::make_unique<LiveSession>();
+  liveTimer->show();
 
-    //    Engine::Timer::getInstance()->start();
+  //    Engine::Timer::getInstance()->start();
 }
 QString TimerWindowQWidget::getTaskName() {
-    return this->ui->taskQComboBox->currentText();
+  return this->ui->taskQComboBox->currentText();
 }
 /**
  * @brief TimerWindowQWidget::~TimerWindowQWidget
  */
 TimerWindowQWidget::~TimerWindowQWidget() {
-    qDebug() << "TimerWindowQWidget destructor#1";
-    delete ui;
-    qDebug() << "TimerWindowQWidget destructor#2";
+  qDebug() << "TimerWindowQWidget destructor#1";
+  delete ui;
+  qDebug() << "TimerWindowQWidget destructor#2";
 }
 
 /**
  * @brief TimerWindowQWidget::on_timerWindowQFrame_destroyed
  */
 void TimerWindowQWidget::on_timerWindowQFrame_destroyed() {
-    qDebug()
-        << " udata::User::getInstance() on on_timerWindowQFrame_destroyed()#1";
-    delete udata::User::getInstance();
-    qDebug()
-        << " udata::User::getInstance() on on_timerWindowQFrame_destroyed()#2";
+  qDebug()
+      << " udata::User::getInstance() on on_timerWindowQFrame_destroyed()#1";
+  delete udata::User::getInstance();
+  qDebug()
+      << " udata::User::getInstance() on on_timerWindowQFrame_destroyed()#2";
 }
 
 void TimerWindowQWidget::dropDownTaskSlot(const QString &arg1) {
-    if (arg1 == QString(WRITING_STRING)) {
-        this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{ Qt::Checked });
-        this->ui->audioQCheckBox->setCheckState(Qt::CheckState{ Qt::Unchecked });
-    } else if (arg1 == QString(MUSIC_STRING)) {
-        this->ui->audioQCheckBox->setCheckState(Qt::CheckState{ Qt::Checked });
-        this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{ Qt::Unchecked });
-    } else if (arg1 == QString(CUSTOM_STRING)) {
-        this->ui->audioQCheckBox->setCheckState(Qt::CheckState{ Qt::Unchecked });
-        this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{ Qt::Unchecked });
-    }
+  if (arg1 == QString(WRITING_STRING)) {
+    this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{Qt::Checked});
+    this->ui->audioQCheckBox->setCheckState(Qt::CheckState{Qt::Unchecked});
+  } else if (arg1 == QString(MUSIC_STRING)) {
+    this->ui->audioQCheckBox->setCheckState(Qt::CheckState{Qt::Checked});
+    this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{Qt::Unchecked});
+  } else if (arg1 == QString(CUSTOM_STRING)) {
+    this->ui->audioQCheckBox->setCheckState(Qt::CheckState{Qt::Unchecked});
+    this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{Qt::Unchecked});
+  }
 }

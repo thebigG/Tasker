@@ -13,13 +13,13 @@
 #include <CreateCommitmentQWidget.h>
 #include <TimerWindowQWidget.h>
 
+#include "User.h"
 #include <QMenu>
 #include <QMenuBar>
 #include <QTreeWidget>
 #include <QWidget>
+#include <map>
 #include <memory>
-
-#include "User.h"
 namespace Ui {
 class CommStatsQWidget;
 }
@@ -77,7 +77,7 @@ private:
   //    TempChartQWidget mw{};
   int selectedCommitmentIndex = 0;
   int currentTimeWindow = 0;
-
+  std::map<QString, udata::Commitment &> commitmentMap;
   //    QVBoxLayout layout{};
   CreateCommitmentQWidget createCommimentWindow;
   TimerWindowQWidget timerWindow;
