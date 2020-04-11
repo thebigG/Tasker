@@ -25,7 +25,8 @@ TimerWindowQWidget::TimerWindowQWidget(QWidget *parent)
   connect(this->ui->taskQComboBox, SIGNAL(activated(const QString &)), this,
           SLOT(dropDownTaskSlot(const QString &)));
   this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{Qt::Checked});
-  //  this->ui->productionTimeMinutesQSpinBox->setValue(30);
+  goalText.reserve(100);
+  goalText.resize(100);
 }
 
 /**
@@ -101,4 +102,26 @@ void TimerWindowQWidget::dropDownTaskSlot(const QString &arg1) {
     this->ui->audioQCheckBox->setCheckState(Qt::CheckState{Qt::Unchecked});
     this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{Qt::Unchecked});
   }
+}
+/**
+ * @brief TimerWindowQWidget::updateGoalText
+ * @todo This is broken. Make sure to fix it. The time format shows
+ * backwards on the UI.
+ */
+void TimerWindowQWidget::updateGoalText() {
+  goalText.fill(' ');
+  const QString &commitmentName =
+      " " + QString{User::getInstance()->getCurrentCommitment().getName()} +
+      " for ";
+  goalText.replace(0, 5, "Goal:");
+  goalText.replace(5, commitmentName.length(), commitmentName);
+  util::formatTime(
+      goalText, User::getInstance()->getCurrentCommitment().getFrequency().goal,
+      goalContext, 5 + commitmentName.length());
+  this->ui->goalQLabel->setText(goalText);
+}
+
+void TimerWindowQWidget::show() {
+  updateGoalText();
+  QWidget::show();
 }

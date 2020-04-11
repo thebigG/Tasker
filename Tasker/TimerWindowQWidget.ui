@@ -29,7 +29,7 @@
    <enum>Qt::LeftToRight</enum>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="6" column="3">
+   <item row="6" column="2">
     <widget class="QPushButton" name="backQPushButton">
      <property name="maximumSize">
       <size>
@@ -60,6 +60,34 @@
       <string>Perferences</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="1">
+       <widget class="QGroupBox" name="productionTimeAlertQGroupBox">
+        <property name="maximumSize">
+         <size>
+          <width>400</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="title">
+         <string>Others</string>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QCheckBox" name="checkBox">
+           <property name="text">
+            <string>Notify me when done</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
       <item row="0" column="0">
        <widget class="QGroupBox" name="taskListenersQGroupBox">
         <property name="maximumSize">
@@ -126,29 +154,79 @@
         </layout>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QGroupBox" name="productionTimeAlertQGroupBox">
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QWidget" name="widget" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>450</width>
+       <height>200</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>450</width>
+       <height>200</height>
+      </size>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="1" column="0">
+       <widget class="QLabel" name="goalQLabel">
         <property name="maximumSize">
          <size>
-          <width>400</width>
+          <width>175</width>
           <height>100</height>
          </size>
         </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
+        <property name="text">
+         <string>Goal: Play guitar for 1h30m</string>
         </property>
-        <property name="title">
-         <string>Others</string>
-        </property>
-        <property name="flat">
+        <property name="wordWrap">
          <bool>true</bool>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QWidget" name="TaskContainerQWidget" native="true">
+        <property name="maximumSize">
+         <size>
+          <width>175</width>
+          <height>50</height>
+         </size>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QCheckBox" name="checkBox">
-           <property name="text">
-            <string>Notify me when done</string>
+          <widget class="QLabel" name="taskQLabel">
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>16777215</height>
+            </size>
            </property>
+           <property name="text">
+            <string>Task:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="taskQComboBox">
+           <item>
+            <property name="text">
+             <string>Write</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Music</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Draw</string>
+            </property>
+           </item>
           </widget>
          </item>
         </layout>
@@ -168,57 +246,6 @@
      <property name="text">
       <string>Start</string>
      </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLabel" name="goalQLabel">
-     <property name="text">
-      <string>TextLabel</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QWidget" name="TaskContainerQWidget" native="true">
-     <property name="maximumSize">
-      <size>
-       <width>175</width>
-       <height>50</height>
-      </size>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QLabel" name="taskQLabel">
-        <property name="maximumSize">
-         <size>
-          <width>50</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Task:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="taskQComboBox">
-        <item>
-         <property name="text">
-          <string>Write</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Music</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Draw</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
   </layout>

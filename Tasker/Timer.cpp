@@ -155,8 +155,7 @@ void Timer::stopTimerSlot() {
   timer->stop();
 }
 void Timer::updateProductiveStatus() {
-  long long int productiveMinutes =
-      StatsUtility::toMinutes(currentProductiveTime);
+  long long int productiveMinutes = toMinutes(currentProductiveTime);
   int resultProductive = currentProductiveTime;
   if (resultProductive > MINUTE) {
     resultProductive = currentProductiveTime - (productiveMinutes * MINUTE);
@@ -178,8 +177,7 @@ void Timer::updateProductiveStatus() {
  */
 QString &Timer::getProductiveStatus() { return productiveStatus; }
 void Timer::updateUnproductiveStatus() {
-  long long int productiveMinutes =
-      StatsUtility::toMinutes(currentUnproductiveTime);
+  long long int productiveMinutes = toMinutes(currentUnproductiveTime);
   int resultProductive = currentUnproductiveTime;
   if (currentUnproductiveTime > MINUTE) {
     resultProductive = currentUnproductiveTime - (productiveMinutes * MINUTE);
@@ -193,7 +191,7 @@ void Timer::updateUnproductiveStatus() {
 QString &Timer::getUnproductiveStatus() { return UnproductiveStatus; }
 
 void Timer::updateTimeElapsedStatus() {
-  long long int productiveMinutes = StatsUtility::toMinutes(totalTimeElapsed);
+  long long int productiveMinutes = toMinutes(totalTimeElapsed);
   int resultProductive = totalTimeElapsed;
   if (resultProductive > MINUTE) {
     resultProductive = totalTimeElapsed - (productiveMinutes * MINUTE);

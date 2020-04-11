@@ -31,6 +31,9 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
           &CommStatsQWidget::nextSnapshot);
   this->ui->commitmentsQTreeWidget->setColumnWidth(
       0, this->ui->commitmentsQTreeWidget->columnWidth(0) + 50);
+
+  //  this->ui->GoalQLabel->setAlignment(Qt::AlignCenter);
+  //  this->la
   //  qDebug()<<""
   //  snapshot.setMaximumSize(600, 600);
   qDebug() << "size of snapshot=" << snapshot.size();
@@ -264,3 +267,5 @@ void CommStatsQWidget::updateSnapshot() {
       User::getInstance()->getCurrentCommitment().getType(),
       User::getInstance()->getCurrentCommitment().getFrequency().goal);
 }
+
+void CommStatsQWidget::show() { QWidget::show(); }

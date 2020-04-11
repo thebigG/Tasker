@@ -27,12 +27,11 @@
  * seconds to hours shall be in this namespace.
  */
 namespace util {
-class StatsUtility;
 struct TimeWindow;
 // QDataStream &operator<<(QDataStream &out, const TimeWindow);
 // QDataStream &operator>>(QDataStream &in, TimeWindow &);
-} // namespace util
-struct util::TimeWindow {
+// namespace util
+struct TimeWindow {
   QDate startDate;
   QDate endDate;
   QVector<udata::Session> sessions;
@@ -47,48 +46,40 @@ struct util::TimeWindow {
 //}
 
 /**
- * @brief The util::StatsUtility class
+ * @brief util::StatsUtility::toMinutes
+ * @param seconds quantity of seconds
+ *
+ * @return -1 if seconds is negative, otherwise quantity of minutes from
+ * seconds
  */
-class util::StatsUtility {
-public:
-  /**
-   * @brief util::StatsUtility::toMinutes
-   * @param seconds quantity of seconds
-   *
-   * @return -1 if seconds is negative, otherwise quantity of minutes from
-   * seconds
-   */
-  inline static int64_t toMinutes(int64_t seconds) {
-    int64_t result = -1;
-    return (result = seconds < 0 ? result : seconds / SECONDS_IN_MINUTE);
-  }
-  inline static int64_t minutesToSeconds(int64_t Minutes) {
-    int64_t result = -1;
-    return (result = Minutes < 0 ? result : Minutes * SECONDS_IN_MINUTE);
-  }
-  /**
-   * @brief util::StatsUtility::toHours
-   * @param seconds quantity of seconds
-   *
-   * @return -1 if seconds is negative, otherwise quantity of hours from soconds
-   */
+inline int64_t toMinutes(int64_t seconds) {
+  int64_t result = -1;
+  return (result = seconds < 0 ? result : seconds / SECONDS_IN_MINUTE);
+}
+inline int64_t minutesToSeconds(int64_t Minutes) {
+  int64_t result = -1;
+  return (result = Minutes < 0 ? result : Minutes * SECONDS_IN_MINUTE);
+}
+/**
+ * @brief util::StatsUtility::toHours
+ * @param seconds quantity of seconds
+ *
+ * @return -1 if seconds is negative, otherwise quantity of hours from soconds
+ */
 
-  static inline int64_t toHours(int64_t seconds) {
-    int64_t result = -1;
-    return (result = seconds < 0 ? result : seconds / SECONDS_IN_HOUR);
-  }
-  static int64_t toDays(int64_t seconds);
-  static int64_t toWeeks(int64_t seconds);
-  static int64_t toMonths(int64_t seconds);
-  static long long int milliToSeconds(long long int);
-  static double calculateProductivePercentage(int64_t secondsTotal,
-                                              int64_t secondsProductive);
-  static double calculateUnproductivePercentage(int64_t secondsTotal,
-                                                int64_t secondsProductive);
-
-private:
-  StatsUtility();
-  ~StatsUtility();
-};
-
+inline int64_t toHours(int64_t seconds) {
+  int64_t result = -1;
+  return (result = seconds < 0 ? result : seconds / SECONDS_IN_HOUR);
+}
+int64_t toDays(int64_t seconds);
+int64_t toWeeks(int64_t seconds);
+int64_t toMonths(int64_t seconds);
+long long int milliToSeconds(long long int);
+double calculateProductivePercentage(int64_t secondsTotal,
+                                     int64_t secondsProductive);
+double calculateUnproductivePercentage(int64_t secondsTotal,
+                                       int64_t secondsProductive);
+int formatTime(QString &formatString, float Time, QString &context,
+               int start = 0);
+} // namespace util
 #endif // STATSUTILITY_H

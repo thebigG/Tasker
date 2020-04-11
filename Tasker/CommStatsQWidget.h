@@ -28,16 +28,16 @@ class CommStatsQWidget;
  * @brief The CommStatsQWidget class is the main hub where the data for
  * Commitments is displayed. Whether that be charts, averages, current
  * commitments and their sessions, it is all displayed by CommStatsQWidget.
- * This clas just displays data, it doesn't really "manipulate" it
+ * This class just displays data, it doesn't really "manipulate" it
  * except for the cases where one might need to convert minutes to seconds,
  * seconds to hours, etc. All data "manipulation" is done for the sake of UI
  * design, not data management. All data management should be left to Classes
  * such as Commitment, Session, Task, etc. This class is a hybrid of a
  * Controller and Viewer. It is a viewer in the sense that it dispplays all data
  * about commitments and a controller in the sense that it controls much of data
- * navigation. This data navigation includes things like navigating through
- * different snapshots of time windows, secleting different commitments and
- * sessions that belong to those commitments.
+ * navigation and parsing for human readibility. This data navigation includes
+ * things like navigating through different snapshots of time windows, secleting
+ * different commitments and sessions that belong to those commitments.
  *
  * @note Beware of manipulating palettes on Qt Designer.
  * It can cause backwards comptability problems(specifically might break the
@@ -54,6 +54,7 @@ public:
   CreateCommitmentQWidget &getCreateCommitment();
   void addCommitmentItem(udata::Commitment &newCommitment);
   ~CommStatsQWidget();
+  void show();
   void func();
   void update();
 
@@ -73,6 +74,7 @@ private slots:
 private:
   Ui::CommStatsQWidget *ui;
   bool isDelete = false;
+
   QPalette p;
   //    TempChartQWidget mw{};
   int selectedCommitmentIndex = 0;

@@ -56,3 +56,6 @@ dkms.conf
 # Miscellaneous
 .DS_Store
 .swp
+
+#Qt junk
+.pro.*

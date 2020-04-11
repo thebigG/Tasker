@@ -28,12 +28,14 @@ private:
   QChartView view;
   QFont chartFont;
   QWidget detailsWidget;
+  QString productiveTimeAvgLabelContext{" in Productive Avg"};
+  QString unproductiveTimeAvgLabelContext{" in Unproductive Avg"};
   QLabel productiveTimeAvgLabel;
   QLabel unproductiveTimeAvgLabel;
   QPushButton previousSnaphotLabel;
   QPushButton nextSnapshotLabel;
-  QString productibeTimeAvgText{20, ' '};
-  QString unproductibeTimeAvgText{20, ' '};
+  QString productibeTimeAvgText{};
+  QString unproductibeTimeAvgText{};
   double productiveTimeAverage = 0;
   double unproductiveTimeAverage = 0;
   double productiveRatio;

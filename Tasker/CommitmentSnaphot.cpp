@@ -121,6 +121,7 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
                                       int commitmentGoal) {
   //  util::TimeWindow currentWindow =
   //      updateData.getCommitmentWindows().at(currentTimeWindow);
+
   QDate dayOfTheWeek = QDate{currentWindow.startDate};
   qDebug() << "_________________________________________________";
   x.clear();
@@ -143,10 +144,9 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
   int temp = 0;
   for (int i = 0; i < numberOfSessions; i++) {
     qDebug() << "productive time in minutes"
-             << util::StatsUtility::toMinutes(
-                    currentWindow.sessions[i].getProductiveTime());
+             << util::toMinutes(currentWindow.sessions[i].getProductiveTime());
     qDebug() << "unproducive time in minutes"
-             << util::StatsUtility::toMinutes(
+             << util::toMinutes(
                     currentWindow.sessions[i].getUnproductiveTime());
     qDebug() << "session date diff-->"
              << currentWindow.startDate.daysTo(
@@ -157,16 +157,14 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
     temp = getWeekDayIndex(currentWindow.startDate,
                            currentWindow.sessions[i].getDate());
     productiveBarSet.replace(
-        temp, util::StatsUtility::toMinutes(
-                  currentWindow.sessions[i].getProductiveTime()));
+        temp, util::toMinutes(currentWindow.sessions[i].getProductiveTime()));
     unproductiveBarSet.replace(
-        temp, util::StatsUtility::toMinutes(
-                  currentWindow.sessions[i].getUnproductiveTime()));
+        temp, util::toMinutes(currentWindow.sessions[i].getUnproductiveTime()));
   }
 
   series.append(&productiveBarSet);
   series.append(&unproductiveBarSet);
-  y.setRange(0, util::StatsUtility::toMinutes(commitmentGoal));
+  y.setRange(0, util::toMinutes(commitmentGoal));
   QString dateRange{currentWindow.startDate.toString() + "--" +
                     currentWindow.endDate.toString()};
 
@@ -180,39 +178,16 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
                     unproductiveBarSet.sum();
   unproductiveRatio = unproductiveBarSet.sum() / productiveBarSet.sum() +
                       unproductiveBarSet.sum();
-  //  Format average productive time
-  productibeTimeAvgText.fill(' ');
-  int numberOfHours = (int)productiveTimeAverage / MINUTES_IN_HOUR;
-  temp = QString::number(numberOfHours).length();
-  productibeTimeAvgText.insert(0, QString::number(numberOfHours));
-  productibeTimeAvgText.insert(temp, 'h');
-  temp = temp + 1;
-  productibeTimeAvgText.insert(
-      temp, QString::number(((int)productiveTimeAverage) -
-                            (numberOfHours * MINUTES_IN_HOUR)));
-  temp += QString::number(((int)productiveTimeAverage) -
-                          (numberOfHours * MINUTES_IN_HOUR))
-              .length();
-  productibeTimeAvgText.insert(temp, 'm');
-  temp = temp + 1;
-  productibeTimeAvgText.insert(temp, " in Productive Avg");
+  //  productibeTimeAvgText.insert(
+  //      util::formatTime(productibeTimeAvgText, productiveTimeAverage),
+  //      " in Productive Avg");
+  util::formatTime(productibeTimeAvgText, productiveTimeAverage,
+                   productiveTimeAvgLabelContext);
   productiveTimeAvgLabel.setText(productibeTimeAvgText);
-  // For average unproductive time
-  unproductibeTimeAvgText.fill(' ');
-  numberOfHours = (int)unproductiveTimeAverage / MINUTES_IN_HOUR;
-  temp = QString::number(numberOfHours).length();
-  unproductibeTimeAvgText.insert(0, QString::number(numberOfHours));
-  unproductibeTimeAvgText.insert(temp, 'h');
-  temp = temp + 1;
-  unproductibeTimeAvgText.insert(
-      temp, QString::number((int)unproductiveTimeAverage -
-                            numberOfHours * MINUTES_IN_HOUR));
-  temp += QString::number((int)unproductiveTimeAverage -
-                          numberOfHours * MINUTES_IN_HOUR)
-              .length();
-  unproductibeTimeAvgText.insert(temp, 'm');
-  temp = temp + 1;
-  unproductibeTimeAvgText.insert(temp, " in Unproductive Avg");
+  //  unproductibeTimeAvgText.insert(
+  util::formatTime(unproductibeTimeAvgText, unproductiveTimeAverage,
+                   unproductiveTimeAvgLabelContext);
+  //      " in Unproductive Avg");
   //  temp.append(QString::number(productiveTimeAverage));
   unproductiveTimeAvgLabel.setText(unproductibeTimeAvgText);
   chart.legend()->setAlignment(Qt::AlignBottom);
