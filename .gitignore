@@ -58,4 +58,6 @@ dkms.conf
 .swp
 
 #Qt junk
-.pro.*
+Tasker.pro.*
+Tasker_*
+*.udb

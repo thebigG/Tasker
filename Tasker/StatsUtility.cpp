@@ -98,13 +98,13 @@ double util::calculateUnproductivePercentage(int64_t secondsTotal,
 long long int util::milliToSeconds(long long int milliSeconds) {
   return milliSeconds / 1000;
 } /**
-   * @brief util::formatTime formats the time(in seconds) to a human redable
+   * @brief util::formatTime formats the time(in minutes) to a human redable
    * format of "XhYM". This function is specially useful for optimization as it
    * tries its best to not allocate more memory for formatString, every
    * character insertion is done in-place.
-   * @param formatString The string to modify and write the final
+   * @param formatString The string to modify and int64_twrite the final
    * time(formatted) and context to.
-   * @param time Time to be formatted in seconds.
+   * @param time Time to be formatted in minutes.
    * @param context This string will get appended at the end of formatString
    * @return The index after the last character in formatString, which may be
    * smaller than its size.

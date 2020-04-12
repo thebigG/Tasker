@@ -115,8 +115,11 @@ void TimerWindowQWidget::updateGoalText() {
       " for ";
   goalText.replace(0, 5, "Goal:");
   goalText.replace(5, commitmentName.length(), commitmentName);
+  //  qDebug()<<""
   util::formatTime(
-      goalText, User::getInstance()->getCurrentCommitment().getFrequency().goal,
+      goalText,
+      util::toMinutes(
+          User::getInstance()->getCurrentCommitment().getFrequency().goal),
       goalContext, 5 + commitmentName.length());
   this->ui->goalQLabel->setText(goalText);
 }
