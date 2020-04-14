@@ -18,6 +18,7 @@
 #include <QMenuBar>
 #include <QTreeWidget>
 #include <QWidget>
+#include <livesession.h>
 #include <map>
 #include <memory>
 namespace Ui {
@@ -59,6 +60,7 @@ public:
   void update();
 
 public slots:
+  void saveCurrentSession();
   void newCommitmentSlot(bool);
   void deleteCommitmentSlot(bool);
   void newSessionSlot(bool);
@@ -74,7 +76,7 @@ private slots:
 private:
   Ui::CommStatsQWidget *ui;
   bool isDelete = false;
-
+  LiveSession currentLiveSessionWidget{};
   QPalette p;
   //    TempChartQWidget mw{};
   int selectedCommitmentIndex = 0;

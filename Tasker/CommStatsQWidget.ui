@@ -119,7 +119,7 @@
        <widget class="QWidget" name="CommitmentInfoStatsQWidget" native="true">
         <property name="maximumSize">
          <size>
-          <width>600</width>
+          <width>800</width>
           <height>200</height>
          </size>
         </property>

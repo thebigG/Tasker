@@ -31,7 +31,7 @@ private:
   Perf::PerfTimer newPerfTimer{};
   int productiveSignalCount = 0;
   int unProductiveSignalCount = 0;
-  long startTimeStamp;
+  //  long startTimeStamp;
   int niceness;
   long long tickCount = 0; // Every "tick" is usually a second, or whatever the
                            // value of TIMER_TICK is in milliseconds
@@ -61,6 +61,7 @@ public:
   static Timer *getInstance();
   void initTimer(Hook::HookType, udata::Session);
   void stop();
+  void reset();
   void pause();
   void setCurrentSession(udata::Session);
   void setListener(Hook::HookType);
@@ -70,6 +71,7 @@ public:
   void startTimer();
   int getTotalTimeElapsed();
   QTime getClock();
+  udata::Session &getCurrentSession();
   QString &getProductiveStatus();
   QString &getUnproductiveStatus();
   QString &getTimeElapsedStatus();

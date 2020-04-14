@@ -1,9 +1,9 @@
 #include "CommStatsQWidget.h"
 
-#include <CreateCommitmentQWidget.h>
-#include <mainui.h>
-
 #include "ui_CommStatsQWidget.h"
+#include <CreateCommitmentQWidget.h>
+#include <UdataUtils.h>
+#include <mainui.h>
 #define TRAVIS_CI 1
 #include "Timer.h"
 #include <QDebug>
@@ -31,6 +31,8 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
           &CommStatsQWidget::nextSnapshot);
   this->ui->commitmentsQTreeWidget->setColumnWidth(
       0, this->ui->commitmentsQTreeWidget->columnWidth(0) + 50);
+  connect(Engine::Timer::getInstance(), &Engine::Timer::stopTimer, this,
+          &CommStatsQWidget::saveCurrentSession);
 
   //  this->ui->GoalQLabel->setAlignment(Qt::AlignCenter);
   //  this->la
@@ -44,6 +46,9 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
       ->addWidget(&snapshot, 0, 1);
   static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
+      ->addWidget(&currentLiveSessionWidget, 2, 1);
+
+  static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
       ->addWidget(this->ui->CommitmentInfoStatsQWidget, 1, 1);
 //          (this->ui->prev,0,0);
 //  static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
@@ -56,6 +61,9 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
              snapshot.palette().color(QPalette::ColorRole::Background));
   this->ui->CommitmentInfoStatsQWidget->setAutoFillBackground(true);
   this->ui->CommitmentInfoStatsQWidget->setPalette(p);
+  currentLiveSessionWidget.setAutoFillBackground(true);
+  currentLiveSessionWidget.setPalette(p);
+
 #endif
   this->layout()->setSpacing(0);
   this->layout()->setContentsMargins(0, 0, 0, 0);
@@ -269,3 +277,15 @@ void CommStatsQWidget::updateSnapshot() {
 }
 
 void CommStatsQWidget::show() { QWidget::show(); }
+/**
+ * @brief CommStatsQWidget::saveCurrentSession
+ * This function assumes that the currently selected session
+ * is the same one that this new live session belongs to.
+ */
+void CommStatsQWidget::saveCurrentSession() {
+  User::getInstance()
+      ->getCurrentCommitment()
+      .getCurrentTimeWindow()
+      .sessions.append(Engine::Timer::getInstance()->getCurrentSession());
+  udata::UdataUtils::saveUserData(*User::getInstance());
+}

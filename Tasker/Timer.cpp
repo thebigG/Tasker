@@ -94,6 +94,10 @@ void Timer::tickUpdate() {
   totalTimeElapsed = currentProductiveTime + currentUnproductiveTime;
   if (currentProductiveTime == productiveTimeGoal) {
     timer->stop();
+    currentSession.setGoal(productiveTimeGoal);
+    currentSession.setProductiveTime(currentProductiveTime);
+    currentSession.setUnproductiveTime(currentUnproductiveTime);
+    currentSession.setDate(QDate::currentDate());
     emit stopTimer();
   }
   updateProductiveStatus();
@@ -203,3 +207,18 @@ void Timer::updateTimeElapsedStatus() {
                       QString::number(resultProductive);
 }
 QString &Timer::getTimeElapsedStatus() { return TimeElapsedStatus; }
+void Timer::reset() {
+  currentProductiveTime = 0;
+  currentUnproductiveTime = 0;
+  totalTimeElapsed = 0;
+  tickCount = 0;
+  productiveSignalCount = 0;
+  unProductiveSignalCount = 0;
+  producitveTickCount = 0;
+  unProducitveTickCount = 0;
+  lastProductiveTick = 0;
+  lastUnproductiveTick = 0;
+  productiveTimeSurplus = 1;
+  unproductiveTimeSurplus = 1;
+}
+udata::Session &Timer::getCurrentSession() { return currentSession; }

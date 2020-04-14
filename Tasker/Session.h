@@ -38,7 +38,7 @@ public:
 
   void setGoal(int);
   long long int getGoal();
-
+  void setDate(QDate newDate);
   QDate &getDate();
 
 private:

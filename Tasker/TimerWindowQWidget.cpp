@@ -54,19 +54,14 @@ void TimerWindowQWidget::startTimerButtonSlot() {
   if (this->ui->mouseQCheckBox->checkState() == Qt::CheckState{Qt::Checked}) {
     newListsners.push_back(Engine::Hook::HookType::X_MOUSE);
   }
-  int goal = 0;
-  //            this->ui->productionTimeHoursQSpinBox->value() *
-  //            SECONDS_IN_HOUR;
-  //    goal += this->ui->productionTimeMinutesQSpinBox->value() *
-  //    SECONDS_IN_MINUTE;
-  qDebug() << "new goal" << goal;
   Task newTask{getTaskName(), newListsners};
-  Session newSession{newTask, goal, QDate::currentDate()};
+  Session newSession{
+      newTask, User::getInstance()->getCurrentCommitment().getFrequency().goal,
+      QDate::currentDate()};
   Engine::Timer::getInstance()->initTimer(newListsners.at(0), newSession);
-  liveTimer = std::make_unique<LiveSession>();
-  liveTimer->show();
-
-  //    Engine::Timer::getInstance()->start();
+  this->hide();
+  //  liveTimer = std::make_unique<LiveSession>();
+  //  liveTimer->show();
 }
 QString TimerWindowQWidget::getTaskName() {
   return this->ui->taskQComboBox->currentText();

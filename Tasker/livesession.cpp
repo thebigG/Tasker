@@ -4,15 +4,16 @@
 #include <Timer.h>
 using namespace Engine;
 LiveSession::LiveSession(QWidget *parent)
-: QWidget(parent), ui(new Ui::LiveSession) {
-    ui->setupUi(this);
-    connect(Engine::Timer::getInstance(), &Timer::Timer::tick, this, &LiveSession::updateTimeUI);
-    connect(Engine::Timer::getInstance(), &Timer::Timer::congrats, this,
-            &LiveSession::congratsSlot);
-    ui->congratsMessageLabel->setText("");
-    this->setWindowTitle("Live Session");
-    //    this->ui->productiveTime
-    qDebug() << "text on label:" + ui->productiveTime->text();
+    : QWidget(parent), ui(new Ui::LiveSession) {
+  ui->setupUi(this);
+  connect(Engine::Timer::getInstance(), &Timer::Timer::tick, this,
+          &LiveSession::updateTimeUI);
+  connect(Engine::Timer::getInstance(), &Timer::Timer::congrats, this,
+          &LiveSession::congratsSlot);
+  ui->congratsMessageLabel->setText("");
+  this->setWindowTitle("Live Session");
+  //    this->ui->productiveTime
+  qDebug() << "text on label:" + ui->productiveTime->text();
 }
 /**
  * @brief LiveSession::updateTimeUI
@@ -23,18 +24,16 @@ LiveSession::LiveSession(QWidget *parent)
  * making later.
  */
 void LiveSession::updateTimeUI() {
-    liveSessionPerfTimer.restart();
-    ui->productiveTime->setText(Timer::getInstance()->getProductiveStatus());
-    ui->unproductiveTimeValue->setText(Timer::getInstance()->getUnproductiveStatus());
-    ui->label->setText(Timer::getInstance()->getTimeElapsedStatus());
-    liveSessionPerfTimer.stop();
-    qDebug() << "updateTimeUI latency#4:" << liveSessionPerfTimer.duration;
+  liveSessionPerfTimer.restart();
+  ui->productiveTime->setText(Timer::getInstance()->getProductiveStatus());
+  ui->unproductiveTimeValue->setText(
+      Timer::getInstance()->getUnproductiveStatus());
+  ui->label->setText(Timer::getInstance()->getTimeElapsedStatus());
+  liveSessionPerfTimer.stop();
+  qDebug() << "updateTimeUI latency#4:" << liveSessionPerfTimer.duration;
 }
 void LiveSession::congratsSlot() {
-    qDebug() << "congrats on livession++++++";
-    ui->congratsMessageLabel->setText(
-        "Congrats! You've completed your session!");
+  qDebug() << "congrats on livession++++++";
+  ui->congratsMessageLabel->setText("Congrats! You've completed your session!");
 }
-LiveSession::~LiveSession() {
-    delete ui;
-}
+LiveSession::~LiveSession() { delete ui; }
