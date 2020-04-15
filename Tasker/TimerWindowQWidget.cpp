@@ -100,8 +100,6 @@ void TimerWindowQWidget::dropDownTaskSlot(const QString &arg1) {
 }
 /**
  * @brief TimerWindowQWidget::updateGoalText
- * @todo This is broken. Make sure to fix it. The time format shows
- * backwards on the UI.
  */
 void TimerWindowQWidget::updateGoalText() {
   goalText.fill(' ');

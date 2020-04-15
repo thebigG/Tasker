@@ -89,7 +89,7 @@
       <enum>QAbstractItemView::SingleSelection</enum>
      </property>
      <attribute name="headerVisible">
-      <bool>true</bool>
+      <bool>false</bool>
      </attribute>
      <column>
       <property name="text">
@@ -125,21 +125,21 @@
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="0">
-          <widget class="QLabel" name="GoalQLabel">
+          <widget class="QLabel" name="goalQLabel">
            <property name="text">
-            <string>25 minutes, four times a week.</string>
+            <string>0h25m, 4 times a week.</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="beginDateQLabel">
            <property name="text">
             <string>Commitment Began on Feb, 05, 2020</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="endDateQLabel">
            <property name="text">
             <string>Has no end date</string>
            </property>

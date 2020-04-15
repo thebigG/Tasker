@@ -33,7 +33,7 @@ class CommStatsQWidget;
  * except for the cases where one might need to convert minutes to seconds,
  * seconds to hours, etc. All data "manipulation" is done for the sake of UI
  * design, not data management. All data management should be left to Classes
- * such as Commitment, Session, Task, etc. This class is a hybrid of a
+ * such as Commitment, Session, UdataUtils, etc. This class is a hybrid of a
  * Controller and Viewer. It is a viewer in the sense that it dispplays all data
  * about commitments and a controller in the sense that it controls much of data
  * navigation and parsing for human readibility. This data navigation includes
@@ -58,6 +58,9 @@ public:
   void show();
   void func();
   void update();
+  void updateCommitmentInfoStatsQWidget();
+  void updateBeginDateQLabel();
+  void updateEndDateQLabel();
 
 public slots:
   void saveCurrentSession();
@@ -76,6 +79,9 @@ private slots:
 private:
   Ui::CommStatsQWidget *ui;
   bool isDelete = false;
+  QString commitmentMetaDataText{};
+  QString beginDateText{"Commitment began on "};
+  QString endDateText{"Ends on "};
   LiveSession currentLiveSessionWidget{};
   QPalette p;
   //    TempChartQWidget mw{};

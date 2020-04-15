@@ -33,7 +33,11 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
       0, this->ui->commitmentsQTreeWidget->columnWidth(0) + 50);
   connect(Engine::Timer::getInstance(), &Engine::Timer::stopTimer, this,
           &CommStatsQWidget::saveCurrentSession);
-
+  // allocate space in this string to avoid realocation on when updating
+  // CommitmentInfoStatsQWidget
+  commitmentMetaDataText.reserve(100);
+  commitmentMetaDataText.resize(100);
+  beginDateText.resize(100);
   //  this->ui->GoalQLabel->setAlignment(Qt::AlignCenter);
   //  this->la
   //  qDebug()<<""
@@ -211,6 +215,10 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
   qDebug() << "changed commitment name:"
            << User::getInstance()->getCommitments().at(currentIndex).getName();
   User::getInstance()->updateCurrentCommitment(selectedCommitmentIndex);
+  // update meta data on meta data widget
+  updateCommitmentInfoStatsQWidget();
+  updateBeginDateQLabel();
+  updateEndDateQLabel();
   if (User::getInstance()->getCommitments().size() != 0 &&
       User::getInstance()
               ->getCommitments()[0]
@@ -288,4 +296,47 @@ void CommStatsQWidget::saveCurrentSession() {
       .getCurrentTimeWindow()
       .sessions.append(Engine::Timer::getInstance()->getCurrentSession());
   udata::UdataUtils::saveUserData(*User::getInstance());
+}
+void CommStatsQWidget::updateCommitmentInfoStatsQWidget() {
+  commitmentMetaDataText.fill(' ');
+  QString frequencyString{};
+  //  frequencyString.reserve(20);
+  //  frequencyString.resize(20);
+  frequencyString.append(", ");
+  frequencyString.append(QString::number(
+      User::getInstance()->getCurrentCommitment().getFrequency().frequency));
+  if (User::getInstance()->getCurrentCommitment().getType() ==
+      udata::CommitmentType::WEEKLY) {
+    frequencyString.append(" times a week.");
+  } else {
+    // Not supported at the moment
+  }
+  qDebug() << "commitmentMetaDataText before format time-->"
+           << commitmentMetaDataText;
+  util::formatTime(
+      commitmentMetaDataText,
+      util::toMinutes(
+          User::getInstance()->getCurrentCommitment().getFrequency().goal),
+      frequencyString, 0);
+  qDebug() << "commitmentMetaDataText after format time-->"
+           << commitmentMetaDataText;
+  this->ui->goalQLabel->setText(commitmentMetaDataText);
+}
+void CommStatsQWidget::updateBeginDateQLabel() {
+  beginDateText.replace(20, beginDateText.length() - 20, ' ');
+  QString startDateText{
+      User::getInstance()->getCurrentCommitment().getDateStart().toString()};
+  beginDateText.replace(20, startDateText.length(), startDateText);
+  this->ui->beginDateQLabel->setText(beginDateText);
+}
+void CommStatsQWidget::updateEndDateQLabel() {
+  if (!User::getInstance()->getCurrentCommitment().hasEndDate()) {
+    this->ui->endDateQLabel->setText("");
+    return;
+  }
+  QString date{
+      User::getInstance()->getCurrentCommitment().getDateEnd().toString()};
+  endDateText.replace(8, endDateText.length() - 8, ' ');
+  endDateText.replace(8, date.length(), date);
+  this->ui->endDateQLabel->setText(endDateText);
 }
