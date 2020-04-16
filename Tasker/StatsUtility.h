@@ -2,6 +2,7 @@
 #define STATSUTILITY_H
 
 #include <QDate>
+#include <QDebug>
 #include <Session.h>
 #include <cstdint>
 #define WEEK_SIZE 7
@@ -52,9 +53,9 @@ struct TimeWindow {
  * @return -1 if seconds is negative, otherwise quantity of minutes from
  * seconds
  */
-inline int64_t toMinutes(int64_t seconds) {
-  int64_t result = -1;
-  return (result = seconds < 0 ? result : seconds / SECONDS_IN_MINUTE);
+inline double toMinutes(int64_t seconds) {
+  double result = -1.0;
+  return (result = seconds < 0 ? result : seconds / (double)SECONDS_IN_MINUTE);
 }
 inline int64_t minutesToSeconds(int64_t Minutes) {
   int64_t result = -1;

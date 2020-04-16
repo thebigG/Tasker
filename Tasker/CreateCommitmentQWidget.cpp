@@ -19,8 +19,6 @@ using namespace udata;
 CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
     : QWidget(parent), ui(new Ui::CreateCommitmentQWidget) {
   ui->setupUi(this);
-
-  //    validator = new QIntValidator(0, 999, this);
   ui->qtyQLineEdit->setValidator(&validator);
   ui->dateStartQDateEdit->setMinimumDate(QDate::currentDate());
   ui->dateStartQDateEdit->setMaximumDate(QDate::currentDate());
@@ -40,6 +38,9 @@ CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
           &CreateCommitmentQWidget::currentIndexCommitmentModeComboBoxSlot);
   connect(this->getUI()->frequencyQComboBox, &QComboBox::currentTextChanged,
           this, &CreateCommitmentQWidget::currentIndexFrequencyComboBoxSlot);
+  this->addAction(new QAction());
+  this->actions().at(0)->setShortcut(QKeySequence::Cancel);
+  connect(this->actions().at(0), &QAction::triggered, this, &QWidget::hide);
   //    qDebug()<<"font height="<<thisFont.height();
   //    qDebug()<<"average width font="<<thisFont.averageCharWidth();
 }
@@ -105,6 +106,12 @@ void CreateCommitmentQWidget::createCommitmentButtonSlot() {
                   this->getInterval(),
                   this->getType(),
                   this->getUI()->noEndDateQCheckBox->isChecked()};
+  if (this->getUI()->noEndDateQCheckBox->isChecked()) {
+    qDebug() << "noEndDate is checked";
+    if (!temp.hasEndDate()) {
+      qDebug() << "commitment has no end date";
+    }
+  }
   this->ui->commitmentNameQLineEdit->clear();
   udata::User::getInstance()->addCommitment(temp);
   qDebug() << "Does this run on createCommitmentButtonSlot?";

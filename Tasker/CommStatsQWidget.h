@@ -11,7 +11,7 @@
 
 #include <CommitmentSnapshot.h>
 #include <CreateCommitmentQWidget.h>
-#include <TimerWindowQWidget.h>
+#include <NewSessionQWidget.h>
 
 #include "User.h"
 #include <QMenu>

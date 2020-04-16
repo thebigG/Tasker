@@ -5,7 +5,7 @@
 #include <livesession.h>
 #include <memory>
 namespace Ui {
-class TimerWindowQWidget;
+class NewSessionQWidget;
 }
 
 /**
@@ -27,7 +27,7 @@ private slots:
   void dropDownTaskSlot(const QString &arg1);
 
 private:
-  Ui::TimerWindowQWidget *ui;
+  Ui::NewSessionQWidget *ui;
   std::unique_ptr<LiveSession> liveTimer;
   QString goalText{};
   QString goalContext{""};

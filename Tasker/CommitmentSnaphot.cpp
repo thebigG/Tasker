@@ -148,6 +148,8 @@ void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
     qDebug() << "unproducive time in minutes"
              << util::toMinutes(
                     currentWindow.sessions[i].getUnproductiveTime());
+    qDebug() << "unproducive time in seconds"
+             << currentWindow.sessions[i].getUnproductiveTime();
     qDebug() << "session date diff-->"
              << currentWindow.startDate.daysTo(
                     currentWindow.sessions[i].getDate());

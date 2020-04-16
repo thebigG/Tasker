@@ -96,13 +96,13 @@ SOURCES += \
     CommitmentSnaphot.cpp \
     CreateCommitmentQWidget.cpp \
     Hook.cpp \
+    NewSessionQWidget.cpp \
     Session.cpp \
     Task.cpp \
     StatsUtility.cpp \
     TaskerPerf/perftimer.cpp \
     TaskerUIMainWindowQWidget.cpp \
     Timer.cpp \
-    TimerWindowQWidget.cpp \
     UdataUtils.cpp \
     User.cpp \
     XHook.cpp \
@@ -119,15 +119,14 @@ HEADERS += \
     CommitmentSnapshot.h \
     CreateCommitmentQWidget.h \
     Hook.h \
+    NewSessionQWidget.h \
     Session.h \
     Task.h \
     TaskerPerf/perftimer.h \
     TaskerUIMainWindowQWidget.h \
     Timer.h \
-    TimerWindowQWidget.h \
     StatsUtility.h \
     TaskerUIMainWindowQWidget.h \
-    TimerWindowQWidget.h \
     UdataUtils.h \
     XHook.h \
     livesession.h \
@@ -138,8 +137,8 @@ HEADERS += \
 FORMS += \
     CommStatsQWidget.ui \
     CreateCommitmentQWidget.ui \
+    NewSessionQWidget.ui \
     TaskerUIMainWindowQWidget.ui \
-    TimerWindowQWidget.ui \
     livesession.ui
 
 # Default rules for deployment.

@@ -3,7 +3,7 @@
 
 #include "CommStatsQWidget.h"
 #include "CreateCommitmentQWidget.h"
-#include "TimerWindowQWidget.h"
+#include "NewSessionQWidget.h"
 
 #include <QFrame>
 #include <QPushButton>

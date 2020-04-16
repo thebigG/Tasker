@@ -179,9 +179,14 @@
        <widget class="QLabel" name="goalQLabel">
         <property name="maximumSize">
          <size>
-          <width>175</width>
+          <width>200</width>
           <height>100</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
         </property>
         <property name="text">
          <string>Goal: Play guitar for 1h30m</string>
@@ -195,7 +200,7 @@
        <widget class="QWidget" name="TaskContainerQWidget" native="true">
         <property name="maximumSize">
          <size>
-          <width>175</width>
+          <width>200</width>
           <height>50</height>
          </size>
         </property>
@@ -214,22 +219,13 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="taskQComboBox">
-           <item>
-            <property name="text">
-             <string>Write</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Music</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Draw</string>
-            </property>
-           </item>
+          <widget class="QLineEdit" name="taskLineEdit">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="placeholderText">
+            <string>Write, Draw, Music, etc</string>
+           </property>
           </widget>
          </item>
         </layout>

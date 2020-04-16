@@ -18,7 +18,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>1000</width>
+    <width>1500</width>
     <height>800</height>
    </size>
   </property>
@@ -88,8 +88,11 @@
      <property name="selectionMode">
       <enum>QAbstractItemView::SingleSelection</enum>
      </property>
+     <property name="allColumnsShowFocus">
+      <bool>true</bool>
+     </property>
      <attribute name="headerVisible">
-      <bool>false</bool>
+      <bool>true</bool>
      </attribute>
      <column>
       <property name="text">
@@ -126,6 +129,11 @@
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="0">
           <widget class="QLabel" name="goalQLabel">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>0h25m, 4 times a week.</string>
            </property>
@@ -133,6 +141,11 @@
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="beginDateQLabel">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Commitment Began on Feb, 05, 2020</string>
            </property>
@@ -140,6 +153,11 @@
          </item>
          <item row="1" column="1">
           <widget class="QLabel" name="endDateQLabel">
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Has no end date</string>
            </property>

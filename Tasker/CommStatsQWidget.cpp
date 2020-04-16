@@ -30,7 +30,7 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   connect(ui->nextSnapshot, &QPushButton::clicked, this,
           &CommStatsQWidget::nextSnapshot);
   this->ui->commitmentsQTreeWidget->setColumnWidth(
-      0, this->ui->commitmentsQTreeWidget->columnWidth(0) + 50);
+      0, this->ui->commitmentsQTreeWidget->size().width() - 100);
   connect(Engine::Timer::getInstance(), &Engine::Timer::stopTimer, this,
           &CommStatsQWidget::saveCurrentSession);
   // allocate space in this string to avoid realocation on when updating

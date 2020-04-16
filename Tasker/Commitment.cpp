@@ -101,9 +101,10 @@ void Commitment::updateCommitmentWindows(Session newSession) {
  *week. Also assume that she goes missing for three weeks on vacation and comes
  *back to Tasker. This method, which is called when Tasker starts on loadUser(),
  *will update all of those three missing CommitmentWindows, which is 3 in this
- *case(three weeks). This would of course be also very useful when a Commitment
+ *case(three weeks). This would of course also be very useful when a Commitment
  *Window is closed; in the beginning of a new week, a new Commitment TimeWindow
- *is added that will be closed in seven more days.
+ *is added that will be closed in seven more days, assuming that this is weekly
+ *commitment of course.
  */
 void Commitment::updateCommitmentWindows() {
   QDate currentDate = QDate::currentDate();
@@ -112,7 +113,7 @@ void Commitment::updateCommitmentWindows() {
     util::TimeWindow &newWindow = commitmentWindows.last();
     newWindow.startDate.setDate(currentDate.year(), currentDate.month(),
                                 currentDate.day());
-    currentDate = currentDate.addDays(frequency.timeWindowSize);
+    currentDate = currentDate.addDays(frequency.timeWindowSize - 1);
     newWindow.endDate.setDate(currentDate.year(), currentDate.month(),
                               currentDate.day());
   } else {
@@ -267,6 +268,7 @@ QDataStream &udata::operator>>(QDataStream &in,
   newCommitment.name = commitmentName;
   newCommitment.dateStart = commitmentDateStart;
   newCommitment.dateEnd = commitmentDateEnd;
+  newCommitment.noEndDate = newNoEndDate;
   newCommitment.frequency = commitmentInterval;
   newCommitment.Type = newType;
   newCommitment.commitmentWindows = newTimeWindows;

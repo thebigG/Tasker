@@ -1,4 +1,4 @@
-#include "TimerWindowQWidget.h"
+#include "NewSessionQWidget.h"
 #include "ui_TimerWindowQWidget.h"
 #include <Hook.h>
 #include <QString>
@@ -16,14 +16,15 @@ using namespace Engine;
  * @param parent
  */
 TimerWindowQWidget::TimerWindowQWidget(QWidget *parent)
-    : QWidget(parent), ui(new Ui::TimerWindowQWidget) {
+    : QWidget(parent), ui(new Ui::NewSessionQWidget) {
   ui->setupUi(this);
   connect(this->ui->backQPushButton, &QPushButton::clicked, this,
           &TimerWindowQWidget::backButtonSlot);
   connect(this->ui->startTimerQPushButton, &QPushButton::clicked, this,
           &TimerWindowQWidget::startTimerButtonSlot);
-  connect(this->ui->taskQComboBox, SIGNAL(activated(const QString &)), this,
-          SLOT(dropDownTaskSlot(const QString &)));
+  this->addAction(new QAction());
+  this->actions().at(0)->setShortcut(QKeySequence::Cancel);
+  connect(this->actions().at(0), &QAction::triggered, this, &QWidget::hide);
   this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{Qt::Checked});
   goalText.reserve(100);
   goalText.resize(100);
@@ -64,7 +65,7 @@ void TimerWindowQWidget::startTimerButtonSlot() {
   //  liveTimer->show();
 }
 QString TimerWindowQWidget::getTaskName() {
-  return this->ui->taskQComboBox->currentText();
+  return this->ui->taskLineEdit->text();
 }
 /**
  * @brief TimerWindowQWidget::~TimerWindowQWidget
@@ -119,5 +120,8 @@ void TimerWindowQWidget::updateGoalText() {
 
 void TimerWindowQWidget::show() {
   updateGoalText();
+  this->setWindowTitle("New session for \"" +
+                       User::getInstance()->getCurrentCommitment().getName() +
+                       "\"");
   QWidget::show();
 }
