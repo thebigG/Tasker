@@ -27,7 +27,7 @@ public:
     CreateCommitmentQWidget &getCreateCommitment();
     QFrame *getWelcomeFrame();
     CommStatsQWidget &getCommStats();
-    TimerWindowQWidget &getTimerWindow();
+    NewSessionQWidget &getTimerWindow();
 
 public:
     Ui::TaskerUIMainWindowQWidget *ui;
@@ -40,7 +40,7 @@ private slots:
 private:
     CreateCommitmentQWidget x;
     CommStatsQWidget wc;
-    TimerWindowQWidget tw;
+    NewSessionQWidget tw;
     LiveSession *s;
 };
 

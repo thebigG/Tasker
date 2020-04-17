@@ -15,13 +15,13 @@ using namespace Engine;
  * @brief TimerWindowQWidget::TimerWindowQWidget
  * @param parent
  */
-TimerWindowQWidget::TimerWindowQWidget(QWidget *parent)
+NewSessionQWidget::NewSessionQWidget(QWidget *parent)
     : QWidget(parent), ui(new Ui::NewSessionQWidget) {
   ui->setupUi(this);
   connect(this->ui->backQPushButton, &QPushButton::clicked, this,
-          &TimerWindowQWidget::backButtonSlot);
+          &NewSessionQWidget::backButtonSlot);
   connect(this->ui->startTimerQPushButton, &QPushButton::clicked, this,
-          &TimerWindowQWidget::startTimerButtonSlot);
+          &NewSessionQWidget::startTimerButtonSlot);
   this->addAction(new QAction());
   this->actions().at(0)->setShortcut(QKeySequence::Cancel);
   connect(this->actions().at(0), &QAction::triggered, this, &QWidget::hide);
@@ -33,11 +33,11 @@ TimerWindowQWidget::TimerWindowQWidget(QWidget *parent)
 /**
  * @brief TimerWindowQWidget::backButtonSlot
  */
-void TimerWindowQWidget::backButtonSlot() {
+void NewSessionQWidget::backButtonSlot() {
   this->hide();
   MainUI::getInstance()->show();
 }
-void TimerWindowQWidget::startTimerButtonSlot() {
+void NewSessionQWidget::startTimerButtonSlot() {
   QVector<Engine::Hook::HookType> newListsners;
   /**
     TODO: While the UI supports multiple listeners at the same time, the backend
@@ -64,13 +64,13 @@ void TimerWindowQWidget::startTimerButtonSlot() {
   //  liveTimer = std::make_unique<LiveSession>();
   //  liveTimer->show();
 }
-QString TimerWindowQWidget::getTaskName() {
+QString NewSessionQWidget::getTaskName() {
   return this->ui->taskLineEdit->text();
 }
 /**
  * @brief TimerWindowQWidget::~TimerWindowQWidget
  */
-TimerWindowQWidget::~TimerWindowQWidget() {
+NewSessionQWidget::~NewSessionQWidget() {
   qDebug() << "TimerWindowQWidget destructor#1";
   delete ui;
   qDebug() << "TimerWindowQWidget destructor#2";
@@ -79,7 +79,7 @@ TimerWindowQWidget::~TimerWindowQWidget() {
 /**
  * @brief TimerWindowQWidget::on_timerWindowQFrame_destroyed
  */
-void TimerWindowQWidget::on_timerWindowQFrame_destroyed() {
+void NewSessionQWidget::on_timerWindowQFrame_destroyed() {
   qDebug()
       << " udata::User::getInstance() on on_timerWindowQFrame_destroyed()#1";
   delete udata::User::getInstance();
@@ -87,7 +87,7 @@ void TimerWindowQWidget::on_timerWindowQFrame_destroyed() {
       << " udata::User::getInstance() on on_timerWindowQFrame_destroyed()#2";
 }
 
-void TimerWindowQWidget::dropDownTaskSlot(const QString &arg1) {
+void NewSessionQWidget::dropDownTaskSlot(const QString &arg1) {
   if (arg1 == QString(WRITING_STRING)) {
     this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{Qt::Checked});
     this->ui->audioQCheckBox->setCheckState(Qt::CheckState{Qt::Unchecked});
@@ -102,7 +102,7 @@ void TimerWindowQWidget::dropDownTaskSlot(const QString &arg1) {
 /**
  * @brief TimerWindowQWidget::updateGoalText
  */
-void TimerWindowQWidget::updateGoalText() {
+void NewSessionQWidget::updateGoalText() {
   goalText.fill(' ');
   const QString &commitmentName =
       " " + QString{User::getInstance()->getCurrentCommitment().getName()} +
@@ -118,7 +118,7 @@ void TimerWindowQWidget::updateGoalText() {
   this->ui->goalQLabel->setText(goalText);
 }
 
-void TimerWindowQWidget::show() {
+void NewSessionQWidget::show() {
   updateGoalText();
   this->setWindowTitle("New session for \"" +
                        User::getInstance()->getCurrentCommitment().getName() +

@@ -79,7 +79,7 @@ CommStatsQWidget &TaskerUIMainWindowQWidget::getCommStats() {
  * @brief TaskerUIMainWindowQWidget::getTimerWindow
  * @return
  */
-TimerWindowQWidget &TaskerUIMainWindowQWidget::getTimerWindow() {
+NewSessionQWidget &TaskerUIMainWindowQWidget::getTimerWindow() {
     return tw;
 }
 

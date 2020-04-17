@@ -51,7 +51,7 @@ class CommStatsQWidget : public QWidget {
 
 public:
   explicit CommStatsQWidget(QWidget *parent = nullptr);
-  TimerWindowQWidget &getTimerWindow();
+  NewSessionQWidget &getNewSessionQWidget();
   CreateCommitmentQWidget &getCreateCommitment();
   void addCommitmentItem(udata::Commitment &newCommitment);
   ~CommStatsQWidget();
@@ -68,10 +68,9 @@ public slots:
   void deleteCommitmentSlot(bool);
   void newSessionSlot(bool);
   void currentCommitmentChangedSlot(QTreeWidgetItem *, QTreeWidgetItem *);
+  void itemDoubleClickedSlot(QTreeWidgetItem *item, int column);
   void newLiveSessionSlot();
   void on_statsQFrame_destroyed();
-  void on_commitmentsQTreeWidget_itemDoubleClicked(QTreeWidgetItem *item,
-                                                   int column);
 private slots:
   void previousSnapshot();
   void nextSnapshot();
@@ -90,7 +89,7 @@ private:
   std::map<QString, udata::Commitment &> commitmentMap;
   //    QVBoxLayout layout{};
   CreateCommitmentQWidget createCommimentWindow;
-  TimerWindowQWidget timerWindow;
+  NewSessionQWidget newSessionQWidget;
   udata::CommitmentSnaphot snapshot;
   void updateSnapshot();
   Perf::PerfTimer newPerfTimer{};

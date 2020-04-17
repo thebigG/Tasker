@@ -11,12 +11,12 @@ class NewSessionQWidget;
 /**
  * @brief The TimerWindowQWidget class
  */
-class TimerWindowQWidget : public QWidget {
+class NewSessionQWidget : public QWidget {
   Q_OBJECT
 
 public:
-  explicit TimerWindowQWidget(QWidget *parent = nullptr);
-  ~TimerWindowQWidget();
+  explicit NewSessionQWidget(QWidget *parent = nullptr);
+  ~NewSessionQWidget();
   QString getTaskName();
   void show();
 private slots:

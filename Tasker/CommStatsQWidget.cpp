@@ -33,6 +33,8 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
       0, this->ui->commitmentsQTreeWidget->size().width() - 100);
   connect(Engine::Timer::getInstance(), &Engine::Timer::stopTimer, this,
           &CommStatsQWidget::saveCurrentSession);
+  connect(ui->commitmentsQTreeWidget, &QTreeWidget::itemDoubleClicked, this,
+          &CommStatsQWidget::newSessionSlot);
   // allocate space in this string to avoid realocation on when updating
   // CommitmentInfoStatsQWidget
   commitmentMetaDataText.reserve(100);
@@ -122,7 +124,35 @@ void CommStatsQWidget::deleteCommitmentSlot(bool checked) {
   qDebug() << "deleting#3:" << tempIndex;
 }
 void CommStatsQWidget::newSessionSlot(bool checked) {
-  this->getTimerWindow().show();
+  if (User::getInstance()->getCurrentCommitment().isDone()) {
+    // Maybe show the user in the UI that this Commitment is done
+    return;
+  }
+  if (!User::getInstance()
+           ->getCurrentCommitment()
+           .getCommitmentWindows()
+           .last()
+           .sessions.isEmpty()) {
+
+    if (QDate::currentDate() == User::getInstance()
+                                    ->getCurrentCommitment()
+                                    .getCommitmentWindows()
+                                    .last()
+                                    .sessions.last()
+                                    .getDate()) {
+      /**
+       * Maybe show the user in the UI that they have added this session already
+       to this commitment today.
+       It might be worth it to consider a case where maybe a session was
+       terminated prematurily for whatever reason and the user might want to
+       resume that session even after closing Tasker.
+       Give this a lot of thought as this could add clutter to the UI, which I
+       don't want.
+      */
+      return;
+    }
+  }
+  this->getNewSessionQWidget().show();
 }
 /**
  * @brief CommStatsQWidget::on_statsQFrame_destroyed
@@ -164,28 +194,12 @@ void CommStatsQWidget::update() {
     w->addTopLevelItem(item);
   }
 }
-
-void CommStatsQWidget::on_commitmentsQTreeWidget_itemDoubleClicked(
-    QTreeWidgetItem *item, int column) {
-  QString commitmentName = item->text(column);
-
-  auto c_vec = User::getInstance()->getCommitments();
-  auto c_it = c_vec.begin();
-
-  while (c_it != c_vec.end()) {
-    Commitment c = (*c_it);
-
-    if (c.getName() == commitmentName) {
-      qDebug() << c.getName();
-
-      TimerWindowQWidget &t =
-          MainUI::getInstance()->getCommitmentHub().getTimerWindow();
-      t.show();
-    }
-
-    ++c_it;
-  }
+void CommStatsQWidget::itemDoubleClickedSlot(QTreeWidgetItem *item,
+                                             int column) {
+  ui->commitmentsQTreeWidget->indexOfTopLevelItem(item);
+  newSessionSlot(false);
 }
+
 void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
                                                     QTreeWidgetItem *previous) {
   qDebug() << "currentCommitmentChangedSlot#1";
@@ -250,7 +264,9 @@ void CommStatsQWidget::newLiveSessionSlot() {
   //    this->hide();
   //    this->getTimerWindow().show();
 }
-TimerWindowQWidget &CommStatsQWidget::getTimerWindow() { return timerWindow; }
+NewSessionQWidget &CommStatsQWidget::getNewSessionQWidget() {
+  return newSessionQWidget;
+}
 CreateCommitmentQWidget &CommStatsQWidget::getCreateCommitment() {
   return createCommimentWindow;
 }
