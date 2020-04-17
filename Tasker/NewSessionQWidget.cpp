@@ -1,6 +1,7 @@
 #include "NewSessionQWidget.h"
-#include "ui_TimerWindowQWidget.h"
+#include "ui_NewSessionQWidget.h"
 #include <Hook.h>
+#include <NewSessionQWidget.h>
 #include <QString>
 #include <Session.h>
 #include <StatsUtility.h>

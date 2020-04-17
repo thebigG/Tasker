@@ -1,5 +1,5 @@
-#ifndef TIMERWINDOW_H
-#define TIMERWINDOW_H
+#ifndef NEWSESSIONQWIDGET_H
+#define NEWSESSIONQWIDGET_H
 
 #include <QWidget>
 #include <livesession.h>
@@ -34,4 +34,4 @@ private:
   void updateGoalText();
 };
 
-#endif // TIMERWINDOW_H
+#endif // NEWSESSIONQWIDGET_H

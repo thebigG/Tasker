@@ -1,254 +1,509 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <ui version="4.0">
- <class>TimerWindowQWidget</class>
- <widget class="QWidget" name="TimerWindowQWidget">
+
+ <class>NewSessionQWidget</class>
+
+ <widget class="QWidget" name="NewSessionQWidget">
+
   <property name="windowModality">
+
    <enum>Qt::ApplicationModal</enum>
+
   </property>
+
   <property name="geometry">
+
    <rect>
+
     <x>0</x>
+
     <y>0</y>
+
     <width>450</width>
+
     <height>450</height>
+
    </rect>
+
   </property>
+
   <property name="minimumSize">
+
    <size>
+
     <width>450</width>
+
     <height>450</height>
+
    </size>
+
   </property>
+
   <property name="maximumSize">
+
    <size>
+
     <width>450</width>
+
     <height>450</height>
+
    </size>
+
   </property>
+
   <property name="windowTitle">
+
    <string>Tasker - Session</string>
+
   </property>
+
   <property name="layoutDirection">
+
    <enum>Qt::LeftToRight</enum>
+
   </property>
+
   <layout class="QGridLayout" name="gridLayout">
+
    <item row="6" column="2">
+
     <widget class="QPushButton" name="backQPushButton">
+
      <property name="maximumSize">
+
       <size>
+
        <width>110</width>
+
        <height>30</height>
+
       </size>
+
      </property>
+
      <property name="text">
+
       <string>Cancel</string>
+
      </property>
+
     </widget>
+
    </item>
+
    <item row="2" column="0">
+
     <widget class="QGroupBox" name="groupBox">
+
      <property name="minimumSize">
+
       <size>
+
        <width>450</width>
+
        <height>0</height>
+
       </size>
+
      </property>
+
      <property name="maximumSize">
+
       <size>
+
        <width>450</width>
+
        <height>200</height>
+
       </size>
+
      </property>
+
      <property name="title">
+
       <string>Perferences</string>
+
      </property>
+
      <layout class="QGridLayout" name="gridLayout_2">
+
       <item row="0" column="1">
+
        <widget class="QGroupBox" name="productionTimeAlertQGroupBox">
+
         <property name="maximumSize">
+
          <size>
+
           <width>400</width>
+
           <height>100</height>
+
          </size>
+
         </property>
+
         <property name="layoutDirection">
+
          <enum>Qt::LeftToRight</enum>
+
         </property>
+
         <property name="title">
+
          <string>Others</string>
+
         </property>
+
         <property name="flat">
+
          <bool>true</bool>
+
         </property>
+
         <layout class="QVBoxLayout" name="verticalLayout">
+
          <item>
+
           <widget class="QCheckBox" name="checkBox">
+
            <property name="text">
+
             <string>Notify me when done</string>
+
            </property>
+
           </widget>
+
          </item>
+
         </layout>
+
        </widget>
+
       </item>
+
       <item row="0" column="0">
+
        <widget class="QGroupBox" name="taskListenersQGroupBox">
+
         <property name="maximumSize">
+
          <size>
+
           <width>200</width>
+
           <height>100</height>
+
          </size>
+
         </property>
+
         <property name="styleSheet">
+
          <string notr="true"/>
+
         </property>
+
         <property name="title">
+
          <string>Hooks</string>
+
         </property>
+
         <property name="checkable">
+
          <bool>false</bool>
+
         </property>
+
         <layout class="QGridLayout" name="gridLayout_4">
+
          <item row="2" column="0">
+
           <widget class="QCheckBox" name="audioQCheckBox">
+
            <property name="text">
+
             <string>Mic</string>
+
            </property>
+
           </widget>
+
          </item>
+
          <item row="0" column="0" colspan="2">
+
           <widget class="QCheckBox" name="keyboardQCheckBox">
+
            <property name="text">
+
             <string>Keyboard</string>
+
            </property>
+
            <property name="tristate">
+
             <bool>false</bool>
+
            </property>
+
           </widget>
+
          </item>
+
          <item row="1" column="0">
+
           <widget class="QCheckBox" name="mouseQCheckBox">
+
            <property name="text">
+
             <string>Mouse</string>
+
            </property>
+
           </widget>
+
          </item>
+
          <item row="2" column="1">
+
           <widget class="QComboBox" name="audioQComboBox">
+
            <property name="minimumSize">
+
             <size>
+
              <width>0</width>
+
              <height>25</height>
+
             </size>
+
            </property>
+
            <property name="maximumSize">
+
             <size>
+
              <width>100</width>
+
              <height>200</height>
+
             </size>
+
            </property>
+
            <item>
+
             <property name="text">
+
              <string>Built-In Mic</string>
+
             </property>
+
            </item>
+
           </widget>
+
          </item>
+
         </layout>
+
        </widget>
+
       </item>
+
      </layout>
+
     </widget>
+
    </item>
+
    <item row="0" column="0">
+
     <widget class="QWidget" name="widget" native="true">
+
      <property name="minimumSize">
+
       <size>
+
        <width>450</width>
+
        <height>200</height>
+
       </size>
+
      </property>
+
      <property name="maximumSize">
+
       <size>
+
        <width>450</width>
+
        <height>200</height>
+
       </size>
+
      </property>
+
      <layout class="QGridLayout" name="gridLayout_3">
+
       <item row="1" column="0">
+
        <widget class="QLabel" name="goalQLabel">
+
         <property name="maximumSize">
+
          <size>
+
           <width>200</width>
+
           <height>100</height>
+
          </size>
+
         </property>
+
         <property name="font">
+
          <font>
+
           <pointsize>14</pointsize>
+
          </font>
+
         </property>
+
         <property name="text">
-         <string>Goal: Play guitar for 1h30m</string>
+
+         <string>Goal: Play guitar for 1h3</string>
+
         </property>
+
         <property name="wordWrap">
+
          <bool>true</bool>
+
         </property>
+
        </widget>
+
       </item>
+
       <item row="0" column="0">
+
        <widget class="QWidget" name="TaskContainerQWidget" native="true">
+
         <property name="maximumSize">
+
          <size>
+
           <width>200</width>
+
           <height>50</height>
+
          </size>
+
         </property>
+
         <layout class="QHBoxLayout" name="horizontalLayout">
+
          <item>
+
           <widget class="QLabel" name="taskQLabel">
+
            <property name="maximumSize">
+
             <size>
+
              <width>50</width>
+
              <height>16777215</height>
+
             </size>
+
            </property>
+
            <property name="text">
+
             <string>Task:</string>
+
            </property>
+
           </widget>
+
          </item>
+
          <item>
+
           <widget class="QLineEdit" name="taskLineEdit">
+
            <property name="text">
+
             <string/>
+
            </property>
+
            <property name="placeholderText">
+
             <string>Write, Draw, Music, etc</string>
+
            </property>
+
           </widget>
+
          </item>
+
         </layout>
+
        </widget>
+
       </item>
+
      </layout>
+
     </widget>
+
    </item>
+
    <item row="6" column="0">
+
     <widget class="QPushButton" name="startTimerQPushButton">
+
      <property name="maximumSize">
+
       <size>
+
        <width>110</width>
+
        <height>30</height>
+
       </size>
+
      </property>
+
      <property name="text">
+
       <string>Start</string>
+
      </property>
+
     </widget>
+
    </item>
+
   </layout>
+
  </widget>
+
  <resources/>
+
  <connections/>
+
 </ui>
+
+
