@@ -124,35 +124,37 @@ void CommStatsQWidget::deleteCommitmentSlot(bool checked) {
   qDebug() << "deleting#3:" << tempIndex;
 }
 void CommStatsQWidget::newSessionSlot(bool checked) {
-  if (User::getInstance()->getCurrentCommitment().isDone()) {
-    // Maybe show the user in the UI that this Commitment is done
-    return;
-  }
-  if (!User::getInstance()
-           ->getCurrentCommitment()
-           .getCommitmentWindows()
-           .last()
-           .sessions.isEmpty()) {
+  //  if (User::getInstance()->getCurrentCommitment().isDone()) {
+  //    // Maybe show the user in the UI that this Commitment is done
+  //    return;
+  //  }
+  //  if (!User::getInstance()
+  //           ->getCurrentCommitment()
+  //           .getCommitmentWindows()
+  //           .last()
+  //           .sessions.isEmpty()) {
 
-    if (QDate::currentDate() == User::getInstance()
-                                    ->getCurrentCommitment()
-                                    .getCommitmentWindows()
-                                    .last()
-                                    .sessions.last()
-                                    .getDate()) {
-      /**
-       * Maybe show the user in the UI that they have added this session already
-       to this commitment today.
-       It might be worth it to consider a case where maybe a session was
-       terminated prematurily for whatever reason and the user might want to
-       resume that session even after closing Tasker.
-       Give this a lot of thought as this could add clutter to the UI, which I
-       don't want.
-      */
-      return;
-    }
+  //    if (QDate::currentDate() == User::getInstance()
+  //                                    ->getCurrentCommitment()
+  //                                    .getCommitmentWindows()
+  //                                    .last()
+  //                                    .sessions.last()
+  //                                    .getDate()) {
+  //      /**
+  //       * Maybe show the user in the UI that they have added this session
+  //       already to this commitment today. It might be worth it to consider a
+  //       case where maybe a session was terminated prematurily for whatever
+  //       reason and the user might want to resume that session even after
+  //       closing Tasker, this is assuming that they open Tasker the very same
+  //       day again. Give this a lot of thought as this could add clutter to
+  //       the UI, which I don't want.
+  //      */
+  //      return;
+  //    }
+  //  }
+  if (MainUI::getInstance()->newSessionActionState()) {
+    this->getNewSessionQWidget().show();
   }
-  this->getNewSessionQWidget().show();
 }
 /**
  * @brief CommStatsQWidget::on_statsQFrame_destroyed
@@ -233,6 +235,7 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
   updateCommitmentInfoStatsQWidget();
   updateBeginDateQLabel();
   updateEndDateQLabel();
+  MainUI::getInstance()->updateNewSessionActionState();
   if (User::getInstance()->getCommitments().size() != 0 &&
       User::getInstance()
               ->getCommitments()[0]

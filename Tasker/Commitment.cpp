@@ -144,11 +144,15 @@ void Commitment::updateCommitmentWindows() {
  */
 void Commitment::update() {
   updateCommitmentWindows();
+  qDebug() << "upating-->" << name;
   if (noEndDate) {
     done = false;
     return;
   }
-  if (commitmentWindows.last().endDate >= dateEnd) {
+  qDebug() << "date comparison on commmitment update:"
+           << commitmentWindows.last().endDate << "," << dateEnd;
+  if (commitmentWindows.last().endDate >= dateEnd &&
+      QDate::currentDate() > dateEnd) {
     done = true;
   }
   return;
@@ -273,6 +277,7 @@ QDataStream &udata::operator>>(QDataStream &in,
   newCommitment.Type = newType;
   newCommitment.commitmentWindows = newTimeWindows;
   newCommitment.done = newDone;
+  newCommitment.update();
   return in;
 }
 QDataStream &udata::operator<<(QDataStream &out,

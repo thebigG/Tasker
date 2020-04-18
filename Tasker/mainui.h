@@ -25,6 +25,8 @@ private:
 public:
   static MainUI *getInstance();
   void update();
+  void updateNewSessionActionState();
+  bool newSessionActionState();
   CommStatsQWidget &getCommitmentHub();
   MainUI();
 public slots:

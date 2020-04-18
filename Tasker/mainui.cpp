@@ -37,6 +37,29 @@ void MainUI::update() {
   QMainWindow::update();
   commitmentHub.update();
 }
+void MainUI::updateNewSessionActionState() {
+  if (User::getInstance()->getCurrentCommitment().isDone()) {
+    sessionMenu.actions().at(0)->setEnabled(false);
+    return;
+  }
+  if (!User::getInstance()
+           ->getCurrentCommitment()
+           .getCommitmentWindows()
+           .last()
+           .sessions.isEmpty()) {
+
+    if (QDate::currentDate() == User::getInstance()
+                                    ->getCurrentCommitment()
+                                    .getCommitmentWindows()
+                                    .last()
+                                    .sessions.last()
+                                    .getDate()) {
+      sessionMenu.actions().at(0)->setEnabled(false);
+      return;
+    }
+  }
+  sessionMenu.actions().at(0)->setEnabled(true);
+}
 CommStatsQWidget &MainUI::getCommitmentHub() { return commitmentHub; }
 
 /**
@@ -59,4 +82,7 @@ MainUI *MainUI::getInstance() {
 void MainUI::saveTaskerStateSlot() {
   qDebug() << "Saving state";
   UdataUtils::saveUserData(*User::getInstance());
+}
+bool MainUI::newSessionActionState() {
+  return this->sessionMenu.actions().at(0)->isEnabled();
 }
