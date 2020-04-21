@@ -32,7 +32,7 @@ void Commitment::setFrequency(long long newTime, int newFrequency,
   frequency.timeWindowSize = newTimeWinowSize;
 }
 void Commitment::setCommitmentWindows(
-    QVector<util::TimeWindow> &newCommitmentWindows) {
+    QVector<TimeWindow> &newCommitmentWindows) {
   for (auto windows : newCommitmentWindows) {
     commitmentWindows.append(windows);
   }
@@ -88,9 +88,9 @@ const QString &Commitment::getName() const { return name; }
 void Commitment::updateCommitmentWindows(Session newSession) {
   if (commitmentWindows.isEmpty()) {
     commitmentWindows.push_back(
-        util::TimeWindow{.startDate = dateStart,
-                         .endDate = dateStart.addDays(frequency.frequency),
-                         .sessions = QVector<Session>{newSession}});
+        TimeWindow{.startDate = dateStart,
+                   .endDate = dateStart.addDays(frequency.frequency),
+                   .sessions = QVector<Session>{newSession}});
   }
 }
 /**
@@ -109,15 +109,15 @@ void Commitment::updateCommitmentWindows(Session newSession) {
 void Commitment::updateCommitmentWindows() {
   QDate currentDate = QDate::currentDate();
   if (commitmentWindows.isEmpty()) {
-    commitmentWindows.push_back(util::TimeWindow{});
-    util::TimeWindow &newWindow = commitmentWindows.last();
+    commitmentWindows.push_back(TimeWindow{});
+    TimeWindow &newWindow = commitmentWindows.last();
     newWindow.startDate.setDate(currentDate.year(), currentDate.month(),
                                 currentDate.day());
     currentDate = currentDate.addDays(frequency.timeWindowSize - 1);
     newWindow.endDate.setDate(currentDate.year(), currentDate.month(),
                               currentDate.day());
   } else {
-    util::TimeWindow &lastWindow = commitmentWindows.last();
+    TimeWindow &lastWindow = commitmentWindows.last();
     if (currentDate <= lastWindow.endDate) {
       return;
     }
@@ -128,8 +128,8 @@ void Commitment::updateCommitmentWindows() {
         qCeil((currentDate.day() - lastWindow.endDate.day()) /
               (frequency.timeWindowSize));
     for (int i = 0; i < NumberOfTimeWindows; i++) {
-      commitmentWindows.push_back(util::TimeWindow{});
-      util::TimeWindow &newWindow = commitmentWindows.last();
+      commitmentWindows.push_back(TimeWindow{});
+      TimeWindow &newWindow = commitmentWindows.last();
       newWindow.startDate.setDate(currentDate.year(), currentDate.month(),
                                   currentDate.day());
       currentDate = currentDate.addDays(frequency.timeWindowSize);
@@ -140,7 +140,7 @@ void Commitment::updateCommitmentWindows() {
 }
 /**
  * @brief Commitment::update updates the state of this commitment.
- * This method update st
+ * Any state regarding TimeWindows is updated by this method.
  */
 void Commitment::update() {
   updateCommitmentWindows();
@@ -181,10 +181,10 @@ bool Commitment::isDone() {
   update();
   return done;
 }
-QVector<util::TimeWindow> &Commitment::getCommitmentWindows() {
+QVector<TimeWindow> &Commitment::getCommitmentWindows() {
   return commitmentWindows;
 }
-util::TimeWindow &Commitment::getCurrentTimeWindow() {
+TimeWindow &Commitment::getCurrentTimeWindow() {
   return commitmentWindows[commitmentWindows.size() - 1];
 }
 /**
@@ -251,7 +251,7 @@ QDataStream &udata::operator>>(QDataStream &in,
   QString commitmentName;
   QDate commitmentDateStart;
   QDate commitmentDateEnd;
-  QVector<util::TimeWindow> newTimeWindows;
+  QVector<TimeWindow> newTimeWindows;
   qDebug() << "QDataStream &udata::operator>>(QDataStream &in, "
               "udata::Commitment &newCommitment) ";
   CommitmentType newType;
@@ -262,7 +262,7 @@ QDataStream &udata::operator>>(QDataStream &in,
   int count = 0;
   in >> count;
   for (int i = 0; i < count; i++) {
-    util::TimeWindow temp{};
+    TimeWindow temp{};
     in >> temp;
     newTimeWindows.append(temp);
   }
@@ -281,7 +281,7 @@ QDataStream &udata::operator>>(QDataStream &in,
   return in;
 }
 QDataStream &udata::operator<<(QDataStream &out,
-                               const util::TimeWindow &newTimeWindow) {
+                               const TimeWindow &newTimeWindow) {
   out << newTimeWindow.startDate << newTimeWindow.endDate;
   out << newTimeWindow.sessions.length();
   for (const auto s : newTimeWindow.sessions) {
@@ -290,8 +290,7 @@ QDataStream &udata::operator<<(QDataStream &out,
   qDebug() << "newTimeWindow startDate=*****************#2";
   return out;
 }
-QDataStream &udata::operator>>(QDataStream &in,
-                               util::TimeWindow &newTimeWindow) {
+QDataStream &udata::operator>>(QDataStream &in, TimeWindow &newTimeWindow) {
   QDate newStartDate, newEndDate;
   QVector<Session> newSessions;
   in >> newStartDate >> newEndDate;
@@ -353,7 +352,7 @@ void Commitment::setDateEnd(QDate value) { dateEnd = value; }
  */
 QVector<Session> Commitment::getAllSessions() {
   QVector<Session> allSessions{};
-  for (util::TimeWindow t : commitmentWindows) {
+  for (TimeWindow t : commitmentWindows) {
     for (Session s : t.sessions) {
       allSessions.push_back(s);
     }

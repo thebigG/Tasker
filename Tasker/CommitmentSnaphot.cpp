@@ -116,7 +116,7 @@ QChartView &udata::CommitmentSnaphot::getView() { return view; }
  * @param updateData
  * @param currentTimeWindow
  */
-void udata::CommitmentSnaphot::update(util::TimeWindow &currentWindow,
+void udata::CommitmentSnaphot::update(udata::TimeWindow &currentWindow,
                                       udata::CommitmentType type,
                                       int commitmentGoal) {
   //  util::TimeWindow currentWindow =

@@ -15,6 +15,8 @@
 #define MAX_TITLE_CHARS 81
 QT_CHARTS_USE_NAMESPACE
 namespace udata {
+// Not sure if this is the right namespace for CommitmentSnapshot, it probably
+// isn't
 
 class CommitmentSnaphot : public QWidget {
 private:
@@ -52,7 +54,7 @@ public:
   double getUnproductiveTimeAverage();
 
   CommitmentSnaphot(int numberOfBars = 7, QString customeCatgeory = "Sunday");
-  void update(util::TimeWindow &currentWindow, udata::CommitmentType type,
+  void update(TimeWindow &currentWindow, udata::CommitmentType type,
               int commitmentGoal);
   QPushButton &getNextSnapshotLabel();
   QPushButton &getPreviousSnaphotLabel();

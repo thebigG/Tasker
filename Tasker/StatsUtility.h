@@ -32,11 +32,6 @@ struct TimeWindow;
 // QDataStream &operator<<(QDataStream &out, const TimeWindow);
 // QDataStream &operator>>(QDataStream &in, TimeWindow &);
 // namespace util
-struct TimeWindow {
-  QDate startDate;
-  QDate endDate;
-  QVector<udata::Session> sessions;
-};
 // QDataStream& util::operator<<(QDataStream &out, const util::TimeWindow t)
 //{
 // return out;
