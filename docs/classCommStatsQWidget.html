@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a> class is the main hub where the data for Commitments is displayed. Whether that be charts, averages, current commitments and their sessions, it is all displayed by <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a>. This clas just displays data, it doesn't really "manipulate" it except for the cases where one might need to convert minutes to seconds, seconds to hours, etc. All data "manipulation" is done for the sake of UI design, not data management. All data management should be left to Classes such as Commitment, Session, Task, etc. This class is a hybrid of a Controller and Viewer. It is a viewer in the sense that it dispplays all data about commitments and a controller in the sense that it controls much of data navigation. This data navigation includes things like navigating through different snapshots of time windows, secleting different commitments and sessions that belong to those commitments.  
+<p>The <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a> class is the main hub where the data for Commitments is displayed. Whether that be charts, averages, current commitments and their sessions, it is all displayed by <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a>. This class just displays data, it doesn't really "manipulate" it except for the cases where one might need to convert minutes to seconds, seconds to hours, etc. All data "manipulation" is done for the sake of UI design, not data management. All data management should be left to Classes such as Commitment, Session, UdataUtils, etc. This class is a hybrid of a Controller and Viewer. It is a viewer in the sense that it dispplays all data about commitments and a controller in the sense that it controls much of data navigation and parsing for human readibility. This data navigation includes things like navigating through different snapshots of time windows, secleting different commitments and sessions that belong to those commitments.  
  <a href="classCommStatsQWidget.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="CommStatsQWidget_8h_source.html">CommStatsQWidget.h</a>&gt;</code></p>
@@ -87,50 +87,66 @@ Inheritance diagram for CommStatsQWidget:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
+<tr class="memitem:aa5ffa16a7364eb68870fd3bae23fb9bd"><td class="memItemLeft" align="right" valign="top"><a id="aa5ffa16a7364eb68870fd3bae23fb9bd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>saveCurrentSession</b> ()</td></tr>
+<tr class="separator:aa5ffa16a7364eb68870fd3bae23fb9bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af684a71655743b8f72f36b608a0b1dfb"><td class="memItemLeft" align="right" valign="top"><a id="af684a71655743b8f72f36b608a0b1dfb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>newCommitmentSlot</b> (bool)</td></tr>
 <tr class="separator:af684a71655743b8f72f36b608a0b1dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af08c8abc8b13249a523342d92af37893"><td class="memItemLeft" align="right" valign="top"><a id="af08c8abc8b13249a523342d92af37893"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>deleteCommitmentSlot</b> (bool)</td></tr>
 <tr class="separator:af08c8abc8b13249a523342d92af37893"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa39b9da2ae3560a7774f451250b82cb7"><td class="memItemLeft" align="right" valign="top"><a id="aa39b9da2ae3560a7774f451250b82cb7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>newSessionSlot</b> (bool)</td></tr>
+<tr class="memitem:aa39b9da2ae3560a7774f451250b82cb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommStatsQWidget.html#aa39b9da2ae3560a7774f451250b82cb7">newSessionSlot</a> (bool)</td></tr>
 <tr class="separator:aa39b9da2ae3560a7774f451250b82cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b50689bf8adc88cf84cea5b6beaac2c"><td class="memItemLeft" align="right" valign="top"><a id="a1b50689bf8adc88cf84cea5b6beaac2c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>currentCommitmentChangedSlot</b> (QTreeWidgetItem *, QTreeWidgetItem *)</td></tr>
 <tr class="separator:a1b50689bf8adc88cf84cea5b6beaac2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecca69859c3b1fe56b6ac86f5c5a67d6"><td class="memItemLeft" align="right" valign="top"><a id="aecca69859c3b1fe56b6ac86f5c5a67d6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>itemDoubleClickedSlot</b> (QTreeWidgetItem *item, int column)</td></tr>
+<tr class="separator:aecca69859c3b1fe56b6ac86f5c5a67d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a979cb161d44234dde269e318383750e0"><td class="memItemLeft" align="right" valign="top"><a id="a979cb161d44234dde269e318383750e0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>newLiveSessionSlot</b> ()</td></tr>
 <tr class="separator:a979cb161d44234dde269e318383750e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a820b773947188924f3cab73e3074fd73"><td class="memItemLeft" align="right" valign="top"><a id="a820b773947188924f3cab73e3074fd73"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommStatsQWidget.html#a820b773947188924f3cab73e3074fd73">on_statsQFrame_destroyed</a> ()</td></tr>
-<tr class="memdesc:a820b773947188924f3cab73e3074fd73"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCommStatsQWidget.html#a820b773947188924f3cab73e3074fd73" title="CommStatsQWidget::on_statsQFrame_destroyed.">CommStatsQWidget::on_statsQFrame_destroyed</a>. <br /></td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>on_statsQFrame_destroyed</b> ()</td></tr>
 <tr class="separator:a820b773947188924f3cab73e3074fd73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5339106730ac8e4965166bec285e48cf"><td class="memItemLeft" align="right" valign="top"><a id="a5339106730ac8e4965166bec285e48cf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>on_commitmentsQTreeWidget_itemDoubleClicked</b> (QTreeWidgetItem *item, int column)</td></tr>
-<tr class="separator:a5339106730ac8e4965166bec285e48cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afd5012897d300955162c969174646bd5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommStatsQWidget.html#afd5012897d300955162c969174646bd5">CommStatsQWidget</a> (QWidget *parent=nullptr)</td></tr>
 <tr class="memdesc:afd5012897d300955162c969174646bd5"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCommStatsQWidget.html#afd5012897d300955162c969174646bd5" title="CommStatsQWidget::CommStatsQWidget.">CommStatsQWidget::CommStatsQWidget</a>.  <a href="classCommStatsQWidget.html#afd5012897d300955162c969174646bd5">More...</a><br /></td></tr>
 <tr class="separator:afd5012897d300955162c969174646bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6749d1858f0851166b0359a7c3178980"><td class="memItemLeft" align="right" valign="top"><a id="a6749d1858f0851166b0359a7c3178980"></a>
-<a class="el" href="classTimerWindowQWidget.html">TimerWindowQWidget</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getTimerWindow</b> ()</td></tr>
-<tr class="separator:a6749d1858f0851166b0359a7c3178980"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad61d89166261125e7b02e31d027135b5"><td class="memItemLeft" align="right" valign="top"><a id="ad61d89166261125e7b02e31d027135b5"></a>
+<tr class="memitem:a74c7cc4f44f9bbef4874fa61de586510"><td class="memItemLeft" align="right" valign="top"><a id="a74c7cc4f44f9bbef4874fa61de586510"></a>
+<a class="el" href="classNewSessionQWidget.html">NewSessionQWidget</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getNewSessionQWidget</b> ()</td></tr>
+<tr class="separator:a74c7cc4f44f9bbef4874fa61de586510"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36f00ee1033dd938c766d011bf13a660"><td class="memItemLeft" align="right" valign="top"><a id="a36f00ee1033dd938c766d011bf13a660"></a>
 <a class="el" href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCreateCommitment</b> ()</td></tr>
-<tr class="separator:ad61d89166261125e7b02e31d027135b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a36f00ee1033dd938c766d011bf13a660"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f7cf33030acf2a960f7c9863cdca83d"><td class="memItemLeft" align="right" valign="top"><a id="a3f7cf33030acf2a960f7c9863cdca83d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>addCommitmentItem</b> (<a class="el" href="classudata_1_1Commitment.html">udata::Commitment</a> &amp;newCommitment)</td></tr>
+<tr class="separator:a3f7cf33030acf2a960f7c9863cdca83d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fec3c6d3d872671b6cc04cfd53bca1d"><td class="memItemLeft" align="right" valign="top"><a id="a1fec3c6d3d872671b6cc04cfd53bca1d"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommStatsQWidget.html#a1fec3c6d3d872671b6cc04cfd53bca1d">~CommStatsQWidget</a> ()</td></tr>
 <tr class="memdesc:a1fec3c6d3d872671b6cc04cfd53bca1d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCommStatsQWidget.html#a1fec3c6d3d872671b6cc04cfd53bca1d" title="CommStatsQWidget::~CommStatsQWidget.">CommStatsQWidget::~CommStatsQWidget</a>. <br /></td></tr>
 <tr class="separator:a1fec3c6d3d872671b6cc04cfd53bca1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1138574f66e9bd10c11b1a103cae3a38"><td class="memItemLeft" align="right" valign="top"><a id="a1138574f66e9bd10c11b1a103cae3a38"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>show</b> ()</td></tr>
+<tr class="separator:a1138574f66e9bd10c11b1a103cae3a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7fb74136aade19184003d739e08ff136"><td class="memItemLeft" align="right" valign="top"><a id="a7fb74136aade19184003d739e08ff136"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>func</b> ()</td></tr>
 <tr class="separator:a7fb74136aade19184003d739e08ff136"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4925f706c659147b41608ba91f743b2"><td class="memItemLeft" align="right" valign="top"><a id="ae4925f706c659147b41608ba91f743b2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></tr>
 <tr class="separator:ae4925f706c659147b41608ba91f743b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6f7cbd8372b77974e25da078e267213"><td class="memItemLeft" align="right" valign="top"><a id="ac6f7cbd8372b77974e25da078e267213"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateCommitmentInfoStatsQWidget</b> ()</td></tr>
+<tr class="separator:ac6f7cbd8372b77974e25da078e267213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b04844dbceb12fa19820ff6ff11078c"><td class="memItemLeft" align="right" valign="top"><a id="a6b04844dbceb12fa19820ff6ff11078c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateBeginDateQLabel</b> ()</td></tr>
+<tr class="separator:a6b04844dbceb12fa19820ff6ff11078c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfd577cfe1c2d662b8b9674f0f4e9003"><td class="memItemLeft" align="right" valign="top"><a id="acfd577cfe1c2d662b8b9674f0f4e9003"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateEndDateQLabel</b> ()</td></tr>
+<tr class="separator:acfd577cfe1c2d662b8b9674f0f4e9003"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-slots"></a>
 Private Slots</h2></td></tr>
@@ -155,6 +171,18 @@ Ui::CommStatsQWidget *&#160;</td><td class="memItemRight" valign="bottom"><b>ui<
 <tr class="memitem:a60861c5fc267b326235e94bcb83fca5e"><td class="memItemLeft" align="right" valign="top"><a id="a60861c5fc267b326235e94bcb83fca5e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isDelete</b> = false</td></tr>
 <tr class="separator:a60861c5fc267b326235e94bcb83fca5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e1ca7b8ef865fe42cd6639b4d4d8ff5"><td class="memItemLeft" align="right" valign="top"><a id="a3e1ca7b8ef865fe42cd6639b4d4d8ff5"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>commitmentMetaDataText</b> {}</td></tr>
+<tr class="separator:a3e1ca7b8ef865fe42cd6639b4d4d8ff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae48ae43ef22dcf3747e33ff1fe832733"><td class="memItemLeft" align="right" valign="top"><a id="ae48ae43ef22dcf3747e33ff1fe832733"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>beginDateText</b> {&quot;Commitment began on &quot;}</td></tr>
+<tr class="separator:ae48ae43ef22dcf3747e33ff1fe832733"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f58167ae3cfbd18acee0709cd3e995f"><td class="memItemLeft" align="right" valign="top"><a id="a6f58167ae3cfbd18acee0709cd3e995f"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>endDateText</b> {&quot;Ends on &quot;}</td></tr>
+<tr class="separator:a6f58167ae3cfbd18acee0709cd3e995f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94f3eb4c0b2c43368f907c829ad4f70b"><td class="memItemLeft" align="right" valign="top"><a id="a94f3eb4c0b2c43368f907c829ad4f70b"></a>
+<a class="el" href="classLiveSession.html">LiveSession</a>&#160;</td><td class="memItemRight" valign="bottom"><b>currentLiveSessionWidget</b> {}</td></tr>
+<tr class="separator:a94f3eb4c0b2c43368f907c829ad4f70b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8b41be901a4970f79221bd98f3d2acb"><td class="memItemLeft" align="right" valign="top"><a id="ae8b41be901a4970f79221bd98f3d2acb"></a>
 QPalette&#160;</td><td class="memItemRight" valign="bottom"><b>p</b></td></tr>
 <tr class="separator:ae8b41be901a4970f79221bd98f3d2acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,12 +192,15 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>selectedCommitmentInde
 <tr class="memitem:a73b5c6f6bbecaf0c5da0afd5f386a91d"><td class="memItemLeft" align="right" valign="top"><a id="a73b5c6f6bbecaf0c5da0afd5f386a91d"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>currentTimeWindow</b> = 0</td></tr>
 <tr class="separator:a73b5c6f6bbecaf0c5da0afd5f386a91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35194699bc8fa1925231c8df19a42bfc"><td class="memItemLeft" align="right" valign="top"><a id="a35194699bc8fa1925231c8df19a42bfc"></a>
+std::map&lt; QString, <a class="el" href="classudata_1_1Commitment.html">udata::Commitment</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>commitmentMap</b></td></tr>
+<tr class="separator:a35194699bc8fa1925231c8df19a42bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a635fc757e27b3be9529d68c1a535966b"><td class="memItemLeft" align="right" valign="top"><a id="a635fc757e27b3be9529d68c1a535966b"></a>
 <a class="el" href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createCommimentWindow</b></td></tr>
 <tr class="separator:a635fc757e27b3be9529d68c1a535966b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6431dc9c59c7343a089c354039d49334"><td class="memItemLeft" align="right" valign="top"><a id="a6431dc9c59c7343a089c354039d49334"></a>
-<a class="el" href="classTimerWindowQWidget.html">TimerWindowQWidget</a>&#160;</td><td class="memItemRight" valign="bottom"><b>timerWindow</b></td></tr>
-<tr class="separator:a6431dc9c59c7343a089c354039d49334"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dc5ed97a22b62d342d93f4a53fe6b17"><td class="memItemLeft" align="right" valign="top"><a id="a7dc5ed97a22b62d342d93f4a53fe6b17"></a>
+<a class="el" href="classNewSessionQWidget.html">NewSessionQWidget</a>&#160;</td><td class="memItemRight" valign="bottom"><b>newSessionQWidget</b></td></tr>
+<tr class="separator:a7dc5ed97a22b62d342d93f4a53fe6b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d1e3b710addfb0bfac2b028582e9eae"><td class="memItemLeft" align="right" valign="top"><a id="a7d1e3b710addfb0bfac2b028582e9eae"></a>
 <a class="el" href="classudata_1_1CommitmentSnaphot.html">udata::CommitmentSnaphot</a>&#160;</td><td class="memItemRight" valign="bottom"><b>snapshot</b></td></tr>
 <tr class="separator:a7d1e3b710addfb0bfac2b028582e9eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,7 +209,7 @@ Perf::PerfTimer&#160;</td><td class="memItemRight" valign="bottom"><b>newPerfTim
 <tr class="separator:ab6ba82ea69ab0c5c083a93795c0292a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a> class is the main hub where the data for Commitments is displayed. Whether that be charts, averages, current commitments and their sessions, it is all displayed by <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a>. This clas just displays data, it doesn't really "manipulate" it except for the cases where one might need to convert minutes to seconds, seconds to hours, etc. All data "manipulation" is done for the sake of UI design, not data management. All data management should be left to Classes such as Commitment, Session, Task, etc. This class is a hybrid of a Controller and Viewer. It is a viewer in the sense that it dispplays all data about commitments and a controller in the sense that it controls much of data navigation. This data navigation includes things like navigating through different snapshots of time windows, secleting different commitments and sessions that belong to those commitments. </p>
+<div class="textblock"><p>The <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a> class is the main hub where the data for Commitments is displayed. Whether that be charts, averages, current commitments and their sessions, it is all displayed by <a class="el" href="classCommStatsQWidget.html" title="The CommStatsQWidget class is the main hub where the data for Commitments is displayed....">CommStatsQWidget</a>. This class just displays data, it doesn't really "manipulate" it except for the cases where one might need to convert minutes to seconds, seconds to hours, etc. All data "manipulation" is done for the sake of UI design, not data management. All data management should be left to Classes such as Commitment, Session, UdataUtils, etc. This class is a hybrid of a Controller and Viewer. It is a viewer in the sense that it dispplays all data about commitments and a controller in the sense that it controls much of data navigation and parsing for human readibility. This data navigation includes things like navigating through different snapshots of time windows, secleting different commitments and sessions that belong to those commitments. </p>
 <dl class="section note"><dt>Note</dt><dd>Beware of manipulating palettes on Qt Designer. It can cause backwards comptability problems(specifically might break the build for Ubuntu 14.04) when changing the palette manually on Qt Designer. It lookes like it is ok to manipulate palettes via code by calling methods like QWidget.setPalette(), but not through the Qt Designer editor. </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afd5012897d300955162c969174646bd5"></a>
@@ -212,6 +243,36 @@ Perf::PerfTimer&#160;</td><td class="memItemRight" valign="bottom"><b>newPerfTim
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa39b9da2ae3560a7774f451250b82cb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa39b9da2ae3560a7774f451250b82cb7">&#9670;&nbsp;</a></span>newSessionSlot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CommStatsQWidget::newSessionSlot </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>checked</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<pre class="fragment">         Maybe show the user in the UI that they have added this session
+</pre><p> already to this commitment today. It might be worth it to consider a case where maybe a session was terminated prematurily for whatever reason and the user might want to resume that session even after closing Tasker, this is assuming that they open Tasker the very same day again. Give this a lot of thought as this could add clutter to the UI, which I don't want. &zwj;/ return; } } if (<a class="el" href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d" title="MainUI::getInstance.">MainUI::getInstance()</a>-&gt;newSessionActionState()) { this-&gt;getNewSessionQWidget().show(); } } /** CommStatsQWidget::on_statsQFrame_destroyed</p>
+<p>CommStatsQWidget::saveCurrentSession This function assumes that the currently selected session is the same one that this new live session belongs to.</p>
 
 </div>
 </div>

@@ -74,85 +74,74 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define STATSUTILITY_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QDate&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;Session.h&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define WEEK_SIZE 7</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define MONTH_SIZE 30</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define ZERO 0</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define MINUTES_STRING &quot;Minute(s)&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define HOURS_STRING &quot;Hour(s)&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define DAY_STRING &quot;Day&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define WEEK_STRING &quot;Week&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define MONTH_STRING &quot;Month&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define EVERYDAY_STRING &quot;Everyday&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define WEEKLY_STRING &quot;Weekly&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define MINUTES_IN_HOUR 60</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define SECONDS_IN_MINUTE 60</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define SECONDS_IN_HOUR 3600</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define SECONDS_IN_DAY 86400</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define SECONDS_IN_WEEK 604800</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define SECONDS_IN_30_DAYS 2592000</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="namespaceutil.html">   29</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceutil.html">util</a> {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">class </span><a class="code" href="classutil_1_1StatsUtility.html">StatsUtility</a>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">struct </span><a class="code" href="structutil_1_1TimeWindow.html">TimeWindow</a>;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;QDebug&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;Session.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define WEEK_SIZE 7</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define MONTH_SIZE 30</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define ZERO 0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define MINUTES_STRING &quot;Minute(s)&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define HOURS_STRING &quot;Hour(s)&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define DAY_STRING &quot;Day&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define WEEK_STRING &quot;Week&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define MONTH_STRING &quot;Month&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define EVERYDAY_STRING &quot;Everyday&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define WEEKLY_STRING &quot;Weekly&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define MINUTES_IN_HOUR 60</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define SECONDS_IN_MINUTE 60</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define SECONDS_IN_HOUR 3600</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define SECONDS_IN_DAY 86400</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define SECONDS_IN_WEEK 604800</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define SECONDS_IN_30_DAYS 2592000</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="namespaceutil.html">   30</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceutil.html">util</a> {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">struct </span>TimeWindow;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// QDataStream &amp;operator&lt;&lt;(QDataStream &amp;out, const TimeWindow);</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// QDataStream &amp;operator&gt;&gt;(QDataStream &amp;in, TimeWindow &amp;);</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;} <span class="comment">// namespace util</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structutil_1_1TimeWindow.html">   35</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structutil_1_1TimeWindow.html">util::TimeWindow</a> {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  QDate startDate;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  QDate endDate;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  QVector&lt;udata::Session&gt; sessions;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;};</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// QDataStream&amp; util::operator&lt;&lt;(QDataStream &amp;out, const util::TimeWindow t)</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//{</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// return out;</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">//}</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// QDataStream&amp; util::operator&gt;&gt;(QDataStream &amp;in, util::TimeWindow &amp;t)</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">//{</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">// return in;</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">//}</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classutil_1_1StatsUtility.html">   52</a></span>&#160;<span class="keyword">class </span><a class="code" href="classutil_1_1StatsUtility.html">util::StatsUtility</a> {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classutil_1_1StatsUtility.html#a496e9e29e8b94a57882b042b49d482e2">   61</a></span>&#160;  <span class="keyword">inline</span> <span class="keyword">static</span> int64_t <a class="code" href="classutil_1_1StatsUtility.html#a496e9e29e8b94a57882b042b49d482e2">toMinutes</a>(int64_t seconds) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    int64_t result = -1;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">return</span> (result = seconds &lt; 0 ? result : seconds / SECONDS_IN_MINUTE);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keyword">inline</span> <span class="keyword">static</span> int64_t minutesToSeconds(int64_t Minutes) {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    int64_t result = -1;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">return</span> (result = Minutes &lt; 0 ? result : Minutes * SECONDS_IN_MINUTE);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  }</div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classutil_1_1StatsUtility.html#aed42a65c06f468ff9d8c6d2c5f4a9b88">   76</a></span>&#160;  <span class="keyword">static</span> <span class="keyword">inline</span> int64_t <a class="code" href="classutil_1_1StatsUtility.html#aed42a65c06f468ff9d8c6d2c5f4a9b88">toHours</a>(int64_t seconds) {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    int64_t result = -1;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> (result = seconds &lt; 0 ? result : seconds / SECONDS_IN_HOUR);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keyword">static</span> int64_t <a class="code" href="classutil_1_1StatsUtility.html#ae237117cbf9022e4a2da5ff5a0c4d0db">toDays</a>(int64_t seconds);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="keyword">static</span> int64_t <a class="code" href="classutil_1_1StatsUtility.html#a74d5d8f373696053167aa80a4b6ee29f">toWeeks</a>(int64_t seconds);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keyword">static</span> int64_t <a class="code" href="classutil_1_1StatsUtility.html#aa208003c6e6c772ffc2924b4e9af17e2">toMonths</a>(int64_t seconds);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span> milliToSeconds(<span class="keywordtype">long</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="classutil_1_1StatsUtility.html#a1556c3650019332538bb4d41dc5856df">calculateProductivePercentage</a>(int64_t secondsTotal,</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                                              int64_t secondsProductive);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="classutil_1_1StatsUtility.html#a1c69e04f902bc84787c420b2dee3c4a4">calculateUnproductivePercentage</a>(int64_t secondsTotal,</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                                                int64_t secondsProductive);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <a class="code" href="classutil_1_1StatsUtility.html">StatsUtility</a>();</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  ~<a class="code" href="classutil_1_1StatsUtility.html">StatsUtility</a>();</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;};</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#endif // STATSUTILITY_H</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// namespace util</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// QDataStream&amp; util::operator&lt;&lt;(QDataStream &amp;out, const util::TimeWindow t)</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">//{</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// return out;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">//}</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// QDataStream&amp; util::operator&gt;&gt;(QDataStream &amp;in, util::TimeWindow &amp;t)</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">//{</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// return in;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">//}</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="namespaceutil.html#aa07a52000163afd982cf784723780009">   51</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="namespaceutil.html#aa07a52000163afd982cf784723780009">toMinutes</a>(int64_t seconds) {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">double</span> result = -1.0;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordflow">return</span> (result = seconds &lt; 0 ? result : seconds / (<span class="keywordtype">double</span>)SECONDS_IN_MINUTE);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">inline</span> int64_t minutesToSeconds(int64_t Minutes) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  int64_t result = -1;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordflow">return</span> (result = Minutes &lt; 0 ? result : Minutes * SECONDS_IN_MINUTE);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="namespaceutil.html#a37e37b735ca52a98d2188c64f42c1bdf">   66</a></span>&#160;<span class="keyword">inline</span> int64_t <a class="code" href="namespaceutil.html#a37e37b735ca52a98d2188c64f42c1bdf">toHours</a>(int64_t seconds) {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  int64_t result = -1;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordflow">return</span> (result = seconds &lt; 0 ? result : seconds / SECONDS_IN_HOUR);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;int64_t <a class="code" href="namespaceutil.html#a22a757a88e9c23a0f251b7c68c7055e0">toDays</a>(int64_t seconds);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;int64_t <a class="code" href="namespaceutil.html#a79e0659a309735f8d094748092d0eae8">toWeeks</a>(int64_t seconds);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;int64_t <a class="code" href="namespaceutil.html#ae64ef2b4a44270b4ff2808ffe942db84">toMonths</a>(int64_t seconds);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordtype">long</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span> milliToSeconds(<span class="keywordtype">long</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">double</span> <a class="code" href="namespaceutil.html#ab7d57ae259c24086720c8fd19ed20c95">calculateProductivePercentage</a>(int64_t secondsTotal,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                                     int64_t secondsProductive);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordtype">double</span> <a class="code" href="namespaceutil.html#a889a3615b1e5dee6872989f8d188166e">calculateUnproductivePercentage</a>(int64_t secondsTotal,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                                       int64_t secondsProductive);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">int</span> <a class="code" href="namespaceutil.html#ad7f9ec03e631c515d87189573c5202bb">formatTime</a>(QString &amp;formatString, <span class="keywordtype">float</span> Time, QString &amp;context,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;               <span class="keywordtype">int</span> start = 0);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;} <span class="comment">// namespace util</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif // STATSUTILITY_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassutil_1_1StatsUtility_html_a1c69e04f902bc84787c420b2dee3c4a4"><div class="ttname"><a href="classutil_1_1StatsUtility.html#a1c69e04f902bc84787c420b2dee3c4a4">util::StatsUtility::calculateUnproductivePercentage</a></div><div class="ttdeci">static double calculateUnproductivePercentage(int64_t secondsTotal, int64_t secondsProductive)</div><div class="ttdoc">util::StatsUtility::calculateUnproductivePercentage</div><div class="ttdef"><b>Definition:</b> StatsUtility.cpp:83</div></div>
-<div class="ttc" id="aclassutil_1_1StatsUtility_html_ae237117cbf9022e4a2da5ff5a0c4d0db"><div class="ttname"><a href="classutil_1_1StatsUtility.html#ae237117cbf9022e4a2da5ff5a0c4d0db">util::StatsUtility::toDays</a></div><div class="ttdeci">static int64_t toDays(int64_t seconds)</div><div class="ttdoc">util::StatsUtility::toMinutes</div><div class="ttdef"><b>Definition:</b> StatsUtility.cpp:32</div></div>
-<div class="ttc" id="aclassutil_1_1StatsUtility_html"><div class="ttname"><a href="classutil_1_1StatsUtility.html">util::StatsUtility</a></div><div class="ttdoc">The util::StatsUtility class.</div><div class="ttdef"><b>Definition:</b> StatsUtility.h:52</div></div>
-<div class="ttc" id="aclassutil_1_1StatsUtility_html_a496e9e29e8b94a57882b042b49d482e2"><div class="ttname"><a href="classutil_1_1StatsUtility.html#a496e9e29e8b94a57882b042b49d482e2">util::StatsUtility::toMinutes</a></div><div class="ttdeci">static int64_t toMinutes(int64_t seconds)</div><div class="ttdoc">util::StatsUtility::toMinutes</div><div class="ttdef"><b>Definition:</b> StatsUtility.h:61</div></div>
-<div class="ttc" id="aclassutil_1_1StatsUtility_html_a74d5d8f373696053167aa80a4b6ee29f"><div class="ttname"><a href="classutil_1_1StatsUtility.html#a74d5d8f373696053167aa80a4b6ee29f">util::StatsUtility::toWeeks</a></div><div class="ttdeci">static int64_t toWeeks(int64_t seconds)</div><div class="ttdoc">util::StatsUtility::toWeeks</div><div class="ttdef"><b>Definition:</b> StatsUtility.cpp:43</div></div>
-<div class="ttc" id="aclassutil_1_1StatsUtility_html_aed42a65c06f468ff9d8c6d2c5f4a9b88"><div class="ttname"><a href="classutil_1_1StatsUtility.html#aed42a65c06f468ff9d8c6d2c5f4a9b88">util::StatsUtility::toHours</a></div><div class="ttdeci">static int64_t toHours(int64_t seconds)</div><div class="ttdoc">util::StatsUtility::toHours</div><div class="ttdef"><b>Definition:</b> StatsUtility.h:76</div></div>
-<div class="ttc" id="aclassutil_1_1StatsUtility_html_aa208003c6e6c772ffc2924b4e9af17e2"><div class="ttname"><a href="classutil_1_1StatsUtility.html#aa208003c6e6c772ffc2924b4e9af17e2">util::StatsUtility::toMonths</a></div><div class="ttdeci">static int64_t toMonths(int64_t seconds)</div><div class="ttdoc">util::StatsUtility::toMonths</div><div class="ttdef"><b>Definition:</b> StatsUtility.cpp:53</div></div>
-<div class="ttc" id="aclassutil_1_1StatsUtility_html_a1556c3650019332538bb4d41dc5856df"><div class="ttname"><a href="classutil_1_1StatsUtility.html#a1556c3650019332538bb4d41dc5856df">util::StatsUtility::calculateProductivePercentage</a></div><div class="ttdeci">static double calculateProductivePercentage(int64_t secondsTotal, int64_t secondsProductive)</div><div class="ttdoc">util::StatsUtility::calculateProductivePercentage</div><div class="ttdef"><b>Definition:</b> StatsUtility.cpp:65</div></div>
-<div class="ttc" id="astructutil_1_1TimeWindow_html"><div class="ttname"><a href="structutil_1_1TimeWindow.html">util::TimeWindow</a></div><div class="ttdef"><b>Definition:</b> StatsUtility.h:35</div></div>
-<div class="ttc" id="anamespaceutil_html"><div class="ttname"><a href="namespaceutil.html">util</a></div><div class="ttdoc">The util namespace has everything that is no more than &quot;utillity&quot; for Tasker. Things like conversion ...</div><div class="ttdef"><b>Definition:</b> StatsUtility.h:29</div></div>
+<div class="ttc" id="anamespaceutil_html_ab7d57ae259c24086720c8fd19ed20c95"><div class="ttname"><a href="namespaceutil.html#ab7d57ae259c24086720c8fd19ed20c95">util::calculateProductivePercentage</a></div><div class="ttdeci">double calculateProductivePercentage(int64_t secondsTotal, int64_t secondsProductive)</div><div class="ttdoc">util::StatsUtility::calculateProductivePercentage</div><div class="ttdef"><b>Definition:</b> StatsUtility.cpp:66</div></div>
+<div class="ttc" id="anamespaceutil_html_a889a3615b1e5dee6872989f8d188166e"><div class="ttname"><a href="namespaceutil.html#a889a3615b1e5dee6872989f8d188166e">util::calculateUnproductivePercentage</a></div><div class="ttdeci">double calculateUnproductivePercentage(int64_t secondsTotal, int64_t secondsProductive)</div><div class="ttdoc">util::StatsUtility::calculateUnproductivePercentage</div><div class="ttdef"><b>Definition:</b> StatsUtility.cpp:86</div></div>
+<div class="ttc" id="anamespaceutil_html_aa07a52000163afd982cf784723780009"><div class="ttname"><a href="namespaceutil.html#aa07a52000163afd982cf784723780009">util::toMinutes</a></div><div class="ttdeci">double toMinutes(int64_t seconds)</div><div class="ttdoc">util::StatsUtility::toMinutes</div><div class="ttdef"><b>Definition:</b> StatsUtility.h:51</div></div>
+<div class="ttc" id="anamespaceutil_html_ae64ef2b4a44270b4ff2808ffe942db84"><div class="ttname"><a href="namespaceutil.html#ae64ef2b4a44270b4ff2808ffe942db84">util::toMonths</a></div><div class="ttdeci">int64_t toMonths(int64_t seconds)</div><div class="ttdoc">util::StatsUtility::toMonths</div><div class="ttdef"><b>Definition:</b> StatsUtility.cpp:53</div></div>
+<div class="ttc" id="anamespaceutil_html_a79e0659a309735f8d094748092d0eae8"><div class="ttname"><a href="namespaceutil.html#a79e0659a309735f8d094748092d0eae8">util::toWeeks</a></div><div class="ttdeci">int64_t toWeeks(int64_t seconds)</div><div class="ttdoc">util::StatsUtility::toWeeks</div><div class="ttdef"><b>Definition:</b> StatsUtility.cpp:43</div></div>
+<div class="ttc" id="anamespaceutil_html_a37e37b735ca52a98d2188c64f42c1bdf"><div class="ttname"><a href="namespaceutil.html#a37e37b735ca52a98d2188c64f42c1bdf">util::toHours</a></div><div class="ttdeci">int64_t toHours(int64_t seconds)</div><div class="ttdoc">util::StatsUtility::toHours</div><div class="ttdef"><b>Definition:</b> StatsUtility.h:66</div></div>
+<div class="ttc" id="anamespaceutil_html_ad7f9ec03e631c515d87189573c5202bb"><div class="ttname"><a href="namespaceutil.html#ad7f9ec03e631c515d87189573c5202bb">util::formatTime</a></div><div class="ttdeci">int formatTime(QString &amp;formatString, float Time, QString &amp;context, int start=0)</div><div class="ttdoc">util::formatTime formats the time(in minutes) to a human redable format of &quot;XhYM&quot;....</div><div class="ttdef"><b>Definition:</b> StatsUtility.cpp:112</div></div>
+<div class="ttc" id="anamespaceutil_html"><div class="ttname"><a href="namespaceutil.html">util</a></div><div class="ttdoc">The util namespace has everything that is no more than &quot;utillity&quot; for Tasker. Things like conversion ...</div><div class="ttdef"><b>Definition:</b> StatsUtility.h:30</div></div>
+<div class="ttc" id="anamespaceutil_html_a22a757a88e9c23a0f251b7c68c7055e0"><div class="ttname"><a href="namespaceutil.html#a22a757a88e9c23a0f251b7c68c7055e0">util::toDays</a></div><div class="ttdeci">int64_t toDays(int64_t seconds)</div><div class="ttdoc">util::StatsUtility::toMinutes</div><div class="ttdef"><b>Definition:</b> StatsUtility.cpp:32</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

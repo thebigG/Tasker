@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['pause_220',['pause',['../classEngine_1_1AudioHook.html#a8436cfd80e4dbdec38449ffdd0b1aa42',1,'Engine::AudioHook::pause()'],['../classEngine_1_1XHook.html#a0e7ec48d50e9f9061115553b686add2f',1,'Engine::XHook::pause()']]],
-  ['prepfiles_221',['prepFiles',['../classudata_1_1UdataUtils.html#a100cd47121a590471cc850418bf05c2e',1,'udata::UdataUtils']]],
-  ['productiveslot_222',['productiveSlot',['../classEngine_1_1Timer.html#a26808f36fda1dfff089b001d7dd0f45a',1,'Engine::Timer']]]
+  ['newsessionqwidget_218',['NewSessionQWidget',['../classNewSessionQWidget.html#ab140edbd393359cb93d8e2a304ffc42b',1,'NewSessionQWidget']]],
+  ['newsessionslot_219',['newSessionSlot',['../classCommStatsQWidget.html#aa39b9da2ae3560a7774f451250b82cb7',1,'CommStatsQWidget']]]
 ];

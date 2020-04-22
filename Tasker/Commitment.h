@@ -27,10 +27,35 @@ struct TimeWindow {
   QDate startDate;
   QDate endDate;
   QVector<Session> sessions;
+  /**
+   * @brief frequency
+   * The only times the client(Commitment) should to write to this field is
+   * when creating the TimeWindow for the first time and when a TimeWindow is
+   * opened (isOpen() returns true) and not done yet(isDone() returns false )
+   * and the frequency changes as a result of the Commitment's frequency
+   * changing. Otherwise, frequency should not be modified.
+   */
   int frequency;
+  /**
+   * @brief isDone represents whether or not this TimeWindow's sessions have all
+   * been completed or not. The number of sessions that MUST be compeleted for
+   * TimeWindow is determined by the frequency of this TimeWindow. This is
+   * particularly useful for the UI when it wants to know whether it can add
+   * sessions or not to a particular TimeWindow.
+   *
+   * @return true if all sessions have been completed. false otherwise.
+   */
   bool isDone() { return sessions.length() == frequency; }
-  bool done = false; // managed by Commitment
-  bool closed = false;
+  /**
+   * @brief isOpen
+   * If isOpen is true, then that means that this TimeWindow is not over yet,
+   * the endDate is not past the current date.
+   * Despite its functionality, I don't think it will be that useful at all to
+   * have this method.
+   * I'll think about it some more, but the more I think about it, the less
+   * sense it makes.
+   */
+  bool isOpen() { return QDate::currentDate() <= endDate; }
 };
 QDataStream &operator<<(QDataStream &out, const CommitmentFrequency &);
 QDataStream &operator>>(QDataStream &in, CommitmentFrequency &);

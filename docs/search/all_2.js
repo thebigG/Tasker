@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['calculateproductivepercentage_8',['calculateProductivePercentage',['../classutil_1_1StatsUtility.html#a1556c3650019332538bb4d41dc5856df',1,'util::StatsUtility']]],
-  ['calculateunproductivepercentage_9',['calculateUnproductivePercentage',['../classutil_1_1StatsUtility.html#a1c69e04f902bc84787c420b2dee3c4a4',1,'util::StatsUtility']]],
+  ['calculateproductivepercentage_8',['calculateProductivePercentage',['../namespaceutil.html#ab7d57ae259c24086720c8fd19ed20c95',1,'util']]],
+  ['calculateunproductivepercentage_9',['calculateUnproductivePercentage',['../namespaceutil.html#a889a3615b1e5dee6872989f8d188166e',1,'util']]],
   ['commitment_10',['Commitment',['../classudata_1_1Commitment.html',1,'udata::Commitment'],['../classudata_1_1Commitment.html#a03a4562c94749bce3a53a9a5b0e22a9f',1,'udata::Commitment::Commitment()']]],
   ['commitment_2eh_11',['Commitment.h',['../Commitment_8h.html',1,'']]],
   ['commitmentfrequency_12',['CommitmentFrequency',['../structudata_1_1CommitmentFrequency.html',1,'udata']]],

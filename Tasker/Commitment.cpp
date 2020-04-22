@@ -116,6 +116,7 @@ void Commitment::updateCommitmentWindows() {
     currentDate = currentDate.addDays(frequency.timeWindowSize - 1);
     newWindow.endDate.setDate(currentDate.year(), currentDate.month(),
                               currentDate.day());
+    newWindow.frequency = frequency.frequency;
   } else {
     TimeWindow &lastWindow = commitmentWindows.last();
     if (currentDate <= lastWindow.endDate) {
@@ -135,6 +136,7 @@ void Commitment::updateCommitmentWindows() {
       currentDate = currentDate.addDays(frequency.timeWindowSize);
       newWindow.endDate.setDate(currentDate.year(), currentDate.month(),
                                 currentDate.day());
+      newWindow.frequency = frequency.frequency;
     }
   }
 }

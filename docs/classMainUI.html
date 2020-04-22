@@ -66,6 +66,7 @@ $(function() {
 <a href="#pub-slots">Public Slots</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classMainUI-members.html">List of all members</a>  </div>
@@ -74,7 +75,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a whole. One can think as this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes,context menus and look-and-feel of the entire UI.  
+<p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a whole. One can think of this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes,context menus and look-and-feel of the entire UI. Another responsability of this class is that it works as the keykeeper of all of the actions that a user may want to do on Tasker. For instance actions( or QActions in QT speak) such as creating new sessions are allowed/disallowed by this class as it is looking at the meta state of the Application as a whole. Any entity that wants to know whether the user can execute an action or not at the moment, such as starting a new Session for a Commitment, should ask this class first.  
  <a href="classMainUI.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="mainui_8h_source.html">mainui.h</a>&gt;</code></p>
@@ -94,6 +95,15 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a94231f91cd102f646a7716e39cede220"><td class="memItemLeft" align="right" valign="top"><a id="a94231f91cd102f646a7716e39cede220"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></tr>
+<tr class="separator:a94231f91cd102f646a7716e39cede220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a780bb5a7fe05ae8ca2a1080a1f754efa"><td class="memItemLeft" align="right" valign="top"><a id="a780bb5a7fe05ae8ca2a1080a1f754efa"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateNewSessionActionState</b> ()</td></tr>
+<tr class="separator:a780bb5a7fe05ae8ca2a1080a1f754efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91650f667b93a03bd19958a7b1805d7b"><td class="memItemLeft" align="right" valign="top"><a id="a91650f667b93a03bd19958a7b1805d7b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>newSessionActionState</b> ()</td></tr>
+<tr class="separator:a91650f667b93a03bd19958a7b1805d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ad0a629be70c502b2654bf5b5dd03ab"><td class="memItemLeft" align="right" valign="top"><a id="a6ad0a629be70c502b2654bf5b5dd03ab"></a>
 <a class="el" href="classCommStatsQWidget.html">CommStatsQWidget</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCommitmentHub</b> ()</td></tr>
 <tr class="separator:a6ad0a629be70c502b2654bf5b5dd03ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -103,6 +113,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:adacd428c44ae710fb9f6e7a36b8ac87d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classMainUI.html">MainUI</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d">getInstance</a> ()</td></tr>
 <tr class="memdesc:adacd428c44ae710fb9f6e7a36b8ac87d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d" title="MainUI::getInstance.">MainUI::getInstance</a>.  <a href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d">More...</a><br /></td></tr>
 <tr class="separator:adacd428c44ae710fb9f6e7a36b8ac87d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:aa79ced1d7fa70aec0452da1c50fbab0a"><td class="memItemLeft" align="right" valign="top"><a id="aa79ced1d7fa70aec0452da1c50fbab0a"></a>
+QAction *&#160;</td><td class="memItemRight" valign="bottom"><b>getNewSessionAction</b> ()</td></tr>
+<tr class="separator:aa79ced1d7fa70aec0452da1c50fbab0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -126,7 +142,7 @@ static std::unique_ptr&lt; <a class="el" href="classMainUI.html">MainUI</a> &gt;
 <tr class="separator:a5977d77626d6faef80f3e1f347449952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a whole. One can think as this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes,context menus and look-and-feel of the entire UI. </p>
+<div class="textblock"><p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a whole. One can think of this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes,context menus and look-and-feel of the entire UI. Another responsability of this class is that it works as the keykeeper of all of the actions that a user may want to do on Tasker. For instance actions( or QActions in QT speak) such as creating new sessions are allowed/disallowed by this class as it is looking at the meta state of the Application as a whole. Any entity that wants to know whether the user can execute an action or not at the moment, such as starting a new Session for a Commitment, should ask this class first. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="adacd428c44ae710fb9f6e7a36b8ac87d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adacd428c44ae710fb9f6e7a36b8ac87d">&#9670;&nbsp;</a></span>getInstance()</h2>

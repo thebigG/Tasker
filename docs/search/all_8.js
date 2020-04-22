@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['mainui_62',['MainUI',['../classMainUI.html',1,'']]],
-  ['makecommitmentbuttonslot_63',['makeCommitmentButtonSlot',['../classTaskerUIMainWindowQWidget.html#a49477550e54500cc40f9ebc79467a52f',1,'TaskerUIMainWindowQWidget']]]
+  ['livesession_63',['LiveSession',['../classLiveSession.html',1,'']]],
+  ['loaduserdata_64',['loadUserData',['../classudata_1_1UdataUtils.html#a7d13f8be23b07e4ac43ecf220742776a',1,'udata::UdataUtils']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['xhook_153',['XHook',['../classEngine_1_1XHook.html',1,'Engine']]]
+  ['udatautils_153',['UdataUtils',['../classudata_1_1UdataUtils.html',1,'udata']]],
+  ['user_154',['User',['../classudata_1_1User.html',1,'udata']]]
 ];
