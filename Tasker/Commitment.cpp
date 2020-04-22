@@ -289,12 +289,14 @@ QDataStream &udata::operator<<(QDataStream &out,
   for (const auto s : newTimeWindow.sessions) {
     out << s;
   };
+  out << newTimeWindow.frequency;
   qDebug() << "newTimeWindow startDate=*****************#2";
   return out;
 }
 QDataStream &udata::operator>>(QDataStream &in, TimeWindow &newTimeWindow) {
   QDate newStartDate, newEndDate;
   QVector<Session> newSessions;
+  int TimeWindowFrequency = 0;
   in >> newStartDate >> newEndDate;
   newTimeWindow.startDate = newStartDate;
   qDebug()
@@ -307,7 +309,8 @@ QDataStream &udata::operator>>(QDataStream &in, TimeWindow &newTimeWindow) {
     in >> s;
     newTimeWindow.sessions.append(s);
   }
-  //    newTimeWindow.sessions = newSessions;
+  in >> TimeWindowFrequency;
+  newTimeWindow.frequency = TimeWindowFrequency;
   return in;
 }
 QDataStream &udata::operator<<(QDataStream &out,

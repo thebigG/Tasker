@@ -42,11 +42,18 @@ void MainUI::updateNewSessionActionState() {
     getNewSessionAction()->setEnabled(false);
     return;
   }
+  qDebug() << "frequency for timeWindow="
+           << User::getInstance()
+                  ->getCurrentCommitment()
+                  .getCommitmentWindows()
+                  .last()
+                  .frequency;
   if (User::getInstance()
           ->getCurrentCommitment()
           .getCommitmentWindows()
           .last()
           .isDone()) {
+
     getNewSessionAction()->setEnabled(false);
     return;
   }
@@ -90,7 +97,11 @@ MainUI *MainUI::getInstance() {
 void MainUI::saveTaskerStateSlot() {
   qDebug() << "Saving state";
   UdataUtils::saveUserData(*User::getInstance());
-}
+} /**
+   * @brief MainUI::newSessionActionState
+   * @return true if Tasker is able to create a session at the moment; false
+   * otherwise.
+   */
 bool MainUI::newSessionActionState() {
   return this->sessionMenu.actions().at(0)->isEnabled();
 }

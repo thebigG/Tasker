@@ -1,6 +1,7 @@
 #ifndef LIVESESSION_H
 #define LIVESESSION_H
 
+#include <QLabel>
 #include <QWidget>
 #include <TaskerPerf/perftimer.h>
 namespace Ui {
@@ -12,6 +13,7 @@ class LiveSession : public QWidget {
 
 public:
   explicit LiveSession(QWidget *parent = nullptr);
+  QLabel &getcongratsMessageLabel();
   ~LiveSession();
 private slots:
   void updateTimeUI();

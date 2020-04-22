@@ -254,8 +254,13 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
                             .length() -
                         1;
     updateSnapshot();
-    //            0);
     newPerfTimer.stop();
+    if (MainUI::getInstance()->newSessionActionState()) {
+      currentLiveSessionWidget.getcongratsMessageLabel().setText("");
+    } else {
+      currentLiveSessionWidget.getcongratsMessageLabel().setText(
+          "Congrats! You've completed your session!");
+    }
     qDebug() << "duration of chart update=" << newPerfTimer.duration
              << "milliseconds";
     QTextStream(stdout) << "(cout)duration of chart update="

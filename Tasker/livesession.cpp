@@ -36,4 +36,7 @@ void LiveSession::congratsSlot() {
   qDebug() << "congrats on livession++++++";
   ui->congratsMessageLabel->setText("Congrats! You've completed your session!");
 }
+QLabel &LiveSession::getcongratsMessageLabel() {
+  return *ui->congratsMessageLabel;
+}
 LiveSession::~LiveSession() { delete ui; }

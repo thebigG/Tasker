@@ -48,8 +48,8 @@ int main(int argc, char *argv[]) {
   //      "Generated#13", 8, util::minutesToSeconds(10),
   //      util::minutesToSeconds(100), util::minutesToSeconds(0),
   //      util::minutesToSeconds(25), udata::CommitmentType::WEEKLY);
-  qDebug() << "Commitment summary:"
-           << User::getInstance()->getCommitments().at(0).summary();
+  //  qDebug() << "Commitment summary:"
+  //           << User::getInstance()->getCommitments().at(0).summary();
   QObject::connect(&a, &QGuiApplication::lastWindowClosed,
                    &MainUI::saveTaskerStateSlot);
   MainUI *widget = nullptr;
