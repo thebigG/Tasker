@@ -44,14 +44,14 @@ void Timer::run() {
 void Timer::startTimer() {
   qDebug() << "From work thread: " << currentThreadId();
 
-  if (listenerType == Hook::HookType::X_MOUSE_KEYBOARD) {
-    listener = std::make_unique<XHook>();
-  } else if (listenerType == Hook::HookType::X_MOUSE) {
-    listener = std::make_unique<XHook>(XHookMode::MOUSE);
-  } else if (listenerType == Hook::HookType::X_KEYBOARD) {
-    listener = std::make_unique<XHook>(XHookMode::KEYBOARD);
-  } else if (listenerType == Hook::HookType::audio) {
-    listener = std::make_unique<AudioHook>();
+  if (hookType == Hook::HookType::X_MOUSE_KEYBOARD) {
+    hook = std::make_unique<XHook>();
+  } else if (hookType == Hook::HookType::X_MOUSE) {
+    hook = std::make_unique<XHook>(XHookMode::MOUSE);
+  } else if (hookType == Hook::HookType::X_KEYBOARD) {
+    hook = std::make_unique<XHook>(XHookMode::KEYBOARD);
+  } else if (hookType == Hook::HookType::audio) {
+    hook = std::make_unique<AudioHook>();
   }
   /**
       This block of code  WORKS!
@@ -59,15 +59,15 @@ void Timer::startTimer() {
       Specifically the statements regarding the listener and
       listenerThread. I'm talking about the next 3 lines of code.
    */
-  connect(&listenerThread, &QThread::started, listener.get(), &Hook::start);
-  listener->moveToThread(&listenerThread);
+  connect(&listenerThread, &QThread::started, hook.get(), &Hook::start);
+  hook->moveToThread(&listenerThread);
   listenerThread.start();
 }
 /**
  * @brief Timer::tickUpdate
  * This is a time-sensitive function. Whatever it executes, it MUST return
  * within 250 milliseconds, which is human perception threshold.
- * Current latency(average)= 14000 nanoseconds
+ * Current latency(average)= 25000 nanoseconds
  */
 void Timer::tickUpdate() {
   newPerfTimer.restart();
@@ -75,15 +75,15 @@ void Timer::tickUpdate() {
    * @brief productiveTickDelta
    * This is kind of like a "grace" peroid for
    * how long the user can go unproductive.
-   * This is 60 seconds for now. Will adjust as I test things out.
+   * This is 30 seconds for now. Will adjust as I test things out.
    */
   int productiveTickDelta = tickCount - lastProductiveTick;
-  if (listener->getState() == Hook::HookState::productive) {
+  if (hook->getState() == Hook::HookState::productive) {
     currentProductiveTime += 1;
     producitveTickCount += 1;
     lastProductiveTick = tickCount;
-    listener->setState(Hook::HookState::unproductive);
-  } else if (productiveTickDelta < 60) {
+    hook->setState(Hook::HookState::unproductive);
+  } else if (productiveTickDelta < 30) {
     currentProductiveTime += 1;
     producitveTickCount += 1;
   } else {
@@ -100,9 +100,6 @@ void Timer::tickUpdate() {
     currentSession.setDate(QDate::currentDate());
     emit stopTimer();
   }
-  updateProductiveStatus();
-  updateUnproductiveStatus();
-  updateTimeElapsedStatus();
   tickCount++;
   newPerfTimer.stop();
   qDebug() << "tick update on Timer took this long(milliseconds):"
@@ -110,16 +107,14 @@ void Timer::tickUpdate() {
   emit tick();
 }
 
-int Timer::getTotalTimeElapsed() {
-  return currentUnproductiveTime + currentProductiveTime;
-}
+int Timer::getTotalTimeElapsed() { return totalTimeElapsed; }
 Timer *Timer::getInstance() { return thisInstance.get(); }
 void Timer::setCurrentSession(Session newSession) {
   currentSession = newSession;
   productiveTimeGoal = currentSession.getGoal();
 }
 void Timer::setListener(Hook::HookType newListenerType) {
-  listenerType = newListenerType;
+  hookType = newListenerType;
 }
 void Timer::initTimer(Hook::HookType newListener, udata::Session newSession) {
   thisInstance->setCurrentSession(newSession);
@@ -158,55 +153,7 @@ void Timer::stopTimerSlot() {
   emit congrats();
   timer->stop();
 }
-void Timer::updateProductiveStatus() {
-  long long int productiveMinutes = toMinutes(currentProductiveTime);
-  int resultProductive = currentProductiveTime;
-  if (resultProductive > MINUTE) {
-    resultProductive = currentProductiveTime - (productiveMinutes * MINUTE);
-  } else if (resultProductive % MINUTE == 0) {
-    resultProductive = 0;
-  }
 
-  productiveStatus = QString::number(productiveMinutes) + ":" +
-                     QString::number(resultProductive);
-  if (productiveMinutes == ZERO) {
-
-  } else {
-  }
-}
-/**
- * @brief Timer::getProductiveStatus
- * @return the productime time status(the string representation)
- * of the current productive time count.
- */
-QString &Timer::getProductiveStatus() { return productiveStatus; }
-void Timer::updateUnproductiveStatus() {
-  long long int productiveMinutes = toMinutes(currentUnproductiveTime);
-  int resultProductive = currentUnproductiveTime;
-  if (currentUnproductiveTime > MINUTE) {
-    resultProductive = currentUnproductiveTime - (productiveMinutes * MINUTE);
-  } else if (resultProductive % MINUTE == 0) {
-    resultProductive = 0;
-  }
-
-  UnproductiveStatus = QString::number(productiveMinutes) + ":" +
-                       QString::number(resultProductive);
-}
-QString &Timer::getUnproductiveStatus() { return UnproductiveStatus; }
-
-void Timer::updateTimeElapsedStatus() {
-  long long int productiveMinutes = toMinutes(totalTimeElapsed);
-  int resultProductive = totalTimeElapsed;
-  if (resultProductive > MINUTE) {
-    resultProductive = totalTimeElapsed - (productiveMinutes * MINUTE);
-  } else if (resultProductive % MINUTE == 0) {
-    resultProductive = 0;
-  }
-
-  TimeElapsedStatus = QString::number(productiveMinutes) + ":" +
-                      QString::number(resultProductive);
-}
-QString &Timer::getTimeElapsedStatus() { return TimeElapsedStatus; }
 void Timer::reset() {
   currentProductiveTime = 0;
   currentUnproductiveTime = 0;
@@ -222,3 +169,5 @@ void Timer::reset() {
   unproductiveTimeSurplus = 1;
 }
 udata::Session &Timer::getCurrentSession() { return currentSession; }
+int Timer::getProductiveTime() { return currentProductiveTime; }
+int Timer::getUnproductiveTime() { return currentUnproductiveTime; }

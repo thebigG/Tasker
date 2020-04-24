@@ -1,5 +1,6 @@
 #include "StatsUtility.h"
 #include <QDebug>
+#include <TaskerPerf/perftimer.h>
 
 /**
  * @brief util::StatsUtility::toMinutes
@@ -102,7 +103,7 @@ long long int util::milliToSeconds(long long int milliSeconds) {
    * format of "XhYM". This function is specially useful for optimization as it
    * tries its best to not allocate more memory for formatString, every
    * character insertion is done in-place.
-   * @param formatString The string to modify and int64_twrite the final
+   * @param formatString The string to modify and write the final
    * time(formatted) and context to.
    * @param time Time to be formatted in minutes.
    * @param context This string will get appended at the end of formatString
@@ -111,6 +112,8 @@ long long int util::milliToSeconds(long long int milliSeconds) {
    */
 int util::formatTime(QString &formatString, float time, QString &context,
                      int start) {
+  static Perf::PerfTimer newPerfTimer{};
+  newPerfTimer.restart();
   int temp = 0;
   if (start == 0) {
     formatString.fill(' ');
@@ -132,5 +135,7 @@ int util::formatTime(QString &formatString, float time, QString &context,
   formatString.replace(temp, 1, "m");
   temp = temp + 1;
   formatString.replace(temp, context.length(), context);
+  newPerfTimer.stop();
+  qDebug() << "perf time for formatTime" << newPerfTimer.duration;
   return temp + context.length();
 }

@@ -31,7 +31,7 @@ public:
     if (durationRecord.size() < durationRecordSize) {
       end = std::chrono::high_resolution_clock::now();
       durationRecord.push_back(
-          std::chrono::duration_cast<std::chrono::microseconds>(end - start)
+          std::chrono::duration_cast<std::chrono::nanoseconds>(end - start)
               .count());
       long long sum = 0;
       for (long long tempDuration : durationRecord) {

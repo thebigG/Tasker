@@ -21,6 +21,10 @@ private slots:
 
 private:
   Ui::LiveSession *ui;
+  QString productiveTimeValueText;
+  QString unproductiveTimeValueText;
+  QString totalTimeValueText;
+  QString contextText{""};
   Perf::PerfTimer liveSessionPerfTimer{};
   Perf::PerfTimer liveSessionPerfTimer1{};
   Perf::PerfTimer liveSessionPerfTimer2{};

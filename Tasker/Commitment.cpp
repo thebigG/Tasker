@@ -1,3 +1,4 @@
+
 #include "Commitment.h"
 #include <QDebug>
 #include <QtGlobal>

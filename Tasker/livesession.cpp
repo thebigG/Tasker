@@ -1,6 +1,7 @@
 #include "livesession.h"
 #include "ui_livesession.h"
 #include <QDebug>
+#include <StatsUtility.h>
 #include <Timer.h>
 using namespace Engine;
 LiveSession::LiveSession(QWidget *parent)
@@ -12,23 +13,37 @@ LiveSession::LiveSession(QWidget *parent)
           &LiveSession::congratsSlot);
   ui->congratsMessageLabel->setText("");
   this->setWindowTitle("Live Session");
+  productiveTimeValueText.reserve(10);
+  productiveTimeValueText.resize(10);
+  unproductiveTimeValueText.reserve(10);
+  unproductiveTimeValueText.resize(10);
+  totalTimeValueText.reserve(10);
+  totalTimeValueText.resize(10);
   //    this->ui->productiveTime
-  qDebug() << "text on label:" + ui->productiveTime->text();
+  qDebug() << "text on label:" + ui->productiveTimeValue->text();
 }
 /**
  * @brief LiveSession::updateTimeUI
  * This is a time-sensitive function.
  * It MUST return within 1 second.
- * current latency(average)=75,000 nanoseconds
+ * current latency(average)=140000 nanoseconds
  * I believe this latency can be reduced with some optimizations I'll be
  * making later.
  */
 void LiveSession::updateTimeUI() {
   liveSessionPerfTimer.restart();
-  ui->productiveTime->setText(Timer::getInstance()->getProductiveStatus());
-  ui->unproductiveTimeValue->setText(
-      Timer::getInstance()->getUnproductiveStatus());
-  ui->label->setText(Timer::getInstance()->getTimeElapsedStatus());
+  util::formatTime(productiveTimeValueText,
+                   util::toMinutes(Timer::getInstance()->getProductiveTime()),
+                   contextText);
+  util::formatTime(unproductiveTimeValueText,
+                   util::toMinutes(Timer::getInstance()->getUnproductiveTime()),
+                   contextText);
+  util::formatTime(totalTimeValueText,
+                   util::toMinutes(Timer::getInstance()->getTotalTimeElapsed()),
+                   contextText);
+  ui->productiveTimeValue->setText(productiveTimeValueText);
+  ui->unproductiveTimeValue->setText(unproductiveTimeValueText);
+  ui->label->setText(totalTimeValueText);
   liveSessionPerfTimer.stop();
   qDebug() << "updateTimeUI latency#4:" << liveSessionPerfTimer.duration;
 }

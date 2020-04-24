@@ -22,10 +22,10 @@ class Timer;
 class Engine::Timer : public QThread {
   Q_OBJECT
 private:
-  int currentProductiveTime = 0;
-  int currentUnproductiveTime = 0;
+  int currentProductiveTime = 0;   // in seconds
+  int currentUnproductiveTime = 0; // in seconds
   int totalTimeElapsed = 0;
-  long long int productiveTimeGoal;
+  long long int productiveTimeGoal; // in seconds
   udata::Session currentSession;
   static std::unique_ptr<Timer> thisInstance;
   Perf::PerfTimer newPerfTimer{};
@@ -43,17 +43,11 @@ private:
   int productiveTimeSurplus = 1; // For how many EXTRA ticks does productiveTime
                                  // get incremented. Depends on niceness
   int unproductiveTimeSurplus = 1;
-  std::unique_ptr<Hook> listener;
-  Hook::HookType listenerType;
+  std::unique_ptr<Hook> hook;
+  Hook::HookType hookType;
   QThread listenerThread;
   QThread thisThread;
   std::unique_ptr<QTimer> timer;
-  void updateProductiveStatus();
-  QString productiveStatus;
-  void updateUnproductiveStatus();
-  QString UnproductiveStatus;
-  void updateTimeElapsedStatus();
-  QString TimeElapsedStatus;
   virtual void run();
 
 public:
@@ -70,11 +64,9 @@ public:
   int getUnproductiveTime();
   void startTimer();
   int getTotalTimeElapsed();
+
   QTime getClock();
   udata::Session &getCurrentSession();
-  QString &getProductiveStatus();
-  QString &getUnproductiveStatus();
-  QString &getTimeElapsedStatus();
 
 public slots:
   void stopTimerSlot();

@@ -27,14 +27,14 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QLabel" name="productiveTime">
+    <widget class="QLabel" name="productiveTimeValue">
      <property name="font">
       <font>
        <pointsize>14</pointsize>
       </font>
      </property>
      <property name="text">
-      <string>0h0m0s</string>
+      <string>0h0m</string>
      </property>
     </widget>
    </item>
@@ -58,7 +58,7 @@
       </font>
      </property>
      <property name="text">
-      <string>0h0m0s</string>
+      <string>0h0m</string>
      </property>
     </widget>
    </item>
@@ -82,7 +82,7 @@
       </font>
      </property>
      <property name="text">
-      <string>0h0m0s</string>
+      <string>0h0m</string>
      </property>
     </widget>
    </item>
