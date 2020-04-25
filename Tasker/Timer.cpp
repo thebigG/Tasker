@@ -98,7 +98,14 @@ void Timer::tickUpdate() {
     currentSession.setProductiveTime(currentProductiveTime);
     currentSession.setUnproductiveTime(currentUnproductiveTime);
     currentSession.setDate(QDate::currentDate());
+    newPerfTimer.stop();
+    tickCount++;
     emit stopTimer();
+    reset();
+    //    "0h0m0s"()
+    qDebug() << "tick update on Timer took this long(milliseconds):"
+             << newPerfTimer.duration;
+    return;
   }
   tickCount++;
   newPerfTimer.stop();
@@ -153,7 +160,10 @@ void Timer::stopTimerSlot() {
   emit congrats();
   timer->stop();
 }
-
+/**
+ * @brief Timer::reset resets all state of the Timer to zero.
+ *
+ */
 void Timer::reset() {
   currentProductiveTime = 0;
   currentUnproductiveTime = 0;

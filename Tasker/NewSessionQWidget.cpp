@@ -112,9 +112,7 @@ void NewSessionQWidget::updateGoalText() {
   goalText.replace(5, commitmentName.length(), commitmentName);
   //  qDebug()<<""
   util::formatTime(
-      goalText,
-      util::toMinutes(
-          User::getInstance()->getCurrentCommitment().getFrequency().goal),
+      goalText, User::getInstance()->getCurrentCommitment().getFrequency().goal,
       goalContext, 5 + commitmentName.length());
   this->ui->goalQLabel->setText(goalText);
 }

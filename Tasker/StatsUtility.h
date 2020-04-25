@@ -29,17 +29,12 @@
  */
 namespace util {
 struct TimeWindow;
-// QDataStream &operator<<(QDataStream &out, const TimeWindow);
-// QDataStream &operator>>(QDataStream &in, TimeWindow &);
-// namespace util
-// QDataStream& util::operator<<(QDataStream &out, const util::TimeWindow t)
-//{
-// return out;
-//}
-// QDataStream& util::operator>>(QDataStream &in, util::TimeWindow &t)
-//{
-// return in;
-//}
+/**
+ * @brief The TimeFormat enum represents the different ways to format an amount
+ * of time, whther that'd be in seconds or minutes.
+ * In particular this enum is used for the formatTime function.
+ */
+enum class TimeFormat { HM, HMS };
 
 /**
  * @brief util::StatsUtility::toMinutes
@@ -52,7 +47,7 @@ inline double toMinutes(int64_t seconds) {
   double result = -1.0;
   return (result = seconds < 0 ? result : seconds / (double)SECONDS_IN_MINUTE);
 }
-inline int64_t minutesToSeconds(int64_t Minutes) {
+inline int64_t minutesToSeconds(double Minutes) {
   int64_t result = -1;
   return (result = Minutes < 0 ? result : Minutes * SECONDS_IN_MINUTE);
 }
@@ -76,6 +71,7 @@ double calculateProductivePercentage(int64_t secondsTotal,
 double calculateUnproductivePercentage(int64_t secondsTotal,
                                        int64_t secondsProductive);
 int formatTime(QString &formatString, float Time, QString &context,
-               int start = 0);
+               int start = 0, TimeFormat format = TimeFormat::HM);
 } // namespace util
+
 #endif // STATSUTILITY_H

@@ -99,30 +99,32 @@ double util::calculateUnproductivePercentage(int64_t secondsTotal,
 long long int util::milliToSeconds(long long int milliSeconds) {
   return milliSeconds / 1000;
 } /**
-   * @brief util::formatTime formats the time(in minutes) to a human redable
+   * @brief util::formatTime formats the time(in seconds) to a human redable
    * format of "XhYM". This function is specially useful for optimization as it
    * tries its best to not allocate more memory for formatString, every
    * character insertion is done in-place.
    * @param formatString The string to modify and write the final
    * time(formatted) and context to.
-   * @param time Time to be formatted in minutes.
+   * @param time Time to be formatted in seconds.
    * @param context This string will get appended at the end of formatString
    * @return The index after the last character in formatString, which may be
    * smaller than its size.
    */
 int util::formatTime(QString &formatString, float time, QString &context,
-                     int start) {
+                     int start, TimeFormat format) {
+  static int temp = 0;
+  static int numberOfSeconds = 0;
+  double timeInminutes = toMinutes(time);
   static Perf::PerfTimer newPerfTimer{};
   newPerfTimer.restart();
-  int temp = 0;
   if (start == 0) {
     formatString.fill(' ');
   } else {
     formatString.replace(start, formatString.length() - (start + 1), ' ');
   }
-  int numberOfHours = (int)time / MINUTES_IN_HOUR;
-  QString numberOfMinutesString{
-      QString::number(((int)time) - (numberOfHours * MINUTES_IN_HOUR))};
+  int numberOfHours = (int)timeInminutes / MINUTES_IN_HOUR;
+  QString numberOfMinutesString{QString::number(
+      ((int)timeInminutes) - (numberOfHours * MINUTES_IN_HOUR))};
   qDebug() << "hours-->" << numberOfHours;
   temp = QString::number(numberOfHours).length();
   formatString.replace(start, temp, QString::number(numberOfHours));
@@ -134,8 +136,20 @@ int util::formatTime(QString &formatString, float time, QString &context,
   temp += numberOfMinutesString.length();
   formatString.replace(temp, 1, "m");
   temp = temp + 1;
+  if (format == TimeFormat::HMS) {
+    float tempDecimal = timeInminutes - (int)timeInminutes;
+    QString numberOfSecondsString{
+        QString::number(tempDecimal * MINUTES_IN_HOUR)};
+    formatString.replace(temp, numberOfSecondsString.length(),
+                         numberOfSecondsString);
+    //    qDebug() << "format string==" << numberOfSecondsString;
+    temp += numberOfSecondsString.length();
+    formatString.replace(temp, 1, "s");
+    temp += 1;
+  }
   formatString.replace(temp, context.length(), context);
   newPerfTimer.stop();
+
   qDebug() << "perf time for formatTime" << newPerfTimer.duration;
   return temp + context.length();
 }

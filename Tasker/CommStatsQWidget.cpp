@@ -320,6 +320,7 @@ void CommStatsQWidget::saveCurrentSession() {
       .getCurrentTimeWindow()
       .sessions.append(Engine::Timer::getInstance()->getCurrentSession());
   udata::UdataUtils::saveUserData(*User::getInstance());
+  updateSnapshot();
 }
 void CommStatsQWidget::updateCommitmentInfoStatsQWidget() {
   commitmentMetaDataText.fill(' ');
@@ -339,8 +340,8 @@ void CommStatsQWidget::updateCommitmentInfoStatsQWidget() {
            << commitmentMetaDataText;
   util::formatTime(
       commitmentMetaDataText,
-      util::toMinutes(
-          User::getInstance()->getCurrentCommitment().getFrequency().goal),
+
+      User::getInstance()->getCurrentCommitment().getFrequency().goal,
       frequencyString, 0);
   qDebug() << "commitmentMetaDataText after format time-->"
            << commitmentMetaDataText;

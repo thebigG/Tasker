@@ -33,22 +33,28 @@ LiveSession::LiveSession(QWidget *parent)
 void LiveSession::updateTimeUI() {
   liveSessionPerfTimer.restart();
   util::formatTime(productiveTimeValueText,
-                   util::toMinutes(Timer::getInstance()->getProductiveTime()),
-                   contextText);
+                   Timer::getInstance()->getProductiveTime(), contextText, 0,
+                   util::TimeFormat::HMS);
   util::formatTime(unproductiveTimeValueText,
-                   util::toMinutes(Timer::getInstance()->getUnproductiveTime()),
-                   contextText);
+                   Timer::getInstance()->getUnproductiveTime(), contextText, 0,
+                   util::TimeFormat::HMS);
   util::formatTime(totalTimeValueText,
-                   util::toMinutes(Timer::getInstance()->getTotalTimeElapsed()),
-                   contextText);
+                   Timer::getInstance()->getTotalTimeElapsed(), contextText, 0,
+                   util::TimeFormat::HMS);
   ui->productiveTimeValue->setText(productiveTimeValueText);
   ui->unproductiveTimeValue->setText(unproductiveTimeValueText);
-  ui->label->setText(totalTimeValueText);
+  ui->totalTimeValue->setText(totalTimeValueText);
   liveSessionPerfTimer.stop();
   qDebug() << "updateTimeUI latency#4:" << liveSessionPerfTimer.duration;
 }
 void LiveSession::congratsSlot() {
   qDebug() << "congrats on livession++++++";
+  ui->productiveTimeValue->setText("0h0m0s");
+  ui->unproductiveTimeValue->setText("0h0m0s");
+  ui->totalTimeValue->setText("0h0m0s");
+  //  ui->
+  // reset the rest of the UI
+
   ui->congratsMessageLabel->setText("Congrats! You've completed your session!");
 }
 QLabel &LiveSession::getcongratsMessageLabel() {

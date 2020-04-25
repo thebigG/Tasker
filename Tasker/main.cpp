@@ -56,8 +56,8 @@ int main(int argc, char *argv[]) {
   qDebug() << "Tasker Debug mode";
   std::cout << "c++ version:" << __cplusplus;
   widget = MainUI::getInstance();
-  qDebug() << "thread id for UI:" << QThread::currentThreadId();
-
+  //  qDebug() << "thread id for UI:" << QThread::currentThreadId();
+  //  qDebug() << "multiplcation=" << 4.5 * 60;
   widget->show();
   return a.exec();
 }

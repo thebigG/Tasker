@@ -183,11 +183,13 @@ void udata::CommitmentSnaphot::update(udata::TimeWindow &currentWindow,
   //  productibeTimeAvgText.insert(
   //      util::formatTime(productibeTimeAvgText, productiveTimeAverage),
   //      " in Productive Avg");
-  util::formatTime(productibeTimeAvgText, productiveTimeAverage,
+  util::formatTime(productibeTimeAvgText,
+                   util::minutesToSeconds(productiveTimeAverage),
                    productiveTimeAvgLabelContext);
   productiveTimeAvgLabel.setText(productibeTimeAvgText);
   //  unproductibeTimeAvgText.insert(
-  util::formatTime(unproductibeTimeAvgText, unproductiveTimeAverage,
+  util::formatTime(unproductibeTimeAvgText,
+                   util::minutesToSeconds(unproductiveTimeAverage),
                    unproductiveTimeAvgLabelContext);
   //      " in Unproductive Avg");
   //  temp.append(QString::number(productiveTimeAverage));
