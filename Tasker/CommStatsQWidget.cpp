@@ -69,6 +69,14 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   this->ui->CommitmentInfoStatsQWidget->setPalette(p);
   currentLiveSessionWidget.setAutoFillBackground(true);
   currentLiveSessionWidget.setPalette(p);
+  //  p.setColor(QPalette::Window,
+  //  snapshot.palette().color(QPalette::Background));
+  currentLiveSessionWidget.getPlayButton()->setStyleSheet(
+      "background-color: rgba(255, 255, 255, 0);");
+  //  currentLiveSessionWidget.getPlayButton()->setAutoFillBackground(true);
+  //  currentLiveSessionWidget.getPlayButton()->setPalette(p);
+  //  currentLiveSessionWidget.getPlayButton()->
+  //  currentLiveSessionWidget.getPlayButton()->update();
 
 #endif
   this->layout()->setSpacing(0);
@@ -230,6 +238,7 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
   qDebug() << "changed commitment index:" << currentIndex;
   qDebug() << "changed commitment name:"
            << User::getInstance()->getCommitments().at(currentIndex).getName();
+  //
   User::getInstance()->updateCurrentCommitment(selectedCommitmentIndex);
   // update meta data on meta data widget
   updateCommitmentInfoStatsQWidget();
@@ -364,4 +373,10 @@ void CommStatsQWidget::updateEndDateQLabel() {
   endDateText.replace(8, endDateText.length() - 8, ' ');
   endDateText.replace(8, date.length(), date);
   this->ui->endDateQLabel->setText(endDateText);
+}
+QPalette CommStatsQWidget::getSnapshotPalette() {
+  QPalette p = this->ui->CommitmentInfoStatsQWidget->palette();
+  p.setColor(this->ui->CommitmentInfoStatsQWidget->backgroundRole(),
+             snapshot.palette().color(QPalette::ColorRole::Background));
+  return p;
 }

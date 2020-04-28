@@ -61,6 +61,7 @@ public:
   void updateCommitmentInfoStatsQWidget();
   void updateBeginDateQLabel();
   void updateEndDateQLabel();
+  QPalette getSnapshotPalette();
 
 public slots:
   void saveCurrentSession();

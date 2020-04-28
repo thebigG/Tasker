@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <StatsUtility.h>
 #include <Timer.h>
+#include <mainui.h>
 using namespace Engine;
 LiveSession::LiveSession(QWidget *parent)
     : QWidget(parent), ui(new Ui::LiveSession) {
@@ -13,6 +14,12 @@ LiveSession::LiveSession(QWidget *parent)
           &LiveSession::congratsSlot);
   ui->congratsMessageLabel->setText("");
   this->setWindowTitle("Live Session");
+  this->ui->playButton->setText("\u25B6");
+  //  QPalette p = this->ui->playButton->palette();
+  //  p.setColor(this->ui->playButton->backgroundRole(), );
+  this->ui->playButton->setAutoFillBackground(true);
+  //  this->ui->playButton->setPalette(
+  //      MainUI::getInstance()->getCommitmentHub().getSnapshotPalette());
   productiveTimeValueText.reserve(10);
   productiveTimeValueText.resize(10);
   unproductiveTimeValueText.reserve(10);
@@ -48,7 +55,9 @@ void LiveSession::updateTimeUI() {
   qDebug() << "updateTimeUI latency#4:" << liveSessionPerfTimer.duration;
 }
 void LiveSession::congratsSlot() {
+
   qDebug() << "congrats on livession++++++";
+
   ui->productiveTimeValue->setText("0h0m0s");
   ui->unproductiveTimeValue->setText("0h0m0s");
   ui->totalTimeValue->setText("0h0m0s");
@@ -60,4 +69,5 @@ void LiveSession::congratsSlot() {
 QLabel &LiveSession::getcongratsMessageLabel() {
   return *ui->congratsMessageLabel;
 }
+QPushButton *LiveSession::getPlayButton() { return ui->playButton; }
 LiveSession::~LiveSession() { delete ui; }
