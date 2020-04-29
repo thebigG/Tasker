@@ -62,8 +62,6 @@ void NewSessionQWidget::startTimerButtonSlot() {
       QDate::currentDate()};
   Engine::Timer::getInstance()->initTimer(newListsners.at(0), newSession);
   this->hide();
-  //  liveTimer = std::make_unique<LiveSession>();
-  //  liveTimer->show();
 }
 QString NewSessionQWidget::getTaskName() {
   return this->ui->taskLineEdit->text();

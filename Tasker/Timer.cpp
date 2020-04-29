@@ -24,6 +24,7 @@ Timer::Timer(int newNiceness) {
   timer = std::make_unique<QTimer>(this);
   connect(timer.get(), &QTimer::timeout, this, &Timer::tickUpdate);
   connect(this, &Timer::stopTimer, this, &Timer::stopTimerSlot);
+  //  connect(this, &QThread::started, )
 }
 
 /**
@@ -101,7 +102,6 @@ void Timer::tickUpdate() {
     newPerfTimer.stop();
     tickCount++;
     emit stopTimer();
-    reset();
     //    "0h0m0s"()
     qDebug() << "tick update on Timer took this long(milliseconds):"
              << newPerfTimer.duration;
@@ -127,6 +127,8 @@ void Timer::initTimer(Hook::HookType newListener, udata::Session newSession) {
   thisInstance->setCurrentSession(newSession);
   thisInstance->setListener(newListener);
   timer->start(TIMER_TICK);
+  //  emit
+  // start the Timer thread
   this->start();
 }
 /**
@@ -158,6 +160,7 @@ void Timer::productiveSlot() { productiveSignalCount++; }
 void Timer::unProductiveSlot() { unProductiveSignalCount++; }
 void Timer::stopTimerSlot() {
   emit congrats();
+  reset();
   timer->stop();
 }
 /**
@@ -178,6 +181,13 @@ void Timer::reset() {
   productiveTimeSurplus = 1;
   unproductiveTimeSurplus = 1;
 }
+QTimer *Timer::getClock() { return timer.get(); }
 udata::Session &Timer::getCurrentSession() { return currentSession; }
 int Timer::getProductiveTime() { return currentProductiveTime; }
 int Timer::getUnproductiveTime() { return currentUnproductiveTime; }
+void Timer::pause() { timer->stop(); }
+void Timer::resume() {
+  timer->start(TIMER_TICK);
+  // start the Timer thread
+  this->start();
+}

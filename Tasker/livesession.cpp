@@ -1,6 +1,7 @@
 #include "livesession.h"
 #include "ui_livesession.h"
 #include <QDebug>
+#include <QFontDatabase>
 #include <StatsUtility.h>
 #include <Timer.h>
 #include <mainui.h>
@@ -12,21 +13,25 @@ LiveSession::LiveSession(QWidget *parent)
           &LiveSession::updateTimeUI);
   connect(Engine::Timer::getInstance(), &Timer::Timer::congrats, this,
           &LiveSession::congratsSlot);
-  ui->congratsMessageLabel->setText("");
-  this->setWindowTitle("Live Session");
-  this->ui->playButton->setText("\u25B6");
-  //  QPalette p = this->ui->playButton->palette();
-  //  p.setColor(this->ui->playButton->backgroundRole(), );
-  this->ui->playButton->setAutoFillBackground(true);
-  //  this->ui->playButton->setPalette(
-  //      MainUI::getInstance()->getCommitmentHub().getSnapshotPalette());
+  connect(this->ui->playButton, &QPushButton::clicked, this,
+          &LiveSession::playButtonSlot);
+  connect(Timer::getInstance(), &QThread::started, this, &LiveSession::start);
+  //  qDebug() << "font value="
+  //           << QFontDatabase::addApplicationFont(
+  //                  "/home/fast-alchemist/Downloads/unifont-13.0.02.ttf");
+  //  QString family = QFontDatabase::applicationFontFamilies(0).at(0);
+  //  QFont newFont(family, 16, true);
+  this->ui->congratsMessageLabel->setText("");
+  //  this->ui->playButton->setFont(newFont);
+  this->ui->playButton->setText(PAUSEBUTTON);
+  //  this->ui->playButton->setAutoFillBackground(true);
   productiveTimeValueText.reserve(10);
   productiveTimeValueText.resize(10);
   unproductiveTimeValueText.reserve(10);
   unproductiveTimeValueText.resize(10);
   totalTimeValueText.reserve(10);
   totalTimeValueText.resize(10);
-  //    this->ui->productiveTime
+  this->ui->playButton->setVisible(false);
   qDebug() << "text on label:" + ui->productiveTimeValue->text();
 }
 /**
@@ -57,7 +62,7 @@ void LiveSession::updateTimeUI() {
 void LiveSession::congratsSlot() {
 
   qDebug() << "congrats on livession++++++";
-
+  //  if()
   ui->productiveTimeValue->setText("0h0m0s");
   ui->unproductiveTimeValue->setText("0h0m0s");
   ui->totalTimeValue->setText("0h0m0s");
@@ -69,5 +74,33 @@ void LiveSession::congratsSlot() {
 QLabel &LiveSession::getcongratsMessageLabel() {
   return *ui->congratsMessageLabel;
 }
+/**
+ * @brief LiveSession::resume resumes the Timer Engine.
+ * If the Timer Engine is already running this function does nothing.
+ */
+void LiveSession::resume() {
+  if (currentState == LiveSessionState::Started) {
+    return;
+  }
+  Timer::getInstance()->resume();
+  currentState = LiveSessionState::Started;
+}
+void LiveSession::pause() {
+  if (currentState == LiveSessionState::Paused) {
+    return;
+  }
+  Timer::getInstance()->pause();
+  currentState = LiveSessionState::Paused;
+}
 QPushButton *LiveSession::getPlayButton() { return ui->playButton; }
+void LiveSession::playButtonSlot() {
+  if (this->ui->playButton->text() == PLAYBUTTON) {
+    this->ui->playButton->setText(PAUSEBUTTON);
+    resume();
+  } else {
+    this->ui->playButton->setText(PLAYBUTTON);
+    pause();
+  }
+}
+void LiveSession::start() { this->ui->playButton->setVisible(true); }
 LiveSession::~LiveSession() { delete ui; }

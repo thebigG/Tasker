@@ -49,6 +49,8 @@ private:
   QThread thisThread;
   std::unique_ptr<QTimer> timer;
   virtual void run();
+signals:
+  void tick();
 
 public:
   Timer(int newNiceness = 5);
@@ -57,15 +59,15 @@ public:
   void stop();
   void reset();
   void pause();
+  void resume();
   void setCurrentSession(udata::Session);
   void setListener(Hook::HookType);
-  void startConnect();
   int getProductiveTime();
   int getUnproductiveTime();
   void startTimer();
   int getTotalTimeElapsed();
 
-  QTime getClock();
+  QTimer *getClock();
   udata::Session &getCurrentSession();
 
 public slots:
@@ -74,9 +76,7 @@ public slots:
   void productiveSlot();
   void unProductiveSlot();
 signals:
-  void startHook();
   void stopTimer();
-  void tick();
   void congrats();
 };
 
