@@ -1,10 +1,13 @@
 #include "livesession.h"
-#include "ui_livesession.h"
-#include <QDebug>
-#include <QFontDatabase>
+
 #include <StatsUtility.h>
 #include <Timer.h>
 #include <mainui.h>
+
+#include <QDebug>
+#include <QFontDatabase>
+
+#include "ui_livesession.h"
 using namespace Engine;
 LiveSession::LiveSession(QWidget *parent)
     : QWidget(parent), ui(new Ui::LiveSession) {
@@ -16,13 +19,20 @@ LiveSession::LiveSession(QWidget *parent)
   connect(this->ui->playButton, &QPushButton::clicked, this,
           &LiveSession::playButtonSlot);
   connect(Timer::getInstance(), &QThread::started, this, &LiveSession::start);
-  //  qDebug() << "font value="
-  //           << QFontDatabase::addApplicationFont(
-  //                  "/home/fast-alchemist/Downloads/unifont-13.0.02.ttf");
-  //  QString family = QFontDatabase::applicationFontFamilies(0).at(0);
-  //  QFont newFont(family, 16, true);
+  /**
+   * @brief QFontDatabase::addApplicationFont We need a supported font for the
+   * play/pause unicode icons.
+   * It currently works on macOS and linux.
+   * Has not been tested on Windows.
+   * @todo Make sure to wrap the font path in a macro.
+   *
+   */
+  QFontDatabase::addApplicationFont(
+      "/Users/lorenzogomez/Tasker/resources/fonts/unifont-13.0.02.ttf");
+  QString family = QFontDatabase::applicationFontFamilies(0).at(0);
+  QFont newFont(family, 16, true);
   this->ui->congratsMessageLabel->setText("");
-  //  this->ui->playButton->setFont(newFont);
+  this->ui->playButton->setFont(newFont);
   this->ui->playButton->setText(PAUSEBUTTON);
   //  this->ui->playButton->setAutoFillBackground(true);
   productiveTimeValueText.reserve(10);
@@ -60,7 +70,6 @@ void LiveSession::updateTimeUI() {
   qDebug() << "updateTimeUI latency#4:" << liveSessionPerfTimer.duration;
 }
 void LiveSession::congratsSlot() {
-
   qDebug() << "congrats on livession++++++";
   //  if()
   ui->productiveTimeValue->setText("0h0m0s");
