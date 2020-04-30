@@ -11,18 +11,31 @@ LiveSession::LiveSession(QWidget *parent)
   ui->setupUi(this);
   connect(Engine::Timer::getInstance(), &Timer::Timer::tick, this,
           &LiveSession::updateTimeUI);
+  connect(Engine::Timer::getInstance(), &Timer::Timer::tick, this,
+          &LiveSession::updateHookState);
+
   connect(Engine::Timer::getInstance(), &Timer::Timer::congrats, this,
           &LiveSession::congratsSlot);
   connect(this->ui->playButton, &QPushButton::clicked, this,
           &LiveSession::playButtonSlot);
   connect(Timer::getInstance(), &QThread::started, this, &LiveSession::start);
-  //  qDebug() << "font value="
-  //           << QFontDatabase::addApplicationFont(
-  //                  "/home/fast-alchemist/Downloads/unifont-13.0.02.ttf");
-  //  QString family = QFontDatabase::applicationFontFamilies(0).at(0);
-  //  QFont newFont(family, 16, true);
-  this->ui->congratsMessageLabel->setText("");
-  //  this->ui->playButton->setFont(newFont);
+  currentState = LiveSessionState::Stopped;
+  //    qDebug() << "font value="
+  /**
+   * @brief QFontDatabase::addApplicationFont We need a supported font for the
+   * play/pause unicode icons.
+   * It currently works on macOS and linux.
+   * Has not been tested on Windows.
+   *
+   */
+  if (QFontDatabase::addApplicationFont(LIVESESSIONFONTPATH) == 0) {
+    qDebug() << "successfully loaded font for play/pause buttons";
+    QString family = QFontDatabase::applicationFontFamilies(0).at(0);
+    QFont newFont(family, 16, true);
+    this->ui->playButton->setFont(newFont);
+  }
+
+  this->ui->taskStateMessageLabel->setText("");
   this->ui->playButton->setText(PAUSEBUTTON);
   //  this->ui->playButton->setAutoFillBackground(true);
   productiveTimeValueText.reserve(10);
@@ -31,6 +44,12 @@ LiveSession::LiveSession(QWidget *parent)
   unproductiveTimeValueText.resize(10);
   totalTimeValueText.reserve(10);
   totalTimeValueText.resize(10);
+  taskState.reserve(100);
+  taskState.resize(100);
+  sessionGoalText.reserve(10);
+  sessionGoalText.resize(10);
+  hookStateText.reserve(20);
+  hookStateText.resize(20);
   this->ui->playButton->setVisible(false);
   qDebug() << "text on label:" + ui->productiveTimeValue->text();
 }
@@ -69,10 +88,10 @@ void LiveSession::congratsSlot() {
   //  ui->
   // reset the rest of the UI
 
-  ui->congratsMessageLabel->setText("Congrats! You've completed your session!");
+  ui->taskStateMessageLabel->setText(congratsMessage);
 }
 QLabel &LiveSession::getcongratsMessageLabel() {
-  return *ui->congratsMessageLabel;
+  return *ui->taskStateMessageLabel;
 }
 /**
  * @brief LiveSession::resume resumes the Timer Engine.
@@ -85,6 +104,12 @@ void LiveSession::resume() {
   Timer::getInstance()->resume();
   currentState = LiveSessionState::Started;
 }
+/**
+ * @brief LiveSession::pause pauses the Timer Engine.
+ * Beware that while the Timer Engine is in this Paused state, there is not data
+ * being collected about this current live session. If the Timer is already
+ * paused, this function does nothing.
+ */
 void LiveSession::pause() {
   if (currentState == LiveSessionState::Paused) {
     return;
@@ -102,5 +127,43 @@ void LiveSession::playButtonSlot() {
     pause();
   }
 }
-void LiveSession::start() { this->ui->playButton->setVisible(true); }
+void LiveSession::start() {
+  currentState = LiveSessionState::Started;
+  initTaskState();
+  initHookState();
+  this->ui->playButton->setVisible(true);
+}
+void LiveSession::initTaskState() {
+  taskState.fill(' ');
+  taskState.insert(0, "Attempting \"");
+  taskState.insert(
+      12, Timer::getInstance()->getCurrentSession().getTask().getName());
+  taskState.insert(12 + Timer::getInstance()
+                            ->getCurrentSession()
+                            .getTask()
+                            .getName()
+                            .length(),
+                   "\"");
+  taskState.insert(13 + Timer::getInstance()
+                            ->getCurrentSession()
+                            .getTask()
+                            .getName()
+                            .length(),
+                   " for ");
+  util::formatTime(sessionGoalText,
+                   Timer::getInstance()->getCurrentSession().getGoal(),
+                   contextText, 0);
+  taskState.insert(19 + Timer::getInstance()
+                            ->getCurrentSession()
+                            .getTask()
+                            .getName()
+                            .length(),
+                   sessionGoalText);
+  this->ui->taskStateMessageLabel->setText(taskState);
+}
+void LiveSession::updateHookState() {}
+void LiveSession::initHookState() {
+  hookStateText.fill(' ');
+  hookStateText.insert(0, "Hook(s):");
+}
 LiveSession::~LiveSession() { delete ui; }
