@@ -65,6 +65,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-slots">Private Slots</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classLiveSession-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -83,22 +84,81 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae7fef580893842ea12760e8c1795adfd"><td class="memItemLeft" align="right" valign="top"><a id="ae7fef580893842ea12760e8c1795adfd"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>LiveSession</b> (QWidget *parent=nullptr)</td></tr>
 <tr class="separator:ae7fef580893842ea12760e8c1795adfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace9a7bcf2085dd64aff56f40176f9ab3"><td class="memItemLeft" align="right" valign="top"><a id="ace9a7bcf2085dd64aff56f40176f9ab3"></a>
+QLabel &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getcongratsMessageLabel</b> ()</td></tr>
+<tr class="separator:ace9a7bcf2085dd64aff56f40176f9ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2ef262c6e35056644092ddb57593605"><td class="memItemLeft" align="right" valign="top"><a id="ac2ef262c6e35056644092ddb57593605"></a>
+QPushButton *&#160;</td><td class="memItemRight" valign="bottom"><b>getPlayButton</b> ()</td></tr>
+<tr class="separator:ac2ef262c6e35056644092ddb57593605"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb7da838db57b8b0b9c3d5b65dcc666d"><td class="memItemLeft" align="right" valign="top"><a id="afb7da838db57b8b0b9c3d5b65dcc666d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveSession.html#afb7da838db57b8b0b9c3d5b65dcc666d">pause</a> ()</td></tr>
+<tr class="memdesc:afb7da838db57b8b0b9c3d5b65dcc666d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classLiveSession.html#afb7da838db57b8b0b9c3d5b65dcc666d" title="LiveSession::pause pauses the Timer Engine. Beware that while the Timer Engine is in this Paused stat...">LiveSession::pause</a> pauses the Timer <a class="el" href="namespaceEngine.html" title="The Engine namespace has all of the Hardware Hooks and classes that make up the &quot;Engine&quot; of Tasker Wh...">Engine</a>. Beware that while the Timer <a class="el" href="namespaceEngine.html" title="The Engine namespace has all of the Hardware Hooks and classes that make up the &quot;Engine&quot; of Tasker Wh...">Engine</a> is in this Paused state, there is not data being collected about this current live session. If the Timer is already paused, this function does nothing. <br /></td></tr>
+<tr class="separator:afb7da838db57b8b0b9c3d5b65dcc666d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a385835836b965186dbf7efc5a2f7bb52"><td class="memItemLeft" align="right" valign="top"><a id="a385835836b965186dbf7efc5a2f7bb52"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveSession.html#a385835836b965186dbf7efc5a2f7bb52">resume</a> ()</td></tr>
+<tr class="memdesc:a385835836b965186dbf7efc5a2f7bb52"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classLiveSession.html#a385835836b965186dbf7efc5a2f7bb52" title="LiveSession::resume resumes the Timer Engine. If the Timer Engine is already running this function do...">LiveSession::resume</a> resumes the Timer <a class="el" href="namespaceEngine.html" title="The Engine namespace has all of the Hardware Hooks and classes that make up the &quot;Engine&quot; of Tasker Wh...">Engine</a>. If the Timer <a class="el" href="namespaceEngine.html" title="The Engine namespace has all of the Hardware Hooks and classes that make up the &quot;Engine&quot; of Tasker Wh...">Engine</a> is already running this function does nothing. <br /></td></tr>
+<tr class="separator:a385835836b965186dbf7efc5a2f7bb52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-slots"></a>
 Private Slots</h2></td></tr>
 <tr class="memitem:a907454ff4014297046f789ba30fa0891"><td class="memItemLeft" align="right" valign="top"><a id="a907454ff4014297046f789ba30fa0891"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveSession.html#a907454ff4014297046f789ba30fa0891">updateTimeUI</a> ()</td></tr>
-<tr class="memdesc:a907454ff4014297046f789ba30fa0891"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classLiveSession.html#a907454ff4014297046f789ba30fa0891" title="LiveSession::updateTimeUI This is a time-sensitive function. It MUST return within 1 second....">LiveSession::updateTimeUI</a> This is a time-sensitive function. It MUST return within 1 second. current latency(average)=75,000 nanoseconds I believe this latency can be reduced with some optimizations I'll be making later. <br /></td></tr>
+<tr class="memdesc:a907454ff4014297046f789ba30fa0891"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classLiveSession.html#a907454ff4014297046f789ba30fa0891" title="LiveSession::updateTimeUI This is a time-sensitive function. It MUST return within 1 second....">LiveSession::updateTimeUI</a> This is a time-sensitive function. It MUST return within 1 second. current latency(average)=140000 nanoseconds I believe this latency can be reduced with some optimizations I'll be making later. <br /></td></tr>
 <tr class="separator:a907454ff4014297046f789ba30fa0891"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94915b631280ab2afbb3c95da667a35a"><td class="memItemLeft" align="right" valign="top"><a id="a94915b631280ab2afbb3c95da667a35a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>congratsSlot</b> ()</td></tr>
 <tr class="separator:a94915b631280ab2afbb3c95da667a35a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c7c583bda3ec8b94cb42955f1b3214c"><td class="memItemLeft" align="right" valign="top"><a id="a7c7c583bda3ec8b94cb42955f1b3214c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>playButtonSlot</b> ()</td></tr>
+<tr class="separator:a7c7c583bda3ec8b94cb42955f1b3214c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99bcee85395056e596506c4014b01e1a"><td class="memItemLeft" align="right" valign="top"><a id="a99bcee85395056e596506c4014b01e1a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateHookState</b> ()</td></tr>
+<tr class="separator:a99bcee85395056e596506c4014b01e1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6e67d96b889d0fa3b7ae2d8f683b79b"><td class="memItemLeft" align="right" valign="top"><a id="ad6e67d96b889d0fa3b7ae2d8f683b79b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>start</b> ()</td></tr>
+<tr class="separator:ad6e67d96b889d0fa3b7ae2d8f683b79b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a5b1202fed5445a1e5fe8e1b15b6c2dff"><td class="memItemLeft" align="right" valign="top"><a id="a5b1202fed5445a1e5fe8e1b15b6c2dff"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>initTaskState</b> ()</td></tr>
+<tr class="separator:a5b1202fed5445a1e5fe8e1b15b6c2dff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d3a503f1004b0c8990c54e8ea349643"><td class="memItemLeft" align="right" valign="top"><a id="a0d3a503f1004b0c8990c54e8ea349643"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>initHookState</b> ()</td></tr>
+<tr class="separator:a0d3a503f1004b0c8990c54e8ea349643"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:afc2f976b69fcc9afe9e0995b463b4fe5"><td class="memItemLeft" align="right" valign="top"><a id="afc2f976b69fcc9afe9e0995b463b4fe5"></a>
 Ui::LiveSession *&#160;</td><td class="memItemRight" valign="bottom"><b>ui</b></td></tr>
 <tr class="separator:afc2f976b69fcc9afe9e0995b463b4fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cba159d18ff1c2c676f9f40044d61b6"><td class="memItemLeft" align="right" valign="top"><a id="a7cba159d18ff1c2c676f9f40044d61b6"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>productiveTimeValueText</b></td></tr>
+<tr class="separator:a7cba159d18ff1c2c676f9f40044d61b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6c4f2230ec44901b8ca69d1be867d5f"><td class="memItemLeft" align="right" valign="top"><a id="ab6c4f2230ec44901b8ca69d1be867d5f"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>unproductiveTimeValueText</b></td></tr>
+<tr class="separator:ab6c4f2230ec44901b8ca69d1be867d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8b3d15d7d000c077c13afe5a1ccb329"><td class="memItemLeft" align="right" valign="top"><a id="ac8b3d15d7d000c077c13afe5a1ccb329"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>totalTimeValueText</b></td></tr>
+<tr class="separator:ac8b3d15d7d000c077c13afe5a1ccb329"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fc15b47987d6ea85adb92d267dd731b"><td class="memItemLeft" align="right" valign="top"><a id="a2fc15b47987d6ea85adb92d267dd731b"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>contextText</b> {&quot;&quot;}</td></tr>
+<tr class="separator:a2fc15b47987d6ea85adb92d267dd731b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04e402ca867acd43c791c99b7dd03334"><td class="memItemLeft" align="right" valign="top"><a id="a04e402ca867acd43c791c99b7dd03334"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>sessionGoalText</b></td></tr>
+<tr class="separator:a04e402ca867acd43c791c99b7dd03334"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad6007842b08a771a6987a2bf6ca2c91"><td class="memItemLeft" align="right" valign="top"><a id="aad6007842b08a771a6987a2bf6ca2c91"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>hookStateText</b> {}</td></tr>
+<tr class="separator:aad6007842b08a771a6987a2bf6ca2c91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9115c326e56b946a4a10469f45a648a"><td class="memItemLeft" align="right" valign="top"><a id="af9115c326e56b946a4a10469f45a648a"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>congratsMessage</b> {&quot;Congrats! You've completed your session!&quot;}</td></tr>
+<tr class="separator:af9115c326e56b946a4a10469f45a648a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77d892c669672471823c4f71b815e165"><td class="memItemLeft" align="right" valign="top"><a id="a77d892c669672471823c4f71b815e165"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>taskState</b> {}</td></tr>
+<tr class="separator:a77d892c669672471823c4f71b815e165"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9de2de1bdc63dd32dc9484badfeb9d0"><td class="memItemLeft" align="right" valign="top"><a id="af9de2de1bdc63dd32dc9484badfeb9d0"></a>
+LiveSessionState&#160;</td><td class="memItemRight" valign="bottom"><b>currentState</b></td></tr>
+<tr class="separator:af9de2de1bdc63dd32dc9484badfeb9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a704a8d04358d94436b44affe38a8c72a"><td class="memItemLeft" align="right" valign="top"><a id="a704a8d04358d94436b44affe38a8c72a"></a>
 Perf::PerfTimer&#160;</td><td class="memItemRight" valign="bottom"><b>liveSessionPerfTimer</b> {}</td></tr>
 <tr class="separator:a704a8d04358d94436b44affe38a8c72a"><td class="memSeparator" colspan="2">&#160;</td></tr>

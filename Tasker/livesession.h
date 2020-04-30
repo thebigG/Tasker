@@ -5,6 +5,12 @@
 #include <QPushButton>
 #include <QWidget>
 #include <TaskerPerf/perftimer.h>
+#if defined(Q_OS_OSX)
+#define LIVESESSIONFONTPATH "some/macOS/path"
+#elif defined(Q_OS_LINUX)
+#define LIVESESSIONFONTPATH "../resources/fonts/unifont-13.0.02.ttf"
+#endif
+
 #define PLAYBUTTON "\u25B6"
 #define PAUSEBUTTON "\u23F8"
 /**
@@ -38,6 +44,7 @@ private slots:
   void updateTimeUI();
   void congratsSlot();
   void playButtonSlot();
+  void updateHookState();
   void start();
 
 private:
@@ -46,6 +53,12 @@ private:
   QString unproductiveTimeValueText;
   QString totalTimeValueText;
   QString contextText{""};
+  QString sessionGoalText;
+  QString hookStateText{};
+  QString congratsMessage{"Congrats! You've completed your session!"};
+  QString taskState{};
+  void initTaskState();
+  void initHookState();
   LiveSessionState currentState;
   Perf::PerfTimer liveSessionPerfTimer{};
   Perf::PerfTimer liveSessionPerfTimer1{};

@@ -24,6 +24,7 @@ Timer::Timer(int newNiceness) {
   timer = std::make_unique<QTimer>(this);
   connect(timer.get(), &QTimer::timeout, this, &Timer::tickUpdate);
   connect(this, &Timer::stopTimer, this, &Timer::stopTimerSlot);
+
   //  connect(this, &QThread::started, )
 }
 

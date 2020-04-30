@@ -36,7 +36,7 @@ Session::Session(Task newTask) : task{newTask} {
  * @brief Session::getTask
  * @return
  */
-const Task &Session::getTask() const { return task; }
+Task &Session::getTask() { return task; }
 
 /**
  * @brief Session::setTask

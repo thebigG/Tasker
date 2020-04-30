@@ -18,7 +18,7 @@ public:
   Session();
   Session(Task newTask, long long goalLength, QDate date);
   Session(Task);
-  const Task &getTask() const;
+  Task &getTask();
   void setTask(Task value);
 
   long long getProductiveTime() const;
