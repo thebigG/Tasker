@@ -53,7 +53,9 @@ LiveSession::LiveSession(QWidget *parent)
   sessionGoalText.resize(10);
   hookStateText.reserve(20);
   hookStateText.resize(20);
+  //  hookStatusText()
   this->ui->playButton->setVisible(false);
+  this->ui->hookStateQLabel->setVisible(false);
   qDebug() << "text on label:" + ui->productiveTimeValue->text();
 }
 /**
@@ -89,7 +91,7 @@ void LiveSession::congratsSlot() {
   ui->totalTimeValue->setText("0h0m0s");
   //  ui->
   // reset the rest of the UI
-
+  this->ui->hookStateQLabel->setVisible(false);
   ui->taskStateMessageLabel->setText(congratsMessage);
 }
 QLabel &LiveSession::getcongratsMessageLabel() {
@@ -163,9 +165,78 @@ void LiveSession::initTaskState() {
                    sessionGoalText);
   this->ui->taskStateMessageLabel->setText(taskState);
 }
-void LiveSession::updateHookState() {}
+/**
+ * @brief LiveSession::updateHookState updates the hook state of the live
+ * session. If the hook is currently productive, this hook(Mouse, Keyboard, etc)
+ * is rendered as "active" to the user. If the hook is unproductive, then the
+ * hook is rendered as "inactive" to the user.
+ * This method is called on every "tick" of the Timer Engine; this is a SLOT
+ * method that gets connected in LiveSession's constructor to the "tick" signal.
+ * The argument could very well be made that this is, in theory inefficient,
+ * as the tick signal is sent out every second. Another approach I have thought
+ * about is having a "switched hook state" signal which only gets sent
+ * out(emitted) exclusively when the Hook state changes from productive to
+ * unproductive, or vice versa. However, this approach could sacrifice
+ * readability as it will add more complexity to the Controller-Viewer
+ * architecture that exists between LiveSession and Timer.
+ * I think for now, having this method triggered every second is negligible as
+ * it only takes 5000 nanoseconds(worst case on i5 2.5GHZ Dual-Core processor
+ * runnign Ubuntu 18.04) on average to complete. That is not to say that other
+ * methods such as UpdateUI should not be taken into consideration, since that
+ * is another SLOT method that gets triggered by "tick". However, in the mean
+ * time, I don't want to sacrifice readability for mere obsession with
+ * optimization, which SOMETIMES may be justified in Timer's delicate
+ * second-to-second state as we don't want latency in its internal clock,
+ * especially when it is rendered to the user.
+ */
+void LiveSession::updateHookState() {
+  liveSessionPerfTimer1.restart();
+  hookStateText.replace(17, hookStateText.length(), ' ');
+  if (Timer::getInstance()->timerHookState == Hook::HookState::productive) {
+    switch (Timer::getInstance()->hookType) {
+    case Hook::HookType::X_KEYBOARD:
+      hookStateText.replace(17, 8, activeText);
+      break;
+    case Hook::HookType::X_MOUSE:
+      hookStateText.replace(13, 10, activeText);
+      break;
+    case Hook::HookType::audio:
+      hookStateText.replace(13, 10, activeText);
+      break;
+    }
+  } else {
+    switch (Timer::getInstance()->hookType) {
+    case Hook::HookType::X_KEYBOARD:
+      hookStateText.replace(17, 10, inactiveText);
+      break;
+    case Hook::HookType::X_MOUSE:
+      hookStateText.replace(13, 10, inactiveText);
+      break;
+    case Hook::HookType::audio:
+      hookStateText.replace(13, 10, inactiveText);
+      break;
+    }
+  }
+  this->ui->hookStateQLabel->setText(hookStateText);
+  liveSessionPerfTimer1.stop();
+  qDebug() << "updateHookState:" << liveSessionPerfTimer1.duration;
+}
+
 void LiveSession::initHookState() {
   hookStateText.fill(' ');
-  hookStateText.insert(0, "Hook(s):");
+  hookStateText.replace(0, 8, "Hook(s):");
+  switch (Timer::getInstance()->hookType) {
+  case Hook::HookType::X_KEYBOARD:
+    hookStateText.replace(8, 8, "Keyboard");
+    break;
+  case Hook::HookType::audio:
+    hookStateText.replace(8, 8, "Audio");
+    break;
+  case Hook::HookType::X_MOUSE:
+    hookStateText.replace(8, 8, "Mouse");
+    break;
+  }
+  this->ui->hookStateQLabel->setText(hookStateText);
+  this->ui->hookStateQLabel->setVisible(true);
 }
 LiveSession::~LiveSession() { delete ui; }

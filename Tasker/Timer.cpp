@@ -84,12 +84,15 @@ void Timer::tickUpdate() {
     currentProductiveTime += 1;
     producitveTickCount += 1;
     lastProductiveTick = tickCount;
+    timerHookState = Hook::HookState::productive;
     hook->setState(Hook::HookState::unproductive);
   } else if (productiveTickDelta < 30) {
     currentProductiveTime += 1;
     producitveTickCount += 1;
+    timerHookState = Hook::HookState::productive;
   } else {
     currentUnproductiveTime += unproductiveTimeSurplus;
+    timerHookState = Hook::HookState::unproductive;
     unProducitveTickCount += 1;
     lastUnproductiveTick = tickCount;
   }
@@ -121,12 +124,12 @@ void Timer::setCurrentSession(Session newSession) {
   currentSession = newSession;
   productiveTimeGoal = currentSession.getGoal();
 }
-void Timer::setListener(Hook::HookType newListenerType) {
+void Timer::setHook(Hook::HookType newListenerType) {
   hookType = newListenerType;
 }
-void Timer::initTimer(Hook::HookType newListener, udata::Session newSession) {
+void Timer::initTimer(Hook::HookType newHook, udata::Session newSession) {
   thisInstance->setCurrentSession(newSession);
-  thisInstance->setListener(newListener);
+  thisInstance->setHook(newHook);
   timer->start(TIMER_TICK);
   //  emit
   // start the Timer thread

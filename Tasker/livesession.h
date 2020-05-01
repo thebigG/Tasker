@@ -56,6 +56,8 @@ private:
   QString sessionGoalText;
   QString hookStateText{};
   QString congratsMessage{"Congrats! You've completed your session!"};
+  QString activeText{"(active)"};
+  QString inactiveText{"(inactive)"};
   QString taskState{};
   void initTaskState();
   void initHookState();

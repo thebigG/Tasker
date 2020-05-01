@@ -44,7 +44,6 @@ private:
                                  // get incremented. Depends on niceness
   int unproductiveTimeSurplus = 1;
   std::unique_ptr<Hook> hook;
-  Hook::HookType hookType;
   QThread listenerThread;
   QThread thisThread;
   std::unique_ptr<QTimer> timer;
@@ -61,12 +60,13 @@ public:
   void pause();
   void resume();
   void setCurrentSession(udata::Session);
-  void setListener(Hook::HookType);
+  void setHook(Hook::HookType);
   int getProductiveTime();
   int getUnproductiveTime();
   void startTimer();
   int getTotalTimeElapsed();
-
+  Hook::HookState timerHookState;
+  Hook::HookType hookType;
   QTimer *getClock();
   udata::Session &getCurrentSession();
 
