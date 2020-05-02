@@ -71,6 +71,7 @@ $(function() {
 <a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#pri-static-attribs">Static Private Attributes</a> &#124;
@@ -143,9 +144,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>resume</b> ()</td></t
 <tr class="memitem:ab10086b22e26c08660e1ca40a1f71e30"><td class="memItemLeft" align="right" valign="top"><a id="ab10086b22e26c08660e1ca40a1f71e30"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCurrentSession</b> (<a class="el" href="classudata_1_1Session.html">udata::Session</a>)</td></tr>
 <tr class="separator:ab10086b22e26c08660e1ca40a1f71e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57eb2a85b5494c9c674119dd4e8bb54e"><td class="memItemLeft" align="right" valign="top"><a id="a57eb2a85b5494c9c674119dd4e8bb54e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setListener</b> (<a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Hook::HookType</a>)</td></tr>
-<tr class="separator:a57eb2a85b5494c9c674119dd4e8bb54e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bab35803c6dd05adcb2ae83f30575c3"><td class="memItemLeft" align="right" valign="top"><a id="a7bab35803c6dd05adcb2ae83f30575c3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setHook</b> (<a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Hook::HookType</a>)</td></tr>
+<tr class="separator:a7bab35803c6dd05adcb2ae83f30575c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f9b2b4df4f29191189b0b0ec0bfa19b"><td class="memItemLeft" align="right" valign="top"><a id="a1f9b2b4df4f29191189b0b0ec0bfa19b"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getProductiveTime</b> ()</td></tr>
 <tr class="separator:a1f9b2b4df4f29191189b0b0ec0bfa19b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,6 +170,15 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a042233e2e3a8a4dbd3935a4bd1b80b5b"><td class="memItemLeft" align="right" valign="top"><a id="a042233e2e3a8a4dbd3935a4bd1b80b5b"></a>
 static <a class="el" href="classEngine_1_1Timer.html">Timer</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
 <tr class="separator:a042233e2e3a8a4dbd3935a4bd1b80b5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a596a8eff77c7799d78f6c65e17a4b02c"><td class="memItemLeft" align="right" valign="top"><a id="a596a8eff77c7799d78f6c65e17a4b02c"></a>
+Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><b>timerHookState</b></td></tr>
+<tr class="separator:a596a8eff77c7799d78f6c65e17a4b02c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af93b1a7293045f81e04a4e97232c7cf8"><td class="memItemLeft" align="right" valign="top"><a id="af93b1a7293045f81e04a4e97232c7cf8"></a>
+<a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Hook::HookType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>hookType</b></td></tr>
+<tr class="separator:af93b1a7293045f81e04a4e97232c7cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -229,9 +239,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>unproductiveTimeSurplu
 <tr class="memitem:ab946a586a51f08d309aee21ee94bca88"><td class="memItemLeft" align="right" valign="top"><a id="ab946a586a51f08d309aee21ee94bca88"></a>
 std::unique_ptr&lt; <a class="el" href="classEngine_1_1Hook.html">Hook</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>hook</b></td></tr>
 <tr class="separator:ab946a586a51f08d309aee21ee94bca88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af93b1a7293045f81e04a4e97232c7cf8"><td class="memItemLeft" align="right" valign="top"><a id="af93b1a7293045f81e04a4e97232c7cf8"></a>
-<a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Hook::HookType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>hookType</b></td></tr>
-<tr class="separator:af93b1a7293045f81e04a4e97232c7cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5008b7350fcc839ee9f3a6e782dca69f"><td class="memItemLeft" align="right" valign="top"><a id="a5008b7350fcc839ee9f3a6e782dca69f"></a>
 QThread&#160;</td><td class="memItemRight" valign="bottom"><b>listenerThread</b></td></tr>
 <tr class="separator:a5008b7350fcc839ee9f3a6e782dca69f"><td class="memSeparator" colspan="2">&#160;</td></tr>

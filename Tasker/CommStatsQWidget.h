@@ -75,10 +75,23 @@ public slots:
 private slots:
   void previousSnapshot();
   void nextSnapshot();
+  void updateLiveSessionStateSlot();
 
 private:
   Ui::CommStatsQWidget *ui;
   bool isDelete = false;
+  /**
+   * @brief isSelectable if true, this means that the commitments are
+   * selectable; the user may select different commitments in the UI and look
+   * at data such as snapshot, commitment metadata, etc.
+   * If false, this means the commitments are NOT selectable and the user may
+   * not look at any data related to any commitments, except the one that is
+   * currently selected; the one that was selected previously. This is
+   * particularly useful for when the user is in the middle of a live session
+   * and we want to disable selection.
+   */
+  bool isSelectable = true;
+  void setSelectable(bool);
   QString commitmentMetaDataText{};
   QString beginDateText{"Commitment began on "};
   QString endDateText{"Ends on "};

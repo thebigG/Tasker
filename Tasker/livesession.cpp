@@ -130,6 +130,7 @@ void LiveSession::playButtonSlot() {
     this->ui->playButton->setText(PLAYBUTTON);
     pause();
   }
+  emit liveStateChanged();
 }
 void LiveSession::start() {
   currentState = LiveSessionState::Started;
@@ -239,4 +240,6 @@ void LiveSession::initHookState() {
   this->ui->hookStateQLabel->setText(hookStateText);
   this->ui->hookStateQLabel->setVisible(true);
 }
+
+LiveSessionState LiveSession::getCurrentState() const { return currentState; }
 LiveSession::~LiveSession() { delete ui; }

@@ -104,12 +104,17 @@ void Commitment::updateCommitmentWindows(Session newSession) {
  *will update all of those three missing CommitmentWindows, which is 3 in this
  *case(three weeks). This would of course also be very useful when a Commitment
  *Window is closed; in the beginning of a new week, a new Commitment TimeWindow
- *is added that will be closed in seven more days, assuming that this is weekly
- *commitment of course.
+ *is added that will be closed in seven more days, assuming that this is a
+ *weekly commitment of course.
  */
 void Commitment::updateCommitmentWindows() {
   QDate currentDate = QDate::currentDate();
-  if (commitmentWindows.isEmpty()) {
+  if (isDone()) {
+    if (name == "Test#100") {
+      qDebug() << "Test#100 is done!";
+    }
+    return;
+  } else if (commitmentWindows.isEmpty()) {
     commitmentWindows.push_back(TimeWindow{});
     TimeWindow &newWindow = commitmentWindows.last();
     newWindow.startDate.setDate(currentDate.year(), currentDate.month(),
@@ -120,33 +125,37 @@ void Commitment::updateCommitmentWindows() {
     newWindow.frequency = frequency.frequency;
   } else {
     TimeWindow &lastWindow = commitmentWindows.last();
-    if (currentDate <= lastWindow.endDate) {
+    int daysSinceLastCommitmentWindow =
+        lastWindow.startDate.daysTo(QDate::currentDate());
+    if (daysSinceLastCommitmentWindow <= 0) {
       return;
     }
-    currentDate.setDate(lastWindow.endDate.year(), lastWindow.endDate.month(),
-                        lastWindow.endDate.day());
-    currentDate = currentDate.addDays(1);
-    float NumberOfTimeWindows =
-        qCeil((currentDate.day() - lastWindow.endDate.day()) /
-              (frequency.timeWindowSize));
-    for (int i = 0; i < NumberOfTimeWindows; i++) {
-      commitmentWindows.push_back(TimeWindow{});
-      TimeWindow &newWindow = commitmentWindows.last();
-      newWindow.startDate.setDate(currentDate.year(), currentDate.month(),
-                                  currentDate.day());
-      currentDate = currentDate.addDays(frequency.timeWindowSize);
-      newWindow.endDate.setDate(currentDate.year(), currentDate.month(),
-                                currentDate.day());
-      newWindow.frequency = frequency.frequency;
+
+    else if (daysSinceLastCommitmentWindow < frequency.timeWindowSize) {
+      return;
+    } else if (daysSinceLastCommitmentWindow >= frequency.timeWindowSize) {
+      int NumberOfTimeWindows =
+          daysSinceLastCommitmentWindow / frequency.timeWindowSize;
+      currentDate = lastWindow.endDate.addDays(1);
+      for (int i = 0; i < NumberOfTimeWindows; i++) {
+        commitmentWindows.push_back(TimeWindow{});
+        TimeWindow &newWindow = commitmentWindows.last();
+        newWindow.startDate = currentDate;
+        currentDate = currentDate.addDays(frequency.timeWindowSize - 1);
+        newWindow.endDate = currentDate;
+        currentDate = newWindow.endDate.addDays(1);
+        newWindow.frequency = frequency.frequency;
+      }
     }
   }
 }
 /**
  * @brief Commitment::update updates the state of this commitment.
- * Any state regarding TimeWindows is updated by this method.
+ * Any state regarding whether this Commitment is considered "done" or not is
+ * updated by this function.
  */
 void Commitment::update() {
-  updateCommitmentWindows();
+  //  updateCommitmentWindows();
   qDebug() << "upating-->" << name;
   if (noEndDate) {
     done = false;
@@ -154,8 +163,7 @@ void Commitment::update() {
   }
   qDebug() << "date comparison on commmitment update:"
            << commitmentWindows.last().endDate << "," << dateEnd;
-  if (commitmentWindows.last().endDate >= dateEnd &&
-      QDate::currentDate() > dateEnd) {
+  if (QDate::currentDate() > dateEnd) {
     done = true;
   }
   return;
@@ -165,7 +173,7 @@ void Commitment::setDone(bool newDone) { done = newDone; }
  * @brief Commitment::isDone
  * A commitment is considered "done" when all
  * of its TimeWindows are "closed", whether the user completed
- * all of the tasks they commmited to or not.
+ * all of the tasks/sessions they commmited to or not.
  * For example; suppose that Alice  made a commitment called "Alice in
  * Wonderland" and she set out to write four times week for a whole month.
  * Suppose her start date is "January 1st, 2020"
@@ -273,6 +281,9 @@ QDataStream &udata::operator>>(QDataStream &in,
   in >> newDone;
 
   newCommitment.name = commitmentName;
+  if (commitmentName == "Poetry") {
+    qDebug() << "number of time windows:" << newTimeWindows.length();
+  }
   newCommitment.dateStart = commitmentDateStart;
   newCommitment.dateEnd = commitmentDateEnd;
   newCommitment.noEndDate = newNoEndDate;
@@ -281,6 +292,8 @@ QDataStream &udata::operator>>(QDataStream &in,
   newCommitment.commitmentWindows = newTimeWindows;
   newCommitment.done = newDone;
   newCommitment.update();
+  // Update commitment windows for this commitment
+  newCommitment.updateCommitmentWindows();
   return in;
 }
 QDataStream &udata::operator<<(QDataStream &out,

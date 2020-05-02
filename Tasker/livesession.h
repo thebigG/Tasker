@@ -40,12 +40,17 @@ public:
   void pause();
   void resume();
   ~LiveSession();
+  LiveSessionState getCurrentState() const;
+
 private slots:
   void updateTimeUI();
   void congratsSlot();
   void playButtonSlot();
   void updateHookState();
   void start();
+
+signals:
+  void liveStateChanged();
 
 private:
   Ui::LiveSession *ui;

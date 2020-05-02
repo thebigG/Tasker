@@ -126,36 +126,40 @@ $(function() {
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">private</span> slots:</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keywordtype">void</span> previousSnapshot();</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordtype">void</span> nextSnapshot();</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  Ui::CommStatsQWidget *ui;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="keywordtype">bool</span> isDelete = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  QString commitmentMetaDataText{};</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  QString beginDateText{<span class="stringliteral">&quot;Commitment began on &quot;</span>};</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  QString endDateText{<span class="stringliteral">&quot;Ends on &quot;</span>};</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <a class="code" href="classLiveSession.html">LiveSession</a> currentLiveSessionWidget{};</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  QPalette p;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="comment">//    TempChartQWidget mw{};</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keywordtype">int</span> selectedCommitmentIndex = 0;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="keywordtype">int</span> currentTimeWindow = 0;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  std::map&lt;QString, udata::Commitment &amp;&gt; commitmentMap;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="comment">//    QVBoxLayout layout{};</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <a class="code" href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a> createCommimentWindow;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <a class="code" href="classNewSessionQWidget.html">NewSessionQWidget</a> newSessionQWidget;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <a class="code" href="classudata_1_1CommitmentSnaphot.html">udata::CommitmentSnaphot</a> snapshot;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordtype">void</span> updateSnapshot();</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  Perf::PerfTimer newPerfTimer{};</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;};</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif // WIDGET_COMMSTATS_H</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keywordtype">void</span> updateLiveSessionStateSlot();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  Ui::CommStatsQWidget *ui;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordtype">bool</span> isDelete = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classCommStatsQWidget.html#a16cf323289cd508c419196e08dc77f7e">   93</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classCommStatsQWidget.html#a16cf323289cd508c419196e08dc77f7e">isSelectable</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordtype">void</span> setSelectable(<span class="keywordtype">bool</span>);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  QString commitmentMetaDataText{};</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  QString beginDateText{<span class="stringliteral">&quot;Commitment began on &quot;</span>};</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  QString endDateText{<span class="stringliteral">&quot;Ends on &quot;</span>};</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <a class="code" href="classLiveSession.html">LiveSession</a> currentLiveSessionWidget{};</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  QPalette p;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="comment">//    TempChartQWidget mw{};</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordtype">int</span> selectedCommitmentIndex = 0;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keywordtype">int</span> currentTimeWindow = 0;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  std::map&lt;QString, udata::Commitment &amp;&gt; commitmentMap;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="comment">//    QVBoxLayout layout{};</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <a class="code" href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a> createCommimentWindow;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <a class="code" href="classNewSessionQWidget.html">NewSessionQWidget</a> newSessionQWidget;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <a class="code" href="classudata_1_1CommitmentSnaphot.html">udata::CommitmentSnaphot</a> snapshot;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keywordtype">void</span> updateSnapshot();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  Perf::PerfTimer newPerfTimer{};</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;};</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#endif // WIDGET_COMMSTATS_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassCommStatsQWidget_html_afd5012897d300955162c969174646bd5"><div class="ttname"><a href="classCommStatsQWidget.html#afd5012897d300955162c969174646bd5">CommStatsQWidget::CommStatsQWidget</a></div><div class="ttdeci">CommStatsQWidget(QWidget *parent=nullptr)</div><div class="ttdoc">CommStatsQWidget::CommStatsQWidget.</div><div class="ttdef"><b>Definition:</b> CommStatsQWidget.cpp:23</div></div>
-<div class="ttc" id="aclassCommStatsQWidget_html_a1fec3c6d3d872671b6cc04cfd53bca1d"><div class="ttname"><a href="classCommStatsQWidget.html#a1fec3c6d3d872671b6cc04cfd53bca1d">CommStatsQWidget::~CommStatsQWidget</a></div><div class="ttdeci">~CommStatsQWidget()</div><div class="ttdoc">CommStatsQWidget::~CommStatsQWidget.</div><div class="ttdef"><b>Definition:</b> CommStatsQWidget.cpp:97</div></div>
+<div class="ttc" id="aclassCommStatsQWidget_html_a1fec3c6d3d872671b6cc04cfd53bca1d"><div class="ttname"><a href="classCommStatsQWidget.html#a1fec3c6d3d872671b6cc04cfd53bca1d">CommStatsQWidget::~CommStatsQWidget</a></div><div class="ttdeci">~CommStatsQWidget()</div><div class="ttdoc">CommStatsQWidget::~CommStatsQWidget.</div><div class="ttdef"><b>Definition:</b> CommStatsQWidget.cpp:100</div></div>
 <div class="ttc" id="aclassudata_1_1Commitment_html"><div class="ttname"><a href="classudata_1_1Commitment.html">udata::Commitment</a></div><div class="ttdoc">The udata::Commitment class A Commitment is a commitment that the user commits to....</div><div class="ttdef"><b>Definition:</b> Commitment.h:170</div></div>
 <div class="ttc" id="aclassudata_1_1CommitmentSnaphot_html"><div class="ttname"><a href="classudata_1_1CommitmentSnaphot.html">udata::CommitmentSnaphot</a></div><div class="ttdef"><b>Definition:</b> CommitmentSnapshot.h:21</div></div>
+<div class="ttc" id="aclassCommStatsQWidget_html_a16cf323289cd508c419196e08dc77f7e"><div class="ttname"><a href="classCommStatsQWidget.html#a16cf323289cd508c419196e08dc77f7e">CommStatsQWidget::isSelectable</a></div><div class="ttdeci">bool isSelectable</div><div class="ttdoc">isSelectable if true, this means that the commitments are selectable; the user may select different c...</div><div class="ttdef"><b>Definition:</b> CommStatsQWidget.h:93</div></div>
 <div class="ttc" id="aclassLiveSession_html"><div class="ttname"><a href="classLiveSession.html">LiveSession</a></div><div class="ttdef"><b>Definition:</b> livesession.h:33</div></div>
 <div class="ttc" id="aclassCreateCommitmentQWidget_html"><div class="ttname"><a href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a></div><div class="ttdoc">The CreateCommitmentQWidget class.</div><div class="ttdef"><b>Definition:</b> CreateCommitmentQWidget.h:21</div></div>
-<div class="ttc" id="aclassCommStatsQWidget_html_aa39b9da2ae3560a7774f451250b82cb7"><div class="ttname"><a href="classCommStatsQWidget.html#aa39b9da2ae3560a7774f451250b82cb7">CommStatsQWidget::newSessionSlot</a></div><div class="ttdeci">void newSessionSlot(bool)</div><div class="ttdef"><b>Definition:</b> CommStatsQWidget.cpp:134</div></div>
+<div class="ttc" id="aclassCommStatsQWidget_html_aa39b9da2ae3560a7774f451250b82cb7"><div class="ttname"><a href="classCommStatsQWidget.html#aa39b9da2ae3560a7774f451250b82cb7">CommStatsQWidget::newSessionSlot</a></div><div class="ttdeci">void newSessionSlot(bool)</div><div class="ttdef"><b>Definition:</b> CommStatsQWidget.cpp:137</div></div>
 <div class="ttc" id="aclassNewSessionQWidget_html"><div class="ttname"><a href="classNewSessionQWidget.html">NewSessionQWidget</a></div><div class="ttdoc">The TimerWindowQWidget class.</div><div class="ttdef"><b>Definition:</b> NewSessionQWidget.h:14</div></div>
 <div class="ttc" id="aclassCommStatsQWidget_html"><div class="ttname"><a href="classCommStatsQWidget.html">CommStatsQWidget</a></div><div class="ttdoc">The CommStatsQWidget class is the main hub where the data for Commitments is displayed....</div><div class="ttdef"><b>Definition:</b> CommStatsQWidget.h:49</div></div>
 <!-- start footer part -->

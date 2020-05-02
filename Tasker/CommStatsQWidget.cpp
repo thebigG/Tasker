@@ -1,7 +1,7 @@
 #include "CommStatsQWidget.h"
-
 #include "ui_CommStatsQWidget.h"
 #include <CreateCommitmentQWidget.h>
+#include <QAbstractItemView>
 #include <UdataUtils.h>
 #include <mainui.h>
 #define TRAVIS_CI 1
@@ -35,11 +35,14 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
           &CommStatsQWidget::saveCurrentSession);
   connect(ui->commitmentsQTreeWidget, &QTreeWidget::itemDoubleClicked, this,
           &CommStatsQWidget::newSessionSlot);
+  connect(&currentLiveSessionWidget, &LiveSession::liveStateChanged, this,
+          &CommStatsQWidget::updateLiveSessionStateSlot);
   // allocate space in this string to avoid realocation on when updating
   // CommitmentInfoStatsQWidget
   commitmentMetaDataText.reserve(100);
   commitmentMetaDataText.resize(100);
   beginDateText.resize(100);
+  setSelectable(true);
   //  this->ui->GoalQLabel->setAlignment(Qt::AlignCenter);
   //  this->la
   //  qDebug()<<""
@@ -151,7 +154,7 @@ void CommStatsQWidget::newSessionSlot(bool checked) {
   //      /**
   //       * Maybe show the user in the UI that they have added this session
   //       already to this commitment today. It might be worth it to consider a
-  //       case where maybe a session was terminated prematurily for whatever
+  //       case where maybe a session was terminated prematurely for whatever
   //       reason and the user might want to resume that session even after
   //       closing Tasker, this is assuming that they open Tasker the very same
   //       day again. Give this a lot of thought as this could add clutter to
@@ -213,6 +216,15 @@ void CommStatsQWidget::itemDoubleClickedSlot(QTreeWidgetItem *item,
 void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
                                                     QTreeWidgetItem *previous) {
   qDebug() << "currentCommitmentChangedSlot#1";
+  //  ui->commitmentsQTreeWidget->selectedItems()
+  //  return;
+  if (previous != nullptr) {
+    //    previous->setSelected(true);
+    //    current->setSelected(false);
+    //    selectedCommitmentIndex = 0;
+    //    return;
+  }
+
   if (isDelete) {
     isDelete = false;
     return;
@@ -379,4 +391,25 @@ QPalette CommStatsQWidget::getSnapshotPalette() {
   p.setColor(this->ui->CommitmentInfoStatsQWidget->backgroundRole(),
              snapshot.palette().color(QPalette::ColorRole::Background));
   return p;
+}
+void CommStatsQWidget::setSelectable(bool toggle) {
+  if (toggle) {
+    this->ui->commitmentsQTreeWidget->setSelectionMode(
+        QAbstractItemView::SelectionMode::SingleSelection); // single selection
+    this->ui->commitmentsQTreeWidget->setFocusPolicy(
+        Qt::StrongFocus); // strong focus
+  } else {
+    this->ui->commitmentsQTreeWidget->setSelectionMode(
+        QAbstractItemView::SelectionMode::NoSelection);
+    this->ui->commitmentsQTreeWidget->setFocusPolicy(Qt::NoFocus);
+  }
+}
+void CommStatsQWidget::updateLiveSessionStateSlot() {
+  if (currentLiveSessionWidget.getCurrentState() == LiveSessionState::Paused) {
+    setSelectable(true);
+  } else if (currentLiveSessionWidget.getCurrentState() ==
+             LiveSessionState::Started) {
+    qDebug() << "setSelectable(false);";
+    setSelectable(false);
+  }
 }

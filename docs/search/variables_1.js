@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['type_289',['Type',['../classudata_1_1Commitment.html#ac7935220d180acba4217bb43c04e3d4b',1,'udata::Commitment']]]
+  ['isselectable_293',['isSelectable',['../classCommStatsQWidget.html#a16cf323289cd508c419196e08dc77f7e',1,'CommStatsQWidget']]]
 ];

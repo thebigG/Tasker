@@ -88,7 +88,7 @@ enum class udata::CommitmentType { WEEKLY, MONTHLY, Custom };
  * frequency = 1;
  * timeWindowSize  = 1;
  *  //The frequency variable  represents how many times and the timeWindowSize\
- * variablerepresents the size of the time
+ * variable represents the size of the time
  * }
  * In the case of twice a week:
  * frequency = 2
@@ -175,7 +175,7 @@ private:
   CommitmentFrequency frequency;
   QVector<TimeWindow>
       commitmentWindows; /**For now these are just a commitment's lifespan
-            divided into weeks.\ But hopefully it's clear that this time
+            divided into weeks. But hopefully it's clear that this time
             window can also be something like a month, or an arbitray number
             like 3 days. Each TimeWindow is the frame of time the user has to
             complete their sessions for that time period. For example;a
@@ -186,6 +186,7 @@ private:
   CommitmentType Type;
   bool noEndDate;
   bool done = false;
+  void update(); // helper function for isDone()
 
 public:
   Commitment();
@@ -204,7 +205,7 @@ public:
   QString summary() const;
   void updateCommitmentWindows(Session);
   void updateCommitmentWindows();
-  void update();
+
   bool isDone();
   void setDone(bool);
   void setFrequency(long long newTime, int newFrequency, int newTimeWinowSize);

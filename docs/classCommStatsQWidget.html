@@ -159,9 +159,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>previousSnapshot</b> 
 <tr class="memitem:abe5f2f4950410ebe3c381c98b45daa69"><td class="memItemLeft" align="right" valign="top"><a id="abe5f2f4950410ebe3c381c98b45daa69"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>nextSnapshot</b> ()</td></tr>
 <tr class="separator:abe5f2f4950410ebe3c381c98b45daa69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb7f9e3d7d15eb48320d5d2d4695a753"><td class="memItemLeft" align="right" valign="top"><a id="afb7f9e3d7d15eb48320d5d2d4695a753"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateLiveSessionStateSlot</b> ()</td></tr>
+<tr class="separator:afb7f9e3d7d15eb48320d5d2d4695a753"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
+<tr class="memitem:a05cb62e21d06db82ce40b1aa64919d97"><td class="memItemLeft" align="right" valign="top"><a id="a05cb62e21d06db82ce40b1aa64919d97"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setSelectable</b> (bool)</td></tr>
+<tr class="separator:a05cb62e21d06db82ce40b1aa64919d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93a39d584be4c627c59fc7251992794a"><td class="memItemLeft" align="right" valign="top"><a id="a93a39d584be4c627c59fc7251992794a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateSnapshot</b> ()</td></tr>
 <tr class="separator:a93a39d584be4c627c59fc7251992794a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -174,6 +180,10 @@ Ui::CommStatsQWidget *&#160;</td><td class="memItemRight" valign="bottom"><b>ui<
 <tr class="memitem:a60861c5fc267b326235e94bcb83fca5e"><td class="memItemLeft" align="right" valign="top"><a id="a60861c5fc267b326235e94bcb83fca5e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isDelete</b> = false</td></tr>
 <tr class="separator:a60861c5fc267b326235e94bcb83fca5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16cf323289cd508c419196e08dc77f7e"><td class="memItemLeft" align="right" valign="top"><a id="a16cf323289cd508c419196e08dc77f7e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommStatsQWidget.html#a16cf323289cd508c419196e08dc77f7e">isSelectable</a> = true</td></tr>
+<tr class="memdesc:a16cf323289cd508c419196e08dc77f7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">isSelectable if true, this means that the commitments are selectable; the user may select different commitments in the UI and look at data such as snapshot, commitment metadata, etc. If false, this means the commitments are NOT selectable and the user may not look at any data related to any commitments, except the one that is currently selected; the one that was selected previously. This is particularly useful for when the user is in the middle of a live session and we want to disable selection. <br /></td></tr>
+<tr class="separator:a16cf323289cd508c419196e08dc77f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e1ca7b8ef865fe42cd6639b4d4d8ff5"><td class="memItemLeft" align="right" valign="top"><a id="a3e1ca7b8ef865fe42cd6639b4d4d8ff5"></a>
 QString&#160;</td><td class="memItemRight" valign="bottom"><b>commitmentMetaDataText</b> {}</td></tr>
 <tr class="separator:a3e1ca7b8ef865fe42cd6639b4d4d8ff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -274,7 +284,7 @@ Perf::PerfTimer&#160;</td><td class="memItemRight" valign="bottom"><b>newPerfTim
 </table>
 </div><div class="memdoc">
 <pre class="fragment">         Maybe show the user in the UI that they have added this session
-</pre><p> already to this commitment today. It might be worth it to consider a case where maybe a session was terminated prematurily for whatever reason and the user might want to resume that session even after closing Tasker, this is assuming that they open Tasker the very same day again. Give this a lot of thought as this could add clutter to the UI, which I don't want. &zwj;/ return; } } if (<a class="el" href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d" title="MainUI::getInstance.">MainUI::getInstance()</a>-&gt;newSessionActionState()) { this-&gt;getNewSessionQWidget().show(); } } /** CommStatsQWidget::on_statsQFrame_destroyed</p>
+</pre><p> already to this commitment today. It might be worth it to consider a case where maybe a session was terminated prematurely for whatever reason and the user might want to resume that session even after closing Tasker, this is assuming that they open Tasker the very same day again. Give this a lot of thought as this could add clutter to the UI, which I don't want. &zwj;/ return; } } if (<a class="el" href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d" title="MainUI::getInstance.">MainUI::getInstance()</a>-&gt;newSessionActionState()) { this-&gt;getNewSessionQWidget().show(); } } /** CommStatsQWidget::on_statsQFrame_destroyed</p>
 <p>CommStatsQWidget::saveCurrentSession This function assumes that the currently selected session is the same one that this new live session belongs to.</p>
 
 </div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['newsessionqwidget_150',['NewSessionQWidget',['../classNewSessionQWidget.html',1,'']]]
+  ['newsessionqwidget_152',['NewSessionQWidget',['../classNewSessionQWidget.html',1,'']]]
 ];

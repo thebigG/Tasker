@@ -63,6 +63,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-slots">Private Slots</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
@@ -79,10 +80,15 @@ Inheritance diagram for LiveSession:</div>
   <img src="classLiveSession.png" alt=""/>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
+Signals</h2></td></tr>
+<tr class="memitem:a5eda5fcd43f4cecbad8994756bbef491"><td class="memItemLeft" align="right" valign="top"><a id="a5eda5fcd43f4cecbad8994756bbef491"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>liveStateChanged</b> ()</td></tr>
+<tr class="separator:a5eda5fcd43f4cecbad8994756bbef491"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae7fef580893842ea12760e8c1795adfd"><td class="memItemLeft" align="right" valign="top"><a id="ae7fef580893842ea12760e8c1795adfd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>LiveSession</b> (QWidget *parent=nullptr)</td></tr>
+<tr class="memitem:ae7fef580893842ea12760e8c1795adfd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveSession.html#ae7fef580893842ea12760e8c1795adfd">LiveSession</a> (QWidget *parent=nullptr)</td></tr>
 <tr class="separator:ae7fef580893842ea12760e8c1795adfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace9a7bcf2085dd64aff56f40176f9ab3"><td class="memItemLeft" align="right" valign="top"><a id="ace9a7bcf2085dd64aff56f40176f9ab3"></a>
 QLabel &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getcongratsMessageLabel</b> ()</td></tr>
@@ -98,6 +104,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveSession.html#a385835836b965186dbf7efc5a2f7bb52">resume</a> ()</td></tr>
 <tr class="memdesc:a385835836b965186dbf7efc5a2f7bb52"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classLiveSession.html#a385835836b965186dbf7efc5a2f7bb52" title="LiveSession::resume resumes the Timer Engine. If the Timer Engine is already running this function do...">LiveSession::resume</a> resumes the Timer <a class="el" href="namespaceEngine.html" title="The Engine namespace has all of the Hardware Hooks and classes that make up the &quot;Engine&quot; of Tasker Wh...">Engine</a>. If the Timer <a class="el" href="namespaceEngine.html" title="The Engine namespace has all of the Hardware Hooks and classes that make up the &quot;Engine&quot; of Tasker Wh...">Engine</a> is already running this function does nothing. <br /></td></tr>
 <tr class="separator:a385835836b965186dbf7efc5a2f7bb52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe0c599c2816e81cf89b9db54357698f"><td class="memItemLeft" align="right" valign="top"><a id="afe0c599c2816e81cf89b9db54357698f"></a>
+LiveSessionState&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentState</b> () const</td></tr>
+<tr class="separator:afe0c599c2816e81cf89b9db54357698f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-slots"></a>
 Private Slots</h2></td></tr>
@@ -112,7 +121,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>congratsSlot</b> ()</
 void&#160;</td><td class="memItemRight" valign="bottom"><b>playButtonSlot</b> ()</td></tr>
 <tr class="separator:a7c7c583bda3ec8b94cb42955f1b3214c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99bcee85395056e596506c4014b01e1a"><td class="memItemLeft" align="right" valign="top"><a id="a99bcee85395056e596506c4014b01e1a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>updateHookState</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveSession.html#a99bcee85395056e596506c4014b01e1a">updateHookState</a> ()</td></tr>
+<tr class="memdesc:a99bcee85395056e596506c4014b01e1a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classLiveSession.html#a99bcee85395056e596506c4014b01e1a" title="LiveSession::updateHookState updates the hook state of the live session. If the hook is currently pro...">LiveSession::updateHookState</a> updates the hook state of the live session. If the hook is currently productive, this hook(Mouse, Keyboard, etc) is rendered as "active" to the user. If the hook is unproductive, then the hook is rendered as "inactive" to the user. This method is called on every "tick" of the Timer <a class="el" href="namespaceEngine.html" title="The Engine namespace has all of the Hardware Hooks and classes that make up the &quot;Engine&quot; of Tasker Wh...">Engine</a>; this is a SLOT method that gets connected in <a class="el" href="classLiveSession.html">LiveSession</a>'s constructor to the "tick" signal. The argument could very well be made that this is, in theory inefficient, as the tick signal is sent out every second. Another approach I have thought about is having a "switched hook state" signal which only gets sent out(emitted) exclusively when the Hook state changes from productive to unproductive, or vice versa. However, this approach could sacrifice readability as it will add more complexity to the Controller-Viewer architecture that exists between <a class="el" href="classLiveSession.html">LiveSession</a> and Timer. I think for now, having this method triggered every second is negligible as it only takes 5000 nanoseconds(worst case on i5 2.5GHZ Dual-Core processor runnign Ubuntu 18.04) on average to complete. That is not to say that other methods such as UpdateUI should not be taken into consideration, since that is another SLOT method that gets triggered by "tick". However, in the mean time, I don't want to sacrifice readability for mere obsession with optimization, which SOMETIMES may be justified in Timer's delicate second-to-second state as we don't want latency in its internal clock, especially when it is rendered to the user. <br /></td></tr>
 <tr class="separator:a99bcee85395056e596506c4014b01e1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6e67d96b889d0fa3b7ae2d8f683b79b"><td class="memItemLeft" align="right" valign="top"><a id="ad6e67d96b889d0fa3b7ae2d8f683b79b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>start</b> ()</td></tr>
@@ -153,6 +163,12 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>hookStateText</b> 
 <tr class="memitem:af9115c326e56b946a4a10469f45a648a"><td class="memItemLeft" align="right" valign="top"><a id="af9115c326e56b946a4a10469f45a648a"></a>
 QString&#160;</td><td class="memItemRight" valign="bottom"><b>congratsMessage</b> {&quot;Congrats! You've completed your session!&quot;}</td></tr>
 <tr class="separator:af9115c326e56b946a4a10469f45a648a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3e12bd4cfcc5b1f2ff4af832e98d15b"><td class="memItemLeft" align="right" valign="top"><a id="af3e12bd4cfcc5b1f2ff4af832e98d15b"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>activeText</b> {&quot;(active)&quot;}</td></tr>
+<tr class="separator:af3e12bd4cfcc5b1f2ff4af832e98d15b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c2106eed8e3315b0dbad0efba28a7aa"><td class="memItemLeft" align="right" valign="top"><a id="a2c2106eed8e3315b0dbad0efba28a7aa"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>inactiveText</b> {&quot;(inactive)&quot;}</td></tr>
+<tr class="separator:a2c2106eed8e3315b0dbad0efba28a7aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77d892c669672471823c4f71b815e165"><td class="memItemLeft" align="right" valign="top"><a id="a77d892c669672471823c4f71b815e165"></a>
 QString&#160;</td><td class="memItemRight" valign="bottom"><b>taskState</b> {}</td></tr>
 <tr class="separator:a77d892c669672471823c4f71b815e165"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,6 +188,34 @@ Perf::PerfTimer&#160;</td><td class="memItemRight" valign="bottom"><b>liveSessio
 Perf::PerfTimer&#160;</td><td class="memItemRight" valign="bottom"><b>liveSessionPerfTimer3</b> {}</td></tr>
 <tr class="separator:a6eaf0ae7109b7d81905d8f954dfd3bf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae7fef580893842ea12760e8c1795adfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7fef580893842ea12760e8c1795adfd">&#9670;&nbsp;</a></span>LiveSession()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">LiveSession::LiveSession </td>
+          <td>(</td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>nullptr</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>QFontDatabase::addApplicationFont We need a supported font for the play/pause unicode icons. It currently works on macOS and linux. Has not been tested on Windows.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Tasker/<a class="el" href="livesession_8h_source.html">livesession.h</a></li>
 <li>Tasker/livesession.cpp</li>
