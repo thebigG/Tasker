@@ -37,6 +37,10 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
           &CommStatsQWidget::newSessionSlot);
   connect(&currentLiveSessionWidget, &LiveSession::liveStateChanged, this,
           &CommStatsQWidget::updateLiveSessionStateSlot);
+  connect(&currentLiveSessionWidget, &LiveSession::sessionStarted, this, [&]() {
+    setSelectable(false);
+    updateCurrentLiveSessionCommitment();
+  });
   // allocate space in this string to avoid realocation on when updating
   // CommitmentInfoStatsQWidget
   commitmentMetaDataText.reserve(100);
@@ -218,11 +222,13 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
   qDebug() << "currentCommitmentChangedSlot#1";
   //  ui->commitmentsQTreeWidget->selectedItems()
   //  return;
-  if (previous != nullptr) {
+  if (!isSelectable) {
     //    previous->setSelected(true);
     //    current->setSelected(false);
     //    selectedCommitmentIndex = 0;
-    //    return;
+    qDebug() << "";
+    //      !isSelectable
+    return;
   }
 
   if (isDelete) {
@@ -276,17 +282,8 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
                         1;
     updateSnapshot();
     newPerfTimer.stop();
-    if (MainUI::getInstance()->newSessionActionState()) {
-      currentLiveSessionWidget.getcongratsMessageLabel().setText("");
-    } else {
-      currentLiveSessionWidget.getcongratsMessageLabel().setText(
-          "Congrats! You've completed your session!");
-    }
     qDebug() << "duration of chart update=" << newPerfTimer.duration
-             << "milliseconds";
-    QTextStream(stdout) << "(cout)duration of chart update="
-                        << newPerfTimer.duration << "milliseconds";
-    ;
+             << "milli/nanoseconds";
   }
 }
 void CommStatsQWidget::newLiveSessionSlot() {
@@ -403,6 +400,7 @@ void CommStatsQWidget::setSelectable(bool toggle) {
         QAbstractItemView::SelectionMode::NoSelection);
     this->ui->commitmentsQTreeWidget->setFocusPolicy(Qt::NoFocus);
   }
+  isSelectable = toggle;
 }
 void CommStatsQWidget::updateLiveSessionStateSlot() {
   if (currentLiveSessionWidget.getCurrentState() == LiveSessionState::Paused) {
@@ -410,6 +408,12 @@ void CommStatsQWidget::updateLiveSessionStateSlot() {
   } else if (currentLiveSessionWidget.getCurrentState() ==
              LiveSessionState::Started) {
     qDebug() << "setSelectable(false);";
+    this->ui->commitmentsQTreeWidget->setCurrentItem(
+        this->ui->commitmentsQTreeWidget->topLevelItem(
+            currentLiveSessionCommitment));
     setSelectable(false);
   }
+}
+void CommStatsQWidget::updateCurrentLiveSessionCommitment() {
+  currentLiveSessionCommitment = selectedCommitmentIndex;
 }

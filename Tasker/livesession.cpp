@@ -23,7 +23,6 @@ LiveSession::LiveSession(QWidget *parent)
           &LiveSession::playButtonSlot);
   connect(Timer::getInstance(), &QThread::started, this, &LiveSession::start);
   currentState = LiveSessionState::Stopped;
-  //    qDebug() << "font value="
   /**
    * @brief QFontDatabase::addApplicationFont We need a supported font for the
    * play/pause unicode icons.
@@ -92,7 +91,6 @@ void LiveSession::congratsSlot() {
   //  ui->
   // reset the rest of the UI
   this->ui->hookStateQLabel->setVisible(false);
-  ui->taskStateMessageLabel->setText(congratsMessage);
 }
 QLabel &LiveSession::getcongratsMessageLabel() {
   return *ui->taskStateMessageLabel;
@@ -137,6 +135,7 @@ void LiveSession::start() {
   initTaskState();
   initHookState();
   this->ui->playButton->setVisible(true);
+  emit sessionStarted();
 }
 void LiveSession::initTaskState() {
   taskState.fill(' ');
@@ -241,5 +240,17 @@ void LiveSession::initHookState() {
   this->ui->hookStateQLabel->setVisible(true);
 }
 
+void LiveSession::updateDetails() {
+  if (MainUI::getInstance()->newSessionActionState()) {
+
+    ui->taskStateMessageLabel->setText("");
+  } else {
+    if (udata::User::getInstance()->getCurrentCommitment().isDone()) {
+      //      ui->taskStateMessageLabel->setText(congratsCommitmentMessage);
+    } else {
+      //      ui->taskStateMessageLabel->setText(congratsSessionMessage);
+    }
+  }
+}
 LiveSessionState LiveSession::getCurrentState() const { return currentState; }
 LiveSession::~LiveSession() { delete ui; }

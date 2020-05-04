@@ -91,6 +91,13 @@ private:
    * and we want to disable selection.
    */
   bool isSelectable = true;
+  /**
+   * @brief currentLiveSessionCommitment Used for re-focusing/re-selecting
+   * the current commitment a LiveSession belongs to when resuming a
+   * LiveSession.
+   */
+  int currentLiveSessionCommitment;
+  void updateCurrentLiveSessionCommitment();
   void setSelectable(bool);
   QString commitmentMetaDataText{};
   QString beginDateText{"Commitment began on "};

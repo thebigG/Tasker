@@ -39,6 +39,11 @@ public:
   QPushButton *getPlayButton();
   void pause();
   void resume();
+  QString congratsCommitmentMessage{
+      "Congrats! You've completed this commitment!"};
+  QString activeText{"(active)"};
+  QString inactiveText{"(inactive)"};
+  void updateDetails();
   ~LiveSession();
   LiveSessionState getCurrentState() const;
 
@@ -51,6 +56,7 @@ private slots:
 
 signals:
   void liveStateChanged();
+  void sessionStarted();
 
 private:
   Ui::LiveSession *ui;
@@ -60,9 +66,6 @@ private:
   QString contextText{""};
   QString sessionGoalText;
   QString hookStateText{};
-  QString congratsMessage{"Congrats! You've completed your session!"};
-  QString activeText{"(active)"};
-  QString inactiveText{"(inactive)"};
   QString taskState{};
   void initTaskState();
   void initHookState();
