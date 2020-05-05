@@ -18,10 +18,11 @@ LiveSession::LiveSession(QWidget *parent)
           &LiveSession::updateHookState);
 
   connect(Engine::Timer::getInstance(), &Timer::Timer::congrats, this,
-          &LiveSession::congratsSlot);
+          &LiveSession::stop);
   connect(this->ui->playButton, &QPushButton::clicked, this,
           &LiveSession::playButtonSlot);
-  connect(Timer::getInstance(), &QThread::started, this, &LiveSession::start);
+  connect(Timer::getInstance(), &Timer::timerStarted, this,
+          &LiveSession::start);
   currentState = LiveSessionState::Stopped;
   /**
    * @brief QFontDatabase::addApplicationFont We need a supported font for the
@@ -82,7 +83,7 @@ void LiveSession::updateTimeUI() {
   liveSessionPerfTimer.stop();
   qDebug() << "updateTimeUI latency#4:" << liveSessionPerfTimer.duration;
 }
-void LiveSession::congratsSlot() {
+void LiveSession::stop() {
   qDebug() << "congrats on livession++++++";
   //  if()
   ui->productiveTimeValue->setText("0h0m0s");
@@ -90,7 +91,11 @@ void LiveSession::congratsSlot() {
   ui->totalTimeValue->setText("0h0m0s");
   //  ui->
   // reset the rest of the UI
+  this->ui->taskStateMessageLabel->setVisible(false);
   this->ui->hookStateQLabel->setVisible(false);
+  this->ui->playButton->setVisible(false);
+  currentState = LiveSessionState::Stopped;
+  emit liveStateChanged();
 }
 QLabel &LiveSession::getcongratsMessageLabel() {
   return *ui->taskStateMessageLabel;
@@ -139,31 +144,34 @@ void LiveSession::start() {
 }
 void LiveSession::initTaskState() {
   taskState.fill(' ');
-  taskState.insert(0, "Attempting \"");
-  taskState.insert(
-      12, Timer::getInstance()->getCurrentSession().getTask().getName());
-  taskState.insert(12 + Timer::getInstance()
-                            ->getCurrentSession()
-                            .getTask()
-                            .getName()
-                            .length(),
-                   "\"");
-  taskState.insert(13 + Timer::getInstance()
-                            ->getCurrentSession()
-                            .getTask()
-                            .getName()
-                            .length(),
-                   " for ");
+  taskState.replace(0, 12, "Attempting \"");
+  taskState.replace(
+      12,
+      Timer::getInstance()->getCurrentSession().getTask().getName().length(),
+      Timer::getInstance()->getCurrentSession().getTask().getName());
+  taskState.replace(12 + Timer::getInstance()
+                             ->getCurrentSession()
+                             .getTask()
+                             .getName()
+                             .length(),
+                    1, "\"");
+  taskState.replace(13 + Timer::getInstance()
+                             ->getCurrentSession()
+                             .getTask()
+                             .getName()
+                             .length(),
+                    5, " for ");
   util::formatTime(sessionGoalText,
                    Timer::getInstance()->getCurrentSession().getGoal(),
                    contextText, 0);
-  taskState.insert(19 + Timer::getInstance()
-                            ->getCurrentSession()
-                            .getTask()
-                            .getName()
-                            .length(),
-                   sessionGoalText);
+  taskState.replace(19 + Timer::getInstance()
+                             ->getCurrentSession()
+                             .getTask()
+                             .getName()
+                             .length(),
+                    sessionGoalText.length(), sessionGoalText);
   this->ui->taskStateMessageLabel->setText(taskState);
+  this->ui->taskStateMessageLabel->setVisible(true);
 }
 /**
  * @brief LiveSession::updateHookState updates the hook state of the live

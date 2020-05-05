@@ -127,6 +127,12 @@
           <pointsize>16</pointsize>
          </font>
         </property>
+        <property name="toolTip">
+         <string>Hi There!</string>
+        </property>
+        <property name="toolTipDuration">
+         <number>2000</number>
+        </property>
         <property name="text">
          <string>u25B6</string>
         </property>

@@ -76,6 +76,7 @@ public slots:
   void productiveSlot();
   void unProductiveSlot();
 signals:
+  void timerStarted();
   void stopTimer();
   void congrats();
 };

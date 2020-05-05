@@ -41,15 +41,27 @@ void Timer::run() {
   qDebug() << "run method on Timer:" << QThread::currentThreadId();
 
   startTimer();
-  exec();
+  int val = exec();
+  if (val == 0) {
+    qDebug() << "Called quit on Timer Thread";
+  }
 }
 void Timer::startTimer() {
   qDebug() << "From work thread: " << currentThreadId();
+  if (hook.get() != nullptr) {
+    /**
+      @note I supect that it crashes when calling moveToThread here.
+      */
 
+    hook->moveToThread(nullptr);
+    hook.reset();
+  }
   if (hookType == Hook::HookType::X_MOUSE_KEYBOARD) {
     hook = std::make_unique<XHook>();
+
   } else if (hookType == Hook::HookType::X_MOUSE) {
     hook = std::make_unique<XHook>(XHookMode::MOUSE);
+    hook.reset();
   } else if (hookType == Hook::HookType::X_KEYBOARD) {
     hook = std::make_unique<XHook>(XHookMode::KEYBOARD);
   } else if (hookType == Hook::HookType::audio) {
@@ -63,6 +75,7 @@ void Timer::startTimer() {
    */
   connect(&listenerThread, &QThread::started, hook.get(), &Hook::start);
   hook->moveToThread(&listenerThread);
+
   listenerThread.start();
 }
 /**
@@ -109,6 +122,8 @@ void Timer::tickUpdate() {
     //    "0h0m0s"()
     qDebug() << "tick update on Timer took this long(milliseconds):"
              << newPerfTimer.duration;
+    //    this->ki
+    this->quit();
     return;
   }
   tickCount++;
@@ -134,6 +149,7 @@ void Timer::initTimer(Hook::HookType newHook, udata::Session newSession) {
   //  emit
   // start the Timer thread
   this->start();
+  emit timerStarted();
 }
 /**
  * @brief Timer::productiveSlot

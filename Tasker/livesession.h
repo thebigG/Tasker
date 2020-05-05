@@ -39,6 +39,7 @@ public:
   QPushButton *getPlayButton();
   void pause();
   void resume();
+  //  void stop();
   QString congratsCommitmentMessage{
       "Congrats! You've completed this commitment!"};
   QString activeText{"(active)"};
@@ -49,7 +50,7 @@ public:
 
 private slots:
   void updateTimeUI();
-  void congratsSlot();
+  void stop();
   void playButtonSlot();
   void updateHookState();
   void start();

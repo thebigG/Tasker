@@ -76,14 +76,6 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   this->ui->CommitmentInfoStatsQWidget->setPalette(p);
   currentLiveSessionWidget.setAutoFillBackground(true);
   currentLiveSessionWidget.setPalette(p);
-  //  p.setColor(QPalette::Window,
-  //  snapshot.palette().color(QPalette::Background));
-  currentLiveSessionWidget.getPlayButton()->setStyleSheet(
-      "background-color: rgba(255, 255, 255, 0);");
-  //  currentLiveSessionWidget.getPlayButton()->setAutoFillBackground(true);
-  //  currentLiveSessionWidget.getPlayButton()->setPalette(p);
-  //  currentLiveSessionWidget.getPlayButton()->
-  //  currentLiveSessionWidget.getPlayButton()->update();
 
 #endif
   this->layout()->setSpacing(0);
@@ -412,6 +404,9 @@ void CommStatsQWidget::updateLiveSessionStateSlot() {
         this->ui->commitmentsQTreeWidget->topLevelItem(
             currentLiveSessionCommitment));
     setSelectable(false);
+  } else if (currentLiveSessionWidget.getCurrentState() ==
+             LiveSessionState::Stopped) {
+    setSelectable(true);
   }
 }
 void CommStatsQWidget::updateCurrentLiveSessionCommitment() {
