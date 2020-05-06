@@ -34,6 +34,7 @@ public:
   static MainUI *getInstance();
   void update();
   void updateNewSessionActionState();
+  void updateActionStates();
   bool newSessionActionState();
   CommStatsQWidget &getCommitmentHub();
   MainUI();

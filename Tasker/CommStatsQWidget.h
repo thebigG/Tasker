@@ -59,6 +59,7 @@ public:
   void func();
   void update();
   void updateCommitmentInfoStatsQWidget();
+  void updateCurrentCommitment();
   void updateBeginDateQLabel();
   void updateEndDateQLabel();
   QPalette getSnapshotPalette();
@@ -66,6 +67,7 @@ public:
 public slots:
   void saveCurrentSession();
   void newCommitmentSlot(bool);
+  void editCommitmentSlot(bool);
   void deleteCommitmentSlot(bool);
   void newSessionSlot(bool);
   void currentCommitmentChangedSlot(QTreeWidgetItem *, QTreeWidgetItem *);

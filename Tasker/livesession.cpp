@@ -260,5 +260,6 @@ void LiveSession::updateDetails() {
     }
   }
 }
+
 LiveSessionState LiveSession::getCurrentState() const { return currentState; }
 LiveSession::~LiveSession() { delete ui; }

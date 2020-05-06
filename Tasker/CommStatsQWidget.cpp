@@ -41,6 +41,7 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
     setSelectable(false);
     updateCurrentLiveSessionCommitment();
   });
+  //  connect(&createCommimentWindow, &CreateCommitmentQWidget::editCommitment)
   // allocate space in this string to avoid realocation on when updating
   // CommitmentInfoStatsQWidget
   commitmentMetaDataText.reserve(100);
@@ -85,10 +86,14 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
 void CommStatsQWidget::newCommitmentSlot(bool checked) {
   this->createCommimentWindow.show();
 }
+void CommStatsQWidget::editCommitmentSlot(bool) {
+  qDebug() << "edit commitment slot!";
+  createCommimentWindow.editCommitment(selectedCommitmentIndex);
+}
 void CommStatsQWidget::addCommitmentItem(udata::Commitment &newCommitment) {
-
+  udata::User::getInstance()->addCommitment(newCommitment);
   ui->commitmentsQTreeWidget->addTopLevelItem(
-      new QTreeWidgetItem(QStringList() << newCommitment.getName() << "0%"));
+      new QTreeWidgetItem(QStringList() << newCommitment.getName() << ""));
 }
 /**
  * @brief CommStatsQWidget::~CommStatsQWidget
@@ -234,7 +239,7 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
   currentIndex = ui->commitmentsQTreeWidget->indexOfTopLevelItem(current);
   qDebug() << "currentIndex#1" << currentIndex;
   if (currentIndex == -1) {
-    qDebug() << "NEGATIVE";
+    qDebug() << "NEGATIVE on TreeWidgetItem";
     if (current == nullptr) {
       return;
     }
@@ -263,7 +268,7 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
   QVector<Commitment> &commitments = User::getInstance()->getCommitments();
   qDebug() << "currentCommitmentChangedSlot#13";
   //  qDebug()
-  MainUI::getInstance()->updateNewSessionActionState();
+  MainUI::getInstance()->updateActionStates();
   qDebug() << "currentCommitmentChangedSlot#14";
   if (!User::getInstance()->getCommitments().isEmpty() &&
       !commitments[0].getCommitmentWindows().isEmpty()) {
@@ -349,7 +354,7 @@ void CommStatsQWidget::updateCommitmentInfoStatsQWidget() {
       User::getInstance()->getCurrentCommitment().getFrequency().frequency));
   if (User::getInstance()->getCurrentCommitment().getType() ==
       udata::CommitmentType::WEEKLY) {
-    frequencyString.append(" times a week.");
+    frequencyString.append(" time(s) a week.");
   } else {
     // Not supported at the moment
   }
@@ -418,4 +423,21 @@ void CommStatsQWidget::updateLiveSessionStateSlot() {
 }
 void CommStatsQWidget::updateCurrentLiveSessionCommitment() {
   currentLiveSessionCommitment = selectedCommitmentIndex;
+}
+void CommStatsQWidget::updateCurrentCommitment() {
+  if (ui->commitmentsQTreeWidget->topLevelItem(selectedCommitmentIndex) !=
+      nullptr) {
+    ui->commitmentsQTreeWidget->topLevelItem(selectedCommitmentIndex)
+        ->setText(0, User::getInstance()->getCurrentCommitment().getName());
+    qDebug() << "new text for  updateCurrentCommitment="
+             << User::getInstance()->getCurrentCommitment().getName();
+  } else {
+    qDebug() << "updateCurrentCommitment failed";
+    return;
+  }
+  updateCommitmentInfoStatsQWidget();
+  qDebug() << "updateCurrentCommitment#1";
+  updateBeginDateQLabel();
+  updateEndDateQLabel();
+  updateSnapshot();
 }

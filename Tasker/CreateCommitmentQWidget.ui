@@ -177,7 +177,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="3" column="1">
-       <widget class="QComboBox" name="frequencyTimeQComboBox">
+       <widget class="QComboBox" name="frequencyTimeFormatQComboBox">
         <property name="font">
          <font>
           <pointsize>12</pointsize>
@@ -196,7 +196,7 @@
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QLineEdit" name="qtyQLineEdit">
+       <widget class="QLineEdit" name="frequencyTimeQLineEdit">
         <property name="maximumSize">
          <size>
           <width>70</width>
@@ -282,7 +282,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Create Commitment</string>
+         <string>Save</string>
         </property>
        </widget>
       </item>

@@ -13,10 +13,12 @@ MainUI::MainUI() {
 
   connect(commitmentMenu.addAction(NEW_COMMITMENT_STRING), &QAction::triggered,
           &commitmentHub, &CommStatsQWidget::newCommitmentSlot);
+
+  connect(commitmentMenu.addAction(EDIT_COMMITMENT_STRING), &QAction::triggered,
+          &commitmentHub, &CommStatsQWidget::editCommitmentSlot);
   connect(commitmentMenu.addAction(DELETE_COMMITMENT_STRING),
           &QAction::triggered, &commitmentHub,
           &CommStatsQWidget::deleteCommitmentSlot);
-  commitmentMenu.addAction(EDIT_COMMITMENT_STRING);
   connect(sessionMenu.addAction(NEW_SESSION_STRING), &QAction::triggered,
           &commitmentHub, &CommStatsQWidget::newSessionSlot);
   commitmentMenu.actions().at(0)->setShortcut(QKeySequence::New);
@@ -96,7 +98,7 @@ MainUI *MainUI::getInstance() {
  * This is called every time the application is about to be closed.
  */
 void MainUI::saveTaskerStateSlot() {
-  qDebug() << "Saving state";
+  qDebug() << "Saving state...";
   UdataUtils::saveUserData(*User::getInstance());
 } /**
    * @brief MainUI::newSessionActionState
@@ -106,4 +108,9 @@ void MainUI::saveTaskerStateSlot() {
 bool MainUI::newSessionActionState() {
   return this->sessionMenu.actions().at(0)->isEnabled();
 }
+/**
+ * @brief MainUI::updateActionStates
+ * @todo Add logic for "Edit Commitment" QAction
+ */
+void MainUI::updateActionStates() { updateNewSessionActionState(); }
 QAction *MainUI::getNewSessionAction() { return sessionMenu.actions().at(0); }

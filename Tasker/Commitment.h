@@ -209,6 +209,7 @@ public:
   bool isDone();
   void setDone(bool);
   void setFrequency(long long newTime, int newFrequency, int newTimeWinowSize);
+  void setFrequency(CommitmentFrequency);
   void setNoEndDate(bool);
   bool hasEndDate();
   CommitmentFrequency &getFrequency();

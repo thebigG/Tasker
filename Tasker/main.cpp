@@ -50,8 +50,9 @@ int main(int argc, char *argv[]) {
   //      util::minutesToSeconds(25), udata::CommitmentType::WEEKLY);
   //  qDebug() << "Commitment summary:"
   //           << User::getInstance()->getCommitments().at(0).summary();
-  //  QObject::connect(&a, &QGuiApplication::lastWindowClosed,
-  //                   &MainUI::saveTaskerStateSlot);
+
+  QObject::connect(&a, &QGuiApplication::lastWindowClosed,
+                   &MainUI::saveTaskerStateSlot);
 
   MainUI *widget = nullptr;
   //  qDebug() << "Tasker Debug mode";

@@ -33,6 +33,9 @@ void Commitment::setFrequency(long long newTime, int newFrequency,
   frequency.frequency = newFrequency;
   frequency.timeWindowSize = newTimeWinowSize;
 }
+void Commitment::setFrequency(CommitmentFrequency newFrequency) {
+  frequency = newFrequency;
+}
 void Commitment::setCommitmentWindows(
     QVector<TimeWindow> &newCommitmentWindows) {
   for (auto windows : newCommitmentWindows) {
@@ -42,31 +45,6 @@ void Commitment::setCommitmentWindows(
            << commitmentWindows.length();
   //    commitmentWindows = newCommitmentWindows;
 }
-//#if defined(Q_OS_OSX)
-// QDataStream &operator<<(QDataStream& out,const QVector<util::TimeWindow>&
-// timeWindows)
-//{
-//    qDebug()<<"QDataStream &operator<<(QDataStream& out,const
-//    QVector<util::TimeWindow>& timeWindows)"; for(const util::TimeWindow t:
-//    timeWindows)
-//    {
-//        out<<t;
-//    }
-//    return out;
-//}
-// QDataStream &operator>>(QDataStream& in, QVector<util::TimeWindow>&
-// timeWindows)
-//{
-//    qDebug()<<"QDataStream &operator>>(QDataStream& in,
-//    QVector<util::TimeWindow>& timeWindows"; for(util::TimeWindow t:
-//    timeWindows)
-//    {
-
-//        in>>t;
-//    }
-//    return in;
-//}
-//#endif
 void Commitment::setType(CommitmentType newType) { Type = newType; }
 CommitmentType &Commitment::getType() { return Type; }
 void Commitment::setNoEndDate(bool newNoEndDate) { noEndDate = newNoEndDate; }

@@ -19,7 +19,7 @@ using namespace udata;
 CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
     : QWidget(parent), ui(new Ui::CreateCommitmentQWidget) {
   ui->setupUi(this);
-  ui->qtyQLineEdit->setValidator(&validator);
+  ui->frequencyTimeQLineEdit->setValidator(&validator);
   ui->dateStartQDateEdit->setMinimumDate(QDate::currentDate());
   ui->dateStartQDateEdit->setMaximumDate(QDate::currentDate());
   if (getType() == udata::CommitmentType::WEEKLY) {
@@ -99,6 +99,22 @@ void CreateCommitmentQWidget::currentIndexFrequencyComboBoxSlot(
  * @brief CreateCommitmentQWidget::createCommitmentButtonSlot
  */
 void CreateCommitmentQWidget::createCommitmentButtonSlot() {
+  if (editing) {
+    editing = false;
+    Commitment &currentCommitment = User::getInstance()->getCurrentCommitment();
+    currentCommitment.setName(this->getCommitmentName());
+    currentCommitment.setDateStart(this->getStartDate());
+    currentCommitment.setDateEnd(this->getEndDate());
+    currentCommitment.setFrequency(getInterval());
+    currentCommitment.setType(this->getType());
+    currentCommitment.setNoEndDate(
+        this->getUI()->noEndDateQCheckBox->isChecked());
+    MainUI::getInstance()->getCommitmentHub().updateCurrentCommitment();
+    this->hide();
+    this->ui->commitmentNameQLineEdit->clear();
+    //    emit commitmentEdit();
+    return;
+  }
   this->hide();
   Commitment temp{this->getCommitmentName(),
                   this->getStartDate(),
@@ -113,10 +129,8 @@ void CreateCommitmentQWidget::createCommitmentButtonSlot() {
     }
   }
   this->ui->commitmentNameQLineEdit->clear();
-  udata::User::getInstance()->addCommitment(temp);
   qDebug() << "Does this run on createCommitmentButtonSlot?";
-  MainUI::getInstance()->getCommitmentHub().addCommitmentItem(
-      udata::User::getInstance()->getCommitments().last());
+  MainUI::getInstance()->getCommitmentHub().addCommitmentItem(temp);
   qDebug() << "Does this run on createCommitmentButtonSlot#2?";
   //  MainUI::getInstance()->show();
   qDebug() << "Does this run on createCommitmentButtonSlot#3?";
@@ -153,11 +167,11 @@ QDate CreateCommitmentQWidget::getEndDate() {
 udata::CommitmentFrequency CreateCommitmentQWidget::getInterval() {
   udata::CommitmentFrequency interval{};
   long long int size;
-  QString currentSizeLabel = ui->frequencyTimeQComboBox->currentText();
+  QString currentSizeLabel = ui->frequencyTimeFormatQComboBox->currentText();
   if (currentSizeLabel == MINUTES_STRING) {
-    size = SECONDS_IN_MINUTE * ui->qtyQLineEdit->text().toInt();
+    size = SECONDS_IN_MINUTE * ui->frequencyTimeQLineEdit->text().toInt();
   } else {
-    size = SECONDS_IN_HOUR * ui->qtyQLineEdit->text().toInt();
+    size = SECONDS_IN_HOUR * ui->frequencyTimeQLineEdit->text().toInt();
   }
 
   interval.goal = size;
@@ -197,4 +211,43 @@ udata::CommitmentType CreateCommitmentQWidget::getType() {
 void CreateCommitmentQWidget::on_createCommitmentQFrame_destroyed() {
   qDebug() << "on_createCommitmentQFrame_destroyed#1";
   //    delete udata::User::getInstance();
+}
+void CreateCommitmentQWidget::editCommitment(int commitmentIndex) {
+  Commitment &currentCommitment = User::getInstance()->getCurrentCommitment();
+  this->setWindowTitle("Edit \"" + currentCommitment.getName() + "\"");
+  this->ui->commitmentNameQLineEdit->setText(currentCommitment.getName());
+  this->ui->dateStartQDateEdit->setDate(currentCommitment.getDateStart());
+  if (currentCommitment.hasEndDate()) {
+    this->ui->noEndDateQCheckBox->setCheckState(Qt::CheckState::Unchecked);
+    this->ui->dateEndQDateEdit->setDate(currentCommitment.getDateEnd());
+  } else {
+    this->ui->noEndDateQCheckBox->setCheckState(Qt::CheckState::Checked);
+  }
+  if (currentCommitment.getFrequency().frequency == 7) {
+    this->ui->commitmentModeQCombox->setCurrentIndex(1);
+  } else {
+    this->ui->commitmentModeQCombox->setCurrentIndex(0);
+  }
+  if (util::toHours(currentCommitment.getFrequency().goal) > 0) {
+    this->ui->frequencyTimeFormatQComboBox->setCurrentIndex(1);
+    this->ui->frequencyTimeQLineEdit->setText(
+        QString::number(util::toHours(currentCommitment.getFrequency().goal)));
+  } else {
+    this->ui->frequencyTimeFormatQComboBox->setCurrentIndex(0);
+    this->ui->frequencyTimeQLineEdit->setText(QString::number(
+        util::toMinutes(currentCommitment.getFrequency().goal)));
+  }
+  this->ui->frequencyQComboBox->setCurrentIndex(
+      currentCommitment.getFrequency().frequency - 1);
+  editing = true;
+  this->show();
+
+  // perhaps emit a signal to CommStats that a commitment has been modified(?)
+}
+
+void CreateCommitmentQWidget::show() {
+  QWidget::show();
+  if (!editing) {
+    this->setWindowTitle("Create a Commitment");
+  };
 }
