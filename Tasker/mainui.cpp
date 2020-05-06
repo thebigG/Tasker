@@ -40,6 +40,7 @@ void MainUI::update() {
 void MainUI::updateNewSessionActionState() {
   if (User::getInstance()->getCurrentCommitment().isDone()) {
     getNewSessionAction()->setEnabled(false);
+    qDebug() << "updateNewSessionActionState#1";
     return;
   }
   qDebug() << "frequency for timeWindow="

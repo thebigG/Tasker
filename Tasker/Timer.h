@@ -44,7 +44,7 @@ private:
                                  // get incremented. Depends on niceness
   int unproductiveTimeSurplus = 1;
   std::unique_ptr<Hook> hook;
-  QThread listenerThread;
+  QThread hookThread;
   QThread thisThread;
   std::unique_ptr<QTimer> timer;
   virtual void run();
@@ -75,6 +75,7 @@ public slots:
   void tickUpdate();
   void productiveSlot();
   void unProductiveSlot();
+  //  void cleanupHookThread();
 signals:
   void timerStarted();
   void stopTimer();

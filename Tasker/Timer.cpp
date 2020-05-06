@@ -24,7 +24,7 @@ Timer::Timer(int newNiceness) {
   timer = std::make_unique<QTimer>(this);
   connect(timer.get(), &QTimer::timeout, this, &Timer::tickUpdate);
   connect(this, &Timer::stopTimer, this, &Timer::stopTimerSlot);
-
+  // connect()
   //  connect(this, &QThread::started, )
 }
 
@@ -48,20 +48,11 @@ void Timer::run() {
 }
 void Timer::startTimer() {
   qDebug() << "From work thread: " << currentThreadId();
-  if (hook.get() != nullptr) {
-    /**
-      @note I supect that it crashes when calling moveToThread here.
-      */
-
-    hook->moveToThread(nullptr);
-    hook.reset();
-  }
   if (hookType == Hook::HookType::X_MOUSE_KEYBOARD) {
     hook = std::make_unique<XHook>();
 
   } else if (hookType == Hook::HookType::X_MOUSE) {
     hook = std::make_unique<XHook>(XHookMode::MOUSE);
-    hook.reset();
   } else if (hookType == Hook::HookType::X_KEYBOARD) {
     hook = std::make_unique<XHook>(XHookMode::KEYBOARD);
   } else if (hookType == Hook::HookType::audio) {
@@ -73,10 +64,10 @@ void Timer::startTimer() {
       Specifically the statements regarding the listener and
       listenerThread. I'm talking about the next 3 lines of code.
    */
-  connect(&listenerThread, &QThread::started, hook.get(), &Hook::start);
-  hook->moveToThread(&listenerThread);
 
-  listenerThread.start();
+  connect(&hookThread, &QThread::started, hook.get(), &Hook::start);
+  hook->moveToThread(&hookThread);
+  hookThread.start();
 }
 /**
  * @brief Timer::tickUpdate
@@ -200,6 +191,7 @@ void Timer::reset() {
   lastUnproductiveTick = 0;
   productiveTimeSurplus = 1;
   unproductiveTimeSurplus = 1;
+  hookThread.quit();
 }
 QTimer *Timer::getClock() { return timer.get(); }
 udata::Session &Timer::getCurrentSession() { return currentSession; }

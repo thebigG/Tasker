@@ -232,6 +232,7 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
   }
   int currentIndex = 0;
   currentIndex = ui->commitmentsQTreeWidget->indexOfTopLevelItem(current);
+  qDebug() << "currentIndex#1" << currentIndex;
   if (currentIndex == -1) {
     qDebug() << "NEGATIVE";
     if (current == nullptr) {
@@ -240,6 +241,7 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
 
     currentIndex =
         ui->commitmentsQTreeWidget->indexOfTopLevelItem(current->parent());
+    qDebug() << "currentIndex#2" << currentIndex;
     qDebug() << "NEGATIVE#2";
     //        return;
   }
@@ -250,16 +252,21 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
            << User::getInstance()->getCommitments().at(currentIndex).getName();
   //
   User::getInstance()->updateCurrentCommitment(selectedCommitmentIndex);
+  qDebug() << "currentCommitmentChangedSlot#10";
+
   // update meta data on meta data widget
   updateCommitmentInfoStatsQWidget();
+  qDebug() << "currentCommitmentChangedSlot#11";
   updateBeginDateQLabel();
   updateEndDateQLabel();
+  qDebug() << "currentCommitmentChangedSlot#12";
+  QVector<Commitment> &commitments = User::getInstance()->getCommitments();
+  qDebug() << "currentCommitmentChangedSlot#13";
+  //  qDebug()
   MainUI::getInstance()->updateNewSessionActionState();
-  if (User::getInstance()->getCommitments().size() != 0 &&
-      User::getInstance()
-              ->getCommitments()[0]
-              .getCommitmentWindows()
-              .length() != 0) {
+  qDebug() << "currentCommitmentChangedSlot#14";
+  if (!User::getInstance()->getCommitments().isEmpty() &&
+      !commitments[0].getCommitmentWindows().isEmpty()) {
     qDebug() << "Running???";
     newPerfTimer.restart();
     /*reset the value of currentTimeWindow to the current time window

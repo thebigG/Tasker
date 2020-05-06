@@ -25,6 +25,7 @@ Commitment::Commitment(QString newName, QDate newStart, QDate newEnd,
     dateEnd = dateStart;
   }
   update();
+  updateCommitmentWindows();
 }
 void Commitment::setFrequency(long long newTime, int newFrequency,
                               int newTimeWinowSize) {
@@ -158,11 +159,12 @@ void Commitment::update() {
   //  updateCommitmentWindows();
   qDebug() << "upating-->" << name;
   if (noEndDate) {
+    qDebug() << "update on Commitment#1";
     done = false;
     return;
   }
-  qDebug() << "date comparison on commmitment update:"
-           << commitmentWindows.last().endDate << "," << dateEnd;
+  qDebug() << "update on Commitment#2";
+  //           << commitmentWindows.last().endDate << "," << dateEnd;
   if (QDate::currentDate() > dateEnd) {
     done = true;
   }
@@ -190,6 +192,7 @@ void Commitment::setDone(bool newDone) { done = newDone; }
  */
 bool Commitment::isDone() {
   update();
+  qDebug() << "isDone#1";
   return done;
 }
 QVector<TimeWindow> &Commitment::getCommitmentWindows() {
