@@ -106,11 +106,54 @@ void MainUI::saveTaskerStateSlot() {
    * otherwise.
    */
 bool MainUI::newSessionActionState() {
-  return this->sessionMenu.actions().at(0)->isEnabled();
+  return getNewSessionAction()->isEnabled();
 }
+bool MainUI::editCommitmentActionState() {
+  return getEditCommitmentAction()->isEnabled();
+}
+bool MainUI::deleteCommitmentActionState() {
+  return getDeleteCommitmentAction()->isEnabled();
+}
+
+void MainUI::updateEditCommitmentActionState() {
+  qDebug() << "commitmentHub.currentLiveSessionCommitment="
+           << commitmentHub.currentLiveSessionCommitment
+           << "commitmentHub.selectedCommitmentIndex"
+           << commitmentHub.selectedCommitmentIndex;
+  if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() !=
+      LiveSessionState::Stopped) {
+    if (commitmentHub.currentLiveSessionCommitment !=
+        commitmentHub.selectedCommitmentIndex) {
+      this->getEditCommitmentAction()->setEnabled(true);
+    } else {
+      this->getEditCommitmentAction()->setEnabled(false);
+    }
+  } else {
+    this->getEditCommitmentAction()->setEnabled(true);
+  }
+}
+void MainUI::updateDeleteCommitmentActionState() {
+  if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() !=
+      LiveSessionState::Stopped) {
+    this->getDeleteCommitmentAction()->setEnabled(false);
+  } else {
+    this->getDeleteCommitmentAction()->setEnabled(true);
+  }
+}
+
 /**
  * @brief MainUI::updateActionStates
  * @todo Add logic for "Edit Commitment" QAction
  */
-void MainUI::updateActionStates() { updateNewSessionActionState(); }
+void MainUI::updateActionStates() {
+  updateNewSessionActionState();
+  updateEditCommitmentActionState();
+  updateDeleteCommitmentActionState();
+}
 QAction *MainUI::getNewSessionAction() { return sessionMenu.actions().at(0); }
+QAction *MainUI::getEditCommitmentAction() {
+  return commitmentMenu.actions().at(1);
+}
+QAction *MainUI::getDeleteCommitmentAction() {
+  return commitmentMenu.actions().at(2);
+}

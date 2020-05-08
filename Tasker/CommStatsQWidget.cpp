@@ -40,6 +40,7 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   connect(&currentLiveSessionWidget, &LiveSession::sessionStarted, this, [&]() {
     setSelectable(false);
     updateCurrentLiveSessionCommitment();
+    MainUI::getInstance()->updateActionStates();
   });
   //  connect(&createCommimentWindow, &CreateCommitmentQWidget::editCommitment)
   // allocate space in this string to avoid realocation on when updating
@@ -404,6 +405,7 @@ void CommStatsQWidget::setSelectable(bool toggle) {
         QAbstractItemView::SelectionMode::NoSelection);
     this->ui->commitmentsQTreeWidget->setFocusPolicy(Qt::NoFocus);
   }
+
   isSelectable = toggle;
 }
 void CommStatsQWidget::updateLiveSessionStateSlot() {
@@ -420,6 +422,7 @@ void CommStatsQWidget::updateLiveSessionStateSlot() {
              LiveSessionState::Stopped) {
     setSelectable(true);
   }
+  MainUI::getInstance()->updateActionStates();
 }
 void CommStatsQWidget::updateCurrentLiveSessionCommitment() {
   currentLiveSessionCommitment = selectedCommitmentIndex;
@@ -440,4 +443,7 @@ void CommStatsQWidget::updateCurrentCommitment() {
   updateBeginDateQLabel();
   updateEndDateQLabel();
   updateSnapshot();
+}
+LiveSession const &CommStatsQWidget::getcurrentLiveSessionWidget() const {
+  return currentLiveSessionWidget;
 }

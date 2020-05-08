@@ -11,7 +11,7 @@
  * displaying Tasker and the one reponsible for shutdown and cleanup procedures
  * such as storing the commitments to disk before shutting down the App.
  * The class is also responsible for managing(as implied before) layout,
- * sizes,context menus and look-and-feel of the entire UI.
+ * sizes, context menus and look-and-feel of the entire UI.
  * Another responsability of this class is that it works as the keykeeper of
  * all of the actions that a user may want to do on Tasker. For instance
  * actions( or QActions in QT speak) such as creating new sessions are
@@ -29,13 +29,19 @@ private:
   QMenu commitmentMenu{COMMITMENT_MENU_STRING};
   QMenu sessionMenu{SESSION_MENU_STRING};
   QAction *getNewSessionAction();
+  QAction *getEditCommitmentAction();
+  QAction *getDeleteCommitmentAction();
 
 public:
   static MainUI *getInstance();
   void update();
   void updateNewSessionActionState();
+  void updateEditCommitmentActionState();
+  void updateDeleteCommitmentActionState();
   void updateActionStates();
   bool newSessionActionState();
+  bool editCommitmentActionState();
+  bool deleteCommitmentActionState();
   CommStatsQWidget &getCommitmentHub();
   MainUI();
 public slots:

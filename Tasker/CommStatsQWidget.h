@@ -62,6 +62,21 @@ public:
   void updateCurrentCommitment();
   void updateBeginDateQLabel();
   void updateEndDateQLabel();
+  /**
+   * @brief currentLiveSessionCommitment Used for re-focusing/re-selecting
+   * the current commitment a LiveSession belongs to when resuming a
+   * LiveSession.
+   */
+  int currentLiveSessionCommitment;
+  /**
+   * @brief selectedCommitmentIndex currently selected(highlited) commitment in
+   * commitmentsQTreeWidget.
+   * @note I think for the future keeping a reference to current commitment
+   * might be a lot better, instead of an index that has to be updated in
+   * hacky/ugly ways.
+   */
+  int selectedCommitmentIndex = 0;
+  LiveSession const &getcurrentLiveSessionWidget() const;
   QPalette getSnapshotPalette();
 
 public slots:
@@ -93,12 +108,6 @@ private:
    * and we want to disable selection.
    */
   bool isSelectable = true;
-  /**
-   * @brief currentLiveSessionCommitment Used for re-focusing/re-selecting
-   * the current commitment a LiveSession belongs to when resuming a
-   * LiveSession.
-   */
-  int currentLiveSessionCommitment;
   void updateCurrentLiveSessionCommitment();
   void setSelectable(bool);
   QString commitmentMetaDataText{};
@@ -107,7 +116,6 @@ private:
   LiveSession currentLiveSessionWidget{};
   QPalette p;
   //    TempChartQWidget mw{};
-  int selectedCommitmentIndex = 0;
   int currentTimeWindow = 0;
   std::map<QString, udata::Commitment &> commitmentMap;
   //    QVBoxLayout layout{};
