@@ -11,6 +11,7 @@
 #include "livesession.h"
 #include "mainui.h"
 #include <CommitmentSnapshot.h>
+#include <QStandardPaths>
 #include <TaskerPerf/perftimer.h>
 
 #include <QApplication>
@@ -43,7 +44,9 @@ int main(int argc, char *argv[]) {
     qDebug("prepFiles failed");
     return -1;
   }
-
+  qDebug() << "path="
+           << QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+  qDebug() << "path2=" << QDir::homePath();
   //  UdataUtils::generateCommitment(
   //      "Generated#13", 8, util::minutesToSeconds(10),
   //      util::minutesToSeconds(100), util::minutesToSeconds(0),

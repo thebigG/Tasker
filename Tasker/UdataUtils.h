@@ -6,12 +6,8 @@
 #include <User.h>
 
 #ifdef Q_OS_UNIX
-#define USERDATA_DIR "."
-#define HOME_FOLDER_NAME "/home"
-#define USER_FOLDER_NAME ".TaskerData"
+#define USER_FOLDER_NAME ".Tasker"
 #define TASKER_FILE_EXTENSION ".tasker"
-#define MKDIR_COMMAND "mkdir "
-#define ROOT_USER "root"
 #endif
 
 namespace udata {
@@ -37,6 +33,5 @@ public:
   static QString getUsername();
   static QString taskerFolder;
   static QString userFilePath;
-  static QString getNotRootUser();
 };
 #endif
