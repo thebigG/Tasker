@@ -3,7 +3,7 @@
 #include "CreateCommitmentQWidget.h"
 #include "StatsUtility.h"
 #include "Task.h"
-#include "TaskerUIMainWindowQWidget.h"
+
 #include "Timer.h"
 #include "UdataUtils.h"
 #include "User.h"

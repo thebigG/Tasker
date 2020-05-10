@@ -4,11 +4,12 @@
 #include <QtGlobal>
 #include <Task.h>
 #include <User.h>
-
-#ifdef Q_OS_UNIX
+#ifdef __TASKER_DEBUG__
+#define USER_FOLDER_NAME ".DebugTasker"
+#else
 #define USER_FOLDER_NAME ".Tasker"
-#define TASKER_FILE_EXTENSION ".tasker"
 #endif
+#define TASKER_FILE_EXTENSION ".tasker"
 
 namespace udata {
 class UdataUtils;

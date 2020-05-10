@@ -1,8 +1,12 @@
 #ifndef MAINUI_H
 #define MAINUI_H
-#include <TaskerUIMainWindowQWidget.h>
 
+#include <QAction>
+#include <QMainWindow>
+#include <QMenu>
 #include <memory>
+
+#include "CommStatsQWidget.h"
 
 /**
  * @brief The MainUI class is the one responsible

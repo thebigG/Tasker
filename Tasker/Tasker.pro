@@ -5,7 +5,13 @@ QT += charts
 #QMAKE_CXXFLAGS +=  -lXt
 #QMAKE_CXXFLAGS += -lX11
 QMAKE_LFLAGS += -no-pie
-
+CONFIG(release, debug|release) {
+    #This is a release build
+    DEFINES += QT_NO_DEBUG_OUTPUT
+} else {
+    #This is a non-release(debug) build
+    DEFINES+=__TASKER_DEBUG__
+}
 #QMAKE_CXXFLAGS += "LDFLAGS=-lX11"
 #QMAKE_CXXFLAGS += -lXcb
 unix:{
@@ -24,6 +30,16 @@ linux-g++*{
 #QMAKE_CXXFLAGS += "-lxcb-xkb"
 #LIBS += -L../libs -lX11
 INCLUDEPATH += /usr/include/x86_64-linux-gnu/qt5
+#CONFIG(release, debug|release)
+#{
+#DEFINES -=__TASKER_DEBUG__
+#DEFINES += QT_NO_DEBUG_OUTPUT
+#}
+#debug
+#{
+#DEFINES+=__TASKER_DEBUG__
+#DEFINES += QT_NO_DEBUG_OUTPUT
+#}
 }
 #macx:
 #{
@@ -52,16 +68,6 @@ CONFIG += -std=c++14
 #DEFINES+=__TASKER_DEBUG__
 #DEFINES += QT_NO_DEBUG_OUTPUT
 #}
-#CONFIG(release, debug|release)
-#{
-##DEFINES -=__TASKER_DEBUG__
-#DEFINES += QT_NO_DEBUG_OUTPUT
-#}
-#debug
-#{
-#DEFINES+=__TASKER_DEBUG__
-#DEFINES += QT_NO_DEBUG_OUTPUT
-#}
 #!debug
 #{
 #DEFINES -= QT_NO_DEBUG_OUTPUT
@@ -72,8 +78,8 @@ CONFIG += -std=c++14
 #QMAKE_CXXFLAGS += lobjc
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-debug: DEFINES += __TASKER_DEBUG__
-!debug: DEFINES -= __TASKER_DEBUG__
+#debug: DEFINES += __TASKER_DEBUG__
+#!debug: DEFINES -= __TASKER_DEBUG__
 CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
@@ -101,7 +107,6 @@ SOURCES += \
     Task.cpp \
     StatsUtility.cpp \
     TaskerPerf/perftimer.cpp \
-    TaskerUIMainWindowQWidget.cpp \
     Timer.cpp \
     UdataUtils.cpp \
     User.cpp \
@@ -123,10 +128,8 @@ HEADERS += \
     Session.h \
     Task.h \
     TaskerPerf/perftimer.h \
-    TaskerUIMainWindowQWidget.h \
     Timer.h \
     StatsUtility.h \
-    TaskerUIMainWindowQWidget.h \
     UdataUtils.h \
     XHook.h \
     livesession.h \
@@ -138,7 +141,6 @@ FORMS += \
     CommStatsQWidget.ui \
     CreateCommitmentQWidget.ui \
     NewSessionQWidget.ui \
-    TaskerUIMainWindowQWidget.ui \
     livesession.ui
 
 # Default rules for deployment.
