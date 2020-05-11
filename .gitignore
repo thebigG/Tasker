@@ -61,3 +61,4 @@ dkms.conf
 Tasker.pro.*
 Tasker_*
 *.udb
+Makefile
