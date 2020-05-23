@@ -4,6 +4,7 @@
 #include <TaskerPerf/perftimer.h>
 
 #include <QVector>
+#include <QtCharts/QAbstractBarSeries>
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QBarSeries>
 #include <QtCharts/QBarSet>

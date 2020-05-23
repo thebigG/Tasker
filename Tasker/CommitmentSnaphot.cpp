@@ -101,6 +101,11 @@ udata::CommitmentSnaphot::CommitmentSnaphot(int numberOfBars,
   static_cast<QGridLayout *>(detailsWidget.layout())
       ->addWidget(&unproductiveTimeAvgLabel, 0, 1);
   static_cast<QGridLayout *>(this->layout())->addWidget(&detailsWidget, 1, 0);
+  //  labelPalette.setColor(QPalette::ColorRole::Foreground, Qt::red);
+  //  view.setPalette(labelPalette);
+  //  view.setAutoFillBackground(true);
+  chart.setBackgroundVisible(false);
+  //  chart.setTheme(QChart::ChartThemeQt);
   //  static_cast<QGridLayout
   //  *>(this->layout())->addWidget(productiveTimeAvgLabel);
 }
@@ -159,14 +164,17 @@ void udata::CommitmentSnaphot::update(udata::TimeWindow &currentWindow,
     temp = getWeekDayIndex(currentWindow.startDate,
                            currentWindow.sessions[i].getDate());
     productiveBarSet.replace(
-        temp, util::toMinutes(currentWindow.sessions[i].getProductiveTime()));
+        temp,
+        (int)util::toMinutes(currentWindow.sessions[i].getProductiveTime()));
     unproductiveBarSet.replace(
-        temp, util::toMinutes(currentWindow.sessions[i].getUnproductiveTime()));
+        temp,
+        (int)util::toMinutes(currentWindow.sessions[i].getUnproductiveTime()));
   }
 
   series.append(&productiveBarSet);
   series.append(&unproductiveBarSet);
   y.setRange(0, util::toMinutes(commitmentGoal));
+  y.setTickCount(3);
   QString dateRange{currentWindow.startDate.toString() + "--" +
                     currentWindow.endDate.toString()};
 
@@ -208,6 +216,17 @@ void udata::CommitmentSnaphot::update(udata::TimeWindow &currentWindow,
            << static_cast<QGridLayout *>(this->layout())->horizontalSpacing();
   qDebug() << "size hint of view in " << view.sizeHint();
   qDebug() << "size of chart in update" << chart.size();
+
+  //    productiveBarSet.setLabel("some label");
+  //  series.setLabelsAngle()
+  //  series
+  //  series.
+  //  (QAbstractBarSeries*) (&series)->setLa
+  series.setLabelsVisible();
+  series.setLabelsFormat("@value");
+  series.setLabelsPosition(QAbstractBarSeries::LabelsInsideEnd);
+  //  series.setOpacity(0.5);
+
   view.setMinimumSize(492, 528);
   qDebug() << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 }

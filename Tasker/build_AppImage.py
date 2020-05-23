@@ -26,7 +26,7 @@ run(["cp", "./clock-256.png", "build/AppDir/usr/share/icons/hicolor/256x256/apps
 run(["cp", "./Tasker.desktop", "build/AppDir/usr/share/applications"])
 
 run(["appimage-builder", "--generate"], cwd="./build")
-#
+
 with open('./build/AppImageBuilder.yml') as recipe_file:
     try:
         AppImage_config = safe_load(recipe_file)
