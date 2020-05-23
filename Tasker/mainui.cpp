@@ -4,6 +4,7 @@
 #include <User.h>
 
 #include <QDebug>
+
 std::unique_ptr<MainUI> MainUI::mainHub;
 
 using namespace udata;
