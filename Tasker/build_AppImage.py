@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+
+#import rando
 from yaml import safe_load, dump
 from yaml import YAMLError
 from subprocess import run
@@ -8,6 +10,9 @@ ubuntu_sources = [{'sourceline': 'deb http://archive.ubuntu.com/ubuntu/ bionic m
                   {'sourceline': 'deb http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse'},
                   {'sourceline': 'deb http://archive.ubuntu.com/ubuntu/ bionic-security main restricted universe multiverse'}
                   ]
+
+
+xhook_path = 'usr/share/applications/XListenerHook'
 run(["mkdir", "build"])
 
 run(["qmake", "../Tasker.pro"],  cwd="./build")
@@ -22,10 +27,13 @@ run(["mkdir", "-p", "usr/share/icons/hicolor/256x256/apps"],
 # Copy/move necessary files to AppDir
 run(["mv", "opt/Tasker/bin/Tasker", "usr/bin"],
     cwd="./build/AppDir")
+run(["cp", "../libs/linux/iohook/XListenerHook",
+     "./build/AppDir/usr/share/applications"])
 run(["cp", "./clock-256.png", "build/AppDir/usr/share/icons/hicolor/256x256/apps"])
 run(["cp", "./Tasker.desktop", "build/AppDir/usr/share/applications"])
 
 run(["appimage-builder", "--generate"], cwd="./build")
+
 
 with open('./build/AppImageBuilder.yml') as recipe_file:
     try:
@@ -37,6 +45,7 @@ with open('./build/AppImageBuilder.yml') as recipe_file:
         print('An Error happened loading the yml recipe')
 with open('./build/AppImageBuilder.yml', mode='w') as recipe_file:
     AppImage_config['AppDir']['apt']['sources'] = ubuntu_sources
+    # AppImage_config['AppDir']['files']['exclude'].append(xhook_path)
     dump(AppImage_config, recipe_file)
 
 

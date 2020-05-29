@@ -3,6 +3,7 @@ QT += multimedia
 QT += testlib
 QT += charts
 #QMAKE_CXXFLAGS +=  -lXt
+#QMAKE_CXXFLAGS += "-fno-sized-deallocation"
 #QMAKE_CXXFLAGS += -lX11
 QMAKE_LFLAGS += -no-pie
 CONFIG(release, debug|release) {
@@ -60,7 +61,7 @@ INCLUDEPATH += /usr/include/x86_64-linux-gnu/qt5
 QT += multimedia
 QMAKE_CXXFLAGS += "-pthread"
 QMAKE_CXXFLAGS = -std=c++14
-CONFIG += static
+#CONFIG += static
 CONFIG += -std=c++14
 
 #CONFIG+=CONFIG(debug, debug|release)
