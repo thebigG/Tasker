@@ -28,7 +28,7 @@ run(["mkdir", "-p", "usr/share/icons/hicolor/256x256/apps"],
 run(["mv", "opt/Tasker/bin/Tasker", "usr/bin"],
     cwd="./build/AppDir")
 run(["cp", "../libs/linux/iohook/XListenerHook",
-     "./build/AppDir/usr/share/applications"])
+     "./build/AppDir/usr/bin"])
 run(["cp", "./clock-256.png", "build/AppDir/usr/share/icons/hicolor/256x256/apps"])
 run(["cp", "./Tasker.desktop", "build/AppDir/usr/share/applications"])
 
@@ -50,5 +50,6 @@ with open('./build/AppImageBuilder.yml', mode='w') as recipe_file:
 
 
 # Build the AppImage
-run(["appimage-builder", "--skip-test", "--skip-appimage"], cwd="./build")
+#Make sure to call appimage-builder once, otherwise it breaks when including extra binaries like XListenerHook
+#run(["appimage-builder", "--skip-test", "--skip-appimage"], cwd="./build")
 run(["appimage-builder", "--skip-test"], cwd="./build")
