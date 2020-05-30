@@ -23,8 +23,10 @@ MainUI::MainUI() {
   connect(sessionMenu.addAction(NEW_SESSION_STRING), &QAction::triggered,
           &commitmentHub, &CommStatsQWidget::newSessionSlot);
   commitmentMenu.actions().at(0)->setShortcut(QKeySequence::New);
+#ifdef __TASKER_DEBUG__
   sessionMenu.addAction(EDIT_SESSION_STRING);
   sessionMenu.addAction(DELETE_SESSION_STRING);
+#endif
   mainMenuBar.addMenu(&commitmentMenu);
   mainMenuBar.addMenu(&sessionMenu);
   this->setMenuBar(&mainMenuBar);

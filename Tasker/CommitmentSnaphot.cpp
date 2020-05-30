@@ -130,11 +130,18 @@ void udata::CommitmentSnaphot::update(udata::TimeWindow &currentWindow,
   QDate dayOfTheWeek = QDate{currentWindow.startDate};
   qDebug() << "_________________________________________________";
   x.clear();
+  //  x.setF
   if (type == udata::CommitmentType::WEEKLY) {
     for (int i = 0; i < WEEK_SIZE; i++) {
       productiveBarSet.replace(i, 0);
       unproductiveBarSet.replace(i, 0);
-      x.append(dayOfTheWeek.toString("ddd"));
+      if (dayOfTheWeek == QDate::currentDate()) {
+        //        x.append(dayOfTheWeek.toString("ddd") + "<b/>(Today)");
+        x.append("Today");
+      } else {
+        x.append(dayOfTheWeek.toString("ddd"));
+      }
+
       dayOfTheWeek = dayOfTheWeek.addDays(1);
     }
   }

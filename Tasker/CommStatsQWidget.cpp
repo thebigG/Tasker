@@ -65,13 +65,14 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
 
   static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
       ->addWidget(this->ui->CommitmentInfoStatsQWidget, 1, 1);
-//          (this->ui->prev,0,0);
-//  static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
-//      ->setSpacing(0);
-//  static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
-//      ->setContentsMargins(0, 0, 0, 0);
-#ifdef TRAVIS_CI
+  //          (this->ui->prev,0,0);
+  //  static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
+  //      ->setSpacing(0);
+  //  static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
+  //      ->setContentsMargins(0, 0, 0, 0);
+  //#ifdef TRAVIS_CI
   QPalette p = this->ui->CommitmentInfoStatsQWidget->palette();
+
   p.setColor(this->ui->CommitmentInfoStatsQWidget->backgroundRole(),
              snapshot.palette().color(QPalette::ColorRole::Background));
   this->ui->CommitmentInfoStatsQWidget->setAutoFillBackground(true);
@@ -79,7 +80,7 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   currentLiveSessionWidget.setAutoFillBackground(true);
   currentLiveSessionWidget.setPalette(p);
 
-#endif
+  //#endif
   this->layout()->setSpacing(0);
   this->layout()->setContentsMargins(0, 0, 0, 0);
 }

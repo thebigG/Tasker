@@ -5,10 +5,16 @@
 #include <QPushButton>
 #include <QWidget>
 #include <TaskerPerf/perftimer.h>
+#ifdef __TASKER_DEBUG__
 #if defined(Q_OS_OSX)
 #define LIVESESSIONFONTPATH "some/macOS/path"
 #elif defined(Q_OS_LINUX)
 #define LIVESESSIONFONTPATH "../resources/fonts/unifont-13.0.02.ttf"
+#endif
+#else
+#if defined(Q_OS_LINUX)
+#define LIVESESSIONFONTPATH "../share/applications/unifont-13.0.02.ttf"
+#endif
 #endif
 
 #define PLAYBUTTON "\u25B6"

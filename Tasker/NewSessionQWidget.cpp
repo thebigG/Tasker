@@ -26,7 +26,7 @@ NewSessionQWidget::NewSessionQWidget(QWidget *parent)
   this->addAction(new QAction());
   this->actions().at(0)->setShortcut(QKeySequence::Cancel);
   connect(this->actions().at(0), &QAction::triggered, this, &QWidget::hide);
-  this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{Qt::Checked});
+  this->ui->keyboardQRadioButton->isChecked();
   goalText.reserve(100);
   goalText.resize(100);
 }
@@ -46,14 +46,11 @@ void NewSessionQWidget::startTimerButtonSlot() {
     more than one listener for the session.
     Will be adding support for multiple listeners ASAP.
     */
-  if (this->ui->keyboardQCheckBox->checkState() ==
-      Qt::CheckState{Qt::Checked}) {
+  if (this->ui->keyboardQRadioButton->isChecked()) {
     newListsners.push_back(Engine::Hook::HookType::X_KEYBOARD);
-  }
-  if (this->ui->audioQCheckBox->checkState() == Qt::CheckState{Qt::Checked}) {
+  } else if (this->ui->audioQRadioButton->isChecked()) {
     newListsners.push_back(Engine::Hook::HookType::audio);
-  }
-  if (this->ui->mouseQCheckBox->checkState() == Qt::CheckState{Qt::Checked}) {
+  } else if (this->ui->mouseQRadioButton->isChecked()) {
     newListsners.push_back(Engine::Hook::HookType::X_MOUSE);
   }
   Task newTask{getTaskName(), newListsners};
@@ -86,18 +83,6 @@ void NewSessionQWidget::on_timerWindowQFrame_destroyed() {
       << " udata::User::getInstance() on on_timerWindowQFrame_destroyed()#2";
 }
 
-void NewSessionQWidget::dropDownTaskSlot(const QString &arg1) {
-  if (arg1 == QString(WRITING_STRING)) {
-    this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{Qt::Checked});
-    this->ui->audioQCheckBox->setCheckState(Qt::CheckState{Qt::Unchecked});
-  } else if (arg1 == QString(MUSIC_STRING)) {
-    this->ui->audioQCheckBox->setCheckState(Qt::CheckState{Qt::Checked});
-    this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{Qt::Unchecked});
-  } else if (arg1 == QString(CUSTOM_STRING)) {
-    this->ui->audioQCheckBox->setCheckState(Qt::CheckState{Qt::Unchecked});
-    this->ui->keyboardQCheckBox->setCheckState(Qt::CheckState{Qt::Unchecked});
-  }
-}
 /**
  * @brief TimerWindowQWidget::updateGoalText
  */
