@@ -11,11 +11,21 @@ Even though my timer counted 30 minutes, I only did 15 minutes of writing. This 
 
 This means that while a session is opened in Tasker, it will be detecting hardware interaction. We **DO NOT** record keyboard strokes or sound. We buffer it temporarily and throw it away once we run it through some logic.
 
-# How do I run tasker?
-Look at the readme under the "bin" folder.
+# How do I get Tasker?
+You can get it [here](https://github.com/thebigG/Tasker/releases) 
 
+##On Linux
+1.Right-click the AppImage
+2.Click on "properties"
+![](/home/fast-alchemist/Tasker/Images/linux-appiamge-executable.png) 
 
-## How do I help?
+3.Make sure to  check the "Allow Executing file as a program" box
+
+To make your life more convinient with appimages I highly recommend downloading this https://github.com/TheAssassin/AppImageLauncher
+
+**NOTE**:Will be packaging for Windows10 and macOS very soon :)
+
+# How do I help?
 
 **Please do not work on master. Always work on and push your changes to the release branch.**
 

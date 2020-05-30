@@ -99,11 +99,6 @@
        <string>Name</string>
       </property>
      </column>
-     <column>
-      <property name="text">
-       <string>Commitment</string>
-      </property>
-     </column>
     </widget>
    </item>
    <item row="0" column="1">

@@ -3,7 +3,11 @@
 #include <Hook.h>
 #include <QtCore>
 #if defined(Q_OS_LINUX)
+#ifdef __TASKER_DEBUG__
+#define IOHOOK_SCRIPT_PATH "../libs/linux/iohook/XListenerHook"
+#else
 #define IOHOOK_SCRIPT_PATH "./XListenerHook"
+#endif
 #endif
 #if defined(Q_OS_OSX)
 #define IOHOOK_SCRIPT_PATH "../Resources/XListenerHook"

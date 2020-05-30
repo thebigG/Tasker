@@ -24,7 +24,6 @@ private slots:
   void backButtonSlot();
   void startTimerButtonSlot();
   void on_timerWindowQFrame_destroyed();
-  void dropDownTaskSlot(const QString &arg1);
 
 private:
   Ui::NewSessionQWidget *ui;

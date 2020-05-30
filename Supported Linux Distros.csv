@@ -1,0 +1,6 @@
+Distro, Test State,
+Ubuntu-xenial, Pass,
+Fedora-30, Pass,
+debian-stable, Pass,
+cenots-7, Pass
+archlinux-latest, SHOULD work*(No text shows on widgets currently. )
