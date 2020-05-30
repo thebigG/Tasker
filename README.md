@@ -14,7 +14,7 @@ This means that while a session is opened in Tasker, it will be detecting hardwa
 # How do I get Tasker?
 You can get it [here](https://github.com/thebigG/Tasker/releases)
 
-##On Linux
+## On Linux
 1.Right-click the AppImage
 2.Click on "properties"
 <img src="Images/linux-appiamge-executable.png" alt="" />
