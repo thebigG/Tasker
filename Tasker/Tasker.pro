@@ -2,6 +2,9 @@ QT += core gui
 QT += multimedia
 QT += testlib
 QT += charts
+macx{
+ICON = taskericon.icns
+}
 #QMAKE_CXXFLAGS +=  -lXt
 #QMAKE_CXXFLAGS += "-fno-sized-deallocation"
 #QMAKE_CXXFLAGS += -lX11

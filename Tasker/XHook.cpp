@@ -89,6 +89,7 @@ void XHook::update() {
     setState(HookState::productive);
   } else {
   }
+  setState(HookState::productive);
 }
 
 /**
@@ -105,6 +106,8 @@ void XHook::resetState() { setState(HookState::unproductive); }
  */
 int XHook::startXHook() {
   setState(HookState::unproductive);
+  QDir dir{QCoreApplication::applicationDirPath()};
+  dir.setPath("../iohook/");
   xChildHook.setWorkingDirectory(WORKDIR);
   // Kill xHook process when this process ends
   connect(qApp, &QGuiApplication::lastWindowClosed, this, &XHook::end);
