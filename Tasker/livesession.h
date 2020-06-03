@@ -1,19 +1,22 @@
 #ifndef LIVESESSION_H
 #define LIVESESSION_H
 
+#include <TaskerPerf/perftimer.h>
+
 #include <QLabel>
 #include <QPushButton>
 #include <QWidget>
-#include <TaskerPerf/perftimer.h>
 #ifdef __TASKER_DEBUG__
 #if defined(Q_OS_OSX)
-#define LIVESESSIONFONTPATH "some/macOS/path"
+#define LIVESESSIONFONTPATH "./unifont-13.0.02.ttf"
 #elif defined(Q_OS_LINUX)
 #define LIVESESSIONFONTPATH "../resources/fonts/unifont-13.0.02.ttf"
 #endif
 #else
 #if defined(Q_OS_LINUX)
 #define LIVESESSIONFONTPATH "../share/applications/unifont-13.0.02.ttf"
+#elif defined(Q_OS_OSX)
+#define LIVESESSIONFONTPATH "../resources/fonts/unifont-13.0.02.ttf"
 #endif
 #endif
 
@@ -23,8 +26,8 @@
  * @brief The LiveSessionState enum repesents the current state when there is a
  * live session happening.
  * Paused: When the current session is paused; all hooks are deactivated;
- * and the Timer engine is stopped. Note that while "Stopped" the Timer Engine
- * is not collecting about the current session.
+ * and the Timer engine is stopped. Note that while paused the Timer Engine
+ * is not collecting data about the current session.
  * Started: The timer engine and hooks are currently active. This means that the
  * Timer Engine is currently collecting data about the current live session.
  * Stopped: This state is when the LiveSession has been stopped prematurely by
@@ -39,7 +42,7 @@ class LiveSession;
 class LiveSession : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   explicit LiveSession(QWidget *parent = nullptr);
   QLabel &getcongratsMessageLabel();
   QPushButton *getPlayButton();
@@ -54,18 +57,18 @@ public:
   ~LiveSession();
   LiveSessionState getCurrentState() const;
 
-private slots:
+ private slots:
   void updateTimeUI();
   void stop();
   void playButtonSlot();
   void updateHookState();
   void start();
 
-signals:
+ signals:
   void liveStateChanged();
   void sessionStarted();
 
-private:
+ private:
   Ui::LiveSession *ui;
   QString productiveTimeValueText;
   QString unproductiveTimeValueText;
@@ -83,4 +86,4 @@ private:
   Perf::PerfTimer liveSessionPerfTimer3{};
 };
 
-#endif // LIVESESSION_H
+#endif  // LIVESESSION_H

@@ -1,8 +1,3 @@
-#include <QApplication>
-#include <QGuiApplication>
-#include <QRegularExpression>
-#include <QThread>
-#include <QtCore>
 #include <XHook.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -10,24 +5,36 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include <QApplication>
+#include <QGuiApplication>
+#include <QRegularExpression>
+#include <QThread>
+#include <QtCore>
 using namespace Engine;
 
 XHook::XHook(Engine::XHookMode newXMode) {
   XMode = newXMode;
   xChildHook.setParent(this);
   switch (XMode) {
-  case XHookMode::MOUSE_AND_KEYBOARD:
-    xChildHookArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
-    break;
-  case XHookMode::MOUSE:
-    xChildHookArguments << IOHOOK_MOUSE_MODE;
-    break;
-  case XHookMode::KEYBOARD:
-    xChildHookArguments << IOHOOK_KEYBOARD_MODE;
-    break;
+    case XHookMode::MOUSE_AND_KEYBOARD:
+      xChildHookArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
+      break;
+    case XHookMode::MOUSE:
+      xChildHookArguments << IOHOOK_MOUSE_MODE;
+      break;
+    case XHookMode::KEYBOARD:
+      xChildHookArguments << IOHOOK_KEYBOARD_MODE;
+      break;
   }
   connect(&xChildHook, &QProcess::readyReadStandardOutput, this,
           &XHook::update);
+  connect(&xChildHook, &QProcess::errorOccurred, this,
+          [=](QProcess::ProcessError e) { qDebug() << "error code=" << e; });
+  connect(&xChildHook, &QProcess::readyReadStandardError, this, [=]() {
+    QByteArray errorData = this->xChildHook.readAllStandardError();
+    qDebug() << "Error on Xhook process:" << QString{errorData};
+  });
 }
 /**
  * @brief XHook::XHook
@@ -38,6 +45,12 @@ XHook::XHook() {
   xChildHookArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
   connect(&xChildHook, &QProcess::readyReadStandardOutput, this,
           &XHook::update);
+  connect(&xChildHook, &QProcess::errorOccurred, this,
+          [=](QProcess::ProcessError e) { qDebug() << "error code=" << e; });
+  connect(&xChildHook, &QProcess::readyReadStandardError, this, [=]() {
+    QByteArray errorData = this->xChildHook.readAllStandardError();
+    qDebug() << "Error on Xhook process:" << QString{errorData};
+  });
 }
 
 /**
@@ -63,6 +76,7 @@ void XHook::pause() {}
  */
 void XHook::update() {
   QByteArray Xdata = xChildHook.readAllStandardOutput();
+  qDebug() << "update for Xhook...";
   Xdata.chop(Xdata.length() - 1);
   QString iohookState{Xdata};
   if (XMode == XHookMode::MOUSE_AND_KEYBOARD &&
@@ -91,9 +105,24 @@ void XHook::resetState() { setState(HookState::unproductive); }
  */
 int XHook::startXHook() {
   setState(HookState::unproductive);
+  xChildHook.setWorkingDirectory(WORKDIR);
   // Kill xHook process when this process ends
   connect(qApp, &QGuiApplication::lastWindowClosed, this, &XHook::end);
   xChildHook.start(IOHOOK_SCRIPT_PATH, xChildHookArguments);
+  qDebug() << "path=" << IOHOOK_SCRIPT_PATH;
+  qDebug() << "current path=" << QDir::currentPath();
+  xChildHook.waitForStarted();
+  switch (xChildHook.state()) {
+    case QProcess::NotRunning:
+      qDebug() << "Not running";
+      break;
+    case QProcess::Running:
+      qDebug() << "Running";
+      break;
+    case QProcess::Starting:
+      qDebug() << "Starting";
+  }
+  qDebug() << "started Xhook??";
   return 0;
 }
 /**

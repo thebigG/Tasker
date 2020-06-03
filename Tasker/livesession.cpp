@@ -27,15 +27,18 @@ LiveSession::LiveSession(QWidget *parent)
   /**
    * @brief QFontDatabase::addApplicationFont We need a supported font for the
    * play/pause unicode icons.
-   * It currently works on macOS and linux.
-   * Has not been tested on Windows.
+   * It currently works on linux.
+   * Has not been tested on Windows or macOS.
    *
    */
+  qDebug() << "current path for font" << QDir::currentPath();
   if (QFontDatabase::addApplicationFont(LIVESESSIONFONTPATH) == 0) {
     qDebug() << "successfully loaded font for play/pause buttons";
     QString family = QFontDatabase::applicationFontFamilies(0).at(0);
     QFont newFont(family, 16, true);
     this->ui->playButton->setFont(newFont);
+  } else {
+    qDebug() << "Font for play/pause buttons failed.";
   }
 
   this->ui->taskStateMessageLabel->setText("");
@@ -202,27 +205,27 @@ void LiveSession::updateHookState() {
   hookStateText.replace(17, hookStateText.length(), ' ');
   if (Timer::getInstance()->timerHookState == Hook::HookState::productive) {
     switch (Timer::getInstance()->hookType) {
-    case Hook::HookType::X_KEYBOARD:
-      hookStateText.replace(17, 8, activeText);
-      break;
-    case Hook::HookType::X_MOUSE:
-      hookStateText.replace(13, 10, activeText);
-      break;
-    case Hook::HookType::audio:
-      hookStateText.replace(13, 10, activeText);
-      break;
+      case Hook::HookType::X_KEYBOARD:
+        hookStateText.replace(17, 8, activeText);
+        break;
+      case Hook::HookType::X_MOUSE:
+        hookStateText.replace(13, 10, activeText);
+        break;
+      case Hook::HookType::audio:
+        hookStateText.replace(13, 10, activeText);
+        break;
     }
   } else {
     switch (Timer::getInstance()->hookType) {
-    case Hook::HookType::X_KEYBOARD:
-      hookStateText.replace(17, 10, inactiveText);
-      break;
-    case Hook::HookType::X_MOUSE:
-      hookStateText.replace(13, 10, inactiveText);
-      break;
-    case Hook::HookType::audio:
-      hookStateText.replace(13, 10, inactiveText);
-      break;
+      case Hook::HookType::X_KEYBOARD:
+        hookStateText.replace(17, 10, inactiveText);
+        break;
+      case Hook::HookType::X_MOUSE:
+        hookStateText.replace(13, 10, inactiveText);
+        break;
+      case Hook::HookType::audio:
+        hookStateText.replace(13, 10, inactiveText);
+        break;
     }
   }
   this->ui->hookStateQLabel->setText(hookStateText);
@@ -234,15 +237,15 @@ void LiveSession::initHookState() {
   hookStateText.fill(' ');
   hookStateText.replace(0, 8, "Hook(s):");
   switch (Timer::getInstance()->hookType) {
-  case Hook::HookType::X_KEYBOARD:
-    hookStateText.replace(8, 8, "Keyboard");
-    break;
-  case Hook::HookType::audio:
-    hookStateText.replace(8, 8, "Audio");
-    break;
-  case Hook::HookType::X_MOUSE:
-    hookStateText.replace(8, 8, "Mouse");
-    break;
+    case Hook::HookType::X_KEYBOARD:
+      hookStateText.replace(8, 8, "Keyboard");
+      break;
+    case Hook::HookType::audio:
+      hookStateText.replace(8, 8, "Audio");
+      break;
+    case Hook::HookType::X_MOUSE:
+      hookStateText.replace(8, 8, "Mouse");
+      break;
   }
   this->ui->hookStateQLabel->setText(hookStateText);
   this->ui->hookStateQLabel->setVisible(true);
@@ -250,7 +253,6 @@ void LiveSession::initHookState() {
 
 void LiveSession::updateDetails() {
   if (MainUI::getInstance()->newSessionActionState()) {
-
     ui->taskStateMessageLabel->setText("");
   } else {
     if (udata::User::getInstance()->getCurrentCommitment().isDone()) {
