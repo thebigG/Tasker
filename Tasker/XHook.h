@@ -8,8 +8,8 @@
 #define IOHOOK_SCRIPT_PATH "./XListenerHook"
 #define WORKDIR "../libs/linux/iohook"
 #elif defined(Q_OS_OSX)
-#define IOHOOK_SCRIPT_PATH "./XListenerHook"
-#define WORKDIR "../iohook"
+#define IOHOOK_SCRIPT_PATH "./run_hook.sh"
+#define WORKDIR "./Contents/iohook"
 #endif
 #else
 #if defined(Q_OS_LINUX)
@@ -17,7 +17,7 @@
 #define WORKDIR "../libs/linux/iohook"
 #elif defined(Q_OS_OSX)
 #define IOHOOK_SCRIPT_PATH "./XListenerHook"
-#define WORKDIR "../Frameworks/iohook"
+#define WORKDIR QCoreApplication::applicationDirPath() + "/../Frameworks/iohook"
 #elif defined(Q_OS_WIN)
 #define IOHOOK_SCRIPT_PATH "../libs/windows/iohook/XListenerHook"
 #endif

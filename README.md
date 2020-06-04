@@ -20,10 +20,26 @@ You can get it [here](https://github.com/thebigG/Tasker/releases)
 3.Make sure to  check the "Allow Executing file as a program" box  
 <img src="Images/linux-appiamge-executable.png" alt="" />
 
-
 To make your life more convinient with appimages I highly recommend downloading this https://github.com/TheAssassin/AppImageLauncher
 
-**NOTE**:Will be packaging for Windows10 and macOS very soon :)
+## On macOS
+<img src="Images/Tasker on macOS.png" alt="" />
+  
+  
+  
+**NOTE:** For the mouse and keyboard hooks to work, you **must** give accessbility permissions to Tasker. For the Microphone hooks, you **must** give Microphone permission to Tasker.
+<img src="Images/Accessibility Prompt.png" alt="" />
+
+<img src="Images/Accessibilty Panel on Tasker.png" alt="" />
+
+If you were prompted to give permission, like in the image above, then tick the box in Accessbility menu for Tasker and restart Tasker. You only have to do this once. After the first time you do it, you will always be able to use the mouse and keyboard hooks. 
+
+You also have to give Microphone permissions to Tasker just like the mouse/keyboard hooks. Except for the Microphone, you don't have to restart Tasker after you allow Microphone Access.
+
+
+
+
+**NOTE**:Will be packaging for Windows10 very  soon :)
 
 # How do I help?
 
