@@ -15,6 +15,8 @@ This means that while a session is opened in Tasker, it will be detecting hardwa
 You can get it [here](https://github.com/thebigG/Tasker/releases)
 
 ## On Linux
+<img src="Images/practice guitar commitment.png" alt="" />
+
 1.Right-click the AppImage  
 2.Click on "properties"  
 3.Make sure to  check the "Allow Executing file as a program" box  
