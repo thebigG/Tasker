@@ -4,6 +4,7 @@ QT += testlib
 QT += charts
 macx{
 ICON = taskericon.icns
+QMAKE_MAC_SDK = macosx10.13.4
 }
 #QMAKE_CXXFLAGS +=  -lXt
 #QMAKE_CXXFLAGS += "-fno-sized-deallocation"
