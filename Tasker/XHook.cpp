@@ -17,15 +17,15 @@ XHook::XHook(Engine::XHookMode newXMode) {
   XMode = newXMode;
   xChildHook.setParent(this);
   switch (XMode) {
-    case XHookMode::MOUSE_AND_KEYBOARD:
-      xChildHookArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
-      break;
-    case XHookMode::MOUSE:
-      xChildHookArguments << IOHOOK_MOUSE_MODE;
-      break;
-    case XHookMode::KEYBOARD:
-      xChildHookArguments << IOHOOK_KEYBOARD_MODE;
-      break;
+  case XHookMode::MOUSE_AND_KEYBOARD:
+    xChildHookArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
+    break;
+  case XHookMode::MOUSE:
+    xChildHookArguments << IOHOOK_MOUSE_MODE;
+    break;
+  case XHookMode::KEYBOARD:
+    xChildHookArguments << IOHOOK_KEYBOARD_MODE;
+    break;
   }
   connect(&xChildHook, &QProcess::readyReadStandardOutput, this,
           &XHook::update);
@@ -52,7 +52,6 @@ XHook::XHook() {
     qDebug() << "Error on Xhook process:" << QString{errorData};
   });
 }
-
 /**
  * @brief XHook::start
  */
@@ -105,26 +104,30 @@ void XHook::resetState() { setState(HookState::unproductive); }
  */
 int XHook::startXHook() {
   setState(HookState::unproductive);
-  xChildHook.setWorkingDirectory(WORKDIR);
+  QFile iohookResource(IOHOOK_SCRIPT_PATH);
+  xChildHookFile.reset(QTemporaryFile::createNativeFile(iohookResource));
+  //  xChildHook.setWorkingDirectory(iohookResource);
   // Kill xHook process when this process ends
   connect(qApp, &QGuiApplication::lastWindowClosed, this, &XHook::end);
-  xChildHook.start(IOHOOK_SCRIPT_PATH, xChildHookArguments);
+  qDebug() << "file name-->" << xChildHookFile->fileName();
+  xChildHook.start(xChildHookFile->fileName(), xChildHookArguments);
   qDebug() << "path=" << IOHOOK_SCRIPT_PATH;
   qDebug() << "current path=" << QCoreApplication::applicationDirPath();
   xChildHook.waitForStarted();
   switch (xChildHook.state()) {
-    case QProcess::NotRunning:
-      qDebug() << "Not running";
-      break;
-    case QProcess::Running:
-      qDebug() << "Running";
-      break;
-    case QProcess::Starting:
-      qDebug() << "Starting";
+  case QProcess::NotRunning:
+    qDebug() << "Not running";
+    break;
+  case QProcess::Running:
+    qDebug() << "Running";
+    break;
+  case QProcess::Starting:
+    qDebug() << "Starting";
   }
   qDebug() << "started Xhook??";
   return 0;
 }
+QString getWorkingDirectory() { return QDir::tempPath(); }
 /**
 
 */

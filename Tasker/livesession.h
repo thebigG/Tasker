@@ -11,12 +11,18 @@
 #define LIVESESSIONFONTPATH "./unifont-13.0.02.ttf"
 #elif defined(Q_OS_LINUX)
 #define LIVESESSIONFONTPATH "../resources/fonts/unifont-13.0.02.ttf"
+#elif defined(Q_OS_WIN)
+#define LIVESESSIONFONTPATH                                                    \
+  QCoreApplication::applicationDirPath() + "/../Resources/unifont-13.0.02.ttf"
 #endif
 #else
 #if defined(Q_OS_LINUX)
 #define LIVESESSIONFONTPATH "../share/applications/unifont-13.0.02.ttf"
 #elif defined(Q_OS_OSX)
-#define LIVESESSIONFONTPATH \
+#define LIVESESSIONFONTPATH                                                    \
+  QCoreApplication::applicationDirPath() + "/../Resources/unifont-13.0.02.ttf"
+#elif defined(Q_OS_WIN)
+#define LIVESESSIONFONTPATH                                                    \
   QCoreApplication::applicationDirPath() + "/../Resources/unifont-13.0.02.ttf"
 #endif
 #endif
@@ -43,7 +49,7 @@ class LiveSession;
 class LiveSession : public QWidget {
   Q_OBJECT
 
- public:
+public:
   explicit LiveSession(QWidget *parent = nullptr);
   QLabel &getcongratsMessageLabel();
   QPushButton *getPlayButton();
@@ -58,18 +64,18 @@ class LiveSession : public QWidget {
   ~LiveSession();
   LiveSessionState getCurrentState() const;
 
- private slots:
+private slots:
   void updateTimeUI();
   void stop();
   void playButtonSlot();
   void updateHookState();
   void start();
 
- signals:
+signals:
   void liveStateChanged();
   void sessionStarted();
 
- private:
+private:
   Ui::LiveSession *ui;
   QString productiveTimeValueText;
   QString unproductiveTimeValueText;
@@ -87,4 +93,4 @@ class LiveSession : public QWidget {
   Perf::PerfTimer liveSessionPerfTimer3{};
 };
 
-#endif  // LIVESESSION_H
+#endif // LIVESESSION_H

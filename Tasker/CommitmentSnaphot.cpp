@@ -234,7 +234,7 @@ void udata::CommitmentSnaphot::update(udata::TimeWindow &currentWindow,
   series.setLabelsPosition(QAbstractBarSeries::LabelsInsideEnd);
   //  series.setOpacity(0.5);
 
-  view.setMinimumSize(492, 528);
+  //  view.setMinimumSize(492, 528);
   qDebug() << "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 }
 

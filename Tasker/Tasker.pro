@@ -2,6 +2,7 @@ QT += core gui
 QT += multimedia
 QT += testlib
 QT += charts
+RESOURCES  = Tasker.qrc
 macx{
 ICON = taskericon.icns
 #QMAKE_MAC_SDK = macosx10.13.4
@@ -9,7 +10,7 @@ ICON = taskericon.icns
 #QMAKE_CXXFLAGS +=  -lXt
 #QMAKE_CXXFLAGS += "-fno-sized-deallocation"
 #QMAKE_CXXFLAGS += -lX11
-QMAKE_LFLAGS += -no-pie
+
 CONFIG(release, debug|release) {
     #This is a release build
     DEFINES += QT_NO_DEBUG_OUTPUT
@@ -20,6 +21,7 @@ CONFIG(release, debug|release) {
 #QMAKE_CXXFLAGS += "LDFLAGS=-lX11"
 #QMAKE_CXXFLAGS += -lXcb
 unix:{
+QMAKE_LFLAGS += -no-pie
     # suppress the default RPATH if you wish
 #    QMAKE_LFLAGS_RPATH=
     # add your own with quoting gyrations to make sure $ORIGIN gets to the command line unexpanded
@@ -185,3 +187,6 @@ linux-g++
 #LIBS += ../libs/iohook/libXext.a
 #LIBS += -lxcb-xkb
 }
+
+RESOURCES += \
+    Tasker.qrc
