@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>resources/linux/XListenerHook</file>
+        <file>resources/unifont-13.0.02.ttf</file>
     </qresource>
 </RCC>

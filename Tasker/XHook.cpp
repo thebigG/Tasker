@@ -104,13 +104,11 @@ void XHook::resetState() { setState(HookState::unproductive); }
  */
 int XHook::startXHook() {
   setState(HookState::unproductive);
-  QFile iohookResource(IOHOOK_SCRIPT_PATH);
-  xChildHookFile.reset(QTemporaryFile::createNativeFile(iohookResource));
-  //  xChildHook.setWorkingDirectory(iohookResource);
+
+  xChildHook.setWorkingDirectory(WORKDIR);
   // Kill xHook process when this process ends
   connect(qApp, &QGuiApplication::lastWindowClosed, this, &XHook::end);
-  qDebug() << "file name-->" << xChildHookFile->fileName();
-  xChildHook.start(xChildHookFile->fileName(), xChildHookArguments);
+  xChildHook.start(IOHOOK_SCRIPT_PATH, xChildHookArguments);
   qDebug() << "path=" << IOHOOK_SCRIPT_PATH;
   qDebug() << "current path=" << QCoreApplication::applicationDirPath();
   xChildHook.waitForStarted();
@@ -127,7 +125,6 @@ int XHook::startXHook() {
   qDebug() << "started Xhook??";
   return 0;
 }
-QString getWorkingDirectory() { return QDir::tempPath(); }
 /**
 
 */

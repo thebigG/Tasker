@@ -10,7 +10,7 @@
 #if defined(Q_OS_OSX)
 #define LIVESESSIONFONTPATH "./unifont-13.0.02.ttf"
 #elif defined(Q_OS_LINUX)
-#define LIVESESSIONFONTPATH "../resources/fonts/unifont-13.0.02.ttf"
+#define LIVESESSIONFONTPATH ":/resources/unifont-13.0.02.ttf"
 #elif defined(Q_OS_WIN)
 #define LIVESESSIONFONTPATH                                                    \
   QCoreApplication::applicationDirPath() + "/../Resources/unifont-13.0.02.ttf"

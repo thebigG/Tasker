@@ -5,7 +5,26 @@ QT += charts
 RESOURCES  = Tasker.qrc
 macx{
 ICON = taskericon.icns
-#QMAKE_MAC_SDK = macosx10.13.4
+}
+win32:{
+
+    file_paths += "\"$$PWD/Path/To/Files/ffmpeg.exe\""
+
+    CONFIG(release, debug|release):{
+        destination_pathes += $$OUT_PWD/release/
+        destination_pathes += ./release
+    }
+    else:CONFIG(debug, debug|release):{
+        destination_pathes += $$OUT_PWD/debug/
+    }
+
+    for(file_path,file_paths){
+        file_path ~= s,/,\\,g
+        for(dest_path,destination_pathes){
+            dest_path ~= s,/,\\,g
+            QMAKE_POST_LINK += $$quote(xcopy $${file_path} $${dest_path} /I /Y $$escape_expand(\n\t))
+         }
+    }
 }
 #QMAKE_CXXFLAGS +=  -lXt
 #QMAKE_CXXFLAGS += "-fno-sized-deallocation"

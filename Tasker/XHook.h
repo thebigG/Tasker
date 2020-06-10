@@ -5,7 +5,7 @@
 #include <memory>
 #ifdef __TASKER_DEBUG__
 #if defined(Q_OS_LINUX)
-#define IOHOOK_SCRIPT_PATH "://resources/linux/XListenerHook"
+#define IOHOOK_SCRIPT_PATH "./XListenerHook"
 #define WORKDIR "../libs/linux/iohook"
 #elif defined(Q_OS_OSX)
 #define IOHOOK_SCRIPT_PATH "./run_hook.sh"
@@ -17,7 +17,7 @@
 #else
 #if defined(Q_OS_LINUX)
 #define IOHOOK_SCRIPT_PATH "./XListenerHook"
-#define WORKDIR "../libs/linux/iohook"
+#define WORKDIR QCoreApplication::applicationDirPath()
 #elif defined(Q_OS_OSX)
 #define IOHOOK_SCRIPT_PATH "./XListenerHook"
 #define WORKDIR QCoreApplication::applicationDirPath() + "/../Frameworks/iohook"
@@ -60,8 +60,6 @@ private:
   QProcess xChildHook;
   QStringList xChildHookArguments;
   XHookMode XMode;
-  QString getWorkingDirectory();
-  std::unique_ptr<QTemporaryFile> xChildHookFile;
 signals:
   void signalThread();
 };

@@ -29,8 +29,6 @@ run(["mv", "opt/Tasker/bin/Tasker", "usr/bin"],
     cwd="./build/AppDir")
 run(["cp", "../libs/linux/iohook/XListenerHook",
      "./build/AppDir/usr/bin"])
-run(["cp", "../resources/fonts/unifont-13.0.02.ttf",
-     "./build/AppDir/usr/share/applications"])
 run(["cp", "./clock-256.png", "build/AppDir/usr/share/icons/hicolor/256x256/apps"])
 run(["cp", "./Tasker.desktop", "build/AppDir/usr/share/applications"])
 
