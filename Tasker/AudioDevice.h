@@ -9,10 +9,7 @@
  * When it comes to detecting user interaction with hardware
  * such as Xhook, AudioHook, Timer and any other class that
  *directly aids these entities such as AudioDevice. Hook classes are
- *platform-dependent. Given that they work very close to hardware, you will
- *probably find a lot of macros that test whether the OS is Linux, MacOS,
- *Windows, etc.
- *
+ *platform-dependent.
  * If you have any ideas/want to make hardware Hook for this app, PR and
  *issues are always welcome!
  */
@@ -21,13 +18,14 @@ class AudioDevice;
 };
 
 /**
- * @brief The Engine::AudioDevice class
+ * @brief The Engine::AudioDevice class represents the audio hardware device of
+ * this machine. It aids to capture the audio(asynchronously) that AudioMachine
+ * manages and captures.
  */
 class Engine::AudioDevice : public QIODevice {
   Q_OBJECT
 public:
   AudioDevice(const QAudioFormat newFormat);
-  ~AudioDevice() override;
 
   void setMinAmplitude(qreal minAmplitude);
 

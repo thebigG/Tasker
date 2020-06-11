@@ -65,6 +65,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-slots">Private Slots</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
@@ -93,6 +94,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>saveCurrentSession</b
 <tr class="memitem:af684a71655743b8f72f36b608a0b1dfb"><td class="memItemLeft" align="right" valign="top"><a id="af684a71655743b8f72f36b608a0b1dfb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>newCommitmentSlot</b> (bool)</td></tr>
 <tr class="separator:af684a71655743b8f72f36b608a0b1dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a957e053504322a118191222f0e4b2adb"><td class="memItemLeft" align="right" valign="top"><a id="a957e053504322a118191222f0e4b2adb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>editCommitmentSlot</b> (bool)</td></tr>
+<tr class="separator:a957e053504322a118191222f0e4b2adb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af08c8abc8b13249a523342d92af37893"><td class="memItemLeft" align="right" valign="top"><a id="af08c8abc8b13249a523342d92af37893"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>deleteCommitmentSlot</b> (bool)</td></tr>
 <tr class="separator:af08c8abc8b13249a523342d92af37893"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,15 +145,31 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></t
 <tr class="memitem:ac6f7cbd8372b77974e25da078e267213"><td class="memItemLeft" align="right" valign="top"><a id="ac6f7cbd8372b77974e25da078e267213"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateCommitmentInfoStatsQWidget</b> ()</td></tr>
 <tr class="separator:ac6f7cbd8372b77974e25da078e267213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09fa01bac4f5fed0d3f826b01e9f8acd"><td class="memItemLeft" align="right" valign="top"><a id="a09fa01bac4f5fed0d3f826b01e9f8acd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateCurrentCommitment</b> ()</td></tr>
+<tr class="separator:a09fa01bac4f5fed0d3f826b01e9f8acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b04844dbceb12fa19820ff6ff11078c"><td class="memItemLeft" align="right" valign="top"><a id="a6b04844dbceb12fa19820ff6ff11078c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateBeginDateQLabel</b> ()</td></tr>
 <tr class="separator:a6b04844dbceb12fa19820ff6ff11078c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfd577cfe1c2d662b8b9674f0f4e9003"><td class="memItemLeft" align="right" valign="top"><a id="acfd577cfe1c2d662b8b9674f0f4e9003"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateEndDateQLabel</b> ()</td></tr>
 <tr class="separator:acfd577cfe1c2d662b8b9674f0f4e9003"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dc9c0067caa64a1bd77989dc367464e"><td class="memItemLeft" align="right" valign="top"><a id="a7dc9c0067caa64a1bd77989dc367464e"></a>
+const <a class="el" href="classLiveSession.html">LiveSession</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getcurrentLiveSessionWidget</b> () const</td></tr>
+<tr class="separator:a7dc9c0067caa64a1bd77989dc367464e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d27b80c90a2155fe2540c99cf941632"><td class="memItemLeft" align="right" valign="top"><a id="a8d27b80c90a2155fe2540c99cf941632"></a>
 QPalette&#160;</td><td class="memItemRight" valign="bottom"><b>getSnapshotPalette</b> ()</td></tr>
 <tr class="separator:a8d27b80c90a2155fe2540c99cf941632"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:abbb56a3539d71611f98e0735987317bb"><td class="memItemLeft" align="right" valign="top"><a id="abbb56a3539d71611f98e0735987317bb"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommStatsQWidget.html#abbb56a3539d71611f98e0735987317bb">currentLiveSessionCommitment</a></td></tr>
+<tr class="memdesc:abbb56a3539d71611f98e0735987317bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">currentLiveSessionCommitment Used for re-focusing/re-selecting the current commitment a <a class="el" href="classLiveSession.html">LiveSession</a> belongs to when resuming a <a class="el" href="classLiveSession.html">LiveSession</a>. <br /></td></tr>
+<tr class="separator:abbb56a3539d71611f98e0735987317bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1d92c64c2b715bb9d77468935ffb655"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommStatsQWidget.html#ac1d92c64c2b715bb9d77468935ffb655">selectedCommitmentIndex</a> = 0</td></tr>
+<tr class="memdesc:ac1d92c64c2b715bb9d77468935ffb655"><td class="mdescLeft">&#160;</td><td class="mdescRight">selectedCommitmentIndex currently selected(highlited) commitment in commitmentsQTreeWidget.  <a href="classCommStatsQWidget.html#ac1d92c64c2b715bb9d77468935ffb655">More...</a><br /></td></tr>
+<tr class="separator:ac1d92c64c2b715bb9d77468935ffb655"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-slots"></a>
 Private Slots</h2></td></tr>
@@ -165,6 +185,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>updateLiveSessionStat
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
+<tr class="memitem:a3316f484ec6dd0e6995ec762a14db1fb"><td class="memItemLeft" align="right" valign="top"><a id="a3316f484ec6dd0e6995ec762a14db1fb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateCurrentLiveSessionCommitment</b> ()</td></tr>
+<tr class="separator:a3316f484ec6dd0e6995ec762a14db1fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05cb62e21d06db82ce40b1aa64919d97"><td class="memItemLeft" align="right" valign="top"><a id="a05cb62e21d06db82ce40b1aa64919d97"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setSelectable</b> (bool)</td></tr>
 <tr class="separator:a05cb62e21d06db82ce40b1aa64919d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,7 +198,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>updateSnapshot</b> ()
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:aa5a02fa227e329bcc5ddeae9ead09510"><td class="memItemLeft" align="right" valign="top"><a id="aa5a02fa227e329bcc5ddeae9ead09510"></a>
-Ui::CommStatsQWidget *&#160;</td><td class="memItemRight" valign="bottom"><b>ui</b></td></tr>
+<a class="el" href="classUi_1_1CommStatsQWidget.html">Ui::CommStatsQWidget</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>ui</b></td></tr>
 <tr class="separator:aa5a02fa227e329bcc5ddeae9ead09510"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60861c5fc267b326235e94bcb83fca5e"><td class="memItemLeft" align="right" valign="top"><a id="a60861c5fc267b326235e94bcb83fca5e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isDelete</b> = false</td></tr>
@@ -199,9 +222,6 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>endDateText</b> {&
 <tr class="memitem:ae8b41be901a4970f79221bd98f3d2acb"><td class="memItemLeft" align="right" valign="top"><a id="ae8b41be901a4970f79221bd98f3d2acb"></a>
 QPalette&#160;</td><td class="memItemRight" valign="bottom"><b>p</b></td></tr>
 <tr class="separator:ae8b41be901a4970f79221bd98f3d2acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1d92c64c2b715bb9d77468935ffb655"><td class="memItemLeft" align="right" valign="top"><a id="ac1d92c64c2b715bb9d77468935ffb655"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>selectedCommitmentIndex</b> = 0</td></tr>
-<tr class="separator:ac1d92c64c2b715bb9d77468935ffb655"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73b5c6f6bbecaf0c5da0afd5f386a91d"><td class="memItemLeft" align="right" valign="top"><a id="a73b5c6f6bbecaf0c5da0afd5f386a91d"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>currentTimeWindow</b> = 0</td></tr>
 <tr class="separator:a73b5c6f6bbecaf0c5da0afd5f386a91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -286,6 +306,24 @@ Perf::PerfTimer&#160;</td><td class="memItemRight" valign="bottom"><b>newPerfTim
 <pre class="fragment">         Maybe show the user in the UI that they have added this session
 </pre><p> already to this commitment today. It might be worth it to consider a case where maybe a session was terminated prematurely for whatever reason and the user might want to resume that session even after closing Tasker, this is assuming that they open Tasker the very same day again. Give this a lot of thought as this could add clutter to the UI, which I don't want. &zwj;/ return; } } if (<a class="el" href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d" title="MainUI::getInstance.">MainUI::getInstance()</a>-&gt;newSessionActionState()) { this-&gt;getNewSessionQWidget().show(); } } /** CommStatsQWidget::on_statsQFrame_destroyed</p>
 <p>CommStatsQWidget::saveCurrentSession This function assumes that the currently selected session is the same one that this new live session belongs to.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac1d92c64c2b715bb9d77468935ffb655"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1d92c64c2b715bb9d77468935ffb655">&#9670;&nbsp;</a></span>selectedCommitmentIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int CommStatsQWidget::selectedCommitmentIndex = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>selectedCommitmentIndex currently selected(highlited) commitment in commitmentsQTreeWidget. </p>
+<dl class="section note"><dt>Note</dt><dd>I think for the future keeping a reference to current commitment might be a lot better, instead of an index that has to be updated in hacky/ugly ways. </dd></dl>
 
 </div>
 </div>

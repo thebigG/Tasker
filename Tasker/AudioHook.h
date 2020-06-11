@@ -11,7 +11,10 @@ class AudioHook;
 }
 
 /**
- * @brief Engine::AudioHook class
+ * @brief Engine::AudioHook class This class uses the AudioDvice and
+ * AudioMachine classes to make a self-sustained asynchronous and stateful audio
+ * Hook that hooks to an audio device.
+ *
  */
 class Engine::AudioHook : public Engine::Hook {
   Q_OBJECT
@@ -20,7 +23,6 @@ public:
   enum class AudioListenerState { ON, OFF };
 
   AudioHook();
-  //    ~AudioListener() override;
   void setAudioThreshold(qreal audioThreshold);
   qreal &getAudioThreshold();
 
@@ -39,11 +41,8 @@ signals:
 private:
   AudioListenerState audioListenerState;
   std::unique_ptr<AudioMachine> audioSource;
-  qreal audioDelta;
-
   qreal audioThreshold;
   bool profiled = false;
-  int startListening(); // seconds
 };
 
 #endif // AUDIOLISTENER_H

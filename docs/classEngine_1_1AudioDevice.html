@@ -78,7 +78,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classEngine_1_1AudioDevice.html" title="The Engine::AudioDevice class.">Engine::AudioDevice</a> class.  
+<p>The <a class="el" href="classEngine_1_1AudioDevice.html" title="The Engine::AudioDevice class represents the audio hardware device of this machine....">Engine::AudioDevice</a> class represents the audio hardware device of this machine. It aids to capture the audio(asynchronously) that <a class="el" href="classEngine_1_1AudioMachine.html" title="The Engine::AudioMachine class.">AudioMachine</a> manages and captures.  
  <a href="classEngine_1_1AudioDevice.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="AudioDevice_8h_source.html">AudioDevice.h</a>&gt;</code></p>
@@ -95,7 +95,7 @@ Public Slots</h2></td></tr>
 <tr class="memdesc:aa860e92a6d7710c4fa620c5ec12b4576"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioDevice.html#aa860e92a6d7710c4fa620c5ec12b4576" title="AudioDevice::readData.">AudioDevice::readData</a>.  <a href="classEngine_1_1AudioDevice.html#aa860e92a6d7710c4fa620c5ec12b4576">More...</a><br /></td></tr>
 <tr class="separator:aa860e92a6d7710c4fa620c5ec12b4576"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a160c28c4cc1270e5d80f4d8fb9a680bf"><td class="memItemLeft" align="right" valign="top">qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioDevice.html#a160c28c4cc1270e5d80f4d8fb9a680bf">writeData</a> (const char *data, qint64 len) override</td></tr>
-<tr class="memdesc:a160c28c4cc1270e5d80f4d8fb9a680bf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioDevice.html#a160c28c4cc1270e5d80f4d8fb9a680bf" title="AudioDevice::writeData.">AudioDevice::writeData</a>.  <a href="classEngine_1_1AudioDevice.html#a160c28c4cc1270e5d80f4d8fb9a680bf">More...</a><br /></td></tr>
+<tr class="memdesc:a160c28c4cc1270e5d80f4d8fb9a680bf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioDevice.html#a160c28c4cc1270e5d80f4d8fb9a680bf" title="AudioDevice::writeData This function gets triggered by the audio device every time there is data that...">AudioDevice::writeData</a> This function gets triggered by the audio device every time there is data that is written to the buffer. This function will collect the audio data on the data buffer and transcribe into a unsigned integer for processing.  <a href="classEngine_1_1AudioDevice.html#a160c28c4cc1270e5d80f4d8fb9a680bf">More...</a><br /></td></tr>
 <tr class="separator:a160c28c4cc1270e5d80f4d8fb9a680bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
@@ -107,12 +107,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>audioRead</b> ()</td>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0a9afd7db98e43e305ac73deec7b9cb1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioDevice.html#a0a9afd7db98e43e305ac73deec7b9cb1">AudioDevice</a> (const QAudioFormat newFormat)</td></tr>
-<tr class="memdesc:a0a9afd7db98e43e305ac73deec7b9cb1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioDevice.html#a0a9afd7db98e43e305ac73deec7b9cb1" title="AudioDevice::AudioDevice.">AudioDevice::AudioDevice</a>.  <a href="classEngine_1_1AudioDevice.html#a0a9afd7db98e43e305ac73deec7b9cb1">More...</a><br /></td></tr>
+<tr class="memdesc:a0a9afd7db98e43e305ac73deec7b9cb1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioDevice.html#a0a9afd7db98e43e305ac73deec7b9cb1" title="AudioDevice::AudioDevice this constructor loads the initial state of components such as amplitude,...">AudioDevice::AudioDevice</a> this constructor loads the initial state of components such as amplitude, audio format and device level(volume) of this instance of this device.  <a href="classEngine_1_1AudioDevice.html#a0a9afd7db98e43e305ac73deec7b9cb1">More...</a><br /></td></tr>
 <tr class="separator:a0a9afd7db98e43e305ac73deec7b9cb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a810634313d1f092e28983d2b42c70600"><td class="memItemLeft" align="right" valign="top"><a id="a810634313d1f092e28983d2b42c70600"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioDevice.html#a810634313d1f092e28983d2b42c70600">~AudioDevice</a> () override</td></tr>
-<tr class="memdesc:a810634313d1f092e28983d2b42c70600"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioDevice.html#a810634313d1f092e28983d2b42c70600" title="AudioDevice::~AudioDevice.">AudioDevice::~AudioDevice</a>. <br /></td></tr>
-<tr class="separator:a810634313d1f092e28983d2b42c70600"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a636165665f12e0e596d8c7b53405f406"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioDevice.html#a636165665f12e0e596d8c7b53405f406">setMinAmplitude</a> (qreal minAmplitude)</td></tr>
 <tr class="memdesc:a636165665f12e0e596d8c7b53405f406"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioDevice.html#a636165665f12e0e596d8c7b53405f406" title="AudioDevice::setMinAmplitude.">AudioDevice::setMinAmplitude</a>.  <a href="classEngine_1_1AudioDevice.html#a636165665f12e0e596d8c7b53405f406">More...</a><br /></td></tr>
 <tr class="separator:a636165665f12e0e596d8c7b53405f406"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,7 +128,7 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ad3c8663206e7e972ad43d65aeb3d0676"><td class="memItemLeft" align="right" valign="top">static quint32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioDevice.html#ad3c8663206e7e972ad43d65aeb3d0676">getMin</a> (quint32 a, quint32 b)</td></tr>
-<tr class="memdesc:ad3c8663206e7e972ad43d65aeb3d0676"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioDevice.html#ad3c8663206e7e972ad43d65aeb3d0676" title="AudioDevice::getMin.">AudioDevice::getMin</a>.  <a href="classEngine_1_1AudioDevice.html#ad3c8663206e7e972ad43d65aeb3d0676">More...</a><br /></td></tr>
+<tr class="memdesc:ad3c8663206e7e972ad43d65aeb3d0676"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioDevice.html#ad3c8663206e7e972ad43d65aeb3d0676" title="AudioDevice::getMin gets the minimum of two numbers (a and b).">AudioDevice::getMin</a> gets the minimum of two numbers (a and b).  <a href="classEngine_1_1AudioDevice.html#ad3c8663206e7e972ad43d65aeb3d0676">More...</a><br /></td></tr>
 <tr class="separator:ad3c8663206e7e972ad43d65aeb3d0676"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -151,7 +147,7 @@ quint32&#160;</td><td class="memItemRight" valign="bottom"><b>maxAmplitude</b></
 <tr class="separator:a9d412773abf84aaec1ddfd3f0d4046ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classEngine_1_1AudioDevice.html" title="The Engine::AudioDevice class.">Engine::AudioDevice</a> class. </p>
+<div class="textblock"><p>The <a class="el" href="classEngine_1_1AudioDevice.html" title="The Engine::AudioDevice class represents the audio hardware device of this machine....">Engine::AudioDevice</a> class represents the audio hardware device of this machine. It aids to capture the audio(asynchronously) that <a class="el" href="classEngine_1_1AudioMachine.html" title="The Engine::AudioMachine class.">AudioMachine</a> manages and captures. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0a9afd7db98e43e305ac73deec7b9cb1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0a9afd7db98e43e305ac73deec7b9cb1">&#9670;&nbsp;</a></span>AudioDevice()</h2>
@@ -169,10 +165,10 @@ quint32&#160;</td><td class="memItemRight" valign="bottom"><b>maxAmplitude</b></
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classEngine_1_1AudioDevice.html#a0a9afd7db98e43e305ac73deec7b9cb1" title="AudioDevice::AudioDevice.">AudioDevice::AudioDevice</a>. </p>
+<p><a class="el" href="classEngine_1_1AudioDevice.html#a0a9afd7db98e43e305ac73deec7b9cb1" title="AudioDevice::AudioDevice this constructor loads the initial state of components such as amplitude,...">AudioDevice::AudioDevice</a> this constructor loads the initial state of components such as amplitude, audio format and device level(volume) of this instance of this device. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">newFormat</td><td></td></tr>
+    <tr><td class="paramname">newFormat</td><td>The format for this audio device. </td></tr>
   </table>
   </dd>
 </dl>
@@ -254,7 +250,7 @@ quint32&#160;</td><td class="memItemRight" valign="bottom"><b>maxAmplitude</b></
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classEngine_1_1AudioDevice.html#ad3c8663206e7e972ad43d65aeb3d0676" title="AudioDevice::getMin.">AudioDevice::getMin</a>. </p>
+<p><a class="el" href="classEngine_1_1AudioDevice.html#ad3c8663206e7e972ad43d65aeb3d0676" title="AudioDevice::getMin gets the minimum of two numbers (a and b).">AudioDevice::getMin</a> gets the minimum of two numbers (a and b). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">a</td><td></td></tr>
@@ -412,15 +408,16 @@ quint32&#160;</td><td class="memItemRight" valign="bottom"><b>maxAmplitude</b></
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classEngine_1_1AudioDevice.html#a160c28c4cc1270e5d80f4d8fb9a680bf" title="AudioDevice::writeData.">AudioDevice::writeData</a>. </p>
+<p><a class="el" href="classEngine_1_1AudioDevice.html#a160c28c4cc1270e5d80f4d8fb9a680bf" title="AudioDevice::writeData This function gets triggered by the audio device every time there is data that...">AudioDevice::writeData</a> This function gets triggered by the audio device every time there is data that is written to the buffer. This function will collect the audio data on the data buffer and transcribe into a unsigned integer for processing. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td></td></tr>
-    <tr><td class="paramname">len</td><td></td></tr>
+    <tr><td class="paramname">data</td><td>The buffer that contains the audio data. </td></tr>
+    <tr><td class="paramname">len</td><td>The maximum number of bytes that cn be written to the buffer. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of bytes written to data. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Note that this is a I/O asynchronous function. </dd></dl>
 
 </div>
 </div>

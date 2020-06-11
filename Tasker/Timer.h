@@ -13,12 +13,6 @@
 namespace Engine {
 class Timer;
 }
-
-/**
- * @brief The Engine::Timer class
- * @note I had to remove the start() method from Timer.
- * It was conflicting with QThread's start() method.
- */
 class Engine::Timer : public QThread {
   Q_OBJECT
 private:
@@ -31,8 +25,6 @@ private:
   Perf::PerfTimer newPerfTimer{};
   int productiveSignalCount = 0;
   int unProductiveSignalCount = 0;
-  //  long startTimeStamp;
-  int niceness;
   long long tickCount = 0; // Every "tick" is usually a second, or whatever the
                            // value of TIMER_TICK is in milliseconds
   long long producitveTickCount = 0;
@@ -47,12 +39,14 @@ private:
   QThread hookThread;
   QThread thisThread;
   std::unique_ptr<QTimer> timer;
+  int gracePeriod = 30; // How many seconds to keep the Timer in a "productive"
+                        // state for before for new state of the hook(s)
   virtual void run();
 signals:
   void tick();
 
 public:
-  Timer(int newNiceness = 5);
+  Timer();
   static Timer *getInstance();
   void initTimer(Hook::HookType, udata::Session);
   void stop();
@@ -75,7 +69,6 @@ public slots:
   void tickUpdate();
   void productiveSlot();
   void unProductiveSlot();
-  //  void cleanupHookThread();
 signals:
   void timerStarted();
   void stopTimer();

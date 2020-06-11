@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['frequency_292',['frequency',['../structudata_1_1TimeWindow.html#a9eb4fa445ee3d48cf759f35a99edbbbe',1,'udata::TimeWindow']]]
+  ['currentlivesessioncommitment_285',['currentLiveSessionCommitment',['../classCommStatsQWidget.html#abbb56a3539d71611f98e0735987317bb',1,'CommStatsQWidget']]]
 ];

@@ -7,7 +7,7 @@ using Engine::AudioHook;
 using Engine::Hook;
 
 /**
- * @brief AudioListener::AudioListener
+ * @brief AudioHook::AudioListener
  */
 AudioHook::AudioHook()
     : Hook::Hook{}, audioListenerState{AudioListenerState::OFF} {
@@ -15,7 +15,7 @@ AudioHook::AudioHook()
 }
 
 /**
- * @brief AudioListener::setAudioThreshold
+ * @brief AudioHook::setAudioThreshold
  * @param audioThreshold
  */
 void AudioHook::setAudioThreshold(qreal audioThreshold) {
@@ -26,22 +26,28 @@ void AudioHook::setAudioThreshold(qreal audioThreshold) {
  * @return
  */
 qreal &AudioHook::getAudioThreshold() { return audioThreshold; }
-
 /**
- * @brief AudioListener::start
+ * @brief AudioHook::start initializes the state of AudioMachine,
+ *AudioDevice(the actual audio I/O device). This function also connects and
+ *signals and slots necessary to start the hook.
  */
-void AudioHook::start() { startListening(); }
-
-/**
- * @brief AudioListener::end
- */
-void AudioHook::end() {
-  // stop listening, for end of session
-  audioListenerState = AudioListenerState::OFF;
+void AudioHook::start() {
+  audioSource = std::make_unique<AudioMachine>();
+  audioListenerState = AudioListenerState::ON;
+  if (audioSource == nullptr) {
+    // error-handling
+  }
+  connect(audioSource->getAudioDevice(), &AudioDevice::audioRead, this,
+          &AudioHook::update);
 }
 
 /**
- * @brief AudioListener::pause
+ * @brief AudioHook::end
+ */
+void AudioHook::end() { audioListenerState = AudioListenerState::OFF; }
+
+/**
+ * @brief AudioHook::pause
  */
 void AudioHook::pause() {
   // TODO pause
@@ -49,11 +55,14 @@ void AudioHook::pause() {
 }
 
 /**
- * @brief AudioListener::update
+ * @brief AudioHook::update updates the state of AudioHook to productive if the
+ * audio volume(level) is above audioThreshold, otherwise it sets the state to
+ * unproductive. It also profiles the audio device's if it hasn't been profiled
+ * yet.
+ * @note Note that this function is called every time the AudioDevice::audioRead
+ * signal is sent.
  */
 void AudioHook::update() {
-  // TODO update
-  // change input device
   if (!profiled) {
     /**
       Profile device's volume if it hasn't been profiled yet
@@ -65,53 +74,15 @@ void AudioHook::update() {
     profiled = true;
   }
   HookState state;
-
   state = audioSource->getAudioDevice()->getDeviceLevel() > audioThreshold
               ? HookState::productive
               : HookState::unproductive;
   setState(state);
-
-  qDebug() << "listener level: "
-           << audioSource->getAudioDevice()->getDeviceLevel();
-
-  if (state == HookState::productive) {
-    qDebug("audio status: productive");
-  } else {
-    qDebug("audio status: unproductive");
-  }
 }
 
-/**
- * @brief AudioListener::listen
- * @return
- */
 Hook::HookState AudioHook::startHook() { return Hook::getState(); }
-void AudioHook::resetState() {
-  // reset state to "unproductive"
-  setState(HookState::unproductive);
-}
 
 /**
- * @brief AudioListener::startListening
- * @param
- * @return
+ * @brief AudioHook::listen resets state to "unproductive"
  */
-int AudioHook::startListening() {
-  audioSource = std::make_unique<AudioMachine>();
-  qDebug() << "From startListening on Listener.cpp: "
-           << QThread::currentThreadId();
-  qDebug() << "From startListening on Listener.cpp: after connect:%d"
-           << QThread::currentThreadId();
-  audioListenerState = AudioListenerState::ON;
-  qDebug() << "AudioListener#1";
-  if (audioSource == nullptr) {
-    qDebug("NULL++++");
-  }
-  qDebug() << "AudioListener#2";
-  connect(audioSource->getAudioDevice(), &AudioDevice::audioRead, this,
-          &AudioHook::update);
-  qDebug() << "AudioListener updateState() thread id: %d"
-           << QThread::currentThreadId();
-
-  return EXIT_SUCCESS;
-}
+void AudioHook::resetState() { setState(HookState::unproductive); }

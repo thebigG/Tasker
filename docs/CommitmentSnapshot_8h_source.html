@@ -76,71 +76,72 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;TaskerPerf/perftimer.h&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QVector&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QBarCategoryAxis&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QBarSeries&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QBarSet&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QChart&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QChartView&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QValueAxis&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;QtCharts&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define MAX_TITLE_CHARS 81</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;QT_CHARTS_USE_NAMESPACE</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceudata.html">udata</a> {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// Not sure if this is the right namespace for CommitmentSnapshot, it probably</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// isn&#39;t</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classudata_1_1CommitmentSnaphot.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="classudata_1_1CommitmentSnaphot.html">CommitmentSnaphot</a> : <span class="keyword">public</span> QWidget {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  QBarSet productiveBarSet{<span class="stringliteral">&quot;Productive&quot;</span>};</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  QBarSet unproductiveBarSet{<span class="stringliteral">&quot;Unproductive&quot;</span>};</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  QBarSeries series;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  QChart chart;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  QStringList categories;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  QBarCategoryAxis x;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  QValueAxis y;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  QChartView view;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  QFont chartFont;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  QWidget detailsWidget;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  QString productiveTimeAvgLabelContext{<span class="stringliteral">&quot; in Productive Avg&quot;</span>};</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  QString unproductiveTimeAvgLabelContext{<span class="stringliteral">&quot; in Unproductive Avg&quot;</span>};</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  QLabel productiveTimeAvgLabel;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  QLabel unproductiveTimeAvgLabel;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  QPushButton previousSnaphotLabel;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  QPushButton nextSnapshotLabel;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  QString productibeTimeAvgText{};</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  QString unproductibeTimeAvgText{};</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordtype">double</span> productiveTimeAverage = 0;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordtype">double</span> unproductiveTimeAverage = 0;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">double</span> productiveRatio;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordtype">double</span> unproductiveRatio;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordtype">int</span> getWeekDayIndex(QDate &amp;dateWindowStart, QDate &amp;sessionDay);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  Perf::PerfTimer newPerfTimer{};</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  QChartView &amp;getView();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  QBarSet &amp;getProductiveQBarSet();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  QBarSet &amp;getUnproducitveQbarSet();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">double</span> getProductiveTimeAverage();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">double</span> getUnproductiveTimeAverage();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <a class="code" href="classudata_1_1CommitmentSnaphot.html">CommitmentSnaphot</a>(<span class="keywordtype">int</span> numberOfBars = 7, QString customeCatgeory = <span class="stringliteral">&quot;Sunday&quot;</span>);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classudata_1_1CommitmentSnaphot.html#aeb8cfb332d5cd5aae01608ba29387012">update</a>(<a class="code" href="structudata_1_1TimeWindow.html">TimeWindow</a> &amp;currentWindow, <a class="code" href="namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14">udata::CommitmentType</a> type,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;              <span class="keywordtype">int</span> commitmentGoal);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  QPushButton &amp;getNextSnapshotLabel();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  QPushButton &amp;getPreviousSnaphotLabel();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;} <span class="comment">// namespace udata</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif // WEEKLYSNAPHOT_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QAbstractBarSeries&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QBarCategoryAxis&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QBarSeries&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QBarSet&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QChart&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QChartView&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;QtCharts/QValueAxis&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;QtCharts&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define MAX_TITLE_CHARS 81</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;QT_CHARTS_USE_NAMESPACE</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceudata.html">udata</a> {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// Not sure if this is the right namespace for CommitmentSnapshot, it probably</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// isn&#39;t</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classudata_1_1CommitmentSnaphot.html">   22</a></span>&#160;<span class="keyword">class </span><a class="code" href="classudata_1_1CommitmentSnaphot.html">CommitmentSnaphot</a> : <span class="keyword">public</span> QWidget {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  QBarSet productiveBarSet{<span class="stringliteral">&quot;Productive&quot;</span>};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  QBarSet unproductiveBarSet{<span class="stringliteral">&quot;Unproductive&quot;</span>};</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  QBarSeries series;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  QChart chart;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  QStringList categories;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  QBarCategoryAxis x;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  QValueAxis y;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  QChartView view;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  QFont chartFont;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  QWidget detailsWidget;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  QString productiveTimeAvgLabelContext{<span class="stringliteral">&quot; in Productive Avg&quot;</span>};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  QString unproductiveTimeAvgLabelContext{<span class="stringliteral">&quot; in Unproductive Avg&quot;</span>};</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  QLabel productiveTimeAvgLabel;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  QLabel unproductiveTimeAvgLabel;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  QPushButton previousSnaphotLabel;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  QPushButton nextSnapshotLabel;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  QString productibeTimeAvgText{};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  QString unproductibeTimeAvgText{};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordtype">double</span> productiveTimeAverage = 0;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">double</span> unproductiveTimeAverage = 0;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordtype">double</span> productiveRatio;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordtype">double</span> unproductiveRatio;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordtype">int</span> getWeekDayIndex(QDate &amp;dateWindowStart, QDate &amp;sessionDay);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  Perf::PerfTimer newPerfTimer{};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  QChartView &amp;getView();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  QBarSet &amp;getProductiveQBarSet();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  QBarSet &amp;getUnproducitveQbarSet();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">double</span> getProductiveTimeAverage();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keywordtype">double</span> getUnproductiveTimeAverage();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <a class="code" href="classudata_1_1CommitmentSnaphot.html">CommitmentSnaphot</a>(<span class="keywordtype">int</span> numberOfBars = 7, QString customeCatgeory = <span class="stringliteral">&quot;Sunday&quot;</span>);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classudata_1_1CommitmentSnaphot.html#aeb8cfb332d5cd5aae01608ba29387012">update</a>(<a class="code" href="structudata_1_1TimeWindow.html">TimeWindow</a> &amp;currentWindow, <a class="code" href="namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14">udata::CommitmentType</a> type,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;              <span class="keywordtype">int</span> commitmentGoal);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  QPushButton &amp;getNextSnapshotLabel();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  QPushButton &amp;getPreviousSnaphotLabel();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;} <span class="comment">// namespace udata</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif // WEEKLYSNAPHOT_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespaceudata_html"><div class="ttname"><a href="namespaceudata.html">udata</a></div><div class="ttdoc">The udata namespace has anything related to data that persistent for users such as Commitment,...</div><div class="ttdef"><b>Definition:</b> Commitment.h:21</div></div>
 <div class="ttc" id="astructudata_1_1TimeWindow_html"><div class="ttname"><a href="structudata_1_1TimeWindow.html">udata::TimeWindow</a></div><div class="ttdef"><b>Definition:</b> Commitment.h:26</div></div>
 <div class="ttc" id="anamespaceudata_html_a3c64c80328b4817464ffd4887c4d8a14"><div class="ttname"><a href="namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14">udata::CommitmentType</a></div><div class="ttdeci">CommitmentType</div><div class="ttdoc">The udata::Commitment class.</div><div class="ttdef"><b>Definition:</b> Commitment.h:74</div></div>
 <div class="ttc" id="aCommitment_8h_html"><div class="ttname"><a href="Commitment_8h.html">Commitment.h</a></div><div class="ttdoc">Header file for udata::Commitment.</div></div>
-<div class="ttc" id="aclassudata_1_1CommitmentSnaphot_html"><div class="ttname"><a href="classudata_1_1CommitmentSnaphot.html">udata::CommitmentSnaphot</a></div><div class="ttdef"><b>Definition:</b> CommitmentSnapshot.h:21</div></div>
-<div class="ttc" id="aclassudata_1_1CommitmentSnaphot_html_aeb8cfb332d5cd5aae01608ba29387012"><div class="ttname"><a href="classudata_1_1CommitmentSnaphot.html#aeb8cfb332d5cd5aae01608ba29387012">udata::CommitmentSnaphot::update</a></div><div class="ttdeci">void update(TimeWindow &amp;currentWindow, udata::CommitmentType type, int commitmentGoal)</div><div class="ttdoc">udata::CommitmentSnaphot::update</div><div class="ttdef"><b>Definition:</b> CommitmentSnaphot.cpp:119</div></div>
+<div class="ttc" id="aclassudata_1_1CommitmentSnaphot_html"><div class="ttname"><a href="classudata_1_1CommitmentSnaphot.html">udata::CommitmentSnaphot</a></div><div class="ttdef"><b>Definition:</b> CommitmentSnapshot.h:22</div></div>
+<div class="ttc" id="aclassudata_1_1CommitmentSnaphot_html_aeb8cfb332d5cd5aae01608ba29387012"><div class="ttname"><a href="classudata_1_1CommitmentSnaphot.html#aeb8cfb332d5cd5aae01608ba29387012">udata::CommitmentSnaphot::update</a></div><div class="ttdeci">void update(TimeWindow &amp;currentWindow, udata::CommitmentType type, int commitmentGoal)</div><div class="ttdoc">udata::CommitmentSnaphot::update</div><div class="ttdef"><b>Definition:</b> CommitmentSnaphot.cpp:124</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -7,7 +7,8 @@ var searchData=
   ['commitmentfrequency_12',['CommitmentFrequency',['../structudata_1_1CommitmentFrequency.html',1,'udata']]],
   ['commitmentsnaphot_13',['CommitmentSnaphot',['../classudata_1_1CommitmentSnaphot.html',1,'udata']]],
   ['commitmenttype_14',['CommitmentType',['../namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14',1,'udata']]],
-  ['commstatsqwidget_15',['CommStatsQWidget',['../classCommStatsQWidget.html',1,'CommStatsQWidget'],['../classCommStatsQWidget.html#afd5012897d300955162c969174646bd5',1,'CommStatsQWidget::CommStatsQWidget()']]],
+  ['commstatsqwidget_15',['CommStatsQWidget',['../classCommStatsQWidget.html',1,'CommStatsQWidget'],['../classUi_1_1CommStatsQWidget.html',1,'Ui::CommStatsQWidget'],['../classCommStatsQWidget.html#afd5012897d300955162c969174646bd5',1,'CommStatsQWidget::CommStatsQWidget()']]],
   ['createcommitmentbuttonslot_16',['createCommitmentButtonSlot',['../classCreateCommitmentQWidget.html#a44fe1d290360c6bf9d70eddcf5dabffe',1,'CreateCommitmentQWidget']]],
-  ['createcommitmentqwidget_17',['CreateCommitmentQWidget',['../classCreateCommitmentQWidget.html',1,'CreateCommitmentQWidget'],['../classCreateCommitmentQWidget.html#a55dd9a3cb48e0ee9d0026f6d72bff024',1,'CreateCommitmentQWidget::CreateCommitmentQWidget()']]]
+  ['createcommitmentqwidget_17',['CreateCommitmentQWidget',['../classCreateCommitmentQWidget.html',1,'CreateCommitmentQWidget'],['../classUi_1_1CreateCommitmentQWidget.html',1,'Ui::CreateCommitmentQWidget'],['../classCreateCommitmentQWidget.html#a55dd9a3cb48e0ee9d0026f6d72bff024',1,'CreateCommitmentQWidget::CreateCommitmentQWidget()']]],
+  ['currentlivesessioncommitment_18',['currentLiveSessionCommitment',['../classCommStatsQWidget.html#abbb56a3539d71611f98e0735987317bb',1,'CommStatsQWidget']]]
 ];

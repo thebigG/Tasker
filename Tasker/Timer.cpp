@@ -18,14 +18,12 @@ std::unique_ptr<Timer> Timer::thisInstance = std::make_unique<Timer>();
 /**
  * @brief Timer::Timer
  */
-Timer::Timer(int newNiceness) {
+Timer::Timer() {
   currentProductiveTime = 0;
   currentUnproductiveTime = 0;
   timer = std::make_unique<QTimer>(this);
   connect(timer.get(), &QTimer::timeout, this, &Timer::tickUpdate);
   connect(this, &Timer::stopTimer, this, &Timer::stopTimerSlot);
-  // connect()
-  //  connect(this, &QThread::started, )
 }
 
 /**
@@ -34,20 +32,16 @@ Timer::Timer(int newNiceness) {
  *Any and all QObjects(such as Hook) MUST be instantiated inside this
  *method. Otherwise, QT's thread management will NOT consider that QObject as
  *part of the Timer thread. The code in &Hook::start, which is the ACTUAL
- *code that hook to hardware, does not run until the startHook() signal
+ *code that hooks to hardware, does not run until the startHook() signal
  *is sent.
  */
 void Timer::run() {
-  qDebug() << "run method on Timer:" << QThread::currentThreadId();
-
   startTimer();
   int val = exec();
   if (val == 0) {
-    qDebug() << "Called quit on Timer Thread";
   }
 }
 void Timer::startTimer() {
-  qDebug() << "From work thread: " << currentThreadId();
   if (hookType == Hook::HookType::X_MOUSE_KEYBOARD) {
     hook = std::make_unique<XHook>();
 
@@ -73,15 +67,15 @@ void Timer::startTimer() {
  * @brief Timer::tickUpdate
  * This is a time-sensitive function. Whatever it executes, it MUST return
  * within 250 milliseconds, which is human perception threshold.
- * Current latency(average)= 25000 nanoseconds
+ * Current latency(average)= 0.025 nanoseconds
  */
 void Timer::tickUpdate() {
   newPerfTimer.restart();
   /**
    * @brief productiveTickDelta
-   * This is kind of like a "grace" peroid for
+   * This is the real-time calculated current grace peroid peroid for
    * how long the user can go unproductive.
-   * This is 30 seconds for now. Will adjust as I test things out.
+   * The maximum grace peroid is defined gracePeriod.
    */
   int productiveTickDelta = tickCount - lastProductiveTick;
   if (hook->getState() == Hook::HookState::productive) {
@@ -90,7 +84,7 @@ void Timer::tickUpdate() {
     lastProductiveTick = tickCount;
     timerHookState = Hook::HookState::productive;
     hook->setState(Hook::HookState::unproductive);
-  } else if (productiveTickDelta < 30) {
+  } else if (productiveTickDelta < gracePeriod) {
     currentProductiveTime += 1;
     producitveTickCount += 1;
     timerHookState = Hook::HookState::productive;
@@ -101,26 +95,19 @@ void Timer::tickUpdate() {
     lastUnproductiveTick = tickCount;
   }
   totalTimeElapsed = currentProductiveTime + currentUnproductiveTime;
+  currentSession.setGoal(productiveTimeGoal);
+  currentSession.setProductiveTime(currentProductiveTime);
+  currentSession.setUnproductiveTime(currentUnproductiveTime);
   if (currentProductiveTime == productiveTimeGoal) {
     timer->stop();
-    currentSession.setGoal(productiveTimeGoal);
-    currentSession.setProductiveTime(currentProductiveTime);
-    currentSession.setUnproductiveTime(currentUnproductiveTime);
-    currentSession.setDate(QDate::currentDate());
     newPerfTimer.stop();
     tickCount++;
     emit stopTimer();
-    //    "0h0m0s"()
-    qDebug() << "tick update on Timer took this long(milliseconds):"
-             << newPerfTimer.duration;
-    //    this->ki
     this->quit();
     return;
   }
   tickCount++;
   newPerfTimer.stop();
-  qDebug() << "tick update on Timer took this long(milliseconds):"
-           << newPerfTimer.duration;
   emit tick();
 }
 
@@ -135,10 +122,9 @@ void Timer::setHook(Hook::HookType newListenerType) {
 }
 void Timer::initTimer(Hook::HookType newHook, udata::Session newSession) {
   thisInstance->setCurrentSession(newSession);
+  currentSession.setDate(QDate::currentDate());
   thisInstance->setHook(newHook);
   timer->start(TIMER_TICK);
-  //  emit
-  // start the Timer thread
   this->start();
   emit timerStarted();
 }
@@ -169,6 +155,11 @@ void Timer::productiveSlot() { productiveSignalCount++; }
  *
  */
 void Timer::unProductiveSlot() { unProductiveSignalCount++; }
+/**
+ * @brief Timer::stopTimerSlot
+ * This stops the timer.
+ * Note that it resets Timer's state by calling the reset function.
+ */
 void Timer::stopTimerSlot() {
   emit congrats();
   reset();
@@ -200,6 +191,5 @@ int Timer::getUnproductiveTime() { return currentUnproductiveTime; }
 void Timer::pause() { timer->stop(); }
 void Timer::resume() {
   timer->start(TIMER_TICK);
-  // start the Timer thread
   this->start();
 }

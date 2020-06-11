@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['newsessionactionstate_223',['newSessionActionState',['../classMainUI.html#a91650f667b93a03bd19958a7b1805d7b',1,'MainUI']]],
-  ['newsessionqwidget_224',['NewSessionQWidget',['../classNewSessionQWidget.html#ab140edbd393359cb93d8e2a304ffc42b',1,'NewSessionQWidget']]],
-  ['newsessionslot_225',['newSessionSlot',['../classCommStatsQWidget.html#aa39b9da2ae3560a7774f451250b82cb7',1,'CommStatsQWidget']]]
+  ['on_5fcreatecommitmentqframe_5fdestroyed_222',['on_createCommitmentQFrame_destroyed',['../classCreateCommitmentQWidget.html#a2ce37f2d702c5d07ffdc26bdac142fd7',1,'CreateCommitmentQWidget']]],
+  ['on_5ftimerwindowqframe_5fdestroyed_223',['on_timerWindowQFrame_destroyed',['../classNewSessionQWidget.html#a53089c4c3a0bef13e99d227c55bcbc2d',1,'NewSessionQWidget']]],
+  ['operator_3c_3c_224',['operator&lt;&lt;',['../namespaceudata.html#a575548cd96a588cd2221b6bb897e1e16',1,'udata::operator&lt;&lt;(QDataStream &amp;out, const CommitmentFrequency &amp;)'],['../namespaceudata.html#adb8e41f8f35734ca979dc926d30f0223',1,'udata::operator&lt;&lt;(QDataStream &amp;out, const udata::Commitment &amp;newCommitment)'],['../namespaceudata.html#ad5513d7cc5fe3d4dbda69f8a1d83cb35',1,'udata::operator&lt;&lt;(QDataStream &amp;out, const udata::Session &amp;newSession)'],['../namespaceudata.html#afe85da3da3f357dc0b39fb5048c5d772',1,'udata::operator&lt;&lt;(QDataStream &amp;out, const udata::Task &amp;newTask)']]],
+  ['operator_3e_3e_225',['operator&gt;&gt;',['../namespaceudata.html#ac36ffc5e1d40fcfd4cbfc7d251d62e91',1,'udata::operator&gt;&gt;(QDataStream &amp;in, CommitmentFrequency &amp;)'],['../namespaceudata.html#adce8e0b78ee9e8ce1c12ae1b5571fe46',1,'udata::operator&gt;&gt;(QDataStream &amp;in, udata::Commitment &amp;newCommitment)'],['../namespaceudata.html#afb65a9480cbfb196e5500429fed60fbf',1,'udata::operator&gt;&gt;(QDataStream &amp;in, udata::Session &amp;newSession)'],['../namespaceudata.html#a47d610b5bbf2b29d3cd7dd0fff9853fd',1,'udata::operator&gt;&gt;(QDataStream &amp;in, udata::Task &amp;newTask)']]]
 ];

@@ -6,26 +6,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QWidget>
-#ifdef __TASKER_DEBUG__
-#if defined(Q_OS_OSX)
-#define LIVESESSIONFONTPATH "./unifont-13.0.02.ttf"
-#elif defined(Q_OS_LINUX)
 #define LIVESESSIONFONTPATH ":/resources/unifont-13.0.02.ttf"
-#elif defined(Q_OS_WIN)
-#define LIVESESSIONFONTPATH                                                    \
-  QCoreApplication::applicationDirPath() + "/../Resources/unifont-13.0.02.ttf"
-#endif
-#else
-#if defined(Q_OS_LINUX)
-#define LIVESESSIONFONTPATH "../share/applications/unifont-13.0.02.ttf"
-#elif defined(Q_OS_OSX)
-#define LIVESESSIONFONTPATH                                                    \
-  QCoreApplication::applicationDirPath() + "/../Resources/unifont-13.0.02.ttf"
-#elif defined(Q_OS_WIN)
-#define LIVESESSIONFONTPATH                                                    \
-  QCoreApplication::applicationDirPath() + "/../Resources/unifont-13.0.02.ttf"
-#endif
-#endif
 
 #define PLAYBUTTON "\u25B6"
 #define PAUSEBUTTON "\u23F8"

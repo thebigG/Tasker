@@ -75,7 +75,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a whole. One can think of this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes,context menus and look-and-feel of the entire UI. Another responsability of this class is that it works as the keykeeper of all of the actions that a user may want to do on Tasker. For instance actions( or QActions in QT speak) such as creating new sessions are allowed/disallowed by this class as it is looking at the meta state of the Application as a whole. Any entity that wants to know whether the user can execute an action or not at the moment, such as starting a new Session for a Commitment, should ask this class first.  
+<p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a whole. One can think of this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes, context menus and look-and-feel of the entire UI. Another responsability of this class is that it works as the keykeeper of all of the actions that a user may want to do on Tasker. For instance actions( or QActions in QT speak) such as creating new sessions are allowed/disallowed by this class as it is looking at the meta state of the Application as a whole. Any entity that wants to know whether the user can execute an action or not at the moment, such as starting a new Session for a Commitment, should ask this class first.  
  <a href="classMainUI.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="mainui_8h_source.html">mainui.h</a>&gt;</code></p>
@@ -101,9 +101,24 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></t
 <tr class="memitem:a780bb5a7fe05ae8ca2a1080a1f754efa"><td class="memItemLeft" align="right" valign="top"><a id="a780bb5a7fe05ae8ca2a1080a1f754efa"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>updateNewSessionActionState</b> ()</td></tr>
 <tr class="separator:a780bb5a7fe05ae8ca2a1080a1f754efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f4f3f984a8a94ea8c49eb42627548a1"><td class="memItemLeft" align="right" valign="top"><a id="a3f4f3f984a8a94ea8c49eb42627548a1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateEditCommitmentActionState</b> ()</td></tr>
+<tr class="separator:a3f4f3f984a8a94ea8c49eb42627548a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2709bfecac825d5a397421313404bdd"><td class="memItemLeft" align="right" valign="top"><a id="ab2709bfecac825d5a397421313404bdd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateDeleteCommitmentActionState</b> ()</td></tr>
+<tr class="separator:ab2709bfecac825d5a397421313404bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a9e743813d6921854c9738bde47f5cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainUI.html#a3a9e743813d6921854c9738bde47f5cd">updateActionStates</a> ()</td></tr>
+<tr class="memdesc:a3a9e743813d6921854c9738bde47f5cd"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMainUI.html#a3a9e743813d6921854c9738bde47f5cd" title="MainUI::updateActionStates.">MainUI::updateActionStates</a>.  <a href="classMainUI.html#a3a9e743813d6921854c9738bde47f5cd">More...</a><br /></td></tr>
+<tr class="separator:a3a9e743813d6921854c9738bde47f5cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91650f667b93a03bd19958a7b1805d7b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainUI.html#a91650f667b93a03bd19958a7b1805d7b">newSessionActionState</a> ()</td></tr>
 <tr class="memdesc:a91650f667b93a03bd19958a7b1805d7b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMainUI.html#a91650f667b93a03bd19958a7b1805d7b" title="MainUI::newSessionActionState.">MainUI::newSessionActionState</a>.  <a href="classMainUI.html#a91650f667b93a03bd19958a7b1805d7b">More...</a><br /></td></tr>
 <tr class="separator:a91650f667b93a03bd19958a7b1805d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad13db9d975ce6d546133bac5c270f5d8"><td class="memItemLeft" align="right" valign="top"><a id="ad13db9d975ce6d546133bac5c270f5d8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>editCommitmentActionState</b> ()</td></tr>
+<tr class="separator:ad13db9d975ce6d546133bac5c270f5d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd05e9656c237e3360f86ac3b860488c"><td class="memItemLeft" align="right" valign="top"><a id="acd05e9656c237e3360f86ac3b860488c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>deleteCommitmentActionState</b> ()</td></tr>
+<tr class="separator:acd05e9656c237e3360f86ac3b860488c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ad0a629be70c502b2654bf5b5dd03ab"><td class="memItemLeft" align="right" valign="top"><a id="a6ad0a629be70c502b2654bf5b5dd03ab"></a>
 <a class="el" href="classCommStatsQWidget.html">CommStatsQWidget</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCommitmentHub</b> ()</td></tr>
 <tr class="separator:a6ad0a629be70c502b2654bf5b5dd03ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,6 +134,12 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:aa79ced1d7fa70aec0452da1c50fbab0a"><td class="memItemLeft" align="right" valign="top"><a id="aa79ced1d7fa70aec0452da1c50fbab0a"></a>
 QAction *&#160;</td><td class="memItemRight" valign="bottom"><b>getNewSessionAction</b> ()</td></tr>
 <tr class="separator:aa79ced1d7fa70aec0452da1c50fbab0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ebd564d03a64bd475a51eaeeb8344f9"><td class="memItemLeft" align="right" valign="top"><a id="a7ebd564d03a64bd475a51eaeeb8344f9"></a>
+QAction *&#160;</td><td class="memItemRight" valign="bottom"><b>getEditCommitmentAction</b> ()</td></tr>
+<tr class="separator:a7ebd564d03a64bd475a51eaeeb8344f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaa4939b88cb285e4068618004e8f3bb"><td class="memItemLeft" align="right" valign="top"><a id="abaa4939b88cb285e4068618004e8f3bb"></a>
+QAction *&#160;</td><td class="memItemRight" valign="bottom"><b>getDeleteCommitmentAction</b> ()</td></tr>
+<tr class="separator:abaa4939b88cb285e4068618004e8f3bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -142,7 +163,7 @@ static std::unique_ptr&lt; <a class="el" href="classMainUI.html">MainUI</a> &gt;
 <tr class="separator:a5977d77626d6faef80f3e1f347449952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a whole. One can think of this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes,context menus and look-and-feel of the entire UI. Another responsability of this class is that it works as the keykeeper of all of the actions that a user may want to do on Tasker. For instance actions( or QActions in QT speak) such as creating new sessions are allowed/disallowed by this class as it is looking at the meta state of the Application as a whole. Any entity that wants to know whether the user can execute an action or not at the moment, such as starting a new Session for a Commitment, should ask this class first. </p>
+<div class="textblock"><p>The <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....">MainUI</a> class is the one responsible for the meta UI/front-end state of Tasker as a whole. One can think of this class as the one represnting the entire winodw displaying Tasker and the one reponsible for shutdown and cleanup procedures such as storing the commitments to disk before shutting down the App. The class is also responsible for managing(as implied before) layout, sizes, context menus and look-and-feel of the entire UI. Another responsability of this class is that it works as the keykeeper of all of the actions that a user may want to do on Tasker. For instance actions( or QActions in QT speak) such as creating new sessions are allowed/disallowed by this class as it is looking at the meta state of the Application as a whole. Any entity that wants to know whether the user can execute an action or not at the moment, such as starting a new Session for a Commitment, should ask this class first. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="adacd428c44ae710fb9f6e7a36b8ac87d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adacd428c44ae710fb9f6e7a36b8ac87d">&#9670;&nbsp;</a></span>getInstance()</h2>
@@ -189,6 +210,26 @@ static std::unique_ptr&lt; <a class="el" href="classMainUI.html">MainUI</a> &gt;
 
 <p><a class="el" href="classMainUI.html#a91650f667b93a03bd19958a7b1805d7b" title="MainUI::newSessionActionState.">MainUI::newSessionActionState</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if Tasker is able to create a session at the moment; false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a3a9e743813d6921854c9738bde47f5cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a9e743813d6921854c9738bde47f5cd">&#9670;&nbsp;</a></span>updateActionStates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainUI::updateActionStates </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classMainUI.html#a3a9e743813d6921854c9738bde47f5cd" title="MainUI::updateActionStates.">MainUI::updateActionStates</a>. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Add logic for "Edit Commitment" QAction </dd></dl>
 
 </div>
 </div>

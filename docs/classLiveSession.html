@@ -65,6 +65,7 @@ $(function() {
   <div class="summary">
 <a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-slots">Private Slots</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
@@ -85,6 +86,9 @@ Signals</h2></td></tr>
 <tr class="memitem:a5eda5fcd43f4cecbad8994756bbef491"><td class="memItemLeft" align="right" valign="top"><a id="a5eda5fcd43f4cecbad8994756bbef491"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>liveStateChanged</b> ()</td></tr>
 <tr class="separator:a5eda5fcd43f4cecbad8994756bbef491"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a5693adbcb565d30c5a6ab7ddffac8f"><td class="memItemLeft" align="right" valign="top"><a id="a7a5693adbcb565d30c5a6ab7ddffac8f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>sessionStarted</b> ()</td></tr>
+<tr class="separator:a7a5693adbcb565d30c5a6ab7ddffac8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -104,9 +108,23 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveSession.html#a385835836b965186dbf7efc5a2f7bb52">resume</a> ()</td></tr>
 <tr class="memdesc:a385835836b965186dbf7efc5a2f7bb52"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classLiveSession.html#a385835836b965186dbf7efc5a2f7bb52" title="LiveSession::resume resumes the Timer Engine. If the Timer Engine is already running this function do...">LiveSession::resume</a> resumes the Timer <a class="el" href="namespaceEngine.html" title="The Engine namespace has all of the Hardware Hooks and classes that make up the &quot;Engine&quot; of Tasker Wh...">Engine</a>. If the Timer <a class="el" href="namespaceEngine.html" title="The Engine namespace has all of the Hardware Hooks and classes that make up the &quot;Engine&quot; of Tasker Wh...">Engine</a> is already running this function does nothing. <br /></td></tr>
 <tr class="separator:a385835836b965186dbf7efc5a2f7bb52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6cdf94280ae45f37b41911a92ecc8f9"><td class="memItemLeft" align="right" valign="top"><a id="ae6cdf94280ae45f37b41911a92ecc8f9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateDetails</b> ()</td></tr>
+<tr class="separator:ae6cdf94280ae45f37b41911a92ecc8f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe0c599c2816e81cf89b9db54357698f"><td class="memItemLeft" align="right" valign="top"><a id="afe0c599c2816e81cf89b9db54357698f"></a>
 LiveSessionState&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentState</b> () const</td></tr>
 <tr class="separator:afe0c599c2816e81cf89b9db54357698f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a49e770ba3ed2ef1556448734a6298656"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><b>congratsCommitmentMessage</b></td></tr>
+<tr class="separator:a49e770ba3ed2ef1556448734a6298656"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3e12bd4cfcc5b1f2ff4af832e98d15b"><td class="memItemLeft" align="right" valign="top"><a id="af3e12bd4cfcc5b1f2ff4af832e98d15b"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>activeText</b> {&quot;(active)&quot;}</td></tr>
+<tr class="separator:af3e12bd4cfcc5b1f2ff4af832e98d15b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c2106eed8e3315b0dbad0efba28a7aa"><td class="memItemLeft" align="right" valign="top"><a id="a2c2106eed8e3315b0dbad0efba28a7aa"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>inactiveText</b> {&quot;(inactive)&quot;}</td></tr>
+<tr class="separator:a2c2106eed8e3315b0dbad0efba28a7aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-slots"></a>
 Private Slots</h2></td></tr>
@@ -114,9 +132,9 @@ Private Slots</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLiveSession.html#a907454ff4014297046f789ba30fa0891">updateTimeUI</a> ()</td></tr>
 <tr class="memdesc:a907454ff4014297046f789ba30fa0891"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classLiveSession.html#a907454ff4014297046f789ba30fa0891" title="LiveSession::updateTimeUI This is a time-sensitive function. It MUST return within 1 second....">LiveSession::updateTimeUI</a> This is a time-sensitive function. It MUST return within 1 second. current latency(average)=140000 nanoseconds I believe this latency can be reduced with some optimizations I'll be making later. <br /></td></tr>
 <tr class="separator:a907454ff4014297046f789ba30fa0891"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94915b631280ab2afbb3c95da667a35a"><td class="memItemLeft" align="right" valign="top"><a id="a94915b631280ab2afbb3c95da667a35a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>congratsSlot</b> ()</td></tr>
-<tr class="separator:a94915b631280ab2afbb3c95da667a35a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75da0136f7d7ca612b89da8e2da7d48a"><td class="memItemLeft" align="right" valign="top"><a id="a75da0136f7d7ca612b89da8e2da7d48a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
+<tr class="separator:a75da0136f7d7ca612b89da8e2da7d48a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c7c583bda3ec8b94cb42955f1b3214c"><td class="memItemLeft" align="right" valign="top"><a id="a7c7c583bda3ec8b94cb42955f1b3214c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>playButtonSlot</b> ()</td></tr>
 <tr class="separator:a7c7c583bda3ec8b94cb42955f1b3214c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,7 +158,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>initHookState</b> ()<
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:afc2f976b69fcc9afe9e0995b463b4fe5"><td class="memItemLeft" align="right" valign="top"><a id="afc2f976b69fcc9afe9e0995b463b4fe5"></a>
-Ui::LiveSession *&#160;</td><td class="memItemRight" valign="bottom"><b>ui</b></td></tr>
+<a class="el" href="classUi_1_1LiveSession.html">Ui::LiveSession</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>ui</b></td></tr>
 <tr class="separator:afc2f976b69fcc9afe9e0995b463b4fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cba159d18ff1c2c676f9f40044d61b6"><td class="memItemLeft" align="right" valign="top"><a id="a7cba159d18ff1c2c676f9f40044d61b6"></a>
 QString&#160;</td><td class="memItemRight" valign="bottom"><b>productiveTimeValueText</b></td></tr>
@@ -160,15 +178,6 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>sessionGoalText</b
 <tr class="memitem:aad6007842b08a771a6987a2bf6ca2c91"><td class="memItemLeft" align="right" valign="top"><a id="aad6007842b08a771a6987a2bf6ca2c91"></a>
 QString&#160;</td><td class="memItemRight" valign="bottom"><b>hookStateText</b> {}</td></tr>
 <tr class="separator:aad6007842b08a771a6987a2bf6ca2c91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9115c326e56b946a4a10469f45a648a"><td class="memItemLeft" align="right" valign="top"><a id="af9115c326e56b946a4a10469f45a648a"></a>
-QString&#160;</td><td class="memItemRight" valign="bottom"><b>congratsMessage</b> {&quot;Congrats! You've completed your session!&quot;}</td></tr>
-<tr class="separator:af9115c326e56b946a4a10469f45a648a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3e12bd4cfcc5b1f2ff4af832e98d15b"><td class="memItemLeft" align="right" valign="top"><a id="af3e12bd4cfcc5b1f2ff4af832e98d15b"></a>
-QString&#160;</td><td class="memItemRight" valign="bottom"><b>activeText</b> {&quot;(active)&quot;}</td></tr>
-<tr class="separator:af3e12bd4cfcc5b1f2ff4af832e98d15b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c2106eed8e3315b0dbad0efba28a7aa"><td class="memItemLeft" align="right" valign="top"><a id="a2c2106eed8e3315b0dbad0efba28a7aa"></a>
-QString&#160;</td><td class="memItemRight" valign="bottom"><b>inactiveText</b> {&quot;(inactive)&quot;}</td></tr>
-<tr class="separator:a2c2106eed8e3315b0dbad0efba28a7aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77d892c669672471823c4f71b815e165"><td class="memItemLeft" align="right" valign="top"><a id="a77d892c669672471823c4f71b815e165"></a>
 QString&#160;</td><td class="memItemRight" valign="bottom"><b>taskState</b> {}</td></tr>
 <tr class="separator:a77d892c669672471823c4f71b815e165"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -212,8 +221,25 @@ Perf::PerfTimer&#160;</td><td class="memItemRight" valign="bottom"><b>liveSessio
   </tr>
 </table>
 </div><div class="memdoc">
-<p>QFontDatabase::addApplicationFont We need a supported font for the play/pause unicode icons. It currently works on macOS and linux. Has not been tested on Windows.</p>
+<p>QFontDatabase::addApplicationFont We need a supported font for the play/pause unicode icons. It currently works on linux. Has not been tested on Windows or macOS.</p>
 
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a49e770ba3ed2ef1556448734a6298656"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49e770ba3ed2ef1556448734a6298656">&#9670;&nbsp;</a></span>congratsCommitmentMessage</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString LiveSession::congratsCommitmentMessage</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">      <span class="stringliteral">&quot;Congrats! You&#39;ve completed this commitment!&quot;</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
