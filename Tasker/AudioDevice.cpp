@@ -148,7 +148,7 @@ qint64 AudioDevice::readData(char *data, qint64 maxlen) {
  * will collect the audio data on the data buffer and transcribe into a unsigned
  * integer for processing.
  * @param data The buffer that contains the audio data.
- * @param len The maximum number of bytes that cn be written to the buffer.
+ * @param len The maximum number of bytes that can be written to the buffer.
  * @return The number of bytes written to data.
  * @note Note that this is a I/O asynchronous function.
  */

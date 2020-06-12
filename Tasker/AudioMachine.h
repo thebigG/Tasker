@@ -17,7 +17,6 @@ class Engine::AudioMachine : public QObject {
 
 public:
   AudioMachine();
-  ~AudioMachine();
   bool isAudioDeviceValid();
   AudioDevice *getAudioDevice();
   QAudioInput &getQAudioInput();

@@ -16,7 +16,8 @@ using namespace util;
 using namespace udata;
 std::unique_ptr<Timer> Timer::thisInstance = std::make_unique<Timer>();
 /**
- * @brief Timer::Timer
+ * @brief Timer::Timer initializes this Timer instance. It also initializes the
+ * QTimer's timeout and Timer's stopTimer signals.
  */
 Timer::Timer() {
   currentProductiveTime = 0;
@@ -41,6 +42,9 @@ void Timer::run() {
   if (val == 0) {
   }
 }
+/**
+ * @brief Timer::startTimer initializes the hook and its thread.
+ */
 void Timer::startTimer() {
   if (hookType == Hook::HookType::X_MOUSE_KEYBOARD) {
     hook = std::make_unique<XHook>();
@@ -52,30 +56,23 @@ void Timer::startTimer() {
   } else if (hookType == Hook::HookType::audio) {
     hook = std::make_unique<AudioHook>();
   }
-  /**
-      This block of code  WORKS!
-      DO NOT DELETE THIS BLOCK OF CODE. IT IS PERFECT!
-      Specifically the statements regarding the listener and
-      listenerThread. I'm talking about the next 3 lines of code.
-   */
-
   connect(&hookThread, &QThread::started, hook.get(), &Hook::start);
   hook->moveToThread(&hookThread);
   hookThread.start();
 }
 /**
- * @brief Timer::tickUpdate
- * This is a time-sensitive function. Whatever it executes, it MUST return
- * within 250 milliseconds, which is human perception threshold.
- * Current latency(average)= 0.025 nanoseconds
+ * @brief Timer::tickUpdate Updates Timer's state. This state includes data such
+ * as current productive/unproductive ticks. It is also responsible for loading
+ * that state into the current session. This is a time-sensitive function.
+ * Whatever it executes, it MUST return within 250 milliseconds, which is human
+ * perception threshold. Current latency(average)= 0.025 nanoseconds
  */
 void Timer::tickUpdate() {
   newPerfTimer.restart();
   /**
    * @brief productiveTickDelta
-   * This is the real-time calculated current grace peroid peroid for
-   * how long the user can go unproductive.
-   * The maximum grace peroid is defined gracePeriod.
+   * This is the real-time amoumt of seconds that the user has gone
+   * unproductive. The maximum grace peroid is defined by gracePeriod.
    */
   int productiveTickDelta = tickCount - lastProductiveTick;
   if (hook->getState() == Hook::HookState::productive) {
@@ -120,6 +117,12 @@ void Timer::setCurrentSession(Session newSession) {
 void Timer::setHook(Hook::HookType newListenerType) {
   hookType = newListenerType;
 }
+/**
+ * @brief Timer::initTimer starts the Timer's internal QTimer object
+ * @param newHook The type of hardware hook that will be part of this session.
+ * @param newSession a new session that will contain the data of Timer once the
+ * Timer's goal is reached.
+ */
 void Timer::initTimer(Hook::HookType newHook, udata::Session newSession) {
   thisInstance->setCurrentSession(newSession);
   currentSession.setDate(QDate::currentDate());
@@ -167,6 +170,7 @@ void Timer::stopTimerSlot() {
 }
 /**
  * @brief Timer::reset resets all state of the Timer to zero.
+ * This function also kills the hook thread.
  *
  */
 void Timer::reset() {

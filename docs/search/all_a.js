@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['newsessionactionstate_63',['newSessionActionState',['../classMainUI.html#a91650f667b93a03bd19958a7b1805d7b',1,'MainUI']]],
-  ['newsessionqwidget_64',['NewSessionQWidget',['../classUi_1_1NewSessionQWidget.html',1,'Ui::NewSessionQWidget'],['../classNewSessionQWidget.html',1,'NewSessionQWidget'],['../classNewSessionQWidget.html#ab140edbd393359cb93d8e2a304ffc42b',1,'NewSessionQWidget::NewSessionQWidget()']]],
-  ['newsessionslot_65',['newSessionSlot',['../classCommStatsQWidget.html#aa39b9da2ae3560a7774f451250b82cb7',1,'CommStatsQWidget']]]
+  ['newsessionactionstate_64',['newSessionActionState',['../classMainUI.html#a91650f667b93a03bd19958a7b1805d7b',1,'MainUI']]],
+  ['newsessionqwidget_65',['NewSessionQWidget',['../classUi_1_1NewSessionQWidget.html',1,'Ui::NewSessionQWidget'],['../classNewSessionQWidget.html',1,'NewSessionQWidget'],['../classNewSessionQWidget.html#ab140edbd393359cb93d8e2a304ffc42b',1,'NewSessionQWidget::NewSessionQWidget()']]],
+  ['newsessionslot_66',['newSessionSlot',['../classCommStatsQWidget.html#aa39b9da2ae3560a7774f451250b82cb7',1,'CommStatsQWidget']]]
 ];

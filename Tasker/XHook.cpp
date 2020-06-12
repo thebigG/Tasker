@@ -12,7 +12,12 @@
 #include <QThread>
 #include <QtCore>
 using namespace Engine;
-
+/**
+ * @brief XHook::XHook initializes this Xhook instance with the specified
+ * XhookMode. It hooks all signals necessary to do IPC with the external Xhook
+ * child process.
+ * @param newXMode The mode(mouse, keyboard or both) this instance will be on.
+ */
 XHook::XHook(Engine::XHookMode newXMode) {
   XMode = newXMode;
   xChildHook.setParent(this);
@@ -37,7 +42,10 @@ XHook::XHook(Engine::XHookMode newXMode) {
   });
 }
 /**
- * @brief XHook::XHook
+ * @brief XHook::XHook initializes this Xhook instance on keyboard_and_mouse
+ * mode. It hooks all signals necessary to do IPC with the external Xhook child
+ * process.
+ * @param newXMode The mode(mouse, keyboard or both) this instance will be on.
  */
 XHook::XHook() {
   XMode = XHookMode::MOUSE_AND_KEYBOARD;
@@ -100,11 +108,10 @@ void XHook::resetState() { setState(HookState::unproductive); }
 /**
  * @brief XListener::startListening
  * Spawn process which is a hardware hook for mouse, keyboard or both
- * @return
+ * @return 0 on success. Error codes to be implemented.
  */
 int XHook::startXHook() {
   setState(HookState::unproductive);
-
   xChildHook.setWorkingDirectory(WORKDIR);
   // Kill xHook process when this process ends
   connect(qApp, &QGuiApplication::lastWindowClosed, this, &XHook::end);
@@ -125,6 +132,3 @@ int XHook::startXHook() {
   qDebug() << "started Xhook??";
   return 0;
 }
-/**
-
-*/

@@ -4,7 +4,6 @@ using namespace Engine;
 
 /**
  * @brief Engine::Hook::Hook
- *        default constructor
  */
 Hook::Hook() { state = Hook::HookState::unproductive; }
 QDataStream &Engine::operator<<(QDataStream &out,
@@ -12,10 +11,17 @@ QDataStream &Engine::operator<<(QDataStream &out,
   out << int(newListener);
   return out;
 }
+QDataStream &Engine::operator>>(QDataStream &in, Hook::HookType &newListener) {
+  int enumValue = 0;
+  in >> enumValue;
+  newListener = Engine::Hook::intToListenerType(enumValue);
+  return in;
+}
 /**
- * @brief Hook::intToListenerType
- * @param enumInt
- * @return
+ * @brief Hook::intToListenerType safely converts an integer into a HookType
+ * enum.
+ * @param enumInt Integer to convert.
+ * @return A HookType enum that was represented by enumInt
  */
 Hook::HookType Hook::intToListenerType(int enumInt) {
   if (int(HookType::X_MOUSE_KEYBOARD) < enumInt ||

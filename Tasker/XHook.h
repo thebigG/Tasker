@@ -38,7 +38,11 @@ enum class XHookMode;
 enum class Engine::XHookMode { MOUSE, KEYBOARD, MOUSE_AND_KEYBOARD };
 /**
  * @brief The Engine::XListener class
- * This class has the capiblity of detecting mouse and keyboard interaction.
+ *  This class has the capiblity of detecting mouse and keyboard
+ * interaction.
+ * @note Note that the detecion of mouse and keyboard input(globally
+ * throughout the system) is made possible by the amazing libuiiohook library.
+ * You can check out the library here https://github.com/kwhat/libuiohook
  */
 class Engine::XHook : public Hook {
   Q_OBJECT

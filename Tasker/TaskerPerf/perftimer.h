@@ -4,10 +4,18 @@
 #include <QDebug>
 #include <chrono>
 #include <vector>
+/**
+ *Anything related to measuring performance will be found on this namespace.
+ */
 namespace Perf {
 class PerfTimer;
 }
-
+/**
+ * @brief The Perf::PerfTimer class a class to made to measure the performance
+ * of entities on Tasker.
+ * It keeps a record of all times recorded for averaging and crunching on a
+ * QVector that will contain durationRecordSize data points.
+ */
 class Perf::PerfTimer {
 private:
   std::chrono::time_point<std::chrono::high_resolution_clock> start;
@@ -19,7 +27,6 @@ public:
   void restart();
   double duration;
   int durationRecordSize;
-  ~PerfTimer();
   /**
    * @brief Perf::PerfTimer::stop
    * Calculates the duration since either the object was constructed or
@@ -37,11 +44,7 @@ public:
       for (long long tempDuration : durationRecord) {
         sum += tempDuration;
       }
-
-      //    TASKER_LOG("vector:"+QString::nu;
       duration = sum / durationRecord.size();
-      //    duration =
-      //    std::chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
     }
   }
 };

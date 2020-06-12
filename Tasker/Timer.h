@@ -13,6 +13,11 @@
 namespace Engine {
 class Timer;
 }
+/**
+ * @brief The Engine::Timer class is a clock that hooks to specified Hooks such
+ * as XHook or AudioHook and keeps track of whether the hook's state is
+ * productive or unproductive.
+ */
 class Engine::Timer : public QThread {
   Q_OBJECT
 private:

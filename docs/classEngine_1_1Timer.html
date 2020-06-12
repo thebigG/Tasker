@@ -80,6 +80,11 @@ $(function() {
 <div class="title">Engine::Timer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Engine::Timer</a> class is a clock that hooks to specified Hooks such as <a class="el" href="classEngine_1_1XHook.html" title="The Engine::XListener class This class has the capiblity of detecting mouse and keyboard interaction.">XHook</a> or <a class="el" href="classEngine_1_1AudioHook.html" title="Engine::AudioHook class This class uses the AudioDvice and AudioMachine classes to make a self-sustai...">AudioHook</a> and keeps track of whether the hook's state is productive or unproductive.  
+ <a href="classEngine_1_1Timer.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Timer_8h_source.html">Timer.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Engine::Timer:</div>
 <div class="dyncontent">
@@ -91,16 +96,16 @@ Inheritance diagram for Engine::Timer:</div>
 Public Slots</h2></td></tr>
 <tr class="memitem:ad700ca54e4d6d2e932a679cfe233e374"><td class="memItemLeft" align="right" valign="top"><a id="ad700ca54e4d6d2e932a679cfe233e374"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#ad700ca54e4d6d2e932a679cfe233e374">stopTimerSlot</a> ()</td></tr>
-<tr class="memdesc:ad700ca54e4d6d2e932a679cfe233e374"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#ad700ca54e4d6d2e932a679cfe233e374" title="Timer::stopTimerSlot This stops the timer. Note that it resets Timer&#39;s state by calling the reset fun...">Timer::stopTimerSlot</a> This stops the timer. Note that it resets <a class="el" href="classEngine_1_1Timer.html">Timer</a>'s state by calling the reset function. <br /></td></tr>
+<tr class="memdesc:ad700ca54e4d6d2e932a679cfe233e374"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#ad700ca54e4d6d2e932a679cfe233e374" title="Timer::stopTimerSlot This stops the timer. Note that it resets Timer&#39;s state by calling the reset fun...">Timer::stopTimerSlot</a> This stops the timer. Note that it resets <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a>'s state by calling the reset function. <br /></td></tr>
 <tr class="separator:ad700ca54e4d6d2e932a679cfe233e374"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afebebbf522eda0444060e92c21f09aa4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4">tickUpdate</a> ()</td></tr>
-<tr class="memdesc:afebebbf522eda0444060e92c21f09aa4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4" title="Timer::tickUpdate This is a time-sensitive function. Whatever it executes, it MUST return within 250 ...">Timer::tickUpdate</a> This is a time-sensitive function. Whatever it executes, it MUST return within 250 milliseconds, which is human perception threshold. Current latency(average)= 0.025 nanoseconds.  <a href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4">More...</a><br /></td></tr>
+<tr class="memdesc:afebebbf522eda0444060e92c21f09aa4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4" title="Timer::tickUpdate Updates Timer&#39;s state. This state includes data such as current productive/unproduc...">Timer::tickUpdate</a> Updates <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a>'s state. This state includes data such as current productive/unproductive ticks. It is also responsible for loading that state into the current session. This is a time-sensitive function. Whatever it executes, it MUST return within 250 milliseconds, which is human perception threshold. Current latency(average)= 0.025 nanoseconds.  <a href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4">More...</a><br /></td></tr>
 <tr class="separator:afebebbf522eda0444060e92c21f09aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26808f36fda1dfff089b001d7dd0f45a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a26808f36fda1dfff089b001d7dd0f45a">productiveSlot</a> ()</td></tr>
 <tr class="memdesc:a26808f36fda1dfff089b001d7dd0f45a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a26808f36fda1dfff089b001d7dd0f45a" title="Timer::productiveSlot.">Timer::productiveSlot</a>.  <a href="classEngine_1_1Timer.html#a26808f36fda1dfff089b001d7dd0f45a">More...</a><br /></td></tr>
 <tr class="separator:a26808f36fda1dfff089b001d7dd0f45a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b9a4f6767f953ceaf92a63cbb840c29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a6b9a4f6767f953ceaf92a63cbb840c29">unProductiveSlot</a> ()</td></tr>
-<tr class="memdesc:a6b9a4f6767f953ceaf92a63cbb840c29"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a6b9a4f6767f953ceaf92a63cbb840c29" title="Timer::unProductiveSlot Called every time the listener emits the unProductive signal....">Timer::unProductiveSlot</a> Called every time the listener emits the unProductive signal. This function can be used to crunch more stats on hardware interaction. For example; we could keep internal unProductive counters on <a class="el" href="classEngine_1_1Timer.html">Timer</a> and give the user data such as "you were least productive
+<tr class="memdesc:a6b9a4f6767f953ceaf92a63cbb840c29"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a6b9a4f6767f953ceaf92a63cbb840c29" title="Timer::unProductiveSlot Called every time the listener emits the unProductive signal....">Timer::unProductiveSlot</a> Called every time the listener emits the unProductive signal. This function can be used to crunch more stats on hardware interaction. For example; we could keep internal unProductive counters on <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a> and give the user data such as "you were least productive
  on the first 10 minutes of the session" because there was a constant decrement on your productive signal count. That's just a silly example, but I think the possibilities are endless, in terms of data, depending on the context, whether they're writing or practicing music.  <a href="classEngine_1_1Timer.html#a6b9a4f6767f953ceaf92a63cbb840c29">More...</a><br /></td></tr>
 <tr class="separator:a6b9a4f6767f953ceaf92a63cbb840c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -123,16 +128,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>congrats</b> ()</td><
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5f16e8da27d2a5a5242dead46de05d97"><td class="memItemLeft" align="right" valign="top"><a id="a5f16e8da27d2a5a5242dead46de05d97"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a5f16e8da27d2a5a5242dead46de05d97">Timer</a> ()</td></tr>
-<tr class="memdesc:a5f16e8da27d2a5a5242dead46de05d97"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a5f16e8da27d2a5a5242dead46de05d97" title="Timer::Timer.">Timer::Timer</a>. <br /></td></tr>
+<tr class="memdesc:a5f16e8da27d2a5a5242dead46de05d97"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a5f16e8da27d2a5a5242dead46de05d97" title="Timer::Timer initializes this Timer instance. It also initializes the QTimer&#39;s timeout and Timer&#39;s st...">Timer::Timer</a> initializes this <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a> instance. It also initializes the QTimer's timeout and <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a>'s stopTimer signals. <br /></td></tr>
 <tr class="separator:a5f16e8da27d2a5a5242dead46de05d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9d150a0450bcfeee60121314696d1bb"><td class="memItemLeft" align="right" valign="top"><a id="af9d150a0450bcfeee60121314696d1bb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initTimer</b> (<a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Hook::HookType</a>, <a class="el" href="classudata_1_1Session.html">udata::Session</a>)</td></tr>
+<tr class="memitem:af9d150a0450bcfeee60121314696d1bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#af9d150a0450bcfeee60121314696d1bb">initTimer</a> (<a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Hook::HookType</a>, <a class="el" href="classudata_1_1Session.html">udata::Session</a>)</td></tr>
+<tr class="memdesc:af9d150a0450bcfeee60121314696d1bb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#af9d150a0450bcfeee60121314696d1bb" title="Timer::initTimer starts the Timer&#39;s internal QTimer object.">Timer::initTimer</a> starts the <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a>'s internal QTimer object.  <a href="classEngine_1_1Timer.html#af9d150a0450bcfeee60121314696d1bb">More...</a><br /></td></tr>
 <tr class="separator:af9d150a0450bcfeee60121314696d1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b09cdb6c090ee4e735b219bebccf362"><td class="memItemLeft" align="right" valign="top"><a id="a9b09cdb6c090ee4e735b219bebccf362"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
 <tr class="separator:a9b09cdb6c090ee4e735b219bebccf362"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9020542d73357a4eef512eefaf57524b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a9020542d73357a4eef512eefaf57524b">reset</a> ()</td></tr>
-<tr class="memdesc:a9020542d73357a4eef512eefaf57524b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a9020542d73357a4eef512eefaf57524b" title="Timer::reset resets all state of the Timer to zero.">Timer::reset</a> resets all state of the <a class="el" href="classEngine_1_1Timer.html">Timer</a> to zero.  <a href="classEngine_1_1Timer.html#a9020542d73357a4eef512eefaf57524b">More...</a><br /></td></tr>
+<tr class="memdesc:a9020542d73357a4eef512eefaf57524b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a9020542d73357a4eef512eefaf57524b" title="Timer::reset resets all state of the Timer to zero. This function also kills the hook thread.">Timer::reset</a> resets all state of the <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a> to zero. This function also kills the hook thread.  <a href="classEngine_1_1Timer.html#a9020542d73357a4eef512eefaf57524b">More...</a><br /></td></tr>
 <tr class="separator:a9020542d73357a4eef512eefaf57524b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0289effad7b573c508bc27e405900a23"><td class="memItemLeft" align="right" valign="top"><a id="a0289effad7b573c508bc27e405900a23"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>pause</b> ()</td></tr>
@@ -152,7 +157,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>getProductiveTime</b> 
 <tr class="memitem:a422031ff11a1841ab36317ea88d2db3c"><td class="memItemLeft" align="right" valign="top"><a id="a422031ff11a1841ab36317ea88d2db3c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getUnproductiveTime</b> ()</td></tr>
 <tr class="separator:a422031ff11a1841ab36317ea88d2db3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8c887576ec3b0d68c10ebf4097c367c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#aa8c887576ec3b0d68c10ebf4097c367c">startTimer</a> ()</td></tr>
+<tr class="memitem:aa8c887576ec3b0d68c10ebf4097c367c"><td class="memItemLeft" align="right" valign="top"><a id="aa8c887576ec3b0d68c10ebf4097c367c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#aa8c887576ec3b0d68c10ebf4097c367c">startTimer</a> ()</td></tr>
+<tr class="memdesc:aa8c887576ec3b0d68c10ebf4097c367c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#aa8c887576ec3b0d68c10ebf4097c367c" title="Timer::startTimer initializes the hook and its thread.">Timer::startTimer</a> initializes the hook and its thread. <br /></td></tr>
 <tr class="separator:aa8c887576ec3b0d68c10ebf4097c367c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a386e5b2195abb7c5e4d46ca8b6d2de"><td class="memItemLeft" align="right" valign="top"><a id="a4a386e5b2195abb7c5e4d46ca8b6d2de"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getTotalTimeElapsed</b> ()</td></tr>
@@ -183,7 +190,7 @@ Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><b>timerHookS
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a1323444ebd7f2c1407518a03a193b5f4"><td class="memItemLeft" align="right" valign="top"><a id="a1323444ebd7f2c1407518a03a193b5f4"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4">run</a> ()</td></tr>
-<tr class="memdesc:a1323444ebd7f2c1407518a03a193b5f4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4" title="Timer::run This function is called when the thread starts. Any and all QObjects(such as Hook) MUST be...">Timer::run</a> This function is called when the thread starts. Any and all QObjects(such as Hook) MUST be instantiated inside this method. Otherwise, QT's thread management will NOT consider that QObject as part of the <a class="el" href="classEngine_1_1Timer.html">Timer</a> thread. The code in &amp;Hook::start, which is the ACTUAL code that hooks to hardware, does not run until the startHook() signal is sent. <br /></td></tr>
+<tr class="memdesc:a1323444ebd7f2c1407518a03a193b5f4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4" title="Timer::run This function is called when the thread starts. Any and all QObjects(such as Hook) MUST be...">Timer::run</a> This function is called when the thread starts. Any and all QObjects(such as Hook) MUST be instantiated inside this method. Otherwise, QT's thread management will NOT consider that QObject as part of the <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a> thread. The code in &amp;Hook::start, which is the ACTUAL code that hooks to hardware, does not run until the startHook() signal is sent. <br /></td></tr>
 <tr class="separator:a1323444ebd7f2c1407518a03a193b5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -254,7 +261,46 @@ Static Private Attributes</h2></td></tr>
 static std::unique_ptr&lt; <a class="el" href="classEngine_1_1Timer.html">Timer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>thisInstance</b> = std::make_unique&lt;<a class="el" href="classEngine_1_1Timer.html">Timer</a>&gt;()</td></tr>
 <tr class="separator:a1d27b8c6c358af1d0ef340b2ccbc0887"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Engine::Timer</a> class is a clock that hooks to specified Hooks such as <a class="el" href="classEngine_1_1XHook.html" title="The Engine::XListener class This class has the capiblity of detecting mouse and keyboard interaction.">XHook</a> or <a class="el" href="classEngine_1_1AudioHook.html" title="Engine::AudioHook class This class uses the AudioDvice and AudioMachine classes to make a self-sustai...">AudioHook</a> and keeps track of whether the hook's state is productive or unproductive. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="af9d150a0450bcfeee60121314696d1bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9d150a0450bcfeee60121314696d1bb">&#9670;&nbsp;</a></span>initTimer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Timer::initTimer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Hook::HookType</a>&#160;</td>
+          <td class="paramname"><em>newHook</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classudata_1_1Session.html">udata::Session</a>&#160;</td>
+          <td class="paramname"><em>newSession</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classEngine_1_1Timer.html#af9d150a0450bcfeee60121314696d1bb" title="Timer::initTimer starts the Timer&#39;s internal QTimer object.">Timer::initTimer</a> starts the <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a>'s internal QTimer object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newHook</td><td>The type of hardware hook that will be part of this session. </td></tr>
+    <tr><td class="paramname">newSession</td><td>a new session that will contain the data of <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a> once the <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a>'s goal is reached. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a26808f36fda1dfff089b001d7dd0f45a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a26808f36fda1dfff089b001d7dd0f45a">&#9670;&nbsp;</a></span>productiveSlot</h2>
 
@@ -299,25 +345,7 @@ on the first 10 minutes of the session" because there was a constant increment o
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classEngine_1_1Timer.html#a9020542d73357a4eef512eefaf57524b" title="Timer::reset resets all state of the Timer to zero.">Timer::reset</a> resets all state of the <a class="el" href="classEngine_1_1Timer.html">Timer</a> to zero. </p>
-
-</div>
-</div>
-<a id="aa8c887576ec3b0d68c10ebf4097c367c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8c887576ec3b0d68c10ebf4097c367c">&#9670;&nbsp;</a></span>startTimer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Timer::startTimer </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This block of code WORKS! DO NOT DELETE THIS BLOCK OF CODE. IT IS PERFECT! Specifically the statements regarding the listener and listenerThread. I'm talking about the next 3 lines of code.</p>
+<p><a class="el" href="classEngine_1_1Timer.html#a9020542d73357a4eef512eefaf57524b" title="Timer::reset resets all state of the Timer to zero. This function also kills the hook thread.">Timer::reset</a> resets all state of the <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a> to zero. This function also kills the hook thread. </p>
 
 </div>
 </div>
@@ -344,8 +372,8 @@ on the first 10 minutes of the session" because there was a constant increment o
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4" title="Timer::tickUpdate This is a time-sensitive function. Whatever it executes, it MUST return within 250 ...">Timer::tickUpdate</a> This is a time-sensitive function. Whatever it executes, it MUST return within 250 milliseconds, which is human perception threshold. Current latency(average)= 0.025 nanoseconds. </p>
-<p>productiveTickDelta This is the real-time calculated current grace peroid peroid for how long the user can go unproductive. The maximum grace peroid is defined gracePeriod.</p>
+<p><a class="el" href="classEngine_1_1Timer.html#afebebbf522eda0444060e92c21f09aa4" title="Timer::tickUpdate Updates Timer&#39;s state. This state includes data such as current productive/unproduc...">Timer::tickUpdate</a> Updates <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a>'s state. This state includes data such as current productive/unproductive ticks. It is also responsible for loading that state into the current session. This is a time-sensitive function. Whatever it executes, it MUST return within 250 milliseconds, which is human perception threshold. Current latency(average)= 0.025 nanoseconds. </p>
+<p>productiveTickDelta This is the real-time amoumt of seconds that the user has gone unproductive. The maximum grace peroid is defined by gracePeriod.</p>
 
 </div>
 </div>
@@ -372,7 +400,7 @@ on the first 10 minutes of the session" because there was a constant increment o
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classEngine_1_1Timer.html#a6b9a4f6767f953ceaf92a63cbb840c29" title="Timer::unProductiveSlot Called every time the listener emits the unProductive signal....">Timer::unProductiveSlot</a> Called every time the listener emits the unProductive signal. This function can be used to crunch more stats on hardware interaction. For example; we could keep internal unProductive counters on <a class="el" href="classEngine_1_1Timer.html">Timer</a> and give the user data such as "you were least productive
+<p><a class="el" href="classEngine_1_1Timer.html#a6b9a4f6767f953ceaf92a63cbb840c29" title="Timer::unProductiveSlot Called every time the listener emits the unProductive signal....">Timer::unProductiveSlot</a> Called every time the listener emits the unProductive signal. This function can be used to crunch more stats on hardware interaction. For example; we could keep internal unProductive counters on <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a> and give the user data such as "you were least productive
  on the first 10 minutes of the session" because there was a constant decrement on your productive signal count. That's just a silly example, but I think the possibilities are endless, in terms of data, depending on the context, whether they're writing or practicing music. </p>
 
 </div>

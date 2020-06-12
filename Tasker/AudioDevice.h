@@ -7,7 +7,7 @@
  *@brief The Engine namespace has all of the
  *Hardware Hooks and classes that make up the "Engine" of Tasker
  * When it comes to detecting user interaction with hardware
- * such as Xhook, AudioHook, Timer and any other class that
+ * such as XHook, AudioHook, Timer and any other class that
  *directly aids these entities such as AudioDevice. Hook classes are
  *platform-dependent.
  * If you have any ideas/want to make hardware Hook for this app, PR and

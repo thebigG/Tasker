@@ -78,82 +78,52 @@ $(function() {
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;QObject&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;QThread&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define BASE_DELAY 2</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceEngine.html">Engine</a> {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span>Hook;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">enum class</span> ListenerType;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;QDataStream &amp;<a class="code" href="namespaceudata.html#a575548cd96a588cd2221b6bb897e1e16">operator&lt;&lt;</a>(QDataStream &amp;out, <span class="keyword">const</span> ListenerType &amp;newListener);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;QDataStream &amp;<a class="code" href="namespaceudata.html#ac36ffc5e1d40fcfd4cbfc7d251d62e91">operator&gt;&gt;</a>(QDataStream &amp;in, ListenerType &amp;newListener);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;} <span class="comment">// namespace Engine</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classEngine_1_1Hook.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="classEngine_1_1Hook.html">Engine::Hook</a> : <span class="keyword">public</span> QObject {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  Q_OBJECT</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">enum class</span> HookState { unproductive, productive };</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">   31</a></span>&#160;  <span class="keyword">enum class</span> <a class="code" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a> {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    X_MOUSE_KEYBOARD,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    X_MOUSE,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    X_KEYBOARD,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    audio,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    none</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  }; <span class="comment">// I had to do this to make QThreads work</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="classEngine_1_1Hook.html#a8e52a70716ef323e93cb08a524b56196">Hook</a>();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="classEngine_1_1Hook.html#acb7976010a5d553afc4fe4e1d7d22814">~Hook</a>();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> start() = 0;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> end() = 0;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> pause() = 0;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> update() = 0;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> resetState() = 0;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keyword">static</span> <a class="code" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a> <a class="code" href="classEngine_1_1Hook.html#a6b05006ac5fd4ca9fa404ea7bd533407">intToListenerType</a>(<span class="keywordtype">int</span> enumToInt);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keyword">virtual</span> Hook::HookState startHook() = 0;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classEngine_1_1Hook.html#ae2dd7072eaaa340c56d078bcdd745b90">setState</a>(HookState);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  HookState <a class="code" href="classEngine_1_1Hook.html#a58e34bb7028ded312af197bee03b66b2">getState</a>();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="comment">// probably not needed...timer keeps track of live session time,</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="comment">// when session ends, session will grab this data from timer</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="comment">// to store permanently in Commitment</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  uint64_t getProductiveTime();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  uint64_t getUnproductiveTime();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  Hook::HookState state;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordtype">double</span> getCheckStateDelay();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">void</span> setCheckStateDelay(<span class="keywordtype">double</span> checkStateDelay);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keyword">friend</span> QDataStream &amp;<a class="code" href="classEngine_1_1Hook.html#aa2462a3fa67873c91ed1ca8aa0758f24">operator&lt;&lt;</a>(QDataStream &amp;out, <span class="keyword">const</span> <a class="code" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a> &amp;newListener);</div>
-<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="classEngine_1_1Hook.html#a4aa17376c98ca29942fe93b5886bb055">   84</a></span>&#160;  <span class="keyword">friend</span> QDataStream &amp;<a class="code" href="classEngine_1_1Hook.html#a4aa17376c98ca29942fe93b5886bb055">operator&gt;&gt;</a>(QDataStream &amp;in, <a class="code" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a> &amp;newListener) {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">int</span> enumValue = 0;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    in &gt;&gt; enumValue;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    newListener = <a class="code" href="classEngine_1_1Hook.html#a6b05006ac5fd4ca9fa404ea7bd533407">intToListenerType</a>(enumValue);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">return</span> in;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="comment">// public slots:</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="comment">//    void tickSlot();</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;signals:</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordtype">void</span> productive();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordtype">void</span> unProductive();</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;};</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#endif // LISTENER_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceEngine.html">Engine</a> {</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span>Hook;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">enum class</span> HookType;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;} <span class="comment">// namespace Engine</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classEngine_1_1Hook.html">   18</a></span>&#160;<span class="comment"></span><span class="keyword">class </span><a class="code" href="classEngine_1_1Hook.html">Engine::Hook</a> : <span class="keyword">public</span> QObject {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  Q_OBJECT</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keyword">enum class</span> HookState { unproductive, productive };</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">   29</a></span>&#160;  <span class="keyword">enum class</span> <a class="code" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a> { X_MOUSE_KEYBOARD, X_MOUSE, X_KEYBOARD, audio, none };</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="classEngine_1_1Hook.html#a8e52a70716ef323e93cb08a524b56196">Hook</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="classEngine_1_1Hook.html#acb7976010a5d553afc4fe4e1d7d22814">~Hook</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> start() = 0;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> end() = 0;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> pause() = 0;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> update() = 0;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> resetState() = 0;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">static</span> <a class="code" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a> <a class="code" href="classEngine_1_1Hook.html#a6b05006ac5fd4ca9fa404ea7bd533407">intToListenerType</a>(<span class="keywordtype">int</span> enumToInt);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keyword">virtual</span> Hook::HookState startHook() = 0;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classEngine_1_1Hook.html#ae2dd7072eaaa340c56d078bcdd745b90">setState</a>(HookState);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  HookState <a class="code" href="classEngine_1_1Hook.html#a58e34bb7028ded312af197bee03b66b2">getState</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  Hook::HookState state;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keyword">friend</span> QDataStream &amp;<a class="code" href="classEngine_1_1Hook.html#aa2462a3fa67873c91ed1ca8aa0758f24">operator&lt;&lt;</a>(QDataStream &amp;out, <span class="keyword">const</span> <a class="code" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a> &amp;newListener);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keyword">friend</span> QDataStream &amp;<a class="code" href="classEngine_1_1Hook.html#a4aa17376c98ca29942fe93b5886bb055">operator&gt;&gt;</a>(QDataStream &amp;in, <a class="code" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a> &amp;newListener);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;signals:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">void</span> productive();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">void</span> unProductive();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif // LISTENER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassEngine_1_1Hook_html_aa2462a3fa67873c91ed1ca8aa0758f24"><div class="ttname"><a href="classEngine_1_1Hook.html#aa2462a3fa67873c91ed1ca8aa0758f24">Engine::Hook::operator&lt;&lt;</a></div><div class="ttdeci">friend QDataStream &amp; operator&lt;&lt;(QDataStream &amp;out, const HookType &amp;newListener)</div><div class="ttdoc">operator &lt;&lt; I'm really sorry about this ugiliness. Apparently, as far as I know, C++ wants me to do i...</div></div>
-<div class="ttc" id="aclassEngine_1_1Hook_html_a6b05006ac5fd4ca9fa404ea7bd533407"><div class="ttname"><a href="classEngine_1_1Hook.html#a6b05006ac5fd4ca9fa404ea7bd533407">Engine::Hook::intToListenerType</a></div><div class="ttdeci">static HookType intToListenerType(int enumToInt)</div><div class="ttdoc">Hook::intToListenerType.</div><div class="ttdef"><b>Definition:</b> Hook.cpp:20</div></div>
-<div class="ttc" id="aclassEngine_1_1Hook_html_aa0103c6a2787b5992ba1ce98140f29ce"><div class="ttname"><a href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Engine::Hook::HookType</a></div><div class="ttdeci">HookType</div><div class="ttdoc">The HookType enum This enum used for Timer to know which listener it is going to instantiate.</div><div class="ttdef"><b>Definition:</b> Hook.h:31</div></div>
-<div class="ttc" id="aclassEngine_1_1Hook_html_a4aa17376c98ca29942fe93b5886bb055"><div class="ttname"><a href="classEngine_1_1Hook.html#a4aa17376c98ca29942fe93b5886bb055">Engine::Hook::operator&gt;&gt;</a></div><div class="ttdeci">friend QDataStream &amp; operator&gt;&gt;(QDataStream &amp;in, HookType &amp;newListener)</div><div class="ttdoc">operator &gt;&gt; I'm really sorry about this ugiliness. Apparently, as far as I know, C++ wants me to do i...</div><div class="ttdef"><b>Definition:</b> Hook.h:84</div></div>
-<div class="ttc" id="aclassEngine_1_1Hook_html_a58e34bb7028ded312af197bee03b66b2"><div class="ttname"><a href="classEngine_1_1Hook.html#a58e34bb7028ded312af197bee03b66b2">Engine::Hook::getState</a></div><div class="ttdeci">HookState getState()</div><div class="ttdoc">Engine::Hook::getState Returns current state of the Hook, unproductive or productive.</div><div class="ttdef"><b>Definition:</b> Hook.cpp:50</div></div>
-<div class="ttc" id="aclassEngine_1_1Hook_html"><div class="ttname"><a href="classEngine_1_1Hook.html">Engine::Hook</a></div><div class="ttdoc">Engine::Hook class.</div><div class="ttdef"><b>Definition:</b> Hook.h:20</div></div>
-<div class="ttc" id="anamespaceudata_html_a575548cd96a588cd2221b6bb897e1e16"><div class="ttname"><a href="namespaceudata.html#a575548cd96a588cd2221b6bb897e1e16">udata::operator&lt;&lt;</a></div><div class="ttdeci">QDataStream &amp; operator&lt;&lt;(QDataStream &amp;out, const CommitmentFrequency &amp;)</div><div class="ttdoc">udata::operator &lt;&lt; This writes an interval to a data stream(file).</div><div class="ttdef"><b>Definition:</b> Commitment.cpp:188</div></div>
-<div class="ttc" id="aclassEngine_1_1Hook_html_a8e52a70716ef323e93cb08a524b56196"><div class="ttname"><a href="classEngine_1_1Hook.html#a8e52a70716ef323e93cb08a524b56196">Engine::Hook::Hook</a></div><div class="ttdeci">Hook()</div><div class="ttdoc">Engine::Hook::Hook default constructor.</div><div class="ttdef"><b>Definition:</b> Hook.cpp:9</div></div>
-<div class="ttc" id="aclassEngine_1_1Hook_html_ae2dd7072eaaa340c56d078bcdd745b90"><div class="ttname"><a href="classEngine_1_1Hook.html#ae2dd7072eaaa340c56d078bcdd745b90">Engine::Hook::setState</a></div><div class="ttdeci">void setState(HookState)</div><div class="ttdoc">Engine::Hook::setState.</div><div class="ttdef"><b>Definition:</b> Hook.cpp:37</div></div>
-<div class="ttc" id="anamespaceudata_html_ac36ffc5e1d40fcfd4cbfc7d251d62e91"><div class="ttname"><a href="namespaceudata.html#ac36ffc5e1d40fcfd4cbfc7d251d62e91">udata::operator&gt;&gt;</a></div><div class="ttdeci">QDataStream &amp; operator&gt;&gt;(QDataStream &amp;in, CommitmentFrequency &amp;)</div><div class="ttdoc">udata::operator &gt;&gt; This gathers all data from the data stream and wirites it to the in-memory Interva...</div><div class="ttdef"><b>Definition:</b> Commitment.cpp:202</div></div>
-<div class="ttc" id="aclassEngine_1_1Hook_html_acb7976010a5d553afc4fe4e1d7d22814"><div class="ttname"><a href="classEngine_1_1Hook.html#acb7976010a5d553afc4fe4e1d7d22814">Engine::Hook::~Hook</a></div><div class="ttdeci">~Hook()</div><div class="ttdoc">Hook::~Hook.</div><div class="ttdef"><b>Definition:</b> Hook.cpp:29</div></div>
+<div class="ttc" id="aclassEngine_1_1Hook_html_aa2462a3fa67873c91ed1ca8aa0758f24"><div class="ttname"><a href="classEngine_1_1Hook.html#aa2462a3fa67873c91ed1ca8aa0758f24">Engine::Hook::operator&lt;&lt;</a></div><div class="ttdeci">friend QDataStream &amp; operator&lt;&lt;(QDataStream &amp;out, const HookType &amp;newListener)</div><div class="ttdoc">operator &lt;&lt;</div></div>
+<div class="ttc" id="aclassEngine_1_1Hook_html_a6b05006ac5fd4ca9fa404ea7bd533407"><div class="ttname"><a href="classEngine_1_1Hook.html#a6b05006ac5fd4ca9fa404ea7bd533407">Engine::Hook::intToListenerType</a></div><div class="ttdeci">static HookType intToListenerType(int enumToInt)</div><div class="ttdoc">Hook::intToListenerType safely converts an integer into a HookType enum.</div><div class="ttdef"><b>Definition:</b> Hook.cpp:26</div></div>
+<div class="ttc" id="aclassEngine_1_1Hook_html_aa0103c6a2787b5992ba1ce98140f29ce"><div class="ttname"><a href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Engine::Hook::HookType</a></div><div class="ttdeci">HookType</div><div class="ttdoc">The HookType enum This enum used for Timer to know which listener it is going to instantiate.</div><div class="ttdef"><b>Definition:</b> Hook.h:29</div></div>
+<div class="ttc" id="aclassEngine_1_1Hook_html_a4aa17376c98ca29942fe93b5886bb055"><div class="ttname"><a href="classEngine_1_1Hook.html#a4aa17376c98ca29942fe93b5886bb055">Engine::Hook::operator&gt;&gt;</a></div><div class="ttdeci">friend QDataStream &amp; operator&gt;&gt;(QDataStream &amp;in, HookType &amp;newListener)</div><div class="ttdoc">operator &gt;&gt;</div></div>
+<div class="ttc" id="aclassEngine_1_1Hook_html_a58e34bb7028ded312af197bee03b66b2"><div class="ttname"><a href="classEngine_1_1Hook.html#a58e34bb7028ded312af197bee03b66b2">Engine::Hook::getState</a></div><div class="ttdeci">HookState getState()</div><div class="ttdoc">Engine::Hook::getState Returns current state of the Hook, unproductive or productive.</div><div class="ttdef"><b>Definition:</b> Hook.cpp:56</div></div>
+<div class="ttc" id="aclassEngine_1_1Hook_html"><div class="ttname"><a href="classEngine_1_1Hook.html">Engine::Hook</a></div><div class="ttdoc">The Engine::Hook class is the base class for all of the hooks on Tasker. It provides a stateful(with ...</div><div class="ttdef"><b>Definition:</b> Hook.h:18</div></div>
+<div class="ttc" id="aclassEngine_1_1Hook_html_a8e52a70716ef323e93cb08a524b56196"><div class="ttname"><a href="classEngine_1_1Hook.html#a8e52a70716ef323e93cb08a524b56196">Engine::Hook::Hook</a></div><div class="ttdeci">Hook()</div><div class="ttdoc">Engine::Hook::Hook.</div><div class="ttdef"><b>Definition:</b> Hook.cpp:8</div></div>
+<div class="ttc" id="aclassEngine_1_1Hook_html_ae2dd7072eaaa340c56d078bcdd745b90"><div class="ttname"><a href="classEngine_1_1Hook.html#ae2dd7072eaaa340c56d078bcdd745b90">Engine::Hook::setState</a></div><div class="ttdeci">void setState(HookState)</div><div class="ttdoc">Engine::Hook::setState.</div><div class="ttdef"><b>Definition:</b> Hook.cpp:43</div></div>
+<div class="ttc" id="aclassEngine_1_1Hook_html_acb7976010a5d553afc4fe4e1d7d22814"><div class="ttname"><a href="classEngine_1_1Hook.html#acb7976010a5d553afc4fe4e1d7d22814">Engine::Hook::~Hook</a></div><div class="ttdeci">~Hook()</div><div class="ttdoc">Hook::~Hook.</div><div class="ttdef"><b>Definition:</b> Hook.cpp:35</div></div>
 <div class="ttc" id="anamespaceEngine_html"><div class="ttname"><a href="namespaceEngine.html">Engine</a></div><div class="ttdoc">The Engine namespace has all of the Hardware Hooks and classes that make up the &quot;Engine&quot; of Tasker Wh...</div><div class="ttdef"><b>Definition:</b> AudioDevice.h:16</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -47,10 +47,6 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
   format.setCodec("audio/pcm");
   format.setByteOrder(QAudioFormat::LittleEndian);
   format.setSampleType(QAudioFormat::UnSignedInt);
-
-  // destinationFile.setFileName("/tmp/test.raw");
-  // destinationFile.open( QIODevice::WriteOnly | QIODevice::Truncate );
-
   audioDevice = std::make_unique<AudioDevice>(format);
   audioDevice->open(QIODevice::WriteOnly);
 
@@ -59,7 +55,6 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
   QList<QAudioDeviceInfo> devices =
       QAudioDeviceInfo::availableDevices(QAudio::Mode::AudioInput);
 
-  qDebug() << "Available Devices:";
   for (QAudioDeviceInfo i : devices) {
     qDebug() << "device info:" << i.isNull();
   }
@@ -70,22 +65,11 @@ AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
 
   qAudioInput = std::make_unique<QAudioInput>(format, this);
 
-  // show device name on console
-  qDebug() << info.deviceName();
-
   qAudioInput->start(audioDevice.get());
   qDebug() << "audio state-->" << qAudioInput->state();
   qAudioInput->setVolume(0.0);
   audioDevice->setMinAmplitude(audioDevice->getDeviceLevel());
   qAudioInput->setVolume(1.0);
-}
-
-/**
- * @brief AudioMachine::~AudioMachine
- */
-AudioMachine::~AudioMachine() {
-  //    delete qAudioInput;
-  //    delete audioDevice;
 }
 
 /**
@@ -132,14 +116,8 @@ void AudioMachine::handleStateChanged(QAudio::State newState) {
 void AudioMachine::stopRecording() {
   qAudioInput->stop();
   audioDevice->close();
-
-  //    delete qAudioInput;
-  //    qAudioInput = nullptr;
-  //    audioDevice = nullptr;
 }
 bool AudioMachine::isAudioDeviceValid() {
-  qDebug() << "isAudioDeviceValid#1";
   audioDevice->isOpen();
-  qDebug() << "isAudioDeviceValid#2";
   return audioDevice->isOpen();
 }
