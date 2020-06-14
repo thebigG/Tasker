@@ -35,7 +35,8 @@ using Engine::AudioDevice;
 using Engine::AudioMachine;
 
 /**
- * @brief AudioMachine::AudioMachine
+ * @brief AudioMachine::AudioMachine initializes the AudioDevice and all other
+ * state(such as audio formats) to enable the AudioDevice to function properly.
  */
 AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
   QAudioFormat format;
@@ -117,7 +118,9 @@ void AudioMachine::stopRecording() {
   qAudioInput->stop();
   audioDevice->close();
 }
-bool AudioMachine::isAudioDeviceValid() {
-  audioDevice->isOpen();
-  return audioDevice->isOpen();
-}
+/**
+ * @brief AudioMachine::isAudioDeviceValid if the AudioDevice is open, then this
+ * function returns true. Otherwise, it returns false.
+ * @return
+ */
+bool AudioMachine::isAudioDeviceValid() { return audioDevice->isOpen(); }

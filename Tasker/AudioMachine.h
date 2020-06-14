@@ -10,7 +10,10 @@ class AudioMachine;
 }
 
 /**
- * @brief The Engine::AudioMachine class
+ * @brief The Engine::AudioMachine class bundles and abstracts the details of
+ * AudioDevice to make the audio device(such as built-in microphone) into a
+ * stateful machine. It also makes it easier to interface with AudioDevice by
+ * providing methods such as stopRecording().
  */
 class Engine::AudioMachine : public QObject {
   Q_OBJECT

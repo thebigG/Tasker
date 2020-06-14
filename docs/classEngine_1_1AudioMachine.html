@@ -76,7 +76,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classEngine_1_1AudioMachine.html" title="The Engine::AudioMachine class.">Engine::AudioMachine</a> class.  
+<p>The <a class="el" href="classEngine_1_1AudioMachine.html" title="The Engine::AudioMachine class bundles and abstracts the details of AudioDevice to make the audio dev...">Engine::AudioMachine</a> class bundles and abstracts the details of <a class="el" href="classEngine_1_1AudioDevice.html" title="The Engine::AudioDevice class represents the audio hardware device of this machine....">AudioDevice</a> to make the audio device(such as built-in microphone) into a stateful machine. It also makes it easier to interface with <a class="el" href="classEngine_1_1AudioDevice.html" title="The Engine::AudioDevice class represents the audio hardware device of this machine....">AudioDevice</a> by providing methods such as <a class="el" href="classEngine_1_1AudioMachine.html#a7244c5562166176dae62051cf3831fc6" title="AudioMachine::stopRecording.">stopRecording()</a>.  
  <a href="classEngine_1_1AudioMachine.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="AudioMachine_8h_source.html">AudioMachine.h</a>&gt;</code></p>
@@ -101,10 +101,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a71d74ab3c8315c83a686c8b1d871f8bb"><td class="memItemLeft" align="right" valign="top"><a id="a71d74ab3c8315c83a686c8b1d871f8bb"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioMachine.html#a71d74ab3c8315c83a686c8b1d871f8bb">AudioMachine</a> ()</td></tr>
-<tr class="memdesc:a71d74ab3c8315c83a686c8b1d871f8bb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioMachine.html#a71d74ab3c8315c83a686c8b1d871f8bb" title="AudioMachine::AudioMachine.">AudioMachine::AudioMachine</a>. <br /></td></tr>
+<tr class="memdesc:a71d74ab3c8315c83a686c8b1d871f8bb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioMachine.html#a71d74ab3c8315c83a686c8b1d871f8bb" title="AudioMachine::AudioMachine initializes the AudioDevice and all other state(such as audio formats) to ...">AudioMachine::AudioMachine</a> initializes the <a class="el" href="classEngine_1_1AudioDevice.html" title="The Engine::AudioDevice class represents the audio hardware device of this machine....">AudioDevice</a> and all other state(such as audio formats) to enable the <a class="el" href="classEngine_1_1AudioDevice.html" title="The Engine::AudioDevice class represents the audio hardware device of this machine....">AudioDevice</a> to function properly. <br /></td></tr>
 <tr class="separator:a71d74ab3c8315c83a686c8b1d871f8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab766b67226f1e33e60c3a6e3383f24e6"><td class="memItemLeft" align="right" valign="top"><a id="ab766b67226f1e33e60c3a6e3383f24e6"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isAudioDeviceValid</b> ()</td></tr>
+<tr class="memitem:ab766b67226f1e33e60c3a6e3383f24e6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioMachine.html#ab766b67226f1e33e60c3a6e3383f24e6">isAudioDeviceValid</a> ()</td></tr>
+<tr class="memdesc:ab766b67226f1e33e60c3a6e3383f24e6"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioMachine.html#ab766b67226f1e33e60c3a6e3383f24e6" title="AudioMachine::isAudioDeviceValid if the AudioDevice is open, then this function returns true....">AudioMachine::isAudioDeviceValid</a> if the <a class="el" href="classEngine_1_1AudioDevice.html" title="The Engine::AudioDevice class represents the audio hardware device of this machine....">AudioDevice</a> is open, then this function returns true. Otherwise, it returns false.  <a href="classEngine_1_1AudioMachine.html#ab766b67226f1e33e60c3a6e3383f24e6">More...</a><br /></td></tr>
 <tr class="separator:ab766b67226f1e33e60c3a6e3383f24e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3132d25e5628be1877f72f185c203490"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEngine_1_1AudioDevice.html">AudioDevice</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioMachine.html#a3132d25e5628be1877f72f185c203490">getAudioDevice</a> ()</td></tr>
 <tr class="memdesc:a3132d25e5628be1877f72f185c203490"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioMachine.html#a3132d25e5628be1877f72f185c203490" title="AudioMachine::getAudioDevice.">AudioMachine::getAudioDevice</a>.  <a href="classEngine_1_1AudioMachine.html#a3132d25e5628be1877f72f185c203490">More...</a><br /></td></tr>
@@ -123,7 +123,7 @@ std::unique_ptr&lt; QAudioInput &gt;&#160;</td><td class="memItemRight" valign="
 <tr class="separator:a9021da28cb688536b414b3d827ab5ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classEngine_1_1AudioMachine.html" title="The Engine::AudioMachine class.">Engine::AudioMachine</a> class. </p>
+<div class="textblock"><p>The <a class="el" href="classEngine_1_1AudioMachine.html" title="The Engine::AudioMachine class bundles and abstracts the details of AudioDevice to make the audio dev...">Engine::AudioMachine</a> class bundles and abstracts the details of <a class="el" href="classEngine_1_1AudioDevice.html" title="The Engine::AudioDevice class represents the audio hardware device of this machine....">AudioDevice</a> to make the audio device(such as built-in microphone) into a stateful machine. It also makes it easier to interface with <a class="el" href="classEngine_1_1AudioDevice.html" title="The Engine::AudioDevice class represents the audio hardware device of this machine....">AudioDevice</a> by providing methods such as <a class="el" href="classEngine_1_1AudioMachine.html#a7244c5562166176dae62051cf3831fc6" title="AudioMachine::stopRecording.">stopRecording()</a>. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a3132d25e5628be1877f72f185c203490"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3132d25e5628be1877f72f185c203490">&#9670;&nbsp;</a></span>getAudioDevice()</h2>
@@ -196,6 +196,26 @@ std::unique_ptr&lt; QAudioInput &gt;&#160;</td><td class="memItemRight" valign="
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ab766b67226f1e33e60c3a6e3383f24e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab766b67226f1e33e60c3a6e3383f24e6">&#9670;&nbsp;</a></span>isAudioDeviceValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool AudioMachine::isAudioDeviceValid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classEngine_1_1AudioMachine.html#ab766b67226f1e33e60c3a6e3383f24e6" title="AudioMachine::isAudioDeviceValid if the AudioDevice is open, then this function returns true....">AudioMachine::isAudioDeviceValid</a> if the <a class="el" href="classEngine_1_1AudioDevice.html" title="The Engine::AudioDevice class represents the audio hardware device of this machine....">AudioDevice</a> is open, then this function returns true. Otherwise, it returns false. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>

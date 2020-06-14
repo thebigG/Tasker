@@ -22,7 +22,8 @@ CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
   ui->frequencyTimeQLineEdit->setValidator(&validator);
   ui->dateStartQDateEdit->setMinimumDate(QDate::currentDate());
   ui->dateStartQDateEdit->setMaximumDate(QDate::currentDate());
-  if (getType() == udata::CommitmentType::WEEKLY) {
+  if (getType() == udata::CommitmentType::WEEKLY ||
+      getType() == udata::CommitmentType::EVERDAY) {
     ui->dateEndQDateEdit->setMinimumDate(
         QDate::currentDate().addDays(WEEK_SIZE));
   }
@@ -176,6 +177,7 @@ udata::CommitmentFrequency CreateCommitmentQWidget::getInterval() {
 
   interval.goal = size;
   interval.frequency = ui->frequencyQComboBox->currentIndex() + 1;
+  qDebug() << "interval.frequency" << interval.frequency;
   switch (getType()) {
   case udata::CommitmentType::WEEKLY:
     interval.timeWindowSize = WEEK_SIZE;
@@ -193,7 +195,7 @@ udata::CommitmentType CreateCommitmentQWidget::getType() {
     return udata::CommitmentType::WEEKLY;
     break;
   case 1:
-    return udata::CommitmentType::MONTHLY;
+    return udata::CommitmentType::EVERDAY;
     break;
   default:
     return udata::CommitmentType::Custom;

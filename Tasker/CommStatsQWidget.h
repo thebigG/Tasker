@@ -121,7 +121,7 @@ private:
   //    QVBoxLayout layout{};
   CreateCommitmentQWidget createCommimentWindow;
   NewSessionQWidget newSessionQWidget;
-  udata::CommitmentSnaphot snapshot;
+  CommitmentSnaphot snapshot;
   void updateSnapshot();
   Perf::PerfTimer newPerfTimer{};
 };

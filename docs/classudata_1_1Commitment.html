@@ -77,7 +77,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">udata::Commitment</a> class A <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> is a commitment that the user commits to. A <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> is composed of TimeWindows called "commitmentWindows". Each one of these describes a time range/span for a list of "sessions". Each one of these sessions is composed of a task the user decides to do as part of the commitment with a frequency that is represented by interval, which is a <a class="el" href="structudata_1_1CommitmentFrequency.html" title="The util::CommitmentFrequency struct represents \ the time the user aims to spend per session(time) o...">CommitmentFrequency</a> type.  
+<p>The <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">udata::Commitment</a> class A <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> is a commitment that the user commits to. A <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> is composed of TimeWindows called "commitmentWindows". Each one of these describes a time range/span for a list of "sessions". Each one of these sessions is composed of a task the user decides to do as part of the commitment with a frequency that is represented by interval, which is a <a class="el" href="structudata_1_1CommitmentFrequency.html" title="The util::CommitmentFrequency struct represents the time the user aims to spend per session(time) on ...">CommitmentFrequency</a> type.  
  <a href="classudata_1_1Commitment.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Commitment_8h_source.html">Commitment.h</a>&gt;</code></p>
@@ -88,8 +88,8 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1Commitment.html#a03a4562c94749bce3a53a9a5b0e22a9f">Commitment</a> ()</td></tr>
 <tr class="memdesc:a03a4562c94749bce3a53a9a5b0e22a9f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#a03a4562c94749bce3a53a9a5b0e22a9f" title="Commitment::Commitment.">Commitment::Commitment</a>. <br /></td></tr>
 <tr class="separator:a03a4562c94749bce3a53a9a5b0e22a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0fb952e721d95960fdce3a3f3b1f917"><td class="memItemLeft" align="right" valign="top"><a id="ae0fb952e721d95960fdce3a3f3b1f917"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Commitment</b> (QString newName, QDate newStart, QDate newEnd, <a class="el" href="structudata_1_1CommitmentFrequency.html">udata::CommitmentFrequency</a>, <a class="el" href="namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14">CommitmentType</a> type, bool noEndDate)</td></tr>
+<tr class="memitem:ae0fb952e721d95960fdce3a3f3b1f917"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1Commitment.html#ae0fb952e721d95960fdce3a3f3b1f917">Commitment</a> (QString newName, QDate newStart, QDate newEnd, <a class="el" href="structudata_1_1CommitmentFrequency.html">udata::CommitmentFrequency</a>, <a class="el" href="namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14">CommitmentType</a> type, bool noEndDate)</td></tr>
+<tr class="memdesc:ae0fb952e721d95960fdce3a3f3b1f917"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#a03a4562c94749bce3a53a9a5b0e22a9f" title="Commitment::Commitment.">Commitment::Commitment</a> Creates a new commitment. This constructor tries its best to solve any date conflicts such as dateStart being greater than dateEnd, which should not happen. It also updates all the <a class="el" href="structudata_1_1TimeWindow.html" title="The TimeWindow struct represents a span of time(such as a week) that the user has a number of tasks(d...">TimeWindow</a> objects in commitment so that the data is up to date with the current date of the machine.  <a href="classudata_1_1Commitment.html#ae0fb952e721d95960fdce3a3f3b1f917">More...</a><br /></td></tr>
 <tr class="separator:ae0fb952e721d95960fdce3a3f3b1f917"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeef5f3304ec35bc1f88f29e68f5b04d7"><td class="memItemLeft" align="right" valign="top">QDate &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1Commitment.html#aeef5f3304ec35bc1f88f29e68f5b04d7">getDateStart</a> ()</td></tr>
 <tr class="memdesc:aeef5f3304ec35bc1f88f29e68f5b04d7"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#aeef5f3304ec35bc1f88f29e68f5b04d7" title="Commitment::getDateStart.">Commitment::getDateStart</a>.  <a href="classudata_1_1Commitment.html#aeef5f3304ec35bc1f88f29e68f5b04d7">More...</a><br /></td></tr>
@@ -104,11 +104,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:adec931bfbfd296b001ba7031ef2ea49f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#adec931bfbfd296b001ba7031ef2ea49f" title="Commitment::setDateEnd.">Commitment::setDateEnd</a>.  <a href="classudata_1_1Commitment.html#adec931bfbfd296b001ba7031ef2ea49f">More...</a><br /></td></tr>
 <tr class="separator:adec931bfbfd296b001ba7031ef2ea49f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabc3ce4c59f6ea2e5348efd43f74adc8"><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="classudata_1_1Session.html">Session</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1Commitment.html#aabc3ce4c59f6ea2e5348efd43f74adc8">getAllSessions</a> ()</td></tr>
-<tr class="memdesc:aabc3ce4c59f6ea2e5348efd43f74adc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commitment::getSessions Get All of the sessions, across all of the commitmment <a class="el" href="structudata_1_1TimeWindow.html">TimeWindow</a> objects.  <a href="classudata_1_1Commitment.html#aabc3ce4c59f6ea2e5348efd43f74adc8">More...</a><br /></td></tr>
+<tr class="memdesc:aabc3ce4c59f6ea2e5348efd43f74adc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commitment::getSessions Get All of the sessions, across all of the commitmment <a class="el" href="structudata_1_1TimeWindow.html" title="The TimeWindow struct represents a span of time(such as a week) that the user has a number of tasks(d...">TimeWindow</a> objects.  <a href="classudata_1_1Commitment.html#aabc3ce4c59f6ea2e5348efd43f74adc8">More...</a><br /></td></tr>
 <tr class="separator:aabc3ce4c59f6ea2e5348efd43f74adc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a014722d5f45d7ae791a475b76fd24047"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1Commitment.html#a014722d5f45d7ae791a475b76fd24047">setSessions</a> (QVector&lt; <a class="el" href="classudata_1_1Session.html">udata::Session</a> &gt; value)</td></tr>
-<tr class="memdesc:a014722d5f45d7ae791a475b76fd24047"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#a014722d5f45d7ae791a475b76fd24047" title="Commitment::setSessions.">Commitment::setSessions</a>.  <a href="classudata_1_1Commitment.html#a014722d5f45d7ae791a475b76fd24047">More...</a><br /></td></tr>
-<tr class="separator:a014722d5f45d7ae791a475b76fd24047"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09ce12dc9119e4d49f0da2b04ae1f866"><td class="memItemLeft" align="right" valign="top"><a id="a09ce12dc9119e4d49f0da2b04ae1f866"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setName</b> (QString)</td></tr>
 <tr class="separator:a09ce12dc9119e4d49f0da2b04ae1f866"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,7 +126,7 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>summary</b> () con
 <tr class="separator:a01fc8e793c5cbf39e97d81a5669c897c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc40989834c99c22a09f7723bf2e54bc"><td class="memItemLeft" align="right" valign="top"><a id="abc40989834c99c22a09f7723bf2e54bc"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1Commitment.html#abc40989834c99c22a09f7723bf2e54bc">updateCommitmentWindows</a> ()</td></tr>
-<tr class="memdesc:abc40989834c99c22a09f7723bf2e54bc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#a01fc8e793c5cbf39e97d81a5669c897c" title="Commitment::updateCommitmentWindows I don&#39;t think this method makes a lot of sense....">Commitment::updateCommitmentWindows</a> Updates the current <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> Time Windows by adding necessary ones to the internal QVector, if needed. For example; Imagine Alice sets a commitment to write 30 minutes four times a week. Also assume that she goes missing for three weeks on vacation and comes back to Tasker. This method, which is called when Tasker starts on loadUser(), will update all of those three missing CommitmentWindows, which is 3 in this case(three weeks). This would of course also be very useful when a <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> Window is closed; in the beginning of a new week, a new <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> <a class="el" href="structudata_1_1TimeWindow.html">TimeWindow</a> is added that will be closed in seven more days, assuming that this is a weekly commitment of course. <br /></td></tr>
+<tr class="memdesc:abc40989834c99c22a09f7723bf2e54bc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#a01fc8e793c5cbf39e97d81a5669c897c" title="Commitment::updateCommitmentWindows I don&#39;t think this method makes a lot of sense....">Commitment::updateCommitmentWindows</a> Updates the current <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> Time Windows by adding necessary ones to the internal QVector, if needed. For example; Imagine Alice sets a commitment to write 30 minutes four times a week. Also assume that she goes missing for three weeks on vacation and comes back to Tasker. This method, which is called when Tasker starts on loadUser(), will update all of those three missing CommitmentWindows, which is 3 in this case(three weeks). This would of course also be very useful when a <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> Window is closed; in the beginning of a new week, a new <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> <a class="el" href="structudata_1_1TimeWindow.html" title="The TimeWindow struct represents a span of time(such as a week) that the user has a number of tasks(d...">TimeWindow</a> is added that will be closed in seven more days, assuming that this is a weekly commitment of course. <br /></td></tr>
 <tr class="separator:abc40989834c99c22a09f7723bf2e54bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bc59a4e2ad37a353e0bbda1ec64fca2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1Commitment.html#a7bc59a4e2ad37a353e0bbda1ec64fca2">isDone</a> ()</td></tr>
 <tr class="memdesc:a7bc59a4e2ad37a353e0bbda1ec64fca2"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#a7bc59a4e2ad37a353e0bbda1ec64fca2" title="Commitment::isDone A commitment is considered &quot;done&quot; when all of its TimeWindows are &quot;closed&quot;,...">Commitment::isDone</a> A commitment is considered "done" when all of its TimeWindows are "closed", whether the user completed all of the tasks/sessions they commmited to or not. For example; suppose that Alice made a commitment called "Alice in
@@ -153,8 +150,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasEndDate</b> ()</td
 <tr class="memitem:ac71c5fdd97ec474d27d8f6e2e5f78f75"><td class="memItemLeft" align="right" valign="top"><a id="ac71c5fdd97ec474d27d8f6e2e5f78f75"></a>
 <a class="el" href="structudata_1_1CommitmentFrequency.html">CommitmentFrequency</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getFrequency</b> ()</td></tr>
 <tr class="separator:ac71c5fdd97ec474d27d8f6e2e5f78f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ded385dd2c32a49c6c4b7d74ea5c5a9"><td class="memItemLeft" align="right" valign="top"><a id="a2ded385dd2c32a49c6c4b7d74ea5c5a9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setCommitmentWindows</b> (QVector&lt; <a class="el" href="structudata_1_1TimeWindow.html">TimeWindow</a> &gt; &amp;newCommitmentWindows)</td></tr>
+<tr class="memitem:a2ded385dd2c32a49c6c4b7d74ea5c5a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1Commitment.html#a2ded385dd2c32a49c6c4b7d74ea5c5a9">setCommitmentWindows</a> (QVector&lt; <a class="el" href="structudata_1_1TimeWindow.html">TimeWindow</a> &gt; &amp;newCommitmentWindows)</td></tr>
+<tr class="memdesc:a2ded385dd2c32a49c6c4b7d74ea5c5a9"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1Commitment.html#a2ded385dd2c32a49c6c4b7d74ea5c5a9" title="Commitment::setCommitmentWindows.">Commitment::setCommitmentWindows</a>.  <a href="classudata_1_1Commitment.html#a2ded385dd2c32a49c6c4b7d74ea5c5a9">More...</a><br /></td></tr>
 <tr class="separator:a2ded385dd2c32a49c6c4b7d74ea5c5a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a413287bc929c0ce4c82d6bc93e2eb824"><td class="memItemLeft" align="right" valign="top"><a id="a413287bc929c0ce4c82d6bc93e2eb824"></a>
 QVector&lt; <a class="el" href="structudata_1_1TimeWindow.html">TimeWindow</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCommitmentWindows</b> ()</td></tr>
@@ -206,9 +203,75 @@ QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator
 <tr class="separator:a1699ac5d45641e0522076e5128eda798"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">udata::Commitment</a> class A <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> is a commitment that the user commits to. A <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> is composed of TimeWindows called "commitmentWindows". Each one of these describes a time range/span for a list of "sessions". Each one of these sessions is composed of a task the user decides to do as part of the commitment with a frequency that is represented by interval, which is a <a class="el" href="structudata_1_1CommitmentFrequency.html" title="The util::CommitmentFrequency struct represents \ the time the user aims to spend per session(time) o...">CommitmentFrequency</a> type. </p>
-<p>For example; Imagine Alice creates a commitment she calls, "Alice in Wonderland". In this commitment she decides to commit to that <a class="el" href="classudata_1_1Task.html" title="The udata::Task class This class repsents a task. It is used as part of a Session.">Task</a>, which is the task of writing. She decides she wants to do this for 30 minutes five times a week. Let's assume this commitment was started on 1 January, 1864 and Alice knew she would finish her book(commitment) on 26 November, 1865. This case woud look like this: <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> Name: "Alice in Winderland" Start date: January 1st, 1865, End Date: November 26, 1865, <a class="el" href="structudata_1_1CommitmentFrequency.html" title="The util::CommitmentFrequency struct represents \ the time the user aims to spend per session(time) o...">CommitmentFrequency</a>:{ time = 1800 //seconds, frequency = 5 //, timeWindowSize = 7 //in days }, commitmentWindows:{ 1st week(determined by timeWindowSize in <a class="el" href="structudata_1_1CommitmentFrequency.html" title="The util::CommitmentFrequency struct represents \ the time the user aims to spend per session(time) o...">CommitmentFrequency</a>, which is seven days):{ startDate = "January 1st, 1865", endDate = "January 7th, 1865" [Session1, Session2, SessionN...] }, 2nd week: { startDate = "January 8th, 1865", endDate = "January 14th, 1865" [Session1, Session2, SessionN...] } , ... nth Week(last week): { startDate = "November 20th, 1865" endDate = "November 26th, 1865 [Session1, Session2, SessionN...] } }, Type : CommitmentType::Weekly, noEndDate : false </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<div class="textblock"><p>The <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">udata::Commitment</a> class A <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> is a commitment that the user commits to. A <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> is composed of TimeWindows called "commitmentWindows". Each one of these describes a time range/span for a list of "sessions". Each one of these sessions is composed of a task the user decides to do as part of the commitment with a frequency that is represented by interval, which is a <a class="el" href="structudata_1_1CommitmentFrequency.html" title="The util::CommitmentFrequency struct represents the time the user aims to spend per session(time) on ...">CommitmentFrequency</a> type. </p>
+<p>For example; Imagine Alice creates a commitment she calls, "Alice in Wonderland". In this commitment she decides to commit to that <a class="el" href="classudata_1_1Task.html" title="The udata::Task class This class repsents a task. It is used as part of a Session.">Task</a>, which is the task of writing. She decides she wants to do this for 30 minutes five times a week. Let's assume this commitment was started on 1 January, 1864 and Alice knew she would finish her book(commitment) on 26 November, 1865. This case woud look like this: <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> Name: "Alice in Winderland" Start date: January 1st, 1865, End Date: November 26, 1865, <a class="el" href="structudata_1_1CommitmentFrequency.html" title="The util::CommitmentFrequency struct represents the time the user aims to spend per session(time) on ...">CommitmentFrequency</a>:{ time = 1800 //seconds, frequency = 5 //, timeWindowSize = 7 //in days }, commitmentWindows:{ 1st week(determined by timeWindowSize in <a class="el" href="structudata_1_1CommitmentFrequency.html" title="The util::CommitmentFrequency struct represents the time the user aims to spend per session(time) on ...">CommitmentFrequency</a>, which is seven days):{ startDate = "January 1st, 1865", endDate = "January 7th, 1865" [Session1, Session2, SessionN...] }, 2nd week: { startDate = "January 8th, 1865", endDate = "January 14th, 1865" [Session1, Session2, SessionN...] } , ... nth Week(last week): { startDate = "November 20th, 1865" endDate = "November 26th, 1865 [Session1, Session2, SessionN...] } }, Type : CommitmentType::Weekly, noEndDate : false </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae0fb952e721d95960fdce3a3f3b1f917"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0fb952e721d95960fdce3a3f3b1f917">&#9670;&nbsp;</a></span>Commitment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Commitment::Commitment </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>newName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QDate&#160;</td>
+          <td class="paramname"><em>newStart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QDate&#160;</td>
+          <td class="paramname"><em>newEnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structudata_1_1CommitmentFrequency.html">udata::CommitmentFrequency</a>&#160;</td>
+          <td class="paramname"><em>newFrequency</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14">CommitmentType</a>&#160;</td>
+          <td class="paramname"><em>newType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>newNoEndDate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classudata_1_1Commitment.html#a03a4562c94749bce3a53a9a5b0e22a9f" title="Commitment::Commitment.">Commitment::Commitment</a> Creates a new commitment. This constructor tries its best to solve any date conflicts such as dateStart being greater than dateEnd, which should not happen. It also updates all the <a class="el" href="structudata_1_1TimeWindow.html" title="The TimeWindow struct represents a span of time(such as a week) that the user has a number of tasks(d...">TimeWindow</a> objects in commitment so that the data is up to date with the current date of the machine. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newName</td><td>The name of this new commitment. </td></tr>
+    <tr><td class="paramname">newStart</td><td>The date this commitment started. If, for whatever reason, this date happens to be earlier than the current date of the machine, then the current date is fetched from the system and this parameter is overwritten. </td></tr>
+    <tr><td class="paramname">newEnd</td><td>The date this commitment will end, if it has an end date. </td></tr>
+    <tr><td class="paramname">newFrequency</td><td>The object that describes the frequency of this commitment(how many times a week the user will commit to this). </td></tr>
+    <tr><td class="paramname">newType</td><td>The type of commitment this is; WEEKLY, MONTHLY, etc. </td></tr>
+    <tr><td class="paramname">newNoEndDate</td><td>Decides whether or not this commitment has an enddate. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="aabc3ce4c59f6ea2e5348efd43f74adc8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aabc3ce4c59f6ea2e5348efd43f74adc8">&#9670;&nbsp;</a></span>getAllSessions()</h2>
 
@@ -224,7 +287,7 @@ QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator
       </table>
 </div><div class="memdoc">
 
-<p>Commitment::getSessions Get All of the sessions, across all of the commitmment <a class="el" href="structudata_1_1TimeWindow.html">TimeWindow</a> objects. </p>
+<p>Commitment::getSessions Get All of the sessions, across all of the commitmment <a class="el" href="structudata_1_1TimeWindow.html" title="The TimeWindow struct represents a span of time(such as a week) that the user has a number of tasks(d...">TimeWindow</a> objects. </p>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
@@ -307,8 +370,35 @@ QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator
 <p><a class="el" href="classudata_1_1Commitment.html#a7bc59a4e2ad37a353e0bbda1ec64fca2" title="Commitment::isDone A commitment is considered &quot;done&quot; when all of its TimeWindows are &quot;closed&quot;,...">Commitment::isDone</a> A commitment is considered "done" when all of its TimeWindows are "closed", whether the user completed all of the tasks/sessions they commmited to or not. For example; suppose that Alice made a commitment called "Alice in
 Wonderland" and she set out to write four times week for a whole month. Suppose her start date is "January 1st, 2020" and her end date is "January 30th, 2020". </p>
 <p>Also suppose she only wrote for two of those weeks. Whe she comes back to use Tasker on January 31st, the <a class="el" href="classudata_1_1Commitment.html" title="The udata::Commitment class A Commitment is a commitment that the user commits to....">Commitment</a> "Alice in Wonderland" will be considered "done". Meaning this function, in that case, will return true.</p>
-<dl class="section note"><dt>Note</dt><dd>Commitments that have noEndDate set to "true" are never considered "done". In such case, this function will always return "false". </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Commitments that have noEndDate set to "true" are never considered "done". In such case, this function will always return false. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>true if this commitment is "done". Otherwise, it returns false. </dd></dl>
+
+</div>
+</div>
+<a id="a2ded385dd2c32a49c6c4b7d74ea5c5a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ded385dd2c32a49c6c4b7d74ea5c5a9">&#9670;&nbsp;</a></span>setCommitmentWindows()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Commitment::setCommitmentWindows </td>
+          <td>(</td>
+          <td class="paramtype">QVector&lt; <a class="el" href="structudata_1_1TimeWindow.html">TimeWindow</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>newCommitmentWindows</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classudata_1_1Commitment.html#a2ded385dd2c32a49c6c4b7d74ea5c5a9" title="Commitment::setCommitmentWindows.">Commitment::setCommitmentWindows</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newCommitmentWindows</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>updates commitment windows if the date between this commitment and the system are out of sync. </dd></dl>
 
 </div>
 </div>
@@ -364,32 +454,6 @@ Wonderland" and she set out to write four times week for a whole month. Suppose 
 
 </div>
 </div>
-<a id="a014722d5f45d7ae791a475b76fd24047"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a014722d5f45d7ae791a475b76fd24047">&#9670;&nbsp;</a></span>setSessions()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Commitment::setSessions </td>
-          <td>(</td>
-          <td class="paramtype">QVector&lt; <a class="el" href="classudata_1_1Session.html">udata::Session</a> &gt;&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><a class="el" href="classudata_1_1Commitment.html#a014722d5f45d7ae791a475b76fd24047" title="Commitment::setSessions.">Commitment::setSessions</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">value</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a01fc8e793c5cbf39e97d81a5669c897c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a01fc8e793c5cbf39e97d81a5669c897c">&#9670;&nbsp;</a></span>updateCommitmentWindows()</h2>
 
@@ -436,7 +500,7 @@ Wonderland" and she set out to write four times week for a whole month. Suppose 
   </tr>
 </table>
 </div><div class="memdoc">
-<p>For now these are just a commitment's lifespan divided into weeks. But hopefully it's clear that this time window can also be something like a month, or an arbitray number like 3 days. Each <a class="el" href="structudata_1_1TimeWindow.html">TimeWindow</a> is the frame of time the user has to complete their sessions for that time period. For example;a commitment that is a once-a-week type will give the user a time window of seven days to complete that one session. Same goes for twice, thrice, four times a week, etc. </p>
+<p>For now these are just a commitment's lifespan divided into weeks. But hopefully it's clear that this time window can also be something like a month, or an arbitray number like 3 days. Each <a class="el" href="structudata_1_1TimeWindow.html" title="The TimeWindow struct represents a span of time(such as a week) that the user has a number of tasks(d...">TimeWindow</a> is the frame of time the user has to complete their sessions for that time period. For example;a commitment that is a once-a-week type will give the user a time window of seven days to complete that one session. Same goes for twice, thrice, four times a week, etc. </p>
 
 </div>
 </div>

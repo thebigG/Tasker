@@ -49,10 +49,6 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   commitmentMetaDataText.resize(100);
   beginDateText.resize(100);
   setSelectable(true);
-  //  this->ui->GoalQLabel->setAlignment(Qt::AlignCenter);
-  //  this->la
-  //  qDebug()<<""
-  //  snapshot.setMaximumSize(600, 600);
   qDebug() << "size of snapshot=" << snapshot.size();
   qDebug() << "size polocy of snapshot" << snapshot.sizePolicy();
   //  snapshot.setMaximumHeight(400);
@@ -349,26 +345,26 @@ void CommStatsQWidget::saveCurrentSession() {
 void CommStatsQWidget::updateCommitmentInfoStatsQWidget() {
   commitmentMetaDataText.fill(' ');
   QString frequencyString{};
-  //  frequencyString.reserve(20);
-  //  frequencyString.resize(20);
-  frequencyString.append(", ");
-  frequencyString.append(QString::number(
-      User::getInstance()->getCurrentCommitment().getFrequency().frequency));
   if (User::getInstance()->getCurrentCommitment().getType() ==
       udata::CommitmentType::WEEKLY) {
+
+    frequencyString.append(", ");
+    frequencyString.append(QString::number(
+        User::getInstance()->getCurrentCommitment().getFrequency().frequency));
     frequencyString.append(" time(s) a week.");
+
+  } else if (User::getInstance()->getCurrentCommitment().getType() ==
+             udata::CommitmentType::EVERDAY) {
+    frequencyString.append(", Everyday");
+
   } else {
     // Not supported at the moment
   }
-  qDebug() << "commitmentMetaDataText before format time-->"
-           << commitmentMetaDataText;
+
   util::formatTime(
       commitmentMetaDataText,
-
       User::getInstance()->getCurrentCommitment().getFrequency().goal,
       frequencyString, 0);
-  qDebug() << "commitmentMetaDataText after format time-->"
-           << commitmentMetaDataText;
   this->ui->goalQLabel->setText(commitmentMetaDataText);
 }
 void CommStatsQWidget::updateBeginDateQLabel() {

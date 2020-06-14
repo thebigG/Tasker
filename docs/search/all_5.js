@@ -28,5 +28,6 @@ var searchData=
   ['gettask_49',['getTask',['../classudata_1_1Session.html#adfed4db4a21fdbbf6f7df9d98b85c1de',1,'udata::Session']]],
   ['getui_50',['getUI',['../classCreateCommitmentQWidget.html#a358a37c2970a4c3a927f22ac084138c6',1,'CreateCommitmentQWidget']]],
   ['getunproductivetime_51',['getUnproductiveTime',['../classudata_1_1Session.html#a93effbdef92f43b20d36de1a339c6922',1,'udata::Session']]],
-  ['getusername_52',['getUsername',['../classudata_1_1UdataUtils.html#a2eba640e8505f89dc4dcfe6b5a585751',1,'udata::UdataUtils::getUsername()'],['../classudata_1_1User.html#aea638f36efa91dabfdb852b73b10b26a',1,'udata::User::getUsername()']]]
+  ['getusername_52',['getUsername',['../classudata_1_1UdataUtils.html#a2eba640e8505f89dc4dcfe6b5a585751',1,'udata::UdataUtils::getUsername()'],['../classudata_1_1User.html#aea638f36efa91dabfdb852b73b10b26a',1,'udata::User::getUsername()']]],
+  ['getweekdayindex_53',['getWeekDayIndex',['../classCommitmentSnaphot.html#a5613b929f39f2a2e1e007251671355fe',1,'CommitmentSnaphot']]]
 ];

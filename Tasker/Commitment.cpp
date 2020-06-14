@@ -11,12 +11,28 @@ using namespace udata;
  * @brief Commitment::Commitment
  */
 Commitment::Commitment() {}
-
+/**
+ * @brief Commitment::Commitment Creates a new commitment. This constructor
+ * tries its best to solve any date conflicts such as dateStart being greater
+ * than dateEnd, which should not happen. It also updates all the TimeWindow
+ * objects in commitment so that the data is up to date with the current date of
+ * the machine.
+ * @param newName The name of this new commitment.
+ * @param newStart The date this commitment started. If, for whatever reason,
+ * this date happens to be earlier than the current date of the machine, then
+ * the current date is fetched from the system and this parameter is
+ * overwritten.
+ * @param newEnd The date this commitment will end, if it has an end date.
+ * @param newFrequency The object that describes the frequency of this
+ * commitment(how many times a week the user will commit to this).
+ * @param newType The type of commitment this is; WEEKLY, MONTHLY, etc.
+ * @param newNoEndDate Decides whether or not this commitment has an enddate.
+ */
 Commitment::Commitment(QString newName, QDate newStart, QDate newEnd,
-                       udata::CommitmentFrequency newInterval,
+                       udata::CommitmentFrequency newFrequency,
                        CommitmentType newType, bool newNoEndDate)
     : name{newName}, dateStart{newStart}, dateEnd{newEnd},
-      frequency{newInterval},
+      frequency{newFrequency},
       commitmentWindows{}, Type{newType}, noEndDate{newNoEndDate} {
   if (dateStart < QDate::currentDate()) {
     dateStart = QDate::currentDate();
@@ -35,15 +51,17 @@ void Commitment::setFrequency(long long newTime, int newFrequency,
 }
 void Commitment::setFrequency(CommitmentFrequency newFrequency) {
   frequency = newFrequency;
-}
+} /**
+   * @brief Commitment::setCommitmentWindows
+   * @param newCommitmentWindows
+   * @note updates commitment windows if the date between this commitment and
+   * the system are out of sync.
+   */
 void Commitment::setCommitmentWindows(
     QVector<TimeWindow> &newCommitmentWindows) {
   for (auto windows : newCommitmentWindows) {
     commitmentWindows.append(windows);
   }
-  qDebug() << "setting windows on this commitment-->"
-           << commitmentWindows.length();
-  //    commitmentWindows = newCommitmentWindows;
 }
 void Commitment::setType(CommitmentType newType) { Type = newType; }
 CommitmentType &Commitment::getType() { return Type; }
@@ -88,12 +106,16 @@ void Commitment::updateCommitmentWindows(Session newSession) {
  */
 void Commitment::updateCommitmentWindows() {
   QDate currentDate = QDate::currentDate();
+  // If the user is done with this commitment, our work is done. There is no
+  // update needed.
   if (isDone()) {
-    if (name == "Test#100") {
-      qDebug() << "Test#100 is done!";
-    }
     return;
-  } else if (commitmentWindows.isEmpty()) {
+
+  }
+  // If there are no TimeWindow objects that are part of the commitment then we
+  // are constructing this Commitment for the first time and only need a single
+  // TimeWindow.
+  else if (commitmentWindows.isEmpty()) {
     commitmentWindows.push_back(TimeWindow{});
     TimeWindow &newWindow = commitmentWindows.last();
     newWindow.startDate.setDate(currentDate.year(), currentDate.month(),
@@ -103,6 +125,8 @@ void Commitment::updateCommitmentWindows() {
                               currentDate.day());
     newWindow.frequency = frequency.frequency;
   } else {
+    // If our TimeWindow objects are up to date, then we don't need to update
+    // them :)
     TimeWindow &lastWindow = commitmentWindows.last();
     int daysSinceLastCommitmentWindow =
         lastWindow.startDate.daysTo(QDate::currentDate());
@@ -112,7 +136,11 @@ void Commitment::updateCommitmentWindows() {
 
     else if (daysSinceLastCommitmentWindow < frequency.timeWindowSize) {
       return;
-    } else if (daysSinceLastCommitmentWindow >= frequency.timeWindowSize) {
+    }
+    // Imagine we had a weekly commitment
+    // If it has been more than week since the last time we added a TimeWindow,
+    // then we might need to add 1 or more TimeWindow objects to this commitment
+    else if (daysSinceLastCommitmentWindow >= frequency.timeWindowSize) {
       int NumberOfTimeWindows =
           daysSinceLastCommitmentWindow / frequency.timeWindowSize;
       currentDate = lastWindow.endDate.addDays(1);
@@ -134,15 +162,10 @@ void Commitment::updateCommitmentWindows() {
  * updated by this function.
  */
 void Commitment::update() {
-  //  updateCommitmentWindows();
-  qDebug() << "upating-->" << name;
   if (noEndDate) {
-    qDebug() << "update on Commitment#1";
     done = false;
     return;
   }
-  qDebug() << "update on Commitment#2";
-  //           << commitmentWindows.last().endDate << "," << dateEnd;
   if (QDate::currentDate() > dateEnd) {
     done = true;
   }
@@ -165,12 +188,11 @@ void Commitment::setDone(bool newDone) { done = newDone; }
  * Meaning this function, in that case, will return true.
  *
  * @note Commitments that have noEndDate set to "true" are never considered
- * "done". In such case, this function will always return "false".
+ * "done". In such case, this function will always return false.
  * @return true if this commitment is "done". Otherwise, it returns false.
  */
 bool Commitment::isDone() {
   update();
-  qDebug() << "isDone#1";
   return done;
 }
 QVector<TimeWindow> &Commitment::getCommitmentWindows() {
@@ -214,8 +236,6 @@ QDataStream &udata::operator>>(QDataStream &in,
  */
 QDataStream &udata::operator<<(QDataStream &out,
                                const udata::Commitment &newCommitment) {
-  qDebug() << "QDataStream &udata::operator<<(QDataStream &out, const "
-              "udata::Commitment &newCommitment)";
   out << newCommitment.name << newCommitment.dateStart << newCommitment.dateEnd
       << newCommitment.frequency << newCommitment.Type
       << newCommitment.noEndDate;
@@ -262,9 +282,6 @@ QDataStream &udata::operator>>(QDataStream &in,
   in >> newDone;
 
   newCommitment.name = commitmentName;
-  if (commitmentName == "Poetry") {
-    qDebug() << "number of time windows:" << newTimeWindows.length();
-  }
   newCommitment.dateStart = commitmentDateStart;
   newCommitment.dateEnd = commitmentDateEnd;
   newCommitment.noEndDate = newNoEndDate;
@@ -285,7 +302,6 @@ QDataStream &udata::operator<<(QDataStream &out,
     out << s;
   };
   out << newTimeWindow.frequency;
-  qDebug() << "newTimeWindow startDate=*****************#2";
   return out;
 }
 QDataStream &udata::operator>>(QDataStream &in, TimeWindow &newTimeWindow) {
@@ -294,8 +310,6 @@ QDataStream &udata::operator>>(QDataStream &in, TimeWindow &newTimeWindow) {
   int TimeWindowFrequency = 0;
   in >> newStartDate >> newEndDate;
   newTimeWindow.startDate = newStartDate;
-  qDebug()
-      << "newTimeWindow startDate=*****************#1"; //<<newTimeWindow.startDate;
   newTimeWindow.endDate = newEndDate;
   int sessionCount = 0;
   in >> sessionCount;
@@ -387,8 +401,3 @@ QString Commitment::summary() const {
   return summary;
 }
 CommitmentFrequency &Commitment::getFrequency() { return frequency; }
-/**
- * @brief Commitment::setSessions
- * @param value
- */
-void Commitment::setSessions(QVector<Session> value) {}

@@ -12,7 +12,6 @@ ubuntu_sources = [{'sourceline': 'deb http://archive.ubuntu.com/ubuntu/ bionic m
                   ]
 
 
-xhook_path = 'usr/share/applications/XListenerHook'
 run(["mkdir", "build"])
 
 run(["qmake", "../Tasker.pro"],  cwd="./build")

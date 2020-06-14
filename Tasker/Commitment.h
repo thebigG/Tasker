@@ -15,25 +15,33 @@
 #include <StatsUtility.h>
 
 /**
- *@brief The udata namespace has anything related to
- * data that persistent for users such as Commitment, Task, Session etc.
+ *@brief The udata namespace has any entities related to
+ * data that is persistent for users such as Commitment, Task, Session etc. All
+ *utilities such as UdataUtils are also part of this namespace.
  */
 namespace udata {
-
 class Commitment;
 enum class CommitmentType;
 struct CommitmentFrequency;
+/**
+ * @brief The TimeWindow struct represents a span of time(such as a week) that
+ * the user has a number of tasks(defined by frequency) to complete for this
+ * partifuclar TimeWindow, whether that'd be a week or a month. startDate is the
+ * beginning of the TimeWindow, while endDate is the end of that TimeWindow(the
+ * seventh day in the case of a week.)
+ */
 struct TimeWindow {
   QDate startDate;
   QDate endDate;
   QVector<Session> sessions;
   /**
    * @brief frequency
-   * The only times the client(Commitment) should to write to this field is
-   * when creating the TimeWindow for the first time and when a TimeWindow is
+   * The only times the client(Commitment) should be able to write to this field
+   * is when creating the TimeWindow for the first time, when a TimeWindow is
    * opened (isOpen() returns true) and not done yet(isDone() returns false )
    * and the frequency changes as a result of the Commitment's frequency
-   * changing. Otherwise, frequency should not be modified.
+   * changing. This frequency may also be modified by the user when they edit a
+   * commitment .Otherwise, frequency should not be modified.
    */
   int frequency;
   /**
@@ -66,20 +74,21 @@ QDataStream &operator<<(QDataStream &out, const TimeWindow &);
 QDataStream &operator>>(QDataStream &in, TimeWindow &);
 QDataStream &operator<<(QDataStream &out, const CommitmentType &);
 QDataStream &operator>>(QDataStream &in, CommitmentType &);
+
 } // namespace udata
 
 /**
  * @brief The udata::Commitment class
  */
-enum class udata::CommitmentType { WEEKLY, MONTHLY, Custom };
+enum class udata::CommitmentType { WEEKLY, MONTHLY, EVERDAY, Custom };
 /**
- * @brief The util::CommitmentFrequency struct represents \
- * the time the user aims to spend per session(time) on each commitment \
+ * @brief The util::CommitmentFrequency struct represents
+ * the time the user aims to spend per session(time) on each commitment
  * AND how often they intend to spend that amount of time on each specific
- *Task/Session of \ the commitment.
- *@note Beware that this struct DOES NOT strictly \
- * "define" whether the user has completed a "session" \
- * withtin a certain TimeWindow. \
+ *Task/Session of the commitment.
+ *@note Beware that this struct DOES NOT strictly
+ * "define" whether the user has completed a "session"
+ * withtin a certain TimeWindow.
  *For example; suppose Alice commits to write 30 minutes everyday.
  * In that case the struct would look like this
  * struct util:CommitmentFrequency
@@ -87,7 +96,7 @@ enum class udata::CommitmentType { WEEKLY, MONTHLY, Custom };
  * time = 1800 //30 minutes in seconds
  * frequency = 1;
  * timeWindowSize  = 1;
- *  //The frequency variable  represents how many times and the timeWindowSize\
+ *  //The frequency variable  represents how many times and the timeWindowSize
  * variable represents the size of the time
  * }
  * In the case of twice a week:
@@ -101,11 +110,11 @@ enum class udata::CommitmentType { WEEKLY, MONTHLY, Custom };
  *there will 7 sessions. It just means that was Alice's optimal goal, and this
  *can be displayed in the
  * viewer(UI) as one sees fit. There could very much be the case where Alice
- *decides \
+ *decides
  * to do 14 sessions of 15 minutes(14x15=30x7). A TimeWindow(in the case of
- *Alice a week) is \
+ *Alice a week) is
  * is only considered accomplished(or closed if you will) when the total amount
- *of \ time(in this case 210 minutes) is reached. Tasker should encourage the
+ *of time(in this case 210 minutes) is reached. Tasker should encourage the
  *user to commit to Frequency number of sessions per week(TimeWindow), BUT the
  *user may choose to "split" that time during the week into as many sessions as
  *they see fit. Hopefully that makes sense. This struct, being a simple struct,
@@ -186,6 +195,7 @@ private:
   CommitmentType Type;
   bool noEndDate;
   bool done = false;
+
   void update(); // helper function for isDone()
 
 public:
@@ -197,7 +207,6 @@ public:
   QDate &getDateEnd();
   void setDateEnd(QDate value);
   QVector<Session> getAllSessions();
-  void setSessions(QVector<udata::Session> value);
   void setName(QString);
   const QString &getName() const;
   void setType(CommitmentType);
@@ -205,7 +214,6 @@ public:
   QString summary() const;
   void updateCommitmentWindows(Session);
   void updateCommitmentWindows();
-
   bool isDone();
   void setDone(bool);
   void setFrequency(long long newTime, int newFrequency, int newTimeWinowSize);

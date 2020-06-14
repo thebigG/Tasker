@@ -15,10 +15,6 @@
 #include <memory>
 #define MAX_TITLE_CHARS 81
 QT_CHARTS_USE_NAMESPACE
-namespace udata {
-// Not sure if this is the right namespace for CommitmentSnapshot, it probably
-// isn't
-
 class CommitmentSnaphot : public QWidget {
 private:
   QBarSet productiveBarSet{"Productive"};
@@ -26,8 +22,8 @@ private:
   QBarSeries series;
   QChart chart;
   QStringList categories;
-  QBarCategoryAxis x;
-  QValueAxis y;
+  QBarCategoryAxis weekAxis;
+  QValueAxis minuteAxis;
   QChartView view;
   QFont chartFont;
   QWidget detailsWidget;
@@ -55,11 +51,10 @@ public:
   double getUnproductiveTimeAverage();
 
   CommitmentSnaphot(int numberOfBars = 7, QString customeCatgeory = "Sunday");
-  void update(TimeWindow &currentWindow, udata::CommitmentType type,
+  void update(udata::TimeWindow &currentWindow, udata::CommitmentType type,
               int commitmentGoal);
   QPushButton &getNextSnapshotLabel();
   QPushButton &getPreviousSnaphotLabel();
 };
 
-} // namespace udata
 #endif // WEEKLYSNAPHOT_H
