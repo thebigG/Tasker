@@ -1,6 +1,7 @@
 #ifndef KEYBOARDLISTENER_H
 #define KEYBOARDLISTENER_H
 #include <Hook.h>
+
 #include <QtCore>
 #include <memory>
 #ifdef __TASKER_DEBUG__
@@ -8,8 +9,8 @@
 #define IOHOOK_SCRIPT_PATH "./XListenerHook"
 #define WORKDIR "../libs/linux/iohook"
 #elif defined(Q_OS_OSX)
-#define IOHOOK_SCRIPT_PATH "./run_hook.sh"
-#define WORKDIR "./Contents/iohook"
+#define IOHOOK_SCRIPT_PATH "./XListenerHook"
+#define WORKDIR QCoreApplication::applicationDirPath() + "/../iohook"
 #elif defined(Q_OS_WIN)
 #define IOHOOK_SCRIPT_PATH "./run_hook.sh"
 #define WORKDIR "./Contents/iohook"
@@ -33,7 +34,7 @@
 namespace Engine {
 class XHook;
 enum class XHookMode;
-} // namespace Engine
+}  // namespace Engine
 
 enum class Engine::XHookMode { MOUSE, KEYBOARD, MOUSE_AND_KEYBOARD };
 /**
@@ -47,26 +48,26 @@ enum class Engine::XHookMode { MOUSE, KEYBOARD, MOUSE_AND_KEYBOARD };
 class Engine::XHook : public Hook {
   Q_OBJECT
 
-public:
+ public:
   XHook();
   XHook(Engine::XHookMode);
   int startXHook();
   Hook::HookState startHook() override;
 
-public slots:
+ public slots:
   virtual void start() override;
   virtual void end() override;
   virtual void pause() override;
   virtual void update() override;
   virtual void resetState() override;
 
-private:
+ private:
   QProcess xChildHook;
   QStringList xChildHookArguments;
   XHookMode XMode;
-signals:
+ signals:
   void signalThread();
 };
 
 void hook();
-#endif // KEYBOARDLISTENER_H
+#endif  // KEYBOARDLISTENER_H
