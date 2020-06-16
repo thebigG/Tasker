@@ -9,8 +9,6 @@
 #include <QDebug>
 #include <iostream>
 
-//#include <QtCharts/QBarSeries>
-
 using Engine::Hook;
 using udata::Commitment;
 using udata::Session;
@@ -42,16 +40,12 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
     updateCurrentLiveSessionCommitment();
     MainUI::getInstance()->updateActionStates();
   });
-  //  connect(&createCommimentWindow, &CreateCommitmentQWidget::editCommitment)
   // allocate space in this string to avoid realocation on when updating
   // CommitmentInfoStatsQWidget
   commitmentMetaDataText.reserve(100);
   commitmentMetaDataText.resize(100);
   beginDateText.resize(100);
   setSelectable(true);
-  qDebug() << "size of snapshot=" << snapshot.size();
-  qDebug() << "size polocy of snapshot" << snapshot.sizePolicy();
-  //  snapshot.setMaximumHeight(400);
   static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
       ->addWidget(this->ui->prevSnaphot, 0, 0);
   static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
@@ -61,12 +55,6 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
 
   static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
       ->addWidget(this->ui->CommitmentInfoStatsQWidget, 1, 1);
-  //          (this->ui->prev,0,0);
-  //  static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
-  //      ->setSpacing(0);
-  //  static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
-  //      ->setContentsMargins(0, 0, 0, 0);
-  //#ifdef TRAVIS_CI
   QPalette p = this->ui->CommitmentInfoStatsQWidget->palette();
 
   p.setColor(this->ui->CommitmentInfoStatsQWidget->backgroundRole(),
@@ -75,8 +63,6 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   this->ui->CommitmentInfoStatsQWidget->setPalette(p);
   currentLiveSessionWidget.setAutoFillBackground(true);
   currentLiveSessionWidget.setPalette(p);
-
-  //#endif
   this->layout()->setSpacing(0);
   this->layout()->setContentsMargins(0, 0, 0, 0);
 }
@@ -85,7 +71,6 @@ void CommStatsQWidget::newCommitmentSlot(bool checked) {
   this->createCommimentWindow.show();
 }
 void CommStatsQWidget::editCommitmentSlot(bool) {
-  qDebug() << "edit commitment slot!";
   createCommimentWindow.editCommitment(selectedCommitmentIndex);
 }
 void CommStatsQWidget::addCommitmentItem(udata::Commitment &newCommitment) {
@@ -96,14 +81,9 @@ void CommStatsQWidget::addCommitmentItem(udata::Commitment &newCommitment) {
 /**
  * @brief CommStatsQWidget::~CommStatsQWidget
  */
-CommStatsQWidget::~CommStatsQWidget() {
-  qDebug("CommStatsQWidget destructor#1");
-  delete ui;
-  qDebug("CommStatsQWidget destructor#2");
-}
+CommStatsQWidget::~CommStatsQWidget() { delete ui; }
 
 void CommStatsQWidget::deleteCommitmentSlot(bool checked) {
-  //    TASKER_LOG("deleting#1:" << selectedCommitmentIndex);
   if (User::getInstance()->getCommitments().isEmpty()) {
     return;
   }
@@ -116,22 +96,12 @@ void CommStatsQWidget::deleteCommitmentSlot(bool checked) {
   User::getInstance()->getCommitments().removeAt(tempIndex);
   isDelete = true; // This is for the currentItemChanged signal, which gets
                    // emitted by delete keyword
-
-  //  ui->commitmentsQTreeWidget->removeItemWidget(
-  //        ui->commitmentsQTreeWidget->topLevelItem(tempIndex), 0);
-  //          ui->commitmentsQTreeWidget->removeItemWidget(
-  //      ui->commitmentsQTreeWidget->currentItem(), 0);
   qDebug() << "selected item="
            << ui->commitmentsQTreeWidget->currentItem()->text(0);
   // I don't want to use delete, but it seems to be the only way to delete these
   // TreeWidget items
   delete ui->commitmentsQTreeWidget->takeTopLevelItem(tempIndex);
   //  takeTopLevelItem
-
-  //  MainUI::getInstance()->update();
-  //    delete ui->commitmentsQTreeWidget->topLevelItem(tempIndex);
-  qDebug() << "deleting#2:" << tempIndex;
-  qDebug() << "deleting#3:" << tempIndex;
 }
 void CommStatsQWidget::newSessionSlot(bool checked) {
   //  if (User::getInstance()->getCurrentCommitment().isDone()) {
@@ -177,7 +147,6 @@ void CommStatsQWidget::on_statsQFrame_destroyed() {
 
 void CommStatsQWidget::update() {
   QVector<Commitment> &commitments = User::getInstance()->getCommitments();
-  int oldCurrentIndex = selectedCommitmentIndex;
   ui->commitmentsQTreeWidget->clear();
   selectedCommitmentIndex = 0;
   auto commitmentIt = commitments.begin();

@@ -15,6 +15,10 @@
 #include <memory>
 #define MAX_TITLE_CHARS 81
 QT_CHARTS_USE_NAMESPACE
+/**
+ * @brief The CommitmentSnaphot class is a UI widget that displays a weekly
+ * chaty of commitments.
+ */
 class CommitmentSnaphot : public QWidget {
 private:
   QBarSet productiveBarSet{"Productive"};

@@ -91,7 +91,8 @@ void CommitmentSnaphot::update(udata::TimeWindow &currentWindow,
   weekAxis.clear();
   /*Maps the dates to week days(like Monday, Tuesday, etc).
    */
-  if (type == udata::CommitmentType::WEEKLY) {
+  if (type == udata::CommitmentType::WEEKLY ||
+      type == udata::CommitmentType::EVERDAY) {
     for (int i = 0; i < WEEK_SIZE; i++) {
       productiveBarSet.replace(i, 0);
       unproductiveBarSet.replace(i, 0);
