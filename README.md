@@ -45,9 +45,12 @@ You also have to give Microphone permissions to Tasker just like the mouse/keybo
 
 # How do I help?
 
-**Please do not work on master. Always work on and push your changes to the release branch.**
+The default branch is **main**
+PRs and issues always welcome!
+Another way to help is to test Tasker with different keyboard/mouse/hardware and post an issue if a specific one does not work!
 
-Once you've tested your chnages on release branch locally, **let people know first** before merging onto master. The master branch should only have the last stable version of Tasker.
+Would like to give credit to the devs at https://github.com/kwhat/libuiohook
+libuiiohook is the library that makes it possible for Tasker to detect mouse and keyboard interaction!
 
 Tasker is built using Qt 5 using c++. So you need to be comfortable using those technologies. If you aren't that's cool, we're still learning!
 
