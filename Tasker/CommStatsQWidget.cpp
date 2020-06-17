@@ -21,6 +21,9 @@ using udata::User;
 CommStatsQWidget::CommStatsQWidget(QWidget *parent)
     : QWidget(parent), ui(new Ui::CommStatsQWidget) {
   ui->setupUi(this);
+  /*
+   * Set up all necessary signals and slots for this class.
+   */
   connect(ui->commitmentsQTreeWidget, &QTreeWidget::currentItemChanged, this,
           &CommStatsQWidget::currentCommitmentChangedSlot);
   connect(ui->prevSnaphot, &QPushButton::clicked, this,
@@ -40,12 +43,16 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
     updateCurrentLiveSessionCommitment();
     MainUI::getInstance()->updateActionStates();
   });
-  // allocate space in this string to avoid realocation on when updating
-  // CommitmentInfoStatsQWidget
+  /*
+   * Allocate space in this string to avoid realocation on when updating
+   */
   commitmentMetaDataText.reserve(100);
   commitmentMetaDataText.resize(100);
   beginDateText.resize(100);
   setSelectable(true);
+  /*
+   * Arrenge navigating buttons for our commitment snaphots.
+   */
   static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
       ->addWidget(this->ui->prevSnaphot, 0, 0);
   static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
@@ -55,6 +62,11 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
 
   static_cast<QGridLayout *>(this->ui->commStatsHubQWidget->layout())
       ->addWidget(this->ui->CommitmentInfoStatsQWidget, 1, 1);
+
+  /*
+   * Assign the same color to our CommitmentInfoStats widget as the
+   * CommitmentSnaphot chart to make things look uniform.
+   */
   QPalette p = this->ui->CommitmentInfoStatsQWidget->palette();
 
   p.setColor(this->ui->CommitmentInfoStatsQWidget->backgroundRole(),
@@ -63,8 +75,6 @@ CommStatsQWidget::CommStatsQWidget(QWidget *parent)
   this->ui->CommitmentInfoStatsQWidget->setPalette(p);
   currentLiveSessionWidget.setAutoFillBackground(true);
   currentLiveSessionWidget.setPalette(p);
-  this->layout()->setSpacing(0);
-  this->layout()->setContentsMargins(0, 0, 0, 0);
 }
 
 void CommStatsQWidget::newCommitmentSlot(bool checked) {
@@ -73,6 +83,11 @@ void CommStatsQWidget::newCommitmentSlot(bool checked) {
 void CommStatsQWidget::editCommitmentSlot(bool) {
   createCommimentWindow.editCommitment(selectedCommitmentIndex);
 }
+/**
+ * @brief CommStatsQWidget::addCommitmentItem Adds a new commitment to the
+ * backing store and to the QTreetView.
+ * @param newCommitment
+ */
 void CommStatsQWidget::addCommitmentItem(udata::Commitment &newCommitment) {
   udata::User::getInstance()->addCommitment(newCommitment);
   ui->commitmentsQTreeWidget->addTopLevelItem(
@@ -84,11 +99,17 @@ void CommStatsQWidget::addCommitmentItem(udata::Commitment &newCommitment) {
 CommStatsQWidget::~CommStatsQWidget() { delete ui; }
 
 void CommStatsQWidget::deleteCommitmentSlot(bool checked) {
+  /*
+   * If there are no commitments to delete, then there is nothing to delete.
+   */
   if (User::getInstance()->getCommitments().isEmpty()) {
     return;
   }
   int tempIndex = selectedCommitmentIndex;
-  qDebug() << "removeCommitmentButtonSlot#1";
+  /*
+   * If we are deleting the last commitment, make sure we don't have an
+   * off-by-one error :)
+   */
   if (selectedCommitmentIndex ==
       (User::getInstance()->getCommitments().size() - 1)) {
     selectedCommitmentIndex--;
@@ -96,42 +117,34 @@ void CommStatsQWidget::deleteCommitmentSlot(bool checked) {
   User::getInstance()->getCommitments().removeAt(tempIndex);
   isDelete = true; // This is for the currentItemChanged signal, which gets
                    // emitted by delete keyword
-  qDebug() << "selected item="
-           << ui->commitmentsQTreeWidget->currentItem()->text(0);
   // I don't want to use delete, but it seems to be the only way to delete these
   // TreeWidget items
   delete ui->commitmentsQTreeWidget->takeTopLevelItem(tempIndex);
-  //  takeTopLevelItem
 }
 void CommStatsQWidget::newSessionSlot(bool checked) {
-  //  if (User::getInstance()->getCurrentCommitment().isDone()) {
-  //    // Maybe show the user in the UI that this Commitment is done
-  //    return;
-  //  }
-  //  if (!User::getInstance()
-  //           ->getCurrentCommitment()
-  //           .getCommitmentWindows()
-  //           .last()
-  //           .sessions.isEmpty()) {
-
-  //    if (QDate::currentDate() == User::getInstance()
-  //                                    ->getCurrentCommitment()
-  //                                    .getCommitmentWindows()
-  //                                    .last()
-  //                                    .sessions.last()
-  //                                    .getDate()) {
-  //      /**
-  //       * Maybe show the user in the UI that they have added this session
-  //       already to this commitment today. It might be worth it to consider a
-  //       case where maybe a session was terminated prematurely for whatever
-  //       reason and the user might want to resume that session even after
-  //       closing Tasker, this is assuming that they open Tasker the very same
-  //       day again. Give this a lot of thought as this could add clutter to
-  //       the UI, which I don't want.
-  //      */
-  //      return;
-  //    }
-  //  }
+  if (!User::getInstance()
+           ->getCurrentCommitment()
+           .getCommitmentWindows()
+           .last()
+           .sessions.isEmpty()) {
+    if (QDate::currentDate() == User::getInstance()
+                                    ->getCurrentCommitment()
+                                    .getCommitmentWindows()
+                                    .last()
+                                    .sessions.last()
+                                    .getDate()) {
+      //      /**
+      //       * Maybe show the user in the UI that they have added this session
+      //       already to this commitment today. It might be worth it to
+      //       consider a case where maybe a session was terminated prematurely
+      //       for whatever reason and the user might want to resume that
+      //       session even after closing Tasker, this is assuming that they
+      //       open Tasker the very same day again. Give this a lot of thought
+      //       as this could add clutter to the UI, which I don't want.
+      //      */
+      return;
+    }
+  }
   if (MainUI::getInstance()->newSessionActionState()) {
     this->getNewSessionQWidget().show();
   }
@@ -301,7 +314,11 @@ void CommStatsQWidget::show() { QWidget::show(); }
 /**
  * @brief CommStatsQWidget::saveCurrentSession
  * This function assumes that the currently selected session
- * is the same one that this new live session belongs to.
+ * is the same one that this new live session belongs to. As such it stores this
+ * new live session to the commitment that is currently selected.
+ * @note Any state regarding commitment snaphots and MainUI QActions are updated
+ * on this function since the data changes those changes should reflected in the
+ * UI.
  */
 void CommStatsQWidget::saveCurrentSession() {
   User::getInstance()
@@ -310,6 +327,7 @@ void CommStatsQWidget::saveCurrentSession() {
       .sessions.append(Engine::Timer::getInstance()->getCurrentSession());
   udata::UdataUtils::saveUserData(*User::getInstance());
   updateSnapshot();
+  MainUI::getInstance()->updateActionStates();
 }
 void CommStatsQWidget::updateCommitmentInfoStatsQWidget() {
   commitmentMetaDataText.fill(' ');

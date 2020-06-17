@@ -126,8 +126,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a36f00ee1033dd938c766d011bf13a660"><td class="memItemLeft" align="right" valign="top"><a id="a36f00ee1033dd938c766d011bf13a660"></a>
 <a class="el" href="classCreateCommitmentQWidget.html">CreateCommitmentQWidget</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getCreateCommitment</b> ()</td></tr>
 <tr class="separator:a36f00ee1033dd938c766d011bf13a660"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f7cf33030acf2a960f7c9863cdca83d"><td class="memItemLeft" align="right" valign="top"><a id="a3f7cf33030acf2a960f7c9863cdca83d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addCommitmentItem</b> (<a class="el" href="classudata_1_1Commitment.html">udata::Commitment</a> &amp;newCommitment)</td></tr>
+<tr class="memitem:a3f7cf33030acf2a960f7c9863cdca83d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommStatsQWidget.html#a3f7cf33030acf2a960f7c9863cdca83d">addCommitmentItem</a> (<a class="el" href="classudata_1_1Commitment.html">udata::Commitment</a> &amp;newCommitment)</td></tr>
+<tr class="memdesc:a3f7cf33030acf2a960f7c9863cdca83d"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCommStatsQWidget.html#a3f7cf33030acf2a960f7c9863cdca83d" title="CommStatsQWidget::addCommitmentItem Adds a new commitment to the backing store and to the QTreetView.">CommStatsQWidget::addCommitmentItem</a> Adds a new commitment to the backing store and to the QTreetView.  <a href="classCommStatsQWidget.html#a3f7cf33030acf2a960f7c9863cdca83d">More...</a><br /></td></tr>
 <tr class="separator:a3f7cf33030acf2a960f7c9863cdca83d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fec3c6d3d872671b6cc04cfd53bca1d"><td class="memItemLeft" align="right" valign="top"><a id="a1fec3c6d3d872671b6cc04cfd53bca1d"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommStatsQWidget.html#a1fec3c6d3d872671b6cc04cfd53bca1d">~CommStatsQWidget</a> ()</td></tr>
@@ -280,6 +280,32 @@ Perf::PerfTimer&#160;</td><td class="memItemRight" valign="bottom"><b>newPerfTim
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3f7cf33030acf2a960f7c9863cdca83d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f7cf33030acf2a960f7c9863cdca83d">&#9670;&nbsp;</a></span>addCommitmentItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CommStatsQWidget::addCommitmentItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classudata_1_1Commitment.html">udata::Commitment</a> &amp;&#160;</td>
+          <td class="paramname"><em>newCommitment</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classCommStatsQWidget.html#a3f7cf33030acf2a960f7c9863cdca83d" title="CommStatsQWidget::addCommitmentItem Adds a new commitment to the backing store and to the QTreetView.">CommStatsQWidget::addCommitmentItem</a> Adds a new commitment to the backing store and to the QTreetView. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newCommitment</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aa39b9da2ae3560a7774f451250b82cb7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa39b9da2ae3560a7774f451250b82cb7">&#9670;&nbsp;</a></span>newSessionSlot</h2>
 
@@ -303,9 +329,9 @@ Perf::PerfTimer&#160;</td><td class="memItemRight" valign="bottom"><b>newPerfTim
   </tr>
 </table>
 </div><div class="memdoc">
-<pre class="fragment">         Maybe show the user in the UI that they have added this session
+<pre class="fragment">             Maybe show the user in the UI that they have added this session
 </pre><p> already to this commitment today. It might be worth it to consider a case where maybe a session was terminated prematurely for whatever reason and the user might want to resume that session even after closing Tasker, this is assuming that they open Tasker the very same day again. Give this a lot of thought as this could add clutter to the UI, which I don't want. &zwj;/ return; } } if (<a class="el" href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d" title="MainUI::getInstance.">MainUI::getInstance()</a>-&gt;newSessionActionState()) { this-&gt;getNewSessionQWidget().show(); } } /** CommStatsQWidget::on_statsQFrame_destroyed</p>
-<p>CommStatsQWidget::saveCurrentSession This function assumes that the currently selected session is the same one that this new live session belongs to.</p>
+<p>CommStatsQWidget::saveCurrentSession This function assumes that the currently selected session is the same one that this new live session belongs to. As such it stores this new live session to the commitment that is currently selected. </p><dl class="section note"><dt>Note</dt><dd>Any state regarding commitment snaphots and <a class="el" href="classMainUI.html" title="The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....">MainUI</a> QActions are updated on this function since the data changes those changes should reflected in the UI.</dd></dl>
 
 </div>
 </div>

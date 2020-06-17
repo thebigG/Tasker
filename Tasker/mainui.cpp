@@ -43,9 +43,16 @@ void MainUI::update() {
   commitmentHub.update();
 }
 void MainUI::updateNewSessionActionState() {
+  if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() ==
+          LiveSessionState::Started ||
+      commitmentHub.getcurrentLiveSessionWidget().getCurrentState() ==
+          LiveSessionState::Paused) {
+
+    getNewSessionAction()->setEnabled(false);
+    return;
+  }
   if (User::getInstance()->getCurrentCommitment().isDone()) {
     getNewSessionAction()->setEnabled(false);
-    qDebug() << "updateNewSessionActionState#1";
     return;
   }
   qDebug() << "frequency for timeWindow="
@@ -145,7 +152,7 @@ void MainUI::updateDeleteCommitmentActionState() {
 }
 
 /**
- * @brief MainUI::updateActionStates
+ * @brief MainUI::updateActionStates updates all of the QActions' states.
  * @todo Add logic for "Edit Commitment" QAction
  */
 void MainUI::updateActionStates() {
