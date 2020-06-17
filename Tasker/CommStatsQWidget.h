@@ -115,10 +115,8 @@ private:
   QString endDateText{"Ends on "};
   LiveSession currentLiveSessionWidget{};
   QPalette p;
-  //    TempChartQWidget mw{};
   int currentTimeWindow = 0;
   std::map<QString, udata::Commitment &> commitmentMap;
-  //    QVBoxLayout layout{};
   CreateCommitmentQWidget createCommimentWindow;
   NewSessionQWidget newSessionQWidget;
   CommitmentSnaphot snapshot;
