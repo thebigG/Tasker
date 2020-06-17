@@ -32,7 +32,6 @@ CommitmentSnaphot::CommitmentSnaphot(int numberOfBars, QString customCategories)
   minuteAxis.setLabelFormat("%d Mins");
   chart.addAxis(&minuteAxis, Qt::AlignLeft);
   series.attachAxis(&minuteAxis);
-  qDebug() << "default bar width constructor=" << series.barWidth();
   series.setBarWidth(1);
   chart.legend()->setVisible(true);
   chart.legend()->setAlignment(Qt::AlignBottom);
@@ -157,7 +156,7 @@ void CommitmentSnaphot::update(udata::TimeWindow &currentWindow,
                    unproductiveTimeAvgLabelContext);
   unproductiveTimeAvgLabel.setText(unproductibeTimeAvgText);
   chart.legend()->setAlignment(Qt::AlignBottom);
-  view.setRenderHint(QPainter::Antialiasing);
+  //  view.setRenderHint(QPainter::Antialiasing);
   series.setLabelsVisible();
   series.setLabelsFormat("@value");
   series.setLabelsPosition(QAbstractBarSeries::LabelsInsideEnd);
