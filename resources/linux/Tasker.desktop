@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Tasker
+Comment=A Commitment tracker
+Exec=Tasker
+Icon=clock-256
+Categories=Utility;
