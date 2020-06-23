@@ -57,7 +57,6 @@ public:
   ~CommStatsQWidget();
   void show();
   void func();
-  void update();
   void updateCommitmentInfoStatsQWidget();
   void updateCurrentCommitment();
   void updateBeginDateQLabel();
@@ -88,7 +87,6 @@ public slots:
   void currentCommitmentChangedSlot(QTreeWidgetItem *, QTreeWidgetItem *);
   void itemDoubleClickedSlot(QTreeWidgetItem *item, int column);
   void newLiveSessionSlot();
-  void on_statsQFrame_destroyed();
 private slots:
   void previousSnapshot();
   void nextSnapshot();
@@ -108,6 +106,7 @@ private:
    * and we want to disable selection.
    */
   bool isSelectable = true;
+  void initCommitmentsQTreeWidget();
   void updateCurrentLiveSessionCommitment();
   void setSelectable(bool);
   QString commitmentMetaDataText{};

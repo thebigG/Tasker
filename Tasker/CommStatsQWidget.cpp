@@ -21,6 +21,7 @@ using udata::User;
 CommStatsQWidget::CommStatsQWidget(QWidget *parent)
     : QWidget(parent), ui(new Ui::CommStatsQWidget) {
   ui->setupUi(this);
+  initCommitmentsQTreeWidget();
   /*
    * Set up all necessary signals and slots for this class.
    */
@@ -121,6 +122,7 @@ void CommStatsQWidget::deleteCommitmentSlot(bool checked) {
   // TreeWidget items
   delete ui->commitmentsQTreeWidget->takeTopLevelItem(tempIndex);
 }
+
 void CommStatsQWidget::newSessionSlot(bool checked) {
   if (!User::getInstance()
            ->getCurrentCommitment()
@@ -133,15 +135,15 @@ void CommStatsQWidget::newSessionSlot(bool checked) {
                                     .last()
                                     .sessions.last()
                                     .getDate()) {
-      //      /**
-      //       * Maybe show the user in the UI that they have added this session
-      //       already to this commitment today. It might be worth it to
-      //       consider a case where maybe a session was terminated prematurely
-      //       for whatever reason and the user might want to resume that
-      //       session even after closing Tasker, this is assuming that they
-      //       open Tasker the very same day again. Give this a lot of thought
-      //       as this could add clutter to the UI, which I don't want.
-      //      */
+      /**
+       * Maybe show the user in the UI that they have added this session
+       * already to this commitment today. It might be worth it to
+       * consider a case where maybe a session was terminated prematurely
+       * for whatever reason and the user might want to resume that
+       * session even after closing Tasker, this is assuming that they
+       * open Tasker the very same day again. Give this a lot of thought
+       * as this could add clutter to the UI, which I don't want.
+       */
       return;
     }
   }
@@ -150,42 +152,21 @@ void CommStatsQWidget::newSessionSlot(bool checked) {
   }
 }
 /**
- * @brief CommStatsQWidget::on_statsQFrame_destroyed
+ * @brief CommStatsQWidget::initCommitmentsQTreeWidget loads all of the
+ * commitments from disk and adds them to commitmentsQTreeWidget.
  */
-void CommStatsQWidget::on_statsQFrame_destroyed() {
-  qDebug() << "delete udata::User::getInstance() on on_statsQFrame_destroyed#1";
-  //    delete udata::User::getInstance();
-  qDebug() << "delete udata::User::getInstance() on on_statsQFrame_destroyed2";
-}
-
-void CommStatsQWidget::update() {
-  QVector<Commitment> &commitments = User::getInstance()->getCommitments();
-  ui->commitmentsQTreeWidget->clear();
-  selectedCommitmentIndex = 0;
-  auto commitmentIt = commitments.begin();
-  qDebug() << "calling update on commstats++++++++++++_";
-  while (commitmentIt != commitments.end()) {
-    Commitment c = (*commitmentIt);
-
-    auto s_vec = c.getAllSessions();
-    auto s_it = s_vec.begin();
-
-    QTreeWidget *w = ui->commitmentsQTreeWidget;
-    qDebug() << "size of tree widget$$$:" << w->size();
-    // Removing this new() call will require more thinking
-    // and considering a redesign of commStatsQwidget as a whole
+void CommStatsQWidget::initCommitmentsQTreeWidget() {
+  for (auto commitment : User::getInstance()->getCommitments()) {
+    /*
+     * I did not want to use new, but have to because there does not seem to be
+     * any other way of adding children to QTreeWidget. It should be ok since
+     * QTreeWidget manages all of those pointers for us :).
+     */
     QTreeWidgetItem *item = new QTreeWidgetItem(
-        QStringList() << c.getName() << ": " << c.getDateStart().toString());
+        QStringList() << commitment.getName() << ": "
+                      << commitment.getDateStart().toString());
 
-    while (s_it != s_vec.end()) {
-      Session s = (*s_it);
-
-      ++s_it;
-    }
-
-    ++commitmentIt;
-
-    w->addTopLevelItem(item);
+    ui->commitmentsQTreeWidget->addTopLevelItem(item);
   }
 }
 void CommStatsQWidget::itemDoubleClickedSlot(QTreeWidgetItem *item,
