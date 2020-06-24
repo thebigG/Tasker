@@ -86,8 +86,8 @@ void CommStatsQWidget::editCommitmentSlot(bool) {
 }
 /**
  * @brief CommStatsQWidget::addCommitmentItem Adds a new commitment to the
- * backing store and to the QTreetView.
- * @param newCommitment
+ * backing store and to the QTreeView.
+ * @param newCommitment the new commitment to add to the backing store.
  */
 void CommStatsQWidget::addCommitmentItem(udata::Commitment &newCommitment) {
   udata::User::getInstance()->addCommitment(newCommitment);
@@ -122,8 +122,12 @@ void CommStatsQWidget::deleteCommitmentSlot(bool checked) {
   // TreeWidget items
   delete ui->commitmentsQTreeWidget->takeTopLevelItem(tempIndex);
 }
-
-void CommStatsQWidget::newSessionSlot(bool checked) {
+/**
+ * @brief CommStatsQWidget::newSessionSlot gets triggered when a commitment item
+ * gets double clicked on the Commitments Tree Widget and decides whether the
+ * user is able to start a new session for that commitment or not.
+ */
+void CommStatsQWidget::newSessionSlot() {
   if (!User::getInstance()
            ->getCurrentCommitment()
            .getCommitmentWindows()
@@ -172,20 +176,12 @@ void CommStatsQWidget::initCommitmentsQTreeWidget() {
 void CommStatsQWidget::itemDoubleClickedSlot(QTreeWidgetItem *item,
                                              int column) {
   ui->commitmentsQTreeWidget->indexOfTopLevelItem(item);
-  newSessionSlot(false);
+  newSessionSlot();
 }
 
 void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
                                                     QTreeWidgetItem *previous) {
-  qDebug() << "currentCommitmentChangedSlot#1";
-  //  ui->commitmentsQTreeWidget->selectedItems()
-  //  return;
   if (!isSelectable) {
-    //    previous->setSelected(true);
-    //    current->setSelected(false);
-    //    selectedCommitmentIndex = 0;
-    qDebug() << "";
-    //      !isSelectable
     return;
   }
 
@@ -193,47 +189,21 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
     isDelete = false;
     return;
   }
-  if (current == previous) {
-    qDebug() << "SAME OBJECT";
-  }
+  // update current commitment
   int currentIndex = 0;
   currentIndex = ui->commitmentsQTreeWidget->indexOfTopLevelItem(current);
-  qDebug() << "currentIndex#1" << currentIndex;
-  if (currentIndex == -1) {
-    qDebug() << "NEGATIVE on TreeWidgetItem";
-    if (current == nullptr) {
-      return;
-    }
-
-    currentIndex =
-        ui->commitmentsQTreeWidget->indexOfTopLevelItem(current->parent());
-    qDebug() << "currentIndex#2" << currentIndex;
-    qDebug() << "NEGATIVE#2";
-    //        return;
-  }
-
   selectedCommitmentIndex = currentIndex;
-  qDebug() << "changed commitment index:" << currentIndex;
-  qDebug() << "changed commitment name:"
-           << User::getInstance()->getCommitments().at(currentIndex).getName();
-  //
   User::getInstance()->updateCurrentCommitment(selectedCommitmentIndex);
-  qDebug() << "currentCommitmentChangedSlot#10";
 
   // update meta data on meta data widget
   updateCommitmentInfoStatsQWidget();
-  qDebug() << "currentCommitmentChangedSlot#11";
   updateBeginDateQLabel();
   updateEndDateQLabel();
-  qDebug() << "currentCommitmentChangedSlot#12";
+
   QVector<Commitment> &commitments = User::getInstance()->getCommitments();
-  qDebug() << "currentCommitmentChangedSlot#13";
-  //  qDebug()
   MainUI::getInstance()->updateActionStates();
-  qDebug() << "currentCommitmentChangedSlot#14";
-  if (!User::getInstance()->getCommitments().isEmpty() &&
-      !commitments[0].getCommitmentWindows().isEmpty()) {
-    qDebug() << "Running???";
+  //
+  if (!commitments.isEmpty()) {
     newPerfTimer.restart();
     /*reset the value of currentTimeWindow to the current time window
      * Since the currently selected commitment has changed
@@ -251,16 +221,16 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
              << "milli/nanoseconds";
   }
 }
-void CommStatsQWidget::newLiveSessionSlot() {
-  //    this->hide();
-  //    this->getTimerWindow().show();
-}
 NewSessionQWidget &CommStatsQWidget::getNewSessionQWidget() {
   return newSessionQWidget;
 }
 CreateCommitmentQWidget &CommStatsQWidget::getCreateCommitment() {
   return createCommimentWindow;
 }
+/**
+ * @brief CommStatsQWidget::previousSnapshot Navigate to the previous commitment
+ * snapshot.
+ */
 void CommStatsQWidget::previousSnapshot() {
   if (currentTimeWindow - 1 >= 0) {
     currentTimeWindow = currentTimeWindow - 1;
@@ -269,7 +239,10 @@ void CommStatsQWidget::previousSnapshot() {
   }
   updateSnapshot();
 }
-
+/**
+ * @brief CommStatsQWidget::nextSnapshot navigate to the previous commitment
+ * snapshot.
+ */
 void CommStatsQWidget::nextSnapshot() {
   if (currentTimeWindow + 1 < User::getInstance()
                                   ->getCurrentCommitment()
@@ -281,8 +254,11 @@ void CommStatsQWidget::nextSnapshot() {
   }
   updateSnapshot();
 }
+/**
+ * @brief CommStatsQWidget::updateSnapshot updates the current snapshot with new
+ * data from the current TimeWindow.
+ */
 void CommStatsQWidget::updateSnapshot() {
-  qDebug() << "updateSnapshot#1";
   snapshot.update(
       User::getInstance()
           ->getCurrentCommitment()
@@ -298,8 +274,8 @@ void CommStatsQWidget::show() { QWidget::show(); }
  * is the same one that this new live session belongs to. As such it stores this
  * new live session to the commitment that is currently selected.
  * @note Any state regarding commitment snaphots and MainUI QActions are updated
- * on this function since the data changes those changes should reflected in the
- * UI.
+ * on this function since the data changes those changes should be reflected in
+ * the UI.
  */
 void CommStatsQWidget::saveCurrentSession() {
   User::getInstance()
