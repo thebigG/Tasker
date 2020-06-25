@@ -29,7 +29,7 @@ CommitmentSnaphot::CommitmentSnaphot(int numberOfBars, QString customCategories)
   previousSnaphotLabel.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
   previousSnaphotLabel.setMaximumSize(20, 20);
   minuteAxis.setTickCount(3);
-  minuteAxis.setLabelFormat("%d Mins");
+  minuteAxis.setLabelFormat("%.1f Mins");
   chart.addAxis(&minuteAxis, Qt::AlignLeft);
   series.attachAxis(&minuteAxis);
   series.setBarWidth(1);

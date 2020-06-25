@@ -7,16 +7,14 @@
 #include <QIntValidator>
 #include <QLineEdit>
 #include <QWidget>
-#define WRITING_STRING "Writing"
-#define MUSIC_STRING "Compose Music"
-#define CUSTOM_STRING "Custom"
 
 namespace Ui {
 class CreateCommitmentQWidget;
 }
 
 /**
- * @brief The CreateCommitmentQWidget class
+ * @brief The CreateCommitmentQWidget class manages the window that alllow users
+ * to edit and create commitments.
  */
 class CreateCommitmentQWidget : public QWidget {
   Q_OBJECT
@@ -24,23 +22,19 @@ class CreateCommitmentQWidget : public QWidget {
 public:
   explicit CreateCommitmentQWidget(QWidget *parent = nullptr);
   ~CreateCommitmentQWidget();
-  Ui::CreateCommitmentQWidget *getUI();
   QIntValidator validator{(0, 999, this)};
   QString getCommitmentName();
   void show();
   QDate getStartDate();
   QDate getEndDate();
-  void editCommitment(int commitmentIndex);
-  udata::CommitmentFrequency getInterval();
+  void editCommitment();
+  udata::CommitmentFrequency getCommitmentFrequency();
   udata::CommitmentType getType();
-signals:
-  void commitmentEdit();
 
 private slots:
   void createCommitmentButtonSlot();
   void backButtonSlot();
-  void noEndDateCheckSlot(int);
-  void on_createCommitmentQFrame_destroyed();
+  void noEndDateCheckSlot();
   void currentIndexCommitmentModeComboBoxSlot(const QString &);
   void currentIndexFrequencyComboBoxSlot(const QString &);
 

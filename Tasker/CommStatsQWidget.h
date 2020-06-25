@@ -60,11 +60,7 @@ public:
   void addCommitmentItem(udata::Commitment &newCommitment);
   ~CommStatsQWidget();
   void show();
-  void func();
-  void updateCommitmentInfoStatsQWidget();
   void updateCurrentCommitment();
-  void updateBeginDateQLabel();
-  void updateEndDateQLabel();
   /**
    * @brief currentLiveSessionCommitment Used for re-focusing/re-selecting
    * the current commitment a LiveSession belongs to when resuming a
@@ -80,7 +76,6 @@ public:
    */
   int selectedCommitmentIndex = 0;
   LiveSession const &getcurrentLiveSessionWidget() const;
-  QPalette getSnapshotPalette();
 
 public slots:
   void saveCurrentSession();
@@ -129,6 +124,9 @@ private:
   NewSessionQWidget newSessionQWidget;
   CommitmentSnaphot snapshot;
   void updateSnapshot();
+  void updateCommitmentInfoStatsQWidget();
+  void updateBeginDateQLabel();
+  void updateEndDateQLabel();
   Perf::PerfTimer newPerfTimer{};
 };
 
