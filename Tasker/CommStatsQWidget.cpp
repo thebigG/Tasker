@@ -82,7 +82,7 @@ void CommStatsQWidget::newCommitmentSlot(bool checked) {
   this->createCommimentWindow.show();
 }
 void CommStatsQWidget::editCommitmentSlot(bool) {
-  createCommimentWindow.editCommitment(selectedCommitmentIndex);
+  createCommimentWindow.editCommitment();
 }
 /**
  * @brief CommStatsQWidget::addCommitmentItem Adds a new commitment to the
@@ -197,8 +197,6 @@ void CommStatsQWidget::currentCommitmentChangedSlot(QTreeWidgetItem *current,
 
   // update meta data on meta data widget
   updateCommitmentInfoStatsQWidget();
-  updateBeginDateQLabel();
-  updateEndDateQLabel();
 
   QVector<Commitment> &commitments = User::getInstance()->getCommitments();
   MainUI::getInstance()->updateActionStates();
@@ -286,6 +284,10 @@ void CommStatsQWidget::saveCurrentSession() {
   updateSnapshot();
   MainUI::getInstance()->updateActionStates();
 }
+/**
+ * @brief CommStatsQWidget::updateCommitmentInfoStatsQWidget updates the meta
+ * data about the selected commitment.
+ */
 void CommStatsQWidget::updateCommitmentInfoStatsQWidget() {
   commitmentMetaDataText.fill(' ');
   QString frequencyString{};
@@ -310,7 +312,13 @@ void CommStatsQWidget::updateCommitmentInfoStatsQWidget() {
       User::getInstance()->getCurrentCommitment().getFrequency().goal,
       frequencyString, 0);
   this->ui->goalQLabel->setText(commitmentMetaDataText);
+  updateBeginDateQLabel();
+  updateEndDateQLabel();
 }
+/**
+ * @brief CommStatsQWidget::updateBeginDateQLabel Helper method for
+ * updateCommitmentInfoStatsQWidget
+ */
 void CommStatsQWidget::updateBeginDateQLabel() {
   beginDateText.replace(20, beginDateText.length() - 20, ' ');
   QString startDateText{
@@ -318,6 +326,10 @@ void CommStatsQWidget::updateBeginDateQLabel() {
   beginDateText.replace(20, startDateText.length(), startDateText);
   this->ui->beginDateQLabel->setText(beginDateText);
 }
+/**
+ * @brief CommStatsQWidget::updateEndDateQLabel Helper method for
+ * updateCommitmentInfoStatsQWidget
+ */
 void CommStatsQWidget::updateEndDateQLabel() {
   if (!User::getInstance()->getCurrentCommitment().hasEndDate()) {
     this->ui->endDateQLabel->setText("");
@@ -329,12 +341,14 @@ void CommStatsQWidget::updateEndDateQLabel() {
   endDateText.replace(8, date.length(), date);
   this->ui->endDateQLabel->setText(endDateText);
 }
-QPalette CommStatsQWidget::getSnapshotPalette() {
-  QPalette p = this->ui->CommitmentInfoStatsQWidget->palette();
-  p.setColor(this->ui->CommitmentInfoStatsQWidget->backgroundRole(),
-             snapshot.palette().color(QPalette::ColorRole::Background));
-  return p;
-}
+/**
+ * @brief CommStatsQWidget::setSelectable sets whether or not the commitment
+ * QTreeView is selctable or not. This is especially useful in the middle of a
+ * session and we need to disable commitment slection.
+ * @param toggle If true, the QTreeView for commitments will be rendered
+ * unSeletable, meaning no other commitment can be selected aside the one that
+ * is currently selected. Otherwise, any commitment can be selected.
+ */
 void CommStatsQWidget::setSelectable(bool toggle) {
   if (toggle) {
     this->ui->commitmentsQTreeWidget->setSelectionMode(
@@ -349,12 +363,15 @@ void CommStatsQWidget::setSelectable(bool toggle) {
 
   isSelectable = toggle;
 }
+/**
+ * @brief CommStatsQWidget::updateLiveSessionStateSlot gets triggered every time
+ * the state of a LiveSession changes.
+ */
 void CommStatsQWidget::updateLiveSessionStateSlot() {
   if (currentLiveSessionWidget.getCurrentState() == LiveSessionState::Paused) {
     setSelectable(true);
   } else if (currentLiveSessionWidget.getCurrentState() ==
              LiveSessionState::Started) {
-    qDebug() << "setSelectable(false);";
     this->ui->commitmentsQTreeWidget->setCurrentItem(
         this->ui->commitmentsQTreeWidget->topLevelItem(
             currentLiveSessionCommitment));
@@ -368,21 +385,19 @@ void CommStatsQWidget::updateLiveSessionStateSlot() {
 void CommStatsQWidget::updateCurrentLiveSessionCommitment() {
   currentLiveSessionCommitment = selectedCommitmentIndex;
 }
+/**
+ * @brief CommStatsQWidget::updateCurrentCommitment updates the meta data about
+ * the currently selected commitment after editing it.
+ */
 void CommStatsQWidget::updateCurrentCommitment() {
   if (ui->commitmentsQTreeWidget->topLevelItem(selectedCommitmentIndex) !=
       nullptr) {
     ui->commitmentsQTreeWidget->topLevelItem(selectedCommitmentIndex)
         ->setText(0, User::getInstance()->getCurrentCommitment().getName());
-    qDebug() << "new text for  updateCurrentCommitment="
-             << User::getInstance()->getCurrentCommitment().getName();
   } else {
-    qDebug() << "updateCurrentCommitment failed";
     return;
   }
   updateCommitmentInfoStatsQWidget();
-  qDebug() << "updateCurrentCommitment#1";
-  updateBeginDateQLabel();
-  updateEndDateQLabel();
   updateSnapshot();
 }
 LiveSession const &CommStatsQWidget::getcurrentLiveSessionWidget() const {

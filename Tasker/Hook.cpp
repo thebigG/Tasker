@@ -11,10 +11,10 @@ QDataStream &Engine::operator<<(QDataStream &out,
   out << int(newListener);
   return out;
 }
-QDataStream &Engine::operator>>(QDataStream &in, Hook::HookType &newListener) {
+QDataStream &Engine::operator>>(QDataStream &in, Hook::HookType &newHook) {
   int enumValue = 0;
   in >> enumValue;
-  newListener = Engine::Hook::intToListenerType(enumValue);
+  newHook = Engine::Hook::intToListenerType(enumValue);
   return in;
 }
 /**

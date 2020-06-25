@@ -46,19 +46,19 @@ protected:
 
 private:
   /**
-   * @brief operator <<
+   * @brief operator << Writes the newHook to disk.
    * @param out
-   * @param newListener
+   * @param newHook
    * @return
    */
-  friend QDataStream &operator<<(QDataStream &out, const HookType &newListener);
+  friend QDataStream &operator<<(QDataStream &out, const HookType &newHook);
   /**
    * @brief operator >>
    * @param in
    * @param newListener
    * @return
    */
-  friend QDataStream &operator>>(QDataStream &in, HookType &newListener);
+  friend QDataStream &operator>>(QDataStream &in, HookType &newHook);
 
 signals:
   void productive();
