@@ -125,6 +125,7 @@ $(function() {
 </li>
 <li>end()
 : <a class="el" href="classEngine_1_1AudioHook.html#acf43f2f5cae8f27be1243d3e0713ec04">Engine::AudioHook</a>
+, <a class="el" href="classEngine_1_1Hook.html#aaa4c909da811b02d554c4ee900892b1f">Engine::Hook</a>
 , <a class="el" href="classEngine_1_1XHook.html#a079d679c67e1c1569ba57ee5c1f10192">Engine::XHook</a>
 </li>
 </ul>
@@ -138,6 +139,9 @@ $(function() {
 
 
 <h3><a id="index_g"></a>- g -</h3><ul>
+<li>generateCommitment()
+: <a class="el" href="classudata_1_1UdataUtils.html#a5d81773f07fbb1be628fcf7afeeeab30">udata::UdataUtils</a>
+</li>
 <li>getAllSessions()
 : <a class="el" href="classudata_1_1Commitment.html#aabc3ce4c59f6ea2e5348efd43f74adc8">udata::Commitment</a>
 </li>
@@ -254,8 +258,8 @@ $(function() {
 <li>initTimer()
 : <a class="el" href="classEngine_1_1Timer.html#af9d150a0450bcfeee60121314696d1bb">Engine::Timer</a>
 </li>
-<li>intToListenerType()
-: <a class="el" href="classEngine_1_1Hook.html#a6b05006ac5fd4ca9fa404ea7bd533407">Engine::Hook</a>
+<li>intToHookType()
+: <a class="el" href="classEngine_1_1Hook.html#ac95bbf03eac74b9416ce0e8f6a7f42fe">Engine::Hook</a>
 </li>
 <li>isAudioDeviceValid()
 : <a class="el" href="classEngine_1_1AudioMachine.html#ab766b67226f1e33e60c3a6e3383f24e6">Engine::AudioMachine</a>
@@ -303,9 +307,6 @@ $(function() {
 
 
 <h3><a id="index_o"></a>- o -</h3><ul>
-<li>on_timerWindowQFrame_destroyed()
-: <a class="el" href="classNewSessionQWidget.html#a53089c4c3a0bef13e99d227c55bcbc2d">NewSessionQWidget</a>
-</li>
 <li>operator&lt;&lt;
 : <a class="el" href="classEngine_1_1Hook.html#adc87da240436094d2ef94c191292da23">Engine::Hook</a>
 </li>
@@ -319,6 +320,7 @@ $(function() {
 <h3><a id="index_p"></a>- p -</h3><ul>
 <li>pause()
 : <a class="el" href="classEngine_1_1AudioHook.html#a8436cfd80e4dbdec38449ffdd0b1aa42">Engine::AudioHook</a>
+, <a class="el" href="classEngine_1_1Hook.html#aa67bdb33e29e2564cfb9ffff993a903b">Engine::Hook</a>
 , <a class="el" href="classEngine_1_1XHook.html#a0e7ec48d50e9f9061115553b686add2f">Engine::XHook</a>
 , <a class="el" href="classLiveSession.html#afb7da838db57b8b0b9c3d5b65dcc666d">LiveSession</a>
 </li>
@@ -343,6 +345,7 @@ $(function() {
 </li>
 <li>resetState()
 : <a class="el" href="classEngine_1_1AudioHook.html#adb44c2e44a69cb0432e53978b519f2d6">Engine::AudioHook</a>
+, <a class="el" href="classEngine_1_1Hook.html#aa2b928d006ad1206eca234a553ebe0b0">Engine::Hook</a>
 </li>
 <li>resume()
 : <a class="el" href="classLiveSession.html#a385835836b965186dbf7efc5a2f7bb52">LiveSession</a>
@@ -380,9 +383,6 @@ $(function() {
 </li>
 <li>setDateStart()
 : <a class="el" href="classudata_1_1Commitment.html#a27bff4c59fc551a7a1a2164f6e02e2bc">udata::Commitment</a>
-</li>
-<li>setDefaultCommitment()
-: <a class="el" href="classudata_1_1User.html#a3f124eb957a1b41d354b7b8dfa08e1cf">udata::User</a>
 </li>
 <li>setLength()
 : <a class="el" href="classudata_1_1Session.html#aad89d78aa59f2d507a966a188295db0c">udata::Session</a>
@@ -422,7 +422,9 @@ $(function() {
 </li>
 <li>start()
 : <a class="el" href="classEngine_1_1AudioHook.html#aac444b2ba243a9e27a77ea90011b0955">Engine::AudioHook</a>
+, <a class="el" href="classEngine_1_1Hook.html#a86ac708ccb0a16520e7392d54c233cfb">Engine::Hook</a>
 , <a class="el" href="classEngine_1_1XHook.html#a2eeb15830af7bf2cb8ef56902c032367">Engine::XHook</a>
+, <a class="el" href="classLiveSession.html#ad6e67d96b889d0fa3b7ae2d8f683b79b">LiveSession</a>
 </li>
 <li>startHook()
 : <a class="el" href="classEngine_1_1XHook.html#aa5c4edbaf10fffaa21edc0a21bec57ea">Engine::XHook</a>
@@ -435,6 +437,9 @@ $(function() {
 </li>
 <li>startXHook()
 : <a class="el" href="classEngine_1_1XHook.html#a4c5adeb270d5c1101bf4cbf604039602">Engine::XHook</a>
+</li>
+<li>state
+: <a class="el" href="classEngine_1_1Hook.html#a25347f91b07bf216b2b350c05e887fe8">Engine::Hook</a>
 </li>
 <li>stopRecording()
 : <a class="el" href="classEngine_1_1AudioMachine.html#a7244c5562166176dae62051cf3831fc6">Engine::AudioMachine</a>
@@ -471,6 +476,7 @@ $(function() {
 <li>update()
 : <a class="el" href="classCommitmentSnaphot.html#afbdceb76856cb83ee35446b93a375303">CommitmentSnaphot</a>
 , <a class="el" href="classEngine_1_1AudioHook.html#a18770f98e8327df3fa7a8ad6c3ee286d">Engine::AudioHook</a>
+, <a class="el" href="classEngine_1_1Hook.html#a78ed990202096648f9aad22932fe8a66">Engine::Hook</a>
 , <a class="el" href="classEngine_1_1XHook.html#adf5d14a7b2c9011dfc9c4aac7a8e1c44">Engine::XHook</a>
 , <a class="el" href="classudata_1_1Commitment.html#ab5df80c128dc7642a1c4203eb3766fdc">udata::Commitment</a>
 </li>
@@ -489,6 +495,12 @@ $(function() {
 <li>updateCurrentCommitment()
 : <a class="el" href="classCommStatsQWidget.html#a09fa01bac4f5fed0d3f826b01e9f8acd">CommStatsQWidget</a>
 </li>
+<li>updateDeleteCommitmentActionState()
+: <a class="el" href="classMainUI.html#ab2709bfecac825d5a397421313404bdd">MainUI</a>
+</li>
+<li>updateEditCommitmentActionState()
+: <a class="el" href="classMainUI.html#a3f4f3f984a8a94ea8c49eb42627548a1">MainUI</a>
+</li>
 <li>updateEndDateQLabel()
 : <a class="el" href="classCommStatsQWidget.html#acfd577cfe1c2d662b8b9674f0f4e9003">CommStatsQWidget</a>
 </li>
@@ -501,6 +513,9 @@ $(function() {
 <li>updateLiveSessionStateSlot()
 : <a class="el" href="classCommStatsQWidget.html#afb7f9e3d7d15eb48320d5d2d4695a753">CommStatsQWidget</a>
 </li>
+<li>updateNewSessionActionState()
+: <a class="el" href="classMainUI.html#a780bb5a7fe05ae8ca2a1080a1f754efa">MainUI</a>
+</li>
 <li>updateSnapshot()
 : <a class="el" href="classCommStatsQWidget.html#a93a39d584be4c627c59fc7251992794a">CommStatsQWidget</a>
 </li>
@@ -508,7 +523,7 @@ $(function() {
 : <a class="el" href="classLiveSession.html#a907454ff4014297046f789ba30fa0891">LiveSession</a>
 </li>
 <li>User()
-: <a class="el" href="classudata_1_1User.html#af07a2c899f489475b5aa95fbf5ca793b">udata::User</a>
+: <a class="el" href="classudata_1_1User.html#a4a0137053e591fbb79d9057dd7d2283d">udata::User</a>
 </li>
 </ul>
 

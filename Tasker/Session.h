@@ -12,6 +12,12 @@ QDataStream &operator>>(QDataStream &in, udata::Session &newSession);
 
 /**
  * @brief The udata::Session class
+ * A session is what is created when the user starts a certain task on Tasker
+ * that is part of the a commitment. For example; imagine a user named Alice
+ * creates a commitment called "Alice in Wonderland"  and they define the
+ * frequency of that commitment to "Five times a week". Every single time they
+ * attempt a new task for that commitment, that will be a session that becomes
+ * part of that commitment as a whole.
  */
 class udata::Session {
 public:

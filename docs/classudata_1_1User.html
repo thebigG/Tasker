@@ -79,7 +79,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classudata_1_1User.html" title="The udata::User class A singleton user for the whole system.">udata::User</a> class A singleton user for the whole system.  
+<p>The <a class="el" href="classudata_1_1User.html" title="The udata::User class A singleton user for the user&#39;s data(all of their commitments) as a whole.">udata::User</a> class A singleton user for the user's data(all of their commitments) as a whole.  
  <a href="classudata_1_1User.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="User_8h_source.html">User.h</a>&gt;</code></p>
@@ -93,9 +93,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2dbcdbe1c54d0f5f293109043f5c6e02"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classudata_1_1Commitment.html">Commitment</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1User.html#a2dbcdbe1c54d0f5f293109043f5c6e02">getDefaultCommitment</a> ()</td></tr>
 <tr class="memdesc:a2dbcdbe1c54d0f5f293109043f5c6e02"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1User.html#a2dbcdbe1c54d0f5f293109043f5c6e02" title="udata::User::getDefaultCommitment">udata::User::getDefaultCommitment</a>  <a href="classudata_1_1User.html#a2dbcdbe1c54d0f5f293109043f5c6e02">More...</a><br /></td></tr>
 <tr class="separator:a2dbcdbe1c54d0f5f293109043f5c6e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f124eb957a1b41d354b7b8dfa08e1cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1User.html#a3f124eb957a1b41d354b7b8dfa08e1cf">setDefaultCommitment</a> (const <a class="el" href="classudata_1_1Commitment.html">Commitment</a> &amp;c)</td></tr>
-<tr class="memdesc:a3f124eb957a1b41d354b7b8dfa08e1cf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1User.html#a3f124eb957a1b41d354b7b8dfa08e1cf" title="udata::User::setDefaultCommitment">udata::User::setDefaultCommitment</a>  <a href="classudata_1_1User.html#a3f124eb957a1b41d354b7b8dfa08e1cf">More...</a><br /></td></tr>
-<tr class="separator:a3f124eb957a1b41d354b7b8dfa08e1cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c0adcf1e2fbb574c98b2da5a73c6be8"><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="classudata_1_1Commitment.html">Commitment</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1User.html#a0c0adcf1e2fbb574c98b2da5a73c6be8">getCommitments</a> ()</td></tr>
 <tr class="memdesc:a0c0adcf1e2fbb574c98b2da5a73c6be8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1User.html#a0c0adcf1e2fbb574c98b2da5a73c6be8" title="User::getCommitments.">User::getCommitments</a>.  <a href="classudata_1_1User.html#a0c0adcf1e2fbb574c98b2da5a73c6be8">More...</a><br /></td></tr>
 <tr class="separator:a0c0adcf1e2fbb574c98b2da5a73c6be8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,7 +168,7 @@ QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator
 <tr class="separator:a8249ab60c5047a503535c8165afa8336"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classudata_1_1User.html" title="The udata::User class A singleton user for the whole system.">udata::User</a> class A singleton user for the whole system. </p>
+<div class="textblock"><p>The <a class="el" href="classudata_1_1User.html" title="The udata::User class A singleton user for the user&#39;s data(all of their commitments) as a whole.">udata::User</a> class A singleton user for the user's data(all of their commitments) as a whole. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af07a2c899f489475b5aa95fbf5ca793b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af07a2c899f489475b5aa95fbf5ca793b">&#9670;&nbsp;</a></span>User() <span class="overload">[1/2]</span></h2>
@@ -379,32 +376,6 @@ QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator
 
 <p><a class="el" href="classudata_1_1User.html#aea638f36efa91dabfdb852b73b10b26a" title="User::getUsername.">User::getUsername</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
-
-</div>
-</div>
-<a id="a3f124eb957a1b41d354b7b8dfa08e1cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f124eb957a1b41d354b7b8dfa08e1cf">&#9670;&nbsp;</a></span>setDefaultCommitment()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void udata::User::setDefaultCommitment </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classudata_1_1Commitment.html">Commitment</a> &amp;&#160;</td>
-          <td class="paramname"><em>c</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><a class="el" href="classudata_1_1User.html#a3f124eb957a1b41d354b7b8dfa08e1cf" title="udata::User::setDefaultCommitment">udata::User::setDefaultCommitment</a> </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">c</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

@@ -21,9 +21,19 @@ class UdataUtils;
 class udata::UdataUtils {
 private:
   UdataUtils();
-  static bool firstTimer();
 
 public:
+  /**
+   * @brief generateCommitment generates a fake commitment. This makes testing
+   * things out with dummy data really easy :)
+   * @param name
+   * @param numberOfTimeWindows
+   * @param minProductiveTime
+   * @param maxProductiveTime
+   * @param minUnproducitveTime
+   * @param maxUnproductiveTime
+   * @param type
+   */
   static void generateCommitment(QString name, int numberOfTimeWindows,
                                  int minProductiveTime, int maxProductiveTime,
                                  int minUnproducitveTime,

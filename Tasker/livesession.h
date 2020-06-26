@@ -18,8 +18,9 @@
  * is not collecting data about the current session.
  * Started: The timer engine and hooks are currently active. This means that the
  * Timer Engine is currently collecting data about the current live session.
- * Stopped: This state is when the LiveSession has been stopped prematurely by
- * the user. This feature is not supported yet; will support as soon as I can.
+ * Stopped: This state is when there is no LiveSession at all or the LiveSession
+ * has been stopped prematurely by the user. This feature is not supported yet;
+ * will support as soon as I can.
  *
  */
 enum class LiveSessionState { Paused, Started, Stopped };
@@ -36,12 +37,10 @@ public:
   QPushButton *getPlayButton();
   void pause();
   void resume();
-  //  void stop();
   QString congratsCommitmentMessage{
       "Congrats! You've completed this commitment!"};
   QString activeText{"(active)"};
   QString inactiveText{"(inactive)"};
-  void updateDetails();
   ~LiveSession();
   LiveSessionState getCurrentState() const;
 

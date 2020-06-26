@@ -70,7 +70,6 @@ $(function() {
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
-<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
 <a href="classudata_1_1UdataUtils-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">udata::UdataUtils Class Reference</div>  </div>
@@ -84,8 +83,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a5d81773f07fbb1be628fcf7afeeeab30"><td class="memItemLeft" align="right" valign="top"><a id="a5d81773f07fbb1be628fcf7afeeeab30"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>generateCommitment</b> (QString name, int numberOfTimeWindows, int minProductiveTime, int maxProductiveTime, int minUnproducitveTime, int maxUnproductiveTime, <a class="el" href="namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14">CommitmentType</a> type)</td></tr>
+<tr class="memitem:a5d81773f07fbb1be628fcf7afeeeab30"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1UdataUtils.html#a5d81773f07fbb1be628fcf7afeeeab30">generateCommitment</a> (QString name, int numberOfTimeWindows, int minProductiveTime, int maxProductiveTime, int minUnproducitveTime, int maxUnproductiveTime, <a class="el" href="namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14">CommitmentType</a> type)</td></tr>
+<tr class="memdesc:a5d81773f07fbb1be628fcf7afeeeab30"><td class="mdescLeft">&#160;</td><td class="mdescRight">generateCommitment generates a fake commitment. This makes testing things out with dummy data really easy :)  <a href="classudata_1_1UdataUtils.html#a5d81773f07fbb1be628fcf7afeeeab30">More...</a><br /></td></tr>
 <tr class="separator:a5d81773f07fbb1be628fcf7afeeeab30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae45c53cba720954e251e66cc67da162f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1UdataUtils.html#ae45c53cba720954e251e66cc67da162f">saveUserData</a> (<a class="el" href="classudata_1_1User.html">User</a> &amp;)</td></tr>
 <tr class="memdesc:ae45c53cba720954e251e66cc67da162f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1UdataUtils.html#ae45c53cba720954e251e66cc67da162f" title="UdataUtils::saveUserData.">UdataUtils::saveUserData</a>.  <a href="classudata_1_1UdataUtils.html#ae45c53cba720954e251e66cc67da162f">More...</a><br /></td></tr>
@@ -115,16 +114,90 @@ Private Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classudata_1_1UdataUtils.html#ae6c70048c053c72cf02a667e7073593b">UdataUtils</a> ()</td></tr>
 <tr class="memdesc:ae6c70048c053c72cf02a667e7073593b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classudata_1_1UdataUtils.html#ae6c70048c053c72cf02a667e7073593b" title="UdataUtils::UdataUtils.">UdataUtils::UdataUtils</a>. <br /></td></tr>
 <tr class="separator:ae6c70048c053c72cf02a667e7073593b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
-Static Private Member Functions</h2></td></tr>
-<tr class="memitem:a82afdd5aee7bc3a0de430b5cfb631125"><td class="memItemLeft" align="right" valign="top"><a id="a82afdd5aee7bc3a0de430b5cfb631125"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>firstTimer</b> ()</td></tr>
-<tr class="separator:a82afdd5aee7bc3a0de430b5cfb631125"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classudata_1_1UdataUtils.html" title="The udata::UdataUtils class.">udata::UdataUtils</a> class. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5d81773f07fbb1be628fcf7afeeeab30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d81773f07fbb1be628fcf7afeeeab30">&#9670;&nbsp;</a></span>generateCommitment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UdataUtils::generateCommitment </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numberOfTimeWindows</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>minProductiveTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxProductiveTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>minUnproducitveTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxUnproductiveTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14">CommitmentType</a>&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>generateCommitment generates a fake commitment. This makes testing things out with dummy data really easy :) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td></td></tr>
+    <tr><td class="paramname">numberOfTimeWindows</td><td></td></tr>
+    <tr><td class="paramname">minProductiveTime</td><td></td></tr>
+    <tr><td class="paramname">maxProductiveTime</td><td></td></tr>
+    <tr><td class="paramname">minUnproducitveTime</td><td></td></tr>
+    <tr><td class="paramname">maxUnproductiveTime</td><td></td></tr>
+    <tr><td class="paramname">type</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a2eba640e8505f89dc4dcfe6b5a585751"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2eba640e8505f89dc4dcfe6b5a585751">&#9670;&nbsp;</a></span>getUsername()</h2>
 

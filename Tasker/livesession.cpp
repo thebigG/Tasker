@@ -31,9 +31,7 @@ LiveSession::LiveSession(QWidget *parent)
    * Has not been tested on Windows or macOS.
    *
    */
-  qDebug() << "current path for font" << QDir::currentPath();
   if (QFontDatabase::addApplicationFont(LIVESESSIONFONTPATH) == 0) {
-    qDebug() << "successfully loaded font for play/pause buttons";
     QString family = QFontDatabase::applicationFontFamilies(0).at(0);
     QFont newFont(family, 16, true);
     this->ui->playButton->setFont(newFont);
@@ -43,7 +41,10 @@ LiveSession::LiveSession(QWidget *parent)
 
   this->ui->taskStateMessageLabel->setText("");
   this->ui->playButton->setText(PAUSEBUTTON);
-  //  this->ui->playButton->setAutoFillBackground(true);
+  /*
+   * Pre-allocate space for strings so we don't have to re-allocate every time
+   * we render an update(like a clock change).
+   */
   productiveTimeValueText.reserve(10);
   productiveTimeValueText.resize(10);
   unproductiveTimeValueText.reserve(10);
@@ -56,10 +57,9 @@ LiveSession::LiveSession(QWidget *parent)
   sessionGoalText.resize(10);
   hookStateText.reserve(20);
   hookStateText.resize(20);
-  //  hookStatusText()
+
   this->ui->playButton->setVisible(false);
   this->ui->hookStateQLabel->setVisible(false);
-  qDebug() << "text on label:" + ui->productiveTimeValue->text();
 }
 /**
  * @brief LiveSession::updateTimeUI
@@ -87,12 +87,9 @@ void LiveSession::updateTimeUI() {
   qDebug() << "updateTimeUI latency#4:" << liveSessionPerfTimer.duration;
 }
 void LiveSession::stop() {
-  qDebug() << "congrats on livession++++++";
-  //  if()
   ui->productiveTimeValue->setText("0h0m0s");
   ui->unproductiveTimeValue->setText("0h0m0s");
   ui->totalTimeValue->setText("0h0m0s");
-  //  ui->
   // reset the rest of the UI
   this->ui->taskStateMessageLabel->setVisible(false);
   this->ui->hookStateQLabel->setVisible(false);
@@ -128,6 +125,7 @@ void LiveSession::pause() {
   currentState = LiveSessionState::Paused;
 }
 QPushButton *LiveSession::getPlayButton() { return ui->playButton; }
+
 void LiveSession::playButtonSlot() {
   if (this->ui->playButton->text() == PLAYBUTTON) {
     this->ui->playButton->setText(PAUSEBUTTON);
@@ -138,6 +136,11 @@ void LiveSession::playButtonSlot() {
   }
   emit liveStateChanged();
 }
+/**
+ * @brief LiveSession::start initializes all of the initial state such as labels
+ * that display real-time report of the state of the hook when the user is about
+ * to start a new LiveSession.
+ */
 void LiveSession::start() {
   currentState = LiveSessionState::Started;
   initTaskState();
@@ -205,62 +208,49 @@ void LiveSession::updateHookState() {
   hookStateText.replace(17, hookStateText.length(), ' ');
   if (Timer::getInstance()->timerHookState == Hook::HookState::productive) {
     switch (Timer::getInstance()->hookType) {
-      case Hook::HookType::X_KEYBOARD:
-        hookStateText.replace(17, 8, activeText);
-        break;
-      case Hook::HookType::X_MOUSE:
-        hookStateText.replace(13, 10, activeText);
-        break;
-      case Hook::HookType::audio:
-        hookStateText.replace(13, 10, activeText);
-        break;
+    case Hook::HookType::X_KEYBOARD:
+      hookStateText.replace(17, 8, activeText);
+      break;
+    case Hook::HookType::X_MOUSE:
+      hookStateText.replace(13, 10, activeText);
+      break;
+    case Hook::HookType::audio:
+      hookStateText.replace(13, 10, activeText);
+      break;
     }
   } else {
     switch (Timer::getInstance()->hookType) {
-      case Hook::HookType::X_KEYBOARD:
-        hookStateText.replace(17, 10, inactiveText);
-        break;
-      case Hook::HookType::X_MOUSE:
-        hookStateText.replace(13, 10, inactiveText);
-        break;
-      case Hook::HookType::audio:
-        hookStateText.replace(13, 10, inactiveText);
-        break;
+    case Hook::HookType::X_KEYBOARD:
+      hookStateText.replace(17, 10, inactiveText);
+      break;
+    case Hook::HookType::X_MOUSE:
+      hookStateText.replace(13, 10, inactiveText);
+      break;
+    case Hook::HookType::audio:
+      hookStateText.replace(13, 10, inactiveText);
+      break;
     }
   }
   this->ui->hookStateQLabel->setText(hookStateText);
   liveSessionPerfTimer1.stop();
-  qDebug() << "updateHookState:" << liveSessionPerfTimer1.duration;
 }
 
 void LiveSession::initHookState() {
   hookStateText.fill(' ');
   hookStateText.replace(0, 8, "Hook(s):");
   switch (Timer::getInstance()->hookType) {
-    case Hook::HookType::X_KEYBOARD:
-      hookStateText.replace(8, 8, "Keyboard");
-      break;
-    case Hook::HookType::audio:
-      hookStateText.replace(8, 8, "Audio");
-      break;
-    case Hook::HookType::X_MOUSE:
-      hookStateText.replace(8, 8, "Mouse");
-      break;
+  case Hook::HookType::X_KEYBOARD:
+    hookStateText.replace(8, 8, "Keyboard");
+    break;
+  case Hook::HookType::audio:
+    hookStateText.replace(8, 8, "Audio");
+    break;
+  case Hook::HookType::X_MOUSE:
+    hookStateText.replace(8, 8, "Mouse");
+    break;
   }
   this->ui->hookStateQLabel->setText(hookStateText);
   this->ui->hookStateQLabel->setVisible(true);
-}
-
-void LiveSession::updateDetails() {
-  if (MainUI::getInstance()->newSessionActionState()) {
-    ui->taskStateMessageLabel->setText("");
-  } else {
-    if (udata::User::getInstance()->getCurrentCommitment().isDone()) {
-      //      ui->taskStateMessageLabel->setText(congratsCommitmentMessage);
-    } else {
-      //      ui->taskStateMessageLabel->setText(congratsSessionMessage);
-    }
-  }
 }
 
 LiveSessionState LiveSession::getCurrentState() const { return currentState; }

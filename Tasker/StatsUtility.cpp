@@ -1,29 +1,6 @@
 #include "StatsUtility.h"
 #include <QDebug>
 #include <TaskerPerf/perftimer.h>
-
-/**
- * @brief util::StatsUtility::toMinutes
- * @param seconds quantity of seconds
- *
- * @return -1 if seconds is negative, otherwise quantity of minutes from seconds
- */
-// inline int64_t util::StatsUtility::toMinutes(int64_t seconds) {
-//    int64_t result = -1;
-//    return (result = seconds < 0 ? result : seconds / SECONDS_IN_MINUTE);
-//}
-
-/**
- * @brief util::StatsUtility::toHours
- * @param seconds quantity of seconds
- *
- * @return -1 if seconds is negative, otherwise quantity of hours from soconds
- */
-// int64_t util::StatsUtility::toHours(int64_t seconds) {
-//    int64_t result = -1;
-//    return (result = seconds < 0 ? result : seconds / SECONDS_IN_HOUR);
-//}
-
 /**
  * @brief util::StatsUtility::toDays
  * @param seconds quantity of seconds
@@ -125,7 +102,6 @@ int util::formatTime(QString &formatString, float time, QString &context,
   int numberOfHours = (int)timeInminutes / MINUTES_IN_HOUR;
   QString numberOfMinutesString{QString::number(
       ((int)timeInminutes) - (numberOfHours * MINUTES_IN_HOUR))};
-  qDebug() << "hours-->" << numberOfHours;
   temp = QString::number(numberOfHours).length();
   formatString.replace(start, temp, QString::number(numberOfHours));
   temp += start;
@@ -142,7 +118,6 @@ int util::formatTime(QString &formatString, float time, QString &context,
         QString::number(tempDecimal * MINUTES_IN_HOUR)};
     formatString.replace(temp, numberOfSecondsString.length(),
                          numberOfSecondsString);
-    //    qDebug() << "format string==" << numberOfSecondsString;
     temp += numberOfSecondsString.length();
     formatString.replace(temp, 1, "s");
     temp += 1;
