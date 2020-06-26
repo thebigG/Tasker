@@ -13,7 +13,7 @@
 using namespace udata;
 using namespace Engine;
 /**
- * @brief TimerWindowQWidget::TimerWindowQWidget
+ * @brief NewSessionQWidget::NewSessionQWidget
  * @param parent
  */
 NewSessionQWidget::NewSessionQWidget(QWidget *parent)
@@ -38,12 +38,13 @@ void NewSessionQWidget::backButtonSlot() {
   this->hide();
   MainUI::getInstance()->show();
 }
+/**
+ * @brief NewSessionQWidget::startTimerButtonSlot initializes all necessary
+ * state to start a new session such as starting the Timer engine.
+ */
 void NewSessionQWidget::startTimerButtonSlot() {
   QVector<Engine::Hook::HookType> newListsners;
   /**
-    TODO: While the UI supports multiple listeners at the same time, the backend
-    DOES NOT. So make sure, for now at least, to NOT allow the user to select
-    more than one listener for the session.
     Will be adding support for multiple listeners ASAP.
     */
   if (this->ui->keyboardQRadioButton->isChecked()) {
@@ -64,24 +65,9 @@ QString NewSessionQWidget::getTaskName() {
   return this->ui->taskLineEdit->text();
 }
 /**
- * @brief TimerWindowQWidget::~TimerWindowQWidget
+ * @brief NewSessionQWidget::~NewSessionQWidget
  */
-NewSessionQWidget::~NewSessionQWidget() {
-  qDebug() << "TimerWindowQWidget destructor#1";
-  delete ui;
-  qDebug() << "TimerWindowQWidget destructor#2";
-}
-
-/**
- * @brief TimerWindowQWidget::on_timerWindowQFrame_destroyed
- */
-void NewSessionQWidget::on_timerWindowQFrame_destroyed() {
-  qDebug()
-      << " udata::User::getInstance() on on_timerWindowQFrame_destroyed()#1";
-  delete udata::User::getInstance();
-  qDebug()
-      << " udata::User::getInstance() on on_timerWindowQFrame_destroyed()#2";
-}
+NewSessionQWidget::~NewSessionQWidget() { delete ui; }
 
 /**
  * @brief TimerWindowQWidget::updateGoalText
@@ -93,7 +79,6 @@ void NewSessionQWidget::updateGoalText() {
       " for ";
   goalText.replace(0, 5, "Goal:");
   goalText.replace(5, commitmentName.length(), commitmentName);
-  //  qDebug()<<""
   util::formatTime(
       goalText, User::getInstance()->getCurrentCommitment().getFrequency().goal,
       goalContext, 5 + commitmentName.length());

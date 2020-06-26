@@ -14,16 +14,16 @@ QDataStream &Engine::operator<<(QDataStream &out,
 QDataStream &Engine::operator>>(QDataStream &in, Hook::HookType &newHook) {
   int enumValue = 0;
   in >> enumValue;
-  newHook = Engine::Hook::intToListenerType(enumValue);
+  newHook = Engine::Hook::intToHookType(enumValue);
   return in;
 }
 /**
- * @brief Hook::intToListenerType safely converts an integer into a HookType
+ * @brief Hook::intToHookType safely converts an integer into a HookType
  * enum.
  * @param enumInt Integer to convert.
  * @return A HookType enum that was represented by enumInt
  */
-Hook::HookType Hook::intToListenerType(int enumInt) {
+Hook::HookType Hook::intToHookType(int enumInt) {
   if (int(HookType::X_MOUSE_KEYBOARD) < enumInt ||
       int(HookType::none) > enumInt)
     return HookType(enumInt);

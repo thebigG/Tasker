@@ -132,19 +132,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:acb7976010a5d553afc4fe4e1d7d22814"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Hook.html#acb7976010a5d553afc4fe4e1d7d22814" title="Hook::~Hook.">Hook::~Hook</a>. <br /></td></tr>
 <tr class="separator:acb7976010a5d553afc4fe4e1d7d22814"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86ac708ccb0a16520e7392d54c233cfb"><td class="memItemLeft" align="right" valign="top"><a id="a86ac708ccb0a16520e7392d54c233cfb"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>start</b> ()=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a86ac708ccb0a16520e7392d54c233cfb">start</a> ()=0</td></tr>
+<tr class="memdesc:a86ac708ccb0a16520e7392d54c233cfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">start Up to the child to define, but it is usually whatever the class considers thet "start" of the hook, whether that'd be mic or keyboard device. <br /></td></tr>
 <tr class="separator:a86ac708ccb0a16520e7392d54c233cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa4c909da811b02d554c4ee900892b1f"><td class="memItemLeft" align="right" valign="top"><a id="aaa4c909da811b02d554c4ee900892b1f"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#aaa4c909da811b02d554c4ee900892b1f">end</a> ()=0</td></tr>
+<tr class="memdesc:aaa4c909da811b02d554c4ee900892b1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">end Up to the child to define, but this method usually cleans up and gives back resources to the system after a hook is done. For example, in Xhook, part of this cleanup process will involve killing the XListenerHook process gracefully. <br /></td></tr>
 <tr class="separator:aaa4c909da811b02d554c4ee900892b1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa67bdb33e29e2564cfb9ffff993a903b"><td class="memItemLeft" align="right" valign="top"><a id="aa67bdb33e29e2564cfb9ffff993a903b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>pause</b> ()=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#aa67bdb33e29e2564cfb9ffff993a903b">pause</a> ()=0</td></tr>
+<tr class="memdesc:aa67bdb33e29e2564cfb9ffff993a903b"><td class="mdescLeft">&#160;</td><td class="mdescRight">pause Up to the child to define, but pause could be useful in a situation where the audio hardware device needs to be swapped for another one at runtime without killing the <a class="el" href="classEngine_1_1AudioHook.html" title="Engine::AudioHook class This class uses the AudioDvice and AudioMachine classes to make a self-sustai...">AudioHook</a> completely. <br /></td></tr>
 <tr class="separator:aa67bdb33e29e2564cfb9ffff993a903b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78ed990202096648f9aad22932fe8a66"><td class="memItemLeft" align="right" valign="top"><a id="a78ed990202096648f9aad22932fe8a66"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a78ed990202096648f9aad22932fe8a66">update</a> ()=0</td></tr>
+<tr class="memdesc:a78ed990202096648f9aad22932fe8a66"><td class="mdescLeft">&#160;</td><td class="mdescRight">update This could be used for updating any state(such as a new audio device) when the hook is pause. <br /></td></tr>
 <tr class="separator:a78ed990202096648f9aad22932fe8a66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2b928d006ad1206eca234a553ebe0b0"><td class="memItemLeft" align="right" valign="top"><a id="aa2b928d006ad1206eca234a553ebe0b0"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>resetState</b> ()=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#aa2b928d006ad1206eca234a553ebe0b0">resetState</a> ()=0</td></tr>
+<tr class="memdesc:aa2b928d006ad1206eca234a553ebe0b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">resetState Up to the child, but this usually just sets the current state of the hook to Unproductive. <br /></td></tr>
 <tr class="separator:aa2b928d006ad1206eca234a553ebe0b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a694be2b48256167e855e3d8d9e545311"><td class="memItemLeft" align="right" valign="top"><a id="a694be2b48256167e855e3d8d9e545311"></a>
 virtual Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><b>startHook</b> ()=0</td></tr>
@@ -158,14 +163,15 @@ virtual Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><b>st
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a6b05006ac5fd4ca9fa404ea7bd533407"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a6b05006ac5fd4ca9fa404ea7bd533407">intToListenerType</a> (int enumToInt)</td></tr>
-<tr class="memdesc:a6b05006ac5fd4ca9fa404ea7bd533407"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Hook.html#a6b05006ac5fd4ca9fa404ea7bd533407" title="Hook::intToListenerType safely converts an integer into a HookType enum.">Hook::intToListenerType</a> safely converts an integer into a HookType enum.  <a href="classEngine_1_1Hook.html#a6b05006ac5fd4ca9fa404ea7bd533407">More...</a><br /></td></tr>
-<tr class="separator:a6b05006ac5fd4ca9fa404ea7bd533407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac95bbf03eac74b9416ce0e8f6a7f42fe"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#ac95bbf03eac74b9416ce0e8f6a7f42fe">intToHookType</a> (int enumToInt)</td></tr>
+<tr class="memdesc:ac95bbf03eac74b9416ce0e8f6a7f42fe"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Hook.html#ac95bbf03eac74b9416ce0e8f6a7f42fe" title="Hook::intToHookType safely converts an integer into a HookType enum.">Hook::intToHookType</a> safely converts an integer into a HookType enum.  <a href="classEngine_1_1Hook.html#ac95bbf03eac74b9416ce0e8f6a7f42fe">More...</a><br /></td></tr>
+<tr class="separator:ac95bbf03eac74b9416ce0e8f6a7f42fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a25347f91b07bf216b2b350c05e887fe8"><td class="memItemLeft" align="right" valign="top"><a id="a25347f91b07bf216b2b350c05e887fe8"></a>
-Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><b>state</b></td></tr>
+Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a25347f91b07bf216b2b350c05e887fe8">state</a></td></tr>
+<tr class="memdesc:a25347f91b07bf216b2b350c05e887fe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">state <br /></td></tr>
 <tr class="separator:a25347f91b07bf216b2b350c05e887fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
@@ -174,7 +180,7 @@ Friends</h2></td></tr>
 <tr class="memdesc:adc87da240436094d2ef94c191292da23"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator &lt;&lt; Writes the newHook to disk.  <a href="classEngine_1_1Hook.html#adc87da240436094d2ef94c191292da23">More...</a><br /></td></tr>
 <tr class="separator:adc87da240436094d2ef94c191292da23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29f2f233c7eeade089062882cbcaf1dc"><td class="memItemLeft" align="right" valign="top">QDataStream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a29f2f233c7eeade089062882cbcaf1dc">operator&gt;&gt;</a> (QDataStream &amp;in, <a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a> &amp;newHook)</td></tr>
-<tr class="memdesc:a29f2f233c7eeade089062882cbcaf1dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator &gt;&gt;  <a href="classEngine_1_1Hook.html#a29f2f233c7eeade089062882cbcaf1dc">More...</a><br /></td></tr>
+<tr class="memdesc:a29f2f233c7eeade089062882cbcaf1dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">operator &gt;&gt; Loads the newHook from disk onto memory.  <a href="classEngine_1_1Hook.html#a29f2f233c7eeade089062882cbcaf1dc">More...</a><br /></td></tr>
 <tr class="separator:a29f2f233c7eeade089062882cbcaf1dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -226,8 +232,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a6b05006ac5fd4ca9fa404ea7bd533407"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b05006ac5fd4ca9fa404ea7bd533407">&#9670;&nbsp;</a></span>intToListenerType()</h2>
+<a id="ac95bbf03eac74b9416ce0e8f6a7f42fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac95bbf03eac74b9416ce0e8f6a7f42fe">&#9670;&nbsp;</a></span>intToHookType()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -236,7 +242,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Hook::HookType</a> Hook::intToListenerType </td>
+          <td class="memname"><a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">Hook::HookType</a> Hook::intToHookType </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>enumInt</em></td><td>)</td>
@@ -250,7 +256,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classEngine_1_1Hook.html#a6b05006ac5fd4ca9fa404ea7bd533407" title="Hook::intToListenerType safely converts an integer into a HookType enum.">Hook::intToListenerType</a> safely converts an integer into a HookType enum. </p>
+<p><a class="el" href="classEngine_1_1Hook.html#ac95bbf03eac74b9416ce0e8f6a7f42fe" title="Hook::intToHookType safely converts an integer into a HookType enum.">Hook::intToHookType</a> safely converts an integer into a HookType enum. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">enumInt</td><td>Integer to convert. </td></tr>
@@ -368,7 +374,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>operator &gt;&gt; </p>
+<p>operator &gt;&gt; Loads the newHook from disk onto memory. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">in</td><td></td></tr>

@@ -10,8 +10,6 @@ std::unique_ptr<MainUI> MainUI::mainHub;
 using namespace udata;
 
 MainUI::MainUI() {
-  commitmentHub.update();
-
   connect(commitmentMenu.addAction(NEW_COMMITMENT_STRING), &QAction::triggered,
           &commitmentHub, &CommStatsQWidget::newCommitmentSlot);
 
@@ -37,11 +35,13 @@ MainUI::MainUI() {
   this->setCentralWidget(&commitmentHub);
   this->statusBar()->hide();
 }
-
-void MainUI::update() {
-  QMainWindow::update();
-  commitmentHub.update();
-}
+/**
+ * @brief MainUI::updateNewSessionActionState updates the state of the QAction
+ * that allows users to create a new session. This method uses a handful of
+ * heuristics to determine if the user is allowed to create a new session such
+ * as, are they in the middle of a session at the moment, has this commitment
+ * ended, etc.
+ */
 void MainUI::updateNewSessionActionState() {
   if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() ==
           LiveSessionState::Started ||
@@ -55,12 +55,6 @@ void MainUI::updateNewSessionActionState() {
     getNewSessionAction()->setEnabled(false);
     return;
   }
-  qDebug() << "frequency for timeWindow="
-           << User::getInstance()
-                  ->getCurrentCommitment()
-                  .getCommitmentWindows()
-                  .last()
-                  .frequency;
   if (User::getInstance()
           ->getCurrentCommitment()
           .getCommitmentWindows()
@@ -124,12 +118,12 @@ bool MainUI::editCommitmentActionState() {
 bool MainUI::deleteCommitmentActionState() {
   return getDeleteCommitmentAction()->isEnabled();
 }
-
+/**
+ * @brief MainUI::updateEditCommitmentActionState updates the state of the
+ * QAction(whether it is enabled or disbaled) that is tasked with editing a
+ * commitment.
+ */
 void MainUI::updateEditCommitmentActionState() {
-  qDebug() << "commitmentHub.currentLiveSessionCommitment="
-           << commitmentHub.currentLiveSessionCommitment
-           << "commitmentHub.selectedCommitmentIndex"
-           << commitmentHub.selectedCommitmentIndex;
   if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() !=
       LiveSessionState::Stopped) {
     if (commitmentHub.currentLiveSessionCommitment !=
@@ -142,6 +136,13 @@ void MainUI::updateEditCommitmentActionState() {
     this->getEditCommitmentAction()->setEnabled(true);
   }
 }
+/**
+ * @brief MainUI::updateDeleteCommitmentActionState updates the state of the
+ * QAction tasked with deleting a commitment.
+ * For example; if the user is in the middle of a session, then they
+ * are not allowed to delete the commitment to which that new session belongs
+ * to.
+ */
 void MainUI::updateDeleteCommitmentActionState() {
   if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() !=
       LiveSessionState::Stopped) {

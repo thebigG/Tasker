@@ -66,12 +66,12 @@ XHook::XHook() {
 void XHook::start() { startXHook(); }
 
 /**
- * @brief XHook::end
+ * @brief XHook::end kills the XListenerHook process.
  */
 void XHook::end() { xChildHook.kill(); }
 
 /**
- * @brief XHook::pause
+ * @brief XHook::pause Does nothing.
  */
 void XHook::pause() {}
 
@@ -99,14 +99,14 @@ void XHook::update() {
 }
 
 /**
- * @brief XHook::listen
+ * @brief XHook::startHook
  * @return
  */
 Hook::HookState XHook::startHook() { return getState(); }
 void XHook::resetState() { setState(HookState::unproductive); }
 
 /**
- * @brief XListener::startListening
+ * @brief XListener::startXHook
  * Spawn process which is a hardware hook for mouse, keyboard or both
  * @return 0 on success. Error codes to be implemented.
  */

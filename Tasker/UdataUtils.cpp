@@ -36,26 +36,21 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
       rd; // Will be used to obtain a seed for the random number engine
   std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
   std::uniform_int_distribution<> dis;
-  //    dis =
-  //    std::uniform_int_distribution<int>(util::StatsUtility(minProductiveTime),util::StatsUtility::toMinutes(maxProductiveTime));
+
   CommitmentFrequency temptFrequency;
   temptFrequency.timeWindowSize = 7;
   temptFrequency.goal = maxProductiveTime;
   dis = std::uniform_int_distribution<int>(1, 7);
   temptFrequency.frequency = dis(gen);
-  qDebug() << "frequency=" << temptFrequency.frequency;
   TimeWindow newTimeWindow;
   QVector<Session> newSessions;
   QDate sessionDate;
   std::vector<QDate> sessionDates{};
-  //  sessionDates.
   Session newSession;
   newCommitment.setDateEnd(
       today.addDays(numberOfTimeWindows * temptFrequency.timeWindowSize));
   newCommitment.setFrequency(temptFrequency.goal, temptFrequency.frequency,
                              temptFrequency.timeWindowSize);
-  qDebug() << "numberofTimeWindows=" << numberOfTimeWindows;
-  qDebug() << "size of vector=" << timeWindows.length();
   int tempDaysCount = 0;
   for (int i = 0; i < numberOfTimeWindows; i++) {
     newTimeWindow = TimeWindow{};
@@ -67,7 +62,6 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
       dis = std::uniform_int_distribution<int>(minProductiveTime,
                                                maxProductiveTime);
       int temp = dis(gen);
-      qDebug() << "new productive for new sessio=" << temp;
       newSession.setProductiveTime(temp);
       dis = std::uniform_int_distribution<int>(minUnproducitveTime,
                                                maxUnproductiveTime);
@@ -84,22 +78,14 @@ void UdataUtils::generateCommitment(QString name, int numberOfTimeWindows,
         tempDaysCount = dis(gen);
       }
       sessionDate = today.addDays(tempDaysCount);
-      qDebug() << "start date for this window=" << newTimeWindow.startDate;
-      qDebug() << "sessionDate=" << sessionDate;
     }
     newTimeWindow.endDate = today.addDays(6);
     newTimeWindow.sessions = newSessions;
     newSessions.clear();
     timeWindows.append(newTimeWindow);
     today = newTimeWindow.endDate.addDays(1);
-    qDebug() << "size of vector for time windows=" << timeWindows.length();
-    qDebug() << "length of generated sessions"
-             << newTimeWindow.sessions.length();
   }
-  qDebug() << "size of generated time windows=" << timeWindows.length();
   newCommitment.setCommitmentWindows(timeWindows);
-  qDebug() << "size of generated sessions="
-           << newCommitment.getCommitmentWindows().at(0).sessions.length();
   User::getInstance()->addCommitment(newCommitment);
 }
 #else
@@ -149,13 +135,9 @@ void UdataUtils::loadUserData(User &newUser) {
   QDataStream in(&file);
   Commitment newCommitment;
   in.setVersion(QDataStream::Qt_5_1);
-  qDebug() << "loading data#1";
   in >> newUser;
-  qDebug() << "neUser data:" << newUser.getCommitments().length();
   if (!newUser.getCommitments().isEmpty()) {
     newCommitment = newUser.getCommitments().at(0);
-    qDebug() << "Commitment summary:"
-             << newUser.getCommitments().at(0).summary();
   } else {
     file.close();
     return;
@@ -172,35 +154,25 @@ void UdataUtils::loadUserData(User &newUser) {
 QString UdataUtils::getUsername() {
   QString name = "";
 
-  qDebug() << "#2";
-
 #ifdef Q_OS_UNIX
-  qDebug() << "#3";
+
   QProcess getUsername;
 
-  qDebug() << "#4";
   QString output = "";
 
-  qDebug() << "#5";
   getUsername.start("whoami");
 
-  qDebug() << "#6";
   getUsername.waitForFinished();
 
-  qDebug() << "#7";
   output = QString(getUsername.readAllStandardOutput());
 
-  qDebug() << "#8";
   name = output.remove(output.length() - 1, 2);
 
-  qDebug() << "#9";
 #else
   // no implementation yet
   // Implement Windows code here
   name = "";
 #endif
-
-  qDebug() << "#11";
   return name;
 }
 
@@ -213,9 +185,8 @@ QString UdataUtils::getUsername() {
 int UdataUtils::prepFiles() {
   int status = 0;
   QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
-  qDebug() << "#1";
+
   QString userName = getUsername();
-  qDebug() << "#3";
 
   QDir taskerFolder{QDir::homePath()};
   userFilePath = taskerFolder.absolutePath() + QDir::separator() +
@@ -226,10 +197,8 @@ int UdataUtils::prepFiles() {
                   USER_FOLDER_NAME + QDir::separator() + userName +
                   TASKER_FILE_EXTENSION};
 
-    qDebug() << "New File path"
-             << taskerFolder.absoluteFilePath(userName + TASKER_FILE_EXTENSION);
     if (!newFile.open(QIODevice::WriteOnly)) {
-      qDebug() << "!newFile.open(QIODevice::WriteOnly)";
+
       status = -1;
     } else {
       newFile.close();
@@ -237,12 +206,10 @@ int UdataUtils::prepFiles() {
       User::getInstance()->setUsername(userName);
 
       saveUserData(*User::getInstance());
-      qDebug() << "prepared files at:" << userFilePath;
 
       status = 0;
     }
   } else {
-    qDebug() << "exists";
     loadUserData(*User::getInstance());
 
     status = 0;

@@ -9,7 +9,8 @@ class NewSessionQWidget;
 }
 
 /**
- * @brief The TimerWindowQWidget class
+ * @brief The NewSessionQWidget class represents the window that allows users to
+ * decribe the new session they are about to start.
  */
 class NewSessionQWidget : public QWidget {
   Q_OBJECT
@@ -20,10 +21,8 @@ public:
   QString getTaskName();
   void show();
 private slots:
-  //    void on_backQPushButton_clicked();
   void backButtonSlot();
   void startTimerButtonSlot();
-  void on_timerWindowQFrame_destroyed();
 
 private:
   Ui::NewSessionQWidget *ui;
