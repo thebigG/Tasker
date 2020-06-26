@@ -242,6 +242,9 @@ void CommStatsQWidget::previousSnapshot() {
  * snapshot.
  */
 void CommStatsQWidget::nextSnapshot() {
+  if (User::getInstance()->getCommitments().isEmpty()) {
+    return;
+  }
   if (currentTimeWindow + 1 < User::getInstance()
                                   ->getCurrentCommitment()
                                   .getCommitmentWindows()
