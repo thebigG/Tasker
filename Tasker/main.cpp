@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
            << QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
   qDebug() << "path2=" << QDir::homePath();
   //  UdataUtils::generateCommitment(
-  //      "Generated#13", 8, util::minutesToSeconds(10),
+  //      "Generated#1", 8, util::minutesToSeconds(10),
   //      util::minutesToSeconds(100), util::minutesToSeconds(0),
   //      util::minutesToSeconds(25), udata::CommitmentType::WEEKLY);
   //  qDebug() << "Commitment summary:"
