@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>resources/unifont-13.0.02.ttf</file>
+        <file>resources/clock-256.png</file>
     </qresource>
 </RCC>

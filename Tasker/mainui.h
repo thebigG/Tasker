@@ -7,6 +7,7 @@
 #include <memory>
 
 #include "CommStatsQWidget.h"
+#define ICONPATH ":/resources/clock-256.png"
 
 /**
  * @brief The MainUI class is the one responsible
@@ -35,6 +36,8 @@ private:
   QAction *getNewSessionAction();
   QAction *getEditCommitmentAction();
   QAction *getDeleteCommitmentAction();
+  QSystemTrayIcon trayIcon;
+  void closeEvent(QCloseEvent *) override;
 
 public:
   static MainUI *getInstance();
@@ -50,6 +53,7 @@ public:
   MainUI();
 public slots:
   static void saveTaskerStateSlot();
+  void trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason);
 };
 
 #endif // MAINUI_H

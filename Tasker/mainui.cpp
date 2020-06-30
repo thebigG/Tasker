@@ -20,7 +20,12 @@ MainUI::MainUI() {
           &CommStatsQWidget::deleteCommitmentSlot);
   connect(sessionMenu.addAction(NEW_SESSION_STRING), &QAction::triggered,
           &commitmentHub, &CommStatsQWidget::newSessionSlot);
+  connect(&trayIcon, &QSystemTrayIcon::activated, this,
+          &MainUI::trayIconShoWindowSlot);
   commitmentMenu.actions().at(0)->setShortcut(QKeySequence::New);
+  trayIcon.setIcon(QIcon{ICONPATH});
+  trayIcon.show();
+  trayIcon.setToolTip("Tasker");
 #ifdef __TASKER_DEBUG__
   sessionMenu.addAction(EDIT_SESSION_STRING);
   sessionMenu.addAction(DELETE_SESSION_STRING);
@@ -35,6 +40,18 @@ MainUI::MainUI() {
   this->setCentralWidget(&commitmentHub);
   this->statusBar()->hide();
 }
+void MainUI::closeEvent(QCloseEvent *event) {
+  event->ignore();
+  this->hide();
+  qDebug() << "closing event";
+}
+void MainUI::trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason reason) {
+  switch (reason) {
+  case QSystemTrayIcon::ActivationReason::Trigger:
+    this->show();
+  }
+}
+
 /**
  * @brief MainUI::updateNewSessionActionState updates the state of the QAction
  * that allows users to create a new session. This method uses a handful of
