@@ -10,22 +10,19 @@ std::unique_ptr<MainUI> MainUI::mainHub;
 using namespace udata;
 
 MainUI::MainUI() {
-  connect(commitmentMenu.addAction(NEW_COMMITMENT_STRING), &QAction::triggered,
-          &commitmentHub, &CommStatsQWidget::newCommitmentSlot);
-
-  connect(commitmentMenu.addAction(EDIT_COMMITMENT_STRING), &QAction::triggered,
-          &commitmentHub, &CommStatsQWidget::editCommitmentSlot);
-  connect(commitmentMenu.addAction(DELETE_COMMITMENT_STRING),
-          &QAction::triggered, &commitmentHub,
-          &CommStatsQWidget::deleteCommitmentSlot);
-  connect(sessionMenu.addAction(NEW_SESSION_STRING), &QAction::triggered,
-          &commitmentHub, &CommStatsQWidget::newSessionSlot);
-  connect(&trayIcon, &QSystemTrayIcon::activated, this,
-          &MainUI::trayIconShoWindowSlot);
-  commitmentMenu.actions().at(0)->setShortcut(QKeySequence::New);
-  trayIcon.setIcon(QIcon{ICONPATH});
-  trayIcon.show();
-  trayIcon.setToolTip("Tasker");
+    connect(commitmentMenu.addAction(NEW_COMMITMENT_STRING), &QAction::triggered,
+            &commitmentHub, &CommStatsQWidget::newCommitmentSlot);
+    connect(commitmentMenu.addAction(EDIT_COMMITMENT_STRING), &QAction::triggered,
+            &commitmentHub, &CommStatsQWidget::editCommitmentSlot);
+    connect(commitmentMenu.addAction(DELETE_COMMITMENT_STRING), &QAction::triggered,
+            &commitmentHub, &CommStatsQWidget::deleteCommitmentSlot);
+    connect(sessionMenu.addAction(NEW_SESSION_STRING), &QAction::triggered,
+            &commitmentHub, &CommStatsQWidget::newSessionSlot);
+    connect(&trayIcon, &QSystemTrayIcon::activated, this, &MainUI::trayIconShoWindowSlot);
+    commitmentMenu.actions().at(0)->setShortcut(QKeySequence::New);
+    trayIcon.setIcon(QIcon{ ICONPATH });
+    trayIcon.show();
+    trayIcon.setToolTip("Tasker");
 #ifdef __TASKER_DEBUG__
   sessionMenu.addAction(EDIT_SESSION_STRING);
   sessionMenu.addAction(DELETE_SESSION_STRING);
@@ -41,15 +38,15 @@ MainUI::MainUI() {
   this->statusBar()->hide();
 }
 void MainUI::closeEvent(QCloseEvent *event) {
-  event->ignore();
-  this->hide();
-  qDebug() << "closing event";
+    event->ignore();
+    this->hide();
+    qDebug() << "closing event";
 }
 void MainUI::trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason reason) {
-  switch (reason) {
-  case QSystemTrayIcon::ActivationReason::Trigger:
-    this->show();
-  }
+    switch (reason) {
+    case QSystemTrayIcon::ActivationReason::Trigger:
+        this->show();
+    }
 }
 
 /**
@@ -60,56 +57,57 @@ void MainUI::trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason reason) {
  * ended, etc.
  */
 void MainUI::updateNewSessionActionState() {
-  if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() ==
-          LiveSessionState::Started ||
-      commitmentHub.getcurrentLiveSessionWidget().getCurrentState() ==
-          LiveSessionState::Paused) {
+    if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() == LiveSessionState::Started ||
+        commitmentHub.getcurrentLiveSessionWidget().getCurrentState() ==
+            LiveSessionState::Paused) {
 
-    getNewSessionAction()->setEnabled(false);
-    return;
-  }
-  if (User::getInstance()->getCurrentCommitment().isDone()) {
-    getNewSessionAction()->setEnabled(false);
-    return;
-  }
-  if (User::getInstance()
-          ->getCurrentCommitment()
-          .getCommitmentWindows()
-          .last()
-          .isDone()) {
-
-    getNewSessionAction()->setEnabled(false);
-    return;
-  }
-  if (!User::getInstance()
-           ->getCurrentCommitment()
-           .getCommitmentWindows()
-           .last()
-           .sessions.isEmpty()) {
-
-    if (QDate::currentDate() == User::getInstance()
-                                    ->getCurrentCommitment()
-                                    .getCommitmentWindows()
-                                    .last()
-                                    .sessions.last()
-                                    .getDate()) {
-      getNewSessionAction()->setEnabled(false);
-      return;
+        getNewSessionAction()->setEnabled(false);
+        return;
     }
-  }
-  getNewSessionAction()->setEnabled(true);
+    if (User::getInstance()->getCurrentCommitment().isDone()) {
+        getNewSessionAction()->setEnabled(false);
+        return;
+    }
+    if (User::getInstance()
+            ->getCurrentCommitment()
+            .getCommitmentWindows()
+            .last()
+            .isDone()) {
+
+        getNewSessionAction()->setEnabled(false);
+        return;
+    }
+    if (!User::getInstance()
+             ->getCurrentCommitment()
+             .getCommitmentWindows()
+             .last()
+             .sessions.isEmpty()) {
+
+        if (QDate::currentDate() == User::getInstance()
+                                        ->getCurrentCommitment()
+                                        .getCommitmentWindows()
+                                        .last()
+                                        .sessions.last()
+                                        .getDate()) {
+            getNewSessionAction()->setEnabled(false);
+            return;
+        }
+    }
+    getNewSessionAction()->setEnabled(true);
 }
-CommStatsQWidget &MainUI::getCommitmentHub() { return commitmentHub; }
+CommStatsQWidget &MainUI::getCommitmentHub() {
+    return commitmentHub;
+}
 
 /**
  * @brief MainUI::getInstance
  * @return
  */
 MainUI *MainUI::getInstance() {
-  if (mainHub.get() == nullptr) {
-    mainHub = std::make_unique<MainUI>();
-  }
-  return mainHub.get();
+    if (mainHub.get() == nullptr) {
+        mainHub = std::make_unique<MainUI>();
+    }
+    return mainHub.get();
 }
 /**
  * @brief MainUI::saveTaskerState
@@ -119,21 +117,22 @@ MainUI *MainUI::getInstance() {
  * This is called every time the application is about to be closed.
  */
 void MainUI::saveTaskerStateSlot() {
-  qDebug() << "Saving state...";
-  UdataUtils::saveUserData(*User::getInstance());
-} /**
-   * @brief MainUI::newSessionActionState
-   * @return true if Tasker is able to create a session at the moment; false
-   * otherwise.
-   */
+    qDebug() << "Saving state...";
+    UdataUtils::saveUserData(*User::getInstance());
+}
+/**
+ * @brief MainUI::newSessionActionState
+ * @return true if Tasker is able to create a session at the moment; false
+ * otherwise.
+ */
 bool MainUI::newSessionActionState() {
-  return getNewSessionAction()->isEnabled();
+    return getNewSessionAction()->isEnabled();
 }
 bool MainUI::editCommitmentActionState() {
-  return getEditCommitmentAction()->isEnabled();
+    return getEditCommitmentAction()->isEnabled();
 }
 bool MainUI::deleteCommitmentActionState() {
-  return getDeleteCommitmentAction()->isEnabled();
+    return getDeleteCommitmentAction()->isEnabled();
 }
 /**
  * @brief MainUI::updateEditCommitmentActionState updates the state of the
@@ -141,17 +140,16 @@ bool MainUI::deleteCommitmentActionState() {
  * commitment.
  */
 void MainUI::updateEditCommitmentActionState() {
-  if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() !=
-      LiveSessionState::Stopped) {
-    if (commitmentHub.currentLiveSessionCommitment !=
-        commitmentHub.selectedCommitmentIndex) {
-      this->getEditCommitmentAction()->setEnabled(true);
+    if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() !=
+        LiveSessionState::Stopped) {
+        if (commitmentHub.currentLiveSessionCommitment != commitmentHub.selectedCommitmentIndex) {
+            this->getEditCommitmentAction()->setEnabled(true);
+        } else {
+            this->getEditCommitmentAction()->setEnabled(false);
+        }
     } else {
-      this->getEditCommitmentAction()->setEnabled(false);
+        this->getEditCommitmentAction()->setEnabled(true);
     }
-  } else {
-    this->getEditCommitmentAction()->setEnabled(true);
-  }
 }
 /**
  * @brief MainUI::updateDeleteCommitmentActionState updates the state of the
@@ -161,12 +159,12 @@ void MainUI::updateEditCommitmentActionState() {
  * to.
  */
 void MainUI::updateDeleteCommitmentActionState() {
-  if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() !=
-      LiveSessionState::Stopped) {
-    this->getDeleteCommitmentAction()->setEnabled(false);
-  } else {
-    this->getDeleteCommitmentAction()->setEnabled(true);
-  }
+    if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() !=
+        LiveSessionState::Stopped) {
+        this->getDeleteCommitmentAction()->setEnabled(false);
+    } else {
+        this->getDeleteCommitmentAction()->setEnabled(true);
+    }
 }
 
 /**
@@ -174,14 +172,16 @@ void MainUI::updateDeleteCommitmentActionState() {
  * @todo Add logic for "Edit Commitment" QAction
  */
 void MainUI::updateActionStates() {
-  updateNewSessionActionState();
-  updateEditCommitmentActionState();
-  updateDeleteCommitmentActionState();
+    updateNewSessionActionState();
+    updateEditCommitmentActionState();
+    updateDeleteCommitmentActionState();
 }
-QAction *MainUI::getNewSessionAction() { return sessionMenu.actions().at(0); }
+QAction *MainUI::getNewSessionAction() {
+    return sessionMenu.actions().at(0);
+}
 QAction *MainUI::getEditCommitmentAction() {
-  return commitmentMenu.actions().at(1);
+    return commitmentMenu.actions().at(1);
 }
 QAction *MainUI::getDeleteCommitmentAction() {
-  return commitmentMenu.actions().at(2);
+    return commitmentMenu.actions().at(2);
 }

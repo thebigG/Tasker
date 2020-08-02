@@ -120,6 +120,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    AppGuard.cpp \
     AudioDevice.cpp \
     AudioHook.cpp \
     AudioMachine.cpp \
@@ -142,6 +143,7 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
+    AppGuard.h \
     AudioDevice.h \
     AudioHook.h \
     AudioMachine.h \
