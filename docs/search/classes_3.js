@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['livesession_168',['LiveSession',['../classLiveSession.html',1,'LiveSession'],['../classUi_1_1LiveSession.html',1,'Ui::LiveSession']]]
+  ['livesession_170',['LiveSession',['../classLiveSession.html',1,'LiveSession'],['../classUi_1_1LiveSession.html',1,'Ui::LiveSession']]]
 ];

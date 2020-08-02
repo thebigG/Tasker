@@ -92,6 +92,9 @@ Public Slots</h2></td></tr>
 static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainUI.html#a2bb78b07b5a1bd9807f93dbaa29423bf">saveTaskerStateSlot</a> ()</td></tr>
 <tr class="memdesc:a2bb78b07b5a1bd9807f93dbaa29423bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">MainUI::saveTaskerState Stores the state of Tasker on disk. This includes all commitments,sessions or anything that the user has changed since the last time that state was loaded. This is called every time the application is about to be closed. <br /></td></tr>
 <tr class="separator:a2bb78b07b5a1bd9807f93dbaa29423bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7f057ed5fb497845771a21f2e1928e4"><td class="memItemLeft" align="right" valign="top"><a id="aa7f057ed5fb497845771a21f2e1928e4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>trayIconShoWindowSlot</b> (QSystemTrayIcon::ActivationReason)</td></tr>
+<tr class="separator:aa7f057ed5fb497845771a21f2e1928e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -143,6 +146,9 @@ QAction *&#160;</td><td class="memItemRight" valign="bottom"><b>getEditCommitmen
 <tr class="memitem:abaa4939b88cb285e4068618004e8f3bb"><td class="memItemLeft" align="right" valign="top"><a id="abaa4939b88cb285e4068618004e8f3bb"></a>
 QAction *&#160;</td><td class="memItemRight" valign="bottom"><b>getDeleteCommitmentAction</b> ()</td></tr>
 <tr class="separator:abaa4939b88cb285e4068618004e8f3bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21809d7def669418f9a44fb2dada57c5"><td class="memItemLeft" align="right" valign="top"><a id="a21809d7def669418f9a44fb2dada57c5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>closeEvent</b> (QCloseEvent *) override</td></tr>
+<tr class="separator:a21809d7def669418f9a44fb2dada57c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -158,6 +164,9 @@ QMenu&#160;</td><td class="memItemRight" valign="bottom"><b>commitmentMenu</b> {
 <tr class="memitem:a9df3d3e801ac955c62a5ce2f0cc999a9"><td class="memItemLeft" align="right" valign="top"><a id="a9df3d3e801ac955c62a5ce2f0cc999a9"></a>
 QMenu&#160;</td><td class="memItemRight" valign="bottom"><b>sessionMenu</b> {SESSION_MENU_STRING}</td></tr>
 <tr class="separator:a9df3d3e801ac955c62a5ce2f0cc999a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af11d01c655cfeab7362ad9836c4dddcf"><td class="memItemLeft" align="right" valign="top"><a id="af11d01c655cfeab7362ad9836c4dddcf"></a>
+QSystemTrayIcon&#160;</td><td class="memItemRight" valign="bottom"><b>trayIcon</b></td></tr>
+<tr class="separator:af11d01c655cfeab7362ad9836c4dddcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
