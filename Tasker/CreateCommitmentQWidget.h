@@ -17,19 +17,19 @@ class CreateCommitmentQWidget;
  * to edit and create commitments.
  */
 class CreateCommitmentQWidget : public QWidget {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit CreateCommitmentQWidget(QWidget *parent = nullptr);
-  ~CreateCommitmentQWidget();
-  QIntValidator validator{(0, 999, this)};
-  QString getCommitmentName();
-  void show();
-  QDate getStartDate();
-  QDate getEndDate();
-  void editCommitment();
-  udata::CommitmentFrequency getCommitmentFrequency();
-  udata::CommitmentType getType();
+    explicit CreateCommitmentQWidget(QWidget *parent = nullptr);
+    ~CreateCommitmentQWidget();
+    QIntValidator validator{ (this) };
+    QString getCommitmentName();
+    void show();
+    QDate getStartDate();
+    QDate getEndDate();
+    void editCommitment();
+    udata::CommitmentFrequency getCommitmentFrequency();
+    udata::CommitmentType getType();
 
 private slots:
   void createCommitmentButtonSlot();
@@ -38,7 +38,7 @@ private slots:
   void currentIndexCommitmentModeComboBoxSlot(const QString &);
   void currentIndexFrequencyComboBoxSlot(const QString &);
 
-private:
+  private:
   /**
    * @brief editing used for knowing whether this widget is being used for
    * editing a commitment or creating a new commitment.

@@ -19,8 +19,12 @@ MainUI::MainUI() {
     connect(sessionMenu.addAction(NEW_SESSION_STRING), &QAction::triggered,
             &commitmentHub, &CommStatsQWidget::newSessionSlot);
     connect(&trayIcon, &QSystemTrayIcon::activated, this, &MainUI::trayIconShoWindowSlot);
+    connect(trayIconMenu.addAction("Show/Hide"), &QAction::triggered, this,
+            &MainUI::toggleShowWindow);
+    connect(trayIconMenu.addAction("Quit"), &QAction::triggered, this, &QApplication::quit);
     commitmentMenu.actions().at(0)->setShortcut(QKeySequence::New);
     trayIcon.setIcon(QIcon{ ICONPATH });
+    trayIcon.setContextMenu(&trayIconMenu);
     trayIcon.show();
     trayIcon.setToolTip("Tasker");
 #ifdef __TASKER_DEBUG__
@@ -42,10 +46,14 @@ void MainUI::closeEvent(QCloseEvent *event) {
     this->hide();
     qDebug() << "closing event";
 }
+
 void MainUI::trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason reason) {
     switch (reason) {
     case QSystemTrayIcon::ActivationReason::Trigger:
-        this->show();
+        //        trayIconMenu.show();
+        trayIconMenu.show();
+    default:
+        break;
     }
 }
 
@@ -184,4 +192,18 @@ QAction *MainUI::getEditCommitmentAction() {
 }
 QAction *MainUI::getDeleteCommitmentAction() {
     return commitmentMenu.actions().at(2);
+}
+
+/**
+ * @brief toggleShowWindow Show/hide Tasker's window.
+ *If Tasker is currently being shown, this method wil hide it.
+ * If it is hiddedn, it will show Tasker.
+ * This is very useful for Tasker's hide-on-close logic.
+ */
+void MainUI::toggleShowWindow() {
+    if (this->isHidden()) {
+        this->show();
+    } else {
+        this->hide();
+    }
 }

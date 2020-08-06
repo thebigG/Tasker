@@ -8,8 +8,8 @@
  * @return -1 if seconds is negative, otherwise quantity of days from seconds
  */
 int64_t util::toDays(int64_t seconds) {
-  int64_t result = -1;
-  return (result = seconds < 0 ? result : seconds / SECONDS_IN_DAY);
+    int64_t result = -1;
+    return (result = seconds < 0 ? result : seconds / SECONDS_IN_DAY);
 }
 
 /**
@@ -19,8 +19,8 @@ int64_t util::toDays(int64_t seconds) {
  * @return -1 if seconds is negative, otherwise quantity of weeks from seconds
  */
 int64_t util::toWeeks(int64_t seconds) {
-  int64_t result = -1;
-  return (result = seconds < 0 ? result : seconds / SECONDS_IN_WEEK);
+    int64_t result = -1;
+    return (result = seconds < 0 ? result : seconds / SECONDS_IN_WEEK);
 }
 
 /**
@@ -29,8 +29,8 @@ int64_t util::toWeeks(int64_t seconds) {
  * @return -1 if seconds is negative, otherwise quantity of months from seconds
  */
 int64_t util::toMonths(int64_t seconds) {
-  int64_t result = -1;
-  return (result = seconds < 0 ? result : seconds / SECONDS_IN_30_DAYS);
+    int64_t result = -1;
+    return (result = seconds < 0 ? result : seconds / SECONDS_IN_30_DAYS);
 }
 
 /**
@@ -41,16 +41,14 @@ int64_t util::toMonths(int64_t seconds) {
  * @return -1 if secondsTotal or secondsProductive is negative, otherwise
  * percentage of productive time
  */
-double util::calculateProductivePercentage(int64_t secondsTotal,
-                                           int64_t secondsProductive) {
-  double result = -1.0;
+double util::calculateProductivePercentage(int64_t secondsTotal, int64_t secondsProductive) {
+    double result = -1.0;
 
-  if (secondsTotal >= 0 && secondsProductive >= 0 &&
-      secondsProductive <= secondsTotal) {
-    result = ((secondsProductive * 100) / (secondsTotal));
-  }
+    if (secondsTotal >= 0 && secondsProductive >= 0 && secondsProductive <= secondsTotal) {
+        result = ((secondsProductive * 100) / (secondsTotal));
+    }
 
-  return result;
+    return result;
 }
 
 /**
@@ -61,20 +59,18 @@ double util::calculateProductivePercentage(int64_t secondsTotal,
  * @return -1 if secondsTotal or secondsProductive is negative, otherwise
  * percentage of unproductive time
  */
-double util::calculateUnproductivePercentage(int64_t secondsTotal,
-                                             int64_t secondsUnproductive) {
-  double result = -1.0;
+double util::calculateUnproductivePercentage(int64_t secondsTotal, int64_t secondsUnproductive) {
+    double result = -1.0;
 
-  if (secondsTotal >= 0 && secondsUnproductive >= 0 &&
-      secondsUnproductive <= secondsTotal) {
-    result = ((secondsUnproductive * 100) / (secondsTotal));
-  }
+    if (secondsTotal >= 0 && secondsUnproductive >= 0 && secondsUnproductive <= secondsTotal) {
+        result = ((secondsUnproductive * 100) / (secondsTotal));
+    }
 
-  return result;
+    return result;
 }
 
 long long int util::milliToSeconds(long long int milliSeconds) {
-  return milliSeconds / 1000;
+    return milliSeconds / 1000;
 } /**
    * @brief util::formatTime formats the time(in seconds) to a human redable
    * format of "XhYM". This function is specially useful for optimization as it
@@ -87,44 +83,39 @@ long long int util::milliToSeconds(long long int milliSeconds) {
    * @return The index after the last character in formatString, which may be
    * smaller than its size.
    */
-int util::formatTime(QString &formatString, float time, QString &context,
-                     int start, TimeFormat format) {
-  static int temp = 0;
-  static int numberOfSeconds = 0;
-  double timeInminutes = toMinutes(time);
-  static Perf::PerfTimer newPerfTimer{};
-  newPerfTimer.restart();
-  if (start == 0) {
-    formatString.fill(' ');
-  } else {
-    formatString.replace(start, formatString.length() - (start + 1), ' ');
-  }
-  int numberOfHours = (int)timeInminutes / MINUTES_IN_HOUR;
-  QString numberOfMinutesString{QString::number(
-      ((int)timeInminutes) - (numberOfHours * MINUTES_IN_HOUR))};
-  temp = QString::number(numberOfHours).length();
-  formatString.replace(start, temp, QString::number(numberOfHours));
-  temp += start;
-  formatString.replace(temp, 1, "h");
-  temp = temp + 1;
-  formatString.replace(temp, numberOfMinutesString.length(),
-                       numberOfMinutesString);
-  temp += numberOfMinutesString.length();
-  formatString.replace(temp, 1, "m");
-  temp = temp + 1;
-  if (format == TimeFormat::HMS) {
-    float tempDecimal = timeInminutes - (int)timeInminutes;
-    QString numberOfSecondsString{
-        QString::number(tempDecimal * MINUTES_IN_HOUR)};
-    formatString.replace(temp, numberOfSecondsString.length(),
-                         numberOfSecondsString);
-    temp += numberOfSecondsString.length();
-    formatString.replace(temp, 1, "s");
-    temp += 1;
-  }
-  formatString.replace(temp, context.length(), context);
-  newPerfTimer.stop();
+int util::formatTime(QString &formatString, float time, QString &context, int start, TimeFormat format) {
+    static int temp = 0;
+    double timeInminutes = toMinutes(time);
+    static Perf::PerfTimer newPerfTimer{};
+    newPerfTimer.restart();
+    if (start == 0) {
+        formatString.fill(' ');
+    } else {
+        formatString.replace(start, formatString.length() - (start + 1), ' ');
+    }
+    int numberOfHours = (int)timeInminutes / MINUTES_IN_HOUR;
+    QString numberOfMinutesString{ QString::number(
+        ((int)timeInminutes) - (numberOfHours * MINUTES_IN_HOUR)) };
+    temp = QString::number(numberOfHours).length();
+    formatString.replace(start, temp, QString::number(numberOfHours));
+    temp += start;
+    formatString.replace(temp, 1, "h");
+    temp = temp + 1;
+    formatString.replace(temp, numberOfMinutesString.length(), numberOfMinutesString);
+    temp += numberOfMinutesString.length();
+    formatString.replace(temp, 1, "m");
+    temp = temp + 1;
+    if (format == TimeFormat::HMS) {
+        float tempDecimal = timeInminutes - (int)timeInminutes;
+        QString numberOfSecondsString{ QString::number(tempDecimal * MINUTES_IN_HOUR) };
+        formatString.replace(temp, numberOfSecondsString.length(), numberOfSecondsString);
+        temp += numberOfSecondsString.length();
+        formatString.replace(temp, 1, "s");
+        temp += 1;
+    }
+    formatString.replace(temp, context.length(), context);
+    newPerfTimer.stop();
 
-  qDebug() << "perf time for formatTime" << newPerfTimer.duration;
-  return temp + context.length();
+    qDebug() << "perf time for formatTime" << newPerfTimer.duration;
+    return temp + context.length();
 }

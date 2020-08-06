@@ -26,20 +26,21 @@
  * Commitment, should ask this class first.
  */
 class MainUI : public QMainWindow {
-  Q_OBJECT
+    Q_OBJECT
 private:
   static std::unique_ptr<MainUI> mainHub;
   CommStatsQWidget commitmentHub{};
   QMenuBar mainMenuBar;
-  QMenu commitmentMenu{COMMITMENT_MENU_STRING};
-  QMenu sessionMenu{SESSION_MENU_STRING};
+  QMenu commitmentMenu{ COMMITMENT_MENU_STRING };
+  QMenu sessionMenu{ SESSION_MENU_STRING };
+  QMenu trayIconMenu{};
   QAction *getNewSessionAction();
   QAction *getEditCommitmentAction();
   QAction *getDeleteCommitmentAction();
   QSystemTrayIcon trayIcon;
   void closeEvent(QCloseEvent *) override;
 
-public:
+  public:
   static MainUI *getInstance();
   void update();
   void updateNewSessionActionState();
@@ -54,6 +55,7 @@ public:
 public slots:
   static void saveTaskerStateSlot();
   void trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason);
+  void toggleShowWindow();
 };
 
 #endif // MAINUI_H

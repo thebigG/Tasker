@@ -51,52 +51,52 @@ class CommStatsQWidget;
  * QWidget.setPalette(), but not through the Qt Designer editor.
  */
 class CommStatsQWidget : public QWidget {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit CommStatsQWidget(QWidget *parent = nullptr);
-  NewSessionQWidget &getNewSessionQWidget();
-  CreateCommitmentQWidget &getCreateCommitment();
-  void addCommitmentItem(udata::Commitment &newCommitment);
-  ~CommStatsQWidget();
-  void show();
-  void updateCurrentCommitment();
-  /**
-   * @brief currentLiveSessionCommitment Used for re-focusing/re-selecting
-   * the current commitment a LiveSession belongs to when resuming a
-   * LiveSession.
-   */
-  int currentLiveSessionCommitment;
-  /**
-   * @brief selectedCommitmentIndex currently selected(highlited) commitment in
-   * commitmentsQTreeWidget.
-   * @note I think for the future keeping a reference to current commitment
-   * might be a lot better, instead of an index that has to be updated in
-   * hacky/ugly ways.
-   */
-  int selectedCommitmentIndex = 0;
-  LiveSession const &getcurrentLiveSessionWidget() const;
+    explicit CommStatsQWidget(QWidget *parent = nullptr);
+    NewSessionQWidget &getNewSessionQWidget();
+    CreateCommitmentQWidget &getCreateCommitment();
+    void addCommitmentItem(udata::Commitment &newCommitment);
+    ~CommStatsQWidget();
+    void show();
+    void updateCurrentCommitment();
+    /**
+     * @brief currentLiveSessionCommitment Used for re-focusing/re-selecting
+     * the current commitment a LiveSession belongs to when resuming a
+     * LiveSession.
+     */
+    int currentLiveSessionCommitment;
+    /**
+     * @brief selectedCommitmentIndex currently selected(highlited) commitment
+     * in commitmentsQTreeWidget.
+     * @note I think for the future keeping a reference to current commitment
+     * might be a lot better, instead of an index that has to be updated in
+     * hacky/ugly ways.
+     */
+    int selectedCommitmentIndex = 0;
+    LiveSession const &getcurrentLiveSessionWidget() const;
 
 public slots:
   void saveCurrentSession();
-  void newCommitmentSlot(bool);
-  void editCommitmentSlot(bool);
-  void deleteCommitmentSlot(bool);
+  void newCommitmentSlot();
+  void editCommitmentSlot();
+  void deleteCommitmentSlot();
   void newSessionSlot();
   void currentCommitmentChangedSlot(QTreeWidgetItem *, QTreeWidgetItem *);
-  void itemDoubleClickedSlot(QTreeWidgetItem *item, int column);
-private slots:
+  void itemDoubleClickedSlot(QTreeWidgetItem *item);
+  private slots:
   void previousSnapshot();
   void nextSnapshot();
   void updateLiveSessionStateSlot();
 
-private:
+  private:
   Ui::CommStatsQWidget *ui;
   /**
    * @brief isDelete if true, it means that we have just deleted a commitment
    * from the Tree View of commitments. This is particularly useful for
-   * preventing issues(such as off-by-one errors) when deleting a commitment and
-   * the currentItemChanged gets fired.
+   * preventing issues(such as off-by-one errors) when deleting a commitment
+   * and the currentItemChanged gets fired.
    */
   bool isDelete = false;
   /**
@@ -114,8 +114,8 @@ private:
   void updateCurrentLiveSessionCommitment();
   void setSelectable(bool);
   QString commitmentMetaDataText{};
-  QString beginDateText{"Commitment began on "};
-  QString endDateText{"Ends on "};
+  QString beginDateText{ "Commitment began on " };
+  QString endDateText{ "Ends on " };
   LiveSession currentLiveSessionWidget{};
   QPalette p;
   int currentTimeWindow = 0;

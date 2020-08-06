@@ -6,8 +6,7 @@
  * @param numberOfBars
  * @param customCategories
  */
-CommitmentSnaphot::CommitmentSnaphot(int numberOfBars, QString customCategories)
-: QWidget() {
+CommitmentSnaphot::CommitmentSnaphot() : QWidget() {
     productiveBarSet << 95 << 0 << 0 << 0 << 0 << 0 << 0;
     unproductiveBarSet << 0 << 0 << 0 << 0 << 0 << 0 << 0;
     series.append(&productiveBarSet);
