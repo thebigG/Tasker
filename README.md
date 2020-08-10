@@ -29,7 +29,7 @@ To make your life more convinient with appimages I highly recommend downloading 
   
   
   
-**NOTE:** For the mouse and keyboard hooks to work, you **must** give accessbility permissions to Tasker. For the Microphone hooks, you **must** give Microphone permission to Tasker.
+**NOTE:** For the mouse and keyboard hooks to work, you **must** give accessibility permissions to Tasker. For the Microphone hooks, you **must** give Microphone permission to Tasker.
 <img src="Images/Accessibility Prompt.png" alt="" />
 
 <img src="Images/Accessibilty Panel on Tasker.png" alt="" />
