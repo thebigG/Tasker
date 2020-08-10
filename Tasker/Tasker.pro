@@ -6,6 +6,9 @@ RESOURCES  = Tasker.qrc
 macx{
 ICON = taskericon.icns
 }
+
+QMAKE_CXXFLAGS += -Wno-deprecated-copy
+
 win32:{
 
     file_paths += "\"$$PWD/Path/To/Files/ffmpeg.exe\""
@@ -26,9 +29,6 @@ win32:{
          }
     }
 }
-#QMAKE_CXXFLAGS +=  -lXt
-#QMAKE_CXXFLAGS += "-fno-sized-deallocation"
-#QMAKE_CXXFLAGS += -lX11
 
 CONFIG(release, debug|release) {
     #This is a release build
@@ -37,8 +37,7 @@ CONFIG(release, debug|release) {
     #This is a non-release(debug) build
     DEFINES+=__TASKER_DEBUG__
 }
-#QMAKE_CXXFLAGS += "LDFLAGS=-lX11"
-#QMAKE_CXXFLAGS += -lXcb
+
 unix:{
 QMAKE_LFLAGS += -no-pie
     # suppress the default RPATH if you wish
@@ -49,63 +48,18 @@ QMAKE_LFLAGS += -no-pie
 
 #DO NOT delete the next includepath line! If you do, things WILL break on linux
 linux-g++*{
-#QMAKE_CXXFLAGS+= "-lX11"
-#QMAKE_CXXFLAGS += "-lICE"
-#QMAKE_CXXFLAGS += "-lSM"
-#QMAKE_CXXFLAGS += "-no-pie"
-#QMAKE_CXXFLAGS += "-lxcb-xkb"
-#LIBS += -L../libs -lX11
 INCLUDEPATH += /usr/include/x86_64-linux-gnu/qt5
-#CONFIG(release, debug|release)
-#{
-#DEFINES -=__TASKER_DEBUG__
-#DEFINES += QT_NO_DEBUG_OUTPUT
-#}
-#debug
-#{
-#DEFINES+=__TASKER_DEBUG__
-#DEFINES += QT_NO_DEBUG_OUTPUT
-#}
 }
-#macx:
-#{
-#debug
-#{
-#DEFINES+=__TASKER_DEBUG__
-#DEFINES += QT_NO_DEBUG_OUTPUT
-#}
-#!debug
-#{
-#DEFINES -= QT_NO_DEBUG_OUTPUT
-#DEFINES -=__TASKER_DEBUG__
-#}
-##    SOURCES +=   objctest.mm
-##    HEADERS += objctest.h
-#}
 
 QT += multimedia
 QMAKE_CXXFLAGS += "-pthread"
-QMAKE_CXXFLAGS = -std=c++14
+QMAKE_CXXFLAGS += -std=c++14
 #CONFIG += static
 CONFIG += -std=c++14
 
-#CONFIG+=CONFIG(debug, debug|release)
-#{
-#DEFINES+=__TASKER_DEBUG__
-#DEFINES += QT_NO_DEBUG_OUTPUT
-#}
-#!debug
-#{
-#DEFINES -= QT_NO_DEBUG_OUTPUT
-#DEFINES -=__TASKER_DEBUG__
-#}
-#QMAKE_LFLAGS += -Xlinker -Bstatic
-#Print the debug messages ONLY in release mode
-#QMAKE_CXXFLAGS += lobjc
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-#debug: DEFINES += __TASKER_DEBUG__
-#!debug: DEFINES -= __TASKER_DEBUG__
+
 CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
@@ -185,28 +139,6 @@ QMAKE_LFLAGS += -Wl,-rpath,@loader_path/$$REL_PATH_TO_LIBS,-rpath,@loader_path/$
 
 linux-g++
 {
-#Use these if you would like to use iohook as a raw C library, which at the moment is not recommended.
-#These are all static library, so obviously your binary will get bigger if you do this.
-#INCLUDEPATH += ../libs/iohook
-#INCLUDEPATH += ../libs/iohook/include
-#DEPENDPATH += ../libs/iohook
-#LIBS += ../libs/iohook/libuiohook.a
-#LIBS += ../libs/iohook/libXtst.a
-#LIBS += ../libs/iohook/libX11.a
-#LIBS += ../libs/iohook/libXt.a
-#LIBS += ../libs/iohook/libxkbcommon.a
-#LIBS += ../libs/iohook/libxkbcommon-x11.a
-#LIBS += ../libs/iohook/libxkbfile.a
-#LIBS += ../libs/iohook/libXinerama.a
-#LIBS += ../libs/iohook/libX11-xcb.a
-#LIBS += ../libs/iohook/libX11.so.6
-#LIBS += ../libs/iohook/libxcb.a
-#LIBS += ../libs/iohook/libXau.a
-#LIBS += ../libs/iohook/libXdmcp.a
-#LIBS += -lICE
-#LIBS += -lSM
-#LIBS += ../libs/iohook/libXext.a
-#LIBS += -lxcb-xkb
 }
 
 RESOURCES += \
