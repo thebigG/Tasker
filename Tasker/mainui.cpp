@@ -21,8 +21,10 @@ MainUI::MainUI() {
     connect(&trayIcon, &QSystemTrayIcon::activated, this, &MainUI::trayIconShoWindowSlot);
     connect(trayIconMenu.addAction("Show/Hide"), &QAction::triggered, this,
             &MainUI::toggleShowWindow);
+
     connect(trayIconMenu.addAction("Quit"), &QAction::triggered, this, &QApplication::quit);
     commitmentMenu.actions().at(0)->setShortcut(QKeySequence::New);
+
     trayIcon.setIcon(QIcon{ ICONPATH });
     trayIcon.setContextMenu(&trayIconMenu);
     trayIcon.show();
@@ -49,9 +51,14 @@ void MainUI::closeEvent(QCloseEvent *event) {
 
 void MainUI::trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason reason) {
     switch (reason) {
-    case QSystemTrayIcon::ActivationReason::Trigger:
+    case QSystemTrayIcon::ActivationReason::Trigger: {
+        /**
+         *@note I'm not sure if a single clck should just show Tasker
+         * or the trayIconeMenu
+         */
         //        trayIconMenu.show();
         trayIconMenu.show();
+    }
     default:
         break;
     }

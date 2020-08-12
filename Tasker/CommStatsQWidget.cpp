@@ -138,8 +138,8 @@ void CommStatsQWidget::newSessionSlot() {
                                         .sessions.last()
                                         .getDate()) {
             /**
-             * Maybe show the user in the UI that they have added this session
-             * already to this commitment today. It might be worth it to
+             *@note Maybe show the user in the UI that they have added this
+             *session already to this commitment today. It might be worth it to
              * consider a case where maybe a session was terminated prematurely
              * for whatever reason and the user might want to resume that
              * session even after closing Tasker, this is assuming that they
@@ -150,6 +150,7 @@ void CommStatsQWidget::newSessionSlot() {
         }
     }
     if (MainUI::getInstance()->newSessionActionState()) {
+        //        this->getNewSessionQWidget().get
         this->getNewSessionQWidget().show();
     }
 }

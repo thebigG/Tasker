@@ -92,8 +92,7 @@ Public Slots</h2></td></tr>
 static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainUI.html#a2bb78b07b5a1bd9807f93dbaa29423bf">saveTaskerStateSlot</a> ()</td></tr>
 <tr class="memdesc:a2bb78b07b5a1bd9807f93dbaa29423bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">MainUI::saveTaskerState Stores the state of Tasker on disk. This includes all commitments,sessions or anything that the user has changed since the last time that state was loaded. This is called every time the application is about to be closed. <br /></td></tr>
 <tr class="separator:a2bb78b07b5a1bd9807f93dbaa29423bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7f057ed5fb497845771a21f2e1928e4"><td class="memItemLeft" align="right" valign="top"><a id="aa7f057ed5fb497845771a21f2e1928e4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>trayIconShoWindowSlot</b> (QSystemTrayIcon::ActivationReason)</td></tr>
+<tr class="memitem:aa7f057ed5fb497845771a21f2e1928e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainUI.html#aa7f057ed5fb497845771a21f2e1928e4">trayIconShoWindowSlot</a> (QSystemTrayIcon::ActivationReason)</td></tr>
 <tr class="separator:aa7f057ed5fb497845771a21f2e1928e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a4a7681f8fc7a830b15eaee7ea8c371"><td class="memItemLeft" align="right" valign="top"><a id="a7a4a7681f8fc7a830b15eaee7ea8c371"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainUI.html#a7a4a7681f8fc7a830b15eaee7ea8c371">toggleShowWindow</a> ()</td></tr>
@@ -229,6 +228,33 @@ static std::unique_ptr&lt; <a class="el" href="classMainUI.html">MainUI</a> &gt;
 
 <p><a class="el" href="classMainUI.html#a91650f667b93a03bd19958a7b1805d7b" title="MainUI::newSessionActionState.">MainUI::newSessionActionState</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if Tasker is able to create a session at the moment; false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="aa7f057ed5fb497845771a21f2e1928e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7f057ed5fb497845771a21f2e1928e4">&#9670;&nbsp;</a></span>trayIconShoWindowSlot</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainUI::trayIconShoWindowSlot </td>
+          <td>(</td>
+          <td class="paramtype">QSystemTrayIcon::ActivationReason&#160;</td>
+          <td class="paramname"><em>reason</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section note"><dt>Note</dt><dd>I'm not sure if a single clck should just show Tasker or the trayIconeMenu</dd></dl>
 
 </div>
 </div>

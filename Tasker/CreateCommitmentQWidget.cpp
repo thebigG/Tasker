@@ -26,6 +26,7 @@ CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
         getType() == udata::CommitmentType::EVERDAY) {
         ui->dateEndQDateEdit->setMinimumDate(QDate::currentDate().addDays(WEEK_SIZE));
     }
+
     connect(this->ui->createCommitmentQPushButton_2, &QPushButton::clicked,
             this, &CreateCommitmentQWidget::createCommitmentButtonSlot);
     connect(this->ui->backQPushButton_2, &QPushButton::clicked, this,
@@ -38,6 +39,10 @@ CreateCommitmentQWidget::CreateCommitmentQWidget(QWidget *parent)
     connect(this->ui->frequencyQComboBox, &QComboBox::currentTextChanged, this,
             &CreateCommitmentQWidget::currentIndexFrequencyComboBoxSlot);
     this->addAction(new QAction());
+
+    /**
+     *Set the Escape key as a shortcut to hide the Create Commitment Window.
+     */
     this->actions().at(0)->setShortcut(QKeySequence::Cancel);
     connect(this->actions().at(0), &QAction::triggered, this, &QWidget::hide);
 }
@@ -167,6 +172,7 @@ udata::CommitmentFrequency CreateCommitmentQWidget::getCommitmentFrequency() {
     }
     return frequency;
 }
+
 /**
  * @brief CreateCommitmentQWidget::getType
  * @return The type of commitment that is currently selected.
@@ -183,6 +189,7 @@ udata::CommitmentType CreateCommitmentQWidget::getType() {
         return udata::CommitmentType::Custom;
     }
 }
+
 /**
  * @brief CreateCommitmentQWidget::editCommitment Updates this window's state
  * with the data from the commitment that the user is editing.
@@ -193,17 +200,20 @@ void CreateCommitmentQWidget::editCommitment() {
     this->setWindowTitle("Edit \"" + currentCommitment.getName() + "\"");
     this->ui->commitmentNameQLineEdit->setText(currentCommitment.getName());
     this->ui->dateStartQDateEdit->setDate(currentCommitment.getDateStart());
+
     if (currentCommitment.hasEndDate()) {
         this->ui->noEndDateQCheckBox->setCheckState(Qt::CheckState::Unchecked);
         this->ui->dateEndQDateEdit->setDate(currentCommitment.getDateEnd());
     } else {
         this->ui->noEndDateQCheckBox->setCheckState(Qt::CheckState::Checked);
     }
+
     if (currentCommitment.getFrequency().frequency == 7) {
         this->ui->commitmentModeQCombox->setCurrentIndex(1);
     } else {
         this->ui->commitmentModeQCombox->setCurrentIndex(0);
     }
+
     if (util::toHours(currentCommitment.getFrequency().goal) > 0) {
         this->ui->frequencyTimeFormatQComboBox->setCurrentIndex(1);
         this->ui->frequencyTimeQLineEdit->setText(
@@ -213,6 +223,7 @@ void CreateCommitmentQWidget::editCommitment() {
         this->ui->frequencyTimeQLineEdit->setText(
             QString::number(util::toMinutes(currentCommitment.getFrequency().goal)));
     }
+
     this->ui->frequencyQComboBox->setCurrentIndex(
         currentCommitment.getFrequency().frequency - 1);
     editing = true;
@@ -223,6 +234,7 @@ void CreateCommitmentQWidget::editCommitment() {
 
 void CreateCommitmentQWidget::show() {
     QWidget::show();
+
     if (!editing) {
         this->setWindowTitle("Create a Commitment");
     };
