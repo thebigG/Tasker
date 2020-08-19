@@ -37,6 +37,7 @@ build-Tasker*
 *.i*86
 *.x86_64
 *.hex
+dist*
 
 # Debug files
 *.dSYM/

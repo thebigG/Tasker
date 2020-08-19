@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.12.4, 2020-08-16T18:11:02. -->
+<!-- Written by QtCreator 4.12.4, 2020-08-18T20:24:13. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -332,7 +332,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">XHook</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.XHook</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">XHook</value>
-    <value type="QString" key="RunConfiguration.Arguments"></value>
+    <value type="QString" key="RunConfiguration.Arguments">0</value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
@@ -341,6 +341,7 @@
     <value type="bool" key="RunConfiguration.UseMultiProcess">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseTerminal">false</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/lorenzogomez/Tasker/libs/Xhook/build-XHook-Desktop_Qt_5_9_9_GCC_64bit-Debug</value>
    </valuemap>

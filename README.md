@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/thebigG/Tasker.svg?branch=release)](https://travis-ci.com/thebigG/Tasker)  [![](https://img.shields.io/badge/docs-readme-blue.svg)](https://thebigg.github.io/Tasker/)
+
 # Tasker
 
 ## Pitch
@@ -45,6 +46,10 @@ When updating Tasker in macOS; meaning re-downloading a new .app file from the r
 
 
 **NOTE**:Will be packaging for Windows10 very  soon :)
+
+# Building The Dependencies
+Tasker uses libuiohook to process mouse and keyboard input. In order to run the XHook, which is what detects
+the mouse and keyboard input, you **must** build the `libuiohook` project. Just `cd` into `libuiohook` and follow the instructions on the readme :). After that, cd into `Tasker/libs/XHook` and build that. I suggest you build `XHook` from Qt Creator to make your life easy. This build system is half-baked right now, but I will make this process a lot smoother in the future.
 
 # How do I help?
 
