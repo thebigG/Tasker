@@ -214,3 +214,12 @@ void MainUI::toggleShowWindow() {
         this->hide();
     }
 }
+
+void MainUI::quitSlot() {
+    if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() !=
+        LiveSessionState::Stopped) {
+        this->show();
+    } else {
+        QApplication::quit();
+    }
+}

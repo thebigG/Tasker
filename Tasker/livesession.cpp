@@ -84,6 +84,7 @@ void LiveSession::stop() {
     ui->productiveTimeValue->setText("0h0m0s");
     ui->unproductiveTimeValue->setText("0h0m0s");
     ui->totalTimeValue->setText("0h0m0s");
+
     // reset the rest of the UI
     this->ui->taskStateMessageLabel->setVisible(false);
     this->ui->hookStateQLabel->setVisible(false);

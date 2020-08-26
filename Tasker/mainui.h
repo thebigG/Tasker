@@ -56,6 +56,7 @@ public slots:
   static void saveTaskerStateSlot();
   void trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason);
   void toggleShowWindow();
+  void quitSlot();
 };
 
 #endif // MAINUI_H
