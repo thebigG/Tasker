@@ -10,6 +10,14 @@
 #define ICONPATH ":/resources/clock-256.png"
 
 /**
+Status strings for what is happening with the current live session.
+*/
+#define LIVESESSION_PENDING ":Pending"
+#define LIVESSION_IN_PROGRESS ":In Progress"
+#define LIVESSION_COMPLETE ":Completed"
+#define LIVESESSION_PAUSED ":Paused"
+
+/**
  * @brief The MainUI class is the one responsible
  * for the meta UI/front-end state of Tasker as a whole.
  * One can think of this class as the one represnting the entire winodw
@@ -38,6 +46,10 @@ private:
   QAction *getEditCommitmentAction();
   QAction *getDeleteCommitmentAction();
   QSystemTrayIcon trayIcon;
+  QAction *liveSessionStatusAction{};
+  QString liveSessionStatusText{ "LiveSession:" };
+  void updateLiveSessionStatusText();
+  void updateLiveSessionStatusAction();
   void closeEvent(QCloseEvent *) override;
 
   public:

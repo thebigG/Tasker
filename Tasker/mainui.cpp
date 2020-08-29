@@ -25,6 +25,8 @@ MainUI::MainUI() {
     connect(trayIconMenu.addAction("Quit"), &QAction::triggered, this, &QApplication::quit);
     commitmentMenu.actions().at(0)->setShortcut(QKeySequence::New);
 
+    liveSessionStatusAction = trayIconMenu.addAction(liveSessionStatusText);
+
     trayIcon.setIcon(QIcon{ ICONPATH });
     trayIcon.setContextMenu(&trayIconMenu);
     trayIcon.show();
@@ -57,6 +59,8 @@ void MainUI::trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason reason) {
          * or the trayIconeMenu
          */
         //        trayIconMenu.show();
+        //        trayIconMenu.actions().at();
+        updateLiveSessionStatusAction();
         trayIconMenu.show();
     }
     default:
@@ -79,10 +83,12 @@ void MainUI::updateNewSessionActionState() {
         getNewSessionAction()->setEnabled(false);
         return;
     }
+
     if (User::getInstance()->getCurrentCommitment().isDone()) {
         getNewSessionAction()->setEnabled(false);
         return;
     }
+
     if (User::getInstance()
             ->getCurrentCommitment()
             .getCommitmentWindows()
@@ -92,6 +98,7 @@ void MainUI::updateNewSessionActionState() {
         getNewSessionAction()->setEnabled(false);
         return;
     }
+
     if (!User::getInstance()
              ->getCurrentCommitment()
              .getCommitmentWindows()
@@ -108,6 +115,7 @@ void MainUI::updateNewSessionActionState() {
             return;
         }
     }
+
     getNewSessionAction()->setEnabled(true);
 }
 CommStatsQWidget &MainUI::getCommitmentHub() {
@@ -222,4 +230,40 @@ void MainUI::quitSlot() {
     } else {
         QApplication::quit();
     }
+}
+
+void MainUI::updateLiveSessionStatusText() {
+    QString prefix{ "LiveSession:" };
+    liveSessionStatusText = prefix;
+    if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() ==
+        LiveSessionState::Started) {
+        liveSessionStatusText += LIVESSION_IN_PROGRESS;
+    } else if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() ==
+               LiveSessionState::Paused) {
+        liveSessionStatusText += LIVESESSION_PAUSED;
+    } else if (!User::getInstance()
+                    ->getCurrentCommitment()
+                    .getCommitmentWindows()
+                    .last()
+                    .sessions.isEmpty() &&
+               QDate::currentDate() == User::getInstance()
+                                           ->getCurrentCommitment()
+                                           .getCommitmentWindows()
+                                           .last()
+                                           .sessions.last()
+                                           .getDate()) {
+        /**
+        The session for the current commitment has been completed, so we
+        update the status string accordingly.
+        */
+        liveSessionStatusText += LIVESSION_COMPLETE;
+
+    } else {
+        liveSessionStatusText += LIVESESSION_PENDING;
+    }
+}
+
+void MainUI::updateLiveSessionStatusAction() {
+    updateLiveSessionStatusText();
+    liveSessionStatusAction->setText(liveSessionStatusText);
 }
