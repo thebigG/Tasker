@@ -7,6 +7,10 @@ macx{
 ICON = taskericon.icns
 }
 
+
+#Add KF5Ntoficiations library for notifications support
+unix:!macx: LIBS += -lKF5Notifications
+
 QMAKE_CXXFLAGS += -Wno-deprecated-copy
 
 win32:{
