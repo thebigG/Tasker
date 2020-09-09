@@ -31,6 +31,7 @@ jobs:
       - sudo apt install libx11-dev
       - sudo apt install libxcb-xkb-dev
       - sudo apt install binutils-2.26
+      - sudo apt-get -y install libkf5notifications
       - ld --version
       - sudo apt-get install clang-format-3.6
       - git clone https://github.com/qt/qtcharts
