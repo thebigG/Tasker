@@ -2,7 +2,13 @@
 
 # Tasker
 
-## Pitch
+# Table of Contents
+1. [Pitch](#pitch)
+2. [Usage](#usage)
+2. [How do I get Tasker?](#how_do_I_get_tasker)
+
+
+## Pitch <a name="pitch"></a>
 
 Many people(including us) have creative pursuits; projects we want to allocate time for; goals to accomplish. In our team, I write; Gem(a contributor to the project) plays music. It’s always been hard for us, and we suspect for many other people, to stay on task. More specifically, it’s even harder to keep track of one’s progress. The timers of our world—smartphones, desktops, etc—aren’t designed to accurately time the tasks we do.
 
@@ -12,10 +18,20 @@ Even though my timer counted 30 minutes, I only did 15 minutes of writing. This 
 
 This means that while a session is opened in Tasker, it will be detecting hardware interaction. We **DO NOT** record keyboard strokes or sound. We buffer it temporarily and throw it away once we run it through some logic.
 
-# How do I get Tasker?
+# Usage <a name="usage"></a>
+## Commitments
+Tasker has the concept of "commitments". A commitment in Tasker is exactly what it sounds like; it is an activity that one commits to for a certain period of time, or
+indefinitely. This could be something like committing to write a novel within a year. Or play an instrument everyday, which is what I use it for.
+
+
+
+*TODO:* Add example images to illustrate this better.
+
+
+# How do I get Tasker? <a name="how_do_I_get_tasker"></a>
 You can get it [here](https://github.com/thebigG/Tasker/releases)
 
-## On Linux
+## On Linux 
 <img src="Images/practice guitar commitment.png" alt="" />
 
 1.Right-click the AppImage  
