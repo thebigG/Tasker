@@ -23,9 +23,37 @@ This means that while a session is opened in Tasker, it will be detecting hardwa
 Tasker has the concept of "commitments". A commitment in Tasker is exactly what it sounds like; it is an activity that one commits to for a certain period of time, or
 indefinitely. This could be something like committing to write a novel within a year. Or play an instrument everyday, which is what I use it for.
 
+<img src="Images/commitment example.png" alt="" />
 
 
-*TODO:* Add example images to illustrate this better.
+
+As you can see in the image above I have a commitment called "Practice Guitar". You can also see that I have **committed** to 25 minutes, 5 **times a week**. 
+
+## How Commitments are measured
+
+You can also see that I have done that twice for that particular week on Sunday and Tuesday. I have done 25 minutes(the time goal of this commitment) of **productive** time which is in **blue**. **Productive Time** in Tasker is the time one spends **actually** doing the task--which in this case, it is practicing guitar. This gets measured by detecting **microphone** interaction. In a nutshell, if there is noise in the room, the **Productive** timer will tick; If there is no noise, the **Unproductive** timer will tick the productive one will stop. Like mentioned earlier, sound nor key strokes are recorded. They are briefly looked at by the app and gets thrown away. You are free to look at the code to confirm this; any class that inherits the *Hook* Class is a class that either detects keyboard, mouse or audio input.
+
+
+
+## Doing the Task of Practicing Guitar(Or "Sessions")
+
+So if I want to practice guitar(the **task** I'm committed to), all I have to do is double-click on my commitment and I get the **new session** window:
+
+
+
+<img src="Images/New Session.png" alt="" />
+
+As you can see when you start a new **session** for a commitment, you have a **name** and **hooks** to choose from. The name is simply a name you want to give this particular session.  The hooks are the **hardware** hooks. So in my case of playing guitar, I would choose the **mic** hook as I would like Tasker to detect audio input. But we also have mouse and keyboard! So if you want to commit to writing a novel, for example, you can! Just create a new commitment and select the **keyboard** hook for your session. 
+
+
+
+## In-Session
+
+<img src="Images/In-Session.png " alt="" />
+
+Once you start a session, Tasker will show a live feed of your current **productive** and **unproductive** time as you can see above. You can also *pause* a session while in the middle of it. Once you are done, Tasker will save that for you and you can come back the next day/or next week to make sure you stay committed!
+
+
 
 
 # How do I get Tasker? <a name="how_do_I_get_tasker"></a>
@@ -43,9 +71,9 @@ To make your life more convinient with appimages I highly recommend downloading 
 
 ## On macOS
 <img src="Images/Tasker on macOS.png" alt="" />
+
   
-  
-  
+
 **NOTE:** For the mouse and keyboard hooks to work, you **must** give accessibility permissions to Tasker. For the Microphone hooks, you **must** give Microphone permission to Tasker.
 <img src="Images/Accessibility Prompt.png" alt="" />
 
