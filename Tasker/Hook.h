@@ -30,6 +30,7 @@ public:
      * @brief start Up to the child to define, but it is usually whatever the
      * class considers thet "start" of the hook, whether that'd be mic or
      * keyboard device.
+     *
      */
     virtual void start() = 0;
     /**

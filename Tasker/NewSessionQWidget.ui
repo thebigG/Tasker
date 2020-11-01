@@ -125,7 +125,7 @@
            </property>
            <item>
             <property name="text">
-             <string>Built-In Mic</string>
+             <string>Default Mic</string>
             </property>
            </item>
           </widget>

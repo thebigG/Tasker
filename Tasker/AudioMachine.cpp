@@ -39,88 +39,100 @@ using Engine::AudioMachine;
  * state(such as audio formats) to enable the AudioDevice to function properly.
  */
 AudioMachine::AudioMachine() : audioDevice(nullptr), qAudioInput(nullptr) {
-  QAudioFormat format;
+    QAudioFormat format;
 
-  // Set up the desired format, for example:
-  format.setSampleRate(8000);
-  format.setChannelCount(1);
-  format.setSampleSize(8);
-  format.setCodec("audio/pcm");
-  format.setByteOrder(QAudioFormat::LittleEndian);
-  format.setSampleType(QAudioFormat::UnSignedInt);
-  audioDevice = std::make_unique<AudioDevice>(format);
-  audioDevice->open(QIODevice::WriteOnly);
+    // Set up the desired format, for example:
+    format.setSampleRate(8000);
+    format.setChannelCount(1);
+    format.setSampleSize(8);
+    format.setCodec("audio/pcm");
+    format.setByteOrder(QAudioFormat::LittleEndian);
+    format.setSampleType(QAudioFormat::UnSignedInt);
+    audioDevice = std::make_unique<AudioDevice>(format);
+    audioDevice->open(QIODevice::WriteOnly);
 
-  // assign audio device here
-  QAudioDeviceInfo info = QAudioDeviceInfo::defaultInputDevice();
-  QList<QAudioDeviceInfo> devices =
-      QAudioDeviceInfo::availableDevices(QAudio::Mode::AudioInput);
+    // assign audio device here
+    QAudioDeviceInfo info = QAudioDeviceInfo::defaultInputDevice();
+    QList<QAudioDeviceInfo> devices =
+        QAudioDeviceInfo::availableDevices(QAudio::Mode::AudioInput);
 
-  for (QAudioDeviceInfo i : devices) {
-    qDebug() << "device info:" << i.isNull();
-  }
-  if (!info.isFormatSupported(format)) {
-    qDebug("Default format not supported, trying to use the nearest.");
-    format = info.nearestFormat(format);
-  }
+    for (QAudioDeviceInfo i : devices) {
 
-  qAudioInput = std::make_unique<QAudioInput>(format, this);
+        if (i.isFormatSupported(format)) {
+            qDebug() << "valid device info name:" << i.deviceName();
+        }
+    }
+    if (!info.isFormatSupported(format)) {
+        qDebug("Default format not supported, trying to use the nearest.");
+        format = info.nearestFormat(format);
+    }
 
-  qAudioInput->start(audioDevice.get());
-  qDebug() << "audio state-->" << qAudioInput->state();
-  qAudioInput->setVolume(0.0);
-  audioDevice->setMinAmplitude(audioDevice->getDeviceLevel());
-  qAudioInput->setVolume(1.0);
+    qAudioInput = std::make_unique<QAudioInput>(format, this);
+
+    qAudioInput->start(audioDevice.get());
+
+    qDebug() << "default audio device name:" << info.deviceName();
+
+    qDebug() << "audio state-->" << qAudioInput->state();
+    qAudioInput->setVolume(0.0);
+    audioDevice->setMinAmplitude(audioDevice->getDeviceLevel());
+    qAudioInput->setVolume(1.0);
 }
 
 /**
  * @brief AudioMachine::getAudioDevice
  * @return
  */
-AudioDevice *AudioMachine::getAudioDevice() { return audioDevice.get(); }
+AudioDevice *AudioMachine::getAudioDevice() {
+    return audioDevice.get();
+}
 
 /**
  * @brief AudioMachine::getQAudioInput
  * @return
  */
-QAudioInput &AudioMachine::getQAudioInput() { return *(qAudioInput.get()); }
+QAudioInput &AudioMachine::getQAudioInput() {
+    return *(qAudioInput.get());
+}
 
 /**
  * @brief AudioMachine::handleStateChanged
  * @param newState
  */
 void AudioMachine::handleStateChanged(QAudio::State newState) {
-  switch (newState) {
-  case QAudio::StoppedState:
-    if (qAudioInput->error() != QAudio::NoError) {
-      // Error handling
-    } else {
-      // Finished recording
-      qDebug("stopped state");
+    switch (newState) {
+    case QAudio::StoppedState:
+        if (qAudioInput->error() != QAudio::NoError) {
+            // Error handling
+        } else {
+            // Finished recording
+            qDebug("stopped state");
+        }
+
+        break;
+
+    case QAudio::ActiveState:
+        // Started recording - read from IO device
+        qDebug("active state");
+
+    default:
+        // ... other cases as appropriate
+        break;
     }
-
-    break;
-
-  case QAudio::ActiveState:
-    // Started recording - read from IO device
-    qDebug("active state");
-
-  default:
-    // ... other cases as appropriate
-    break;
-  }
 }
 
 /**
  * @brief AudioMachine::stopRecording
  */
 void AudioMachine::stopRecording() {
-  qAudioInput->stop();
-  audioDevice->close();
+    qAudioInput->stop();
+    audioDevice->close();
 }
 /**
  * @brief AudioMachine::isAudioDeviceValid if the AudioDevice is open, then this
  * function returns true. Otherwise, it returns false.
  * @return
  */
-bool AudioMachine::isAudioDeviceValid() { return audioDevice->isOpen(); }
+bool AudioMachine::isAudioDeviceValid() {
+    return audioDevice->isOpen();
+}
