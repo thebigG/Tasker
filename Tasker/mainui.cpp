@@ -238,6 +238,20 @@ void MainUI::updateLiveSessionStatusText() {
     if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() ==
         LiveSessionState::Started) {
         liveSessionStatusText += LIVESSION_IN_PROGRESS;
+        switch (Engine::Timer::getInstance()->timerHookState) {
+        case Engine::Hook::HookState::productive: {
+            qDebug() << "productive case";
+            liveSessionStatusText += "(productive)";
+            break;
+        }
+        case Engine::Hook::HookState::unproductive: {
+            liveSessionStatusText += "(unproductive)";
+            qDebug() << "unproductive case";
+            break;
+        }
+        default:
+            break;
+        }
     } else if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() ==
                LiveSessionState::Paused) {
         liveSessionStatusText += LIVESESSION_PAUSED;

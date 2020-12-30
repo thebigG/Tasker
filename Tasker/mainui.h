@@ -7,15 +7,16 @@
 #include <memory>
 
 #include "CommStatsQWidget.h"
+#include "Timer.h"
 #define ICONPATH ":/resources/clock-256.png"
 
 /**
 Status strings for what is happening with the current live session.
 */
-#define LIVESESSION_PENDING ":Pending"
-#define LIVESSION_IN_PROGRESS ":In Progress"
-#define LIVESSION_COMPLETE ":Completed"
-#define LIVESESSION_PAUSED ":Paused"
+#define LIVESESSION_PENDING "Pending"
+#define LIVESSION_IN_PROGRESS "In Progress"
+#define LIVESSION_COMPLETE "Completed"
+#define LIVESESSION_PAUSED "Paused"
 
 /**
  * @brief The MainUI class is the one responsible
