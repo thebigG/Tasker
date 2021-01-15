@@ -52,19 +52,17 @@ void MainUI::closeEvent(QCloseEvent *event) {
 }
 
 void MainUI::trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason reason) {
+
     switch (reason) {
-    case QSystemTrayIcon::ActivationReason::Trigger: {
-        /**
-         *@note I'm not sure if a single clck should just show Tasker
-         * or the trayIconeMenu
-         */
-        //        trayIconMenu.show();
-        //        trayIconMenu.actions().at();
+    case QSystemTrayIcon::ActivationReason::MiddleClick: {
+        /** We ignore middle click because that would feel weird. */
+        break;
+    }
+    default: {
         updateLiveSessionStatusAction();
         trayIconMenu.show();
-    }
-    default:
         break;
+    }
     }
 }
 
