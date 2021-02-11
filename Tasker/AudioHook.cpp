@@ -8,10 +8,13 @@ using Engine::Hook;
 
 /**
  * @brief AudioHook::AudioListener
+ * @todo At the moment the audioThreshold is set on AudioHook, but it really
+ * should not be.
  */
 AudioHook::AudioHook()
-    : Hook::Hook{}, audioListenerState{AudioListenerState::OFF} {
-  audioThreshold = 0.01;
+: Hook::Hook{}, audioListenerState{ AudioListenerState::OFF } {
+
+    audioThreshold = 0.01;
 }
 
 /**
@@ -19,39 +22,42 @@ AudioHook::AudioHook()
  * @param audioThreshold
  */
 void AudioHook::setAudioThreshold(qreal audioThreshold) {
-  this->audioThreshold = audioThreshold;
+    this->audioThreshold = audioThreshold;
 }
 /**
  * @brief AudioListener::getAudioThreshold
  * @return
  */
-qreal &AudioHook::getAudioThreshold() { return audioThreshold; }
+qreal &AudioHook::getAudioThreshold() {
+    return audioThreshold;
+}
 /**
  * @brief AudioHook::start initializes the state of AudioMachine,
  *AudioDevice(the actual audio I/O device). This function also connects and
  *signals and slots necessary to start the hook.
  */
 void AudioHook::start() {
-  audioSource = std::make_unique<AudioMachine>();
-  audioListenerState = AudioListenerState::ON;
-  if (audioSource == nullptr) {
-    // error-handling
-  }
-  connect(audioSource->getAudioDevice(), &AudioDevice::audioRead, this,
-          &AudioHook::update);
+    audioSource = std::make_unique<AudioMachine>();
+    audioListenerState = AudioListenerState::ON;
+    if (audioSource == nullptr) {
+        // error-handling
+    }
+    connect(audioSource->getAudioDevice(), &AudioDevice::audioRead, this, &AudioHook::update);
 }
 
 /**
  * @brief AudioHook::end
  */
-void AudioHook::end() { audioListenerState = AudioListenerState::OFF; }
+void AudioHook::end() {
+    audioListenerState = AudioListenerState::OFF;
+}
 
 /**
  * @brief AudioHook::pause
  */
 void AudioHook::pause() {
-  // TODO pause
-  // suspend listening, but don't quit
+    // TODO pause
+    // suspend listening, but don't quit
 }
 
 /**
@@ -63,26 +69,30 @@ void AudioHook::pause() {
  * signal is sent.
  */
 void AudioHook::update() {
-  if (!profiled) {
-    /**
-      Profile device's volume if it hasn't been profiled yet
-      */
-    audioSource->getQAudioInput().setVolume(0.0);
-    audioSource->getAudioDevice()->setMinAmplitude(
-        audioSource->getAudioDevice()->getDeviceLevel());
-    audioSource->getQAudioInput().setVolume(1.0);
-    profiled = true;
-  }
-  HookState state;
-  state = audioSource->getAudioDevice()->getDeviceLevel() > audioThreshold
-              ? HookState::productive
-              : HookState::unproductive;
-  setState(state);
+    if (!profiled) {
+        /**
+          Profile device's volume if it hasn't been profiled yet
+          */
+        audioSource->getQAudioInput().setVolume(0.0);
+        audioSource->getAudioDevice()->setMinAmplitude(
+            audioSource->getAudioDevice()->getDeviceLevel());
+        audioSource->getQAudioInput().setVolume(1.0);
+        profiled = true;
+    }
+    HookState state;
+    state = audioSource->getAudioDevice()->getDeviceLevel() > audioThreshold ?
+                HookState::productive :
+                HookState::unproductive;
+    setState(state);
 }
 
-Hook::HookState AudioHook::startHook() { return Hook::getState(); }
+Hook::HookState AudioHook::startHook() {
+    return Hook::getState();
+}
 
 /**
  * @brief AudioHook::listen resets state to "unproductive"
  */
-void AudioHook::resetState() { setState(HookState::unproductive); }
+void AudioHook::resetState() {
+    setState(HookState::unproductive);
+}

@@ -91,8 +91,8 @@ AudioDevice::AudioDevice(const QAudioFormat newFormat)
         break;
 
     default:
-      break;
-  }
+        break;
+    }
 }
 
 /**
@@ -155,7 +155,9 @@ qint64 AudioDevice::readData(char *data, qint64 maxlen) {
  * @param data The buffer that contains the audio data.
  * @param len The maximum number of bytes that can be written to the buffer.
  * @return The number of bytes written to data.
- * @note Note that this is a I/O asynchronous function.
+ * @note Note that this is a I/O asynchronous function. This function calculates
+ * what is known as peak amplitude. You can read more about it
+ * here:https://en.wikipedia.org/wiki/Amplitude#Peak_amplitude
  */
 qint64 AudioDevice::writeData(const char *data, qint64 len) {
     qreal captureValue = 0.0;
@@ -225,7 +227,10 @@ qint64 AudioDevice::writeData(const char *data, qint64 len) {
 
         maxValue = getMin(maxValue, maxAmplitude);
         captureValue = (qreal(maxValue) / maxAmplitude);
-        deviceLevel = captureValue - minAmplitude;
+        // When we say "deviceLevel", what we really mean is Peak Amplitude.
+        deviceLevel = qAbs(captureValue - minAmplitude);
+
+        qDebug() << "deviceLevel:" << deviceLevel;
     }
     emit audioRead();
     return len;

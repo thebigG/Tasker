@@ -6,8 +6,10 @@
 *.ko
 *.obj
 *.elf
-build/*.o
+*build*
 build-Tasker*
+Tasker/moc*
+Tasker/ui*
 
 # Linker output
 *.ilk
