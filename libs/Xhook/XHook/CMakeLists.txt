@@ -11,7 +11,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5Core)
+#find_package(Qt5Core)
 
 add_executable(XHook
   main.cpp
@@ -19,5 +19,5 @@ add_executable(XHook
 target_include_directories(XHook PRIVATE ${CMAKE_SOURCE_DIR}/../../../libuiohook/include)
 
 
-target_link_libraries(XHook Qt5::Core)
+#target_link_libraries(XHook Qt5::Core)
 target_link_libraries(XHook ${CMAKE_SOURCE_DIR}/../../../libuiohook/build/libuiohook.so)
