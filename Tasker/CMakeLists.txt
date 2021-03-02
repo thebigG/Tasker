@@ -38,9 +38,35 @@ set(SOURCES
         XHook.cpp
         ${CMAKE_SOURCE_DIR}/TaskerPerf/perftimer.cpp
         Tasker.qrc)
-add_executable(tasker ${SOURCES})
+#List out headers for IDEs
+set(HEADERS
+        AppGuard.h
+        AudioDevice.h
+        AudioHook.h
+        AudioMachine.cpp
+        AudioMachine.h
+        Commitment.h
+        CommitmentSnaphot.cpp
+        CommitmentSnapshot.h
+        CommStatsQWidget.h
+        CreateCommitmentQWidget.h
+        Hook.h
+        livesession.h
+        mainui.h
+        NewSessionQWidget.h
+        objctest.h
+        Session.h
+        StatsUtility.h
+        Task.h
+        Timer.h
+        UdataUtils.h
+        User.h
+        XHook.h
+        TaskerPerf/perftimer.h)
+
+add_executable(Tasker  ${SOURCES} ${HEADERS})
 
 # Add the Qt5 libraries for linking
-target_link_libraries(tasker Qt5::Core)
-target_link_libraries(tasker Qt5::Multimedia)
-target_link_libraries(tasker Qt5::Charts)
+target_link_libraries(Tasker Qt5::Core)
+target_link_libraries(Tasker Qt5::Multimedia)
+target_link_libraries(Tasker Qt5::Charts)
