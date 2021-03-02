@@ -10,12 +10,37 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt5 REQUIRED COMPONENTS Widgets Multimedia Charts)
 
 include_directories(${CMAKE_SOURCE_DIR})
 
-add_executable(tasker main.cpp)
+set(SOURCES
+        main.cpp
+        AppGuard.cpp
+        AudioDevice.cpp
+        AudioHook.cpp
+        AudioMachine.cpp
+        Commitment.cpp
+        CommitmentSnaphot.cpp
+        CommStatsQWidget.cpp
+        CreateCommitmentQWidget.cpp
+        Hook.cpp
+        livesession.cpp
+        main.cpp
+        mainui.cpp
+        NewSessionQWidget.cpp
+        Session.cpp
+        StatsUtility.cpp
+        Task.cpp
+        Timer.cpp
+        UdataUtils.cpp
+        User.cpp
+        XHook.cpp
+        ${CMAKE_SOURCE_DIR}/TaskerPerf/perftimer.cpp
+        Tasker.qrc)
+add_executable(tasker ${SOURCES})
 
 # Add the Qt5 libraries for linking
 target_link_libraries(tasker Qt5::Core)
 target_link_libraries(tasker Qt5::Multimedia)
+target_link_libraries(tasker Qt5::Charts)
