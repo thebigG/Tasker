@@ -15,7 +15,8 @@ find_package(Qt5 REQUIRED COMPONENTS Widgets Multimedia Charts)
 include_directories(${CMAKE_SOURCE_DIR}
                     ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/
                     ${CMAKE_SOURCE_DIR}/Engine/Hooks/
-                    ${CMAKE_SOURCE_DIR}/Engine)
+                    ${CMAKE_SOURCE_DIR}/Engine
+                    ${CMAKE_SOURCE_DIR}/udata)
 
 set(SOURCES
         main.cpp
@@ -23,7 +24,7 @@ set(SOURCES
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioDevice.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioHook.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.cpp
-        Commitment.cpp
+        ${CMAKE_SOURCE_DIR}/udata/Commitment.cpp
         CommitmentSnaphot.cpp
         CommStatsQWidget.cpp
         CreateCommitmentQWidget.cpp
@@ -32,12 +33,12 @@ set(SOURCES
         main.cpp
         mainui.cpp
         NewSessionQWidget.cpp
-        Session.cpp
+        ${CMAKE_SOURCE_DIR}/udata/Session.cpp
         StatsUtility.cpp
-        Task.cpp
+        ${CMAKE_SOURCE_DIR}/udata/Task.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Timer.cpp
-        UdataUtils.cpp
-        User.cpp
+        ${CMAKE_SOURCE_DIR}/udata/UdataUtils.cpp
+        ${CMAKE_SOURCE_DIR}/udata/User.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/XHook.cpp
         ${CMAKE_SOURCE_DIR}/TaskerPerf/perftimer.cpp
         Tasker.qrc
@@ -51,7 +52,7 @@ set(HEADERS
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioHook.h
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.h
-        Commitment.h
+        ${CMAKE_SOURCE_DIR}/udata/Commitment.h
         CommitmentSnaphot.cpp
         CommitmentSnapshot.h
         CommStatsQWidget.h
@@ -60,12 +61,12 @@ set(HEADERS
         livesession.h
         mainui.h
         NewSessionQWidget.h
-        Session.h
+        ${CMAKE_SOURCE_DIR}/udata/Session.h
         StatsUtility.h
-        Task.h
+        ${CMAKE_SOURCE_DIR}/udata/Task.h
         ${CMAKE_SOURCE_DIR}/Engine/Timer.h
-        UdataUtils.h
-        User.h
+        ${CMAKE_SOURCE_DIR}/udata/UdataUtils.h
+        ${CMAKE_SOURCE_DIR}/udata/User.h
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/XHook.h
         TaskerPerf/perftimer.h)
 

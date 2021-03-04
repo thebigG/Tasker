@@ -13,7 +13,7 @@
 #include "XHook.h"
 using namespace Engine;
 using namespace util;
-using namespace Udata;
+using namespace udata;
 std::unique_ptr<Timer> Timer::thisInstance = std::make_unique<Timer>();
 /**
  * @brief Timer::Timer initializes this Timer instance. It also initializes the
@@ -123,7 +123,7 @@ void Timer::setHook(Hook::HookType newListenerType) {
  * @param newSession a new session that will contain the data of Timer once the
  * Timer's goal is reached.
  */
-void Timer::initTimer(Hook::HookType newHook, Udata::Session newSession) {
+void Timer::initTimer(Hook::HookType newHook, udata::Session newSession) {
   thisInstance->setCurrentSession(newSession);
   currentSession.setDate(QDate::currentDate());
   thisInstance->setHook(newHook);
@@ -189,7 +189,7 @@ void Timer::reset() {
   hookThread.quit();
 }
 QTimer *Timer::getClock() { return timer.get(); }
-Udata::Session &Timer::getCurrentSession() { return currentSession; }
+udata::Session &Timer::getCurrentSession() { return currentSession; }
 int Timer::getProductiveTime() { return currentProductiveTime; }
 int Timer::getUnproductiveTime() { return currentUnproductiveTime; }
 void Timer::pause() { timer->stop(); }
