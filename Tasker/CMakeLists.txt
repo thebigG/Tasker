@@ -12,19 +12,22 @@ set(CMAKE_AUTORCC ON)
 
 find_package(Qt5 REQUIRED COMPONENTS Widgets Multimedia Charts)
 
-include_directories(${CMAKE_SOURCE_DIR})
+include_directories(${CMAKE_SOURCE_DIR}
+                    ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/
+                    ${CMAKE_SOURCE_DIR}/Engine/Hooks/
+                    ${CMAKE_SOURCE_DIR}/Engine)
 
 set(SOURCES
         main.cpp
         AppGuard.cpp
-        AudioDevice.cpp
-        AudioHook.cpp
-        AudioMachine.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioDevice.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioHook.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.cpp
         Commitment.cpp
         CommitmentSnaphot.cpp
         CommStatsQWidget.cpp
         CreateCommitmentQWidget.cpp
-        Hook.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Hooks/Hook.cpp
         livesession.cpp
         main.cpp
         mainui.cpp
@@ -32,36 +35,38 @@ set(SOURCES
         Session.cpp
         StatsUtility.cpp
         Task.cpp
-        Timer.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Timer.cpp
         UdataUtils.cpp
         User.cpp
-        XHook.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/XHook.cpp
         ${CMAKE_SOURCE_DIR}/TaskerPerf/perftimer.cpp
-        Tasker.qrc)
+        Tasker.qrc
+        CommStatsQWidget.ui
+        CreateCommitmentQWidget.ui)
+
 #List out headers for IDEs
 set(HEADERS
         AppGuard.h
-        AudioDevice.h
-        AudioHook.h
-        AudioMachine.cpp
-        AudioMachine.h
+        ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioDevice.h
+        ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioHook.h
+        ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.h
         Commitment.h
         CommitmentSnaphot.cpp
         CommitmentSnapshot.h
         CommStatsQWidget.h
         CreateCommitmentQWidget.h
-        Hook.h
+        ${CMAKE_SOURCE_DIR}/Engine/Hooks/Hook.h
         livesession.h
         mainui.h
         NewSessionQWidget.h
-        objctest.h
         Session.h
         StatsUtility.h
         Task.h
-        Timer.h
+        ${CMAKE_SOURCE_DIR}/Engine/Timer.h
         UdataUtils.h
         User.h
-        XHook.h
+        ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/XHook.h
         TaskerPerf/perftimer.h)
 
 add_executable(Tasker  ${SOURCES} ${HEADERS})

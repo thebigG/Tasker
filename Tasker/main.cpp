@@ -1,18 +1,5 @@
-#include "AudioHook.h"
-#include "CommStatsQWidget.h"
-#include "CreateCommitmentQWidget.h"
-#include "StatsUtility.h"
-#include "Task.h"
-
-#include "Timer.h"
 #include "UdataUtils.h"
-#include "User.h"
-#include "XHook.h"
-#include "livesession.h"
 #include "mainui.h"
-#include <CommitmentSnapshot.h>
-#include <QStandardPaths>
-#include <TaskerPerf/perftimer.h>
 
 #include "AppGuard.h"
 #include <QApplication>
