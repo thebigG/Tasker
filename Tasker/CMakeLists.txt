@@ -12,9 +12,11 @@ set(CMAKE_AUTORCC ON)
 
 find_package(Qt5 REQUIRED COMPONENTS Widgets Multimedia Charts)
 
+#Not sure if this is the best way of handling includes. Don't like it took much because it is not explicit in source code.
 include_directories(${CMAKE_SOURCE_DIR}
                     ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/
-                    ${CMAKE_SOURCE_DIR}/Engine/Hooks/
+                    ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/
+                    ${CMAKE_SOURCE_DIR}/Engine/Hooks
                     ${CMAKE_SOURCE_DIR}/Engine
                     ${CMAKE_SOURCE_DIR}/udata)
 
