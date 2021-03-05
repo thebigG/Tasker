@@ -18,7 +18,8 @@ include_directories(${CMAKE_SOURCE_DIR}
                     ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/
                     ${CMAKE_SOURCE_DIR}/Engine/Hooks
                     ${CMAKE_SOURCE_DIR}/Engine
-                    ${CMAKE_SOURCE_DIR}/udata)
+                    ${CMAKE_SOURCE_DIR}/udata
+		    ${CMAKE_SOURCE_DIR}/Ui/)
 
 set(SOURCES
         main.cpp
@@ -27,14 +28,14 @@ set(SOURCES
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioHook.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.cpp
         ${CMAKE_SOURCE_DIR}/udata/Commitment.cpp
-        CommitmentSnaphot.cpp
-        CommStatsQWidget.cpp
-        CreateCommitmentQWidget.cpp
+        ${CMAKE_SOURCE_DIR}/Ui/CommitmentSnaphot.cpp
+        ${CMAKE_SOURCE_DIR}/Ui/CommStatsQWidget.cpp
+        ${CMAKE_SOURCE_DIR}/Ui/CreateCommitmentQWidget.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Hook.cpp
-        livesession.cpp
+        ${CMAKE_SOURCE_DIR}/Ui/livesession.cpp
         main.cpp
-        mainui.cpp
-        NewSessionQWidget.cpp
+        ${CMAKE_SOURCE_DIR}/Ui/mainui.cpp
+        ${CMAKE_SOURCE_DIR}/Ui/NewSessionQWidget.cpp
         ${CMAKE_SOURCE_DIR}/udata/Session.cpp
         StatsUtility.cpp
         ${CMAKE_SOURCE_DIR}/udata/Task.cpp
@@ -43,9 +44,9 @@ set(SOURCES
         ${CMAKE_SOURCE_DIR}/udata/User.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/XHook.cpp
         ${CMAKE_SOURCE_DIR}/TaskerPerf/perftimer.cpp
-        Tasker.qrc
-        CommStatsQWidget.ui
-        CreateCommitmentQWidget.ui)
+        ${CMAKE_SOURCE_DIR}/Ui/CommStatsQWidget.ui
+        ${CMAKE_SOURCE_DIR}/Ui/CreateCommitmentQWidget.ui
+	Tasker.qrc)
 
 #List out headers for IDEs
 set(HEADERS
@@ -55,14 +56,13 @@ set(HEADERS
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.h
         ${CMAKE_SOURCE_DIR}/udata/Commitment.h
-        CommitmentSnaphot.cpp
-        CommitmentSnapshot.h
-        CommStatsQWidget.h
-        CreateCommitmentQWidget.h
+        ${CMAKE_SOURCE_DIR}/Ui/CommitmentSnapshot.h
+        ${CMAKE_SOURCE_DIR}/Ui/CommStatsQWidget.h
+        ${CMAKE_SOURCE_DIR}/Ui/CreateCommitmentQWidget.h
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Hook.h
-        livesession.h
-        mainui.h
-        NewSessionQWidget.h
+        ${CMAKE_SOURCE_DIR}/Ui/livesession.h
+        ${CMAKE_SOURCE_DIR}/Ui/mainui.h
+        ${CMAKE_SOURCE_DIR}/Ui/NewSessionQWidget.h
         ${CMAKE_SOURCE_DIR}/udata/Session.h
         StatsUtility.h
         ${CMAKE_SOURCE_DIR}/udata/Task.h
