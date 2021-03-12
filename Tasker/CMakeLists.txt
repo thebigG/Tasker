@@ -78,3 +78,7 @@ add_executable(Tasker  ${SOURCES} ${HEADERS})
 target_link_libraries(Tasker Qt5::Core)
 target_link_libraries(Tasker Qt5::Multimedia)
 target_link_libraries(Tasker Qt5::Charts)
+
+install(TARGETS Tasker
+    DESTINATION ${CMAKE_INSTALL_PREFIX}
+    )
