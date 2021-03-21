@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 
-#import rando
+#I should make this a shell script at this point...
 from yaml import safe_load, dump
 from yaml import YAMLError
 from subprocess import run
+CMAKE="/home/lorenzo/cmake-3.16.0-Linux-x86_64/bin/cmake"
+CMAKE_PREFIX_PATH="-DCMAKE_PREFIX_PATH=/opt/qt59/lib/cmake"
+APPDIR_DIR="AppDir"
+LINUX_DEPLOY_QT="/home/lorenzo/Downloads/linuxdeployqt-7-x86_64.AppImage"
+QMAKE="/opt/qt59/bin/qmake"
+
 ubuntu_sources = [{'sourceline': 'deb http://archive.ubuntu.com/ubuntu/ bionic main restricted universe multiverse',
                    'key_url': 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3b4fe6acc0b21f32'},
                   {'sourceline': 'deb http://archive.ubuntu.com/ubuntu/ bionic-updates main restricted universe multiverse'},
@@ -14,9 +20,11 @@ ubuntu_sources = [{'sourceline': 'deb http://archive.ubuntu.com/ubuntu/ bionic m
 
 run(["mkdir", "build"])
 
-run(["qmake", "../Tasker.pro"],  cwd="./build")
-run(["make", "-j4", ],  cwd="./build")
-run(["make", "install", "INSTALL_ROOT=AppDir"], cwd="./build")
+run([CMAKE, "..", CMAKE_PREFIX_PATH],  cwd="./build")
+run(["make", "-j4", "-C", "./build" ])
+
+run(["mkdir", "AppDir"], cwd="./build")
+run(["make", "INSTALL_ROOT=AppDir"], cwd="./build")
 # Build directory structure for AppDir
 run(["mkdir", "-p", "usr/bin"], cwd="./build/AppDir")
 run(["mkdir", "-p", "usr/share/applications"], cwd="./build/AppDir")
@@ -24,32 +32,11 @@ run(["mkdir", "-p", "usr/share/icons/hicolor/256x256/apps"],
     cwd="./build/AppDir")
 
 # Copy/move necessary files to AppDir
-run(["mv", "opt/Tasker/bin/Tasker", "usr/bin"],
-    cwd="./build/AppDir")
+run(["cp", "./Tasker", "./AppDir/usr/bin"],
+    cwd="./build")
 run(["cp", "../libs/linux/iohook/XListenerHook",
      "./build/AppDir/usr/bin"])
 run(["cp", "./clock-256.png", "build/AppDir/usr/share/icons/hicolor/256x256/apps"])
 run(["cp", "./Tasker.desktop", "build/AppDir/usr/share/applications"])
 
-run(["appimage-builder", "--generate"], cwd="./build")
-
-
-with open('./build/AppImageBuilder.yml') as recipe_file:
-    try:
-        AppImage_config = safe_load(recipe_file)
-    except YAMLError as exc:
-        if hasattr(exc, 'problem_mark'):
-            mark = exc.problem_mark
-            print("Error position: (%s:%s)" % (mark.line + 1, mark.column + 1))
-        print('An Error happened loading the yml recipe')
-with open('./build/AppImageBuilder.yml', mode='w') as recipe_file:
-    AppImage_config['AppDir']['apt']['sources'] = ubuntu_sources
-    # AppImage_config['AppDir']['files']['exclude'].append(xhook_path)
-    dump(AppImage_config, recipe_file)
-
-
-# Build the AppImage
-# Make sure to call appimage-builder once, otherwise it breaks when including extra binaries like XListenerHook
-#run(["appimage-builder", "--skip-test", "--skip-appimage"], cwd="./build")
-#run(["appimage-builder", "--skip-test", "--skip-appimage"], cwd="./build")
-run(["appimage-builder", "--skip-test"], cwd="./build")
+run([LINUX_DEPLOY_QT,"AppDir/usr/share/applications/Tasker.desktop", "-appimage" ,"-bundle-non-qt-libs", "-qmake="+QMAKE ], cwd="./build")
