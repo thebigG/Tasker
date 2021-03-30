@@ -104,10 +104,10 @@ int main(int argc, char* argv[]) {
     printf(
         "Invalid arguments!\n"
         "USAGE:./XListenerHook MODE\n"
-        "MODES={"
-        "#define IOHOOK_MOUSE_MODE 0\n"
-        "#define IOHOOK_KEYBOARD_MODE 1\n"
-        "#define IOHOOK_KEYBOARD_AND_MOUSE_MODE 2\n"
+        "MODES={\n"
+        "IOHOOK_MOUSE_MODE=0\n"
+        "IOHOOK_KEYBOARD_MODE=1\n"
+        "IOHOOK_KEYBOARD_AND_MOUSE_MODE=2\n"
         "}\n");
     return -1;
   }
@@ -116,10 +116,10 @@ int main(int argc, char* argv[]) {
     printf(
         "Invalid arguments!\n"
         "USAGE:./XListenerHook MODE\n"
-        "MODES={"
-        "#define IOHOOK_MOUSE_MODE 0\n"
-        "#define IOHOOK_KEYBOARD_MODE 1\n"
-        "#define IOHOOK_KEYBOARD_AND_MOUSE_MODE 2\n"
+        "MODES={\n"
+        "IOHOOK_MOUSE_MODE=0\n"
+        "IOHOOK_KEYBOARD_MODE=1\n"
+        "IOHOOK_KEYBOARD_AND_MOUSE_MODE=2\n"
         "}\n");
     return -1;
   }
