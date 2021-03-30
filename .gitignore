@@ -69,3 +69,5 @@ Tasker_*
 Makefile
 libs/Xhook/build-*
 *.user
+
+!build_libuiohook.sh
