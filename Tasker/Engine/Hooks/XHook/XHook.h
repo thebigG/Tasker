@@ -27,10 +27,6 @@
 #define WORKDIR QCoreApplication::applicationDirPath()
 #endif
 #endif
-#define IOHOOK_MOUSE_MODE "0"
-#define IOHOOK_KEYBOARD_MODE "1"
-#define IOHOOK_KEYBOARD_AND_MOUSE_MODE "2"
-#define IOHOOK_MOUSE_DRAGGED "3"
 namespace Engine {
 class XHook;
 enum class XHookMode;
