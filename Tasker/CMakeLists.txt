@@ -10,7 +10,13 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+
+if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    message(STATUS ${CMAKE_BUILD_TYPE})
+    add_compile_definitions(__TASKER_DEBUG__=1)
+endif ()
 find_package(Qt5 REQUIRED COMPONENTS Widgets Multimedia Charts)
+
 
 set(SHELL /bin/zsh)
 set(TASKER_ROOT ${CMAKE_SOURCE_DIR}/..)
