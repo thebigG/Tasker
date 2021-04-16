@@ -4,20 +4,19 @@
 /**
  * @brief Engine::Engine::Hook::Hook
  */
-Engine::Hook::Hook() {
-    state = Engine::Hook::HookState::unproductive;
-}
+Engine::Hook::Hook() { state = Engine::Hook::HookState::unproductive; }
 
-QDataStream &operator<<(QDataStream &out, const Engine::Hook::HookType &newListener) {
-    out << int(newListener);
-    return out;
+QDataStream &operator<<(QDataStream &out,
+                        const Engine::Hook::HookType &newListener) {
+  out << int(newListener);
+  return out;
 }
 
 QDataStream &operator>>(QDataStream &in, Engine::Hook::HookType &newHook) {
-    int enumValue = 0;
-    in >> enumValue;
-    newHook = Engine::Hook::intToHookType(enumValue);
-    return in;
+  int enumValue = 0;
+  in >> enumValue;
+  newHook = Engine::Hook::intToHookType(enumValue);
+  return in;
 }
 
 /**
@@ -27,16 +26,16 @@ QDataStream &operator>>(QDataStream &in, Engine::Hook::HookType &newHook) {
  * @return A HookType enum that was represented by enumInt
  */
 Engine::Hook::HookType Engine::Hook::intToHookType(int enumInt) {
-    if (int(HookType::X_MOUSE_KEYBOARD) < enumInt || int(HookType::none) > enumInt)
-        return HookType(enumInt);
-    return HookType::none;
+  if (int(HookType::X_MOUSE_KEYBOARD) < enumInt ||
+      int(HookType::none) > enumInt)
+    return HookType(enumInt);
+  return HookType::none;
 }
 
 /**
  * @brief Engine::Hook::~Hook
  */
-Engine::Hook::~Hook() {
-}
+Engine::Hook::~Hook() {}
 
 /**
  * @brief Engine::Engine::Hook::setState
@@ -45,8 +44,8 @@ Engine::Hook::~Hook() {
  * depending on the state passed.
  */
 void Engine::Hook::setState(Engine::Hook::HookState newState) {
-    newState == HookState::productive ? emit productive() : emit unProductive();
-    state = newState;
+  newState == HookState::productive ? emit productive() : emit unProductive();
+  state = newState;
 }
 
 /**
@@ -57,6 +56,4 @@ void Engine::Hook::setState(Engine::Hook::HookState newState) {
  *         or
  *         Engine::Engine::Hook::Engine::Hook::productive
  */
-Engine::Hook::HookState Engine::Hook::getState() {
-    return state;
-}
+// Engine::Hook::HookState Engine::Hook::getState() { return state; }

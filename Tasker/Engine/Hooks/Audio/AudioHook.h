@@ -28,6 +28,8 @@ public:
 
   Hook::HookState startHook() override;
 
+  Hook::HookState getState() override;
+
 public slots:
   virtual void start() override;
   virtual void end() override;

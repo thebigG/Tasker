@@ -30,7 +30,7 @@
 namespace Engine {
 class XHook;
 enum class XHookMode;
-}  // namespace Engine
+} // namespace Engine
 
 enum class Engine::XHookMode { MOUSE, KEYBOARD, MOUSE_AND_KEYBOARD };
 /**
@@ -44,26 +44,28 @@ enum class Engine::XHookMode { MOUSE, KEYBOARD, MOUSE_AND_KEYBOARD };
 class Engine::XHook : public Hook {
   Q_OBJECT
 
- public:
+public:
   XHook();
   XHook(Engine::XHookMode);
   int startXHook();
   Hook::HookState startHook() override;
+  virtual Hook::HookState getState() override;
+  virtual void setState(HookState) override;
 
- public slots:
+public slots:
   virtual void start() override;
   virtual void end() override;
   virtual void pause() override;
   virtual void update() override;
   virtual void resetState() override;
 
- private:
+private:
   QProcess xChildHook;
   QStringList xChildHookArguments;
   XHookMode XMode;
- signals:
+signals:
   void signalThread();
 };
 
 void hook();
-#endif  // KEYBOARDLISTENER_H
+#endif // KEYBOARDLISTENER_H
