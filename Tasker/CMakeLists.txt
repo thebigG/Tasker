@@ -11,7 +11,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
 
-if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     message(STATUS ${CMAKE_BUILD_TYPE})
     add_compile_definitions(__TASKER_DEBUG__=1)
 endif ()
