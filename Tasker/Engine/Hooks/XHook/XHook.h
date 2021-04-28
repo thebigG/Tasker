@@ -28,11 +28,12 @@
 #endif
 #endif
 namespace Engine {
+enum class XHookMode { MOUSE, KEYBOARD, MOUSE_AND_KEYBOARD };
+int run_xhook_engine(XHookMode mode);
 class XHook;
 enum class XHookMode;
 } // namespace Engine
 
-enum class Engine::XHookMode { MOUSE, KEYBOARD, MOUSE_AND_KEYBOARD };
 /**
  * @brief The Engine::XListener class
  *  This class has the capiblity of detecting mouse and keyboard
@@ -60,8 +61,6 @@ public slots:
   virtual void resetState() override;
 
 private:
-  QProcess xChildHook;
-  QStringList xChildHookArguments;
   XHookMode XMode;
 signals:
   void signalThread();

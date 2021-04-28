@@ -52,7 +52,6 @@ set(SOURCES
         ${CMAKE_SOURCE_DIR}/udata/UdataUtils.cpp
         ${CMAKE_SOURCE_DIR}/udata/User.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/XHook.cpp
-        ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/xhook_engine.cpp
         ${CMAKE_SOURCE_DIR}/TaskerPerf/perftimer.cpp
         ${CMAKE_SOURCE_DIR}/Ui/CommStatsQWidget.ui
         ${CMAKE_SOURCE_DIR}/Ui/CreateCommitmentQWidget.ui
@@ -80,7 +79,6 @@ set(HEADERS
         ${CMAKE_SOURCE_DIR}/udata/UdataUtils.h
         ${CMAKE_SOURCE_DIR}/udata/User.h
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/XHook.h
-        ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/xhook_engine.h
         TaskerPerf/perftimer.h)
 
 add_executable(Tasker build_libuiohook ${SOURCES} ${HEADERS})

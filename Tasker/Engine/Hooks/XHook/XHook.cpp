@@ -1,5 +1,4 @@
 #include "XHook.h"
-#include "xhook_engine.h"
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -13,8 +12,6 @@
 #include <QThread>
 #include <QtCore>
 using namespace Engine;
-
-#include "xhook_engine.h"
 
 /* libUIOHook: Cross-platfrom userland keyboard and mouse hooking.
  * Copyright (C) 2006-2017 Alexander Barker.  All Rights Received.
@@ -45,7 +42,7 @@ using namespace Engine;
 #include <string.h>
 #include <uiohook.h>
 #include <wchar.h>
-static int current_mode;
+static XHookMode current_mode;
 
 static Engine::Hook::HookState currentState;
 static std::unique_ptr<QMutex> lock = std::make_unique<QMutex>();
@@ -84,15 +81,12 @@ bool logger_proc(unsigned int level, const char *format, ...) {
 // thread.
 void dispatch_proc(uiohook_event *const event) {
   QMutexLocker locker{lock.get()};
-  printf("\ndispatch_proc1\n");
-  printf("current mode:%d\n", current_mode);
   switch (event->type) {
   case EVENT_KEY_PRESSED:
   case EVENT_KEY_RELEASED:
   case EVENT_KEY_TYPED:
-    printf("event->type:%d", event->type);
-    if (current_mode == IOHOOK_KEYBOARD_MODE ||
-        current_mode == IOHOOK_KEYBOARD_AND_MOUSE_MODE) {
+    if (current_mode == XHookMode::KEYBOARD ||
+        current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
       //      printf("%d\n", IOHOOK_KEYBOARD_MODE);
       currentState = Engine::Hook::HookState::productive;
     }
@@ -103,18 +97,17 @@ void dispatch_proc(uiohook_event *const event) {
   case EVENT_MOUSE_MOVED:
   case EVENT_MOUSE_DRAGGED:
   case EVENT_MOUSE_WHEEL:
-    if (current_mode == IOHOOK_MOUSE_MODE ||
-        current_mode == IOHOOK_KEYBOARD_AND_MOUSE_MODE) {
+    if (current_mode == XHookMode::MOUSE ||
+        current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
       currentState = Engine::Hook::HookState::productive;
     }
     break;
   default:
     break;
   }
-  printf("dispatch_proc2\n");
 }
 
-int Engine::run_xhook_engine(int mode) {
+int Engine::run_xhook_engine(XHookMode mode) {
   // We need to disable buffering in order for this process to send the
   // "readyReadStandardOutput" signal to Tasker
   setbuf(stdout, NULL);
@@ -216,26 +209,6 @@ int Engine::run_xhook_engine(int mode) {
  */
 XHook::XHook(Engine::XHookMode newXMode) {
   XMode = newXMode;
-  xChildHook.setParent(this);
-  //  switch (XMode) {
-  //  case XHookMode::MOUSE_AND_KEYBOARD:
-  //    xChildHookArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
-  //    break;
-  //  case XHookMode::MOUSE:
-  //    xChildHookArguments << IOHOOK_MOUSE_MODE;
-  //    break;
-  //  case XHookMode::KEYBOARD:
-  //    xChildHookArguments << IOHOOK_KEYBOARD_MODE;
-  //    break;
-  //  }
-  connect(&xChildHook, &QProcess::readyReadStandardOutput, this,
-          &XHook::update);
-  connect(&xChildHook, &QProcess::errorOccurred, this,
-          [=](QProcess::ProcessError e) { qDebug() << "error code=" << e; });
-  connect(&xChildHook, &QProcess::readyReadStandardError, this, [=]() {
-    QByteArray errorData = this->xChildHook.readAllStandardError();
-    qDebug() << "Error on Xhook process:" << QString{errorData};
-  });
   currentState = state;
 }
 /**
@@ -244,28 +217,16 @@ XHook::XHook(Engine::XHookMode newXMode) {
  * process.
  * @param newXMode The mode(mouse, keyboard or both) this instance will be on.
  */
-XHook::XHook() {
-  XMode = XHookMode::MOUSE_AND_KEYBOARD;
-  xChildHook.setParent(this);
-  //  xChildHookArguments << IOHOOK_KEYBOARD_AND_MOUSE_MODE;
-  connect(&xChildHook, &QProcess::readyReadStandardOutput, this,
-          &XHook::update);
-  connect(&xChildHook, &QProcess::errorOccurred, this,
-          [=](QProcess::ProcessError e) { qDebug() << "error code=" << e; });
-  connect(&xChildHook, &QProcess::readyReadStandardError, this, [=]() {
-    QByteArray errorData = this->xChildHook.readAllStandardError();
-    qDebug() << "Error on Xhook process:" << QString{errorData};
-  });
-}
+XHook::XHook() { XMode = XHookMode::MOUSE_AND_KEYBOARD; }
 /**
  * @brief XHook::start
  */
 void XHook::start() { startXHook(); }
 
 /**
- * @brief XHook::end kills the XListenerHook process.
+ * @brief XHook::end kills the keyboard/mouse hook.
  */
-void XHook::end() { xChildHook.kill(); }
+void XHook::end() { hook_stop(); }
 
 /**
  * @brief XHook::pause Does nothing.
@@ -278,24 +239,7 @@ void XHook::pause() {}
  * It's essentially IPC.
  *
  */
-void XHook::update() {
-  //    current_mode = 12;
-  return;
-  QByteArray Xdata = xChildHook.readAllStandardOutput();
-  qDebug() << "update for Xhook...";
-  Xdata.chop(Xdata.length() - 1);
-  QString iohookState{Xdata};
-  if (XMode == XHookMode::MOUSE_AND_KEYBOARD &&
-      iohookState == IOHOOK_KEYBOARD_AND_MOUSE_MODE) {
-    setState(HookState::productive);
-  } else if (XMode == XHookMode::MOUSE && iohookState == IOHOOK_MOUSE_MODE) {
-    setState(HookState::productive);
-  } else if (XMode == XHookMode::KEYBOARD &&
-             iohookState == IOHOOK_KEYBOARD_MODE) {
-    setState(HookState::productive);
-  } else {
-  }
-}
+void XHook::update() { return; }
 
 /**
  * @brief XHook::startHook
@@ -311,20 +255,17 @@ void XHook::resetState() { setState(HookState::unproductive); }
  */
 int XHook::startXHook() {
   setState(HookState::unproductive);
-  printf("current val:%d\n", current_mode);
 
-  run_xhook_engine(IOHOOK_KEYBOARD_MODE);
+  run_xhook_engine(XMode);
 
   return 0;
 }
 void XHook::setState(HookState newState) {
   QMutexLocker locker{lock.get()};
-  printf("\nsetState1\n");
   currentState = newState;
   state = currentState;
 
   Hook::setState(state);
-  printf("setState2\n");
 }
 /**
  * @brief Engine::Engine::Hook::getState
