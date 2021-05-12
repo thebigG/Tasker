@@ -25,6 +25,7 @@ set(TASKER_ROOT ${CMAKE_SOURCE_DIR}/..)
 include_directories(${CMAKE_SOURCE_DIR}
                     ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/
                     ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/
+                    ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/Audio/Jack
                     ${CMAKE_SOURCE_DIR}/Engine/Hooks
                     ${CMAKE_SOURCE_DIR}/Engine
                     ${CMAKE_SOURCE_DIR}/udata
@@ -36,6 +37,7 @@ set(SOURCES
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioDevice.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioHook.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/Jack/JackHook.cpp
         ${CMAKE_SOURCE_DIR}/udata/Commitment.cpp
         ${CMAKE_SOURCE_DIR}/Ui/CommitmentSnaphot.cpp
         ${CMAKE_SOURCE_DIR}/Ui/CommStatsQWidget.cpp
@@ -62,8 +64,8 @@ set(HEADERS
         AppGuard.h
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioDevice.h
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioHook.h
-        ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.h
+        ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/Jack/JackHook.h
         ${CMAKE_SOURCE_DIR}/udata/Commitment.h
         ${CMAKE_SOURCE_DIR}/Ui/CommitmentSnapshot.h
         ${CMAKE_SOURCE_DIR}/Ui/CommStatsQWidget.h
@@ -87,6 +89,8 @@ add_executable(Tasker build_libuiohook ${SOURCES} ${HEADERS})
 target_link_libraries(Tasker Qt5::Core)
 target_link_libraries(Tasker Qt5::Multimedia)
 target_link_libraries(Tasker Qt5::Charts)
+
+target_link_libraries(Tasker jack)
 
 
 
