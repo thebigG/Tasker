@@ -5,8 +5,8 @@
 # Table of Contents
 1. [Pitch](#pitch)
 2. [Usage](#usage)
-2. [How do I get Tasker?](#how_do_I_get_tasker)
-
+3. [How do I get Tasker?](#how_do_I_get_tasker)
+4. [Build It From Source](#build_it_from_source)
 
 ## Pitch <a name="pitch"></a>
 
@@ -91,9 +91,18 @@ When updating Tasker in macOS; meaning re-downloading a new .app file from the r
 
 **NOTE**:Will be packaging for Windows10 very  soon :)
 
-# Building The Dependencies
-Tasker uses libuiohook to process mouse and keyboard input. In order to run the XHook, which is what detects
-the mouse and keyboard input, you **must** build the `libuiohook` project. Just `cd` into `libuiohook` and follow the instructions on the readme :). After that, cd into `Tasker/libs/XHook` and build that. I suggest you build `XHook` from Qt Creator to make your life easy. This build system is half-baked right now, but I will make this process a lot smoother in the future.
+
+# Build It From Source(Tested on Ubuntu 16 & 20) <a name="build_it_from_source"></a>
+`cmake>=3.16.0`
+
+```
+cd Tasker 
+mkdir build
+cd build
+cmake ..
+make
+```
+
 
 # How do I help?
 
