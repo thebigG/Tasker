@@ -113,92 +113,94 @@ int initJackClient(std::string clientName) {
     //    exit(1);
   }
 
-  qDebug() << "initJackClient3\n";
+  else {
 
-  if (status & JackServerStarted) {
-    fprintf(stderr, "JACK server started\n");
-  }
-  if (status & JackNameNotUnique) {
-    client_name = jack_get_client_name(client);
-    fprintf(stderr, "unique name `%s' assigned\n", client_name);
-  }
+    qDebug() << "initJackClient3\n";
 
-  /* tell the JACK server to call `process()' whenever
-           there is work to be done.
-        */
+    if (status & JackServerStarted) {
+      fprintf(stderr, "JACK server started\n");
+    }
+    if (status & JackNameNotUnique) {
+      client_name = jack_get_client_name(client);
+      fprintf(stderr, "unique name `%s' assigned\n", client_name);
+    }
 
-  jack_set_process_callback(client, process, NULL);
+    /* tell the JACK server to call `process()' whenever
+             there is work to be done.
+          */
 
-  /* tell the JACK server to call `jack_shutdown()' if
-           it ever shuts down, either entirely, or if it
-           just decides to stop calling us.
-        */
+    jack_set_process_callback(client, process, NULL);
 
-  jack_on_shutdown(client, jack_shutdown, 0);
+    /* tell the JACK server to call `jack_shutdown()' if
+             it ever shuts down, either entirely, or if it
+             just decides to stop calling us.
+          */
 
-  /* create two ports */
+    jack_on_shutdown(client, jack_shutdown, 0);
 
-  output_port1 = jack_port_register(client, "output1", JACK_DEFAULT_AUDIO_TYPE,
-                                    JackPortIsInput, 0);
+    /* create two ports */
 
-  if (output_port1 == NULL) {
-    fprintf(stderr, "no more JACK ports available\n");
-    //    exit(1);
-  }
+    output_port1 = jack_port_register(
+        client, "output1", JACK_DEFAULT_AUDIO_TYPE, JackPortIsInput, 0);
 
-  /* Tell the JACK server that we are ready to roll.  Our
-   * process() callback will start running now. */
+    if (output_port1 == NULL) {
+      fprintf(stderr, "no more JACK ports available\n");
+      //    exit(1);
+    }
 
-  if (jack_activate(client)) {
-    fprintf(stderr, "cannot activate client");
-    //    exit(1);
-  }
+    /* Tell the JACK server that we are ready to roll.  Our
+     * process() callback will start running now. */
 
-  /* Connect the ports.  You can't do this before the client is
-   * activated, because we can't make connections to clients
-   * that aren't running.  Note the confusing (but necessary)
-   * orientation of the driver backend ports: playback ports are
-   * "input" to the backend, and capture ports are "output" from
-   * it.
-   */
+    if (jack_activate(client)) {
+      fprintf(stderr, "cannot activate client");
+      //    exit(1);
+    }
 
-  ports =
-      jack_get_ports(client, NULL, NULL, JackPortIsPhysical | JackPortIsOutput);
-  if (ports == NULL) {
-    fprintf(stderr, "no physical playback ports\n");
-    //    exit(1);
-  }
+    /* Connect the ports.  You can't do this before the client is
+     * activated, because we can't make connections to clients
+     * that aren't running.  Note the confusing (but necessary)
+     * orientation of the driver backend ports: playback ports are
+     * "input" to the backend, and capture ports are "output" from
+     * it.
+     */
 
-  if (jack_connect(client, ports[0], jack_port_name(output_port1))) {
-    fprintf(stderr, "cannot connect output ports\n");
-  }
+    ports = jack_get_ports(client, NULL, NULL,
+                           JackPortIsPhysical | JackPortIsOutput);
+    if (ports == NULL) {
+      fprintf(stderr, "no physical playback ports\n");
+      //    exit(1);
+    }
 
-  jack_free(ports);
+    if (jack_connect(client, ports[0], jack_port_name(output_port1))) {
+      fprintf(stderr, "cannot connect output ports\n");
+    }
 
-  /* install a signal handler to properly quits jack client */
+    jack_free(ports);
+
+    /* install a signal handler to properly quits jack client */
 #ifdef WIN32
-  signal(SIGINT, signal_handler);
-  signal(SIGABRT, signal_handler);
-  signal(SIGTERM, signal_handler);
+    signal(SIGINT, signal_handler);
+    signal(SIGABRT, signal_handler);
+    signal(SIGTERM, signal_handler);
 #else
-  signal(SIGQUIT, signal_handler);
-  signal(SIGTERM, signal_handler);
-  signal(SIGHUP, signal_handler);
-  signal(SIGINT, signal_handler);
+    signal(SIGQUIT, signal_handler);
+    signal(SIGTERM, signal_handler);
+    signal(SIGHUP, signal_handler);
+    signal(SIGINT, signal_handler);
 #endif
 
-  /* keep running until the Ctrl+C */
+    /* keep running until the Ctrl+C */
 
-  while (1) {
+    while (1) {
 #ifdef WIN32
-    Sleep(1000);
+      Sleep(1000);
 #else
-    sleep(1);
+      sleep(1);
 #endif
+    }
+
+    //  jack_client_close(client);
+    //  exit(0);
   }
-
-  //  jack_client_close(client);
-  //  exit(0);
-
   return 0;
 }

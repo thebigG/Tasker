@@ -1,8 +1,8 @@
 #include "Hook.h"
 
 int initJackClient(std::string clientName);
-namespace Jack {
+namespace Engine {
 class JackHook;
-} // namespace Jack
+} // namespace Engine
 
-class Jack::JackHook : public Engine::Hook {};
+class Engine::JackHook : public Engine::Hook {};
