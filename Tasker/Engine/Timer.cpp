@@ -10,6 +10,7 @@
 #include <iostream>
 
 #include "AudioHook.h"
+#include "Jack/JackHook.h"
 #include "XHook.h"
 using namespace Engine;
 using namespace util;
@@ -55,7 +56,7 @@ void Timer::startTimer() {
   } else if (hookType == Hook::HookType::X_KEYBOARD) {
     hook = std::make_unique<XHook>(XHookMode::KEYBOARD);
   } else if (hookType == Hook::HookType::audio) {
-    hook = std::make_unique<AudioHook>();
+    hook = std::make_unique<JackHook>();
   }
   connect(&hookThread, &QThread::started, hook.get(), &Hook::start);
   hook->moveToThread(&hookThread);
@@ -199,3 +200,5 @@ void Timer::resume() {
   timer->start(TIMER_TICK);
   this->start();
 }
+
+std::unique_ptr<Hook> &Timer::getHook() { return hook; }

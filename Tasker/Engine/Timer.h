@@ -69,6 +69,8 @@ public:
   QTimer *getClock();
   udata::Session &getCurrentSession();
 
+  std::unique_ptr<Hook> &getHook();
+
 public slots:
   void stopTimerSlot();
   void tickUpdate();

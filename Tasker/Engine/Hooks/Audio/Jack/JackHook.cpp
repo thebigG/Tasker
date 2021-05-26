@@ -22,18 +22,11 @@
 #include <algorithm>
 
 #include "JackHook.h"
+#include "Timer.h"
 
 jack_port_t *output_port1;
 jack_client_t *client;
-
-#ifndef M_PI
-#define M_PI (3.14159265)
-#endif
-static void signal_handler(int sig) {
-  jack_client_close(client);
-  fprintf(stderr, "signal received, exiting ...\n");
-  //  exit(0);
-}
+float deviceLevel;
 
 /**
  * The process callback for this JACK application is called in a
@@ -58,9 +51,12 @@ int process(jack_nframes_t nframes, void *arg) {
 
   float captureValue = 0;
 
-  float deviceLevel;
-
   float minAmplitude = 0;
+  //    Engine::Timer::tick;
+  //  emit Engine::Timer::getInstance()->tick();
+
+  //  QObject::connect(scrollBar, SIGNAL(valueChanged(int)),
+  //                   label,  SLOT(setNum(int)));
 
   uint32_t current_sample_value = 0;
 
@@ -77,6 +73,7 @@ int process(jack_nframes_t nframes, void *arg) {
   deviceLevel = captureValue - minAmplitude;
 
   printf("level:%f\n", std::abs(deviceLevel));
+  emit Engine::Timer::getInstance()->getHook().get()->productive();
 
   return 0;
 }
@@ -88,6 +85,12 @@ int process(jack_nframes_t nframes, void *arg) {
 void jack_shutdown(void *arg) { // shutdwon procedure
 }
 
+/**
+  Initializes a jack client
+ * @brief initJackClient
+ * @param clientName
+ * @return 0 if successful.-1 otherwise.
+ */
 int initJackClient(std::string clientName) {
   const char **ports;
   const char *client_name;
@@ -99,108 +102,133 @@ int initJackClient(std::string clientName) {
   qDebug() << "initJackClient1\n";
 
   client = jack_client_open(clientName.c_str(), options, &status, server_name);
-  qDebug() << "initJackClient2\n";
 
   if (client == NULL) {
-    //    fprintf(stderr,
-    //            "jack_client_open() failed, "
-    //            "status = 0x%2.0x\n",
-    //            status);
-    //    if (status & JackServerFailed) {
-    //      fprintf(stderr, "Unable to connect to JACK server\n");
-    //    }
-    qDebug() << "initJackClient2\n";
-    //    exit(1);
+    return -1;
   }
 
-  else {
-
-    qDebug() << "initJackClient3\n";
-
-    if (status & JackServerStarted) {
-      fprintf(stderr, "JACK server started\n");
-    }
-    if (status & JackNameNotUnique) {
-      client_name = jack_get_client_name(client);
-      fprintf(stderr, "unique name `%s' assigned\n", client_name);
-    }
-
-    /* tell the JACK server to call `process()' whenever
-             there is work to be done.
-          */
-
-    jack_set_process_callback(client, process, NULL);
-
-    /* tell the JACK server to call `jack_shutdown()' if
-             it ever shuts down, either entirely, or if it
-             just decides to stop calling us.
-          */
-
-    jack_on_shutdown(client, jack_shutdown, 0);
-
-    /* create two ports */
-
-    output_port1 = jack_port_register(
-        client, "output1", JACK_DEFAULT_AUDIO_TYPE, JackPortIsInput, 0);
-
-    if (output_port1 == NULL) {
-      fprintf(stderr, "no more JACK ports available\n");
-      //    exit(1);
-    }
-
-    /* Tell the JACK server that we are ready to roll.  Our
-     * process() callback will start running now. */
-
-    if (jack_activate(client)) {
-      fprintf(stderr, "cannot activate client");
-      //    exit(1);
-    }
-
-    /* Connect the ports.  You can't do this before the client is
-     * activated, because we can't make connections to clients
-     * that aren't running.  Note the confusing (but necessary)
-     * orientation of the driver backend ports: playback ports are
-     * "input" to the backend, and capture ports are "output" from
-     * it.
-     */
-
-    ports = jack_get_ports(client, NULL, NULL,
-                           JackPortIsPhysical | JackPortIsOutput);
-    if (ports == NULL) {
-      fprintf(stderr, "no physical playback ports\n");
-      //    exit(1);
-    }
-
-    if (jack_connect(client, ports[0], jack_port_name(output_port1))) {
-      fprintf(stderr, "cannot connect output ports\n");
-    }
-
-    jack_free(ports);
-
-    /* install a signal handler to properly quits jack client */
-#ifdef WIN32
-    signal(SIGINT, signal_handler);
-    signal(SIGABRT, signal_handler);
-    signal(SIGTERM, signal_handler);
-#else
-    signal(SIGQUIT, signal_handler);
-    signal(SIGTERM, signal_handler);
-    signal(SIGHUP, signal_handler);
-    signal(SIGINT, signal_handler);
-#endif
-
-    /* keep running until the Ctrl+C */
-
-    while (1) {
-#ifdef WIN32
-      Sleep(1000);
-#else
-      sleep(1);
-#endif
-    }
-
-    //  jack_client_close(client);
-    //  exit(0);
+  if (status & JackServerStarted) {
+    fprintf(stderr, "JACK server started\n");
   }
+  if (status & JackNameNotUnique) {
+    client_name = jack_get_client_name(client);
+    fprintf(stderr, "unique name `%s' assigned\n", client_name);
+  }
+
+  /* tell the JACK server to call `process()' whenever
+           there is work to be done.
+        */
+
+  jack_set_process_callback(client, process, NULL);
+
+  /* tell the JACK server to call `jack_shutdown()' if
+           it ever shuts down, either entirely, or if it
+           just decides to stop calling us.
+        */
+
+  jack_on_shutdown(client, jack_shutdown, 0);
+
+  /* create two ports */
+
+  output_port1 = jack_port_register(client, "output1", JACK_DEFAULT_AUDIO_TYPE,
+                                    JackPortIsInput, 0);
+
+  if (output_port1 == NULL) {
+    fprintf(stderr, "no more JACK ports available\n");
+    return -1;
+  }
+
+  /* Tell the JACK server that we are ready to roll.  Our
+   * process() callback will start running now. */
+
+  if (jack_activate(client)) {
+    fprintf(stderr, "cannot activate client");
+    return -1;
+  }
+
+  /* Connect the ports.  You can't do this before the client is
+   * activated, because we can't make connections to clients
+   * that aren't running.  Note the confusing (but necessary)
+   * orientation of the driver backend ports: playback ports are
+   * "input" to the backend, and capture ports are "output" from
+   * it.
+   */
+
+  ports =
+      jack_get_ports(client, NULL, NULL, JackPortIsPhysical | JackPortIsOutput);
+  if (ports == NULL) {
+    fprintf(stderr, "no physical playback ports\n");
+    return -1;
+  }
+
+  if (jack_connect(client, ports[0], jack_port_name(output_port1))) {
+    fprintf(stderr, "cannot connect output ports\n");
+  }
+
+  jack_free(ports);
   return 0;
 }
+
+Engine::JackHook::JackHook() {}
+/**
+ * @brief AudioHook::start initializes the state of AudioMachine,
+ *AudioDevice(the actual audio I/O device). This function also connects and
+ *signals and slots necessary to start the hook.
+ */
+void Engine::JackHook::start() {
+  connect(this, &Engine::JackHook::productive, this, &JackHook::jackUpdateSlot);
+  initJackClient("Tasker");
+}
+
+void Engine::JackHook::jackUpdateSlot() {
+  qDebug() << "$Jack Update$" << deviceLevel;
+  ;
+}
+
+/**
+ * @brief AudioHook::end
+ */
+void Engine::JackHook::end() { audioListenerState = AudioListenerState::OFF; }
+
+/**
+ * @brief AudioHook::pause
+ */
+void Engine::JackHook::pause() {
+  // TODO pause
+  // suspend listening, but don't quit
+}
+
+/**
+ * @brief AudioHook::update updates the state of AudioHook to productive if the
+ * audio volume(level) is above audioThreshold, otherwise it sets the state to
+ * unproductive. It also profiles the audio device's if it hasn't been profiled
+ * yet.
+ * @note Note that this function is called every time the AudioDevice::audioRead
+ * signal is sent.
+ */
+void Engine::JackHook::update() {
+  //  if (!profiled) {
+  //    /**
+  //      Profile device's volume if it hasn't been profiled yet
+  //      */
+  //    audioSource->getQAudioInput().setVolume(0.0);
+  //    audioSource->getAudioDevice()->setMinAmplitude(
+  //        audioSource->getAudioDevice()->getDeviceLevel());
+  //    audioSource->getQAudioInput().setVolume(1.0);
+  //    profiled = true;
+  //  }
+  //  HookState state;
+  //  state = audioSource->getAudioDevice()->getDeviceLevel() > audioThreshold
+  //              ? HookState::productive
+  //              : HookState::unproductive;
+  //  setState(state);
+}
+
+Engine::JackHook::HookState Engine::JackHook::startHook() { return getState(); }
+
+/**
+ * @brief AudioHook::listen resets state to "unproductive"
+ */
+void Engine::JackHook::resetState() { setState(HookState::unproductive); }
+
+Engine::JackHook::Hook::HookState Engine::JackHook::getState() { return state; }
