@@ -48,6 +48,7 @@ void Engine::Hook::setState(Engine::Hook::HookState newState) {
   state = newState;
 }
 
+Engine::Hook::HookType Engine::Hook::getType() { return type; }
 /**
  * @brief Engine::Engine::Hook::getState
  *        Returns current state of the Hook, unproductive or productive

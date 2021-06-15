@@ -27,7 +27,6 @@
 jack_port_t *output_port1;
 jack_client_t *client;
 float deviceLevel;
-
 /**
  * The process callback for this JACK application is called in a
  * special realtime thread once for each audio cycle.
@@ -40,11 +39,10 @@ float deviceLevel;
  * jack, "usermod -a -G audio theusername"
  */
 
-int process(jack_nframes_t nframes, void *arg) {
+static int process_jack_data(jack_nframes_t nframes, void *arg) {
   jack_default_audio_sample_t *out1;
   out1 = (jack_default_audio_sample_t *)jack_port_get_buffer(output_port1,
                                                              nframes);
-
   float maxValue = 0;
 
   float maxAmplitude = 0x7fffffff;
@@ -52,13 +50,10 @@ int process(jack_nframes_t nframes, void *arg) {
   float captureValue = 0;
 
   float minAmplitude = 0;
-  //    Engine::Timer::tick;
-  //  emit Engine::Timer::getInstance()->tick();
-
-  //  QObject::connect(scrollBar, SIGNAL(valueChanged(int)),
-  //                   label,  SLOT(setNum(int)));
 
   uint32_t current_sample_value = 0;
+
+  printf("JACK$$$$\n");
 
   for (unsigned int i = 0; i < nframes; i++) {
     current_sample_value =
@@ -72,8 +67,23 @@ int process(jack_nframes_t nframes, void *arg) {
   // When we say "deviceLevel", what we really mean is Peak Amplitude.
   deviceLevel = captureValue - minAmplitude;
 
-  printf("level:%f\n", std::abs(deviceLevel));
-  emit Engine::Timer::getInstance()->getHook().get()->productive();
+  // I think it's best to just share deviceLevel with this compilation unit. I
+  // think. Not sure about this yet.
+  // Or another option is to make this function static and have the hashmap.
+  // I think it'd be easier to just the check the type of hook...
+  //  if(Engine::Timer::getInstance()->getHook()->get
+  //  }
+  printf("JACK2$$$$\n");
+
+  if (Engine::Timer::getInstance()->getHook()->getType() ==
+      Engine::Hook::HookType::jack) {
+    printf("JACK3$$$$\n");
+
+    Engine::Timer::getInstance()->getHook().get()->update();
+  } else {
+    // This should never happen.
+  }
+  printf("JACK20$$$$\n");
 
   return 0;
 }
@@ -119,7 +129,7 @@ int initJackClient(std::string clientName) {
            there is work to be done.
         */
 
-  jack_set_process_callback(client, process, NULL);
+  jack_set_process_callback(client, process_jack_data, NULL);
 
   /* tell the JACK server to call `jack_shutdown()' if
            it ever shuts down, either entirely, or if it
@@ -169,16 +179,18 @@ int initJackClient(std::string clientName) {
   return 0;
 }
 
-Engine::JackHook::JackHook() {}
+Engine::JackHook::JackHook() {
+  connect(this, &Engine::JackHook::hookUpdate, this, &JackHook::update);
+
+  type = HookType::jack;
+  audioThreshold = 0.01;
+}
 /**
  * @brief AudioHook::start initializes the state of AudioMachine,
  *AudioDevice(the actual audio I/O device). This function also connects and
  *signals and slots necessary to start the hook.
  */
-void Engine::JackHook::start() {
-  connect(this, &Engine::JackHook::productive, this, &JackHook::jackUpdateSlot);
-  initJackClient("Tasker");
-}
+void Engine::JackHook::start() { initJackClient("Tasker"); }
 
 void Engine::JackHook::jackUpdateSlot() {
   qDebug() << "$Jack Update$" << deviceLevel;
@@ -207,21 +219,15 @@ void Engine::JackHook::pause() {
  * signal is sent.
  */
 void Engine::JackHook::update() {
-  //  if (!profiled) {
-  //    /**
-  //      Profile device's volume if it hasn't been profiled yet
-  //      */
-  //    audioSource->getQAudioInput().setVolume(0.0);
-  //    audioSource->getAudioDevice()->setMinAmplitude(
-  //        audioSource->getAudioDevice()->getDeviceLevel());
-  //    audioSource->getQAudioInput().setVolume(1.0);
-  //    profiled = true;
-  //  }
-  //  HookState state;
-  //  state = audioSource->getAudioDevice()->getDeviceLevel() > audioThreshold
-  //              ? HookState::productive
-  //              : HookState::unproductive;
-  //  setState(state);
+  HookState state;
+  printf("JACK4$$$$\n");
+  jack_cycle_wait(client);
+  state = deviceLevel > audioThreshold ? HookState::productive
+                                       : HookState::unproductive;
+  printf("JACK5$$$$\n");
+
+  setState(state);
+  printf("JACK6$$$$\n");
 }
 
 Engine::JackHook::HookState Engine::JackHook::startHook() { return getState(); }

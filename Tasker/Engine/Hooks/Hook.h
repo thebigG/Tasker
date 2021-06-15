@@ -23,7 +23,14 @@ public:
    * sure to add them BEFORE none. The none type is used for bounds
    * checking.
    */
-  enum class HookType { X_MOUSE_KEYBOARD, X_MOUSE, X_KEYBOARD, audio, none };
+  enum class HookType {
+    X_MOUSE_KEYBOARD,
+    X_MOUSE,
+    X_KEYBOARD,
+    audio,
+    jack,
+    none
+  };
   Hook();
   ~Hook();
   /**
@@ -60,12 +67,14 @@ public:
   virtual Hook::HookState startHook() = 0;
   virtual void setState(HookState);
   virtual HookState getState() = 0;
+  virtual HookType getType();
 
 protected:
   /**
    * @brief state
    */
   Hook::HookState state;
+  HookType type;
 
 private:
   /**
@@ -78,6 +87,7 @@ private:
 signals:
   void productive();
   void unProductive();
+  void hookUpdate();
 };
 } // namespace Engine
 

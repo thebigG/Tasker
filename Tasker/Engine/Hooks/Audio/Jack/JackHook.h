@@ -35,6 +35,8 @@ signals:
 
 private:
   AudioListenerState audioListenerState;
+  // TODO: Maybe this should be configurable by the user...
+  float audioThreshold = 0.0;
 
 signals:
   void jackUpdate();
