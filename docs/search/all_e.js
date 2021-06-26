@@ -1,15 +1,9 @@
 var searchData=
 [
-  ['qt_5fmeta_5fstringdata_5fcommstatsqwidget_5ft_86',['qt_meta_stringdata_CommStatsQWidget_t',['../structqt__meta__stringdata__CommStatsQWidget__t.html',1,'']]],
-  ['qt_5fmeta_5fstringdata_5fcreatecommitmentqwidget_5ft_87',['qt_meta_stringdata_CreateCommitmentQWidget_t',['../structqt__meta__stringdata__CreateCommitmentQWidget__t.html',1,'']]],
-  ['qt_5fmeta_5fstringdata_5fengine_5f_5faudiodevice_5ft_88',['qt_meta_stringdata_Engine__AudioDevice_t',['../structqt__meta__stringdata__Engine____AudioDevice__t.html',1,'']]],
-  ['qt_5fmeta_5fstringdata_5fengine_5f_5faudiohook_5ft_89',['qt_meta_stringdata_Engine__AudioHook_t',['../structqt__meta__stringdata__Engine____AudioHook__t.html',1,'']]],
-  ['qt_5fmeta_5fstringdata_5fengine_5f_5faudiomachine_5ft_90',['qt_meta_stringdata_Engine__AudioMachine_t',['../structqt__meta__stringdata__Engine____AudioMachine__t.html',1,'']]],
-  ['qt_5fmeta_5fstringdata_5fengine_5f_5fhook_5ft_91',['qt_meta_stringdata_Engine__Hook_t',['../structqt__meta__stringdata__Engine____Hook__t.html',1,'']]],
-  ['qt_5fmeta_5fstringdata_5fengine_5f_5fjackhook_5ft_92',['qt_meta_stringdata_Engine__JackHook_t',['../structqt__meta__stringdata__Engine____JackHook__t.html',1,'']]],
-  ['qt_5fmeta_5fstringdata_5fengine_5f_5ftimer_5ft_93',['qt_meta_stringdata_Engine__Timer_t',['../structqt__meta__stringdata__Engine____Timer__t.html',1,'']]],
-  ['qt_5fmeta_5fstringdata_5fengine_5f_5fxhook_5ft_94',['qt_meta_stringdata_Engine__XHook_t',['../structqt__meta__stringdata__Engine____XHook__t.html',1,'']]],
-  ['qt_5fmeta_5fstringdata_5flivesession_5ft_95',['qt_meta_stringdata_LiveSession_t',['../structqt__meta__stringdata__LiveSession__t.html',1,'']]],
-  ['qt_5fmeta_5fstringdata_5fmainui_5ft_96',['qt_meta_stringdata_MainUI_t',['../structqt__meta__stringdata__MainUI__t.html',1,'']]],
-  ['qt_5fmeta_5fstringdata_5fnewsessionqwidget_5ft_97',['qt_meta_stringdata_NewSessionQWidget_t',['../structqt__meta__stringdata__NewSessionQWidget__t.html',1,'']]]
+  ['readdata_86',['readData',['../classEngine_1_1AudioDevice.html#aa860e92a6d7710c4fa620c5ec12b4576',1,'Engine::AudioDevice']]],
+  ['reset_87',['reset',['../classEngine_1_1Timer.html#a9020542d73357a4eef512eefaf57524b',1,'Engine::Timer']]],
+  ['resetstate_88',['resetState',['../classEngine_1_1AudioHook.html#adb44c2e44a69cb0432e53978b519f2d6',1,'Engine::AudioHook::resetState()'],['../classEngine_1_1JackHook.html#a89fbaf1621b681da1f6b3d5c96663f5d',1,'Engine::JackHook::resetState()'],['../classEngine_1_1Hook.html#aa2b928d006ad1206eca234a553ebe0b0',1,'Engine::Hook::resetState()']]],
+  ['restart_89',['restart',['../classPerf_1_1PerfTimer.html#a40ed92c0e09c69861ba8c5c4ec6c843f',1,'Perf::PerfTimer']]],
+  ['resume_90',['resume',['../classLiveSession.html#a385835836b965186dbf7efc5a2f7bb52',1,'LiveSession']]],
+  ['run_91',['run',['../classEngine_1_1Timer.html#a1323444ebd7f2c1407518a03a193b5f4',1,'Engine::Timer']]]
 ];
