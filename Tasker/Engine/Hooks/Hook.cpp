@@ -27,9 +27,9 @@ QDataStream &operator>>(QDataStream &in, Engine::Hook::HookType &newHook) {
  */
 Engine::Hook::HookType Engine::Hook::intToHookType(int enumInt) {
   if (int(HookType::X_MOUSE_KEYBOARD) < enumInt ||
-      int(HookType::none) > enumInt)
+      int(HookType::NONE) > enumInt)
     return HookType(enumInt);
-  return HookType::none;
+  return HookType::NONE;
 }
 
 /**

@@ -27,9 +27,9 @@ public:
     X_MOUSE_KEYBOARD,
     X_MOUSE,
     X_KEYBOARD,
-    audio,
-    jack,
-    none
+    AUDIO,
+    JACK,
+    NONE
   };
   Hook();
   ~Hook();

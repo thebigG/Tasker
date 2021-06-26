@@ -45,7 +45,8 @@ private:
   QThread thisThread;
   std::unique_ptr<QTimer> timer;
   int gracePeriod = 30; // How many seconds to keep the Timer in a "productive"
-                        // state for before for new state of the hook(s)
+                        // state for before for new state of the hook(s). This
+                        // really needs to be configurable.
   virtual void run();
 signals:
   void tick();

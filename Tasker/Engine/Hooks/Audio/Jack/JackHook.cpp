@@ -53,8 +53,6 @@ static int process_jack_data(jack_nframes_t nframes, void *arg) {
 
   uint32_t current_sample_value = 0;
 
-  printf("JACK$$$$\n");
-
   for (unsigned int i = 0; i < nframes; i++) {
     current_sample_value =
         static_cast<uint32_t>(std::abs((out1[i]) * (0x7fffffff)));
@@ -67,24 +65,13 @@ static int process_jack_data(jack_nframes_t nframes, void *arg) {
   // When we say "deviceLevel", what we really mean is Peak Amplitude.
   deviceLevel = captureValue - minAmplitude;
 
-  // I think it's best to just share deviceLevel with this compilation unit. I
-  // think. Not sure about this yet.
-  // Or another option is to make this function static and have the hashmap.
-  // I think it'd be easier to just the check the type of hook...
-  //  if(Engine::Timer::getInstance()->getHook()->get
-  //  }
-  printf("JACK2$$$$\n");
-
   if (Engine::Timer::getInstance()->getHook()->getType() ==
-      Engine::Hook::HookType::jack) {
-    printf("JACK3$$$$\n");
+      Engine::Hook::HookType::JACK) {
 
     Engine::Timer::getInstance()->getHook().get()->update();
   } else {
     // This should never happen.
   }
-  printf("JACK20$$$$\n");
-
   return 0;
 }
 
@@ -125,7 +112,7 @@ int initJackClient(std::string clientName) {
     fprintf(stderr, "unique name `%s' assigned\n", client_name);
   }
 
-  /* tell the JACK server to call `process()' whenever
+  /* tell the JACK server to call `process_jack_data()' whenever
            there is work to be done.
         */
 
@@ -179,23 +166,25 @@ int initJackClient(std::string clientName) {
   return 0;
 }
 
+/**
+ * @brief Engine::JackHook::JackHook
+ * Sets the audio threshhold to 0.001f. Obviously this is something that
+ * needs to be investigated further since this is a fixed threshold and users
+ * have no way of configuring it. At the moment this was tested on Pop!_OS 20.04
+ * LTS with default settings of the Jack server. Using Moukey Moukey USB 3.0
+ * Audio Interface; model#: MK0155-PAN-UK.
+ */
 Engine::JackHook::JackHook() {
   connect(this, &Engine::JackHook::hookUpdate, this, &JackHook::update);
-
-  type = HookType::jack;
-  audioThreshold = 0.01;
+  type = HookType::JACK;
+  audioThreshold = 0.001f;
 }
 /**
- * @brief AudioHook::start initializes the state of AudioMachine,
- *AudioDevice(the actual audio I/O device). This function also connects and
- *signals and slots necessary to start the hook.
+ * @brief JackHook::start Initializes the jack client.
+ * @todo In the future have a way of checking if the Jack Server
+ * is even running.
  */
 void Engine::JackHook::start() { initJackClient("Tasker"); }
-
-void Engine::JackHook::jackUpdateSlot() {
-  qDebug() << "$Jack Update$" << deviceLevel;
-  ;
-}
 
 /**
  * @brief AudioHook::end
@@ -211,23 +200,18 @@ void Engine::JackHook::pause() {
 }
 
 /**
- * @brief AudioHook::update updates the state of AudioHook to productive if the
- * audio volume(level) is above audioThreshold, otherwise it sets the state to
- * unproductive. It also profiles the audio device's if it hasn't been profiled
- * yet.
- * @note Note that this function is called every time the AudioDevice::audioRead
- * signal is sent.
+ * @brief AudioHook::update updates the state of AudioHook to productive if
+ * the audio volume(level) is above audioThreshold, otherwise it sets the
+ * state to unproductive. It also profiles the audio device's if it hasn't
+ * been profiled yet.
+ * @note Note that this function is called every time the
+ * AudioDevice::audioRead signal is sent.
  */
 void Engine::JackHook::update() {
   HookState state;
-  printf("JACK4$$$$\n");
-  jack_cycle_wait(client);
   state = deviceLevel > audioThreshold ? HookState::productive
                                        : HookState::unproductive;
-  printf("JACK5$$$$\n");
-
   setState(state);
-  printf("JACK6$$$$\n");
 }
 
 Engine::JackHook::HookState Engine::JackHook::startHook() { return getState(); }

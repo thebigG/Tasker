@@ -8,6 +8,8 @@ class JackHook;
 /**
  * @brief The Engine::JackHook class allows users to connect Tasker to Jack.
  * To learn more about Jack:https://jackaudio.org/
+ * Meaning one could have software such as Audacity(or anything else that
+ * supports Jack) and Tasker running at the same time.
  */
 class Engine::JackHook : public Engine::Hook {
   Q_OBJECT
@@ -36,11 +38,9 @@ signals:
 private:
   AudioListenerState audioListenerState;
   // TODO: Maybe this should be configurable by the user...
-  float audioThreshold = 0.0;
+  // At the moment is a fixed value set on the constructor.
+  float audioThreshold;
 
 signals:
   void jackUpdate();
-
-public slots:
-  void jackUpdateSlot();
 };
