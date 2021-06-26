@@ -55,7 +55,7 @@ void Timer::startTimer() {
     hook = std::make_unique<XHook>(XHookMode::MOUSE);
   } else if (hookType == Hook::HookType::X_KEYBOARD) {
     hook = std::make_unique<XHook>(XHookMode::KEYBOARD);
-  } else if (hookType == Hook::HookType::audio) {
+  } else if (hookType == Hook::HookType::AUDIO) {
     hook = std::make_unique<JackHook>();
   }
   connect(&hookThread, &QThread::started, hook.get(), &Hook::start);

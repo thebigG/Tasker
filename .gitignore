@@ -61,6 +61,7 @@ dkms.conf
 # Miscellaneous
 .DS_Store
 .swp
+*.cmake
 
 #Qt junk
 Tasker.pro.*
@@ -70,4 +71,8 @@ Makefile
 libs/Xhook/build-*
 *.user
 *qdocconf*
+.qmake.stash
+*.user*
+
+#Exception for libuiohook
 !build_libuiohook.sh
