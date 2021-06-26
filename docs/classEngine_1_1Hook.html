@@ -89,7 +89,8 @@ Inheritance diagram for Engine::Hook:</div>
   <img src="classEngine_1_1Hook.png" usemap="#Engine::Hook_map" alt=""/>
   <map id="Engine::Hook_map" name="Engine::Hook_map">
 <area href="classEngine_1_1AudioHook.html" title="Engine::AudioHook class This class uses the AudioDvice and AudioMachine classes to make a self-sustai..." alt="Engine::AudioHook" shape="rect" coords="0,112,119,136"/>
-<area href="classEngine_1_1XHook.html" title="The Engine::XListener class This class has the capiblity of detecting mouse and keyboard interaction." alt="Engine::XHook" shape="rect" coords="129,112,248,136"/>
+<area href="classEngine_1_1JackHook.html" title="The Engine::JackHook class allows users to connect Tasker to Jack. To learn more about Jack:https://j..." alt="Engine::JackHook" shape="rect" coords="129,112,248,136"/>
+<area href="classEngine_1_1XHook.html" title="The Engine::XListener class This class has the capiblity of detecting mouse and keyboard interaction." alt="Engine::XHook" shape="rect" coords="258,112,377,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -103,9 +104,10 @@ Public Types</h2></td></tr>
 &#160;&#160;<b>X_MOUSE_KEYBOARD</b>, 
 <b>X_MOUSE</b>, 
 <b>X_KEYBOARD</b>, 
-<b>audio</b>, 
+<b>AUDIO</b>, 
 <br />
-&#160;&#160;<b>none</b>
+&#160;&#160;<b>JACK</b>, 
+<b>NONE</b>
 <br />
  }</td></tr>
 <tr class="memdesc:aa0103c6a2787b5992ba1ce98140f29ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">The HookType enum This enum used for <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a> to know which listener it is going to instantiate.  <a href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">More...</a><br /></td></tr>
@@ -119,6 +121,9 @@ Signals</h2></td></tr>
 <tr class="memitem:a2985c4a5546244d31b3abc0d32887671"><td class="memItemLeft" align="right" valign="top"><a id="a2985c4a5546244d31b3abc0d32887671"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>unProductive</b> ()</td></tr>
 <tr class="separator:a2985c4a5546244d31b3abc0d32887671"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87154b68bc3ffab905d89c617c0b6935"><td class="memItemLeft" align="right" valign="top"><a id="a87154b68bc3ffab905d89c617c0b6935"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>hookUpdate</b> ()</td></tr>
+<tr class="separator:a87154b68bc3ffab905d89c617c0b6935"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -130,9 +135,8 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#aa7310dbb402c784da9ad46e2fc0c3a08">~Hook</a> ()</td></tr>
 <tr class="memdesc:aa7310dbb402c784da9ad46e2fc0c3a08"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Hook.html#aa7310dbb402c784da9ad46e2fc0c3a08" title="Engine::Hook::~Hook.">Engine::Hook::~Hook</a>. <br /></td></tr>
 <tr class="separator:aa7310dbb402c784da9ad46e2fc0c3a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86ac708ccb0a16520e7392d54c233cfb"><td class="memItemLeft" align="right" valign="top"><a id="a86ac708ccb0a16520e7392d54c233cfb"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a86ac708ccb0a16520e7392d54c233cfb">start</a> ()=0</td></tr>
-<tr class="memdesc:a86ac708ccb0a16520e7392d54c233cfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">start Up to the child to define, but it is usually whatever the class considers thet "start" of the hook, whether that'd be mic or keyboard device. <br /></td></tr>
+<tr class="memitem:a86ac708ccb0a16520e7392d54c233cfb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a86ac708ccb0a16520e7392d54c233cfb">start</a> ()=0</td></tr>
+<tr class="memdesc:a86ac708ccb0a16520e7392d54c233cfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">start Up to the child to define, but it is usually whatever the class considers thet "start" of the hook, whether that'd be mic or keyboard device.  <a href="classEngine_1_1Hook.html#a86ac708ccb0a16520e7392d54c233cfb">More...</a><br /></td></tr>
 <tr class="separator:a86ac708ccb0a16520e7392d54c233cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa4c909da811b02d554c4ee900892b1f"><td class="memItemLeft" align="right" valign="top"><a id="aaa4c909da811b02d554c4ee900892b1f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#aaa4c909da811b02d554c4ee900892b1f">end</a> ()=0</td></tr>
@@ -153,12 +157,15 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memitem:a694be2b48256167e855e3d8d9e545311"><td class="memItemLeft" align="right" valign="top"><a id="a694be2b48256167e855e3d8d9e545311"></a>
 virtual Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><b>startHook</b> ()=0</td></tr>
 <tr class="separator:a694be2b48256167e855e3d8d9e545311"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c4ae43720a7f9e35ba028eae399415f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a7c4ae43720a7f9e35ba028eae399415f">setState</a> (HookState)</td></tr>
+<tr class="memitem:a7c4ae43720a7f9e35ba028eae399415f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a7c4ae43720a7f9e35ba028eae399415f">setState</a> (HookState)</td></tr>
 <tr class="memdesc:a7c4ae43720a7f9e35ba028eae399415f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Engine::Engine::Hook::setState.  <a href="classEngine_1_1Hook.html#a7c4ae43720a7f9e35ba028eae399415f">More...</a><br /></td></tr>
 <tr class="separator:a7c4ae43720a7f9e35ba028eae399415f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a253c8e98c3b7dc96b817c661ec35e905"><td class="memItemLeft" align="right" valign="top">HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a253c8e98c3b7dc96b817c661ec35e905">getState</a> ()</td></tr>
-<tr class="memdesc:a253c8e98c3b7dc96b817c661ec35e905"><td class="mdescLeft">&#160;</td><td class="mdescRight">Engine::Engine::Hook::getState Returns current state of the <a class="el" href="classEngine_1_1Hook.html" title="The Engine::Hook class is the base class for all of the hooks on Tasker. It provides a stateful(with ...">Hook</a>, unproductive or productive.  <a href="classEngine_1_1Hook.html#a253c8e98c3b7dc96b817c661ec35e905">More...</a><br /></td></tr>
-<tr class="separator:a253c8e98c3b7dc96b817c661ec35e905"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5a41adf9ec7c4160eea51bffb402146"><td class="memItemLeft" align="right" valign="top"><a id="ad5a41adf9ec7c4160eea51bffb402146"></a>
+virtual HookState&#160;</td><td class="memItemRight" valign="bottom"><b>getState</b> ()=0</td></tr>
+<tr class="separator:ad5a41adf9ec7c4160eea51bffb402146"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a688c994b4fb4bc57ace4f7cdd052ddc6"><td class="memItemLeft" align="right" valign="top"><a id="a688c994b4fb4bc57ace4f7cdd052ddc6"></a>
+virtual <a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> ()</td></tr>
+<tr class="separator:a688c994b4fb4bc57ace4f7cdd052ddc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -172,6 +179,9 @@ Protected Attributes</h2></td></tr>
 Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a25347f91b07bf216b2b350c05e887fe8">state</a></td></tr>
 <tr class="memdesc:a25347f91b07bf216b2b350c05e887fe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">state <br /></td></tr>
 <tr class="separator:a25347f91b07bf216b2b350c05e887fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a413945a9594fe3e852b0243cfbf7b0c8"><td class="memItemLeft" align="right" valign="top"><a id="a413945a9594fe3e852b0243cfbf7b0c8"></a>
+<a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
+<tr class="separator:a413945a9594fe3e852b0243cfbf7b0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classEngine_1_1Hook.html" title="The Engine::Hook class is the base class for all of the hooks on Tasker. It provides a stateful(with ...">Engine::Hook</a> class is the base class for all of the hooks on Tasker. It provides a stateful(with productive and unproductive states) interface that any child class may extend and build upon. </p>
@@ -202,26 +212,6 @@ Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a253c8e98c3b7dc96b817c661ec35e905"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a253c8e98c3b7dc96b817c661ec35e905">&#9670;&nbsp;</a></span>getState()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Engine::Hook::HookState Engine::Hook::getState </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Engine::Engine::Hook::getState Returns current state of the <a class="el" href="classEngine_1_1Hook.html" title="The Engine::Hook class is the base class for all of the hooks on Tasker. It provides a stateful(with ...">Hook</a>, unproductive or productive. </p>
-<dl class="section return"><dt>Returns</dt><dd>Engine::Engine::Hook::HookState::unproductive, or Engine::Engine::Hook::Engine::Hook::productive </dd></dl>
-
-</div>
-</div>
 <a id="aeab8b2243fde37451545ca778ce66966"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeab8b2243fde37451545ca778ce66966">&#9670;&nbsp;</a></span>intToHookType()</h2>
 
@@ -297,6 +287,9 @@ Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Engine::Hook::setState </td>
@@ -306,6 +299,11 @@ Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Engine::Engine::Hook::setState. </p>
@@ -316,11 +314,41 @@ Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
   </dd>
 </dl>
 
+<p>Reimplemented in <a class="el" href="classEngine_1_1XHook.html#a562d4287c06b9642e6fd66184b68618c">Engine::XHook</a>.</p>
+
+</div>
+</div>
+<a id="a86ac708ccb0a16520e7392d54c233cfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86ac708ccb0a16520e7392d54c233cfb">&#9670;&nbsp;</a></span>start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Engine::Hook::start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>start Up to the child to define, but it is usually whatever the class considers thet "start" of the hook, whether that'd be mic or keyboard device. </p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Tasker/<a class="el" href="Hook_8h_source.html">Hook.h</a></li>
-<li>Tasker/Hook.cpp</li>
+<li>Tasker/Engine/Hooks/<a class="el" href="Hook_8h_source.html">Hook.h</a></li>
+<li>Tasker/Engine/Hooks/Hook.cpp</li>
+<li>Tasker/Tasker_autogen/HPZKBQKLFK/moc_Hook.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

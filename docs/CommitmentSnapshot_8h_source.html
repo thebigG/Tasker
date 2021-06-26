@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Tasker: Tasker/CommitmentSnapshot.h Source File</title>
+<title>Tasker: Tasker/Ui/CommitmentSnapshot.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_34c7a90fed869d072f4d19447ed2eeb8.html">Tasker</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_34c7a90fed869d072f4d19447ed2eeb8.html">Tasker</a></li><li class="navelem"><a class="el" href="dir_9de1e2e8054547a75c3517d164bbc853.html">Ui</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -113,7 +113,7 @@ $(function() {
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">double</span> unproductiveRatio;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classCommitmentSnaphot.html#a5613b929f39f2a2e1e007251671355fe">getWeekDayIndex</a>(QDate &amp;dateWindowStart, QDate &amp;sessionDay);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    Perf::PerfTimer newPerfTimer{};</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="classPerf_1_1PerfTimer.html">Perf::PerfTimer</a> newPerfTimer{};</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    QChartView &amp;getView();</div>
@@ -134,6 +134,7 @@ $(function() {
 <div class="ttc" id="astructudata_1_1TimeWindow_html"><div class="ttname"><a href="structudata_1_1TimeWindow.html">udata::TimeWindow</a></div><div class="ttdoc">The TimeWindow struct represents a span of time(such as a week) that the user has a number of tasks(d...</div><div class="ttdef"><b>Definition:</b> Commitment.h:33</div></div>
 <div class="ttc" id="anamespaceudata_html_a3c64c80328b4817464ffd4887c4d8a14"><div class="ttname"><a href="namespaceudata.html#a3c64c80328b4817464ffd4887c4d8a14">udata::CommitmentType</a></div><div class="ttdeci">CommitmentType</div><div class="ttdoc">The udata::Commitment class.</div><div class="ttdef"><b>Definition:</b> Commitment.h:83</div></div>
 <div class="ttc" id="aCommitment_8h_html"><div class="ttname"><a href="Commitment_8h.html">Commitment.h</a></div><div class="ttdoc">Header file for udata::Commitment.</div></div>
+<div class="ttc" id="aclassPerf_1_1PerfTimer_html"><div class="ttname"><a href="classPerf_1_1PerfTimer.html">Perf::PerfTimer</a></div><div class="ttdoc">The Perf::PerfTimer class a class to made to measure the performance of entities on Tasker....</div><div class="ttdef"><b>Definition:</b> perftimer.h:18</div></div>
 <div class="ttc" id="aclassCommitmentSnaphot_html"><div class="ttname"><a href="classCommitmentSnaphot.html">CommitmentSnaphot</a></div><div class="ttdoc">The CommitmentSnaphot class is a UI widget that displays a weekly chaty of commitments.</div><div class="ttdef"><b>Definition:</b> CommitmentSnapshot.h:22</div></div>
 <div class="ttc" id="aclassCommitmentSnaphot_html_aeff4397de801aa61d89d3a1c9632f403"><div class="ttname"><a href="classCommitmentSnaphot.html#aeff4397de801aa61d89d3a1c9632f403">CommitmentSnaphot::CommitmentSnaphot</a></div><div class="ttdeci">CommitmentSnaphot()</div><div class="ttdoc">CommitmentSnaphot::CommitmentSnaphot Initializes a dummy chart.</div><div class="ttdef"><b>Definition:</b> CommitmentSnaphot.cpp:9</div></div>
 <div class="ttc" id="aclassCommitmentSnaphot_html_a5613b929f39f2a2e1e007251671355fe"><div class="ttname"><a href="classCommitmentSnaphot.html#a5613b929f39f2a2e1e007251671355fe">CommitmentSnaphot::getWeekDayIndex</a></div><div class="ttdeci">int getWeekDayIndex(QDate &amp;dateWindowStart, QDate &amp;sessionDay)</div><div class="ttdoc">CommitmentSnaphot::getWeekDayIndex Maps sessionDay to an index of the week relative to dateWindowStar...</div><div class="ttdef"><b>Definition:</b> CommitmentSnaphot.cpp:165</div></div>

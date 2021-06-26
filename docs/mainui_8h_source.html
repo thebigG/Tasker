@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Tasker: Tasker/mainui.h Source File</title>
+<title>Tasker: Tasker/Ui/mainui.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_34c7a90fed869d072f4d19447ed2eeb8.html">Tasker</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_34c7a90fed869d072f4d19447ed2eeb8.html">Tasker</a></li><li class="navelem"><a class="el" href="dir_9de1e2e8054547a75c3517d164bbc853.html">Ui</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -79,54 +79,66 @@ $(function() {
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;CommStatsQWidget.h&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define ICONPATH &quot;:/resources/clock-256.png&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classMainUI.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMainUI.html">MainUI</a> : <span class="keyword">public</span> QMainWindow {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    Q_OBJECT</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keyword">static</span> std::unique_ptr&lt;MainUI&gt; mainHub;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="classCommStatsQWidget.html">CommStatsQWidget</a> commitmentHub{};</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  QMenuBar mainMenuBar;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  QMenu commitmentMenu{ COMMITMENT_MENU_STRING };</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  QMenu sessionMenu{ SESSION_MENU_STRING };</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  QMenu trayIconMenu{};</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  QAction *getNewSessionAction();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  QAction *getEditCommitmentAction();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  QAction *getDeleteCommitmentAction();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  QSystemTrayIcon trayIcon;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordtype">void</span> closeEvent(QCloseEvent *) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keyword">static</span> <a class="code" href="classMainUI.html">MainUI</a> *<a class="code" href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d">getInstance</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordtype">void</span> update();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#a780bb5a7fe05ae8ca2a1080a1f754efa">updateNewSessionActionState</a>();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#a3f4f3f984a8a94ea8c49eb42627548a1">updateEditCommitmentActionState</a>();</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#ab2709bfecac825d5a397421313404bdd">updateDeleteCommitmentActionState</a>();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#a3a9e743813d6921854c9738bde47f5cd">updateActionStates</a>();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classMainUI.html#a91650f667b93a03bd19958a7b1805d7b">newSessionActionState</a>();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordtype">bool</span> editCommitmentActionState();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">bool</span> deleteCommitmentActionState();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="classCommStatsQWidget.html">CommStatsQWidget</a> &amp;getCommitmentHub();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <a class="code" href="classMainUI.html">MainUI</a>();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#a2bb78b07b5a1bd9807f93dbaa29423bf">saveTaskerStateSlot</a>();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#aa7f057ed5fb497845771a21f2e1928e4">trayIconShoWindowSlot</a>(QSystemTrayIcon::ActivationReason);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#a7a4a7681f8fc7a830b15eaee7ea8c371">toggleShowWindow</a>();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif // MAINUI_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;Timer.h&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define ICONPATH &quot;:/resources/clock-256.png&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define LIVESESSION_PENDING &quot;Pending&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define LIVESSION_IN_PROGRESS &quot;In Progress&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define LIVESSION_COMPLETE &quot;Completed&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define LIVESESSION_PAUSED &quot;Paused&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classMainUI.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="classMainUI.html">MainUI</a> : <span class="keyword">public</span> QMainWindow {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keyword">static</span> std::unique_ptr&lt;MainUI&gt; mainHub;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="classCommStatsQWidget.html">CommStatsQWidget</a> commitmentHub{};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  QMenuBar mainMenuBar;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  QMenu commitmentMenu{ COMMITMENT_MENU_STRING };</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  QMenu sessionMenu{ SESSION_MENU_STRING };</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  QMenu trayIconMenu{};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  QAction *getNewSessionAction();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  QAction *getEditCommitmentAction();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  QAction *getDeleteCommitmentAction();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  QSystemTrayIcon trayIcon;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  QAction *liveSessionStatusAction{};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  QString liveSessionStatusText{ <span class="stringliteral">&quot;LiveSession:&quot;</span> };</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#a044a90e28639fb43897472dfd4ac5ce9">updateLiveSessionStatusText</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">void</span> updateLiveSessionStatusAction();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">void</span> closeEvent(QCloseEvent *) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">static</span> <a class="code" href="classMainUI.html">MainUI</a> *<a class="code" href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d">getInstance</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordtype">void</span> update();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#a780bb5a7fe05ae8ca2a1080a1f754efa">updateNewSessionActionState</a>();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#a3f4f3f984a8a94ea8c49eb42627548a1">updateEditCommitmentActionState</a>();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#ab2709bfecac825d5a397421313404bdd">updateDeleteCommitmentActionState</a>();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#a3a9e743813d6921854c9738bde47f5cd">updateActionStates</a>();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="classMainUI.html#a91650f667b93a03bd19958a7b1805d7b">newSessionActionState</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">bool</span> editCommitmentActionState();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">bool</span> deleteCommitmentActionState();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <a class="code" href="classCommStatsQWidget.html">CommStatsQWidget</a> &amp;getCommitmentHub();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <a class="code" href="classMainUI.html">MainUI</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">public</span> slots:</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#a2bb78b07b5a1bd9807f93dbaa29423bf">saveTaskerStateSlot</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#aa7f057ed5fb497845771a21f2e1928e4">trayIconShoWindowSlot</a>(QSystemTrayIcon::ActivationReason);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classMainUI.html#a7a4a7681f8fc7a830b15eaee7ea8c371">toggleShowWindow</a>();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">void</span> quitSlot();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;};</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif // MAINUI_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassMainUI_html_ab2709bfecac825d5a397421313404bdd"><div class="ttname"><a href="classMainUI.html#ab2709bfecac825d5a397421313404bdd">MainUI::updateDeleteCommitmentActionState</a></div><div class="ttdeci">void updateDeleteCommitmentActionState()</div><div class="ttdoc">MainUI::updateDeleteCommitmentActionState updates the state of the QAction tasked with deleting a com...</div><div class="ttdef"><b>Definition:</b> mainui.cpp:176</div></div>
-<div class="ttc" id="aclassMainUI_html_adacd428c44ae710fb9f6e7a36b8ac87d"><div class="ttname"><a href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d">MainUI::getInstance</a></div><div class="ttdeci">static MainUI * getInstance()</div><div class="ttdoc">MainUI::getInstance.</div><div class="ttdef"><b>Definition:</b> mainui.cpp:121</div></div>
-<div class="ttc" id="aclassMainUI_html"><div class="ttname"><a href="classMainUI.html">MainUI</a></div><div class="ttdoc">The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....</div><div class="ttdef"><b>Definition:</b> mainui.h:28</div></div>
-<div class="ttc" id="aclassMainUI_html_a7a4a7681f8fc7a830b15eaee7ea8c371"><div class="ttname"><a href="classMainUI.html#a7a4a7681f8fc7a830b15eaee7ea8c371">MainUI::toggleShowWindow</a></div><div class="ttdeci">void toggleShowWindow()</div><div class="ttdoc">toggleShowWindow Show/hide Tasker's window. If Tasker is currently being shown, this method wil hide ...</div><div class="ttdef"><b>Definition:</b> mainui.cpp:210</div></div>
-<div class="ttc" id="aclassMainUI_html_a91650f667b93a03bd19958a7b1805d7b"><div class="ttname"><a href="classMainUI.html#a91650f667b93a03bd19958a7b1805d7b">MainUI::newSessionActionState</a></div><div class="ttdeci">bool newSessionActionState()</div><div class="ttdoc">MainUI::newSessionActionState.</div><div class="ttdef"><b>Definition:</b> mainui.cpp:143</div></div>
-<div class="ttc" id="aclassMainUI_html_a3f4f3f984a8a94ea8c49eb42627548a1"><div class="ttname"><a href="classMainUI.html#a3f4f3f984a8a94ea8c49eb42627548a1">MainUI::updateEditCommitmentActionState</a></div><div class="ttdeci">void updateEditCommitmentActionState()</div><div class="ttdoc">MainUI::updateEditCommitmentActionState updates the state of the QAction(whether it is enabled or dis...</div><div class="ttdef"><b>Definition:</b> mainui.cpp:157</div></div>
-<div class="ttc" id="aclassMainUI_html_aa7f057ed5fb497845771a21f2e1928e4"><div class="ttname"><a href="classMainUI.html#aa7f057ed5fb497845771a21f2e1928e4">MainUI::trayIconShoWindowSlot</a></div><div class="ttdeci">void trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason)</div><div class="ttdef"><b>Definition:</b> mainui.cpp:52</div></div>
-<div class="ttc" id="aclassMainUI_html_a780bb5a7fe05ae8ca2a1080a1f754efa"><div class="ttname"><a href="classMainUI.html#a780bb5a7fe05ae8ca2a1080a1f754efa">MainUI::updateNewSessionActionState</a></div><div class="ttdeci">void updateNewSessionActionState()</div><div class="ttdoc">MainUI::updateNewSessionActionState updates the state of the QAction that allows users to create a ne...</div><div class="ttdef"><b>Definition:</b> mainui.cpp:74</div></div>
-<div class="ttc" id="aclassMainUI_html_a2bb78b07b5a1bd9807f93dbaa29423bf"><div class="ttname"><a href="classMainUI.html#a2bb78b07b5a1bd9807f93dbaa29423bf">MainUI::saveTaskerStateSlot</a></div><div class="ttdeci">static void saveTaskerStateSlot()</div><div class="ttdoc">MainUI::saveTaskerState Stores the state of Tasker on disk. This includes all commitments,...</div><div class="ttdef"><b>Definition:</b> mainui.cpp:134</div></div>
+<div class="ttc" id="aclassMainUI_html_ab2709bfecac825d5a397421313404bdd"><div class="ttname"><a href="classMainUI.html#ab2709bfecac825d5a397421313404bdd">MainUI::updateDeleteCommitmentActionState</a></div><div class="ttdeci">void updateDeleteCommitmentActionState()</div><div class="ttdoc">MainUI::updateDeleteCommitmentActionState updates the state of the QAction tasked with deleting a com...</div><div class="ttdef"><b>Definition:</b> mainui.cpp:182</div></div>
+<div class="ttc" id="aclassMainUI_html_adacd428c44ae710fb9f6e7a36b8ac87d"><div class="ttname"><a href="classMainUI.html#adacd428c44ae710fb9f6e7a36b8ac87d">MainUI::getInstance</a></div><div class="ttdeci">static MainUI * getInstance()</div><div class="ttdoc">MainUI::getInstance.</div><div class="ttdef"><b>Definition:</b> mainui.cpp:127</div></div>
+<div class="ttc" id="aclassMainUI_html"><div class="ttname"><a href="classMainUI.html">MainUI</a></div><div class="ttdoc">The MainUI class is the one responsible for the meta UI/front-end state of Tasker as a whole....</div><div class="ttdef"><b>Definition:</b> mainui.h:37</div></div>
+<div class="ttc" id="aclassMainUI_html_a7a4a7681f8fc7a830b15eaee7ea8c371"><div class="ttname"><a href="classMainUI.html#a7a4a7681f8fc7a830b15eaee7ea8c371">MainUI::toggleShowWindow</a></div><div class="ttdeci">void toggleShowWindow()</div><div class="ttdoc">toggleShowWindow Show/hide Tasker's window. If Tasker is currently being shown, this method wil hide ...</div><div class="ttdef"><b>Definition:</b> mainui.cpp:216</div></div>
+<div class="ttc" id="aclassMainUI_html_a044a90e28639fb43897472dfd4ac5ce9"><div class="ttname"><a href="classMainUI.html#a044a90e28639fb43897472dfd4ac5ce9">MainUI::updateLiveSessionStatusText</a></div><div class="ttdeci">void updateLiveSessionStatusText()</div><div class="ttdef"><b>Definition:</b> mainui.cpp:233</div></div>
+<div class="ttc" id="aclassMainUI_html_a91650f667b93a03bd19958a7b1805d7b"><div class="ttname"><a href="classMainUI.html#a91650f667b93a03bd19958a7b1805d7b">MainUI::newSessionActionState</a></div><div class="ttdeci">bool newSessionActionState()</div><div class="ttdoc">MainUI::newSessionActionState.</div><div class="ttdef"><b>Definition:</b> mainui.cpp:149</div></div>
+<div class="ttc" id="aclassMainUI_html_a3f4f3f984a8a94ea8c49eb42627548a1"><div class="ttname"><a href="classMainUI.html#a3f4f3f984a8a94ea8c49eb42627548a1">MainUI::updateEditCommitmentActionState</a></div><div class="ttdeci">void updateEditCommitmentActionState()</div><div class="ttdoc">MainUI::updateEditCommitmentActionState updates the state of the QAction(whether it is enabled or dis...</div><div class="ttdef"><b>Definition:</b> mainui.cpp:163</div></div>
+<div class="ttc" id="aclassMainUI_html_aa7f057ed5fb497845771a21f2e1928e4"><div class="ttname"><a href="classMainUI.html#aa7f057ed5fb497845771a21f2e1928e4">MainUI::trayIconShoWindowSlot</a></div><div class="ttdeci">void trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason)</div><div class="ttdef"><b>Definition:</b> mainui.cpp:54</div></div>
+<div class="ttc" id="aclassMainUI_html_a780bb5a7fe05ae8ca2a1080a1f754efa"><div class="ttname"><a href="classMainUI.html#a780bb5a7fe05ae8ca2a1080a1f754efa">MainUI::updateNewSessionActionState</a></div><div class="ttdeci">void updateNewSessionActionState()</div><div class="ttdoc">MainUI::updateNewSessionActionState updates the state of the QAction that allows users to create a ne...</div><div class="ttdef"><b>Definition:</b> mainui.cpp:76</div></div>
+<div class="ttc" id="aclassMainUI_html_a2bb78b07b5a1bd9807f93dbaa29423bf"><div class="ttname"><a href="classMainUI.html#a2bb78b07b5a1bd9807f93dbaa29423bf">MainUI::saveTaskerStateSlot</a></div><div class="ttdeci">static void saveTaskerStateSlot()</div><div class="ttdoc">MainUI::saveTaskerState Stores the state of Tasker on disk. This includes all commitments,...</div><div class="ttdef"><b>Definition:</b> mainui.cpp:140</div></div>
 <div class="ttc" id="aclassCommStatsQWidget_html"><div class="ttname"><a href="classCommStatsQWidget.html">CommStatsQWidget</a></div><div class="ttdoc">The CommStatsQWidget class is the main hub where the data for Commitments is displayed....</div><div class="ttdef"><b>Definition:</b> CommStatsQWidget.h:53</div></div>
-<div class="ttc" id="aclassMainUI_html_a3a9e743813d6921854c9738bde47f5cd"><div class="ttname"><a href="classMainUI.html#a3a9e743813d6921854c9738bde47f5cd">MainUI::updateActionStates</a></div><div class="ttdeci">void updateActionStates()</div><div class="ttdoc">MainUI::updateActionStates updates all of the QActions' states.</div><div class="ttdef"><b>Definition:</b> mainui.cpp:189</div></div>
+<div class="ttc" id="aclassMainUI_html_a3a9e743813d6921854c9738bde47f5cd"><div class="ttname"><a href="classMainUI.html#a3a9e743813d6921854c9738bde47f5cd">MainUI::updateActionStates</a></div><div class="ttdeci">void updateActionStates()</div><div class="ttdoc">MainUI::updateActionStates updates all of the QActions' states.</div><div class="ttdef"><b>Definition:</b> mainui.cpp:195</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

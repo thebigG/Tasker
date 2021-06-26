@@ -64,7 +64,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Engine Namespace Reference</div>  </div>
 </div><!--header-->
@@ -87,6 +88,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html">Hook</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classEngine_1_1Hook.html" title="The Engine::Hook class is the base class for all of the hooks on Tasker. It provides a stateful(with ...">Engine::Hook</a> class is the base class for all of the hooks on Tasker. It provides a stateful(with productive and unproductive states) interface that any child class may extend and build upon.  <a href="classEngine_1_1Hook.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1JackHook.html">JackHook</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classEngine_1_1JackHook.html" title="The Engine::JackHook class allows users to connect Tasker to Jack. To learn more about Jack:https://j...">Engine::JackHook</a> class allows users to connect Tasker to Jack. To learn more about Jack:https://jackaudio.org/ Meaning one could have software such as Audacity(or anything else that supports Jack) and Tasker running at the same time.  <a href="classEngine_1_1JackHook.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Timer.html">Timer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Engine::Timer</a> class is a clock that hooks to specified Hooks such as <a class="el" href="classEngine_1_1XHook.html" title="The Engine::XListener class This class has the capiblity of detecting mouse and keyboard interaction.">XHook</a> or <a class="el" href="classEngine_1_1AudioHook.html" title="Engine::AudioHook class This class uses the AudioDvice and AudioMachine classes to make a self-sustai...">AudioHook</a> and keeps track of whether the hook's state is productive or unproductive.  <a href="classEngine_1_1Timer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,6 +105,12 @@ Enumerations</h2></td></tr>
 <b>MOUSE_AND_KEYBOARD</b>
  }</td></tr>
 <tr class="separator:aa5b46d2824e1f8b8501751e6b6958fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a8ea5744d98c5ec5c2d61bbc62757c856"><td class="memItemLeft" align="right" valign="top"><a id="a8ea5744d98c5ec5c2d61bbc62757c856"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>run_xhook_engine</b> (XHookMode mode)</td></tr>
+<tr class="separator:a8ea5744d98c5ec5c2d61bbc62757c856"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="namespaceEngine.html" title="The Engine namespace has all of the Hardware Hooks and classes that make up the &quot;Engine&quot; of Tasker Wh...">Engine</a> namespace has all of the Hardware Hooks and classes that make up the "Engine" of Tasker When it comes to detecting user interaction with hardware such as <a class="el" href="classEngine_1_1XHook.html" title="The Engine::XListener class This class has the capiblity of detecting mouse and keyboard interaction.">XHook</a>, <a class="el" href="classEngine_1_1AudioHook.html" title="Engine::AudioHook class This class uses the AudioDvice and AudioMachine classes to make a self-sustai...">AudioHook</a>, <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a> and any other class that directly aids these entities such as <a class="el" href="classEngine_1_1AudioDevice.html" title="The Engine::AudioDevice class represents the audio hardware device of this machine....">AudioDevice</a>. <a class="el" href="classEngine_1_1Hook.html" title="The Engine::Hook class is the base class for all of the hooks on Tasker. It provides a stateful(with ...">Hook</a> classes are platform-dependent. If you have any ideas/want to make hardware <a class="el" href="classEngine_1_1Hook.html" title="The Engine::Hook class is the base class for all of the hooks on Tasker. It provides a stateful(with ...">Hook</a> for this app, PR and issues are always welcome! </p>

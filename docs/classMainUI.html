@@ -98,6 +98,9 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainUI.html#a7a4a7681f8fc7a830b15eaee7ea8c371">toggleShowWindow</a> ()</td></tr>
 <tr class="memdesc:a7a4a7681f8fc7a830b15eaee7ea8c371"><td class="mdescLeft">&#160;</td><td class="mdescRight">toggleShowWindow Show/hide Tasker's window. If Tasker is currently being shown, this method wil hide it. If it is hiddedn, it will show Tasker. This is very useful for Tasker's hide-on-close logic. <br /></td></tr>
 <tr class="separator:a7a4a7681f8fc7a830b15eaee7ea8c371"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84a8820c54422eae1dc7a284c8211e56"><td class="memItemLeft" align="right" valign="top"><a id="a84a8820c54422eae1dc7a284c8211e56"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>quitSlot</b> ()</td></tr>
+<tr class="separator:a84a8820c54422eae1dc7a284c8211e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -149,6 +152,11 @@ QAction *&#160;</td><td class="memItemRight" valign="bottom"><b>getEditCommitmen
 <tr class="memitem:abaa4939b88cb285e4068618004e8f3bb"><td class="memItemLeft" align="right" valign="top"><a id="abaa4939b88cb285e4068618004e8f3bb"></a>
 QAction *&#160;</td><td class="memItemRight" valign="bottom"><b>getDeleteCommitmentAction</b> ()</td></tr>
 <tr class="separator:abaa4939b88cb285e4068618004e8f3bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a044a90e28639fb43897472dfd4ac5ce9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainUI.html#a044a90e28639fb43897472dfd4ac5ce9">updateLiveSessionStatusText</a> ()</td></tr>
+<tr class="separator:a044a90e28639fb43897472dfd4ac5ce9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1d82da5237d8efc2a3b6546a6604fd6"><td class="memItemLeft" align="right" valign="top"><a id="af1d82da5237d8efc2a3b6546a6604fd6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateLiveSessionStatusAction</b> ()</td></tr>
+<tr class="separator:af1d82da5237d8efc2a3b6546a6604fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21809d7def669418f9a44fb2dada57c5"><td class="memItemLeft" align="right" valign="top"><a id="a21809d7def669418f9a44fb2dada57c5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>closeEvent</b> (QCloseEvent *) override</td></tr>
 <tr class="separator:a21809d7def669418f9a44fb2dada57c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -173,6 +181,12 @@ QMenu&#160;</td><td class="memItemRight" valign="bottom"><b>trayIconMenu</b> {}<
 <tr class="memitem:af11d01c655cfeab7362ad9836c4dddcf"><td class="memItemLeft" align="right" valign="top"><a id="af11d01c655cfeab7362ad9836c4dddcf"></a>
 QSystemTrayIcon&#160;</td><td class="memItemRight" valign="bottom"><b>trayIcon</b></td></tr>
 <tr class="separator:af11d01c655cfeab7362ad9836c4dddcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ebbfaebc3287a0aff1964f3142b0f91"><td class="memItemLeft" align="right" valign="top"><a id="a1ebbfaebc3287a0aff1964f3142b0f91"></a>
+QAction *&#160;</td><td class="memItemRight" valign="bottom"><b>liveSessionStatusAction</b> {}</td></tr>
+<tr class="separator:a1ebbfaebc3287a0aff1964f3142b0f91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad75f51971ad489760f4f04d76f4f16c9"><td class="memItemLeft" align="right" valign="top"><a id="ad75f51971ad489760f4f04d76f4f16c9"></a>
+QString&#160;</td><td class="memItemRight" valign="bottom"><b>liveSessionStatusText</b> { &quot;LiveSession:&quot; }</td></tr>
+<tr class="separator:ad75f51971ad489760f4f04d76f4f16c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -254,7 +268,7 @@ static std::unique_ptr&lt; <a class="el" href="classMainUI.html">MainUI</a> &gt;
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section note"><dt>Note</dt><dd>I'm not sure if a single clck should just show Tasker or the trayIconeMenu</dd></dl>
+<p>We ignore middle click because that would feel weird.</p>
 
 </div>
 </div>
@@ -274,13 +288,39 @@ static std::unique_ptr&lt; <a class="el" href="classMainUI.html">MainUI</a> &gt;
 </div><div class="memdoc">
 
 <p><a class="el" href="classMainUI.html#a3a9e743813d6921854c9738bde47f5cd" title="MainUI::updateActionStates updates all of the QActions&#39; states.">MainUI::updateActionStates</a> updates all of the QActions' states. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Add logic for "Edit Commitment" QAction </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Add logic for "Edit Commitment" QAction </dd></dl>
+
+</div>
+</div>
+<a id="a044a90e28639fb43897472dfd4ac5ce9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a044a90e28639fb43897472dfd4ac5ce9">&#9670;&nbsp;</a></span>updateLiveSessionStatusText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainUI::updateLiveSessionStatusText </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The session for the current commitment has been completed, so we update the status string accordingly.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Tasker/<a class="el" href="mainui_8h_source.html">mainui.h</a></li>
-<li>Tasker/mainui.cpp</li>
+<li>Tasker/Ui/<a class="el" href="mainui_8h_source.html">mainui.h</a></li>
+<li>Tasker/Ui/mainui.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

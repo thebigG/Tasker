@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mainui_170',['MainUI',['../classMainUI.html',1,'']]]
+  ['livesession_192',['LiveSession',['../classLiveSession.html',1,'LiveSession'],['../classUi_1_1LiveSession.html',1,'Ui::LiveSession']]]
 ];

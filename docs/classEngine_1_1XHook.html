@@ -99,7 +99,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a2eeb15830af7bf2cb8ef56902c032367"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a079d679c67e1c1569ba57ee5c1f10192"><td class="memItemLeft" align="right" valign="top"><a id="a079d679c67e1c1569ba57ee5c1f10192"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1XHook.html#a079d679c67e1c1569ba57ee5c1f10192">end</a> () override</td></tr>
-<tr class="memdesc:a079d679c67e1c1569ba57ee5c1f10192"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1XHook.html#a079d679c67e1c1569ba57ee5c1f10192" title="XHook::end kills the XListenerHook process.">XHook::end</a> kills the XListenerHook process. <br /></td></tr>
+<tr class="memdesc:a079d679c67e1c1569ba57ee5c1f10192"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1XHook.html#a079d679c67e1c1569ba57ee5c1f10192" title="XHook::end kills the keyboard/mouse hook.">XHook::end</a> kills the keyboard/mouse hook. <br /></td></tr>
 <tr class="separator:a079d679c67e1c1569ba57ee5c1f10192"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e7ec48d50e9f9061115553b686add2f"><td class="memItemLeft" align="right" valign="top"><a id="a0e7ec48d50e9f9061115553b686add2f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1XHook.html#a0e7ec48d50e9f9061115553b686add2f">pause</a> () override</td></tr>
@@ -124,6 +124,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>signalThread</b> ()</
 <tr class="memitem:a2985c4a5546244d31b3abc0d32887671 inherit signals_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="a2985c4a5546244d31b3abc0d32887671"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>unProductive</b> ()</td></tr>
 <tr class="separator:a2985c4a5546244d31b3abc0d32887671 inherit signals_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87154b68bc3ffab905d89c617c0b6935 inherit signals_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="a87154b68bc3ffab905d89c617c0b6935"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>hookUpdate</b> ()</td></tr>
+<tr class="separator:a87154b68bc3ffab905d89c617c0b6935 inherit signals_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -139,6 +142,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa5c4edbaf10fffaa21edc0a21bec57ea"><td class="memItemLeft" align="right" valign="top">Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1XHook.html#aa5c4edbaf10fffaa21edc0a21bec57ea">startHook</a> () override</td></tr>
 <tr class="memdesc:aa5c4edbaf10fffaa21edc0a21bec57ea"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1XHook.html#aa5c4edbaf10fffaa21edc0a21bec57ea" title="XHook::startHook.">XHook::startHook</a>.  <a href="classEngine_1_1XHook.html#aa5c4edbaf10fffaa21edc0a21bec57ea">More...</a><br /></td></tr>
 <tr class="separator:aa5c4edbaf10fffaa21edc0a21bec57ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a531f1252cf537f9fcd1ace0700d6ba9a"><td class="memItemLeft" align="right" valign="top">virtual Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1XHook.html#a531f1252cf537f9fcd1ace0700d6ba9a">getState</a> () override</td></tr>
+<tr class="memdesc:a531f1252cf537f9fcd1ace0700d6ba9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Engine::Engine::Hook::getState Returns current state of the <a class="el" href="classEngine_1_1Hook.html" title="The Engine::Hook class is the base class for all of the hooks on Tasker. It provides a stateful(with ...">Hook</a>, unproductive or productive.  <a href="classEngine_1_1XHook.html#a531f1252cf537f9fcd1ace0700d6ba9a">More...</a><br /></td></tr>
+<tr class="separator:a531f1252cf537f9fcd1ace0700d6ba9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a562d4287c06b9642e6fd66184b68618c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1XHook.html#a562d4287c06b9642e6fd66184b68618c">setState</a> (HookState) override</td></tr>
+<tr class="memdesc:a562d4287c06b9642e6fd66184b68618c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Engine::Engine::Hook::setState.  <a href="classEngine_1_1XHook.html#a562d4287c06b9642e6fd66184b68618c">More...</a><br /></td></tr>
+<tr class="separator:a562d4287c06b9642e6fd66184b68618c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classEngine_1_1Hook"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classEngine_1_1Hook')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classEngine_1_1Hook.html">Engine::Hook</a></td></tr>
 <tr class="memitem:a9e29356015d18a21054178b7177fe639 inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="a9e29356015d18a21054178b7177fe639"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a9e29356015d18a21054178b7177fe639">Hook</a> ()</td></tr>
@@ -148,9 +157,8 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#aa7310dbb402c784da9ad46e2fc0c3a08">~Hook</a> ()</td></tr>
 <tr class="memdesc:aa7310dbb402c784da9ad46e2fc0c3a08 inherit pub_methods_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Hook.html#aa7310dbb402c784da9ad46e2fc0c3a08" title="Engine::Hook::~Hook.">Engine::Hook::~Hook</a>. <br /></td></tr>
 <tr class="separator:aa7310dbb402c784da9ad46e2fc0c3a08 inherit pub_methods_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86ac708ccb0a16520e7392d54c233cfb inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="a86ac708ccb0a16520e7392d54c233cfb"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a86ac708ccb0a16520e7392d54c233cfb">start</a> ()=0</td></tr>
-<tr class="memdesc:a86ac708ccb0a16520e7392d54c233cfb inherit pub_methods_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight">start Up to the child to define, but it is usually whatever the class considers thet "start" of the hook, whether that'd be mic or keyboard device. <br /></td></tr>
+<tr class="memitem:a86ac708ccb0a16520e7392d54c233cfb inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a86ac708ccb0a16520e7392d54c233cfb">start</a> ()=0</td></tr>
+<tr class="memdesc:a86ac708ccb0a16520e7392d54c233cfb inherit pub_methods_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight">start Up to the child to define, but it is usually whatever the class considers thet "start" of the hook, whether that'd be mic or keyboard device.  <a href="classEngine_1_1Hook.html#a86ac708ccb0a16520e7392d54c233cfb">More...</a><br /></td></tr>
 <tr class="separator:a86ac708ccb0a16520e7392d54c233cfb inherit pub_methods_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa4c909da811b02d554c4ee900892b1f inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="aaa4c909da811b02d554c4ee900892b1f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#aaa4c909da811b02d554c4ee900892b1f">end</a> ()=0</td></tr>
@@ -168,21 +176,12 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#aa2b928d006ad1206eca234a553ebe0b0">resetState</a> ()=0</td></tr>
 <tr class="memdesc:aa2b928d006ad1206eca234a553ebe0b0 inherit pub_methods_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight">resetState Up to the child, but this usually just sets the current state of the hook to Unproductive. <br /></td></tr>
 <tr class="separator:aa2b928d006ad1206eca234a553ebe0b0 inherit pub_methods_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c4ae43720a7f9e35ba028eae399415f inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a7c4ae43720a7f9e35ba028eae399415f">setState</a> (HookState)</td></tr>
-<tr class="memdesc:a7c4ae43720a7f9e35ba028eae399415f inherit pub_methods_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight">Engine::Engine::Hook::setState.  <a href="classEngine_1_1Hook.html#a7c4ae43720a7f9e35ba028eae399415f">More...</a><br /></td></tr>
-<tr class="separator:a7c4ae43720a7f9e35ba028eae399415f inherit pub_methods_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a253c8e98c3b7dc96b817c661ec35e905 inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top">HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a253c8e98c3b7dc96b817c661ec35e905">getState</a> ()</td></tr>
-<tr class="memdesc:a253c8e98c3b7dc96b817c661ec35e905 inherit pub_methods_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight">Engine::Engine::Hook::getState Returns current state of the <a class="el" href="classEngine_1_1Hook.html" title="The Engine::Hook class is the base class for all of the hooks on Tasker. It provides a stateful(with ...">Hook</a>, unproductive or productive.  <a href="classEngine_1_1Hook.html#a253c8e98c3b7dc96b817c661ec35e905">More...</a><br /></td></tr>
-<tr class="separator:a253c8e98c3b7dc96b817c661ec35e905 inherit pub_methods_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a688c994b4fb4bc57ace4f7cdd052ddc6 inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="a688c994b4fb4bc57ace4f7cdd052ddc6"></a>
+virtual <a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> ()</td></tr>
+<tr class="separator:a688c994b4fb4bc57ace4f7cdd052ddc6 inherit pub_methods_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a196bfb5abb917a2c89b23dc7cd509b6a"><td class="memItemLeft" align="right" valign="top"><a id="a196bfb5abb917a2c89b23dc7cd509b6a"></a>
-QProcess&#160;</td><td class="memItemRight" valign="bottom"><b>xChildHook</b></td></tr>
-<tr class="separator:a196bfb5abb917a2c89b23dc7cd509b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accc05108103e2013ae241f9b5eb2b838"><td class="memItemLeft" align="right" valign="top"><a id="accc05108103e2013ae241f9b5eb2b838"></a>
-QStringList&#160;</td><td class="memItemRight" valign="bottom"><b>xChildHookArguments</b></td></tr>
-<tr class="separator:accc05108103e2013ae241f9b5eb2b838"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2309404b5d3dfc6b23404a3c7b5b8a99"><td class="memItemLeft" align="right" valign="top"><a id="a2309404b5d3dfc6b23404a3c7b5b8a99"></a>
 XHookMode&#160;</td><td class="memItemRight" valign="bottom"><b>XMode</b></td></tr>
 <tr class="separator:a2309404b5d3dfc6b23404a3c7b5b8a99"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -198,9 +197,10 @@ Additional Inherited Members</h2></td></tr>
 &#160;&#160;<b>X_MOUSE_KEYBOARD</b>, 
 <b>X_MOUSE</b>, 
 <b>X_KEYBOARD</b>, 
-<b>audio</b>, 
+<b>AUDIO</b>, 
 <br />
-&#160;&#160;<b>none</b>
+&#160;&#160;<b>JACK</b>, 
+<b>NONE</b>
 <br />
  }</td></tr>
 <tr class="memdesc:aa0103c6a2787b5992ba1ce98140f29ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">The HookType enum This enum used for <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a> to know which listener it is going to instantiate.  <a href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">More...</a><br /></td></tr>
@@ -214,6 +214,9 @@ Additional Inherited Members</h2></td></tr>
 Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a25347f91b07bf216b2b350c05e887fe8">state</a></td></tr>
 <tr class="memdesc:a25347f91b07bf216b2b350c05e887fe8 inherit pro_attribs_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight">state <br /></td></tr>
 <tr class="separator:a25347f91b07bf216b2b350c05e887fe8 inherit pro_attribs_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a413945a9594fe3e852b0243cfbf7b0c8 inherit pro_attribs_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="a413945a9594fe3e852b0243cfbf7b0c8"></a>
+<a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
+<tr class="separator:a413945a9594fe3e852b0243cfbf7b0c8 inherit pro_attribs_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The Engine::XListener class This class has the capiblity of detecting mouse and keyboard interaction. </p>
@@ -271,6 +274,72 @@ Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a531f1252cf537f9fcd1ace0700d6ba9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a531f1252cf537f9fcd1ace0700d6ba9a">&#9670;&nbsp;</a></span>getState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Hook::HookState XHook::getState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Engine::Engine::Hook::getState Returns current state of the <a class="el" href="classEngine_1_1Hook.html" title="The Engine::Hook class is the base class for all of the hooks on Tasker. It provides a stateful(with ...">Hook</a>, unproductive or productive. </p>
+<dl class="section return"><dt>Returns</dt><dd>Engine::Engine::Hook::HookState::unproductive, or Engine::Engine::Hook::Engine::Hook::productive </dd></dl>
+
+<p>Implements <a class="el" href="classEngine_1_1Hook.html">Engine::Hook</a>.</p>
+
+</div>
+</div>
+<a id="a562d4287c06b9642e6fd66184b68618c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a562d4287c06b9642e6fd66184b68618c">&#9670;&nbsp;</a></span>setState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void XHook::setState </td>
+          <td>(</td>
+          <td class="paramtype">HookState&#160;</td>
+          <td class="paramname"><em>newState</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Engine::Engine::Hook::setState. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>HookState, unproductive or productive This method emits the productive or unProductive signal, depending on the state passed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classEngine_1_1Hook.html#a7c4ae43720a7f9e35ba028eae399415f">Engine::Hook</a>.</p>
+
+</div>
+</div>
 <a id="aa5c4edbaf10fffaa21edc0a21bec57ea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa5c4edbaf10fffaa21edc0a21bec57ea">&#9670;&nbsp;</a></span>startHook()</h2>
 
@@ -349,8 +418,9 @@ Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Tasker/<a class="el" href="XHook_8h_source.html">XHook.h</a></li>
-<li>Tasker/XHook.cpp</li>
+<li>Tasker/Engine/Hooks/XHook/<a class="el" href="XHook_8h_source.html">XHook.h</a></li>
+<li>Tasker/Engine/Hooks/XHook/XHook.cpp</li>
+<li>Tasker/Tasker_autogen/7QCI7CLOFI/moc_XHook.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -107,9 +107,10 @@ Public Types</h2></td></tr>
 &#160;&#160;<b>X_MOUSE_KEYBOARD</b>, 
 <b>X_MOUSE</b>, 
 <b>X_KEYBOARD</b>, 
-<b>audio</b>, 
+<b>AUDIO</b>, 
 <br />
-&#160;&#160;<b>none</b>
+&#160;&#160;<b>JACK</b>, 
+<b>NONE</b>
 <br />
  }</td></tr>
 <tr class="memdesc:aa0103c6a2787b5992ba1ce98140f29ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">The HookType enum This enum used for <a class="el" href="classEngine_1_1Timer.html" title="The Engine::Timer class is a clock that hooks to specified Hooks such as XHook or AudioHook and keeps...">Timer</a> to know which listener it is going to instantiate.  <a href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">More...</a><br /></td></tr>
@@ -149,12 +150,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>signalThread</b> ()</
 <tr class="memitem:a2985c4a5546244d31b3abc0d32887671 inherit signals_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="a2985c4a5546244d31b3abc0d32887671"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>unProductive</b> ()</td></tr>
 <tr class="separator:a2985c4a5546244d31b3abc0d32887671 inherit signals_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87154b68bc3ffab905d89c617c0b6935 inherit signals_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="a87154b68bc3ffab905d89c617c0b6935"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>hookUpdate</b> ()</td></tr>
+<tr class="separator:a87154b68bc3ffab905d89c617c0b6935 inherit signals_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a671bd0fc18a506b8fb1e988d12e497e1"><td class="memItemLeft" align="right" valign="top"><a id="a671bd0fc18a506b8fb1e988d12e497e1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioHook.html#a671bd0fc18a506b8fb1e988d12e497e1">AudioHook</a> ()</td></tr>
-<tr class="memdesc:a671bd0fc18a506b8fb1e988d12e497e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">AudioHook::AudioListener. <br /></td></tr>
+<tr class="memitem:a671bd0fc18a506b8fb1e988d12e497e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioHook.html#a671bd0fc18a506b8fb1e988d12e497e1">AudioHook</a> ()</td></tr>
+<tr class="memdesc:a671bd0fc18a506b8fb1e988d12e497e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">AudioHook::AudioListener.  <a href="classEngine_1_1AudioHook.html#a671bd0fc18a506b8fb1e988d12e497e1">More...</a><br /></td></tr>
 <tr class="separator:a671bd0fc18a506b8fb1e988d12e497e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dd6deca8ea0af16d5646211c167d9d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1AudioHook.html#a2dd6deca8ea0af16d5646211c167d9d1">setAudioThreshold</a> (qreal audioThreshold)</td></tr>
 <tr class="memdesc:a2dd6deca8ea0af16d5646211c167d9d1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1AudioHook.html#a2dd6deca8ea0af16d5646211c167d9d1" title="AudioHook::setAudioThreshold.">AudioHook::setAudioThreshold</a>.  <a href="classEngine_1_1AudioHook.html#a2dd6deca8ea0af16d5646211c167d9d1">More...</a><br /></td></tr>
@@ -165,6 +168,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab38d58c98f24c2836b1479aeb1f6faf4"><td class="memItemLeft" align="right" valign="top"><a id="ab38d58c98f24c2836b1479aeb1f6faf4"></a>
 Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><b>startHook</b> () override</td></tr>
 <tr class="separator:ab38d58c98f24c2836b1479aeb1f6faf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a546f2a1c38a0a5c7ed5bdb4481ce01a7"><td class="memItemLeft" align="right" valign="top"><a id="a546f2a1c38a0a5c7ed5bdb4481ce01a7"></a>
+Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><b>getState</b> () override</td></tr>
+<tr class="separator:a546f2a1c38a0a5c7ed5bdb4481ce01a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classEngine_1_1Hook"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classEngine_1_1Hook')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classEngine_1_1Hook.html">Engine::Hook</a></td></tr>
 <tr class="memitem:a9e29356015d18a21054178b7177fe639 inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="a9e29356015d18a21054178b7177fe639"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a9e29356015d18a21054178b7177fe639">Hook</a> ()</td></tr>
@@ -174,9 +180,8 @@ Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><b>startHook<
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#aa7310dbb402c784da9ad46e2fc0c3a08">~Hook</a> ()</td></tr>
 <tr class="memdesc:aa7310dbb402c784da9ad46e2fc0c3a08 inherit pub_methods_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEngine_1_1Hook.html#aa7310dbb402c784da9ad46e2fc0c3a08" title="Engine::Hook::~Hook.">Engine::Hook::~Hook</a>. <br /></td></tr>
 <tr class="separator:aa7310dbb402c784da9ad46e2fc0c3a08 inherit pub_methods_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86ac708ccb0a16520e7392d54c233cfb inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="a86ac708ccb0a16520e7392d54c233cfb"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a86ac708ccb0a16520e7392d54c233cfb">start</a> ()=0</td></tr>
-<tr class="memdesc:a86ac708ccb0a16520e7392d54c233cfb inherit pub_methods_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight">start Up to the child to define, but it is usually whatever the class considers thet "start" of the hook, whether that'd be mic or keyboard device. <br /></td></tr>
+<tr class="memitem:a86ac708ccb0a16520e7392d54c233cfb inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a86ac708ccb0a16520e7392d54c233cfb">start</a> ()=0</td></tr>
+<tr class="memdesc:a86ac708ccb0a16520e7392d54c233cfb inherit pub_methods_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight">start Up to the child to define, but it is usually whatever the class considers thet "start" of the hook, whether that'd be mic or keyboard device.  <a href="classEngine_1_1Hook.html#a86ac708ccb0a16520e7392d54c233cfb">More...</a><br /></td></tr>
 <tr class="separator:a86ac708ccb0a16520e7392d54c233cfb inherit pub_methods_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa4c909da811b02d554c4ee900892b1f inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="aaa4c909da811b02d554c4ee900892b1f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#aaa4c909da811b02d554c4ee900892b1f">end</a> ()=0</td></tr>
@@ -194,12 +199,12 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#aa2b928d006ad1206eca234a553ebe0b0">resetState</a> ()=0</td></tr>
 <tr class="memdesc:aa2b928d006ad1206eca234a553ebe0b0 inherit pub_methods_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight">resetState Up to the child, but this usually just sets the current state of the hook to Unproductive. <br /></td></tr>
 <tr class="separator:aa2b928d006ad1206eca234a553ebe0b0 inherit pub_methods_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c4ae43720a7f9e35ba028eae399415f inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a7c4ae43720a7f9e35ba028eae399415f">setState</a> (HookState)</td></tr>
+<tr class="memitem:a7c4ae43720a7f9e35ba028eae399415f inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a7c4ae43720a7f9e35ba028eae399415f">setState</a> (HookState)</td></tr>
 <tr class="memdesc:a7c4ae43720a7f9e35ba028eae399415f inherit pub_methods_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight">Engine::Engine::Hook::setState.  <a href="classEngine_1_1Hook.html#a7c4ae43720a7f9e35ba028eae399415f">More...</a><br /></td></tr>
 <tr class="separator:a7c4ae43720a7f9e35ba028eae399415f inherit pub_methods_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a253c8e98c3b7dc96b817c661ec35e905 inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top">HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a253c8e98c3b7dc96b817c661ec35e905">getState</a> ()</td></tr>
-<tr class="memdesc:a253c8e98c3b7dc96b817c661ec35e905 inherit pub_methods_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight">Engine::Engine::Hook::getState Returns current state of the <a class="el" href="classEngine_1_1Hook.html" title="The Engine::Hook class is the base class for all of the hooks on Tasker. It provides a stateful(with ...">Hook</a>, unproductive or productive.  <a href="classEngine_1_1Hook.html#a253c8e98c3b7dc96b817c661ec35e905">More...</a><br /></td></tr>
-<tr class="separator:a253c8e98c3b7dc96b817c661ec35e905 inherit pub_methods_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a688c994b4fb4bc57ace4f7cdd052ddc6 inherit pub_methods_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="a688c994b4fb4bc57ace4f7cdd052ddc6"></a>
+virtual <a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> ()</td></tr>
+<tr class="separator:a688c994b4fb4bc57ace4f7cdd052ddc6 inherit pub_methods_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -227,10 +232,34 @@ Additional Inherited Members</h2></td></tr>
 Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEngine_1_1Hook.html#a25347f91b07bf216b2b350c05e887fe8">state</a></td></tr>
 <tr class="memdesc:a25347f91b07bf216b2b350c05e887fe8 inherit pro_attribs_classEngine_1_1Hook"><td class="mdescLeft">&#160;</td><td class="mdescRight">state <br /></td></tr>
 <tr class="separator:a25347f91b07bf216b2b350c05e887fe8 inherit pro_attribs_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a413945a9594fe3e852b0243cfbf7b0c8 inherit pro_attribs_classEngine_1_1Hook"><td class="memItemLeft" align="right" valign="top"><a id="a413945a9594fe3e852b0243cfbf7b0c8"></a>
+<a class="el" href="classEngine_1_1Hook.html#aa0103c6a2787b5992ba1ce98140f29ce">HookType</a>&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
+<tr class="separator:a413945a9594fe3e852b0243cfbf7b0c8 inherit pro_attribs_classEngine_1_1Hook"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classEngine_1_1AudioHook.html" title="Engine::AudioHook class This class uses the AudioDvice and AudioMachine classes to make a self-sustai...">Engine::AudioHook</a> class This class uses the AudioDvice and <a class="el" href="classEngine_1_1AudioMachine.html" title="The Engine::AudioMachine class bundles and abstracts the details of AudioDevice to make the audio dev...">AudioMachine</a> classes to make a self-sustained asynchronous and stateful audio <a class="el" href="classEngine_1_1Hook.html" title="The Engine::Hook class is the base class for all of the hooks on Tasker. It provides a stateful(with ...">Hook</a> that hooks to an audio device. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a671bd0fc18a506b8fb1e988d12e497e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a671bd0fc18a506b8fb1e988d12e497e1">&#9670;&nbsp;</a></span>AudioHook()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AudioHook::AudioHook </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>AudioHook::AudioListener. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>At the moment the audioThreshold is set on <a class="el" href="classEngine_1_1AudioHook.html" title="Engine::AudioHook class This class uses the AudioDvice and AudioMachine classes to make a self-sustai...">AudioHook</a>, but it really should not be. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6b185beee0d64325cce02196635a430a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b185beee0d64325cce02196635a430a">&#9670;&nbsp;</a></span>getAudioThreshold()</h2>
 
@@ -307,8 +336,9 @@ Hook::HookState&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Tasker/<a class="el" href="AudioHook_8h_source.html">AudioHook.h</a></li>
-<li>Tasker/AudioHook.cpp</li>
+<li>Tasker/Engine/Hooks/Audio/<a class="el" href="AudioHook_8h_source.html">AudioHook.h</a></li>
+<li>Tasker/Engine/Hooks/Audio/AudioHook.cpp</li>
+<li>Tasker/Tasker_autogen/PMFKPYOXQW/moc_AudioHook.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
