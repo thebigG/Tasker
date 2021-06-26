@@ -69,5 +69,5 @@ Tasker_*
 Makefile
 libs/Xhook/build-*
 *.user
-
+*qdocconf*
 !build_libuiohook.sh
