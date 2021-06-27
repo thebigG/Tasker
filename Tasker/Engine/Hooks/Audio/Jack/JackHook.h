@@ -7,7 +7,7 @@ class JackHook;
 
 /**
  * @brief The Engine::JackHook class allows users to connect Tasker to Jack.
- * To learn more about Jack:<a href=" https://jackaudio.org/">click here/a>  
+ * To learn more about Jack:<a href=" https://jackaudio.org/">click here</a>  
  * Meaning one could have software such as Audacity(or anything else that
  * supports Jack) and Tasker running at the same time.
  */
