@@ -21,7 +21,7 @@ find_package(Qt5 REQUIRED COMPONENTS Widgets Multimedia Charts)
 set(SHELL /bin/zsh)
 set(TASKER_ROOT ${CMAKE_SOURCE_DIR}/..)
 
-#Not sure if this is the best way of handling includes. Don't like it took much because it is not explicit in source code.
+#Not sure if this is the best way of handling includes. Don't like it too much because it is not explicit in source code.
 include_directories(${CMAKE_SOURCE_DIR}
                     ${CMAKE_SOURCE_DIR}/Engine/Hooks/Audio/
                     ${CMAKE_SOURCE_DIR}/Engine/Hooks/XHook/
