@@ -13,8 +13,7 @@ using Engine::Hook;
  */
 AudioHook::AudioHook()
     : Hook::Hook{}, audioListenerState{AudioListenerState::OFF} {
-
-  audioThreshold = 0.01;
+  audioThreshold = 0.001f;
 }
 
 /**
