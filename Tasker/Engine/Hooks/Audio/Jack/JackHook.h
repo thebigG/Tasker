@@ -1,13 +1,11 @@
 #include "Hook.h"
-
-int initJackClient(std::string clientName);
 namespace Engine {
 class JackHook;
 } // namespace Engine
 
 /**
  * @brief The Engine::JackHook class allows users to connect Tasker to Jack.
- * To learn more about Jack:<a href=" https://jackaudio.org/">click here</a>  
+ * To learn more about Jack:<a href=" https://jackaudio.org/">click here</a>
  * Meaning one could have software such as Audacity(or anything else that
  * supports Jack) and Tasker running at the same time.
  */
@@ -20,10 +18,10 @@ public:
   JackHook();
   void setAudioThreshold(qreal audioThreshold);
   qreal &getAudioThreshold();
-
   Hook::HookState startHook() override;
-
   Hook::HookState getState() override;
+  int initJackClient(std::string clientName);
+  bool probeJackServer();
 
 public slots:
   virtual void start() override;

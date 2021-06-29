@@ -88,7 +88,7 @@ void jack_shutdown(void *arg) { // shutdwon procedure
  * @param clientName
  * @return 0 if successful.-1 otherwise.
  */
-int initJackClient(std::string clientName) {
+int Engine::JackHook::initJackClient(std::string clientName) {
   const char **ports;
   const char *client_name;
   const char *server_name = NULL;
@@ -163,6 +163,50 @@ int initJackClient(std::string clientName) {
   }
 
   jack_free(ports);
+  return 0;
+}
+
+/**
+  Initializes a jack client
+ * @brief initJackClient
+ * @param clientName
+ * @return 0 if successful.-1 otherwise.
+ */
+bool Engine::JackHook::probeJackServer() {
+  const char **ports;
+  const char *client_name;
+  const char *server_name = NULL;
+
+  jack_client_t *probeClient;
+  //  jack_options_t options = JackNullOption;
+
+  int options = JackNullOption | JackNoStartServer;
+
+  jack_status_t status;
+
+  /* open a client connection to the JACK server */
+  qDebug() << "probeJackServer1\n";
+
+  probeClient = jack_client_open("Tasker", static_cast<JackOptions>(options),
+                                 &status, server_name);
+
+  qDebug() << "probeJackServer2\n";
+
+  if (probeClient == NULL) {
+    qDebug() << "probeJackServer3\n";
+    return -1;
+  }
+  qDebug() << "probeJackServer4\n";
+
+  printf("close client function:%d\n", jack_client_close(probeClient));
+
+  if (status & JackServerStarted) {
+    fprintf(stderr, "JACK server started -- probeJackServer \n");
+  }
+  if (status & JackNameNotUnique) {
+    client_name = jack_get_client_name(probeClient);
+    fprintf(stderr, "unique name `%s' assigned\n", client_name);
+  }
   return 0;
 }
 
