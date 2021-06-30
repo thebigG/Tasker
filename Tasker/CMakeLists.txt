@@ -57,6 +57,8 @@ set(SOURCES
         ${CMAKE_SOURCE_DIR}/TaskerPerf/perftimer.cpp
         ${CMAKE_SOURCE_DIR}/Ui/CommStatsQWidget.ui
         ${CMAKE_SOURCE_DIR}/Ui/CreateCommitmentQWidget.ui
+        ${CMAKE_SOURCE_DIR}/Ui/livesession.ui
+        ${CMAKE_SOURCE_DIR}/Ui/NewSessionQWidget.ui
         Tasker.qrc)
 
 #List out headers for IDEs

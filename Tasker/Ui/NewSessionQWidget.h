@@ -24,6 +24,8 @@ private slots:
   void backButtonSlot();
   void startTimerButtonSlot();
 
+  void isJackActiveSlot(int);
+
 private:
   Ui::NewSessionQWidget *ui;
   std::unique_ptr<LiveSession> liveTimer;
