@@ -96,6 +96,9 @@ When updating Tasker in macOS; meaning re-downloading a new .app file from the r
 `cmake>=3.16.0`
 
 ```
+cd dependencies
+./install_deps.sh
+cd ..
 cd Tasker 
 mkdir build
 cd build
