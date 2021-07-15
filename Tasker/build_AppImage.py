@@ -4,11 +4,13 @@
 from yaml import safe_load, dump
 from yaml import YAMLError
 from subprocess import run
-CMAKE="/home/lorenzo/cmake-3.16.0-Linux-x86_64/bin/cmake"
-CMAKE_PREFIX_PATH="-DCMAKE_PREFIX_PATH=/opt/qt59/lib/cmake"
+
+#NOTE: Install Qt with the regular online installer from the Qt company to make your life easier
+CMAKE="/home/lgomez/cmake/cmake-3.21.0-rc3-linux-x86_64/bin/cmake"
+CMAKE_PREFIX_PATH="-DCMAKE_PREFIX_PATH=/home/lgomez/Qt/5.12.5/gcc_64/lib/cmake"
 APPDIR_DIR="AppDir"
-LINUX_DEPLOY_QT="/home/lorenzo/Downloads/linuxdeployqt-7-x86_64.AppImage"
-QMAKE="/opt/qt59/bin/qmake"
+LINUX_DEPLOY_QT="/home/lgomez/Downloads/linuxdeployqt-continuous-x86_64.AppImage"
+QMAKE="/home/lgomez/Qt/5.12.5/gcc_64/bin/qmake"
 
 ubuntu_sources = [{'sourceline': 'deb http://archive.ubuntu.com/ubuntu/ bionic main restricted universe multiverse',
                    'key_url': 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3b4fe6acc0b21f32'},

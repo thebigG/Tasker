@@ -199,7 +199,7 @@ void LiveSession::updateHookState() {
         case Hook::HookType::X_MOUSE:
             hookStateText.replace(13, 10, activeText);
             break;
-        case Hook::HookType::audio:
+        case Hook::HookType::AUDIO:
             hookStateText.replace(13, 10, activeText);
             break;
         default:
@@ -213,7 +213,7 @@ void LiveSession::updateHookState() {
         case Hook::HookType::X_MOUSE:
             hookStateText.replace(13, 10, inactiveText);
             break;
-        case Hook::HookType::audio:
+        case Hook::HookType::AUDIO:
             hookStateText.replace(13, 10, inactiveText);
             break;
         default:
@@ -231,7 +231,7 @@ void LiveSession::initHookState() {
     case Hook::HookType::X_KEYBOARD:
         hookStateText.replace(8, 8, "Keyboard");
         break;
-    case Hook::HookType::audio:
+    case Hook::HookType::AUDIO:
         hookStateText.replace(8, 8, "Audio");
         break;
     case Hook::HookType::X_MOUSE:
