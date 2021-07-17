@@ -1,4 +1,6 @@
 #include "XHook.h"
+#include "Timer.h"
+
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -11,6 +13,7 @@
 #include <QRegularExpression>
 #include <QThread>
 #include <QtCore>
+
 using namespace Engine;
 
 /* libUIOHook: Cross-platfrom userland keyboard and mouse hooking.
@@ -44,9 +47,8 @@ using namespace Engine;
 #include <wchar.h>
 static XHookMode current_mode;
 
+// I don't like globals, but haven't found any other way of doing this...
 static Engine::Hook::HookState currentState;
-static std::unique_ptr<QMutex> lock = std::make_unique<QMutex>();
-
 bool logger_proc(unsigned int level, const char *format, ...) {
   bool status = false;
 
@@ -80,15 +82,24 @@ bool logger_proc(unsigned int level, const char *format, ...) {
 // processing, please do so by copying the event to your own queued dispatch
 // thread.
 void dispatch_proc(uiohook_event *const event) {
-  QMutexLocker locker{lock.get()};
   switch (event->type) {
   case EVENT_KEY_PRESSED:
   case EVENT_KEY_RELEASED:
   case EVENT_KEY_TYPED:
     if (current_mode == XHookMode::KEYBOARD ||
         current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
-      //      printf("%d\n", IOHOOK_KEYBOARD_MODE);
       currentState = Engine::Hook::HookState::productive;
+
+      // Ensure that we are not messing with some other hook, just in case
+      if (Engine::Timer::getInstance()->getHook()->getType() ==
+              Engine::Hook::HookType::X_KEYBOARD ||
+          Engine::Timer::getInstance()->getHook()->getType() ==
+              Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
+
+        Engine::Timer::getInstance()->getHook().get()->update();
+      } else {
+        // This should never happen.
+      }
     }
     break;
   case EVENT_MOUSE_PRESSED:
@@ -100,6 +111,17 @@ void dispatch_proc(uiohook_event *const event) {
     if (current_mode == XHookMode::MOUSE ||
         current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
       currentState = Engine::Hook::HookState::productive;
+
+      // Ensure that we are not messing with some other hook, just in case
+      if (Engine::Timer::getInstance()->getHook()->getType() ==
+              Engine::Hook::HookType::X_MOUSE ||
+          Engine::Timer::getInstance()->getHook()->getType() ==
+              Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
+
+        Engine::Timer::getInstance()->getHook().get()->update();
+      } else {
+        // This should never happen.
+      }
     }
     break;
   default:
@@ -235,11 +257,9 @@ void XHook::pause() {}
 
 /**
  * @brief  XHook::update
- * This method is called every time xHook process writes to standrd output.
- * It's essentially IPC.
  *
  */
-void XHook::update() { return; }
+void XHook::update() { setState(currentState); }
 
 /**
  * @brief XHook::startHook
@@ -260,13 +280,7 @@ int XHook::startXHook() {
 
   return 0;
 }
-void XHook::setState(HookState newState) {
-  QMutexLocker locker{lock.get()};
-  currentState = newState;
-  state = currentState;
-
-  Hook::setState(state);
-}
+void XHook::setState(HookState newState) { Hook::setState(newState); }
 /**
  * @brief Engine::Engine::Hook::getState
  *        Returns current state of the Hook, unproductive or productive
@@ -275,7 +289,4 @@ void XHook::setState(HookState newState) {
  *         or
  *         Engine::Engine::Hook::Engine::Hook::productive
  */
-Hook::HookState XHook::getState() {
-  Hook::setState(currentState);
-  return state;
-}
+Hook::HookState XHook::getState() { return state; }

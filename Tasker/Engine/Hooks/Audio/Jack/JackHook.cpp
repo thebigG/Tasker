@@ -42,15 +42,11 @@ float deviceLevel;
 static int process_jack_data(jack_nframes_t nframes, void *arg) {
   jack_default_audio_sample_t *out1;
   out1 = (jack_default_audio_sample_t *)jack_port_get_buffer(output_port1,
-                                                             nframes);
+                                        nframes);
   float maxValue = 0;
-
   float maxAmplitude = 0x7fffffff;
-
   float captureValue = 0;
-
   float minAmplitude = 0;
-
   uint32_t current_sample_value = 0;
 
   for (unsigned int i = 0; i < nframes; i++) {
@@ -62,16 +58,17 @@ static int process_jack_data(jack_nframes_t nframes, void *arg) {
   // Calculate the volume of the sound coming from the device.
   maxValue = std::min(maxValue, maxAmplitude);
   captureValue = static_cast<uint32_t>(maxValue) / maxAmplitude;
+
   // When we say "deviceLevel", what we really mean is Peak Amplitude.
   deviceLevel = captureValue - minAmplitude;
 
   if (Engine::Timer::getInstance()->getHook()->getType() ==
       Engine::Hook::HookType::JACK) {
-
     Engine::Timer::getInstance()->getHook().get()->update();
   } else {
     // This should never happen.
   }
+
   return 0;
 }
 

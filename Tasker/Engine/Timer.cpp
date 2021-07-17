@@ -56,7 +56,7 @@ void Timer::startTimer() {
   } else if (hookType == Hook::HookType::X_KEYBOARD) {
     hook = std::make_unique<XHook>(XHookMode::KEYBOARD);
   } else if (hookType == Hook::HookType::AUDIO) {
-    hook = std::make_unique<JackHook>();
+    hook = std::make_unique<AudioHook>();
   }
   connect(&hookThread, &QThread::started, hook.get(), &Hook::start);
   hook->moveToThread(&hookThread);
