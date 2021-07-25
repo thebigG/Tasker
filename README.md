@@ -6,7 +6,8 @@
 1. [Pitch](#pitch)
 2. [Usage](#usage)
 3. [How do I get Tasker?](#how_do_I_get_tasker)
-4. [Build It From Source](#build_it_from_source)
+4. [Build It From Source on Linux](#build_it_from_source)
+5. [Cross-compile for Windows](#cross_compile_windows)
 
 ## Pitch <a name="pitch"></a>
 
@@ -104,6 +105,13 @@ mkdir build
 cd build
 cmake ..
 make
+```
+
+# Build It From Source(Tested on Ubuntu 16 & 20) <a name="cross_compile_windows"></a>
+`cmake>=3.16.0`
+
+```
+Get the mxe tools
 ```
 
 
