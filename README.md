@@ -112,6 +112,32 @@ make
 
 ```
 Get the mxe tools
+
+Cross-compiling Tasker for Windows:
+
+Get the mxe tools
+Install qt, qtcharts, qtmultimedia
+
+
+i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=/home/lorenzogomez/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
+
+
+in mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake file comment out:
+
+
+make -j8 jack MXE_TARGETS='x86_64-w64-mingw32.static i686-w64-mingw32.static' 
+
+#set_property(TARGET Qt5::Core PROPERTY INTERFACE_COMPILE_FEATURES cxx_decltype)
+
+
+Build libuiohook:
+
+cd libuiohook
+mkdir build && cd build
+
+i686-w64-mingw32.static-cmake -S .. -DUIOHOOK_ENABLE_STATIC=ON
+i686-w64-mingw32.static-cmake --build .
+
 ```
 
 
