@@ -119,6 +119,10 @@ Get the mxe tools
 Install qt, qtcharts, qtmultimedia
 
 
+Get the hash from git
+git rev-parse --short HEA
+
+
 i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=/home/lorenzogomez/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
 
 
