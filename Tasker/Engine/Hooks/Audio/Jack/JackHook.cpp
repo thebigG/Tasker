@@ -17,12 +17,13 @@
 #ifndef WIN32
 #include <unistd.h>
 #endif
-#include <jack/jack.h>
 
+#include "jack/weakjack.h"
 #include <algorithm>
 
 #include "JackHook.h"
 #include "Timer.h"
+#include "jack/jack.h"
 
 jack_port_t *output_port1;
 jack_client_t *client;
@@ -42,7 +43,7 @@ float deviceLevel;
 static int process_jack_data(jack_nframes_t nframes, void *arg) {
   jack_default_audio_sample_t *out1;
   out1 = (jack_default_audio_sample_t *)jack_port_get_buffer(output_port1,
-                                        nframes);
+                                                             nframes);
   float maxValue = 0;
   float maxAmplitude = 0x7fffffff;
   float captureValue = 0;
