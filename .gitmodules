@@ -1,3 +1,7 @@
 [submodule "libuiohook"]
 	path = libuiohook
 	url = https://github.com/thebigG/libuiohook.git
+[submodule "mxe"]
+	path = mxe
+	url = git@github.com:thebigG/mxe.git
+	branch = master
