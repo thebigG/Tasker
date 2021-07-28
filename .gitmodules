@@ -5,3 +5,7 @@
 	path = mxe
 	url = git@github.com:thebigG/mxe.git
 	branch = master
+[submodule "jack2"]
+	path = jack2
+	url = git@github.com:thebigG/jack2.git
+	branch = master
