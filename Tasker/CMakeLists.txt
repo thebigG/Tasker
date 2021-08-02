@@ -103,13 +103,16 @@ target_link_libraries(Tasker Qt5::Core)
 target_link_libraries(Tasker Qt5::Multimedia)
 target_link_libraries(Tasker Qt5::Charts)
 
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../libuiohook external_libs)
+
 if(WIN32)
     target_link_libraries(Tasker /home/lorenzogomez/mxe/usr/i686-w64-mingw32.static/lib/libjack.dll)
-    target_link_libraries(Tasker ${CMAKE_BINARY_DIR}/libuiohook/libuiohook.dll)
+    #target_link_libraries(Tasker ${CMAKE_BINARY_DIR}/libuiohook/libuiohook.dll)
+    target_link_libraries(Tasker  uiohook)
 
 else(WIN32)
     target_link_libraries(Tasker jack)
-    target_link_libraries(Tasker ${CMAKE_BINARY_DIR}/libuiohook/libuiohook.so)
+    target_link_libraries(Tasker  uiohook)
 endif()
 
 
