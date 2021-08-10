@@ -148,7 +148,7 @@ Build libuiohook:
 cd libuiohook
 mkdir build && cd build
 
-i686-w64-mingw32.static-cmake -S .. -DUIOHOOK_ENABLE_STATIC=ON
+i686-w64-mingw32.static-cmake -S .. -DUIOHOOK_ENABLE_STATIC=ON  -DUIOHOOK_ENABLE_SHARED=OFF
 i686-w64-mingw32.static-cmake --build .
 
 ```
