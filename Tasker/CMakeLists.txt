@@ -20,7 +20,7 @@ find_package(Qt5 REQUIRED COMPONENTS Widgets Multimedia Charts)
 
 message(STATUS ${WIN32})
 
-set(SHELL /bin/zsh)
+#set(SHELL /bin/zsh)
 set(TASKER_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 #Not sure if this is the best way of handling includes. Don't like it too much because it is not explicit in source code.
@@ -103,6 +103,7 @@ target_link_libraries(Tasker Qt5::Core)
 target_link_libraries(Tasker Qt5::Multimedia)
 target_link_libraries(Tasker Qt5::Charts)
 
+message(STATUS ${UIOHOOK_ENABLE_STATIC})
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../libuiohook external_libs)
 
 if(WIN32)
@@ -111,6 +112,7 @@ if(WIN32)
     target_link_libraries(Tasker  uiohook)
 
 else(WIN32)
+    message(STATUS LINUX)
     target_link_libraries(Tasker jack)
     target_link_libraries(Tasker  uiohook)
 endif()
