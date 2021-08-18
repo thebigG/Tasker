@@ -47,8 +47,6 @@ using namespace Engine;
 #include <wchar.h>
 static XHookMode current_mode;
 
-// I don't like globals, but haven't found any other way of doing this...
-static Engine::Hook::HookState currentState;
 bool logger_proc(unsigned int level, const char *format, ...) {
   bool status = false;
 
@@ -88,7 +86,6 @@ void dispatch_proc(uiohook_event *const event) {
   case EVENT_KEY_TYPED:
     if (current_mode == XHookMode::KEYBOARD ||
         current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
-      currentState = Engine::Hook::HookState::productive;
 
       // Ensure that we are not messing with some other hook, just in case
       if (Engine::Timer::getInstance()->getHook()->getType() ==
@@ -96,7 +93,7 @@ void dispatch_proc(uiohook_event *const event) {
           Engine::Timer::getInstance()->getHook()->getType() ==
               Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
 
-        Engine::Timer::getInstance()->getHook().get()->update();
+        Engine::Timer::getInstance()->getHook().get()->setState(Engine::Hook::HookState::productive);
       } else {
         // This should never happen.
       }
@@ -110,7 +107,6 @@ void dispatch_proc(uiohook_event *const event) {
   case EVENT_MOUSE_WHEEL:
     if (current_mode == XHookMode::MOUSE ||
         current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
-      currentState = Engine::Hook::HookState::productive;
 
       // Ensure that we are not messing with some other hook, just in case
       if (Engine::Timer::getInstance()->getHook()->getType() ==
@@ -118,7 +114,7 @@ void dispatch_proc(uiohook_event *const event) {
           Engine::Timer::getInstance()->getHook()->getType() ==
               Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
 
-        Engine::Timer::getInstance()->getHook().get()->update();
+        Engine::Timer::getInstance()->getHook().get()->setState(Engine::Hook::HookState::productive);
       } else {
         // This should never happen.
       }
@@ -148,7 +144,10 @@ int Engine::run_xhook_engine(XHookMode mode) {
   switch (status) {
   case UIOHOOK_SUCCESS:
     // Everything is ok.
+  {
+    printf("UIOHOOK_SUCCESS\n");
     break;
+  }
 
   // System level errors.
   case UIOHOOK_ERROR_OUT_OF_MEMORY:
@@ -231,7 +230,6 @@ int Engine::run_xhook_engine(XHookMode mode) {
  */
 XHook::XHook(Engine::XHookMode newXMode) {
   XMode = newXMode;
-  currentState = state;
 }
 /**
  * @brief XHook::XHook initializes this Xhook instance on keyboard_and_mouse
@@ -259,7 +257,7 @@ void XHook::pause() {}
  * @brief  XHook::update
  *
  */
-void XHook::update() { setState(currentState); }
+void XHook::update() {}
 
 /**
  * @brief XHook::startHook
@@ -276,7 +274,9 @@ void XHook::resetState() { setState(HookState::unproductive); }
 int XHook::startXHook() {
   setState(HookState::unproductive);
 
-  run_xhook_engine(XMode);
+  int ret = run_xhook_engine(XMode);
+
+  printf("ret code for run_xhook_engine:%d\n", ret);
 
   return 0;
 }
