@@ -118,6 +118,8 @@ make
 
 # Build It From Source(Tested on Ubuntu 16 & 20) <a name="cross_compile_windows"></a>
 `cmake>=3.16.0`
+NOTE: Make sure that `/home/lorenzogomez/mxe/usr/bin` is part of your PATH variable. Otherwise mxe might break when building.
+
 
 ```
 Get the mxe tools
