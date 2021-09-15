@@ -11,20 +11,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
+#include <iostream>
 
-#include <cmath>
 #include <vector>
 #ifndef WIN32
 #include <unistd.h>
 #endif
 
 #include "jack/weakjack.h"
-#include <algorithm>
 
 #include "JackHook.h"
 #include "Timer.h"
 #include "jack/jack.h"
 
+//TODO: remove these globals
 jack_port_t *output_port1;
 jack_client_t *client;
 float deviceLevel;
@@ -62,6 +62,8 @@ static int process_jack_data(jack_nframes_t nframes, void *arg) {
 
   // When we say "deviceLevel", what we really mean is Peak Amplitude.
   deviceLevel = captureValue - minAmplitude;
+
+  std::cout<<"deviceLevel"<<deviceLevel<<std::endl;
 
   if (Engine::Timer::getInstance()->getHook()->getType() ==
       Engine::Hook::HookType::JACK) {
