@@ -2,8 +2,6 @@
 #define AUDIOLISTENER_H
 
 #include "Hook.h"
-#include <QAudioDeviceInfo>
-#include <QAudioInput>
 #include <memory>
 namespace Engine {
 class AudioHook;

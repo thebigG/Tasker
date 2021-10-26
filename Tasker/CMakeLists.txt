@@ -15,7 +15,7 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     message(STATUS ${CMAKE_BUILD_TYPE})
     add_compile_definitions(__TASKER_DEBUG__=1)
 endif ()
-find_package(Qt5 REQUIRED COMPONENTS Widgets Multimedia Charts)
+find_package(Qt5 REQUIRED COMPONENTS Widgets  Charts)
 
 
 message(STATUS ${WIN32})
@@ -92,7 +92,6 @@ add_executable(Tasker  ${SOURCES} ${HEADERS})
 
 # Add the Qt5 libraries for linking
 target_link_libraries(Tasker Qt5::Core)
-target_link_libraries(Tasker Qt5::Multimedia)
 target_link_libraries(Tasker Qt5::Charts)
 
 message(STATUS ${UIOHOOK_ENABLE_STATIC})
