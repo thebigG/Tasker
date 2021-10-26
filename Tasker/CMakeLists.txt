@@ -39,9 +39,7 @@ include_directories(
 set(SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/AppGuard.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/AudioDevice.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/AudioHook.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/Jack/JackHook.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/udata/Commitment.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CommitmentSnaphot.cpp
@@ -64,16 +62,12 @@ set(SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CreateCommitmentQWidget.ui
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/livesession.ui
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/NewSessionQWidget.ui
-#        /home/lorenzogomez/weakjack/weak_libjack.c
-#        /home/lorenzogomez/weakjack/weak_libjack.def
         Tasker.qrc)
 
 #List out headers for IDEs
 set(HEADERS
         AppGuard.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/AudioDevice.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/AudioHook.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/AudioMachine.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/Jack/JackHook.h
         ${CMAKE_CURRENT_SOURCE_DIR}/udata/Commitment.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CommitmentSnapshot.h

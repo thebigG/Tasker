@@ -12,7 +12,7 @@ using Engine::Hook;
  * should not be.
  */
 AudioHook::AudioHook()
-    : Hook::Hook{}, audioListenerState{AudioListenerState::OFF} {
+    : Hook::Hook{}, audioListenerState{AudioHookState::OFF} {
   audioThreshold = 0.001f;
 }
 
@@ -34,19 +34,19 @@ qreal &AudioHook::getAudioThreshold() { return audioThreshold; }
  *signals and slots necessary to start the hook.
  */
 void AudioHook::start() {
-  audioSource = std::make_unique<AudioMachine>();
-  audioListenerState = AudioListenerState::ON;
-  if (audioSource == nullptr) {
-    // error-handling
-  }
-  connect(audioSource->getAudioDevice(), &AudioDevice::audioRead, this,
-          &AudioHook::update);
+//  audioSource = std::make_unique<AudioMachine>();
+  audioListenerState = AudioHookState::ON;
+//  if (audioSource == nullptr) {
+//    // error-handling
+//  }
+//  connect(audioSource->getAudioDevice(), &AudioDevice::audioRead, this,
+//          &AudioHook::update);
 }
 
 /**
  * @brief AudioHook::end
  */
-void AudioHook::end() { audioListenerState = AudioListenerState::OFF; }
+void AudioHook::end() { audioListenerState = AudioHookState::OFF; }
 
 /**
  * @brief AudioHook::pause
@@ -69,16 +69,16 @@ void AudioHook::update() {
     /**
       Profile device's volume if it hasn't been profiled yet
       */
-    audioSource->getQAudioInput().setVolume(0.0);
-    audioSource->getAudioDevice()->setMinAmplitude(
-        audioSource->getAudioDevice()->getDeviceLevel());
-    audioSource->getQAudioInput().setVolume(1.0);
+//    audioSource->getQAudioInput().setVolume(0.0);
+//    audioSource->getAudioDevice()->setMinAmplitude(
+//        audioSource->getAudioDevice()->getDeviceLevel());
+//    audioSource->getQAudioInput().setVolume(1.0);
     profiled = true;
   }
   HookState state;
-  state = audioSource->getAudioDevice()->getDeviceLevel() > audioThreshold
-              ? HookState::productive
-              : HookState::unproductive;
+//  state = audioSource->getAudioDevice()->getDeviceLevel() > audioThreshold
+//              ? HookState::productive
+//              : HookState::unproductive;
   setState(state);
 }
 

@@ -2,7 +2,6 @@
 #define AUDIOLISTENER_H
 
 #include "Hook.h"
-#include <AudioMachine.h>
 #include <QAudioDeviceInfo>
 #include <QAudioInput>
 #include <memory>
@@ -20,7 +19,7 @@ class Engine::AudioHook : public Engine::Hook {
   Q_OBJECT
 
 public:
-  enum class AudioListenerState { ON, OFF };
+  enum class AudioHookState { ON, OFF };
 
   AudioHook();
   void setAudioThreshold(qreal audioThreshold);
@@ -41,8 +40,8 @@ signals:
   void signalThread();
 
 private:
-  AudioListenerState audioListenerState;
-  std::unique_ptr<AudioMachine> audioSource;
+  AudioHookState audioListenerState;
+//  std::unique_ptr<AudioMachine> audioSource;
   qreal audioThreshold;
   bool profiled = false;
 };
