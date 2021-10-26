@@ -40,7 +40,6 @@ set(SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/AppGuard.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/AudioHook.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/Jack/JackHook.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/udata/Commitment.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CommitmentSnaphot.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CommStatsQWidget.cpp
@@ -68,7 +67,6 @@ set(SOURCES
 set(HEADERS
         AppGuard.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/AudioHook.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/Jack/JackHook.h
         ${CMAKE_CURRENT_SOURCE_DIR}/udata/Commitment.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CommitmentSnapshot.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CommStatsQWidget.h

@@ -10,7 +10,6 @@
 #include <iostream>
 
 #include "AudioHook.h"
-#include "Jack/JackHook.h"
 #include "XHook.h"
 using namespace Engine;
 using namespace util;
