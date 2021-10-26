@@ -2,6 +2,7 @@
 #define AUDIOLISTENER_H
 
 #include "Hook.h"
+#include "miniaudio.h"
 #include <memory>
 namespace Engine {
 class AudioHook;

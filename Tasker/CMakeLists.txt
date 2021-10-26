@@ -33,6 +33,7 @@ include_directories(
                     ${CMAKE_CURRENT_SOURCE_DIR}/Engine
                     ${CMAKE_CURRENT_SOURCE_DIR}/udata
                    ${CMAKE_CURRENT_SOURCE_DIR}/Ui/
+                   ${CMAKE_CURRENT_SOURCE_DIR}/../miniaudio
 		    )
 
 

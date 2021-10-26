@@ -5,3 +5,6 @@
 	path = mxe
 	url = git@github.com:thebigG/mxe.git
 	branch = master
+[submodule "miniaudio"]
+	path = miniaudio
+	url = git@github.com:mackron/miniaudio.git
