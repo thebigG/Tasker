@@ -137,7 +137,7 @@ git rev-parse --short HEA
 i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=/home/lorenzogomez/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
 
 
-in mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake file comment out:
+in mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake file(line 83) comment out:
 
 
 make -j8 jack MXE_TARGETS='x86_64-w64-mingw32.static i686-w64-mingw32.static' 
