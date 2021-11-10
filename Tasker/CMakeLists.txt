@@ -98,7 +98,7 @@ if(WIN32)
 
 else(WIN32)
     message(STATUS LINUX)
-    target_link_libraries(Tasker jack)
+#    target_link_libraries(Tasker jack)
     target_link_libraries(Tasker  uiohook)
 endif()
 
