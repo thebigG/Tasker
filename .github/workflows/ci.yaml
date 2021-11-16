@@ -14,7 +14,7 @@ defaults:
     shell: bash
 
 jobs:
-  build:
+  build-linux:
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
     strategy:
@@ -47,6 +47,67 @@ jobs:
             cd build
             make -j8
 
+
+  cross-compile-for-windows:
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { name: "ubuntu-18.04", os: "ubuntu-18.04" }
+    steps:
+      - name: Install dependencies
+            run: |
+              sudo apt-get update
+              sudo apt-get install \
+                       autoconf \
+                       automake \
+                       autopoint \
+                       bash \
+                       bison \
+                       bzip2 \
+                       flex \
+                       g++ \
+                       g++-multilib \
+                       gettext \
+                       git \
+                       gperf \
+                       intltool \
+                       libc6-dev-i386 \
+                       libgdk-pixbuf2.0-dev \
+                       libltdl-dev \
+                       libssl-dev \
+                       libtool-bin \
+                       libxml-parser-perl \
+                       lzip \
+                       make \
+                       openssl \
+                       p7zip-full \
+                       patch \
+                       perl \
+                       python \
+                       ruby \
+                       sed \
+                       unzip \
+                       wget \
+                       xz-utils
+      - name: Configure MXE
+        run: |
+          cd mxe
+          make qt5
+          cd ..
+
+      - name: Configure CMake
+        run: |
+          git submodule update --init --recursive
+          mkdir build
+          cd build
+          i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=/home/root/Tasker/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
+      - name: make
+        run: |
+          cd build
+          make -j8
 
 #    - name: upload package
 #      uses: actions/upload-artifact@master
