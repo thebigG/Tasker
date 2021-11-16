@@ -50,7 +50,7 @@ jobs:
 
 
   cross-compile-for-windows:
-    name: ${{ matrix.config.name }}
+    name: cross-compile-for-windows
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
@@ -95,6 +95,7 @@ jobs:
                    xz-utils
       - name: Configure MXE
         run: |
+          pwd
           git submodule update --init --recursive
           cd mxe
           make qt5
