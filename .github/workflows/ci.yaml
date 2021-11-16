@@ -93,9 +93,9 @@ jobs:
                    unzip \
                    wget \
                    xz-utils
+        #          Have to do this because the github actions "workspace" directory gets in the way.
       - name: Configure MXE
         run: |
-#          Have to do this because the github actions "workspace" directory gets in the way.
           cd ..
           git submodule update --init --recursive
           cd mxe
