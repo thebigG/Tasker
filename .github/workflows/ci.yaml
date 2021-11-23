@@ -97,7 +97,6 @@ jobs:
         #          Have to do this because the github actions "workspace" directory gets in the way.
       - name: Configure MXE
         run: |
-          cd ..
           git submodule update --init --recursive
           cd mxe
           make qt5
