@@ -107,7 +107,7 @@ jobs:
           git submodule update --init --recursive
           mkdir build
           cd build
-          /home/runner/work/Tasker/mxe/usr/bin/i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=/home/runner/work/Tasker/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
+          ../mxe/usr/bin/i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=../mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
       - name: make
         run: |
           cd build
