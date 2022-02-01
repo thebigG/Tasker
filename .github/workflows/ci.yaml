@@ -115,6 +115,11 @@ jobs:
 
 
   build-container-linux:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { name: "ubuntu-18.04", os: "ubuntu-18.04" }
     name: build-container-linux
     runs-on: ${{ matrix.config.os }}
     steps:
