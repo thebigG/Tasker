@@ -123,6 +123,8 @@ jobs:
     name: build-container-linux
     runs-on: ${{ matrix.config.os }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
