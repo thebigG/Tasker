@@ -115,6 +115,7 @@ jobs:
 
 
   build-container-linux:
+    name: build-container-linux
     runs-on: ${{ matrix.config.os }}
     steps:
       - name: Set up Docker Buildx
