@@ -98,7 +98,6 @@ jobs:
       - name: Configure MXE
         run: |
           git submodule update --init --recursive
-
           cd mxe
           make qt5
           cd ..
