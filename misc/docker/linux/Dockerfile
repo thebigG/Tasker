@@ -1,4 +1,5 @@
 FROM ubuntu:18.04
+USER root
 
 RUN apt-get update && apt-get install -y qt5-default libqt5charts5-dev libx11-dev \
                                                    libxtst-dev \
@@ -43,7 +44,8 @@ RUN apt-get update && apt-get install -y qt5-default libqt5charts5-dev libx11-de
 
 RUN pip3 install cmake
 
-RUN git clone https://github.com/thebigG/Tasker.git
+RUN git clone https://github.com/thebigG/mxe.git
+RUN make -C mxe -j8 qt5
 #RUN git submodule update --init --recursive
 #
 #RUN export PATH=$PATH:/home/Tasker/mxe/usr/bin/

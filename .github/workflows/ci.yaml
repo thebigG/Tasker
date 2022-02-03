@@ -98,6 +98,7 @@ jobs:
       - name: Configure MXE
         run: |
           git submodule update --init --recursive
+
           cd mxe
           make qt5
           cd ..
@@ -107,11 +108,13 @@ jobs:
           git submodule update --init --recursive
           mkdir build
           cd build
+#          export PATH=$PATH:../mxe/usr/bin/
           ../mxe/usr/bin/i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=../mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
       - name: make
         run: |
           cd build
           make -j8
+
 
 
   build-container-linux:
@@ -139,8 +142,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      - name: LS
-        run: pwd
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
