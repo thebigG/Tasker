@@ -46,6 +46,10 @@ RUN pip3 install cmake
 
 RUN git clone https://github.com/thebigG/mxe.git
 RUN make -C mxe -j8 qt5
+COPY Qt5CoreConfigExtras.cmake.patch /
+RUN patch /mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake Qt5CoreConfigExtras.cmake.patch
+RUN echo "export PATH=\$PATH:/mxe/usr/bin" >> /root/.bashrc
+
 #RUN git submodule update --init --recursive
 #
 #RUN export PATH=$PATH:/home/Tasker/mxe/usr/bin/
