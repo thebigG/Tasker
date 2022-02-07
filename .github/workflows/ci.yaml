@@ -43,6 +43,8 @@ jobs:
   cross-compile-for-windows:
     name: cross-compile-for-windows
     runs-on: ${{ matrix.config.os }}
+    container:
+      image: thebigg1/tasker-linux-ci:latest
     strategy:
       fail-fast: false
       matrix:
