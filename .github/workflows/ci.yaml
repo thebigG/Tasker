@@ -52,8 +52,11 @@ jobs:
         config:
           - { name: "ubuntu-18.04", os: "ubuntu-18.04" }
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.MY_REPO_PAT }}
+        submodules: recursive
       - name: ls
         run: ls && pwd
       - name: Configure MXE
