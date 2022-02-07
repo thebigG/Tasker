@@ -15,6 +15,8 @@ defaults:
 
 jobs:
   build-linux:
+    container:
+      image: thebigg1/tasker-linux-ci:latest
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
     strategy:
@@ -25,17 +27,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: |
-           sudo apt-get update
-           sudo apt-get install qt5-default libqt5charts5-dev libx11-dev \
-                                                                   libxtst-dev \
-                                                                   libxt-dev \
-                                                                   libxinerama-dev \
-                                                                   libx11-xcb-dev \
-                                                                   libxkbcommon-dev \
-                                                                   libxkbcommon-x11-dev \
-                                                                   libxkbfile-dev
     - name: Configure CMake
       run: |
            git submodule update --init --recursive
@@ -59,61 +50,21 @@ jobs:
           - { name: "ubuntu-18.04", os: "ubuntu-18.04" }
     steps:
       - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install \
-                   autoconf \
-                   automake \
-                   autopoint \
-                   bash \
-                   bison \
-                   bzip2 \
-                   flex \
-                   g++ \
-                   g++-multilib \
-                   gettext \
-                   git \
-                   gperf \
-                   intltool \
-                   libc6-dev-i386 \
-                   libgdk-pixbuf2.0-dev \
-                   libltdl-dev \
-                   libssl-dev \
-                   libtool-bin \
-                   libxml-parser-perl \
-                   lzip \
-                   make \
-                   openssl \
-                   p7zip-full \
-                   patch \
-                   perl \
-                   python \
-                   ruby \
-                   sed \
-                   unzip \
-                   wget \
-                   xz-utils
-        #          Have to do this because the github actions "workspace" directory gets in the way.
       - name: Configure MXE
         run: |
           git submodule update --init --recursive
-          cd mxe
-          make qt5
-          cd ..
+          patch /mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake misc/docker/linuxQt5CoreConfigExtras.cmake.patch
 
       - name: Configure CMake
         run: |
           git submodule update --init --recursive
           mkdir build
           cd build
-          ../mxe/usr/bin/i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=../mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
+          i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
       - name: make
         run: |
           cd build
           make -j8
-
-
 
   build-container-linux:
     strategy:
