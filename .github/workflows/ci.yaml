@@ -26,7 +26,8 @@ jobs:
         - {name: "ubuntu-18.04", os: "ubuntu-18.04"}
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Configure CMake
       run: |
            git submodule update --init --recursive
@@ -51,12 +52,11 @@ jobs:
         config:
           - { name: "ubuntu-18.04", os: "ubuntu-18.04" }
     steps:
-      - uses: actions/checkout@v2
       - name: Configure MXE
-        run: |
-          git submodule update --init --recursive
+        run:
           patch /mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake misc/docker/linux/Qt5CoreConfigExtras.cmake.patch
-
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Configure CMake
         run: |
           git submodule update --init --recursive
