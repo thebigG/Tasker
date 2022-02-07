@@ -52,11 +52,11 @@ jobs:
         config:
           - { name: "ubuntu-18.04", os: "ubuntu-18.04" }
     steps:
+      - name: Checkout
+          uses: actions/checkout@v2
       - name: Configure MXE
         run:
           patch /mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake Tasker/misc/docker/linux/Qt5CoreConfigExtras.cmake.patch
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: Configure CMake
         run: |
           cd Tasker
