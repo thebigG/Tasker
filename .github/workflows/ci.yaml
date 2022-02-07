@@ -52,11 +52,11 @@ jobs:
         config:
           - { name: "ubuntu-18.04", os: "ubuntu-18.04" }
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        token: ${{ secrets.MY_REPO_PAT }}
-        submodules: recursive
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.MY_REPO_PAT }}
+          submodules: recursive
       - name: ls
         run: ls && pwd
       - name: Configure MXE
@@ -64,7 +64,6 @@ jobs:
           patch /mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake misc/docker/linux/Qt5CoreConfigExtras.cmake.patch
       - name: Configure CMake
         run: |
-          git submodule update --init --recursive
           mkdir build
           cd build
           i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
