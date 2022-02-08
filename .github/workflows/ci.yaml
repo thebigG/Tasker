@@ -57,12 +57,10 @@ jobs:
         with:
           token: ${{ secrets.MY_REPO_PAT }}
           submodules: recursive
-      - name: ls
-        run: ls && pwd
       - name: Configure MXE
         run: |
           patch /mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake misc/docker/linux/Qt5CoreConfigExtras.cmake.patch
-          echo "export PATH=\$PATH:/mxe/usr/bin" >> ~/.bashrc
+          echo "$AA/BB/bin" >> $GITHUB_PATH
       - name: Configure CMake
         run: |
           mkdir build
