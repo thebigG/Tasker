@@ -60,8 +60,9 @@ jobs:
       - name: ls
         run: ls && pwd
       - name: Configure MXE
-        run:
+        run: |
           patch /mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake misc/docker/linux/Qt5CoreConfigExtras.cmake.patch
+          echo "export PATH=\$PATH:/mxe/usr/bin" >> ~/.bashrc
       - name: Configure CMake
         run: |
           mkdir build
