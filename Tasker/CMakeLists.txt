@@ -93,14 +93,7 @@ target_link_libraries(Tasker Qt5::Charts)
 message(STATUS ${UIOHOOK_ENABLE_STATIC})
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../libuiohook external_libs)
 
-if(WIN32)
-    target_link_libraries(Tasker  uiohook)
-
-else(WIN32)
-    message(STATUS LINUX)
-#    target_link_libraries(Tasker jack)
-    target_link_libraries(Tasker  uiohook)
-endif()
+target_link_libraries(Tasker  uiohook)
 
 install(TARGETS Tasker
     DESTINATION ${CMAKE_INSTALL_PREFIX}
