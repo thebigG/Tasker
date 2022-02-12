@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.com/thebigG/Tasker.svg?branch=release)](https://travis-ci.com/thebigG/Tasker)  [![](https://img.shields.io/badge/docs-readme-blue.svg)](https://thebigg.github.io/Tasker/)
-
+[![Build](https://github.com/thebigG/Tasker/actions/workflows/ci.yaml/badge.svg)](https://github.com/thebigG/Tasker/actions/workflows/ci.yaml) [![](https://img.shields.io/badge/docs-readme-blue.svg)](https://thebigg.github.io/Tasker/)
 # Tasker
 
 # Table of Contents
