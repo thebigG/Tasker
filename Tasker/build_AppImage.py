@@ -6,11 +6,11 @@ from yaml import YAMLError
 from subprocess import run
 
 #NOTE: Install Qt with the regular online installer from the Qt company to make your life easier
-CMAKE="/home/lgomez/cmake/cmake-3.21.0-rc3-linux-x86_64/bin/cmake"
-CMAKE_PREFIX_PATH="-DCMAKE_PREFIX_PATH=/home/lgomez/Qt/5.12.5/gcc_64/lib/cmake"
+CMAKE="/usr/local/bin/cmake"
+CMAKE_PREFIX_PATH="-DCMAKE_PREFIX_PATH=/usr/lib/x86_64-linux-gnu/cmake/"
 APPDIR_DIR="AppDir"
-LINUX_DEPLOY_QT="/home/lgomez/Downloads/linuxdeployqt-continuous-x86_64.AppImage"
-QMAKE="/home/lgomez/Qt/5.12.5/gcc_64/bin/qmake"
+LINUX_DEPLOY_QT="/opt/linuxdeployqt.AppDir/AppRun"
+QMAKE="/usr/lib/qt5/bin/qmake"
 
 ubuntu_sources = [{'sourceline': 'deb http://archive.ubuntu.com/ubuntu/ bionic main restricted universe multiverse',
                    'key_url': 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3b4fe6acc0b21f32'},
@@ -34,11 +34,9 @@ run(["mkdir", "-p", "usr/share/icons/hicolor/256x256/apps"],
     cwd="./build/AppDir")
 
 # Copy/move necessary files to AppDir
-run(["cp", "./Tasker", "./AppDir/usr/bin"],
+run(["cp", "./Tasker/Tasker", "./AppDir/usr/bin"],
     cwd="./build")
-run(["cp", "../libs/linux/iohook/XListenerHook",
-     "./build/AppDir/usr/bin"])
-run(["cp", "./clock-256.png", "build/AppDir/usr/share/icons/hicolor/256x256/apps"])
-run(["cp", "./Tasker.desktop", "build/AppDir/usr/share/applications"])
+run(["cp", "./Tasker/clock-256.png", "build/AppDir/usr/share/icons/hicolor/256x256/apps"])
+run(["cp", "./Tasker/Tasker.desktop", "build/AppDir/usr/share/applications"])
 
 run([LINUX_DEPLOY_QT,"AppDir/usr/share/applications/Tasker.desktop", "-appimage" ,"-bundle-non-qt-libs", "-qmake="+QMAKE ], cwd="./build")
