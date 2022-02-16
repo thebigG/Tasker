@@ -9,7 +9,7 @@ from subprocess import run
 CMAKE="/usr/local/bin/cmake"
 CMAKE_PREFIX_PATH="-DCMAKE_PREFIX_PATH=/usr/lib/x86_64-linux-gnu/cmake/"
 APPDIR_DIR="AppDir"
-LINUX_DEPLOY_QT="/opt/linuxdeployqt.AppDir/AppRun"
+LINUX_DEPLOY_QT="/opt/squashfs-root/AppRun"
 QMAKE="/usr/lib/qt5/bin/qmake"
 
 ubuntu_sources = [{'sourceline': 'deb http://archive.ubuntu.com/ubuntu/ bionic main restricted universe multiverse',
