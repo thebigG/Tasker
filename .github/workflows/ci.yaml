@@ -19,12 +19,14 @@ jobs:
       image: thebigg1/tasker-linux-ci:latest
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
+    env:
+      SHA8: ${GITHUB_SHA::8}
     strategy:
       fail-fast: false
       matrix:
         include:
           - name: Publish Linunx Release
-            bin: "./build/Tasker-${{GITHUB_SHA}}-x86_64.AppImage"
+            bin: "./build/Tasker-${{SHA8}}-x86_64.AppImage"
             publish-release: true
         config:
         - {name: "ubuntu-18.04", os: "ubuntu-18.04"}
