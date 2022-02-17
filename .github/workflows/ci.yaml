@@ -24,7 +24,7 @@ jobs:
       matrix:
         include:
           - name: Publish Linunx Release
-            bin: "./bin/Tasker-${GITHUB_SHA}-x86_64.AppImage"
+            bin: "./build/Tasker-${{GITHUB_SHA}}-x86_64.AppImage"
             publish-release: true
         config:
         - {name: "ubuntu-18.04", os: "ubuntu-18.04"}
