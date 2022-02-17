@@ -1,0 +1,184 @@
+name: Build
+
+on:
+  push:
+    branches: ['*']
+    tags:
+    paths_ignore: ['docs/**', '.travis.yml']
+  pull_request:
+  release:
+    types: ['created']
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build-linux:
+    container:
+      image: thebigg1/tasker-linux-ci:latest
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Publish Linunx Release
+            publish-release: true
+        config:
+        - {name: "ubuntu-18.04", os: "ubuntu-18.04"}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        token: ${{ secrets.MY_REPO_PAT }}
+        submodules: recursive
+    - name: Configure CMake
+      run: |
+           git submodule update --init --recursive
+           mkdir build
+           cd build
+           cmake ..
+    - name: make
+      run:  |
+            cd build
+            make -j8
+            cd ..
+    - name: Build AppImage
+      run:  |
+            python3 Tasker/build_AppImage.py
+    - name: Delete old release assets
+      uses: mknejp/delete-release-assets@v1
+      with:
+        token: ${{ github.token }}
+        tag: nightly # This may also be of the form 'refs/tags/staging'
+        assets: '*-x86_64.AppImage'
+
+    - name: Upload binaries to release
+      if: ${{ matrix.publish-release }}
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: build/Tasker-*-x86_64.AppImage
+        tag: nightly
+        overwrite: true
+        file_glob: true
+        body: "Nightly build, freshly baked."
+
+
+
+  cross-compile-for-windows:
+    name: cross-compile-for-windows
+    runs-on: ${{ matrix.config.os }}
+    container:
+      image: thebigg1/tasker-linux-ci:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { name: "ubuntu-18.04", os: "ubuntu-18.04" }
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          token: ${{ secrets.MY_REPO_PAT }}
+          submodules: recursive
+      - name: Configure MXE
+        run: |
+          patch /mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake misc/docker/linux/Qt5CoreConfigExtras.cmake.patch
+          echo "/mxe/usr/bin" >> $GITHUB_PATH
+      - name: Configure CMake
+        run: |
+          mkdir build
+          cd build
+          i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
+      - name: make
+        run: |
+          cd build
+          make -j8
+          mv Tasker/Tasker.exe Tasker/Tasker-`git rev-parse --short HEAD`.exe
+          cd ..
+
+      - name: Delete old release assets
+        uses: mknejp/delete-release-assets@v1
+        with:
+          fail-if-no-assets: false
+          token: ${{ github.token }}
+          tag: nightly # This may also be of the form 'refs/tags/staging'
+          assets: '*.exe'
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/Tasker/*.exe
+          tag: nightly
+          overwrite: true
+          file_glob: true
+          body: "Nightly build, freshly baked."
+
+  build-container-linux:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { name: "ubuntu-18.04", os: "ubuntu-18.04" }
+    name: build-container-linux
+    runs-on: ${{ matrix.config.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+          context: .
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+      - uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ../Tasker/misc/docker/linux/Dockerfile
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          tags: thebigg1/tasker-linux-ci:latest
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+#    - name: upload package
+#      uses: actions/upload-artifact@master
+#      with:
+#        name: pkg-${{ matrix.config.name }}
+#        path: package
+#    - name: upload to release page
+#      if: github.event_name == 'release'
+#      env:
+#        TOKEN: "token ${{ secrets.GITHUB_TOKEN }}"
+#        TAG: ${{ github.event.release.tag_name }}
+#        UPLOAD_URL: ${{ github.event.release.upload_url }}
+#      run: |
+#              # Do try this at home! The REST API is documented at
+#              # https://docs.github.com/en/free-pro-team@latest/rest and you can get a personal
+#              # access token at https://github.com/settings/tokens
+#              # (set TOKEN to "bearer abcdef1234")
+#              # you can get the UPLOAD_URL with a short bash snippet; make sure to set the env var TAG:
+#              # UPLOAD_URL=$(curl -H 'Accept: application/vnd.github.v3+json' $GITHUB_API_URL/repos/$GITHUB_REPOSITORY/releases/tags/$TAG | jq -r .upload_url)
+#              UPLOAD_URL=${UPLOAD_URL%\{*} # remove "{name,label}" suffix
+#              for pkg in package/*.*; do
+#                NAME=$(basename $pkg)
+#                MIME=$(file --mime-type $pkg|cut -d ' ' -f2)
+#                curl -X POST -H "Accept: application/vnd.github.v3+json" -H "Authorization: $TOKEN" -H "Content-Type: $MIME" --data-binary @$pkg $UPLOAD_URL?name=$NAME
+#              done
+

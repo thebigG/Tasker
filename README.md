@@ -1,12 +1,12 @@
-[![Build Status](https://travis-ci.com/thebigG/Tasker.svg?branch=release)](https://travis-ci.com/thebigG/Tasker)  [![](https://img.shields.io/badge/docs-readme-blue.svg)](https://thebigg.github.io/Tasker/)
-
+[![Build](https://github.com/thebigG/Tasker/actions/workflows/ci.yaml/badge.svg)](https://github.com/thebigG/Tasker/actions/workflows/ci.yaml) [![](https://img.shields.io/badge/docs-readme-blue.svg)](https://thebigg.github.io/Tasker/)
 # Tasker
 
 # Table of Contents
 1. [Pitch](#pitch)
 2. [Usage](#usage)
 3. [How do I get Tasker?](#how_do_I_get_tasker)
-4. [Build It From Source](#build_it_from_source)
+4. [Build It From Source on Linux](#build_it_from_source)
+5. [Cross-compile for Windows](#cross_compile_windows)
 
 ## Pitch <a name="pitch"></a>
 
@@ -96,14 +96,62 @@ When updating Tasker in macOS; meaning re-downloading a new .app file from the r
 `cmake>=3.16.0`
 
 ```
-cd dependencies
-./install_deps.sh
+#Install dependencies for libuiohook and Tasker
+sudo apt-get install libx11-dev
+sudo apt-get install libxtst-dev
+sudo apt-get install libxt-dev
+sudo apt-get install libxinerama-dev
+sudo apt-get install libx11-xcb-dev
+sudo apt-get install libxkbcommon-dev
+sudo apt-get install libxkbcommon-x11-dev
+sudo apt-get install libxkbfile-dev
+sudo apt-get install libjack-dev
+
 cd ..
 cd Tasker 
 mkdir build
 cd build
 cmake ..
 make
+```
+
+# Build It From Source(Tested on Ubuntu 16 & 20) <a name="cross_compile_windows"></a>
+`cmake>=3.16.0`
+NOTE: Make sure that `/home/lorenzogomez/mxe/usr/bin` is part of your PATH variable. Otherwise mxe might break when building.
+
+
+```
+Get the mxe tools
+
+Cross-compiling Tasker for Windows:
+
+Get the mxe tools
+Install qt, qtcharts, qtmultimedia
+
+
+Get the hash from git
+git rev-parse --short HEA
+
+
+i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=/home/lorenzogomez/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
+
+
+in mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake file(line 83) comment out:
+
+
+make -j8 jack MXE_TARGETS='x86_64-w64-mingw32.static i686-w64-mingw32.static' 
+
+#set_property(TARGET Qt5::Core PROPERTY INTERFACE_COMPILE_FEATURES cxx_decltype)
+
+
+Build libuiohook:
+
+cd libuiohook
+mkdir build && cd build
+
+i686-w64-mingw32.static-cmake -S .. -DUIOHOOK_ENABLE_STATIC=ON  -DUIOHOOK_ENABLE_SHARED=OFF
+i686-w64-mingw32.static-cmake --build .
+
 ```
 
 

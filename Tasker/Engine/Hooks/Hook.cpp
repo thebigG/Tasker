@@ -57,4 +57,4 @@ Engine::Hook::HookType Engine::Hook::getType() { return type; }
  *         or
  *         Engine::Engine::Hook::Engine::Hook::productive
  */
-// Engine::Hook::HookState Engine::Hook::getState() { return state; }
+ Engine::Hook::HookState Engine::Hook::getState() { return state; }

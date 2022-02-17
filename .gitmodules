@@ -1,3 +1,10 @@
 [submodule "libuiohook"]
 	path = libuiohook
 	url = https://github.com/thebigG/libuiohook.git
+[submodule "mxe"]
+	path = mxe
+	url = https://github.com/thebigG/mxe.git
+	branch = master
+[submodule "miniaudio"]
+	path = miniaudio
+	url = https://github.com/mackron/miniaudio.git

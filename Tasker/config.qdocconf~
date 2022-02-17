@@ -1,8 +1,0 @@
-outputdir = html
-headerdirs = .
-project = Tasker
-sourcedirs = .
-sources = Tasker.cpp
-exampledirs = .
-outputformats = HTML
-sources.fileextensions = "*.cpp *.qml"

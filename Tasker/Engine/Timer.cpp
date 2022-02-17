@@ -10,7 +10,6 @@
 #include <iostream>
 
 #include "AudioHook.h"
-#include "Jack/JackHook.h"
 #include "XHook.h"
 using namespace Engine;
 using namespace util;
@@ -74,7 +73,7 @@ void Timer::tickUpdate() {
   /**
    * @brief productiveTickDelta
    * This is the real-time amoumt of seconds that the user has gone
-   * unproductive. The maximum grace peroid is defined by gracePeriod.
+   * unproductive. The maximum grace period is defined by gracePeriod.
    */
   int productiveTickDelta = tickCount - lastProductiveTick;
   if (hook->getState() == Hook::HookState::productive) {
