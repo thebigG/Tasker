@@ -33,6 +33,12 @@ jobs:
       with:
         token: ${{ secrets.MY_REPO_PAT }}
         submodules: recursive
+    - name: Tag Repo
+      uses: richardsimko/update-tag@v1
+      with:
+        tag_name: nightly
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Configure CMake
       run: |
            git submodule update --init --recursive
