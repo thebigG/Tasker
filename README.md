@@ -92,65 +92,41 @@ When updating Tasker in macOS; meaning re-downloading a new .app file from the r
 **NOTE**:Will be packaging for Windows10 very  soon :)
 
 
-# Build It From Source(Tested on Ubuntu 16 & 20) <a name="build_it_from_source"></a>
+# Build It From Source(Tested on Ubuntu 18 & 20) <a name="build_it_from_source"></a>
 `cmake>=3.16.0`
 
 ```
-#Install dependencies for libuiohook and Tasker
-sudo apt-get install libx11-dev
-sudo apt-get install libxtst-dev
-sudo apt-get install libxt-dev
-sudo apt-get install libxinerama-dev
-sudo apt-get install libx11-xcb-dev
-sudo apt-get install libxkbcommon-dev
-sudo apt-get install libxkbcommon-x11-dev
-sudo apt-get install libxkbfile-dev
-sudo apt-get install libjack-dev
+docker pull thebigg1/tasker-linux-ci:latest
 
-cd ..
-cd Tasker 
+sudo docker run -it thebigg1/tasker-linux-ci:latest bash
+git clone https://github.com/thebigG/Tasker.git
+cd Tasker
+git submodule update --recursive --init
+rm -r build
 mkdir build
 cd build
 cmake ..
 make
 ```
 
-# Build It From Source(Tested on Ubuntu 16 & 20) <a name="cross_compile_windows"></a>
+# Build It From Source For Windows(Tested on Ubuntu 18 & 20) <a name="cross_compile_windows"></a>
 `cmake>=3.16.0`
 NOTE: Make sure that `/home/lorenzogomez/mxe/usr/bin` is part of your PATH variable. Otherwise mxe might break when building.
 
 
 ```
-Get the mxe tools
+docker pull thebigg1/tasker-linux-ci:latest
 
-Cross-compiling Tasker for Windows:
-
-Get the mxe tools
-Install qt, qtcharts, qtmultimedia
-
-
-Get the hash from git
-git rev-parse --short HEA
-
-
-i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=/home/lorenzogomez/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
-
-
-in mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake file(line 83) comment out:
-
-
-make -j8 jack MXE_TARGETS='x86_64-w64-mingw32.static i686-w64-mingw32.static' 
-
-#set_property(TARGET Qt5::Core PROPERTY INTERFACE_COMPILE_FEATURES cxx_decltype)
-
-
-Build libuiohook:
-
-cd libuiohook
-mkdir build && cd build
-
-i686-w64-mingw32.static-cmake -S .. -DUIOHOOK_ENABLE_STATIC=ON  -DUIOHOOK_ENABLE_SHARED=OFF
-i686-w64-mingw32.static-cmake --build .
+sudo docker run -it thebigg1/tasker-linux-ci:latest bash
+git clone https://github.com/thebigG/Tasker.git
+cd Tasker
+git submodule update --recursive --init
+patch /mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake misc/docker/linux/Qt5CoreConfigExtras.cmake.patch
+rm -r build
+mkdir build
+cd build
+i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
+make
 
 ```
 
