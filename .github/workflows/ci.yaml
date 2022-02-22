@@ -50,6 +50,7 @@ jobs:
     - name: Delete old release assets
       uses: mknejp/delete-release-assets@v1
       with:
+        fail-if-no-assets: false
         token: ${{ github.token }}
         tag: nightly # This may also be of the form 'refs/tags/staging'
         assets: '*-x86_64.AppImage'
