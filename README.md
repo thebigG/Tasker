@@ -86,12 +86,6 @@ You also have to give Microphone permissions to Tasker just like the mouse/keybo
 ### Updating Tasker on macOS
 When updating Tasker in macOS; meaning re-downloading a new .app file from the release page, to avoid any headaches, **re-enable** all of the accessibility and microphone permisions on macOS preferences. That means removing Tasker from the list of allowed apps on the Accessibility and Microphone sections and **re-adding** that new Tasker.app file you just downloaded. If you don't do this, Tasker wil **not** work properly because macOS still thinks that those permissions belong to the older Tasker version you had.
 
-
-
-
-**NOTE**:Will be packaging for Windows10 very  soon :)
-
-
 # Build It From Source(Tested on Ubuntu 18 & 20) <a name="build_it_from_source"></a>
 
 ```
