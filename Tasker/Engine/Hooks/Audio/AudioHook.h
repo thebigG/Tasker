@@ -43,6 +43,7 @@ private:
 //  std::unique_ptr<AudioMachine> audioSource;
   qreal audioThreshold;
   bool profiled = false;
+  static std::array<ma_backend, MA_BACKEND_COUNT> getBackends();
 };
 
 #endif // AUDIOLISTENER_H

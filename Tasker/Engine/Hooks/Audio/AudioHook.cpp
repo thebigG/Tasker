@@ -90,3 +90,12 @@ Hook::HookState AudioHook::startHook() { return getState(); }
 void AudioHook::resetState() { setState(HookState::unproductive); }
 
 Hook::HookState AudioHook::getState() { return state; }
+
+std::array<ma_backend, MA_BACKEND_COUNT> AudioHook::getBackends()
+{
+	std::array<ma_backend, MA_BACKEND_COUNT> backendArr = {};
+	size_t count = 0;
+	ma_get_enabled_backends(backendArr.data(), backendArr.size(), &count);
+
+	return backendArr;
+}
