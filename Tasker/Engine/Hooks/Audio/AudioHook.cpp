@@ -1,4 +1,6 @@
 #include "AudioHook.h"
+#define MINIAUDIO_IMPLEMENTATION
+#include "miniaudio.h"
 #include "TaskerPerf/perftimer.h"
 #include <QDebug>
 #include <cstdio>

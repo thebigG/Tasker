@@ -10,7 +10,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     message(STATUS ${CMAKE_BUILD_TYPE})
     add_compile_definitions(__TASKER_DEBUG__=1)
@@ -94,6 +93,14 @@ message(STATUS ${UIOHOOK_ENABLE_STATIC})
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../libuiohook external_libs)
 
 target_link_libraries(Tasker  uiohook)
+
+if(WIN32)
+    target_link_libraries(Tasker pthread)
+
+else(WIN32)
+    target_link_libraries(Tasker pthread dl)
+
+endif()
 
 install(TARGETS Tasker
     DESTINATION ${CMAKE_INSTALL_PREFIX}
