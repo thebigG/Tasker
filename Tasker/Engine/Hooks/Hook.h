@@ -1,5 +1,5 @@
-#ifndef LISTENER_H
-#define LISTENER_H
+#ifndef HOOK_H
+#define HOOK_H
 
 #include <QDataStream>
 #include <QFile>
@@ -100,4 +100,4 @@ QDataStream &operator<<(QDataStream &out,
  * @return
  */
 QDataStream &operator>>(QDataStream &in, Engine::Hook::HookType &newHook);
-#endif // LISTENER_H
+#endif // HOOK_H

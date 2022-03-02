@@ -1,5 +1,5 @@
-#ifndef AUDIOLISTENER_H
-#define AUDIOLISTENER_H
+#ifndef AUDIOHOOK_H
+#define AUDIOHOOK_H
 
 #include "Hook.h"
 #include "miniaudio.h"
@@ -46,4 +46,4 @@ private:
   static std::array<ma_backend, MA_BACKEND_COUNT> getBackends();
 };
 
-#endif // AUDIOLISTENER_H
+#endif // AUDIOHOOK_H

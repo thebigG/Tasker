@@ -1,32 +1,9 @@
-#ifndef KEYBOARDLISTENER_H
-#define KEYBOARDLISTENER_H
+#ifndef XHOOK_H
+#define XHOOK_H
 #include <Hook.h>
 
 #include <QtCore>
 #include <memory>
-#ifdef __TASKER_DEBUG__
-#if defined(Q_OS_LINUX)
-#define IOHOOK_SCRIPT_PATH "./XListenerHook"
-#define WORKDIR "../libs/linux/iohook"
-#elif defined(Q_OS_OSX)
-#define IOHOOK_SCRIPT_PATH "./XListenerHook"
-#define WORKDIR QCoreApplication::applicationDirPath() + "/../iohook"
-#elif defined(Q_OS_WIN)
-#define IOHOOK_SCRIPT_PATH "./run_hook.sh"
-#define WORKDIR "./Contents/iohook"
-#endif
-#else
-#if defined(Q_OS_LINUX)
-#define IOHOOK_SCRIPT_PATH "./XListenerHook"
-#define WORKDIR QCoreApplication::applicationDirPath()
-#elif defined(Q_OS_OSX)
-#define IOHOOK_SCRIPT_PATH "./XListenerHook"
-#define WORKDIR QCoreApplication::applicationDirPath() + "/../Frameworks/iohook"
-#elif defined(Q_OS_WIN)
-#define IOHOOK_SCRIPT_PATH "./XListenerHook"
-#define WORKDIR QCoreApplication::applicationDirPath()
-#endif
-#endif
 namespace Engine {
 enum class XHookMode { MOUSE, KEYBOARD, MOUSE_AND_KEYBOARD };
 int run_xhook_engine(XHookMode mode);
@@ -67,4 +44,4 @@ signals:
 };
 
 void hook();
-#endif // KEYBOARDLISTENER_H
+#endif // XHOOK_H

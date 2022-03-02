@@ -1,5 +1,5 @@
-#ifndef WEEKLYSNAPHOT_H
-#define WEEKLYSNAPHOT_H
+#ifndef COMMITMENTSNASPHOT_H
+#define COMMITMENTSNASPHOT_H
 #include <Commitment.h>
 #include <TaskerPerf/perftimer.h>
 
@@ -60,4 +60,4 @@ public:
     QPushButton &getPreviousSnaphotLabel();
 };
 
-#endif // WEEKLYSNAPHOT_H
+#endif // COMMITMENTSNASPHOT_H

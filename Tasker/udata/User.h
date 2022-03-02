@@ -1,5 +1,5 @@
-#ifndef USERQOBJECT_H
-#define USERQOBJECT_H
+#ifndef USER_H
+#define USER_H
 
 #include "Commitment.h"
 #include <QVector>
