@@ -152,14 +152,17 @@ QString UdataUtils::getUsername() {
 
   QString output = "";
 
-  getUsername.start("whoami", QStringList{});
+  QString command{"whoami"};
+  QStringList args{};
+
+  getUsername.start(command, args);
 
   //FIXME: Implement errorOccurred signal
   getUsername.waitForFinished();
 
   output = QString(getUsername.readAllStandardOutput());
 
-  name = output.remove(output.length() - 1, 2);
+  name =  output.remove(output.length() - 1, 2);
 
 #else
   // no implementation yet

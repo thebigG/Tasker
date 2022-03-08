@@ -16,6 +16,11 @@ using Engine::Hook;
 AudioHook::AudioHook()
     : Hook::Hook{}, audioListenerState{AudioHookState::OFF} {
   audioThreshold = 0.001f;
+   contextConfig = std::make_unique<ma_context_config>();
+
+  initContext(contextConfig.get(), &context, 1, getBackends().data());
+  getDevices();
+
 }
 
 /**
@@ -93,11 +98,62 @@ void AudioHook::resetState() { setState(HookState::unproductive); }
 
 Hook::HookState AudioHook::getState() { return state; }
 
-std::array<ma_backend, MA_BACKEND_COUNT> AudioHook::getBackends()
+std::vector<ma_backend> AudioHook::getBackends()
 {
-	std::array<ma_backend, MA_BACKEND_COUNT> backendArr = {};
-	size_t count = 0;
-	ma_get_enabled_backends(backendArr.data(), backendArr.size(), &count);
+	std::array<ma_backend, MA_BACKEND_COUNT> backendArr;
+	std::vector<ma_backend> backends{};
+	try {
+		backends.reserve(MA_BACKEND_COUNT);
+	}  catch (std::length_error) {
+		qCritical()<<"reserve()failed to reserve memory for backends vector";
+	}
 
-	return backendArr;
+	size_t count = 0;
+	ma_get_enabled_backends(backends.data(), MA_BACKEND_COUNT, &count);
+
+   return backends;
+}
+
+std::vector<ma_device_info> AudioHook::getDevices()
+{
+	unsigned int a{0};
+
+	std::vector<ma_device_info> devices{};
+	//NOTE: I know the API is written in C, but I don't like this pointer busisness here...
+	ma_uint32* pPlaybackDeviceCount;
+	pPlaybackDeviceCount = &a;
+	ma_device_info* ppCaptureDeviceInfos;
+	ma_device_info info{};
+	ma_uint32* pCaptureDeviceCount;
+	pCaptureDeviceCount = &a;
+
+	ma_result res  = ma_context_get_devices(&context, nullptr, pPlaybackDeviceCount, &ppCaptureDeviceInfos, pCaptureDeviceCount);
+	devices.reserve(*pCaptureDeviceCount);
+	if(res == MA_SUCCESS)
+	{
+		for(int i =0;i<*pCaptureDeviceCount; i++)
+		{
+			devices.push_back(ppCaptureDeviceInfos[i]);
+			qDebug()<<"device-->"<<ppCaptureDeviceInfos[i].name;
+		}
+	}
+	else
+	{
+//		std::cout<<"Something bad happended. ma_context_get_devices failed"<<std::endl;
+//		throw std::exception{"Something bad happended. ma_context_get_devices failed"};
+	}
+
+	return devices;
+}
+ma_result AudioHook::initContext(ma_context_config *pConfig, ma_context *pContext,
+					   ma_uint32 backendCount, ma_backend* backends) {
+  int res = ma_context_init(backends, backendCount, pConfig, pContext);
+
+  return res;
+}
+
+
+const char* Engine::MA_Exception::what() const throw()
+{
+	return "Miniaudio error";
 }

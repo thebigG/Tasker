@@ -6,8 +6,15 @@
 #include <memory>
 namespace Engine {
 class AudioHook;
+class MA_Exception;
 }
 
+class Engine::MA_Exception :public std::exception
+{
+public:
+ virtual ~MA_Exception(){};
+ const char* what() const throw();
+};
 /**
  * @brief Engine::AudioHook class This class uses the AudioDvice and
  * AudioMachine classes to make a self-sustained asynchronous and stateful audio
@@ -43,7 +50,13 @@ private:
 //  std::unique_ptr<AudioMachine> audioSource;
   qreal audioThreshold;
   bool profiled = false;
-  static std::array<ma_backend, MA_BACKEND_COUNT> getBackends();
+  static std::vector<ma_backend> getBackends();
+  std::vector<ma_device_info> getDevices();
+  ma_result initContext(ma_context_config *pConfig, ma_context *pContext,
+						 ma_uint32 backendCount, ma_backend* backends);
+
+  ma_context context;
+  std::unique_ptr<ma_context_config> contextConfig;
 };
 
 #endif // AUDIOHOOK_H
