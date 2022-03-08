@@ -59,3 +59,6 @@ RUN wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous
 RUN chmod +x /opt/linuxdeployqt \
     && cd /opt/; sed -i 's|AI\x02|\x00\x00\x00|' linuxdeployqt; /opt/linuxdeployqt --appimage-extract \
     && mv /opt/squashfs-root /opt/linuxdeployqt.AppDir; exit 0 \
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get install -y clang-format
+
