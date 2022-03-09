@@ -8,3 +8,6 @@
 [submodule "miniaudio"]
 	path = miniaudio
 	url = https://github.com/mackron/miniaudio.git
+[submodule "clang-format-all"]
+	path = clang-format-all
+	url = git@github.com:thebigG/clang-format-all.git
