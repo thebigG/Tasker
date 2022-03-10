@@ -33,6 +33,10 @@ jobs:
       with:
         token: ${{ secrets.MY_REPO_PAT }}
         submodules: recursive
+
+    - name: Check Coding Style
+      run: |
+        ./clang-format-all/check-all.py --root_dir Tasker
     - name: Tag Repo
       uses: richardsimko/update-tag@v1
       with:
