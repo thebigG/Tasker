@@ -16,7 +16,8 @@ User::User(QVector<Commitment> newCommitments) {
 /**
  * @brief User::User
  */
-User::User() {}
+User::User() {
+}
 void User::updateCurrentCommitment(int newCommitmentIndex) {
     currentCommitment = newCommitmentIndex;
 }
@@ -39,7 +40,8 @@ int User::getDefaultCommitmentIndex() const {
 /**
  * @brief User::~User
  */
-User::~User() {}
+User::~User() {
+}
 
 /**
  * @brief udata::User::getDefaultCommitment

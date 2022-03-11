@@ -37,39 +37,39 @@ Status strings for what is happening with the current live session.
 class MainUI : public QMainWindow {
     Q_OBJECT
 private:
-  static std::unique_ptr<MainUI> mainHub;
-  CommStatsQWidget commitmentHub{};
-  QMenuBar mainMenuBar;
-  QMenu commitmentMenu{ COMMITMENT_MENU_STRING };
-  QMenu sessionMenu{ SESSION_MENU_STRING };
-  QMenu trayIconMenu{};
-  QAction *getNewSessionAction();
-  QAction *getEditCommitmentAction();
-  QAction *getDeleteCommitmentAction();
-  QSystemTrayIcon trayIcon;
-  QAction *liveSessionStatusAction{};
-  QString liveSessionStatusText{ "LiveSession:" };
-  void updateLiveSessionStatusText();
-  void updateLiveSessionStatusAction();
-  void closeEvent(QCloseEvent *) override;
+    static std::unique_ptr<MainUI> mainHub;
+    CommStatsQWidget commitmentHub{};
+    QMenuBar mainMenuBar;
+    QMenu commitmentMenu{ COMMITMENT_MENU_STRING };
+    QMenu sessionMenu{ SESSION_MENU_STRING };
+    QMenu trayIconMenu{};
+    QAction *getNewSessionAction();
+    QAction *getEditCommitmentAction();
+    QAction *getDeleteCommitmentAction();
+    QSystemTrayIcon trayIcon;
+    QAction *liveSessionStatusAction{};
+    QString liveSessionStatusText{ "LiveSession:" };
+    void updateLiveSessionStatusText();
+    void updateLiveSessionStatusAction();
+    void closeEvent(QCloseEvent *) override;
 
-  public:
-  static MainUI *getInstance();
-  void update();
-  void updateNewSessionActionState();
-  void updateEditCommitmentActionState();
-  void updateDeleteCommitmentActionState();
-  void updateActionStates();
-  bool newSessionActionState();
-  bool editCommitmentActionState();
-  bool deleteCommitmentActionState();
-  CommStatsQWidget &getCommitmentHub();
-  MainUI();
+public:
+    static MainUI *getInstance();
+    void update();
+    void updateNewSessionActionState();
+    void updateEditCommitmentActionState();
+    void updateDeleteCommitmentActionState();
+    void updateActionStates();
+    bool newSessionActionState();
+    bool editCommitmentActionState();
+    bool deleteCommitmentActionState();
+    CommStatsQWidget &getCommitmentHub();
+    MainUI();
 public slots:
-  static void saveTaskerStateSlot();
-  void trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason);
-  void toggleShowWindow();
-  void quitSlot();
+    static void saveTaskerStateSlot();
+    void trayIconShoWindowSlot(QSystemTrayIcon::ActivationReason);
+    void toggleShowWindow();
+    void quitSlot();
 };
 
 #endif // MAINUI_H

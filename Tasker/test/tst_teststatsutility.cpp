@@ -5,7 +5,7 @@
 class TestStatsUtility : public QObject {
     Q_OBJECT
 
-    private slots:
+private slots:
     void testToMinutesPositive();
     void testToMinutesNegative();
 
@@ -26,7 +26,6 @@ class TestStatsUtility : public QObject {
     void calculateProductivePercentagePositiveSecondsNegativeProductive();
     void calculateProductivePercentageAllPositive();
 };
-
 
 using util::StatsUtility;
 

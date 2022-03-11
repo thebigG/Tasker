@@ -7,7 +7,8 @@ using namespace udata;
 /**
  * @brief Session::Session
  */
-Session::Session() {}
+Session::Session() {
+}
 
 /**
  * @brief Session::Session
@@ -15,10 +16,10 @@ Session::Session() {}
  * @param goalLength
  */
 Session::Session(Task newTask, long long int goalLength, QDate newDate)
-    : task{newTask}, goal{goalLength}, date{newDate} {
-  if (goal < ZERO) {
-    goal = ZERO;
-  }
+: task{ newTask }, goal{ goalLength }, date{ newDate } {
+    if (goal < ZERO) {
+        goal = ZERO;
+    }
 }
 /**
  * @brief Session::Session This constructor is useful when the user creates a
@@ -27,52 +28,66 @@ Session::Session(Task newTask, long long int goalLength, QDate newDate)
  * @param newTask The task of this "empty" session.
  * @note Be aware that different sessions have different tasks.
  */
-Session::Session(Task newTask) : task{newTask} {
-  goal = -1;
-  length = -1;
+Session::Session(Task newTask) : task{ newTask } {
+    goal = -1;
+    length = -1;
 }
 
 /**
  * @brief Session::getTask
  * @return
  */
-Task &Session::getTask() { return task; }
+Task &Session::getTask() {
+    return task;
+}
 
 /**
  * @brief Session::setTask
  * @param value
  */
-void Session::setTask(Task value) { task = value; }
+void Session::setTask(Task value) {
+    task = value;
+}
 
 /**
  * @brief Session::getProductiveTime
  * @return
  */
-long long Session::getProductiveTime() const { return productiveTime; }
+long long Session::getProductiveTime() const {
+    return productiveTime;
+}
 
 /**
  * @brief Session::setProductiveTime
  * @param value
  */
-void Session::setProductiveTime(long long value) { productiveTime = value; }
+void Session::setProductiveTime(long long value) {
+    productiveTime = value;
+}
 
 /**
  * @brief Session::getUnproductiveTime
  * @return
  */
-long long Session::getUnproductiveTime() const { return unproductiveTime; }
+long long Session::getUnproductiveTime() const {
+    return unproductiveTime;
+}
 
 /**
  * @brief Session::setUnproductiveTime
  * @param value
  */
-void Session::setUnproductiveTime(long long value) { unproductiveTime = value; }
+void Session::setUnproductiveTime(long long value) {
+    unproductiveTime = value;
+}
 
 /**
  * @brief Session::getNotes
  * @return
  */
-QString &Session::getNotes() { return notes; }
+QString &Session::getNotes() {
+    return notes;
+}
 
 /**
  * @brief udata::operator <<
@@ -80,12 +95,11 @@ QString &Session::getNotes() { return notes; }
  * @param newSession
  * @return
  */
-QDataStream &udata::operator<<(QDataStream &out,
-                               const udata::Session &newSession) {
-  out << newSession.task << newSession.productiveTime
-      << newSession.unproductiveTime << newSession.notes << newSession.media
-      << newSession.length << newSession.date;
-  return out;
+QDataStream &udata::operator<<(QDataStream &out, const udata::Session &newSession) {
+    out << newSession.task << newSession.productiveTime
+        << newSession.unproductiveTime << newSession.notes << newSession.media
+        << newSession.length << newSession.date;
+    return out;
 }
 
 /**
@@ -96,43 +110,60 @@ QDataStream &udata::operator<<(QDataStream &out,
  */
 QDataStream &udata::operator>>(QDataStream &in, udata::Session &newSession) {
 
-  in >> newSession.task >> newSession.productiveTime >>
-      newSession.unproductiveTime >> newSession.notes >> newSession.media >>
-      newSession.length >> newSession.date;
-  return in;
+    in >> newSession.task >> newSession.productiveTime >> newSession.unproductiveTime >>
+        newSession.notes >> newSession.media >> newSession.length >> newSession.date;
+    return in;
 }
 
 /**
  * @brief Session::setNotes
  * @param value
  */
-void Session::setNotes(QString value) { notes = value; }
+void Session::setNotes(QString value) {
+    notes = value;
+}
 
 /**
  * @brief Session::getMedia
  * @return
  */
-QVector<QString> &Session::getMedia() { return media; }
+QVector<QString> &Session::getMedia() {
+    return media;
+}
 
 /**
  * @brief Session::setMedia
  * @param value
  */
-void Session::setMedia(QVector<QString> value) { media = value; }
+void Session::setMedia(QVector<QString> value) {
+    media = value;
+}
 
 /**
  * @brief Session::getLength
  * @return
  */
-long long Session::getLength() const { return length; }
+long long Session::getLength() const {
+    return length;
+}
 
 /**
  * @brief Session::setLength
  * @param value
  */
-void Session::setLength(long long value) { length = value; }
-long long int Session::getGoal() { return goal; }
+void Session::setLength(long long value) {
+    length = value;
+}
+long long int Session::getGoal() {
+    return goal;
+}
 
-void Session::setGoal(int newGoal) { goal = newGoal; }
-QDate &Session::getDate() { return date; }
-void Session::setDate(QDate newDate) { date = newDate; }
+void Session::setGoal(int newGoal) {
+    goal = newGoal;
+}
+QDate &Session::getDate() {
+    return date;
+}
+void Session::setDate(QDate newDate) {
+    date = newDate;
+}

@@ -32,19 +32,19 @@ public:
     udata::CommitmentType getType();
 
 private slots:
-  void createCommitmentButtonSlot();
-  void backButtonSlot();
-  void noEndDateCheckSlot();
-  void currentIndexCommitmentModeComboBoxSlot(const QString &);
-  void currentIndexFrequencyComboBoxSlot(const QString &);
+    void createCommitmentButtonSlot();
+    void backButtonSlot();
+    void noEndDateCheckSlot();
+    void currentIndexCommitmentModeComboBoxSlot(const QString &);
+    void currentIndexFrequencyComboBoxSlot(const QString &);
 
-  private:
-  /**
-   * @brief editing used for knowing whether this widget is being used for
-   * editing a commitment or creating a new commitment.
-   */
-  bool editing = false;
-  Ui::CreateCommitmentQWidget *ui;
+private:
+    /**
+     * @brief editing used for knowing whether this widget is being used for
+     * editing a commitment or creating a new commitment.
+     */
+    bool editing = false;
+    Ui::CreateCommitmentQWidget *ui;
 };
 
 #endif // CREATECOMMITMENT_H

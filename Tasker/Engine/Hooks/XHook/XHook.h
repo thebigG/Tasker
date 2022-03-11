@@ -20,27 +20,27 @@ enum class XHookMode;
  * You can check out the library here https://github.com/kwhat/libuiohook
  */
 class Engine::XHook : public Hook {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  XHook();
-  XHook(Engine::XHookMode);
-  int startXHook();
-  Hook::HookState startHook() override;
-  virtual Hook::HookState getState() override;
-  virtual void setState(HookState) override;
+    XHook();
+    XHook(Engine::XHookMode);
+    int startXHook();
+    Hook::HookState startHook() override;
+    virtual Hook::HookState getState() override;
+    virtual void setState(HookState) override;
 
 public slots:
-  virtual void start() override;
-  virtual void end() override;
-  virtual void pause() override;
-  virtual void update() override;
-  virtual void resetState() override;
+    virtual void start() override;
+    virtual void end() override;
+    virtual void pause() override;
+    virtual void update() override;
+    virtual void resetState() override;
 
 private:
-  XHookMode XMode;
+    XHookMode XMode;
 signals:
-  void signalThread();
+    void signalThread();
 };
 
 void hook();

@@ -10,7 +10,8 @@ using namespace udata;
 /**
  * @brief Commitment::Commitment
  */
-Commitment::Commitment() {}
+Commitment::Commitment() {
+}
 /**
  * @brief Commitment::Commitment Creates a new commitment. This constructor
  * tries its best to solve any date conflicts such as dateStart being greater

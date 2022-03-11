@@ -21,44 +21,43 @@ QDataStream &operator>>(QDataStream &in, udata::Session &newSession);
  */
 class udata::Session {
 public:
-  Session();
-  Session(Task newTask, long long goalLength, QDate date);
-  Session(Task);
-  Task &getTask();
-  void setTask(Task value);
+    Session();
+    Session(Task newTask, long long goalLength, QDate date);
+    Session(Task);
+    Task &getTask();
+    void setTask(Task value);
 
-  long long getProductiveTime() const;
-  void setProductiveTime(long long value);
+    long long getProductiveTime() const;
+    void setProductiveTime(long long value);
 
-  long long getUnproductiveTime() const;
-  void setUnproductiveTime(long long int value);
+    long long getUnproductiveTime() const;
+    void setUnproductiveTime(long long int value);
 
-  QString &getNotes();
-  void setNotes(QString value);
+    QString &getNotes();
+    void setNotes(QString value);
 
-  QVector<QString> &getMedia();
-  void setMedia(QVector<QString> value);
+    QVector<QString> &getMedia();
+    void setMedia(QVector<QString> value);
 
-  long long getLength() const;
-  void setLength(long long int value);
+    long long getLength() const;
+    void setLength(long long int value);
 
-  void setGoal(int);
-  long long int getGoal();
-  void setDate(QDate newDate);
-  QDate &getDate();
+    void setGoal(int);
+    long long int getGoal();
+    void setDate(QDate newDate);
+    QDate &getDate();
 
 private:
-  Task task;
-  long long int goal;
-  long long int productiveTime;
-  long long int unproductiveTime;
-  QString notes;
-  QVector<QString> media;
-  long long int length;
-  QDate date;
-  friend QDataStream &operator<<(QDataStream &out,
-                                 const udata::Session &newSession);
-  friend QDataStream &operator>>(QDataStream &in, udata::Session &newSession);
+    Task task;
+    long long int goal;
+    long long int productiveTime;
+    long long int unproductiveTime;
+    QString notes;
+    QVector<QString> media;
+    long long int length;
+    QDate date;
+    friend QDataStream &operator<<(QDataStream &out, const udata::Session &newSession);
+    friend QDataStream &operator>>(QDataStream &in, udata::Session &newSession);
 };
 
 #endif // SESSION_H

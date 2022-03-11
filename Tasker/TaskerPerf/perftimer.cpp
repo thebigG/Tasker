@@ -5,8 +5,8 @@
  * @param newDurationRecordSize
  */
 Perf::PerfTimer::PerfTimer(int newDurationRecordSize) {
-  durationRecordSize = newDurationRecordSize;
-  start = std::chrono::high_resolution_clock::now();
+    durationRecordSize = newDurationRecordSize;
+    start = std::chrono::high_resolution_clock::now();
 }
 /**
  * @brief Perf::PerfTimer::restart
@@ -16,5 +16,5 @@ Perf::PerfTimer::PerfTimer(int newDurationRecordSize) {
  * of code you're measuring begins.
  */
 void Perf::PerfTimer::restart() {
-  start = std::chrono::high_resolution_clock::now();
+    start = std::chrono::high_resolution_clock::now();
 }

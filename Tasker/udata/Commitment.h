@@ -31,44 +31,47 @@ struct CommitmentFrequency;
  * seventh day in the case of a week.)
  */
 struct TimeWindow {
-  QDate startDate;
-  QDate endDate;
-  QVector<Session> sessions;
-  /**
-   * @brief frequency
-   * The only times the client(Commitment) should be able to write to this field
-   * is when creating the TimeWindow for the first time, when a TimeWindow is
-   * opened (isOpen() returns true) and not done yet(isDone() returns false )
-   * and the frequency changes as a result of the Commitment's frequency
-   * changing. This frequency may also be modified by the user when they edit a
-   * commitment .Otherwise, frequency should not be modified.
-   */
-  int frequency;
-  /**
-   * @brief isDone represents whether or not this TimeWindow's sessions have all
-   * been completed or not. The number of sessions that MUST be compeleted for
-   * TimeWindow is determined by the frequency of this TimeWindow. This is
-   * particularly useful for the UI when it wants to know whether it can add
-   * sessions or not to a particular TimeWindow.
-   *
-   * @return true if all sessions have been completed. false otherwise.
-   */
-  bool isDone() { return sessions.length() == frequency; }
-  /**
-   * @brief isOpen
-   * If isOpen is true, then that means that this TimeWindow is not over yet,
-   * the endDate is not past the current date.
-   * Despite its functionality, I don't think it will be that useful at all to
-   * have this method.
-   * I'll think about it some more, but the more I think about it, the less
-   * sense it makes.
-   */
-  bool isOpen() { return QDate::currentDate() <= endDate; }
+    QDate startDate;
+    QDate endDate;
+    QVector<Session> sessions;
+    /**
+     * @brief frequency
+     * The only times the client(Commitment) should be able to write to this
+     * field is when creating the TimeWindow for the first time, when a
+     * TimeWindow is opened (isOpen() returns true) and not done yet(isDone()
+     * returns false ) and the frequency changes as a result of the Commitment's
+     * frequency changing. This frequency may also be modified by the user when
+     * they edit a commitment .Otherwise, frequency should not be modified.
+     */
+    int frequency;
+    /**
+     * @brief isDone represents whether or not this TimeWindow's sessions have
+     * all been completed or not. The number of sessions that MUST be compeleted
+     * for TimeWindow is determined by the frequency of this TimeWindow. This is
+     * particularly useful for the UI when it wants to know whether it can add
+     * sessions or not to a particular TimeWindow.
+     *
+     * @return true if all sessions have been completed. false otherwise.
+     */
+    bool isDone() {
+        return sessions.length() == frequency;
+    }
+    /**
+     * @brief isOpen
+     * If isOpen is true, then that means that this TimeWindow is not over yet,
+     * the endDate is not past the current date.
+     * Despite its functionality, I don't think it will be that useful at all to
+     * have this method.
+     * I'll think about it some more, but the more I think about it, the less
+     * sense it makes.
+     */
+    bool isOpen() {
+        return QDate::currentDate() <= endDate;
+    }
 };
 QDataStream &operator<<(QDataStream &out, const CommitmentFrequency &);
 QDataStream &operator>>(QDataStream &in, CommitmentFrequency &);
-QDataStream &operator<<(QDataStream &out,
-                        const udata::Commitment &newCommitment);
+QDataStream &operator<<(QDataStream &out, const udata::Commitment &newCommitment);
 QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
 QDataStream &operator<<(QDataStream &out, const TimeWindow &);
 QDataStream &operator>>(QDataStream &in, TimeWindow &);
@@ -122,9 +125,9 @@ enum class udata::CommitmentType { WEEKLY, MONTHLY, EVERDAY, Custom };
  *struct.
  */
 struct udata::CommitmentFrequency {
-  long long goal = 0; // in seconds
-  int frequency = 0;
-  int timeWindowSize = 0; // in days
+    long long goal = 0; // in seconds
+    int frequency = 0;
+    int timeWindowSize = 0; // in days
 };
 /**
  * @brief The udata::Commitment class
@@ -178,56 +181,57 @@ struct udata::CommitmentFrequency {
  */
 class udata::Commitment {
 private:
-  QString name;
-  QDate dateStart;
-  QDate dateEnd;
-  CommitmentFrequency frequency;
-  QVector<TimeWindow>
-      commitmentWindows; /**For now these are just a commitment's lifespan
-            divided into weeks. But hopefully it's clear that this time
-            window can also be something like a month, or an arbitray number
-            like 3 days. Each TimeWindow is the frame of time the user has to
-            complete their sessions for that time period. For example;a
-            commitment that is a once-a-week type will give the user a time
-            window of seven days to complete that one session. Same goes for
-            twice, thrice, four times a week, etc.
-            */
-  CommitmentType Type;
-  bool noEndDate;
-  bool done = false;
+    QString name;
+    QDate dateStart;
+    QDate dateEnd;
+    CommitmentFrequency frequency;
+    QVector<TimeWindow> commitmentWindows; /**For now these are just a commitment's lifespan
+                              divided into weeks. But hopefully it's clear that this time
+                              window can also be something like a month, or an arbitray number
+                              like 3 days. Each TimeWindow is the frame of time the user has to
+                              complete their sessions for that time period. For example;a
+                              commitment that is a once-a-week type will give the user a time
+                              window of seven days to complete that one session. Same goes for
+                              twice, thrice, four times a week, etc.
+                              */
+    CommitmentType Type;
+    bool noEndDate;
+    bool done = false;
 
-  void update(); // helper function for isDone()
+    void update(); // helper function for isDone()
 
 public:
-  Commitment();
-  Commitment(QString newName, QDate newStart, QDate newEnd,
-             udata::CommitmentFrequency, CommitmentType type, bool noEndDate);
-  QDate &getDateStart();
-  void setDateStart(QDate value);
-  QDate &getDateEnd();
-  void setDateEnd(QDate value);
-  QVector<Session> getAllSessions();
-  void setName(QString);
-  const QString &getName() const;
-  void setType(CommitmentType);
-  CommitmentType &getType();
-  QString summary() const;
-  void updateCommitmentWindows(Session);
-  void updateCommitmentWindows();
-  bool isDone();
-  void setDone(bool);
-  void setFrequency(long long newTime, int newFrequency, int newTimeWinowSize);
-  void setFrequency(CommitmentFrequency);
-  void setNoEndDate(bool);
-  bool hasEndDate();
-  CommitmentFrequency &getFrequency();
-  void setCommitmentWindows(QVector<TimeWindow> &newCommitmentWindows);
-  QVector<TimeWindow> &getCommitmentWindows();
-  TimeWindow &getCurrentTimeWindow();
-  friend QDataStream &operator<<(QDataStream &out,
-                                 const udata::Commitment &newCommitment);
-  friend QDataStream &operator>>(QDataStream &in,
-                                 udata::Commitment &newCommitment);
+    Commitment();
+    Commitment(QString newName,
+               QDate newStart,
+               QDate newEnd,
+               udata::CommitmentFrequency,
+               CommitmentType type,
+               bool noEndDate);
+    QDate &getDateStart();
+    void setDateStart(QDate value);
+    QDate &getDateEnd();
+    void setDateEnd(QDate value);
+    QVector<Session> getAllSessions();
+    void setName(QString);
+    const QString &getName() const;
+    void setType(CommitmentType);
+    CommitmentType &getType();
+    QString summary() const;
+    void updateCommitmentWindows(Session);
+    void updateCommitmentWindows();
+    bool isDone();
+    void setDone(bool);
+    void setFrequency(long long newTime, int newFrequency, int newTimeWinowSize);
+    void setFrequency(CommitmentFrequency);
+    void setNoEndDate(bool);
+    bool hasEndDate();
+    CommitmentFrequency &getFrequency();
+    void setCommitmentWindows(QVector<TimeWindow> &newCommitmentWindows);
+    QVector<TimeWindow> &getCommitmentWindows();
+    TimeWindow &getCurrentTimeWindow();
+    friend QDataStream &operator<<(QDataStream &out, const udata::Commitment &newCommitment);
+    friend QDataStream &operator>>(QDataStream &in, udata::Commitment &newCommitment);
 };
 
 #endif // COMMITMENT_H

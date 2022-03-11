@@ -29,48 +29,48 @@ class LiveSession;
 }
 
 class LiveSession : public QWidget {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  explicit LiveSession(QWidget *parent = nullptr);
-  QLabel &getcongratsMessageLabel();
-  QPushButton *getPlayButton();
-  void pause();
-  void resume();
-  QString congratsCommitmentMessage{
-      "Congrats! You've completed this commitment!"};
-  QString activeText{"(active)"};
-  QString inactiveText{"(inactive)"};
-  ~LiveSession();
-  LiveSessionState getCurrentState() const;
+    explicit LiveSession(QWidget *parent = nullptr);
+    QLabel &getcongratsMessageLabel();
+    QPushButton *getPlayButton();
+    void pause();
+    void resume();
+    QString congratsCommitmentMessage{ "Congrats! You've completed this "
+                                       "commitment!" };
+    QString activeText{ "(active)" };
+    QString inactiveText{ "(inactive)" };
+    ~LiveSession();
+    LiveSessionState getCurrentState() const;
 
 private slots:
-  void updateTimeUI();
-  void stop();
-  void playButtonSlot();
-  void updateHookState();
-  void start();
+    void updateTimeUI();
+    void stop();
+    void playButtonSlot();
+    void updateHookState();
+    void start();
 
 signals:
-  void liveStateChanged();
-  void sessionStarted();
+    void liveStateChanged();
+    void sessionStarted();
 
 private:
-  Ui::LiveSession *ui;
-  QString productiveTimeValueText;
-  QString unproductiveTimeValueText;
-  QString totalTimeValueText;
-  QString contextText{""};
-  QString sessionGoalText;
-  QString hookStateText{};
-  QString taskState{};
-  void initTaskState();
-  void initHookState();
-  LiveSessionState currentState;
-  Perf::PerfTimer liveSessionPerfTimer{};
-  Perf::PerfTimer liveSessionPerfTimer1{};
-  Perf::PerfTimer liveSessionPerfTimer2{};
-  Perf::PerfTimer liveSessionPerfTimer3{};
+    Ui::LiveSession *ui;
+    QString productiveTimeValueText;
+    QString unproductiveTimeValueText;
+    QString totalTimeValueText;
+    QString contextText{ "" };
+    QString sessionGoalText;
+    QString hookStateText{};
+    QString taskState{};
+    void initTaskState();
+    void initHookState();
+    LiveSessionState currentState;
+    Perf::PerfTimer liveSessionPerfTimer{};
+    Perf::PerfTimer liveSessionPerfTimer1{};
+    Perf::PerfTimer liveSessionPerfTimer2{};
+    Perf::PerfTimer liveSessionPerfTimer3{};
 };
 
 #endif // LIVESESSION_H

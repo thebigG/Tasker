@@ -32,18 +32,18 @@ MainUI::MainUI() {
     trayIcon.show();
     trayIcon.setToolTip("Tasker");
 #ifdef __TASKER_DEBUG__
-  sessionMenu.addAction(EDIT_SESSION_STRING);
-  sessionMenu.addAction(DELETE_SESSION_STRING);
+    sessionMenu.addAction(EDIT_SESSION_STRING);
+    sessionMenu.addAction(DELETE_SESSION_STRING);
 #endif
-  mainMenuBar.addMenu(&commitmentMenu);
-  mainMenuBar.addMenu(&sessionMenu);
-  this->setMenuBar(&mainMenuBar);
-  this->layout()->setContentsMargins(0, 0, 0, 0);
-  this->layout()->setSpacing(0);
-  commitmentHub.layout()->setSpacing(0);
-  commitmentHub.setContentsMargins(0, 0, 0, 0);
-  this->setCentralWidget(&commitmentHub);
-  this->statusBar()->hide();
+    mainMenuBar.addMenu(&commitmentMenu);
+    mainMenuBar.addMenu(&sessionMenu);
+    this->setMenuBar(&mainMenuBar);
+    this->layout()->setContentsMargins(0, 0, 0, 0);
+    this->layout()->setSpacing(0);
+    commitmentHub.layout()->setSpacing(0);
+    commitmentHub.setContentsMargins(0, 0, 0, 0);
+    this->setCentralWidget(&commitmentHub);
+    this->statusBar()->hide();
 }
 void MainUI::closeEvent(QCloseEvent *event) {
     event->ignore();

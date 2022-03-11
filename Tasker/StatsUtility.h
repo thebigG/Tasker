@@ -44,12 +44,12 @@ enum class TimeFormat { HM, HMS };
  * seconds
  */
 inline double toMinutes(int64_t seconds) {
-  double result = -1.0;
-  return (result = seconds < 0 ? result : seconds / (double)SECONDS_IN_MINUTE);
+    double result = -1.0;
+    return (result = seconds < 0 ? result : seconds / (double)SECONDS_IN_MINUTE);
 }
 inline int64_t minutesToSeconds(double Minutes) {
-  int64_t result = -1;
-  return (result = Minutes < 0 ? result : Minutes * SECONDS_IN_MINUTE);
+    int64_t result = -1;
+    return (result = Minutes < 0 ? result : Minutes * SECONDS_IN_MINUTE);
 }
 /**
  * @brief util::StatsUtility::toHours
@@ -59,19 +59,20 @@ inline int64_t minutesToSeconds(double Minutes) {
  */
 
 inline int64_t toHours(int64_t seconds) {
-  int64_t result = -1;
-  return (result = seconds < 0 ? result : seconds / SECONDS_IN_HOUR);
+    int64_t result = -1;
+    return (result = seconds < 0 ? result : seconds / SECONDS_IN_HOUR);
 }
 int64_t toDays(int64_t seconds);
 int64_t toWeeks(int64_t seconds);
 int64_t toMonths(int64_t seconds);
 long long int milliToSeconds(long long int);
-double calculateProductivePercentage(int64_t secondsTotal,
-                                     int64_t secondsProductive);
-double calculateUnproductivePercentage(int64_t secondsTotal,
-                                       int64_t secondsProductive);
-int formatTime(QString &formatString, float Time, QString &context,
-               int start = 0, TimeFormat format = TimeFormat::HM);
+double calculateProductivePercentage(int64_t secondsTotal, int64_t secondsProductive);
+double calculateUnproductivePercentage(int64_t secondsTotal, int64_t secondsProductive);
+int formatTime(QString &formatString,
+               float Time,
+               QString &context,
+               int start = 0,
+               TimeFormat format = TimeFormat::HM);
 } // namespace util
 
 #endif // STATSUTILITY_H
