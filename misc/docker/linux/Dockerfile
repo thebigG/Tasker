@@ -61,4 +61,4 @@ RUN chmod +x /opt/linuxdeployqt \
     && mv /opt/squashfs-root /opt/linuxdeployqt.AppDir; exit 0 \
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y clang-format-10
-
+RUN ln -s  /usr/bin/clang-format-10 /usr/bin/clang-format
