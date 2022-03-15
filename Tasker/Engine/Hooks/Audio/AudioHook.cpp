@@ -92,6 +92,15 @@ void AudioHook::update() {
     setState(state);
 }
 
+ma_bool32 AudioHook::enumerateCallback(ma_context *pContext,
+                                       ma_device_type deviceType,
+                                       const ma_device_info *pInfo,
+                                       void *pUserData) {
+    auto *devices = static_cast<std::vector<std::string> *>(pUserData);
+    devices->push_back(std::string{ pInfo->name });
+    return 0;
+}
+
 Hook::HookState AudioHook::startHook() {
     return getState();
 }

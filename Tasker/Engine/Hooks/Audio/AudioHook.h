@@ -46,6 +46,10 @@ signals:
 
 private:
     AudioHookState audioListenerState;
+    ma_bool32 enumerateCallback(ma_context *pContext,
+                                ma_device_type deviceType,
+                                const ma_device_info *pInfo,
+                                void *pUserData);
     //  std::unique_ptr<AudioMachine> audioSource;
     qreal audioThreshold;
     bool profiled = false;
