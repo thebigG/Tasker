@@ -18,7 +18,11 @@ AudioHook::AudioHook()
     audioThreshold = 0.001f;
     contextConfig = std::make_unique<ma_context_config>();
 
-    initContext(contextConfig.get(), &context, 1, getBackends().data());
+    std::unique_ptr<ma_device_config> config = std::make_unique<ma_device_config>();
+    init_audio_device(config.get());
+
+    initContext(contextConfig.get(), &context, 1, getBackends().data(), deviceId);
+    ma_context_enumerate_devices(&context, enumerateCallback, nullptr);
     getDevices();
 }
 
@@ -92,10 +96,10 @@ void AudioHook::update() {
     setState(state);
 }
 
-ma_bool32 AudioHook::enumerateCallback(ma_context *pContext,
-                                       ma_device_type deviceType,
-                                       const ma_device_info *pInfo,
-                                       void *pUserData) {
+ma_bool32 enumerateCallback(ma_context *pContext,
+                            ma_device_type deviceType,
+                            const ma_device_info *pInfo,
+                            void *pUserData) {
     auto *devices = static_cast<std::vector<std::string> *>(pUserData);
     devices->push_back(std::string{ pInfo->name });
     return 0;
@@ -161,10 +165,32 @@ std::vector<ma_device_info> AudioHook::getDevices() {
 ma_result AudioHook::initContext(ma_context_config *pConfig,
                                  ma_context *pContext,
                                  ma_uint32 backendCount,
-                                 ma_backend *backends) {
+                                 ma_backend *backends,
+                                 const ma_device_id *deviceId) {
     int res = ma_context_init(backends, backendCount, pConfig, pContext);
 
     return res;
+}
+
+void AudioHook::init_audio_device(ma_device_config *config) {
+    ma_device device;
+
+    *config = ma_device_config_init(ma_device_type_capture);
+    config->capture.format = ma_format_f32; // Set to ma_format_unknown to use
+                                            // the device's native format.
+    config->capture.channels = 2; // Set to 0 to use the device's native channel count.
+    config->sampleRate = 0; // Set to 0 to use the device's native sample rate.
+    //  config->dataCallback = data_callback; // This function will be called when
+    // miniaudio needs more data.
+
+    config->capture.pDeviceID = deviceId;
+    ma_result result = ma_device_init(&context, config, &device);
+    if (result != MA_SUCCESS) {
+        printf("Failed to initialize capture device.\n");
+        //		 return -2;
+    }
+
+    result = ma_device_start(&device);
 }
 
 const char *Engine::MA_Exception::what() const throw() {
