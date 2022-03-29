@@ -1,0 +1,65 @@
+name: Build
+
+on:
+  push:
+    branches: ['*']
+    tags:
+    paths_ignore: ['docs/**', '.travis.yml']
+  pull_request:
+  release:
+    types: ['created']
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  cross-compile-for-windows:
+    name: cross-compile-for-windows
+    runs-on: ${{ matrix.config.os }}
+    container:
+      image: thebigg1/tasker-linux-ci:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { name: "ubuntu-18.04", os: "ubuntu-18.04" }
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          token: ${{ secrets.MY_REPO_PAT }}
+          submodules: recursive
+      - name: Configure MXE
+        run: |
+          patch /mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake misc/docker/linux/Qt5CoreConfigExtras.cmake.patch
+          echo "/mxe/usr/bin" >> $GITHUB_PATH
+      - name: Configure CMake
+        run: |
+          mkdir build
+          cd build
+          i686-w64-mingw32.static-cmake -DCMAKE_CXX_COMPILER_FORCED=true -DCMAKE_PREFIX_PATH=/mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake  ..
+      - name: make
+        run: |
+          cd build
+          make -j8
+          mv Tasker/Tasker.exe Tasker/Tasker-`git rev-parse --short HEAD`.exe
+          cd ..
+
+      - name: Delete old release assets
+        uses: mknejp/delete-release-assets@v1
+        with:
+          fail-if-no-assets: false
+          token: ${{ github.token }}
+          tag: nightly # This may also be of the form 'refs/tags/staging'
+          assets: '*.exe'
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: build/Tasker/*.exe
+          tag: nightly
+          overwrite: true
+          file_glob: true
+          body: "Nightly build, freshly baked."

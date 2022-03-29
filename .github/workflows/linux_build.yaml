@@ -1,0 +1,77 @@
+name: Build
+
+on:
+  push:
+    branches: ['*']
+    tags:
+    paths_ignore: ['docs/**', '.travis.yml']
+  pull_request:
+  release:
+    types: ['created']
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build-linux:
+    container:
+      image: thebigg1/tasker-linux-ci:latest
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Publish Linunx Release
+            publish-release: true
+        config:
+        - {name: "ubuntu-18.04", os: "ubuntu-18.04"}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        token: ${{ secrets.MY_REPO_PAT }}
+        submodules: recursive
+
+    - name: Check Coding Style
+      run: |
+        ./clang-format-all/check-all.py --root_dir Tasker
+    - name: Tag Repo
+      uses: richardsimko/update-tag@v1
+      with:
+        tag_name: nightly
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Configure CMake
+      run: |
+           git submodule update --init --recursive
+           mkdir build
+           cd build
+           cmake ..
+    - name: make
+      run:  |
+            cd build
+            make -j8
+            cd ..
+    - name: Build AppImage
+      run:  |
+            python3 Tasker/build_AppImage.py
+    - name: Delete old release assets
+      uses: mknejp/delete-release-assets@v1
+      with:
+        fail-if-no-assets: false
+        token: ${{ github.token }}
+        tag: nightly # This may also be of the form 'refs/tags/staging'
+        assets: '*-x86_64.AppImage'
+
+    - name: Upload binaries to release
+      if: ${{ matrix.publish-release }}
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: build/Tasker-*-x86_64.AppImage
+        tag: nightly
+        overwrite: true
+        file_glob: true
+        body: "Nightly build, freshly baked."

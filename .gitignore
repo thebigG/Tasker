@@ -76,3 +76,5 @@ libs/Xhook/build-*
 
 #Exception for libuiohook
 !build_libuiohook.sh
+!linux_build.yaml
+!windows_build.yaml
