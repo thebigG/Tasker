@@ -4,6 +4,8 @@
 #include "miniaudio.h"
 #include <QDebug>
 #include <cstdio>
+#include <exception>
+#include <map>
 
 using Engine::AudioHook;
 using Engine::Hook;
@@ -21,8 +23,9 @@ AudioHook::AudioHook()
     std::unique_ptr<ma_device_config> config = std::make_unique<ma_device_config>();
     init_audio_device(config.get());
 
+    // Don't love doing this in a constructor. Maybe I should have an
+    // "init/configure" method in the Hook interface
     initContext(contextConfig.get(), &context, 1, getBackends().data(), deviceId);
-    ma_context_enumerate_devices(&context, enumerateCallback, nullptr);
     getDevices();
 }
 
@@ -96,15 +99,6 @@ void AudioHook::update() {
     setState(state);
 }
 
-ma_bool32 enumerateCallback(ma_context *pContext,
-                            ma_device_type deviceType,
-                            const ma_device_info *pInfo,
-                            void *pUserData) {
-    auto *devices = static_cast<std::vector<std::string> *>(pUserData);
-    devices->push_back(std::string{ pInfo->name });
-    return 0;
-}
-
 Hook::HookState AudioHook::startHook() {
     return getState();
 }
@@ -135,29 +129,28 @@ std::vector<ma_backend> AudioHook::getBackends() {
     return backends;
 }
 
-std::vector<ma_device_info> AudioHook::getDevices() {
-    unsigned int a{ 0 };
+std::vector<std::string> AudioHook::getDevices() {
 
-    std::vector<ma_device_info> devices{};
-    // NOTE: I know the API is written in C, but I don't like this pointer busisness here...
-    ma_uint32 *pPlaybackDeviceCount;
-    pPlaybackDeviceCount = &a;
+    ma_uint32 pPlaybackDeviceCount;
     ma_device_info *ppCaptureDeviceInfos;
-    ma_device_info info{};
-    ma_uint32 *pCaptureDeviceCount;
-    pCaptureDeviceCount = &a;
+    ma_uint32 pCaptureDeviceCount;
 
-    ma_result res = ma_context_get_devices(&context, nullptr, pPlaybackDeviceCount,
-                                           &ppCaptureDeviceInfos, pCaptureDeviceCount);
-    devices.reserve(*pCaptureDeviceCount);
+    ma_result res = ma_context_get_devices(&context, nullptr, &pPlaybackDeviceCount,
+                                           &ppCaptureDeviceInfos, &pCaptureDeviceCount);
     if (res == MA_SUCCESS) {
-        for (int i = 0; i < *pCaptureDeviceCount; i++) {
-            devices.push_back(ppCaptureDeviceInfos[i]);
+        for (int i = 0; i < pCaptureDeviceCount; i++) {
             qDebug() << "device-->" << ppCaptureDeviceInfos[i].name;
+            deviceMap[ppCaptureDeviceInfos[i].name] = ppCaptureDeviceInfos[i];
         }
     } else {
-        //		std::cout<<"Something bad happended. ma_context_get_devices failed"<<std::endl;
-        //		throw std::exception{"Something bad happended. ma_context_get_devices failed"};
+        // TODO:Replace with MA_Exception
+        //			throw std::exception("Something bad happended. ma_context_get_devices failed");
+    }
+
+    std::vector<std::string> devices{};
+    for (auto &pair : deviceMap) {
+        devices.push_back(pair.first);
+        qDebug() << "name:" << devices.back().c_str();
     }
 
     return devices;

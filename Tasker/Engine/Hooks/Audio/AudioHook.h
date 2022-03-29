@@ -8,11 +8,6 @@ namespace Engine {
 class AudioHook;
 class MA_Exception;
 } // namespace Engine
-
-ma_bool32 enumerateCallback(ma_context *pContext,
-                            ma_device_type deviceType,
-                            const ma_device_info *pInfo,
-                            void *pUserData);
 class Engine::MA_Exception : public std::exception {
 public:
     virtual ~MA_Exception(){};
@@ -54,7 +49,7 @@ private:
     qreal audioThreshold;
     bool profiled = false;
     static std::vector<ma_backend> getBackends();
-    std::vector<ma_device_info> getDevices();
+    std::vector<std::string> getDevices();
     ma_result initContext(ma_context_config *pConfig,
                           ma_context *pContext,
                           ma_uint32 backendCount,
@@ -65,6 +60,7 @@ private:
     std::unique_ptr<ma_context_config> contextConfig;
     const ma_device_id *deviceId; // Managed by miniaudio
     void init_audio_device(ma_device_config *config);
+    std::map<std::string, ma_device_info> deviceMap{};
 };
 
 #endif // AUDIOHOOK_H
