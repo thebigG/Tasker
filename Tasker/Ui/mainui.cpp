@@ -34,6 +34,7 @@ MainUI::MainUI() {
 #ifdef __TASKER_DEBUG__
     sessionMenu.addAction(EDIT_SESSION_STRING);
     sessionMenu.addAction(DELETE_SESSION_STRING);
+    this->setWindowTitle("Tasker(Debug)");
 #endif
     mainMenuBar.addMenu(&commitmentMenu);
     mainMenuBar.addMenu(&sessionMenu);
