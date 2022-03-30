@@ -19,6 +19,7 @@ public:
     explicit NewSessionQWidget(QWidget *parent = nullptr);
     ~NewSessionQWidget();
     QString getTaskName();
+    void setItems(QStringList items);
     void show();
 private slots:
     void backButtonSlot();

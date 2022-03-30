@@ -15,18 +15,19 @@ using Engine::Hook;
  * @todo At the moment the audioThreshold is set on AudioHook, but it really
  * should not be.
  */
+// TODO:Add constructor that that takes the context as a parameter
 AudioHook::AudioHook()
 : Hook::Hook{}, audioListenerState{ AudioHookState::OFF } {
     audioThreshold = 0.001f;
     contextConfig = std::make_unique<ma_context_config>();
 
-    std::unique_ptr<ma_device_config> config = std::make_unique<ma_device_config>();
-    init_audio_device(config.get());
+    //    std::unique_ptr<ma_device_config> config =
+    //    std::make_unique<ma_device_config>(); init_audio_device(config.get());
 
     // Don't love doing this in a constructor. Maybe I should have an
     // "init/configure" method in the Hook interface
     initContext(contextConfig.get(), &context, 1, getBackends().data(), deviceId);
-    getDevices();
+    updateDeviceMap();
 }
 
 /**
@@ -129,23 +130,7 @@ std::vector<ma_backend> AudioHook::getBackends() {
     return backends;
 }
 
-std::vector<std::string> AudioHook::getDevices() {
-
-    ma_uint32 pPlaybackDeviceCount;
-    ma_device_info *ppCaptureDeviceInfos;
-    ma_uint32 pCaptureDeviceCount;
-
-    ma_result res = ma_context_get_devices(&context, nullptr, &pPlaybackDeviceCount,
-                                           &ppCaptureDeviceInfos, &pCaptureDeviceCount);
-    if (res == MA_SUCCESS) {
-        for (int i = 0; i < pCaptureDeviceCount; i++) {
-            qDebug() << "device-->" << ppCaptureDeviceInfos[i].name;
-            deviceMap[ppCaptureDeviceInfos[i].name] = ppCaptureDeviceInfos[i];
-        }
-    } else {
-        // TODO:Replace with MA_Exception
-        //			throw std::exception("Something bad happended. ma_context_get_devices failed");
-    }
+std::vector<std::string> AudioHook::getDeviceNames() {
 
     std::vector<std::string> devices{};
     for (auto &pair : deviceMap) {
@@ -154,6 +139,28 @@ std::vector<std::string> AudioHook::getDevices() {
     }
 
     return devices;
+}
+
+/**
+ * @brief AudioHook::updateDeviceMap
+ * update devicemap with the current backend.
+ */
+void AudioHook::updateDeviceMap() {
+    deviceMap.clear();
+    ma_uint32 pPlaybackDeviceCount;
+    ma_device_info *ppCaptureDeviceInfos;
+    ma_uint32 pCaptureDeviceCount;
+
+    ma_result res = ma_context_get_devices(&context, nullptr, &pPlaybackDeviceCount,
+                                           &ppCaptureDeviceInfos, &pCaptureDeviceCount);
+    if (res == MA_SUCCESS) {
+        for (int i = 0; i < pCaptureDeviceCount; i++) {
+            deviceMap[ppCaptureDeviceInfos[i].name] = ppCaptureDeviceInfos[i];
+        }
+    } else {
+        // TODO:Replace with MA_Exception
+        //			throw std::exception("Something bad happended. ma_context_get_devices failed");
+    }
 }
 ma_result AudioHook::initContext(ma_context_config *pConfig,
                                  ma_context *pContext,

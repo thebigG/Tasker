@@ -1,4 +1,5 @@
 #include "NewSessionQWidget.h"
+#include "AudioHook.h"
 #include "ui_NewSessionQWidget.h"
 #include <Hook.h>
 #include <NewSessionQWidget.h>
@@ -29,6 +30,7 @@ NewSessionQWidget::NewSessionQWidget(QWidget *parent)
     this->actions().at(0)->setShortcut(QKeySequence::Cancel);
     connect(this->actions().at(0), &QAction::triggered, this, &QWidget::hide);
     this->ui->keyboardQRadioButton->isChecked();
+    //	Engine::AudioHook hook{};
     goalText.reserve(100);
     goalText.resize(100);
 }
@@ -108,5 +110,17 @@ void NewSessionQWidget::show() {
                          User::getInstance()->getCurrentCommitment().getName() + "\"");
     this->ui->taskLineEdit->setText(User::getInstance()->getCurrentCommitment().getName());
 
+    Engine::AudioHook hook{};
+
+    QStringList devices{};
+    for (auto &d : ((AudioHook *)&hook)->getDeviceNames()) {
+        devices.append(d.c_str());
+    }
+    MainUI::getInstance()->getCommitmentHub().getNewSessionQWidget().setItems(devices);
+
     QWidget::show();
+}
+
+void NewSessionQWidget::setItems(QStringList items) {
+    this->ui->audioQComboBox->insertItems(0, items);
 }
