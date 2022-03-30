@@ -1,4 +1,4 @@
-[![Build](https://github.com/thebigG/Tasker/actions/workflows/ci.yaml/badge.svg)](https://github.com/thebigG/Tasker/actions/workflows/ci.yaml) [![](https://img.shields.io/badge/docs-readme-blue.svg)](https://thebigg.github.io/Tasker/)
+[![Build](https://github.com/thebigG/Tasker/actions/workflows/linux_build.yaml/badge.svg)](https://github.com/thebigG/Tasker/actions/workflows/linux_build.yaml) [![](https://img.shields.io/badge/docs-readme-blue.svg)](https://thebigg.github.io/Tasker/)
 # Tasker
 
 # Table of Contents
