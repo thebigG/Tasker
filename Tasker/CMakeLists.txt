@@ -13,6 +13,8 @@ set(CMAKE_AUTORCC ON)
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     message(STATUS ${CMAKE_BUILD_TYPE})
     add_compile_definitions(__TASKER_DEBUG__=1)
+else()
+    add_compile_definitions(QT_NO_DEBUG_OUTPUT)
 endif ()
 find_package(Qt5 REQUIRED COMPONENTS Widgets  Charts)
 
