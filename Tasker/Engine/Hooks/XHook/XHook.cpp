@@ -88,7 +88,7 @@ void dispatch_proc(uiohook_event *const event) {
 
             // Ensure that we are not messing with some other hook, just in case
             //			if (Engine::Timer::getInstance()->getHook()->getType()
-            //== 					Engine::Hook::HookType::X_KEYBOARD || 				Engine::Timer::getInstance()->getHook()->getType()
+            //== 					Engine::Hook::HookType::X_KEYBOARD || Engine::Timer::getInstance()->getHook()->getType()
             //== 					Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
 
             //				Engine::Timer::getInstance()->getHook().get()->setState(
@@ -279,9 +279,7 @@ int XHook::startXHook() {
 
     int ret = run_xhook_engine(XMode);
 
-    printf("ret code for run_xhook_engine:%d\n", ret);
-
-    return 0;
+    return ret;
 }
 void XHook::setState(HookState newState) {
     Hook::setState(newState);
