@@ -59,7 +59,6 @@ void Timer::startTimer() {
         hook = std::make_unique<XHook>();
 
     } else if (hookType == Hook::HookType::X_MOUSE) {
-        std::cout << "mouse type..";
         hook = std::make_unique<XHook>(XHookMode::MOUSE);
     } else if (hookType == Hook::HookType::X_KEYBOARD) {
         hook = std::make_unique<XHook>(XHookMode::KEYBOARD);

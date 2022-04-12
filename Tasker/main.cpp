@@ -56,12 +56,7 @@ int main(int argc, char *argv[]) {
     QObject::connect(&a, &QCoreApplication::aboutToQuit, &MainUI::saveTaskerStateSlot);
 
     MainUI *widget = nullptr;
-    //  qDebug() << "Tasker Debug mode";
-    std::cout << "c++ version:" << __cplusplus;
     widget = MainUI::getInstance();
-    qDebug() << "thread id for UI:" << QThread::currentThreadId();
-    //  qDebug() << "multiplcation=" << 4.5 * 60;
-    //  qDebug() << "date plus 7=" << QDate::currentDate().addDays(7);
     widget->show();
     return a.exec();
 }
