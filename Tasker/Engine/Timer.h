@@ -40,13 +40,16 @@ private:
     int productiveTimeSurplus = 1; // For how many EXTRA ticks does productiveTime
                                    // get incremented. Depends on niceness
     int unproductiveTimeSurplus = 1;
-    std::unique_ptr<Hook> hook;
+    std::vector<std::unique_ptr<Hook>> hooks;
     QThread hookThread;
     QThread thisThread;
     std::unique_ptr<QTimer> timer;
     int gracePeriod = 30; // How many seconds to keep the Timer in a
                           // "productive" state for before for new state of the
                           // hook(s). This really needs to be configurable.
+    std::map<std::string, std::unique_ptr<Hook>> hookMap{};
+    const std::string XHOOK_KEY{ "XHOOK" };
+    const std::string AUDIOHOOK_KEY{ "XHOOK" };
     virtual void run();
 signals:
     void tick();
@@ -70,7 +73,7 @@ public:
     QTimer *getClock();
     udata::Session &getCurrentSession();
 
-    std::unique_ptr<Hook> &getHook();
+    std::vector<std::unique_ptr<Hook>> &getHooks();
 
 public slots:
     void stopTimerSlot();

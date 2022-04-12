@@ -87,16 +87,15 @@ void dispatch_proc(uiohook_event *const event) {
         if (current_mode == XHookMode::KEYBOARD || current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
 
             // Ensure that we are not messing with some other hook, just in case
-            if (Engine::Timer::getInstance()->getHook()->getType() ==
-                    Engine::Hook::HookType::X_KEYBOARD ||
-                Engine::Timer::getInstance()->getHook()->getType() ==
-                    Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
+            //			if (Engine::Timer::getInstance()->getHook()->getType()
+            //== 					Engine::Hook::HookType::X_KEYBOARD || 				Engine::Timer::getInstance()->getHook()->getType()
+            //== 					Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
 
-                Engine::Timer::getInstance()->getHook().get()->setState(
-                    Engine::Hook::HookState::productive);
-            } else {
-                // This should never happen.
-            }
+            //				Engine::Timer::getInstance()->getHook().get()->setState(
+            //					Engine::Hook::HookState::productive);
+            //			} else {
+            //				// This should never happen.
+            //			}
         }
         break;
     case EVENT_MOUSE_PRESSED:
@@ -108,16 +107,16 @@ void dispatch_proc(uiohook_event *const event) {
         if (current_mode == XHookMode::MOUSE || current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
 
             // Ensure that we are not messing with some other hook, just in case
-            if (Engine::Timer::getInstance()->getHook()->getType() ==
-                    Engine::Hook::HookType::X_MOUSE ||
-                Engine::Timer::getInstance()->getHook()->getType() ==
-                    Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
+            //            if (Engine::Timer::getInstance()->getHook()->getType() ==
+            //                    Engine::Hook::HookType::X_MOUSE ||
+            //                Engine::Timer::getInstance()->getHook()->getType() ==
+            //                    Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
 
-                Engine::Timer::getInstance()->getHook().get()->setState(
-                    Engine::Hook::HookState::productive);
-            } else {
-                // This should never happen.
-            }
+            //                Engine::Timer::getInstance()->getHook().get()->setState(
+            //                    Engine::Hook::HookState::productive);
+            //            } else {
+            //                // This should never happen.
+            //            }
         }
         break;
     default:
@@ -297,4 +296,8 @@ void XHook::setState(HookState newState) {
  */
 Hook::HookState XHook::getState() {
     return state;
+}
+void XHook::setMode(Engine::XHookMode newMode) {
+    // TODO: Check state(?)
+    XMode = newMode;
 }

@@ -26,6 +26,9 @@ Timer::Timer() {
     connect(timer.get(), &QTimer::timeout, this, &Timer::tickUpdate);
     connect(this, &Timer::stopTimer, this, &Timer::stopTimerSlot);
 
+    hookMap[XHOOK_KEY] = std::make_unique<XHook>();
+    hookMap[AUDIOHOOK_KEY] = std::make_unique<AudioHook>();
+
     //	hook = std::make_unique<AudioHook>();
 
     //		QStringList devices{};
@@ -55,25 +58,25 @@ void Timer::run() {
  * @brief Timer::startTimer initializes the hook and its thread.
  */
 void Timer::startTimer() {
-    if (hookType == Hook::HookType::X_MOUSE_KEYBOARD) {
-        hook = std::make_unique<XHook>();
+    //    if (hookType == Hook::HookType::X_MOUSE_KEYBOARD) {
+    //		hooks = std::make_unique<XHook>();
 
-    } else if (hookType == Hook::HookType::X_MOUSE) {
-        hook = std::make_unique<XHook>(XHookMode::MOUSE);
-    } else if (hookType == Hook::HookType::X_KEYBOARD) {
-        hook = std::make_unique<XHook>(XHookMode::KEYBOARD);
-    } else if (hookType == Hook::HookType::AUDIO) {
-        hook = std::make_unique<AudioHook>();
+    //    } else if (hookType == Hook::HookType::X_MOUSE) {
+    //		hooks = std::make_unique<XHook>(XHookMode::MOUSE);
+    //    } else if (hookType == Hook::HookType::X_KEYBOARD) {
+    //		hooks = std::make_unique<XHook>(XHookMode::KEYBOARD);
+    //    } else if (hookType == Hook::HookType::AUDIO) {
+    //		hooks = std::make_unique<AudioHook>();
 
-        QStringList devices{};
-        for (auto &d : ((AudioHook *)&hook)->getDeviceNames()) {
-            devices.append(d.c_str());
-        }
-        MainUI::getInstance()->getCommitmentHub().getNewSessionQWidget().setItems(devices);
-    }
-    connect(&hookThread, &QThread::started, hook.get(), &Hook::start);
-    hook->moveToThread(&hookThread);
-    hookThread.start();
+    //        QStringList devices{};
+    //		for (auto &d : ((AudioHook *)&hooks)->getDeviceNames()) {
+    //            devices.append(d.c_str());
+    //        }
+    //        MainUI::getInstance()->getCommitmentHub().getNewSessionQWidget().setItems(devices);
+    //    }
+    //	connect(&hookThread, &QThread::started, hooks.get(), &Hook::start);
+    //	hooks->moveToThread(&hookThread);
+    //    hookThread.start();
 }
 /**
  * @brief Timer::tickUpdate Updates Timer's state. This state includes data such
@@ -83,44 +86,44 @@ void Timer::startTimer() {
  * perception threshold. Current latency(average)= 0.025 nanoseconds
  */
 void Timer::tickUpdate() {
-    newPerfTimer.restart();
-    /**
-     * @brief productiveTickDelta
-     * This is the real-time amoumt of seconds that the user has gone
-     * unproductive. The maximum grace period is defined by gracePeriod.
-     */
-    int productiveTickDelta = tickCount - lastProductiveTick;
-    if (hook->getState() == Hook::HookState::productive) {
-        currentProductiveTime += 1;
-        producitveTickCount += 1;
-        lastProductiveTick = tickCount;
-        timerHookState = Hook::HookState::productive;
-        hook->setState(Hook::HookState::unproductive);
-    } else if (productiveTickDelta < gracePeriod) {
-        currentProductiveTime += 1;
-        producitveTickCount += 1;
-        timerHookState = Hook::HookState::productive;
-    } else {
-        currentUnproductiveTime += unproductiveTimeSurplus;
-        timerHookState = Hook::HookState::unproductive;
-        unProducitveTickCount += 1;
-        lastUnproductiveTick = tickCount;
-    }
-    totalTimeElapsed = currentProductiveTime + currentUnproductiveTime;
-    currentSession.setGoal(productiveTimeGoal);
-    currentSession.setProductiveTime(currentProductiveTime);
-    currentSession.setUnproductiveTime(currentUnproductiveTime);
-    if (currentProductiveTime == productiveTimeGoal) {
-        timer->stop();
-        newPerfTimer.stop();
-        tickCount++;
-        emit stopTimer();
-        this->quit();
-        return;
-    }
-    tickCount++;
-    newPerfTimer.stop();
-    emit tick();
+    //    newPerfTimer.restart();
+    //    /**
+    //     * @brief productiveTickDelta
+    //     * This is the real-time amoumt of seconds that the user has gone
+    //     * unproductive. The maximum grace period is defined by gracePeriod.
+    //     */
+    //    int productiveTickDelta = tickCount - lastProductiveTick;
+    //	if (hooks->getState() == Hook::HookState::productive) {
+    //        currentProductiveTime += 1;
+    //        producitveTickCount += 1;
+    //        lastProductiveTick = tickCount;
+    //        timerHookState = Hook::HookState::productive;
+    //		hooks->setState(Hook::HookState::unproductive);
+    //    } else if (productiveTickDelta < gracePeriod) {
+    //        currentProductiveTime += 1;
+    //        producitveTickCount += 1;
+    //        timerHookState = Hook::HookState::productive;
+    //    } else {
+    //        currentUnproductiveTime += unproductiveTimeSurplus;
+    //        timerHookState = Hook::HookState::unproductive;
+    //        unProducitveTickCount += 1;
+    //        lastUnproductiveTick = tickCount;
+    //    }
+    //    totalTimeElapsed = currentProductiveTime + currentUnproductiveTime;
+    //    currentSession.setGoal(productiveTimeGoal);
+    //    currentSession.setProductiveTime(currentProductiveTime);
+    //    currentSession.setUnproductiveTime(currentUnproductiveTime);
+    //    if (currentProductiveTime == productiveTimeGoal) {
+    //        timer->stop();
+    //        newPerfTimer.stop();
+    //        tickCount++;
+    //        emit stopTimer();
+    //        this->quit();
+    //        return;
+    //    }
+    //    tickCount++;
+    //    newPerfTimer.stop();
+    //    emit tick();
 }
 
 int Timer::getTotalTimeElapsed() {
@@ -188,7 +191,7 @@ void Timer::unProductiveSlot() {
  */
 void Timer::stopTimerSlot() {
     emit congrats();
-    hook->end();
+    //	hooks->end();
     reset();
     timer->stop();
 }
@@ -232,6 +235,6 @@ void Timer::resume() {
     this->start();
 }
 
-std::unique_ptr<Hook> &Timer::getHook() {
-    return hook;
+std::vector<std::unique_ptr<Hook>> &Timer::getHooks() {
+    return hooks;
 }

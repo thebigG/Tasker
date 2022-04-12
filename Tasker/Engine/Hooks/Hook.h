@@ -15,7 +15,7 @@ namespace Engine {
 class Hook : public QObject {
     Q_OBJECT
 public:
-    enum class HookState { unproductive, productive };
+    enum class HookState { unproductive, productive, started, paused, ended };
     /**
      * @brief The HookType enum
      * This enum used for Timer to know which listener it is going to instantiate
@@ -23,14 +23,7 @@ public:
      * sure to add them BEFORE none. The none type is used for bounds
      * checking.
      */
-    enum class HookType {
-        X_MOUSE_KEYBOARD,
-        X_MOUSE,
-        X_KEYBOARD,
-        AUDIO,
-        JACK,
-        NONE
-    };
+    enum class HookType { X_MOUSE_KEYBOARD, X_MOUSE, X_KEYBOARD, AUDIO, NONE };
     Hook();
     ~Hook();
     /**

@@ -29,6 +29,7 @@ public:
     Hook::HookState startHook() override;
     virtual Hook::HookState getState() override;
     virtual void setState(HookState) override;
+    void setMode(Engine::XHookMode);
 
 public slots:
     virtual void start() override;
