@@ -47,7 +47,7 @@ void NewSessionQWidget::backButtonSlot() {
  * state to start a new session such as starting the Timer engine.
  */
 void NewSessionQWidget::startTimerButtonSlot() {
-    QVector<Engine::Hook::HookType> newListsners;
+    std::vector<Engine::Hook::HookType> newListsners;
     /**
       Will be adding support for multiple listeners ASAP.
       */
@@ -63,7 +63,7 @@ void NewSessionQWidget::startTimerButtonSlot() {
         newTask, User::getInstance()->getCurrentCommitment().getFrequency().goal,
         QDate::currentDate()
     };
-    Engine::Timer::getInstance()->initTimer(newListsners.at(0), newSession);
+    Engine::Timer::getInstance()->initTimer(newListsners, newSession);
     this->hide();
 }
 QString NewSessionQWidget::getTaskName() {

@@ -86,44 +86,56 @@ void Timer::startTimer() {
  * perception threshold. Current latency(average)= 0.025 nanoseconds
  */
 void Timer::tickUpdate() {
-    //    newPerfTimer.restart();
-    //    /**
-    //     * @brief productiveTickDelta
-    //     * This is the real-time amoumt of seconds that the user has gone
-    //     * unproductive. The maximum grace period is defined by gracePeriod.
-    //     */
-    //    int productiveTickDelta = tickCount - lastProductiveTick;
-    //	if (hooks->getState() == Hook::HookState::productive) {
-    //        currentProductiveTime += 1;
-    //        producitveTickCount += 1;
-    //        lastProductiveTick = tickCount;
-    //        timerHookState = Hook::HookState::productive;
-    //		hooks->setState(Hook::HookState::unproductive);
-    //    } else if (productiveTickDelta < gracePeriod) {
-    //        currentProductiveTime += 1;
-    //        producitveTickCount += 1;
-    //        timerHookState = Hook::HookState::productive;
-    //    } else {
-    //        currentUnproductiveTime += unproductiveTimeSurplus;
-    //        timerHookState = Hook::HookState::unproductive;
-    //        unProducitveTickCount += 1;
-    //        lastUnproductiveTick = tickCount;
-    //    }
-    //    totalTimeElapsed = currentProductiveTime + currentUnproductiveTime;
-    //    currentSession.setGoal(productiveTimeGoal);
-    //    currentSession.setProductiveTime(currentProductiveTime);
-    //    currentSession.setUnproductiveTime(currentUnproductiveTime);
-    //    if (currentProductiveTime == productiveTimeGoal) {
-    //        timer->stop();
-    //        newPerfTimer.stop();
-    //        tickCount++;
-    //        emit stopTimer();
-    //        this->quit();
-    //        return;
-    //    }
-    //    tickCount++;
-    //    newPerfTimer.stop();
-    //    emit tick();
+    newPerfTimer.restart();
+    /**
+     * @brief productiveTickDelta
+     * This is the real-time amoumt of seconds that the user has gone
+     * unproductive. The maximum grace period is defined by gracePeriod.
+     */
+    int productiveTickDelta = tickCount - lastProductiveTick;
+
+    Hook::HookState hookState{ Hook::HookState::unproductive };
+
+    for (auto &hook : hookMap) {
+        if (hook.second->getState() == Hook::HookState::productive) {
+            hookState = Hook::HookState::productive;
+            break;
+        }
+    }
+
+    if (hookState == Hook::HookState::productive) {
+        currentProductiveTime += 1;
+        producitveTickCount += 1;
+        lastProductiveTick = tickCount;
+        timerHookState = Hook::HookState::productive;
+        // Not sure if this is the best way of handling this.
+        hookMap[XHOOK_KEY]->setState(Hook::HookState::unproductive);
+        hookMap[XHOOK_KEY]->setState(Hook::HookState::unproductive);
+    } else if (productiveTickDelta < gracePeriod) {
+        currentProductiveTime += 1;
+        producitveTickCount += 1;
+        timerHookState = Hook::HookState::productive;
+    } else {
+        currentUnproductiveTime += unproductiveTimeSurplus;
+        timerHookState = Hook::HookState::unproductive;
+        unProducitveTickCount += 1;
+        lastUnproductiveTick = tickCount;
+    }
+    totalTimeElapsed = currentProductiveTime + currentUnproductiveTime;
+    currentSession.setGoal(productiveTimeGoal);
+    currentSession.setProductiveTime(currentProductiveTime);
+    currentSession.setUnproductiveTime(currentUnproductiveTime);
+    if (currentProductiveTime == productiveTimeGoal) {
+        timer->stop();
+        newPerfTimer.stop();
+        tickCount++;
+        emit stopTimer();
+        this->quit();
+        return;
+    }
+    tickCount++;
+    newPerfTimer.stop();
+    emit tick();
 }
 
 int Timer::getTotalTimeElapsed() {
@@ -136,8 +148,8 @@ void Timer::setCurrentSession(Session newSession) {
     currentSession = newSession;
     productiveTimeGoal = currentSession.getGoal();
 }
-void Timer::setHook(Hook::HookType newListenerType) {
-    hookType = newListenerType;
+void Timer::setHooks(std::vector<Hook::HookType> newListenerType) {
+    hookTypes = newListenerType;
 }
 /**
  * @brief Timer::initTimer starts the Timer's internal QTimer object
@@ -145,10 +157,10 @@ void Timer::setHook(Hook::HookType newListenerType) {
  * @param newSession a new session that will contain the data of Timer once the
  * Timer's goal is reached.
  */
-void Timer::initTimer(Hook::HookType newHook, udata::Session newSession) {
+void Timer::initTimer(std::vector<Hook::HookType> newHook, udata::Session newSession) {
     thisInstance->setCurrentSession(newSession);
     currentSession.setDate(QDate::currentDate());
-    thisInstance->setHook(newHook);
+    thisInstance->setHooks(newHook);
     timer->start(TIMER_TICK);
     this->start();
     emit timerStarted();
@@ -233,8 +245,4 @@ void Timer::pause() {
 void Timer::resume() {
     timer->start(TIMER_TICK);
     this->start();
-}
-
-std::vector<std::unique_ptr<Hook>> &Timer::getHooks() {
-    return hooks;
 }

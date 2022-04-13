@@ -191,33 +191,37 @@ void LiveSession::initTaskState() {
 void LiveSession::updateHookState() {
     liveSessionPerfTimer1.restart();
     hookStateText.replace(17, hookStateText.length(), ' ');
-    if (Timer::getInstance()->timerHookState == Hook::HookState::productive) {
-        switch (Timer::getInstance()->hookType) {
-        case Hook::HookType::X_KEYBOARD:
-            hookStateText.replace(17, 8, activeText);
-            break;
-        case Hook::HookType::X_MOUSE:
-            hookStateText.replace(13, 10, activeText);
-            break;
-        case Hook::HookType::AUDIO:
-            hookStateText.replace(13, 10, activeText);
-            break;
-        default:
-            break;
-        }
-    } else {
-        switch (Timer::getInstance()->hookType) {
-        case Hook::HookType::X_KEYBOARD:
-            hookStateText.replace(17, 10, inactiveText);
-            break;
-        case Hook::HookType::X_MOUSE:
-            hookStateText.replace(13, 10, inactiveText);
-            break;
-        case Hook::HookType::AUDIO:
-            hookStateText.replace(13, 10, inactiveText);
-            break;
-        default:
-            break;
+
+    for (auto &hook : Timer::getInstance()->hookTypes) {
+        // TODO: Implement text replacement properly
+        if (Timer::getInstance()->timerHookState == Hook::HookState::productive) {
+            switch (hook) {
+            case Hook::HookType::X_KEYBOARD:
+                hookStateText.replace(17, 8, activeText);
+                break;
+            case Hook::HookType::X_MOUSE:
+                hookStateText.replace(13, 10, activeText);
+                break;
+            case Hook::HookType::AUDIO:
+                hookStateText.replace(13, 10, activeText);
+                break;
+            default:
+                break;
+            }
+        } else {
+            switch (hook) {
+            case Hook::HookType::X_KEYBOARD:
+                hookStateText.replace(17, 10, inactiveText);
+                break;
+            case Hook::HookType::X_MOUSE:
+                hookStateText.replace(13, 10, inactiveText);
+                break;
+            case Hook::HookType::AUDIO:
+                hookStateText.replace(13, 10, inactiveText);
+                break;
+            default:
+                break;
+            }
         }
     }
     this->ui->hookStateQLabel->setText(hookStateText);
@@ -227,18 +231,21 @@ void LiveSession::updateHookState() {
 void LiveSession::initHookState() {
     hookStateText.fill(' ');
     hookStateText.replace(0, 8, "Hook(s):");
-    switch (Timer::getInstance()->hookType) {
-    case Hook::HookType::X_KEYBOARD:
-        hookStateText.replace(8, 8, "Keyboard");
-        break;
-    case Hook::HookType::AUDIO:
-        hookStateText.replace(8, 8, "Audio");
-        break;
-    case Hook::HookType::X_MOUSE:
-        hookStateText.replace(8, 8, "Mouse");
-        break;
-    default:
-        break;
+    // TODO: Implement text replacement properly
+    for (auto &hook : Timer::getInstance()->hookTypes) {
+        switch (hook) {
+        case Hook::HookType::X_KEYBOARD:
+            hookStateText.replace(8, 8, "Keyboard");
+            break;
+        case Hook::HookType::AUDIO:
+            hookStateText.replace(8, 8, "Audio");
+            break;
+        case Hook::HookType::X_MOUSE:
+            hookStateText.replace(8, 8, "Mouse");
+            break;
+        default:
+            break;
+        }
     }
     this->ui->hookStateQLabel->setText(hookStateText);
     this->ui->hookStateQLabel->setVisible(true);

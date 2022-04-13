@@ -28,10 +28,13 @@ public:
     Task();
     Task(QString newName);
     Task(QString newName, QVector<Engine::Hook::HookType> listeners);
+    Task(QString newName, std::vector<Engine::Hook::HookType> listeners);
     QString &getName();
     void setName(QString value);
     QVector<Engine::Hook::HookType> &getListeners();
     void setListeners(QVector<Engine::Hook::HookType> value);
+
+    void setListeners(std::vector<Engine::Hook::HookType> newListeners);
 
     friend QDataStream &operator<<(QDataStream &out, const udata::Task &newTask);
     /**

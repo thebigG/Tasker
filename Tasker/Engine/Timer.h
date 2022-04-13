@@ -40,7 +40,6 @@ private:
     int productiveTimeSurplus = 1; // For how many EXTRA ticks does productiveTime
                                    // get incremented. Depends on niceness
     int unproductiveTimeSurplus = 1;
-    std::vector<std::unique_ptr<Hook>> hooks;
     QThread hookThread;
     QThread thisThread;
     std::unique_ptr<QTimer> timer;
@@ -57,23 +56,21 @@ signals:
 public:
     Timer();
     static Timer *getInstance();
-    void initTimer(Hook::HookType, udata::Session);
+    void initTimer(std::vector<Hook::HookType>, udata::Session);
     void stop();
     void reset();
     void pause();
     void resume();
     void setCurrentSession(udata::Session);
-    void setHook(Hook::HookType);
+    void setHooks(std::vector<Hook::HookType>);
     int getProductiveTime();
     int getUnproductiveTime();
     void startTimer();
     int getTotalTimeElapsed();
     Hook::HookState timerHookState;
-    Hook::HookType hookType;
+    std::vector<Hook::HookType> hookTypes;
     QTimer *getClock();
     udata::Session &getCurrentSession();
-
-    std::vector<std::unique_ptr<Hook>> &getHooks();
 
 public slots:
     void stopTimerSlot();
