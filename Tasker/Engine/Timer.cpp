@@ -110,7 +110,7 @@ void Timer::tickUpdate() {
         timerHookState = Hook::HookState::productive;
         // Not sure if this is the best way of handling this.
         hookMap[XHOOK_KEY]->setState(Hook::HookState::unproductive);
-        hookMap[XHOOK_KEY]->setState(Hook::HookState::unproductive);
+        hookMap[AUDIOHOOK_KEY]->setState(Hook::HookState::unproductive);
     } else if (productiveTickDelta < gracePeriod) {
         currentProductiveTime += 1;
         producitveTickCount += 1;
