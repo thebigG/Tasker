@@ -25,7 +25,7 @@ jobs:
             publish-release: true
         config:
         - {name: "macos-latest", os: "macos-latest",
-          qt_version: "5.15.2", modules: ""}
+          qt_version: "5.15.2", modules: "qtcharts"}
     steps:
     - name: Checkout
       uses: actions/checkout@v1
