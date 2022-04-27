@@ -32,18 +32,24 @@ jobs:
         token: ${{ secrets.MY_REPO_PAT }}
         submodules: recursive
 
-    - name: install dependencies
-      run: |
-        brew install qt5
-        echo 'export PATH="/usr/local/opt/qt/bin:$PATH"' >> ~/.bash_profile
-        export LDFLAGS="-L/usr/local/opt/qt/lib"
-        export CPPFLAGS="-I/usr/local/opt/qt/include"
-        source ~/.bash_profile
-        #ls /usr/local/opt/qt/bin
 
-        # - name: Check Coding Style
-        #run: |
-        #./clang-format-all/check-all.py --root_dir Tasker
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: ${{ matrix.config.qt_version }}
+        modules: ${{ matrix.config.modules }}
+#    - name: install dependencies
+#      run: |
+#        brew install qt5
+#        echo 'export PATH="/usr/local/opt/qt/bin:$PATH"' >> ~/.bash_profile
+#        export LDFLAGS="-L/usr/local/opt/qt/lib"
+#        export CPPFLAGS="-I/usr/local/opt/qt/include"
+#        source ~/.bash_profile
+#        #ls /usr/local/opt/qt/bin
+
+#         - name: Check Coding Style
+#        run: |
+#        ./clang-format-all/check-all.py --root_dir Tasker
     - name: Tag Repo
       uses: richardsimko/update-tag@v1
       with:
@@ -61,16 +67,13 @@ jobs:
             cd build
             make -j8
             cd ..
-    - name: Build App
-      run:  |
-            python3 Tasker/build_AppImage.py
-    - name: Delete old release assets
-      uses: mknejp/delete-release-assets@v1
-      with:
-        fail-if-no-assets: false
-        token: ${{ github.token }}
-        tag: nightly # This may also be of the form 'refs/tags/staging'
-        assets: '*-x86_64.App'
+#            - name: Delete old release assets
+#              uses: mknejp/delete-release-assets@v1
+#               with:
+#              fail-if-no-assets: false
+#              token: ${{ github.token }}
+#             tag: nightly # This may also be of the form 'refs/tags/staging'
+#              assets: '*-x86_64.App'
 
 #    - name: Upload binaries to release
 #      if: ${{ matrix.publish-release }}
