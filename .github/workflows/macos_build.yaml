@@ -24,7 +24,8 @@ jobs:
           - name: Publish MacOS Release
             publish-release: true
         config:
-        - {name: "macos-latest", os: "macos-latest"}
+        - {name: "macos-latest", os: "macos-latest",
+          qt_version: "5.15.2", modules: ""}
     steps:
     - name: Checkout
       uses: actions/checkout@v1
