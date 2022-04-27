@@ -38,8 +38,8 @@ jobs:
          brew install qt
          brew link qt --force
          export HOMEBREW_QT5_CELLAR=$(brew --cellar qt)
-         ln -s $HOMEBREW_QT5_CELLAR/$HOMEBREW_QT5_VERSION/mkspecs /usr/local/mkspecs
-         ln -s $HOMEBREW_QT5_CELLAR/$HOMEBREW_QT5_VERSION/plugins /usr/local/plugins
+         sudo ln -s $HOMEBREW_QT5_CELLAR/$HOMEBREW_QT5_VERSION/mkspecs /usr/local/mkspecs
+         sudo ln -s $HOMEBREW_QT5_CELLAR/$HOMEBREW_QT5_VERSION/plugins /usr/local/plugins
 
     - name: Check Coding Style
       run: |
