@@ -32,6 +32,9 @@ jobs:
         token: ${{ secrets.MY_REPO_PAT }}
         submodules: recursive
 
+    - name: Install Dependencies
+      run: |
+         brew install clang-format
     - name: Check Coding Style
       run: |
         ./clang-format-all/check-all.py --root_dir Tasker
