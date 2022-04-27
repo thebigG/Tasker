@@ -32,14 +32,14 @@ jobs:
         token: ${{ secrets.MY_REPO_PAT }}
         submodules: recursive
 
-    - name: Install Dependencies
+    - name: install dependencies
       run: |
-         brew install clang-format
-         brew install qt
-         brew link qt --force
-         export HOMEBREW_QT5_CELLAR=$(brew --cellar qt)
-         sudo ln -s $HOMEBREW_QT5_CELLAR/$HOMEBREW_QT5_VERSION/mkspecs /usr/local/mkspecs
-         sudo ln -s $HOMEBREW_QT5_CELLAR/$HOMEBREW_QT5_VERSION/plugins /usr/local/plugins
+        brew install qt5
+        echo 'export PATH="/usr/local/opt/qt/bin:$PATH"' >> ~/.bash_profile
+        export LDFLAGS="-L/usr/local/opt/qt/lib"
+        export CPPFLAGS="-I/usr/local/opt/qt/include"
+        source ~/.bash_profile
+        ls /usr/local/opt/qt/bin
 
     - name: Check Coding Style
       run: |
