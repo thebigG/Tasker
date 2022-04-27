@@ -41,9 +41,9 @@ jobs:
         source ~/.bash_profile
         #ls /usr/local/opt/qt/bin
 
-    - name: Check Coding Style
-      run: |
-        ./clang-format-all/check-all.py --root_dir Tasker
+        # - name: Check Coding Style
+        #run: |
+        #./clang-format-all/check-all.py --root_dir Tasker
     - name: Tag Repo
       uses: richardsimko/update-tag@v1
       with:
