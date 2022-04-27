@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+ cmake_minimum_required(VERSION 3.5)
 
 project(Tasker LANGUAGES CXX)
 
@@ -15,7 +15,7 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
 else()
     add_compile_definitions(QT_NO_DEBUG_OUTPUT)
 endif ()
-find_package(Qt5 REQUIRED COMPONENTS Widgets  Charts)
+find_package(Qt5 REQUIRED COMPONENTS Widgets  Charts Core)
 
 
 message(STATUS ${WIN32})
