@@ -39,7 +39,7 @@ jobs:
         export LDFLAGS="-L/usr/local/opt/qt/lib"
         export CPPFLAGS="-I/usr/local/opt/qt/include"
         source ~/.bash_profile
-        ls /usr/local/opt/qt/bin
+        #ls /usr/local/opt/qt/bin
 
     - name: Check Coding Style
       run: |
