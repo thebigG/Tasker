@@ -78,3 +78,4 @@ libs/Xhook/build-*
 !build_libuiohook.sh
 !linux_build.yaml
 !windows_build.yaml
+!macos_build.yaml
