@@ -136,23 +136,23 @@
           </widget>
          </item>
          <item row="0" column="0" colspan="2">
-          <widget class="QRadioButton" name="keyboardQRadioButton">
+          <widget class="QCheckBox" name="keyboardQCheckBox">
            <property name="text">
             <string>Keyboard</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QRadioButton" name="audioQRadioButton">
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="mouseQCheckBox">
            <property name="text">
-            <string>Audio</string>
+            <string>Mouse</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QRadioButton" name="mouseQRadioButton">
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="audioQCheckBox">
            <property name="text">
-            <string>Mouse</string>
+            <string>Audio</string>
            </property>
           </widget>
          </item>

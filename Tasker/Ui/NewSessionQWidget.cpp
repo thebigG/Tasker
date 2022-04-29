@@ -29,8 +29,6 @@ NewSessionQWidget::NewSessionQWidget(QWidget *parent)
     this->addAction(new QAction());
     this->actions().at(0)->setShortcut(QKeySequence::Cancel);
     connect(this->actions().at(0), &QAction::triggered, this, &QWidget::hide);
-    this->ui->keyboardQRadioButton->isChecked();
-    //	Engine::AudioHook hook{};
     goalText.reserve(100);
     goalText.resize(100);
 }
@@ -47,23 +45,23 @@ void NewSessionQWidget::backButtonSlot() {
  * state to start a new session such as starting the Timer engine.
  */
 void NewSessionQWidget::startTimerButtonSlot() {
-    std::vector<Engine::Hook::HookType> newListsners;
+    std::vector<Engine::Hook::HookType> newHooks;
     /**
       Will be adding support for multiple listeners ASAP.
       */
-    if (this->ui->keyboardQRadioButton->isChecked()) {
-        newListsners.push_back(Engine::Hook::HookType::X_KEYBOARD);
-    } else if (this->ui->audioQRadioButton->isChecked()) {
-        newListsners.push_back(Engine::Hook::HookType::AUDIO);
-    } else if (this->ui->mouseQRadioButton->isChecked()) {
-        newListsners.push_back(Engine::Hook::HookType::X_MOUSE);
+    if (this->ui->keyboardQCheckBox->isChecked()) {
+        newHooks.push_back(Engine::Hook::HookType::X_KEYBOARD);
+    } else if (this->ui->audioQCheckBox->isChecked()) {
+        newHooks.push_back(Engine::Hook::HookType::AUDIO);
+    } else if (this->ui->mouseQCheckBox->isChecked()) {
+        newHooks.push_back(Engine::Hook::HookType::X_MOUSE);
     }
-    Task newTask{ getTaskName(), newListsners };
+    Task newTask{ getTaskName(), newHooks };
     Session newSession{
         newTask, User::getInstance()->getCurrentCommitment().getFrequency().goal,
         QDate::currentDate()
     };
-    Engine::Timer::getInstance()->initTimer(newListsners, newSession);
+    Engine::Timer::getInstance()->initTimer(newHooks, newSession);
     this->hide();
 }
 QString NewSessionQWidget::getTaskName() {
