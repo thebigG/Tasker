@@ -58,13 +58,11 @@ void Timer::run() {
  * @brief Timer::startTimer initializes the hook and its thread.
  */
 void Timer::startTimer() {
-    //    if (hookType == Hook::HookType::X_MOUSE_KEYBOARD) {
-    //		hooks = std::make_unique<XHook>();
-
-    //    } else if (hookType == Hook::HookType::X_MOUSE) {
-    //		hooks = std::make_unique<XHook>(XHookMode::MOUSE);
-    //    } else if (hookType == Hook::HookType::X_KEYBOARD) {
-    //		hooks = std::make_unique<XHook>(XHookMode::KEYBOARD);
+    for (auto &hook : hookMap) {
+        connect(&hookThread, &QThread::started, hook.second.get(), &Hook::start);
+        hook.second->moveToThread(&hookThread);
+    }
+    hookThread.start();
     //    } else if (hookType == Hook::HookType::AUDIO) {
     //		hooks = std::make_unique<AudioHook>();
 
@@ -74,9 +72,6 @@ void Timer::startTimer() {
     //        }
     //        MainUI::getInstance()->getCommitmentHub().getNewSessionQWidget().setItems(devices);
     //    }
-    //	connect(&hookThread, &QThread::started, hooks.get(), &Hook::start);
-    //	hooks->moveToThread(&hookThread);
-    //    hookThread.start();
 }
 /**
  * @brief Timer::tickUpdate Updates Timer's state. This state includes data such
@@ -99,7 +94,8 @@ void Timer::tickUpdate() {
     for (auto &hook : hookMap) {
         if (hook.second->getState() == Hook::HookState::productive) {
             hookState = Hook::HookState::productive;
-            break;
+            hook.second->setState(Hook::HookState::unproductive);
+            //            break;
         }
     }
 
@@ -157,10 +153,10 @@ void Timer::setHooks(std::vector<Hook::HookType> newListenerType) {
  * @param newSession a new session that will contain the data of Timer once the
  * Timer's goal is reached.
  */
-void Timer::initTimer(std::vector<Hook::HookType> newHook, udata::Session newSession) {
+void Timer::initTimer(std::vector<Hook::HookType> newHooks, udata::Session newSession) {
     thisInstance->setCurrentSession(newSession);
     currentSession.setDate(QDate::currentDate());
-    thisInstance->setHooks(newHook);
+    thisInstance->setHooks(newHooks);
     timer->start(TIMER_TICK);
     this->start();
     emit timerStarted();
