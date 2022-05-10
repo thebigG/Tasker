@@ -26,9 +26,6 @@ Timer::Timer() {
     connect(timer.get(), &QTimer::timeout, this, &Timer::tickUpdate);
     connect(this, &Timer::stopTimer, this, &Timer::stopTimerSlot);
 
-    hookMap[XHOOK_KEY] = std::make_unique<XHook>();
-    hookMap[AUDIOHOOK_KEY] = std::make_unique<AudioHook>();
-
     //	hook = std::make_unique<AudioHook>();
 
     //		QStringList devices{};
@@ -58,20 +55,13 @@ void Timer::run() {
  * @brief Timer::startTimer initializes the hook and its thread.
  */
 void Timer::startTimer() {
+    hookMap[XHOOK_KEY] = std::make_unique<XHook>();
+    hookMap[AUDIOHOOK_KEY] = std::make_unique<AudioHook>();
     for (auto &hook : hookMap) {
         connect(&hookThread, &QThread::started, hook.second.get(), &Hook::start);
         hook.second->moveToThread(&hookThread);
     }
     hookThread.start();
-    //    } else if (hookType == Hook::HookType::AUDIO) {
-    //		hooks = std::make_unique<AudioHook>();
-
-    //        QStringList devices{};
-    //		for (auto &d : ((AudioHook *)&hooks)->getDeviceNames()) {
-    //            devices.append(d.c_str());
-    //        }
-    //        MainUI::getInstance()->getCommitmentHub().getNewSessionQWidget().setItems(devices);
-    //    }
 }
 /**
  * @brief Timer::tickUpdate Updates Timer's state. This state includes data such
@@ -241,4 +231,8 @@ void Timer::pause() {
 void Timer::resume() {
     timer->start(TIMER_TICK);
     this->start();
+}
+
+std::map<std::string, std::unique_ptr<Hook>> &Timer::getHookMap() {
+    return hookMap;
 }

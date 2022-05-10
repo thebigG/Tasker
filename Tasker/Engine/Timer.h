@@ -47,8 +47,6 @@ private:
                           // "productive" state for before for new state of the
                           // hook(s). This really needs to be configurable.
     std::map<std::string, std::unique_ptr<Hook>> hookMap{};
-    const std::string XHOOK_KEY{ "XHOOK" };
-    const std::string AUDIOHOOK_KEY{ "XHOOK" };
     virtual void run();
 signals:
     void tick();
@@ -71,6 +69,9 @@ public:
     std::vector<Hook::HookType> hookTypes;
     QTimer *getClock();
     udata::Session &getCurrentSession();
+    std::map<std::string, std::unique_ptr<Hook>> &getHookMap();
+    const std::string XHOOK_KEY{ "XHOOK" };
+    const std::string AUDIOHOOK_KEY{ "AudioHook" };
 
 public slots:
     void stopTimerSlot();

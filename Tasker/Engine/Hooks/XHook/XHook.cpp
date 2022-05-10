@@ -86,16 +86,22 @@ void dispatch_proc(uiohook_event *const event) {
     case EVENT_KEY_TYPED:
         if (current_mode == XHookMode::KEYBOARD || current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
 
-            // Ensure that we are not messing with some other hook, just in case
-            //			if (Engine::Timer::getInstance()->getHook()->getType()
-            //== 					Engine::Hook::HookType::X_KEYBOARD || Engine::Timer::getInstance()->getHook()->getType()
-            //== 					Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
+            //            Ensure that we are not messing with some other hook,
+            //                just in case
 
-            //				Engine::Timer::getInstance()->getHook().get()->setState(
-            //					Engine::Hook::HookState::productive);
-            //			} else {
-            //				// This should never happen.
-            //			}
+            if (Engine::Timer::getInstance()
+                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
+                        ->getType() == Engine::Hook::HookType::X_KEYBOARD ||
+                Engine::Timer::getInstance()
+                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
+                        ->getType() == Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
+
+                Engine::Timer::getInstance()
+                    ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
+                    ->setState(Engine::Hook::HookState::productive);
+            } else {
+                // This should never happen.
+            }
         }
         break;
     case EVENT_MOUSE_PRESSED:
@@ -106,17 +112,20 @@ void dispatch_proc(uiohook_event *const event) {
     case EVENT_MOUSE_WHEEL:
         if (current_mode == XHookMode::MOUSE || current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
 
-            // Ensure that we are not messing with some other hook, just in case
-            //            if (Engine::Timer::getInstance()->getHook()->getType() ==
-            //                    Engine::Hook::HookType::X_MOUSE ||
-            //                Engine::Timer::getInstance()->getHook()->getType() ==
-            //                    Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
+            //			 Ensure that we are not messing with some other hook, just in case
+            if (Engine::Timer::getInstance()
+                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
+                        ->getType() == Engine::Hook::HookType::X_MOUSE ||
+                Engine::Timer::getInstance()
+                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
+                        ->getType() == Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
 
-            //                Engine::Timer::getInstance()->getHook().get()->setState(
-            //                    Engine::Hook::HookState::productive);
-            //            } else {
-            //                // This should never happen.
-            //            }
+                Engine::Timer::getInstance()
+                    ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
+                    ->setState(Engine::Hook::HookState::productive);
+            } else {
+                // This should never happen.
+            }
         }
         break;
     default:
