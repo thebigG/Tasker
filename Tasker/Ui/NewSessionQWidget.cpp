@@ -51,9 +51,11 @@ void NewSessionQWidget::startTimerButtonSlot() {
       */
     if (this->ui->keyboardQCheckBox->isChecked()) {
         newHooks.push_back(Engine::Hook::HookType::X_KEYBOARD);
-    } else if (this->ui->audioQCheckBox->isChecked()) {
+    }
+    if (this->ui->audioQCheckBox->isChecked()) {
         newHooks.push_back(Engine::Hook::HookType::AUDIO);
-    } else if (this->ui->mouseQCheckBox->isChecked()) {
+    }
+    if (this->ui->mouseQCheckBox->isChecked()) {
         newHooks.push_back(Engine::Hook::HookType::X_MOUSE);
     }
     Task newTask{ getTaskName(), newHooks };

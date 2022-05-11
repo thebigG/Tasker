@@ -2,17 +2,25 @@
 #define TIMER_H
 
 #include "Session.h"
+#include "TaskerPerf/perftimer.h"
+#include "XHook.h"
 #include <QObject>
 #include <QThread>
 #include <QTime>
+#include <memory>
+
 #define TIMER_TICK 1000 // in milliseconds
 #define MINUTE 60 // in seconds
-#include <TaskerPerf/perftimer.h>
-#include <XHook.h>
-#include <memory>
+
 namespace Engine {
 class Timer;
-}
+// TODO:Possible implementation for Session preferences.
+// Not sure if I should just implment global settings for Tasker altogether.
+struct EngineConfig {
+    std::vector<Hook::HookType> activeHooks{};
+    std::string audioDevice{};
+};
+} // namespace Engine
 /**
  * @brief The Engine::Timer class is a clock that hooks to specified Hooks such
  * as XHook or AudioHook and keeps track of whether the hook's state is
