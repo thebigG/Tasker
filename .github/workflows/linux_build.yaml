@@ -28,6 +28,9 @@ jobs:
         config:
         - {name: "ubuntu-18.04", os: "ubuntu-18.04"}
     steps:
+    - name: Trust My Directory #https://github.com/actions/checkout/issues/760
+      run: |
+        export GIT_CEILING_DIRECTORIES=/__w
     - name: Checkout
       uses: actions/checkout@v1
       with:
@@ -45,6 +48,11 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Configure CMake
       run: |
+           git config --global --add safe.directory /__w/Tasker/Tasker
+           git config --global --add safe.directory /__w/Tasker/Tasker/clang-format-all
+           git config --global --add safe.directory /__w/Tasker/Tasker/libuiohook
+           git config --global --add safe.directory /__w/Tasker/Tasker/mxe
+           git config --global --add safe.directory /__w/Tasker/Tasker/miniaudio
            git submodule update --init --recursive
            mkdir build
            cd build
