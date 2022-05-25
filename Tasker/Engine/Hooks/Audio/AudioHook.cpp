@@ -28,6 +28,7 @@ AudioHook::AudioHook()
     // "init/configure" method in the Hook interface
     initContext(contextConfig.get(), &context, 1, getBackends().data(), deviceId);
     updateDeviceMap();
+    type = HookType::AUDIO;
 }
 
 /**

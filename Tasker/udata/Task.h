@@ -32,9 +32,9 @@ public:
     QString &getName();
     void setName(QString value);
     QVector<Engine::Hook::HookType> &getListeners();
-    void setListeners(QVector<Engine::Hook::HookType> value);
+    void setHooks(QVector<Engine::Hook::HookType> value);
 
-    void setListeners(std::vector<Engine::Hook::HookType> newListeners);
+    void setHooks(std::vector<Engine::Hook::HookType> newListeners);
 
     friend QDataStream &operator<<(QDataStream &out, const udata::Task &newTask);
     /**

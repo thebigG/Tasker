@@ -55,6 +55,7 @@ private:
                           // "productive" state for before for new state of the
                           // hook(s). This really needs to be configurable.
     std::map<std::string, std::unique_ptr<Hook>> hookMap{};
+    EngineConfig config;
     virtual void run();
 signals:
     void tick();
@@ -62,7 +63,7 @@ signals:
 public:
     Timer();
     static Timer *getInstance();
-    void initTimer(std::vector<Hook::HookType>, udata::Session);
+    void initTimer(EngineConfig &newConfig, udata::Session newSession);
     void stop();
     void reset();
     void pause();

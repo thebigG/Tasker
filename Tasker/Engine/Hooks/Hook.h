@@ -18,7 +18,7 @@ public:
     enum class HookState { unproductive, productive, started, paused, ended };
     /**
      * @brief The HookType enum
-     * This enum used for Timer to know which listener it is going to instantiate
+     * This enum used for Timer to know which hook it is going to instantiate
      * @note If, for whatever reason, we decide to add HookType values make
      * sure to add them BEFORE none. The none type is used for bounds
      * checking.

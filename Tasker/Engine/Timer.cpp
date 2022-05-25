@@ -61,6 +61,28 @@ void Timer::startTimer() {
         connect(&hookThread, &QThread::started, hook.second.get(), &Hook::start);
         hook.second->moveToThread(&hookThread);
     }
+    for (auto hook : config.activeHooks) {
+        switch (hook) {
+        case Engine::Hook::HookType::AUDIO: {
+            hookMap[AUDIOHOOK_KEY] = std::make_unique<AudioHook>();
+            break;
+        }
+        case Engine::Hook::HookType::X_KEYBOARD:
+        case Engine::Hook::HookType::X_MOUSE:
+        case Engine::Hook::HookType::X_MOUSE_KEYBOARD: {
+            // Any config needed for the XHook goes here
+            hookMap[AUDIOHOOK_KEY] = std::make_unique<AudioHook>();
+            break;
+        }
+
+        default:
+
+        {
+            qDebug() << "Hook not supported.";
+            break;
+        }
+        }
+    }
     hookThread.start();
 }
 /**
@@ -85,7 +107,6 @@ void Timer::tickUpdate() {
         if (hook.second->getState() == Hook::HookState::productive) {
             hookState = Hook::HookState::productive;
             hook.second->setState(Hook::HookState::unproductive);
-            //            break;
         }
     }
 
@@ -143,10 +164,11 @@ void Timer::setHooks(std::vector<Hook::HookType> newListenerType) {
  * @param newSession a new session that will contain the data of Timer once the
  * Timer's goal is reached.
  */
-void Timer::initTimer(std::vector<Hook::HookType> newHooks, udata::Session newSession) {
+void Timer::initTimer(EngineConfig &newConfig, udata::Session newSession) {
+    config = newConfig;
     thisInstance->setCurrentSession(newSession);
     currentSession.setDate(QDate::currentDate());
-    thisInstance->setHooks(newHooks);
+    thisInstance->setHooks(config.activeHooks);
     timer->start(TIMER_TICK);
     this->start();
     emit timerStarted();
