@@ -55,12 +55,6 @@ void Timer::run() {
  * @brief Timer::startTimer initializes the hook and its thread.
  */
 void Timer::startTimer() {
-    hookMap[XHOOK_KEY] = std::make_unique<XHook>();
-    hookMap[AUDIOHOOK_KEY] = std::make_unique<AudioHook>();
-    for (auto &hook : hookMap) {
-        connect(&hookThread, &QThread::started, hook.second.get(), &Hook::start);
-        hook.second->moveToThread(&hookThread);
-    }
     for (auto hook : config.activeHooks) {
         switch (hook) {
         case Engine::Hook::HookType::AUDIO: {
@@ -71,7 +65,7 @@ void Timer::startTimer() {
         case Engine::Hook::HookType::X_MOUSE:
         case Engine::Hook::HookType::X_MOUSE_KEYBOARD: {
             // Any config needed for the XHook goes here
-            hookMap[AUDIOHOOK_KEY] = std::make_unique<AudioHook>();
+            hookMap[XHOOK_KEY] = std::make_unique<AudioHook>();
             break;
         }
 
@@ -82,6 +76,12 @@ void Timer::startTimer() {
             break;
         }
         }
+    }
+
+    // TODO:Iterate through both; hookMap and hookThreads. Maybe have both in the same map(?)
+    for (auto &hook : hookMap) {
+        connect(&hookThread, &QThread::started, hook.second.get(), &Hook::start);
+        hook.second->moveToThread(&hookThread);
     }
     hookThread.start();
 }

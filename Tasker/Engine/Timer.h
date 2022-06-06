@@ -48,6 +48,7 @@ private:
     int productiveTimeSurplus = 1; // For how many EXTRA ticks does productiveTime
                                    // get incremented. Depends on niceness
     int unproductiveTimeSurplus = 1;
+    // TODO:This has to be a vector/list of threads for multiple hook support
     QThread hookThread;
     QThread thisThread;
     std::unique_ptr<QTimer> timer;
