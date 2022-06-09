@@ -58,13 +58,14 @@ void NewSessionQWidget::startTimerButtonSlot() {
     if (this->ui->mouseQCheckBox->isChecked()) {
         newHooks.push_back(Engine::Hook::HookType::X_MOUSE);
     }
-    EngineConfig newConfig{ newHooks };
+    EngineConfig newConfig{};
+    newConfig.activeHooks = newHooks;
     Task newTask{ getTaskName(), newHooks };
     Session newSession{
         newTask, User::getInstance()->getCurrentCommitment().getFrequency().goal,
         QDate::currentDate()
     };
-    Engine::Timer::getInstance()->initTimer(newConfig, newSession);
+    Engine::Timer::getInstance()->initTimer(newConfig.activeHooks, newSession);
     this->hide();
 }
 QString NewSessionQWidget::getTaskName() {

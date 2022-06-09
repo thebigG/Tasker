@@ -19,6 +19,8 @@ class Timer;
 struct EngineConfig {
     std::vector<Hook::HookType> activeHooks{};
     std::string audioDevice{};
+    QThread hookThread{};
+    std::unique_ptr<Hook> hook;
 };
 } // namespace Engine
 /**
@@ -49,13 +51,13 @@ private:
                                    // get incremented. Depends on niceness
     int unproductiveTimeSurplus = 1;
     // TODO:This has to be a vector/list of threads for multiple hook support
-    QThread hookThread;
+    std::vector<QThread> hookThread;
     QThread thisThread;
     std::unique_ptr<QTimer> timer;
     int gracePeriod = 30; // How many seconds to keep the Timer in a
                           // "productive" state for before for new state of the
                           // hook(s). This really needs to be configurable.
-    std::map<std::string, std::unique_ptr<Hook>> hookMap{};
+    std::map<Hook::HookType, EngineConfig> hookConfigMap{};
     EngineConfig config;
     virtual void run();
 signals:
@@ -64,7 +66,7 @@ signals:
 public:
     Timer();
     static Timer *getInstance();
-    void initTimer(EngineConfig &newConfig, udata::Session newSession);
+    void initTimer(std::vector<Hook::HookType> &newConfig, udata::Session newSession);
     void stop();
     void reset();
     void pause();
@@ -79,9 +81,7 @@ public:
     std::vector<Hook::HookType> hookTypes;
     QTimer *getClock();
     udata::Session &getCurrentSession();
-    std::map<std::string, std::unique_ptr<Hook>> &getHookMap();
-    const std::string XHOOK_KEY{ "XHOOK" };
-    const std::string AUDIOHOOK_KEY{ "AudioHook" };
+    std::map<Hook::HookType, EngineConfig> &getHookMap();
 
 public slots:
     void stopTimerSlot();

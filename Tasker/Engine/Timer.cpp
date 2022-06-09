@@ -58,14 +58,14 @@ void Timer::startTimer() {
     for (auto hook : config.activeHooks) {
         switch (hook) {
         case Engine::Hook::HookType::AUDIO: {
-            hookMap[AUDIOHOOK_KEY] = std::make_unique<AudioHook>();
+            hookConfigMap[hook].hook = std::make_unique<AudioHook>();
             break;
         }
         case Engine::Hook::HookType::X_KEYBOARD:
         case Engine::Hook::HookType::X_MOUSE:
         case Engine::Hook::HookType::X_MOUSE_KEYBOARD: {
             // Any config needed for the XHook goes here
-            hookMap[XHOOK_KEY] = std::make_unique<AudioHook>();
+            hookConfigMap[hook].hook = std::make_unique<XHook>();
             break;
         }
 
@@ -79,11 +79,12 @@ void Timer::startTimer() {
     }
 
     // TODO:Iterate through both; hookMap and hookThreads. Maybe have both in the same map(?)
-    for (auto &hook : hookMap) {
-        connect(&hookThread, &QThread::started, hook.second.get(), &Hook::start);
-        hook.second->moveToThread(&hookThread);
+    for (auto &config : hookConfigMap) {
+        connect(&config.second.hookThread, &QThread::started,
+                config.second.hook.get(), &Hook::start);
+        config.second.hook->moveToThread(&config.second.hookThread);
+        config.second.hookThread.start();
     }
-    hookThread.start();
 }
 /**
  * @brief Timer::tickUpdate Updates Timer's state. This state includes data such
@@ -103,10 +104,10 @@ void Timer::tickUpdate() {
 
     Hook::HookState hookState{ Hook::HookState::unproductive };
 
-    for (auto &hook : hookMap) {
-        if (hook.second->getState() == Hook::HookState::productive) {
+    for (auto &hook : hookConfigMap) {
+        if (hook.second.hook->getState() == Hook::HookState::productive) {
             hookState = Hook::HookState::productive;
-            hook.second->setState(Hook::HookState::unproductive);
+            hook.second.hook->setState(Hook::HookState::unproductive);
         }
     }
 
@@ -116,8 +117,8 @@ void Timer::tickUpdate() {
         lastProductiveTick = tickCount;
         timerHookState = Hook::HookState::productive;
         // Not sure if this is the best way of handling this.
-        hookMap[XHOOK_KEY]->setState(Hook::HookState::unproductive);
-        hookMap[AUDIOHOOK_KEY]->setState(Hook::HookState::unproductive);
+        //		hookConfigMap[Hook::HookType::AUDIO].hook->setState(Hook::HookState::unproductive);
+        //		hookConfigMap[Hook::HookType::]->setState(Hook::HookState::unproductive);
     } else if (productiveTickDelta < gracePeriod) {
         currentProductiveTime += 1;
         producitveTickCount += 1;
@@ -164,8 +165,8 @@ void Timer::setHooks(std::vector<Hook::HookType> newListenerType) {
  * @param newSession a new session that will contain the data of Timer once the
  * Timer's goal is reached.
  */
-void Timer::initTimer(EngineConfig &newConfig, udata::Session newSession) {
-    config = newConfig;
+void Timer::initTimer(std::vector<Hook::HookType> &newConfig, udata::Session newSession) {
+    config.activeHooks = newConfig;
     thisInstance->setCurrentSession(newSession);
     currentSession.setDate(QDate::currentDate());
     thisInstance->setHooks(config.activeHooks);
@@ -233,7 +234,9 @@ void Timer::reset() {
     lastUnproductiveTick = 0;
     productiveTimeSurplus = 1;
     unproductiveTimeSurplus = 1;
-    hookThread.quit();
+    for (auto &config : hookConfigMap) {
+        config.second.hookThread.quit();
+    }
 }
 QTimer *Timer::getClock() {
     return timer.get();
@@ -255,6 +258,6 @@ void Timer::resume() {
     this->start();
 }
 
-std::map<std::string, std::unique_ptr<Hook>> &Timer::getHookMap() {
-    return hookMap;
+std::map<Hook::HookType, EngineConfig> &Timer::getHookMap() {
+    return hookConfigMap;
 }

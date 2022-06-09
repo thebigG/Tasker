@@ -3,6 +3,7 @@
 
 #include <errno.h>
 #include <fcntl.h>
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -80,28 +81,32 @@ bool logger_proc(unsigned int level, const char *format, ...) {
 // processing, please do so by copying the event to your own queued dispatch
 // thread.
 void dispatch_proc(uiohook_event *const event) {
+    std::cout << "dispatch_proc************" << std::endl;
     switch (event->type) {
     case EVENT_KEY_PRESSED:
     case EVENT_KEY_RELEASED:
     case EVENT_KEY_TYPED:
         if (current_mode == XHookMode::KEYBOARD || current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
+            Engine::Timer::getInstance()
+                ->getHookMap()[Engine::Hook::HookType::X_MOUSE]
+                .hook->setState(Engine::Hook::HookState::productive);
 
             //            Ensure that we are not messing with some other hook,
             //                just in case
 
-            if (Engine::Timer::getInstance()
-                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
-                        ->getType() == Engine::Hook::HookType::X_KEYBOARD ||
-                Engine::Timer::getInstance()
-                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
-                        ->getType() == Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
+            //            if (Engine::Timer::getInstance()
+            //                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
+            //                        ->getType() == Engine::Hook::HookType::X_KEYBOARD ||
+            //                Engine::Timer::getInstance()
+            //                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
+            //                        ->getType() == Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
 
-                Engine::Timer::getInstance()
-                    ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
-                    ->setState(Engine::Hook::HookState::productive);
-            } else {
-                // This should never happen.
-            }
+            //                Engine::Timer::getInstance()
+            //                    ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
+            //                    ->setState(Engine::Hook::HookState::productive);
+            //            } else {
+            //                // This should never happen.
+            //            }
         }
         break;
     case EVENT_MOUSE_PRESSED:
@@ -112,20 +117,19 @@ void dispatch_proc(uiohook_event *const event) {
     case EVENT_MOUSE_WHEEL:
         if (current_mode == XHookMode::MOUSE || current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
 
+            Engine::Timer::getInstance()
+                ->getHookMap()[Engine::Hook::HookType::X_MOUSE]
+                .hook->setState(Engine::Hook::HookState::productive);
             //			 Ensure that we are not messing with some other hook, just in case
-            if (Engine::Timer::getInstance()
-                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
-                        ->getType() == Engine::Hook::HookType::X_MOUSE ||
-                Engine::Timer::getInstance()
-                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
-                        ->getType() == Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
-
-                Engine::Timer::getInstance()
-                    ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
-                    ->setState(Engine::Hook::HookState::productive);
-            } else {
-                // This should never happen.
-            }
+            //            if (Engine::Timer::getInstance()
+            //                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
+            //                        ->getType() == Engine::Hook::HookType::X_MOUSE ||
+            //                Engine::Timer::getInstance()
+            //                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
+            //                        ->getType() == Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
+            //            } else {
+            //                // This should never happen.
+            //            }
         }
         break;
     default:
@@ -137,6 +141,7 @@ int Engine::run_xhook_engine(XHookMode mode) {
     // We need to disable buffering in order for this process to send the
     // "readyReadStandardOutput" signal to Tasker
     setbuf(stdout, NULL);
+    std::cout << "run_xhook_engine************" << std::endl;
 
     current_mode = mode;
 
