@@ -61,17 +61,22 @@ void Timer::startTimer() {
             hookConfigMap[hook].hook = std::make_unique<AudioHook>();
             break;
         }
-        case Engine::Hook::HookType::X_KEYBOARD:
-        case Engine::Hook::HookType::X_MOUSE:
+        case Engine::Hook::HookType::X_KEYBOARD: {
+            hookConfigMap[hook].hook = std::make_unique<XHook>(XHookMode::KEYBOARD);
+            break;
+        }
+        case Engine::Hook::HookType::X_MOUSE: {
+            hookConfigMap[hook].hook = std::make_unique<XHook>(XHookMode::MOUSE);
+            break;
+        }
         case Engine::Hook::HookType::X_MOUSE_KEYBOARD: {
             // Any config needed for the XHook goes here
-            hookConfigMap[hook].hook = std::make_unique<XHook>();
+            hookConfigMap[hook].hook =
+                std::make_unique<XHook>(XHookMode::MOUSE_AND_KEYBOARD);
             break;
         }
 
-        default:
-
-        {
+        default: {
             qDebug() << "Hook not supported.";
             break;
         }

@@ -81,32 +81,25 @@ bool logger_proc(unsigned int level, const char *format, ...) {
 // processing, please do so by copying the event to your own queued dispatch
 // thread.
 void dispatch_proc(uiohook_event *const event) {
-    std::cout << "dispatch_proc************" << std::endl;
     switch (event->type) {
     case EVENT_KEY_PRESSED:
     case EVENT_KEY_RELEASED:
     case EVENT_KEY_TYPED:
-        if (current_mode == XHookMode::KEYBOARD || current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
+        switch (current_mode) {
+        case XHookMode::KEYBOARD: {
             Engine::Timer::getInstance()
-                ->getHookMap()[Engine::Hook::HookType::X_MOUSE]
+                ->getHookMap()[Engine::Hook::HookType::X_KEYBOARD]
                 .hook->setState(Engine::Hook::HookState::productive);
-
-            //            Ensure that we are not messing with some other hook,
-            //                just in case
-
-            //            if (Engine::Timer::getInstance()
-            //                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
-            //                        ->getType() == Engine::Hook::HookType::X_KEYBOARD ||
-            //                Engine::Timer::getInstance()
-            //                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
-            //                        ->getType() == Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
-
-            //                Engine::Timer::getInstance()
-            //                    ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
-            //                    ->setState(Engine::Hook::HookState::productive);
-            //            } else {
-            //                // This should never happen.
-            //            }
+            break;
+        }
+        case XHookMode::MOUSE_AND_KEYBOARD: {
+            Engine::Timer::getInstance()
+                ->getHookMap()[Engine::Hook::HookType::X_MOUSE_KEYBOARD]
+                .hook->setState(Engine::Hook::HookState::productive);
+            break;
+        }
+        default:
+            break;
         }
         break;
     case EVENT_MOUSE_PRESSED:
@@ -115,21 +108,21 @@ void dispatch_proc(uiohook_event *const event) {
     case EVENT_MOUSE_MOVED:
     case EVENT_MOUSE_DRAGGED:
     case EVENT_MOUSE_WHEEL:
-        if (current_mode == XHookMode::MOUSE || current_mode == XHookMode::MOUSE_AND_KEYBOARD) {
-
+        switch (current_mode) {
+        case XHookMode::MOUSE: {
             Engine::Timer::getInstance()
                 ->getHookMap()[Engine::Hook::HookType::X_MOUSE]
                 .hook->setState(Engine::Hook::HookState::productive);
-            //			 Ensure that we are not messing with some other hook, just in case
-            //            if (Engine::Timer::getInstance()
-            //                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
-            //                        ->getType() == Engine::Hook::HookType::X_MOUSE ||
-            //                Engine::Timer::getInstance()
-            //                        ->getHookMap()[Engine::Timer::getInstance()->XHOOK_KEY]
-            //                        ->getType() == Engine::Hook::HookType::X_MOUSE_KEYBOARD) {
-            //            } else {
-            //                // This should never happen.
-            //            }
+            break;
+        }
+        case XHookMode::MOUSE_AND_KEYBOARD: {
+            Engine::Timer::getInstance()
+                ->getHookMap()[Engine::Hook::HookType::X_MOUSE_KEYBOARD]
+                .hook->setState(Engine::Hook::HookState::productive);
+            break;
+        }
+        default:
+            break;
         }
         break;
     default:

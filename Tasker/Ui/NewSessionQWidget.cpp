@@ -49,14 +49,16 @@ void NewSessionQWidget::startTimerButtonSlot() {
     /**
       Will be adding support for multiple listeners ASAP.
       */
-    if (this->ui->keyboardQCheckBox->isChecked()) {
+    if (this->ui->keyboardQCheckBox->isChecked() && this->ui->mouseQCheckBox->isChecked()) {
+        newHooks.push_back(Engine::Hook::HookType::X_MOUSE_KEYBOARD);
+    } else if (this->ui->keyboardQCheckBox->isChecked()) {
         newHooks.push_back(Engine::Hook::HookType::X_KEYBOARD);
+    } else if (this->ui->mouseQCheckBox->isChecked()) {
+        newHooks.push_back(Engine::Hook::HookType::X_MOUSE);
     }
+
     if (this->ui->audioQCheckBox->isChecked()) {
         newHooks.push_back(Engine::Hook::HookType::AUDIO);
-    }
-    if (this->ui->mouseQCheckBox->isChecked()) {
-        newHooks.push_back(Engine::Hook::HookType::X_MOUSE);
     }
     EngineConfig newConfig{};
     newConfig.activeHooks = newHooks;

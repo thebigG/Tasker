@@ -20,6 +20,7 @@ struct EngineConfig {
     std::vector<Hook::HookType> activeHooks{};
     std::string audioDevice{};
     QThread hookThread{};
+    Engine::XHookMode xMode;
     std::unique_ptr<Hook> hook;
 };
 } // namespace Engine
@@ -54,9 +55,9 @@ private:
     std::vector<QThread> hookThread;
     QThread thisThread;
     std::unique_ptr<QTimer> timer;
-    int gracePeriod = 30; // How many seconds to keep the Timer in a
-                          // "productive" state for before for new state of the
-                          // hook(s). This really needs to be configurable.
+    int gracePeriod = 0; // How many seconds to keep the Timer in a
+                         // "productive" state for before for new state of the
+                         // hook(s). This really needs to be configurable.
     std::map<Hook::HookType, EngineConfig> hookConfigMap{};
     EngineConfig config;
     virtual void run();
