@@ -7,6 +7,24 @@
 #include <exception>
 #include <map>
 
+// Please ALWAYS include cmath. Otherwise the Windows build breaks. No freaking
+// idea why... It complains abs(float) functions being ambiguous
+// This explains why: https://stackoverflow.com/a/5450536
+/**
+ * Its boils down to this: math.h is from C and was created over 10 years ago.
+In math.h, due to its primitive nature, the abs() function is "essentially" just
+for integer types and if you wanted to get the absolute value of a double, you
+had to use fabs(). When C++ was created it took math.h and made it cmath. cmath
+is essentially math.h but improved for C++. It improved things like having to
+distinguish between fabs() and abs, and just made abs() for both doubles and
+integer types. In summary either: Use  math.h and use abs() for integers, fabs()
+for doubles or use cmath and just have abs for everything (easier and
+recommended)
+
+Hope this helps anyone who is having the same problem!
+ */
+#include <cmath>
+
 using Engine::AudioHook;
 using Engine::Hook;
 
