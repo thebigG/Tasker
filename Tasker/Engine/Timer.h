@@ -67,7 +67,7 @@ signals:
 public:
     Timer();
     static Timer *getInstance();
-    void initTimer(std::vector<Hook::HookType> &newConfig, udata::Session newSession);
+    void initTimer(EngineConfig &newConfig, udata::Session newSession);
     void stop();
     void reset();
     void pause();

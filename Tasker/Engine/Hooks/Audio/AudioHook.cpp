@@ -11,24 +11,78 @@ using Engine::AudioHook;
 using Engine::Hook;
 
 /**
+ * @brief calc_peak_amplitude
+ * @param pOutput
+ * @param pInput
+ * @param frameCount
+ * @return
+ */
+float calc_peak_amplitude(void *pOutput, const void *pInput, ma_uint32 frameCount) {
+    float maxValue = 0;
+    float maxAmplitude = 0x7fffffff;
+    float captureValue = 0;
+    float minAmplitude = 0;
+    uint32_t current_sample_value = 0;
+
+    const float *audioInput = static_cast<const float *>(pInput);
+
+    for (unsigned int i = 0; i < frameCount; i++) {
+        current_sample_value =
+            static_cast<long long>(std::abs((audioInput[i]) * (0x7fffffff)));
+
+        maxValue = current_sample_value > maxValue ? current_sample_value : maxValue;
+    }
+
+    // Calculate the volume of the sound coming from the device.
+
+    maxValue = std::min(maxValue, maxAmplitude);
+    captureValue = static_cast<uint32_t>(maxValue) / maxAmplitude;
+
+    // When we say "deviceLevel", what we really mean is Peak Amplitude.
+    float deviceLevel = captureValue - minAmplitude;
+
+    return deviceLevel;
+}
+
+void data_callback(ma_device *pDevice, void *pOutput, const void *pInput, ma_uint32 frameCount) {
+    auto deviceLevel = calc_peak_amplitude(pDevice, pInput, frameCount);
+}
+
+/**
  * @brief AudioHook::AudioListener
  * @todo At the moment the audioThreshold is set on AudioHook, but it really
  * should not be.
  */
 // TODO:Add constructor that that takes the context as a parameter
+AudioHook::AudioHook(std::string newDevice)
+: Hook::Hook{}, audioListenerState{ AudioHookState::OFF } {
+    audioThreshold = 0.001f;
+    contextConfig = std::make_unique<ma_context_config>();
+
+    config = std::make_unique<ma_device_config>();
+    //	init_audio_device(config.get());
+
+    // Don't love doing this in a constructor. Maybe I should have an
+    // "init/configure" method in the Hook interface
+    initContext(contextConfig.get(), &context, 1, getBackends().data());
+    updateDeviceMap();
+    deviceId = &deviceMap.at(newDevice).id;
+    type = HookType::AUDIO;
+}
+
+// TODO:Temporary for now to create the context(and fetch devices) somewhat easily
 AudioHook::AudioHook()
 : Hook::Hook{}, audioListenerState{ AudioHookState::OFF } {
     audioThreshold = 0.001f;
     contextConfig = std::make_unique<ma_context_config>();
 
-    //    std::unique_ptr<ma_device_config> config =
-    //    std::make_unique<ma_device_config>(); init_audio_device(config.get());
+    std::unique_ptr<ma_device_config> config = std::make_unique<ma_device_config>();
+    //	init_audio_device(config.get());
 
     // Don't love doing this in a constructor. Maybe I should have an
     // "init/configure" method in the Hook interface
-    initContext(contextConfig.get(), &context, 1, getBackends().data(), deviceId);
+    initContext(contextConfig.get(), &context, 1, getBackends().data());
     updateDeviceMap();
-    type = HookType::AUDIO;
 }
 
 /**
@@ -53,6 +107,7 @@ qreal &AudioHook::getAudioThreshold() {
 void AudioHook::start() {
     //  audioSource = std::make_unique<AudioMachine>();
     audioListenerState = AudioHookState::ON;
+    initAudioDevice(config.get());
     //  if (audioSource == nullptr) {
     //    // error-handling
     //  }
@@ -166,14 +221,13 @@ void AudioHook::updateDeviceMap() {
 ma_result AudioHook::initContext(ma_context_config *pConfig,
                                  ma_context *pContext,
                                  ma_uint32 backendCount,
-                                 ma_backend *backends,
-                                 const ma_device_id *deviceId) {
+                                 ma_backend *backends) {
     int res = ma_context_init(backends, backendCount, pConfig, pContext);
 
     return res;
 }
 
-void AudioHook::init_audio_device(ma_device_config *config) {
+void AudioHook::initAudioDevice(ma_device_config *config) {
     ma_device device;
 
     *config = ma_device_config_init(ma_device_type_capture);
@@ -181,7 +235,7 @@ void AudioHook::init_audio_device(ma_device_config *config) {
                                             // the device's native format.
     config->capture.channels = 2; // Set to 0 to use the device's native channel count.
     config->sampleRate = 0; // Set to 0 to use the device's native sample rate.
-    //  config->dataCallback = data_callback; // This function will be called when
+    config->dataCallback = data_callback; // This function will be called when
     // miniaudio needs more data.
 
     config->capture.pDeviceID = deviceId;

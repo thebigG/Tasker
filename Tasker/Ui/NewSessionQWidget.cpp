@@ -67,7 +67,8 @@ void NewSessionQWidget::startTimerButtonSlot() {
         newTask, User::getInstance()->getCurrentCommitment().getFrequency().goal,
         QDate::currentDate()
     };
-    Engine::Timer::getInstance()->initTimer(newConfig.activeHooks, newSession);
+    newConfig.audioDevice = ui->audioQComboBox->currentText().toStdString();
+    Engine::Timer::getInstance()->initTimer(newConfig, newSession);
     this->hide();
 }
 QString NewSessionQWidget::getTaskName() {

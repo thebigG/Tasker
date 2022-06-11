@@ -58,7 +58,10 @@ void Timer::startTimer() {
     for (auto hook : config.activeHooks) {
         switch (hook) {
         case Engine::Hook::HookType::AUDIO: {
-            hookConfigMap[hook].hook = std::make_unique<AudioHook>();
+            // TODO:Revisit this logic. It is horrendous how I'm handling configs here...
+            hookConfigMap[hook].audioDevice = config.audioDevice;
+            hookConfigMap[hook].hook =
+                std::make_unique<AudioHook>(hookConfigMap[hook].audioDevice);
             break;
         }
         case Engine::Hook::HookType::X_KEYBOARD: {
@@ -170,8 +173,10 @@ void Timer::setHooks(std::vector<Hook::HookType> newListenerType) {
  * @param newSession a new session that will contain the data of Timer once the
  * Timer's goal is reached.
  */
-void Timer::initTimer(std::vector<Hook::HookType> &newConfig, udata::Session newSession) {
-    config.activeHooks = newConfig;
+void Timer::initTimer(EngineConfig &newConfig, udata::Session newSession) {
+    // TODO:Revisit this logic. It is horrendous how I'm handling configs here...
+    config.activeHooks = newConfig.activeHooks;
+    config.audioDevice = newConfig.audioDevice;
     thisInstance->setCurrentSession(newSession);
     currentSession.setDate(QDate::currentDate());
     thisInstance->setHooks(config.activeHooks);

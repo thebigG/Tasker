@@ -24,6 +24,7 @@ class Engine::AudioHook : public Engine::Hook {
 
 public:
     enum class AudioHookState { ON, OFF };
+    AudioHook(std::string deviceName);
     AudioHook();
     void setAudioThreshold(qreal audioThreshold);
     qreal &getAudioThreshold();
@@ -50,13 +51,12 @@ private:
     ma_result initContext(ma_context_config *pConfig,
                           ma_context *pContext,
                           ma_uint32 backendCount,
-                          ma_backend *backends,
-                          const ma_device_id *deviceId);
+                          ma_backend *backends);
 
     ma_context context;
     std::unique_ptr<ma_context_config> contextConfig;
     const ma_device_id *deviceId; // Managed by miniaudio
-    void init_audio_device(ma_device_config *config);
+    void initAudioDevice(ma_device_config *config);
     std::map<std::string, ma_device_info> deviceMap{};
     void updateDeviceMap();
     std::unique_ptr<ma_device_config> config;
