@@ -1,6 +1,6 @@
 #include "StatsUtility.h"
 #include <QDebug>
-#include <TaskerPerf/perftimer.h>
+#include <TaskerPerf/PerfTimer.h>
 /**
  * @brief util::StatsUtility::toDays
  * @param seconds quantity of seconds

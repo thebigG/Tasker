@@ -18,7 +18,7 @@
 #include <QMenuBar>
 #include <QTreeWidget>
 #include <QWidget>
-#include <livesession.h>
+#include <LiveSession.h>
 #include <map>
 #include <memory>
 /**

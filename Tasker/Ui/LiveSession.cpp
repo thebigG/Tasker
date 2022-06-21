@@ -1,13 +1,13 @@
-#include "livesession.h"
+#include "LiveSession.h"
 
 #include <StatsUtility.h>
 #include <Timer.h>
-#include <mainui.h>
+#include <MainUi.h>
 
 #include <QDebug>
 #include <QFontDatabase>
 
-#include "ui_livesession.h"
+#include "ui_LiveSession.h"
 using namespace Engine;
 LiveSession::LiveSession(QWidget *parent)
 : QWidget(parent), ui(new Ui::LiveSession) {

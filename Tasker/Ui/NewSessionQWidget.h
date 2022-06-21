@@ -2,7 +2,7 @@
 #define NEWSESSIONQWIDGET_H
 
 #include <QWidget>
-#include <livesession.h>
+#include <LiveSession.h>
 #include <memory>
 namespace Ui {
 class NewSessionQWidget;

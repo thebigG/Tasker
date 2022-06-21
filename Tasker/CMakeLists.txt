@@ -37,7 +37,7 @@ include_directories(
 
 
 set(SOURCES
-        ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Main.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/AppGuard.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/AudioHook.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/udata/Commitment.cpp
@@ -45,9 +45,8 @@ set(SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CommStatsQWidget.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CreateCommitmentQWidget.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Hook.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Ui/livesession.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Ui/mainui.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Ui/LiveSession.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Ui/MainUi.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/NewSessionQWidget.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/udata/Session.cpp
         StatsUtility.cpp
@@ -56,10 +55,10 @@ set(SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/udata/UdataUtils.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/udata/User.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/XHook/XHook.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/TaskerPerf/perftimer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/TaskerPerf/PerfTimer.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CommStatsQWidget.ui
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CreateCommitmentQWidget.ui
-        ${CMAKE_CURRENT_SOURCE_DIR}/Ui/livesession.ui
+        ${CMAKE_CURRENT_SOURCE_DIR}/Ui/LiveSession.ui
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/NewSessionQWidget.ui
         Tasker.qrc)
 
@@ -72,8 +71,8 @@ set(HEADERS
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CommStatsQWidget.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CreateCommitmentQWidget.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Hook.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/Ui/livesession.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/Ui/mainui.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/Ui/LiveSession.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/Ui/MainUi.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/NewSessionQWidget.h
         ${CMAKE_CURRENT_SOURCE_DIR}/udata/Session.h
         StatsUtility.h
@@ -82,7 +81,7 @@ set(HEADERS
         ${CMAKE_CURRENT_SOURCE_DIR}/udata/UdataUtils.h
         ${CMAKE_CURRENT_SOURCE_DIR}/udata/User.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/XHook/XHook.h
-        TaskerPerf/perftimer.h)
+        TaskerPerf/PerfTimer.h)
 
 add_executable(Tasker  ${SOURCES} ${HEADERS})
 

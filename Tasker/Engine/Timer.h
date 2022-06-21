@@ -2,7 +2,7 @@
 #define TIMER_H
 
 #include "Session.h"
-#include "TaskerPerf/perftimer.h"
+#include "TaskerPerf/PerfTimer.h"
 #include "XHook.h"
 #include <QObject>
 #include <QThread>

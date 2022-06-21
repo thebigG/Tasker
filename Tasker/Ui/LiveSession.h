@@ -1,7 +1,7 @@
 #ifndef LIVESESSION_H
 #define LIVESESSION_H
 
-#include <TaskerPerf/perftimer.h>
+#include <TaskerPerf/PerfTimer.h>
 
 #include <QLabel>
 #include <QPushButton>

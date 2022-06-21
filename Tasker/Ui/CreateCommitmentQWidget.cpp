@@ -7,7 +7,7 @@
 #include <QObject>
 #include <StatsUtility.h>
 #include <User.h>
-#include <mainui.h>
+#include <MainUi.h>
 
 using namespace util;
 using namespace udata;

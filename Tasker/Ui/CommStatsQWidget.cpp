@@ -3,8 +3,7 @@
 #include <CreateCommitmentQWidget.h>
 #include <QAbstractItemView>
 #include <UdataUtils.h>
-#include <mainui.h>
-#define TRAVIS_CI 1
+#include <MainUi.h>
 #include "Timer.h"
 #include <QDebug>
 #include <iostream>

@@ -1,4 +1,4 @@
-#include "perftimer.h"
+#include "PerfTimer.h"
 #include <QDebug>
 /**
  * @brief Perf::PerfTimer::PerfTimer starts the PerfTimer.

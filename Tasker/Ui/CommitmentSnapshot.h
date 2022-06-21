@@ -1,7 +1,7 @@
 #ifndef COMMITMENTSNASPHOT_H
 #define COMMITMENTSNASPHOT_H
 #include <Commitment.h>
-#include <TaskerPerf/perftimer.h>
+#include <TaskerPerf/PerfTimer.h>
 
 #include <QVector>
 #include <QtCharts/QAbstractBarSeries>
