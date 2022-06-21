@@ -3,11 +3,11 @@
 #include <CommStatsQWidget.h>
 #include <Commitment.h>
 #include <Hook.h>
+#include <MainUi.h>
 #include <QDebug>
 #include <QObject>
 #include <StatsUtility.h>
 #include <User.h>
-#include <MainUi.h>
 
 using namespace util;
 using namespace udata;

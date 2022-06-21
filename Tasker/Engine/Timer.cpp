@@ -1,8 +1,8 @@
 #include "Timer.h"
 
+#include <MainUi.h>
 #include <StatsUtility.h>
 #include <TaskerPerf/PerfTimer.h>
-#include <MainUi.h>
 
 #include <QDebug>
 #include <QThread>

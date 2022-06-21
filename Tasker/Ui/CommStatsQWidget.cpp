@@ -1,11 +1,11 @@
 #include "CommStatsQWidget.h"
+#include "Timer.h"
 #include "ui_CommStatsQWidget.h"
 #include <CreateCommitmentQWidget.h>
-#include <QAbstractItemView>
-#include <UdataUtils.h>
 #include <MainUi.h>
-#include "Timer.h"
+#include <QAbstractItemView>
 #include <QDebug>
+#include <UdataUtils.h>
 #include <iostream>
 
 using Engine::Hook;

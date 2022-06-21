@@ -2,6 +2,8 @@
 #include "AudioHook.h"
 #include "ui_NewSessionQWidget.h"
 #include <Hook.h>
+#include <LiveSession.h>
+#include <MainUi.h>
 #include <NewSessionQWidget.h>
 #include <QString>
 #include <Session.h>
@@ -9,8 +11,7 @@
 #include <Task.h>
 #include <Timer.h>
 #include <User.h>
-#include <LiveSession.h>
-#include <MainUi.h>
+#include <iostream>
 using namespace udata;
 using namespace Engine;
 /**
@@ -31,6 +32,16 @@ NewSessionQWidget::NewSessionQWidget(QWidget *parent)
     connect(this->actions().at(0), &QAction::triggered, this, &QWidget::hide);
     goalText.reserve(100);
     goalText.resize(100);
+
+    this->ui->audioQComboBox->setEnabled(false);
+
+    connect(this->ui->audioQCheckBox, &QCheckBox::stateChanged, [this](int state) {
+        if (state == Qt::CheckState::Checked) {
+            this->ui->audioQComboBox->setEnabled(true);
+        } else {
+            this->ui->audioQComboBox->setEnabled(false);
+        }
+    });
 }
 
 /**
@@ -46,9 +57,6 @@ void NewSessionQWidget::backButtonSlot() {
  */
 void NewSessionQWidget::startTimerButtonSlot() {
     std::vector<Engine::Hook::HookType> newHooks;
-    /**
-      Will be adding support for multiple listeners ASAP.
-      */
     if (this->ui->keyboardQCheckBox->isChecked() && this->ui->mouseQCheckBox->isChecked()) {
         newHooks.push_back(Engine::Hook::HookType::X_MOUSE_KEYBOARD);
     } else if (this->ui->keyboardQCheckBox->isChecked()) {

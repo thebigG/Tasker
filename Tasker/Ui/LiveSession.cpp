@@ -1,8 +1,8 @@
 #include "LiveSession.h"
 
+#include <MainUi.h>
 #include <StatsUtility.h>
 #include <Timer.h>
-#include <MainUi.h>
 
 #include <QDebug>
 #include <QFontDatabase>

@@ -14,11 +14,11 @@
 #include <NewSessionQWidget.h>
 
 #include "User.h"
+#include <LiveSession.h>
 #include <QMenu>
 #include <QMenuBar>
 #include <QTreeWidget>
 #include <QWidget>
-#include <LiveSession.h>
 #include <map>
 #include <memory>
 /**

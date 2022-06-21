@@ -1,8 +1,8 @@
 #ifndef NEWSESSIONQWIDGET_H
 #define NEWSESSIONQWIDGET_H
 
-#include <QWidget>
 #include <LiveSession.h>
+#include <QWidget>
 #include <memory>
 namespace Ui {
 class NewSessionQWidget;
