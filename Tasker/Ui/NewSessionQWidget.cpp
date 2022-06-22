@@ -124,14 +124,17 @@ void NewSessionQWidget::show() {
     this->ui->taskLineEdit->setText(User::getInstance()->getCurrentCommitment().getName());
 
     QStringList devices{};
-    for (auto &d : AudioHook::queryDeviceNames()) {
+    devices.clear();
+    auto deviceNames = AudioHook::queryDeviceNames();
+    for (auto &d : deviceNames) {
         devices.append(d.c_str());
     }
-    MainUI::getInstance()->getCommitmentHub().getNewSessionQWidget().setItems(devices);
+    MainUI::getInstance()->getCommitmentHub().getNewSessionQWidget().setAudioQComboBoxItems(devices);
 
     QWidget::show();
 }
 
-void NewSessionQWidget::setItems(QStringList items) {
+void NewSessionQWidget::setAudioQComboBoxItems(QStringList items) {
+    this->ui->audioQComboBox->clear();
     this->ui->audioQComboBox->insertItems(0, items);
 }
