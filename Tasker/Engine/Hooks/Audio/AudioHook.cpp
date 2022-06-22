@@ -88,21 +88,6 @@ AudioHook::AudioHook(std::string newDevice)
     type = HookType::AUDIO;
 }
 
-// TODO:Temporary for now to create the context(and fetch devices) somewhat easily
-AudioHook::AudioHook()
-: Hook::Hook{}, audioListenerState{ AudioHookState::OFF } {
-    audioThreshold = 0.001f;
-    contextConfig = std::make_unique<ma_context_config>();
-
-    std::unique_ptr<ma_device_config> config = std::make_unique<ma_device_config>();
-    //	init_audio_device(config.get());
-
-    // Don't love doing this in a constructor. Maybe I should have an
-    // "init/configure" method in the Hook interface
-    initContext(contextConfig.get(), &context, 1, getBackends().data());
-    updateDeviceMap();
-}
-
 /**
  * @brief AudioHook::setAudioThreshold
  * @param audioThreshold
@@ -210,6 +195,40 @@ std::vector<std::string> AudioHook::getDeviceNames() {
     for (auto &pair : deviceMap) {
         devices.push_back(pair.first);
         qDebug() << "name:" << devices.back().c_str();
+    }
+
+    return devices;
+}
+
+std::vector<std::string> AudioHook::queryDeviceNames() {
+
+    std::unique_ptr<ma_context_config> contextConfig =
+        std::make_unique<ma_context_config>();
+
+    std::unique_ptr<ma_device_config> config = std::make_unique<ma_device_config>();
+
+    // Don't love doing this in a constructor. Maybe I should have an
+    // "init/configure" method in the Hook interface
+    ma_context context;
+
+    ma_result res = ma_context_init(getBackends().data(), 1, contextConfig.get(), &context);
+
+    ma_uint32 pPlaybackDeviceCount;
+    ma_device_info *ppCaptureDeviceInfos;
+    ma_uint32 pCaptureDeviceCount;
+
+    res = ma_context_get_devices(&context, nullptr, &pPlaybackDeviceCount,
+                                 &ppCaptureDeviceInfos, &pCaptureDeviceCount);
+
+    std::vector<std::string> devices{};
+
+    if (res == MA_SUCCESS) {
+        for (auto i = 0; i < pCaptureDeviceCount; i++) {
+            devices.push_back(ppCaptureDeviceInfos[i].name);
+        }
+    } else {
+        // TODO:Replace with MA_Exception
+        //			throw std::exception("Something bad happended. ma_context_get_devices failed");
     }
 
     return devices;

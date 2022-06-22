@@ -123,10 +123,8 @@ void NewSessionQWidget::show() {
                          User::getInstance()->getCurrentCommitment().getName() + "\"");
     this->ui->taskLineEdit->setText(User::getInstance()->getCurrentCommitment().getName());
 
-    Engine::AudioHook hook{};
-
     QStringList devices{};
-    for (auto &d : ((AudioHook *)&hook)->getDeviceNames()) {
+    for (auto &d : AudioHook::queryDeviceNames()) {
         devices.append(d.c_str());
     }
     MainUI::getInstance()->getCommitmentHub().getNewSessionQWidget().setItems(devices);

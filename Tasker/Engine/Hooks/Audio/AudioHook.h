@@ -25,12 +25,12 @@ class Engine::AudioHook : public Engine::Hook {
 public:
     enum class AudioHookState { ON, OFF };
     AudioHook(std::string deviceName);
-    AudioHook();
     void setAudioThreshold(qreal audioThreshold);
     qreal &getAudioThreshold();
     Hook::HookState startHook() override;
     Hook::HookState getState() override;
     std::vector<std::string> getDeviceNames();
+    static std::vector<std::string> queryDeviceNames();
 
 public slots:
     virtual void start() override;

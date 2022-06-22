@@ -25,15 +25,6 @@ Timer::Timer() {
     timer = std::make_unique<QTimer>(this);
     connect(timer.get(), &QTimer::timeout, this, &Timer::tickUpdate);
     connect(this, &Timer::stopTimer, this, &Timer::stopTimerSlot);
-
-    //	hook = std::make_unique<AudioHook>();
-
-    //		QStringList devices{};
-    //		for(auto& d: ((AudioHook*)&hook)->getDeviceNames())
-    //		{
-    //			devices.append(d.c_str());
-    //		}
-    //		MainUI::getInstance()->getCommitmentHub().getNewSessionQWidget().setItems(devices);
 }
 
 /**
