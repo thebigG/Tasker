@@ -42,6 +42,8 @@ NewSessionQWidget::NewSessionQWidget(QWidget *parent)
             this->ui->audioQComboBox->setEnabled(false);
         }
     });
+
+    this->ui->audioQComboBox->installEventFilter(this);
 }
 
 /**
@@ -116,6 +118,16 @@ void NewSessionQWidget::isJackActiveSlot(int index) {
     qDebug() << "jack active:" << index;
 }
 
+void NewSessionQWidget::updateAudioDevices() {
+    QStringList devices{};
+    devices.clear();
+    auto deviceNames = AudioHook::queryDeviceNames();
+    for (auto &d : deviceNames) {
+        devices.append(d.c_str());
+    }
+    this->setAudioQComboBoxItems(devices);
+}
+
 void NewSessionQWidget::show() {
     updateGoalText();
 
@@ -123,13 +135,7 @@ void NewSessionQWidget::show() {
                          User::getInstance()->getCurrentCommitment().getName() + "\"");
     this->ui->taskLineEdit->setText(User::getInstance()->getCurrentCommitment().getName());
 
-    QStringList devices{};
-    devices.clear();
-    auto deviceNames = AudioHook::queryDeviceNames();
-    for (auto &d : deviceNames) {
-        devices.append(d.c_str());
-    }
-    MainUI::getInstance()->getCommitmentHub().getNewSessionQWidget().setAudioQComboBoxItems(devices);
+    updateAudioDevices();
 
     QWidget::show();
 }
@@ -137,4 +143,19 @@ void NewSessionQWidget::show() {
 void NewSessionQWidget::setAudioQComboBoxItems(QStringList items) {
     this->ui->audioQComboBox->clear();
     this->ui->audioQComboBox->insertItems(0, items);
+}
+
+bool NewSessionQWidget::eventFilter(QObject *obj, QEvent *event) {
+    if (obj == this->ui->audioQComboBox) {
+        if (event->type() == QEvent::MouseButtonPress) {
+            QMouseEvent *keyEvent = static_cast<QMouseEvent *>(event);
+            updateAudioDevices();
+            return false;
+        } else {
+            return false;
+        }
+    } else {
+        // pass the event on to the parent class
+        return NewSessionQWidget::eventFilter(obj, event);
+    }
 }

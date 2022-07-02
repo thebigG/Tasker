@@ -231,6 +231,7 @@ std::vector<std::string> AudioHook::queryDeviceNames() {
         //			throw std::exception("Something bad happended. ma_context_get_devices failed");
     }
 
+    ma_context_uninit(&context);
     return devices;
 }
 

@@ -27,12 +27,16 @@ private slots:
 
     void isJackActiveSlot(int);
 
+protected:
+    bool eventFilter(QObject *obj, QEvent *ev);
+
 private:
     Ui::NewSessionQWidget *ui;
     std::unique_ptr<LiveSession> liveTimer;
     QString goalText{};
     QString goalContext{ "" };
     void updateGoalText();
+    void updateAudioDevices();
 };
 
 #endif // NEWSESSIONQWIDGET_H
