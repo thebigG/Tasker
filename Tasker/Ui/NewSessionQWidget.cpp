@@ -58,6 +58,9 @@ void NewSessionQWidget::backButtonSlot() {
  * state to start a new session such as starting the Timer engine.
  */
 void NewSessionQWidget::startTimerButtonSlot() {
+    if (!validateSessionConfig()) {
+        return;
+    }
     std::vector<Engine::Hook::HookType> newHooks;
     if (this->ui->keyboardQCheckBox->isChecked() && this->ui->mouseQCheckBox->isChecked()) {
         newHooks.push_back(Engine::Hook::HookType::X_MOUSE_KEYBOARD);
@@ -158,4 +161,32 @@ bool NewSessionQWidget::eventFilter(QObject *obj, QEvent *event) {
         // pass the event on to the parent class
         return NewSessionQWidget::eventFilter(obj, event);
     }
+}
+
+/**
+ * @brief NewSessionQWidget::validateSessionConfig
+ * Validates the configuration of the new session.
+ * The validation uses several criteria to consider a certain configuration
+ * valid or not such as whether at least a hook is selected.
+ * This method also updates the UI to inform to the user
+ * about any validation they need to act upon(such as marking a textbox as red).
+ * @return true is the current config is valid. Otherwisde return false.
+ */
+bool NewSessionQWidget::validateSessionConfig() {
+    // TODO: Handle return status codes from
+    // Hook API.
+    bool valid = true;
+    if (this->ui->taskLineEdit->text().isEmpty()) {
+        valid = false;
+        this->ui->taskLineEdit->setStyleSheet(Ui::invalidStateStylesheet);
+    }
+    if (this->ui->audioQCheckBox->checkState() != Qt::CheckState::Checked ||
+        this->ui->keyboardQCheckBox->checkState() != Qt::CheckState::Checked ||
+        this->ui->mouseQCheckBox->checkState() != Qt::CheckState::Checked) {
+        valid = false;
+        this->ui->audioQCheckBox->setStyleSheet(Ui::invalidStateStylesheet);
+        this->ui->keyboardQCheckBox->setStyleSheet(Ui::invalidStateStylesheet);
+        this->ui->mouseQCheckBox->setStyleSheet(Ui::invalidStateStylesheet);
+    }
+    return valid;
 }

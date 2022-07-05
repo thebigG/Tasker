@@ -6,7 +6,8 @@
 #include <memory>
 namespace Ui {
 class NewSessionQWidget;
-}
+const QString invalidStateStylesheet{ "border: 1px solid red;" };
+} // namespace Ui
 
 /**
  * @brief The NewSessionQWidget class represents the window that allows users to
@@ -37,6 +38,7 @@ private:
     QString goalContext{ "" };
     void updateGoalText();
     void updateAudioDevices();
+    bool validateSessionConfig();
 };
 
 #endif // NEWSESSIONQWIDGET_H
