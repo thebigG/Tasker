@@ -34,11 +34,11 @@ public:
     static std::vector<std::string> queryDeviceNames();
 
 public slots:
-    virtual void start() override;
-    virtual void end() override;
-    virtual void pause() override;
-    virtual void update() override;
-    virtual void resetState() override;
+	virtual HookStatus start() override;
+	virtual HookStatus end() override;
+	virtual HookStatus pause() override;
+	virtual HookStatus update() override;
+	virtual void resetState() override;
 
 signals:
     void signalThread();

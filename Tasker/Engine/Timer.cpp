@@ -40,6 +40,7 @@ void Timer::run() {
     startTimer();
     int val = exec();
     if (val == 0) {
+		qDebug()<<"$$$$$$$$$$$$$$$$$$$$$";
     }
 }
 /**

@@ -241,28 +241,33 @@ XHook::XHook() {
 /**
  * @brief XHook::start
  */
-void XHook::start() {
+Hook::HookStatus XHook::start() {
     startXHook();
+
+	return Hook::HookStatus::SUCCESS;
 }
 
 /**
  * @brief XHook::end kills the keyboard/mouse hook.
  */
-void XHook::end() {
+Hook::HookStatus XHook::end() {
     hook_stop();
+	return Hook::HookStatus::SUCCESS;
 }
 
 /**
  * @brief XHook::pause Does nothing.
  */
-void XHook::pause() {
+Hook::HookStatus XHook::pause() {
+	return Hook::HookStatus::SUCCESS;
 }
 
 /**
  * @brief  XHook::update
  *
  */
-void XHook::update() {
+Hook::HookStatus XHook::update() {
+	return Hook::HookStatus::SUCCESS;
 }
 
 /**
@@ -272,7 +277,7 @@ void XHook::update() {
 Hook::HookState XHook::startHook() {
     return getState();
 }
-void XHook::resetState() {
+void  XHook::resetState() {
     setState(HookState::unproductive);
 }
 

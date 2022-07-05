@@ -107,7 +107,7 @@ qreal &AudioHook::getAudioThreshold() {
  *AudioDevice(the actual audio I/O device). This function also connects and
  *signals and slots necessary to start the hook.
  */
-void AudioHook::start() {
+Hook::HookStatus AudioHook::start() {
     //  audioSource = std::make_unique<AudioMachine>();
     audioListenerState = AudioHookState::ON;
     initAudioDevice(config.get());
@@ -116,21 +116,25 @@ void AudioHook::start() {
     //  }
     //  connect(audioSource->getAudioDevice(), &AudioDevice::audioRead, this,
     //          &AudioHook::update);
+
+	return Hook::HookStatus::SUCCESS;
 }
 
 /**
  * @brief AudioHook::end
  */
-void AudioHook::end() {
+Hook::HookStatus AudioHook::end() {
     audioListenerState = AudioHookState::OFF;
+	return Hook::HookStatus::SUCCESS;
 }
 
 /**
  * @brief AudioHook::pause
  */
-void AudioHook::pause() {
+Hook::HookStatus AudioHook::pause() {
     // TODO pause
     // suspend listening, but don't quit
+	return Hook::HookStatus::SUCCESS;
 }
 
 /**
@@ -141,7 +145,7 @@ void AudioHook::pause() {
  * @note Note that this function is called every time the AudioDevice::audioRead
  * signal is sent.
  */
-void AudioHook::update() {
+Hook::HookStatus AudioHook::update() {
     if (!profiled) {
         /**
           Profile device's volume if it hasn't been profiled yet
@@ -157,6 +161,8 @@ void AudioHook::update() {
     //              ? HookState::productive
     //              : HookState::unproductive;
     setState(state);
+
+	return Hook::HookStatus::SUCCESS;
 }
 
 Hook::HookState AudioHook::startHook() {

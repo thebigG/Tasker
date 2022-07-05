@@ -24,6 +24,7 @@ public:
      * checking.
      */
     enum class HookType { X_MOUSE_KEYBOARD, X_MOUSE, X_KEYBOARD, AUDIO, NONE };
+	enum class HookStatus{SUCCESS, ERROR};
     Hook();
     ~Hook();
     /**
@@ -32,30 +33,30 @@ public:
      * keyboard device.
      *
      */
-    virtual void start() = 0;
+	virtual HookStatus start() = 0;
     /**
      * @brief end Up to the child to define, but this method usually cleans up
      * and gives back resources to the system after a hook is done. For example,
      * in Xhook, part of this cleanup process will involve killing the
      * XListenerHook process gracefully.
      */
-    virtual void end() = 0;
+	virtual HookStatus end() = 0;
     /**
      * @brief pause Up to the child to define, but pause could be useful in a
      * situation where the audio hardware device needs to be swapped for another
      * one at runtime without killing the AudioHook completely.
      */
-    virtual void pause() = 0;
+	virtual HookStatus pause() = 0;
     /**
      * @brief update This could be used for updating any state(such as a new
      * audio device) when the hook is pause.
      */
-    virtual void update() = 0;
+	virtual HookStatus update() = 0;
     /**
      * @brief resetState Up to the child, but this usually just sets the current
      * state of the hook to Unproductive.
      */
-    virtual void resetState() = 0;
+	virtual void resetState() = 0;
     static HookType intToHookType(int enumToInt);
     virtual Hook::HookState startHook() = 0;
     virtual void setState(HookState);
