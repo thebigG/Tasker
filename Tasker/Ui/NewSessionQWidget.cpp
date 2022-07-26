@@ -180,9 +180,9 @@ bool NewSessionQWidget::validateSessionConfig() {
         valid = false;
         this->ui->taskLineEdit->setStyleSheet(Ui::invalidStateStylesheet);
     }
-    if (this->ui->audioQCheckBox->checkState() != Qt::CheckState::Checked ||
-        this->ui->keyboardQCheckBox->checkState() != Qt::CheckState::Checked ||
-        this->ui->mouseQCheckBox->checkState() != Qt::CheckState::Checked) {
+	if (this->ui->audioQCheckBox->checkState() == Qt::CheckState::Unchecked &&
+		this->ui->keyboardQCheckBox->checkState() == Qt::CheckState::Unchecked &&
+		this->ui->mouseQCheckBox->checkState() == Qt::CheckState::Unchecked) {
         valid = false;
         this->ui->audioQCheckBox->setStyleSheet(Ui::invalidStateStylesheet);
         this->ui->keyboardQCheckBox->setStyleSheet(Ui::invalidStateStylesheet);
