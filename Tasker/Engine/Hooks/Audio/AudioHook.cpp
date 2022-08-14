@@ -285,6 +285,15 @@ void AudioHook::initAudioDevice(ma_device_config *config) {
 
     result = ma_device_start(&device);
 }
+/**
+ * @todo This should return some indication about whether
+ * the configuration of the hook was sucessful or not.
+ */
+Hook::HookError AudioHook::configure() {
+    // config code
+
+    return HookError{ "Placeholder", Hook::HookError::HookErrorStatus::SUCCESS };
+}
 
 const char *Engine::MA_Exception::what() const throw() {
     return "Miniaudio error";

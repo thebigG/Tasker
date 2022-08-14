@@ -39,6 +39,7 @@ public slots:
     virtual void pause() override;
     virtual void update() override;
     virtual void resetState() override;
+    virtual HookError configure() override;
 
 signals:
     void signalThread();

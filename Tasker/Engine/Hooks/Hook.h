@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QThread>
 #include <cstdint>
+#include <exception>
 namespace Engine {
 /**
  * @brief The Engine::Hook class is the base class for all of the hooks on
@@ -15,6 +16,21 @@ namespace Engine {
 class Hook : public QObject {
     Q_OBJECT
 public:
+    class HookError {
+    public:
+        enum class HookErrorStatus { ERROR, SUCCESS };
+        HookError(std::string msg, HookErrorStatus newStatus) {
+            newMsg = msg;
+            status = newStatus;
+        }
+        virtual const std::string what() const {
+            return newMsg;
+        }
+
+    private:
+        std::string newMsg;
+        HookErrorStatus status;
+    };
     enum class HookState { unproductive, productive, started, paused, ended };
     /**
      * @brief The HookType enum
@@ -56,6 +72,13 @@ public:
      * state of the hook to Unproductive.
      */
     virtual void resetState() = 0;
+
+    /**
+     * @brief configure .
+     * @todo This should return some indication about whether
+     * the configuration of the hook was sucessful or not.
+     */
+    virtual HookError configure(){};
     static HookType intToHookType(int enumToInt);
     virtual Hook::HookState startHook() = 0;
     virtual void setState(HookState);

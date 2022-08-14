@@ -83,6 +83,7 @@ public:
     QTimer *getClock();
     udata::Session &getCurrentSession();
     std::map<Hook::HookType, EngineConfig> &getHookMap();
+    void configTimer(EngineConfig &newConfig, udata::Session newSession);
 
 public slots:
     void stopTimerSlot();

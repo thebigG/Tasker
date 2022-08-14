@@ -46,36 +46,6 @@ void Timer::run() {
  * @brief Timer::startTimer initializes the hook and its thread.
  */
 void Timer::startTimer() {
-    for (auto hook : config.activeHooks) {
-        switch (hook) {
-        case Engine::Hook::HookType::AUDIO: {
-            // TODO:Revisit this logic. It is horrendous how I'm handling configs here...
-            hookConfigMap[hook].audioDevice = config.audioDevice;
-            hookConfigMap[hook].hook =
-                std::make_unique<AudioHook>(hookConfigMap[hook].audioDevice);
-            break;
-        }
-        case Engine::Hook::HookType::X_KEYBOARD: {
-            hookConfigMap[hook].hook = std::make_unique<XHook>(XHookMode::KEYBOARD);
-            break;
-        }
-        case Engine::Hook::HookType::X_MOUSE: {
-            hookConfigMap[hook].hook = std::make_unique<XHook>(XHookMode::MOUSE);
-            break;
-        }
-        case Engine::Hook::HookType::X_MOUSE_KEYBOARD: {
-            // Any config needed for the XHook goes here
-            hookConfigMap[hook].hook =
-                std::make_unique<XHook>(XHookMode::MOUSE_AND_KEYBOARD);
-            break;
-        }
-
-        default: {
-            qDebug() << "Hook not supported.";
-            break;
-        }
-        }
-    }
 
     // TODO:Iterate through both; hookMap and hookThreads. Maybe have both in the same map(?)
     for (auto &config : hookConfigMap) {
@@ -166,14 +136,49 @@ void Timer::setHooks(std::vector<Hook::HookType> newListenerType) {
  */
 void Timer::initTimer(EngineConfig &newConfig, udata::Session newSession) {
     // TODO:Revisit this logic. It is horrendous how I'm handling configs here...
-    config.activeHooks = newConfig.activeHooks;
-    config.audioDevice = newConfig.audioDevice;
-    thisInstance->setCurrentSession(newSession);
-    currentSession.setDate(QDate::currentDate());
-    thisInstance->setHooks(config.activeHooks);
+    configTimer(newConfig, newSession);
     timer->start(TIMER_TICK);
     this->start();
     emit timerStarted();
+}
+void Timer::configTimer(EngineConfig &newConfig, udata::Session newSession) {
+
+    for (auto hook : config.activeHooks) {
+        switch (hook) {
+        case Engine::Hook::HookType::AUDIO: {
+            // TODO:Revisit this logic. It is horrendous how I'm handling configs here...
+            hookConfigMap[hook].audioDevice = config.audioDevice;
+            hookConfigMap[hook].hook =
+                std::make_unique<AudioHook>(hookConfigMap[hook].audioDevice);
+            hookConfigMap[hook].hook->configure();
+            break;
+        }
+        case Engine::Hook::HookType::X_KEYBOARD: {
+            hookConfigMap[hook].hook = std::make_unique<XHook>(XHookMode::KEYBOARD);
+            break;
+        }
+        case Engine::Hook::HookType::X_MOUSE: {
+            hookConfigMap[hook].hook = std::make_unique<XHook>(XHookMode::MOUSE);
+            break;
+        }
+        case Engine::Hook::HookType::X_MOUSE_KEYBOARD: {
+            // Any config needed for the XHook goes here
+            hookConfigMap[hook].hook =
+                std::make_unique<XHook>(XHookMode::MOUSE_AND_KEYBOARD);
+            break;
+        }
+
+        default: {
+            qDebug() << "Hook not supported.";
+            break;
+        }
+        }
+    }
+    config.activeHooks = newConfig.activeHooks;
+    config.audioDevice = newConfig.audioDevice;
+    setCurrentSession(newSession);
+    currentSession.setDate(QDate::currentDate());
+    setHooks(config.activeHooks);
 }
 /**
  * @brief Timer::productiveSlot
