@@ -43,6 +43,7 @@ RUN apt-get update && apt-get install -y qt5-default libqt5charts5-dev libx11-de
                                                    python3-pip \
                                                    libicu-dev
 
+RUN pip3 install --upgrade pip
 RUN pip3 install cmake
 
 RUN git clone https://github.com/thebigG/mxe.git
