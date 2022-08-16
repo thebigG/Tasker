@@ -292,7 +292,7 @@ void AudioHook::initAudioDevice(ma_device_config *config) {
 Hook::HookError AudioHook::configure() {
     // config code
 
-    return HookError{ "Placeholder", Hook::HookError::HookErrorStatus::SUCCESS };
+    return HookError{ "Placeholder", Hook::HookError::HookErrorStatus::ERROR };
 }
 
 const char *Engine::MA_Exception::what() const throw() {

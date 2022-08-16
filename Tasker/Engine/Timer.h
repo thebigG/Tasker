@@ -67,7 +67,7 @@ signals:
 public:
     Timer();
     static Timer *getInstance();
-    void initTimer(EngineConfig &newConfig, udata::Session newSession);
+    Hook::HookError initTimer(EngineConfig &newConfig, udata::Session newSession);
     void stop();
     void reset();
     void pause();
@@ -83,7 +83,7 @@ public:
     QTimer *getClock();
     udata::Session &getCurrentSession();
     std::map<Hook::HookType, EngineConfig> &getHookMap();
-    void configTimer(EngineConfig &newConfig, udata::Session newSession);
+    Hook::HookError configTimer(EngineConfig &newConfig, udata::Session newSession);
 
 public slots:
     void stopTimerSlot();

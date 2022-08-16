@@ -81,7 +81,12 @@ void NewSessionQWidget::startTimerButtonSlot() {
         QDate::currentDate()
     };
     newConfig.audioDevice = ui->audioQComboBox->currentText().toStdString();
-    Engine::Timer::getInstance()->initTimer(newConfig, newSession);
+    Hook::HookError error = Engine::Timer::getInstance()->initTimer(newConfig, newSession);
+    if (error.getStatus() == Hook::HookError::HookErrorStatus::ERROR) {
+        QMessageBox m{ QMessageBox::Critical, "Error",
+                       "Error:" + QString::fromStdString(error.what()) };
+        m.exec();
+    }
     this->hide();
 }
 QString NewSessionQWidget::getTaskName() {

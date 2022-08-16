@@ -5,6 +5,7 @@
 #include <TaskerPerf/PerfTimer.h>
 
 #include <QDebug>
+#include <QMessageBox>
 #include <QThread>
 #include <QTime>
 #include <iostream>
@@ -134,15 +135,21 @@ void Timer::setHooks(std::vector<Hook::HookType> newListenerType) {
  * @param newSession a new session that will contain the data of Timer once the
  * Timer's goal is reached.
  */
-void Timer::initTimer(EngineConfig &newConfig, udata::Session newSession) {
+Hook::HookError Timer::initTimer(EngineConfig &newConfig, udata::Session newSession) {
     // TODO:Revisit this logic. It is horrendous how I'm handling configs here...
-    configTimer(newConfig, newSession);
+    Hook::HookError error = configTimer(newConfig, newSession);
+    if (error.getStatus() == Hook::HookError::HookErrorStatus::ERROR) {
+        return error;
+    }
     timer->start(TIMER_TICK);
     this->start();
     emit timerStarted();
-}
-void Timer::configTimer(EngineConfig &newConfig, udata::Session newSession) {
 
+    return error;
+}
+Hook::HookError Timer::configTimer(EngineConfig &newConfig, udata::Session newSession) {
+    config.activeHooks = newConfig.activeHooks;
+    config.audioDevice = newConfig.audioDevice;
     for (auto hook : config.activeHooks) {
         switch (hook) {
         case Engine::Hook::HookType::AUDIO: {
@@ -150,7 +157,9 @@ void Timer::configTimer(EngineConfig &newConfig, udata::Session newSession) {
             hookConfigMap[hook].audioDevice = config.audioDevice;
             hookConfigMap[hook].hook =
                 std::make_unique<AudioHook>(hookConfigMap[hook].audioDevice);
-            hookConfigMap[hook].hook->configure();
+            Hook::HookError error = hookConfigMap[hook].hook->configure();
+            if (error.getStatus() == Hook::HookError::HookErrorStatus::ERROR)
+                return error;
             break;
         }
         case Engine::Hook::HookType::X_KEYBOARD: {
@@ -174,11 +183,11 @@ void Timer::configTimer(EngineConfig &newConfig, udata::Session newSession) {
         }
         }
     }
-    config.activeHooks = newConfig.activeHooks;
-    config.audioDevice = newConfig.audioDevice;
     setCurrentSession(newSession);
     currentSession.setDate(QDate::currentDate());
     setHooks(config.activeHooks);
+
+    return Hook::HookError{ "Succeess", Hook::HookError::HookErrorStatus::SUCCESS };
 }
 /**
  * @brief Timer::productiveSlot

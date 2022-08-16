@@ -27,6 +27,10 @@ public:
             return newMsg;
         }
 
+        virtual const HookErrorStatus getStatus() {
+            return status;
+        }
+
     private:
         std::string newMsg;
         HookErrorStatus status;
@@ -74,11 +78,13 @@ public:
     virtual void resetState() = 0;
 
     /**
-     * @brief configure .
+     * @brief configure.
      * @todo This should return some indication about whether
      * the configuration of the hook was sucessful or not.
      */
-    virtual HookError configure(){};
+    virtual HookError configure() {
+        return HookError{ "Success", HookError::HookErrorStatus::SUCCESS };
+    };
     static HookType intToHookType(int enumToInt);
     virtual Hook::HookState startHook() = 0;
     virtual void setState(HookState);
@@ -104,6 +110,7 @@ signals:
     void productive();
     void unProductive();
     void hookUpdate();
+    void hookError(HookError e);
 };
 } // namespace Engine
 
