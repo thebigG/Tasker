@@ -18,7 +18,7 @@ class Hook : public QObject {
 public:
     class HookError {
     public:
-        enum class HookErrorStatus { ERROR, SUCCESS };
+        enum class HookErrorStatus { FAIL, SUCCESS };
         HookError(std::string msg, HookErrorStatus newStatus) {
             newMsg = msg;
             status = newStatus;

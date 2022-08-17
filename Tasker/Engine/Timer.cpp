@@ -138,7 +138,7 @@ void Timer::setHooks(std::vector<Hook::HookType> newListenerType) {
 Hook::HookError Timer::initTimer(EngineConfig &newConfig, udata::Session newSession) {
     // TODO:Revisit this logic. It is horrendous how I'm handling configs here...
     Hook::HookError error = configTimer(newConfig, newSession);
-    if (error.getStatus() == Hook::HookError::HookErrorStatus::ERROR) {
+    if (error.getStatus() == Hook::HookError::HookErrorStatus::FAIL) {
         return error;
     }
     timer->start(TIMER_TICK);
@@ -158,7 +158,7 @@ Hook::HookError Timer::configTimer(EngineConfig &newConfig, udata::Session newSe
             hookConfigMap[hook].hook =
                 std::make_unique<AudioHook>(hookConfigMap[hook].audioDevice);
             Hook::HookError error = hookConfigMap[hook].hook->configure();
-            if (error.getStatus() == Hook::HookError::HookErrorStatus::ERROR)
+            if (error.getStatus() == Hook::HookError::HookErrorStatus::FAIL)
                 return error;
             break;
         }

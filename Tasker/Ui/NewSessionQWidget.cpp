@@ -82,7 +82,7 @@ void NewSessionQWidget::startTimerButtonSlot() {
     };
     newConfig.audioDevice = ui->audioQComboBox->currentText().toStdString();
     Hook::HookError error = Engine::Timer::getInstance()->initTimer(newConfig, newSession);
-    if (error.getStatus() == Hook::HookError::HookErrorStatus::ERROR) {
+    if (error.getStatus() == Hook::HookError::HookErrorStatus::FAIL) {
         QMessageBox m{ QMessageBox::Critical, "Error",
                        "Error:" + QString::fromStdString(error.what()) };
         m.exec();

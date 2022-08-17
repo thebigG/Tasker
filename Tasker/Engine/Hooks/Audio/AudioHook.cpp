@@ -100,6 +100,7 @@ void AudioHook::setAudioThreshold(qreal audioThreshold) {
  * @return
  */
 qreal &AudioHook::getAudioThreshold() {
+
     return audioThreshold;
 }
 /**
@@ -292,7 +293,7 @@ void AudioHook::initAudioDevice(ma_device_config *config) {
 Hook::HookError AudioHook::configure() {
     // config code
 
-    return HookError{ "Placeholder", Hook::HookError::HookErrorStatus::ERROR };
+    return HookError{ "Placeholder", Hook::HookError::HookErrorStatus::FAIL };
 }
 
 const char *Engine::MA_Exception::what() const throw() {
