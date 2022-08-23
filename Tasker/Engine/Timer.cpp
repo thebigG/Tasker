@@ -160,6 +160,9 @@ Hook::HookError Timer::configTimer(EngineConfig &newConfig, udata::Session newSe
             Hook::HookError error = hookConfigMap[hook].hook->configure();
             if (error.getStatus() == Hook::HookError::HookErrorStatus::FAIL)
                 return error;
+
+            connect(hookConfigMap[hook].hook.get(), &Hook::hookError, this,
+                    &Timer::hookErrorSlot);
             break;
         }
         case Engine::Hook::HookType::X_KEYBOARD: {
@@ -227,7 +230,6 @@ void Timer::unProductiveSlot() {
  */
 void Timer::stopTimerSlot() {
     emit congrats();
-    //	hooks->end();
     reset();
     timer->stop();
 }
@@ -275,4 +277,16 @@ void Timer::resume() {
 
 std::map<Hook::HookType, EngineConfig> &Timer::getHookMap() {
     return hookConfigMap;
+}
+
+/**
+ * This could be useful for upstreaming a HookError that happens during
+ * the start() function of any of the hooks.
+ * I'm still thinking about this since the code could get messy...
+ * ONe could make the argument that the configure() function of the hook API
+ * is the only one that should return any kind of HookError...
+ */
+void Timer::hookErrorSlot(Hook::HookError e) {
+    // If I decide to do this, then congrats signal would have pass along the
+    // HookError Message/signal. emit stopTimer();
 }

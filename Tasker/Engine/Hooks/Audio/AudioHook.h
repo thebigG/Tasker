@@ -48,7 +48,6 @@ private:
     AudioHookState audioListenerState;
     //  std::unique_ptr<AudioMachine> audioSource;
     qreal audioThreshold;
-    bool profiled = false;
     static std::vector<ma_backend> getBackends();
     ma_result initContext(ma_context_config *pConfig,
                           ma_context *pContext,
@@ -58,10 +57,11 @@ private:
     ma_context context;
     std::unique_ptr<ma_context_config> contextConfig;
     const ma_device_id *deviceId; // Managed by miniaudio
-    void initAudioDevice(ma_device_config *config);
+    Hook::HookError initAudioDevice(ma_device_config *config);
     std::map<std::string, ma_device_info> deviceMap{};
     void updateDeviceMap();
     std::unique_ptr<ma_device_config> config;
+    std::string deviceName;
 };
 
 #endif // AUDIOHOOK_H

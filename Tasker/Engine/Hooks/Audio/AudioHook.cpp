@@ -73,19 +73,7 @@ void data_callback(ma_device *pDevice, void *pOutput, const void *pInput, ma_uin
  */
 // TODO:Add constructor that that takes the context as a parameter
 AudioHook::AudioHook(std::string newDevice)
-: Hook::Hook{}, audioListenerState{ AudioHookState::OFF } {
-    audioThreshold = 0.001f;
-    contextConfig = std::make_unique<ma_context_config>();
-
-    config = std::make_unique<ma_device_config>();
-    //	init_audio_device(config.get());
-
-    // Don't love doing this in a constructor. Maybe I should have an
-    // "init/configure" method in the Hook interface
-    initContext(contextConfig.get(), &context, 1, getBackends().data());
-    updateDeviceMap();
-    deviceId = &deviceMap.at(newDevice).id;
-    type = HookType::AUDIO;
+: audioListenerState{ AudioHookState::OFF }, deviceName{ newDevice } {
 }
 
 /**
@@ -100,7 +88,6 @@ void AudioHook::setAudioThreshold(qreal audioThreshold) {
  * @return
  */
 qreal &AudioHook::getAudioThreshold() {
-
     return audioThreshold;
 }
 /**
@@ -109,14 +96,17 @@ qreal &AudioHook::getAudioThreshold() {
  *signals and slots necessary to start the hook.
  */
 void AudioHook::start() {
-    //  audioSource = std::make_unique<AudioMachine>();
     audioListenerState = AudioHookState::ON;
-    initAudioDevice(config.get());
-    //  if (audioSource == nullptr) {
-    //    // error-handling
-    //  }
-    //  connect(audioSource->getAudioDevice(), &AudioDevice::audioRead, this,
-    //          &AudioHook::update);
+    auto e = initAudioDevice(config.get());
+    switch (e.getStatus()) {
+    case HookError::HookErrorStatus::FAIL: {
+        emit hookError(e);
+
+        break;
+    }
+    default:
+        break;
+    }
 }
 
 /**
@@ -143,16 +133,6 @@ void AudioHook::pause() {
  * signal is sent.
  */
 void AudioHook::update() {
-    if (!profiled) {
-        /**
-          Profile device's volume if it hasn't been profiled yet
-          */
-        //    audioSource->getQAudioInput().setVolume(0.0);
-        //    audioSource->getAudioDevice()->setMinAmplitude(
-        //        audioSource->getAudioDevice()->getDeviceLevel());
-        //    audioSource->getQAudioInput().setVolume(1.0);
-        profiled = true;
-    }
     HookState state;
     //  state = audioSource->getAudioDevice()->getDeviceLevel() > audioThreshold
     //              ? HookState::productive
@@ -266,7 +246,7 @@ ma_result AudioHook::initContext(ma_context_config *pConfig,
     return res;
 }
 
-void AudioHook::initAudioDevice(ma_device_config *config) {
+Hook::HookError AudioHook::initAudioDevice(ma_device_config *config) {
     ma_device device;
 
     *config = ma_device_config_init(ma_device_type_capture);
@@ -280,11 +260,22 @@ void AudioHook::initAudioDevice(ma_device_config *config) {
     config->capture.pDeviceID = deviceId;
     ma_result result = ma_device_init(&context, config, &device);
     if (result != MA_SUCCESS) {
-        printf("Failed to initialize capture device.\n");
-        //		 return -2;
+        return Hook::HookError{ "Failed to initialize capture device.\n"
+                                "Error number:" +
+                                    std::to_string(result),
+                                Hook::HookError::HookErrorStatus::FAIL };
     }
 
     result = ma_device_start(&device);
+
+    if (result != MA_SUCCESS) {
+        return Hook::HookError{ "Failed to initialize capture device.\n"
+                                "Error number:" +
+                                    std::to_string(result),
+                                Hook::HookError::HookErrorStatus::FAIL };
+    }
+
+    return Hook::HookError{ "", Hook::HookError::HookErrorStatus::SUCCESS };
 }
 /**
  * @todo This should return some indication about whether
@@ -292,7 +283,18 @@ void AudioHook::initAudioDevice(ma_device_config *config) {
  */
 Hook::HookError AudioHook::configure() {
     // config code
+    audioThreshold = 0.001f;
+    contextConfig = std::make_unique<ma_context_config>();
 
+    config = std::make_unique<ma_device_config>();
+    //	init_audio_device(config.get());
+
+    // Don't love doing this in a constructor. Maybe I should have an
+    // "init/configure" method in the Hook interface
+    initContext(contextConfig.get(), &context, 1, getBackends().data());
+    updateDeviceMap();
+    deviceId = &deviceMap.at(deviceName).id;
+    type = HookType::AUDIO;
     return HookError{ "Placeholder", Hook::HookError::HookErrorStatus::FAIL };
 }
 

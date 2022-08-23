@@ -90,6 +90,7 @@ public slots:
     void tickUpdate();
     void productiveSlot();
     void unProductiveSlot();
+    void hookErrorSlot(Hook::HookError);
 signals:
     void timerStarted();
     void stopTimer();
