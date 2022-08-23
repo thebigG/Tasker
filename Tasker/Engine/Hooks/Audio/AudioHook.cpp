@@ -35,7 +35,7 @@ using Engine::Hook;
  * @param frameCount
  * @return
  */
-float calc_peak_amplitude(void *pOutput, const void *pInput, ma_uint32 frameCount) {
+float AudioHook::calc_peak_amplitude(void *pOutput, const void *pInput, ma_uint32 frameCount) {
     float maxValue = 0;
     float maxAmplitude = 0x7fffffff;
     float captureValue = 0;
@@ -62,7 +62,7 @@ float calc_peak_amplitude(void *pOutput, const void *pInput, ma_uint32 frameCoun
     return deviceLevel;
 }
 
-void data_callback(ma_device *pDevice, void *pOutput, const void *pInput, ma_uint32 frameCount) {
+void AudioHook::data_callback(ma_device *pDevice, void *pOutput, const void *pInput, ma_uint32 frameCount) {
     auto deviceLevel = calc_peak_amplitude(pDevice, pInput, frameCount);
 }
 
@@ -220,7 +220,7 @@ std::vector<std::string> AudioHook::queryDeviceNames() {
  * @brief AudioHook::updateDeviceMap
  * update devicemap with the current backend.
  */
-void AudioHook::updateDeviceMap() {
+Hook::HookError AudioHook::updateDeviceMap() {
     deviceMap.clear();
     ma_uint32 pPlaybackDeviceCount;
     ma_device_info *ppCaptureDeviceInfos;
@@ -233,17 +233,25 @@ void AudioHook::updateDeviceMap() {
             deviceMap[ppCaptureDeviceInfos[i].name] = ppCaptureDeviceInfos[i];
         }
     } else {
-        // TODO:Replace with MA_Exception
-        //			throw std::exception("Something bad happended. ma_context_get_devices failed");
+        Hook::HookError{ "Something bad happended. ma_context_get_devices "
+                         "failed",
+                         Hook::HookError::HookErrorStatus::SUCCESS };
     }
-}
-ma_result AudioHook::initContext(ma_context_config *pConfig,
-                                 ma_context *pContext,
-                                 ma_uint32 backendCount,
-                                 ma_backend *backends) {
-    int res = ma_context_init(backends, backendCount, pConfig, pContext);
 
-    return res;
+    return Hook::HookError{ "", Hook::HookError::HookErrorStatus::SUCCESS };
+}
+Hook::HookError AudioHook::initContext(ma_context_config *pConfig,
+                                       ma_context *pContext,
+                                       ma_uint32 backendCount,
+                                       ma_backend *backends) {
+    int res = ma_context_init(backends, backendCount, pConfig, pContext);
+    if (res != MA_SUCCESS) {
+        return HookError{ "initContext failed."
+                          "MA_Audio error code:" +
+                              std::to_string(res),
+                          HookError::HookErrorStatus::FAIL };
+    }
+    return HookError{ "", HookError::HookErrorStatus::SUCCESS };
 }
 
 Hook::HookError AudioHook::initAudioDevice(ma_device_config *config) {
@@ -291,11 +299,15 @@ Hook::HookError AudioHook::configure() {
 
     // Don't love doing this in a constructor. Maybe I should have an
     // "init/configure" method in the Hook interface
-    initContext(contextConfig.get(), &context, 1, getBackends().data());
+    HookError error =
+        initContext(contextConfig.get(), &context, 1, getBackends().data());
+    if (error.getStatus() != HookError::HookErrorStatus::SUCCESS) {
+        return error;
+    }
     updateDeviceMap();
     deviceId = &deviceMap.at(deviceName).id;
     type = HookType::AUDIO;
-    return HookError{ "Placeholder", Hook::HookError::HookErrorStatus::FAIL };
+    return HookError{ "Success", Hook::HookError::HookErrorStatus::SUCCESS };
 }
 
 const char *Engine::MA_Exception::what() const throw() {

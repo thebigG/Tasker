@@ -49,17 +49,19 @@ private:
     //  std::unique_ptr<AudioMachine> audioSource;
     qreal audioThreshold;
     static std::vector<ma_backend> getBackends();
-    ma_result initContext(ma_context_config *pConfig,
+    HookError initContext(ma_context_config *pConfig,
                           ma_context *pContext,
                           ma_uint32 backendCount,
                           ma_backend *backends);
+    static float calc_peak_amplitude(void *pOutput, const void *pInput, ma_uint32 frameCount);
+    static void data_callback(ma_device *pDevice, void *pOutput, const void *pInput, ma_uint32 frameCount);
 
     ma_context context;
     std::unique_ptr<ma_context_config> contextConfig;
     const ma_device_id *deviceId; // Managed by miniaudio
     Hook::HookError initAudioDevice(ma_device_config *config);
     std::map<std::string, ma_device_info> deviceMap{};
-    void updateDeviceMap();
+    HookError updateDeviceMap();
     std::unique_ptr<ma_device_config> config;
     std::string deviceName;
 };
