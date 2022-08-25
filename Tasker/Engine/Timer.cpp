@@ -47,13 +47,14 @@ void Timer::run() {
  * @brief Timer::startTimer initializes the hook and its thread.
  */
 void Timer::startTimer() {
-
     // TODO:Iterate through both; hookMap and hookThreads. Maybe have both in the same map(?)
     for (auto &config : hookConfigMap) {
-        connect(&config.second.hookThread, &QThread::started,
-                config.second.hook.get(), &Hook::start);
-        config.second.hook->moveToThread(&config.second.hookThread);
-        config.second.hookThread.start();
+        // Not neede since all hooks implemented at the moment intantiate their own threads
+        //        connect(&config.second.hookThread, &QThread::started,
+        //                config.second.hook.get(), &Hook::start);
+        ////        config.second.hook->moveToThread(&config.second.hookThread);
+        ////        config.second.hookThread.start();
+        config.second.hook->start();
     }
 }
 /**

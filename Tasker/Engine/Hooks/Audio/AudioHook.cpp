@@ -3,6 +3,7 @@
 #include "TaskerPerf/PerfTimer.h"
 #include "miniaudio.h"
 #include <QDebug>
+#include <Timer.h>
 #include <cstdio>
 #include <exception>
 #include <map>
@@ -35,7 +36,7 @@ using Engine::Hook;
  * @param frameCount
  * @return
  */
-float AudioHook::calc_peak_amplitude(void *pOutput, const void *pInput, ma_uint32 frameCount) {
+float calc_peak_amplitude(void *pOutput, const void *pInput, ma_uint32 frameCount) {
     float maxValue = 0;
     float maxAmplitude = 0x7fffffff;
     float captureValue = 0;
@@ -62,8 +63,18 @@ float AudioHook::calc_peak_amplitude(void *pOutput, const void *pInput, ma_uint3
     return deviceLevel;
 }
 
-void AudioHook::data_callback(ma_device *pDevice, void *pOutput, const void *pInput, ma_uint32 frameCount) {
+void data_callback(ma_device *pDevice, void *pOutput, const void *pInput, ma_uint32 frameCount) {
     auto deviceLevel = calc_peak_amplitude(pDevice, pInput, frameCount);
+    qDebug() << "deviceLevel:" << deviceLevel;
+    if (deviceLevel > 0.01) {
+        Engine::Timer::getInstance()
+            ->getHookMap()[Engine::Hook::HookType::AUDIO]
+            .hook->setState(Engine::Hook::HookState::productive);
+    } else {
+        Engine::Timer::getInstance()
+            ->getHookMap()[Engine::Hook::HookType::AUDIO]
+            .hook->setState(Engine::Hook::HookState::unproductive);
+    }
 }
 
 /**
@@ -98,15 +109,15 @@ qreal &AudioHook::getAudioThreshold() {
 void AudioHook::start() {
     audioListenerState = AudioHookState::ON;
     auto e = initAudioDevice(config.get());
-    switch (e.getStatus()) {
-    case HookError::HookErrorStatus::FAIL: {
-        emit hookError(e);
+    //    switch (e.getStatus()) {
+    //    case HookError::HookErrorStatus::FAIL: {
+    //        emit hookError(e);
 
-        break;
-    }
-    default:
-        break;
-    }
+    //        break;
+    //    }
+    //    default:
+    //        break;
+    //    }
 }
 
 /**
@@ -258,8 +269,8 @@ Hook::HookError AudioHook::initAudioDevice(ma_device_config *config) {
     ma_device device;
 
     *config = ma_device_config_init(ma_device_type_capture);
-    config->capture.format = ma_format_f32; // Set to ma_format_unknown to use
-                                            // the device's native format.
+    config->capture.format = ma_format_unknown; // Set to ma_format_unknown to use
+                                                // the device's native format.
     config->capture.channels = 2; // Set to 0 to use the device's native channel count.
     config->sampleRate = 0; // Set to 0 to use the device's native sample rate.
     config->dataCallback = data_callback; // This function will be called when
