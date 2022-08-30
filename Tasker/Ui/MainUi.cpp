@@ -139,7 +139,35 @@ MainUI *MainUI::getInstance() {
  * This is called every time the application is about to be closed.
  */
 void MainUI::saveTaskerStateSlot() {
-    qDebug() << "Saving state...";
+    if (mainHub->getCommitmentHub().getcurrentLiveSessionWidget().getCurrentState() ==
+            LiveSessionState::Started ||
+        mainHub->getCommitmentHub().getcurrentLiveSessionWidget().getCurrentState() ==
+            LiveSessionState::Paused) {
+        QMessageBox msgBox{};
+
+        msgBox.setText("Session in progress.");
+        msgBox.setInformativeText(
+            "Do you want to save your progress for the session in progress?");
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard |
+                                  QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        int ret = msgBox.exec();
+
+        switch (ret) {
+        case QMessageBox::Save:
+            Engine::Timer::getInstance()->stopTimerSlot();
+            break;
+        case QMessageBox::Discard:
+            // Don't Save was clicked
+            break;
+        case QMessageBox::Cancel:
+            return;
+        default:
+            // should never be reached
+            break;
+        }
+    }
+
     UdataUtils::saveUserData(*User::getInstance());
 }
 /**
