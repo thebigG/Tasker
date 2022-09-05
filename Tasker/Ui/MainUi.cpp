@@ -156,6 +156,9 @@ void MainUI::saveTaskerStateSlot() {
         switch (ret) {
         case QMessageBox::Save:
             Engine::Timer::getInstance()->stopTimerSlot();
+            // I don't love the way I'm hanlding this by going around and reaching the instance...
+            Engine::Timer::getInstance()->quit();
+            mainHub->getCommitmentHub().saveCurrentSession();
             break;
         case QMessageBox::Discard:
             // Don't Save was clicked

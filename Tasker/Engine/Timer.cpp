@@ -101,7 +101,6 @@ void Timer::tickUpdate() {
         lastUnproductiveTick = tickCount;
     }
     totalTimeElapsed = currentProductiveTime + currentUnproductiveTime;
-    currentSession.setGoal(productiveTimeGoal);
     currentSession.setProductiveTime(currentProductiveTime);
     currentSession.setUnproductiveTime(currentUnproductiveTime);
     if (currentProductiveTime == productiveTimeGoal) {

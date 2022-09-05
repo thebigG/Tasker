@@ -116,10 +116,9 @@ void CommitmentSnaphot::update(udata::TimeWindow &currentWindow,
     for (int i = 0; i < numberOfSessions; i++) {
         temp = getWeekDayIndex(currentWindow.startDate,
                                currentWindow.sessions[i].getDate());
-        productiveBarSet.replace(temp, (int)util::toMinutes(
-                                           currentWindow.sessions[i].getProductiveTime()));
-        unproductiveBarSet.replace(temp, (int)util::toMinutes(
-                                             currentWindow.sessions[i].getUnproductiveTime()));
+        productiveBarSet.replace(temp, util::toMinutes(currentWindow.sessions[i].getProductiveTime()));
+        unproductiveBarSet.replace(
+            temp, util::toMinutes(currentWindow.sessions[i].getUnproductiveTime()));
     }
 
     series.append(&productiveBarSet);
