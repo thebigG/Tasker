@@ -263,6 +263,8 @@ void MainUI::quitSlot() {
             break;
         }
     }
+
+    QApplication::quit();
 }
 
 void MainUI::updateLiveSessionStatusText() {
