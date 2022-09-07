@@ -125,6 +125,7 @@ void AudioHook::start() {
  */
 void AudioHook::end() {
     audioListenerState = AudioHookState::OFF;
+    unInitAudioDevice();
 }
 
 /**
@@ -296,6 +297,21 @@ Hook::HookError AudioHook::initAudioDevice(ma_device_config *config) {
 
     return Hook::HookError{ "", Hook::HookError::HookErrorStatus::SUCCESS };
 }
+
+Hook::HookError AudioHook::unInitAudioDevice() {
+    ma_result result = ma_device_stop(&device);
+
+    if (result != MA_SUCCESS) {
+        return Hook::HookError{ "Failed to stop capture device.\n"
+                                "Error number:" +
+                                    std::to_string(result),
+                                Hook::HookError::HookErrorStatus::FAIL };
+    }
+    ma_device_uninit(&device);
+
+    return Hook::HookError{ "", Hook::HookError::HookErrorStatus::SUCCESS };
+}
+
 /**
  * @todo This should return some indication about whether
  * the configuration of the hook was sucessful or not.

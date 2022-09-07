@@ -253,6 +253,7 @@ void Timer::reset() {
     unproductiveTimeSurplus = 1;
     for (auto &config : hookConfigMap) {
         config.second.hookThread.quit();
+        config.second.hook->end();
     }
 }
 QTimer *Timer::getClock() {

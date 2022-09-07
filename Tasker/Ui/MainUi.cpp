@@ -22,7 +22,7 @@ MainUI::MainUI() {
     connect(trayIconMenu.addAction("Show/Hide"), &QAction::triggered, this,
             &MainUI::toggleShowWindow);
 
-    connect(trayIconMenu.addAction("Quit"), &QAction::triggered, this, &QApplication::quit);
+    connect(trayIconMenu.addAction("Quit"), &QAction::triggered, this, &MainUI::quitSlot);
     commitmentMenu.actions().at(0)->setShortcut(QKeySequence::New);
 
     liveSessionStatusAction = trayIconMenu.addAction(liveSessionStatusText);
@@ -139,38 +139,6 @@ MainUI *MainUI::getInstance() {
  * This is called every time the application is about to be closed.
  */
 void MainUI::saveTaskerStateSlot() {
-    if (mainHub->getCommitmentHub().getcurrentLiveSessionWidget().getCurrentState() ==
-            LiveSessionState::Started ||
-        mainHub->getCommitmentHub().getcurrentLiveSessionWidget().getCurrentState() ==
-            LiveSessionState::Paused) {
-        QMessageBox msgBox{};
-
-        msgBox.setText("Session in progress.");
-        msgBox.setInformativeText(
-            "Do you want to save your progress for the session in progress?");
-        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard |
-                                  QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Save);
-        int ret = msgBox.exec();
-
-        switch (ret) {
-        case QMessageBox::Save:
-            Engine::Timer::getInstance()->stopTimerSlot();
-            // I don't love the way I'm hanlding this by going around and reaching the instance...
-            Engine::Timer::getInstance()->quit();
-            mainHub->getCommitmentHub().saveCurrentSession();
-            break;
-        case QMessageBox::Discard:
-            // Don't Save was clicked
-            break;
-        case QMessageBox::Cancel:
-            return;
-        default:
-            // should never be reached
-            break;
-        }
-    }
-
     UdataUtils::saveUserData(*User::getInstance());
 }
 /**
@@ -257,8 +225,43 @@ void MainUI::quitSlot() {
     if (commitmentHub.getcurrentLiveSessionWidget().getCurrentState() !=
         LiveSessionState::Stopped) {
         this->show();
-    } else {
-        QApplication::quit();
+    }
+
+    if (mainHub->getCommitmentHub().getcurrentLiveSessionWidget().getCurrentState() ==
+            LiveSessionState::Started ||
+        mainHub->getCommitmentHub().getcurrentLiveSessionWidget().getCurrentState() ==
+            LiveSessionState::Paused) {
+        QMessageBox msgBox{};
+
+        msgBox.setText("Session in progress.");
+        msgBox.setInformativeText(
+            "Do you want to save your progress for the session in progress?");
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard |
+                                  QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        int ret = msgBox.exec();
+
+        switch (ret) {
+        case QMessageBox::Save:
+            Engine::Timer::getInstance()->stopTimerSlot();
+            // I don't love the way I'm hanlding this by going around and reaching the instance...
+            Engine::Timer::getInstance()->quit();
+            mainHub->getCommitmentHub().saveCurrentSession();
+            QApplication::quit();
+            break;
+        case QMessageBox::Discard:
+            // Don't Save was clicked
+            Engine::Timer::getInstance()->stopTimerSlot();
+            // I don't love the way I'm hanlding this by going around and reaching the instance...
+            Engine::Timer::getInstance()->quit();
+            QApplication::quit();
+            break;
+        case QMessageBox::Cancel:
+            return;
+        default:
+            // should never be reached
+            break;
+        }
     }
 }
 

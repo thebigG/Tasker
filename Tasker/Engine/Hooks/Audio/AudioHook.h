@@ -46,6 +46,7 @@ signals:
 
 private:
     AudioHookState audioListenerState;
+    ma_device device;
     //  std::unique_ptr<AudioMachine> audioSource;
     qreal audioThreshold;
     static std::vector<ma_backend> getBackends();
@@ -58,6 +59,7 @@ private:
     std::unique_ptr<ma_context_config> contextConfig;
     const ma_device_id *deviceId; // Managed by miniaudio
     Hook::HookError initAudioDevice(ma_device_config *config);
+    Hook::HookError unInitAudioDevice();
     std::map<std::string, ma_device_info> deviceMap{};
     HookError updateDeviceMap();
     std::unique_ptr<ma_device_config> config;
