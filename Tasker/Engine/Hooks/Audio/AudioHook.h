@@ -32,6 +32,7 @@ public:
     Hook::HookState getState() override;
     std::vector<std::string> getDeviceNames();
     static std::vector<std::string> queryDeviceNames();
+    std::vector<std::string> queryBackendNames();
 
 public slots:
     virtual void start() override;
@@ -61,7 +62,9 @@ private:
     Hook::HookError initAudioDevice(ma_device_config *config);
     Hook::HookError unInitAudioDevice();
     std::map<std::string, ma_device_info> deviceMap{};
+    std::map<std::string, ma_backend> backendsMap{};
     HookError updateDeviceMap();
+    HookError updateBackendMap();
     std::unique_ptr<ma_device_config> config;
     std::string deviceName;
 };

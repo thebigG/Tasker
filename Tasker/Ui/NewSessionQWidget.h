@@ -38,6 +38,7 @@ private:
     QString goalContext{ "" };
     void updateGoalText();
     void updateAudioDevices();
+    void updateAudioBackends();
     bool validateSessionConfig();
 };
 

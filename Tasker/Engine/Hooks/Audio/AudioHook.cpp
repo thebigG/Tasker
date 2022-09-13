@@ -177,7 +177,9 @@ std::vector<ma_backend> AudioHook::getBackends() {
     }
 
     size_t count = 0;
-    ma_get_enabled_backends(backends.data(), MA_BACKEND_COUNT, &count);
+    // TODO:Return this value to the caller
+    ma_result res = ma_get_enabled_backends(backendArr.data(), MA_BACKEND_COUNT, &count);
+    qDebug() << "res-->" << res;
 
     return backends;
 }
@@ -226,6 +228,82 @@ std::vector<std::string> AudioHook::queryDeviceNames() {
 
     ma_context_uninit(&context);
     return devices;
+}
+std::vector<std::string> AudioHook::queryBackendNames() {
+
+    std::array<ma_backend, MA_BACKEND_COUNT> backendArr;
+    std::vector<std::string> backends{};
+
+    //	updateBackendMap();
+    //	for(auto backend: backendsMap)
+    //	{
+    //		backends.push_back(backend.first);
+    //	}
+    size_t count = 0;
+
+    ma_get_enabled_backends(backendArr.data(), backendArr.size(), &count);
+
+    for (size_t i = 0; i < count; ++i) {
+        auto const backend = backendArr[i];
+        backends.push_back(std::string(ma_get_backend_name(backend)));
+    }
+
+    return backends;
+}
+Hook::HookError AudioHook::updateBackendMap() {
+
+    std::unique_ptr<ma_context_config> contextConfig =
+        std::make_unique<ma_context_config>();
+
+    std::unique_ptr<ma_device_config> config = std::make_unique<ma_device_config>();
+
+    for (auto backend : getBackends()) {
+        switch (backend) {
+        case ma_backend_wasapi:
+            backendsMap["ma_backend_wasapi"] = ma_backend::ma_backend_wasapi;
+            break;
+        case ma_backend_dsound:
+            backendsMap["ma_backend_dsound"] = ma_backend::ma_backend_dsound;
+            break;
+        case ma_backend_winmm:
+            backendsMap["ma_backend_winmm"] = ma_backend::ma_backend_winmm;
+            break;
+        case ma_backend_coreaudio:
+            backendsMap["ma_backend_coreaudio"] = ma_backend::ma_backend_coreaudio;
+            break;
+        case ma_backend_sndio:
+            backendsMap["ma_backend_sndio"] = ma_backend::ma_backend_sndio;
+            break;
+        case ma_backend_audio4:
+            backendsMap["ma_backend_audio4"] = ma_backend::ma_backend_audio4;
+            break;
+        case ma_backend_oss:
+            backendsMap["ma_backend_oss"] = ma_backend::ma_backend_oss;
+            break;
+        case ma_backend_pulseaudio:
+            backendsMap["ma_backend_pulseaudio"] = ma_backend::ma_backend_pulseaudio;
+            break;
+        case ma_backend_alsa:
+            backendsMap["ma_backend_alsa"] = ma_backend::ma_backend_alsa;
+            break;
+        case ma_backend_jack:
+            backendsMap["ma_backend_jack"] = ma_backend::ma_backend_jack;
+            break;
+        case ma_backend_aaudio:
+            backendsMap["ma_backend_aaudio"] = ma_backend::ma_backend_aaudio;
+            break;
+        case ma_backend_opensl:
+            backendsMap["ma_backend_opensl"] = ma_backend::ma_backend_opensl;
+            break;
+        case ma_backend_webaudio:
+            backendsMap["ma_backend_webaudio"] = ma_backend::ma_backend_webaudio;
+            break;
+        default:
+            break;
+        }
+    }
+    // TODO:Handle this properly
+    return Hook::HookError{ "", Hook::HookError::HookErrorStatus::SUCCESS };
 }
 
 /**

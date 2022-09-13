@@ -136,6 +136,16 @@ void NewSessionQWidget::updateAudioDevices() {
     this->setAudioQComboBoxItems(devices);
 }
 
+void NewSessionQWidget::updateAudioBackends() {
+    QStringList devices{};
+    devices.clear();
+    auto deviceNames = AudioHook{ "" }.queryBackendNames();
+    for (auto &d : deviceNames) {
+        devices.append(d.c_str());
+    }
+    this->setAudioQComboBoxItems(devices);
+}
+
 void NewSessionQWidget::show() {
     updateGoalText();
 
@@ -143,7 +153,8 @@ void NewSessionQWidget::show() {
                          User::getInstance()->getCurrentCommitment().getName() + "\"");
     this->ui->taskLineEdit->setText(User::getInstance()->getCurrentCommitment().getName());
 
-    updateAudioDevices();
+    //    updateAudioDevices();
+    updateAudioBackends();
 
     QWidget::show();
 }
@@ -157,7 +168,8 @@ bool NewSessionQWidget::eventFilter(QObject *obj, QEvent *event) {
     if (obj == this->ui->audioQComboBox) {
         if (event->type() == QEvent::MouseButtonPress) {
             QMouseEvent *keyEvent = static_cast<QMouseEvent *>(event);
-            updateAudioDevices();
+            //            updateAudioDevices();
+            updateAudioBackends();
             return false;
         } else {
             return false;
