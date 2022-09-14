@@ -25,7 +25,7 @@ NewSessionQWidget::NewSessionQWidget(QWidget *parent)
             &NewSessionQWidget::backButtonSlot);
     connect(this->ui->startTimerQPushButton, &QPushButton::clicked, this,
             &NewSessionQWidget::startTimerButtonSlot);
-    connect(this->ui->audioQComboBox, QOverload<int>::of(&QComboBox::highlighted),
+    connect(this->ui->audioDeviceQComboBox, QOverload<int>::of(&QComboBox::highlighted),
             this, &NewSessionQWidget::isJackActiveSlot);
     this->addAction(new QAction());
     this->actions().at(0)->setShortcut(QKeySequence::Cancel);
@@ -33,17 +33,17 @@ NewSessionQWidget::NewSessionQWidget(QWidget *parent)
     goalText.reserve(100);
     goalText.resize(100);
 
-    this->ui->audioQComboBox->setEnabled(false);
+    this->ui->audioDeviceQComboBox->setEnabled(false);
 
     connect(this->ui->audioQCheckBox, &QCheckBox::stateChanged, [this](int state) {
         if (state == Qt::CheckState::Checked) {
-            this->ui->audioQComboBox->setEnabled(true);
+            this->ui->audioDeviceQComboBox->setEnabled(true);
         } else {
-            this->ui->audioQComboBox->setEnabled(false);
+            this->ui->audioDeviceQComboBox->setEnabled(false);
         }
     });
 
-    this->ui->audioQComboBox->installEventFilter(this);
+    this->ui->audioDeviceQComboBox->installEventFilter(this);
 }
 
 /**
@@ -80,7 +80,7 @@ void NewSessionQWidget::startTimerButtonSlot() {
         newTask, User::getInstance()->getCurrentCommitment().getFrequency().goal,
         QDate::currentDate()
     };
-    newConfig.audioDevice = ui->audioQComboBox->currentText().toStdString();
+    newConfig.audioDevice = ui->audioDeviceQComboBox->currentText().toStdString();
     Hook::HookError error = Engine::Timer::getInstance()->initTimer(newConfig, newSession);
     if (error.getStatus() == Hook::HookError::HookErrorStatus::FAIL) {
         QMessageBox m{ QMessageBox::Critical, "Error",
@@ -160,12 +160,12 @@ void NewSessionQWidget::show() {
 }
 
 void NewSessionQWidget::setAudioQComboBoxItems(QStringList items) {
-    this->ui->audioQComboBox->clear();
-    this->ui->audioQComboBox->insertItems(0, items);
+    this->ui->audioDeviceQComboBox->clear();
+    this->ui->audioDeviceQComboBox->insertItems(0, items);
 }
 
 bool NewSessionQWidget::eventFilter(QObject *obj, QEvent *event) {
-    if (obj == this->ui->audioQComboBox) {
+    if (obj == this->ui->audioDeviceQComboBox) {
         if (event->type() == QEvent::MouseButtonPress) {
             QMouseEvent *keyEvent = static_cast<QMouseEvent *>(event);
             //            updateAudioDevices();
