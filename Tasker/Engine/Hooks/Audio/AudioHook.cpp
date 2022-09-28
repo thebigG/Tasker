@@ -190,7 +190,7 @@ std::vector<std::string> AudioHook::getDeviceNames() {
 
 std::vector<std::string> AudioHook::queryDeviceNames(std::string backend) {
 
-    auto bakendsMap = getBackendMap();
+    auto backendsMap = getBackendMap();
     std::unique_ptr<ma_context_config> contextConfig =
         std::make_unique<ma_context_config>();
 
@@ -200,7 +200,8 @@ std::vector<std::string> AudioHook::queryDeviceNames(std::string backend) {
     // "init/configure" method in the Hook interface
     ma_context context;
 
-    ma_result res = ma_context_init(&bakendsMap[backend], 1, contextConfig.get(), &context);
+    ma_result res =
+        ma_context_init(&backendsMap[backend], 1, contextConfig.get(), &context);
 
     ma_uint32 pPlaybackDeviceCount;
     ma_device_info *ppCaptureDeviceInfos;
