@@ -27,8 +27,8 @@ NewSessionQWidget::NewSessionQWidget(QWidget *parent)
             &NewSessionQWidget::startTimerButtonSlot);
     connect(this->ui->audioDeviceQComboBox, QOverload<int>::of(&QComboBox::highlighted),
             this, &NewSessionQWidget::isJackActiveSlot);
-    connect(this->ui->audioBackendQComboBox, (&QComboBox::textActivated), this,
-            &NewSessionQWidget::backendActivated);
+    connect(this->ui->audioBackendQComboBox, QOverload<int>::of(&QComboBox::activated),
+            this, &NewSessionQWidget::backendActivated);
     this->addAction(new QAction());
     this->actions().at(0)->setShortcut(QKeySequence::Cancel);
     connect(this->actions().at(0), &QAction::triggered, this, &QWidget::hide);
@@ -215,7 +215,7 @@ bool NewSessionQWidget::validateSessionConfig() {
     return valid;
 }
 
-void NewSessionQWidget::backendActivated(QString item) {
+void NewSessionQWidget::backendActivated(int item) {
     this->ui->audioDeviceQComboBox->setEnabled(true);
-    updateAudioDevices(item.toStdString());
+    updateAudioDevices(this->ui->audioBackendQComboBox->itemText(item).toStdString());
 }

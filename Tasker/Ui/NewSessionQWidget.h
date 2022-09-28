@@ -28,7 +28,7 @@ private slots:
     void startTimerButtonSlot();
 
     void isJackActiveSlot(int);
-    void backendActivated(QString);
+    void backendActivated(int);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
