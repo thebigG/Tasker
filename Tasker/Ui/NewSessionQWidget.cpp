@@ -83,6 +83,7 @@ void NewSessionQWidget::startTimerButtonSlot() {
         QDate::currentDate()
     };
     newConfig.audioDevice = ui->audioDeviceQComboBox->currentText().toStdString();
+    newConfig.audioBackend = ui->audioBackendQComboBox->currentText().toStdString();
     Hook::HookError error = Engine::Timer::getInstance()->initTimer(newConfig, newSession);
     if (error.getStatus() == Hook::HookError::HookErrorStatus::FAIL) {
         QMessageBox m{ QMessageBox::Critical, "Error",
@@ -141,7 +142,7 @@ void NewSessionQWidget::updateAudioDevices(std::string backend) {
 void NewSessionQWidget::updateAudioBackends() {
     QStringList devices{};
     devices.clear();
-    auto deviceNames = AudioHook{ "" }.queryBackendNames();
+    auto deviceNames = AudioHook::queryBackendNames();
     for (auto &d : deviceNames) {
         devices.append(d.c_str());
     }

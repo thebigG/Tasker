@@ -156,7 +156,8 @@ Hook::HookError Timer::configTimer(EngineConfig &newConfig, udata::Session newSe
             // TODO:Revisit this logic. It is horrendous how I'm handling configs here...
             hookConfigMap[hook].audioDevice = config.audioDevice;
             hookConfigMap[hook].hook =
-                std::make_unique<AudioHook>(hookConfigMap[hook].audioDevice);
+                std::make_unique<AudioHook>(hookConfigMap[hook].audioDevice,
+                                            hookConfigMap[hook].audioBackend);
             Hook::HookError error = hookConfigMap[hook].hook->configure();
             if (error.getStatus() == Hook::HookError::HookErrorStatus::FAIL)
                 return error;

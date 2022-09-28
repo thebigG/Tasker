@@ -25,14 +25,14 @@ class Engine::AudioHook : public Engine::Hook {
 
 public:
     enum class AudioHookState { ON, OFF };
-    AudioHook(std::string deviceName);
+    AudioHook(std::string newDevice, std::string newBackend);
     void setAudioThreshold(qreal audioThreshold);
     qreal &getAudioThreshold();
     Hook::HookState startHook() override;
     Hook::HookState getState() override;
     std::vector<std::string> getDeviceNames();
     static std::vector<std::string> queryDeviceNames(std::string backend);
-    std::vector<std::string> queryBackendNames();
+    static std::vector<std::string> queryBackendNames();
 
 public slots:
     virtual void start() override;
@@ -66,6 +66,7 @@ private:
     static std::map<std::string, ma_backend> getBackendMap();
     std::unique_ptr<ma_device_config> config;
     std::string deviceName;
+    std::string backendName;
 };
 
 #endif // AUDIOHOOK_H

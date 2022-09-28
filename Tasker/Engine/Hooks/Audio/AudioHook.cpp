@@ -83,7 +83,7 @@ void data_callback(ma_device *pDevice, void *pOutput, const void *pInput, ma_uin
  * should not be.
  */
 // TODO:Add constructor that that takes the context as a parameter
-AudioHook::AudioHook(std::string newDevice)
+AudioHook::AudioHook(std::string newDevice, std::string newBackend)
 : audioListenerState{ AudioHookState::OFF }, deviceName{ newDevice } {
 }
 
@@ -174,7 +174,6 @@ std::vector<ma_backend> AudioHook::getBackends() {
     // TODO:Return this value to the caller
     ma_result res = ma_get_enabled_backends(backendArr.data(), MA_BACKEND_COUNT, &count);
     return std::vector<ma_backend>(backendArr.begin(), backendArr.end());
-    ;
 }
 
 std::vector<std::string> AudioHook::getDeviceNames() {
@@ -386,7 +385,7 @@ Hook::HookError AudioHook::configure() {
     // Don't love doing this in a constructor. Maybe I should have an
     // "init/configure" method in the Hook interface
     HookError error =
-        initContext(contextConfig.get(), &context, 1, getBackends().data());
+        initContext(contextConfig.get(), &context, 1, &getBackendMap()[backendName]);
     if (error.getStatus() != HookError::HookErrorStatus::SUCCESS) {
         return error;
     }

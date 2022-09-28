@@ -19,6 +19,7 @@ class Timer;
 struct EngineConfig {
     std::vector<Hook::HookType> activeHooks{};
     std::string audioDevice{};
+    std::string audioBackend{};
     QThread hookThread{};
     Engine::XHookMode xMode;
     std::unique_ptr<Hook> hook;
