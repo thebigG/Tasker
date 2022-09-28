@@ -20,13 +20,15 @@ public:
     explicit NewSessionQWidget(QWidget *parent = nullptr);
     ~NewSessionQWidget();
     QString getTaskName();
-    void setAudioQComboBoxItems(QStringList items);
+    void setAudioDeviceQComboBoxItems(QStringList items);
+    void setAudioBackendQComboBoxItems(QStringList items);
     void show();
 private slots:
     void backButtonSlot();
     void startTimerButtonSlot();
 
     void isJackActiveSlot(int);
+    void backendActivated(QString);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
@@ -37,7 +39,7 @@ private:
     QString goalText{};
     QString goalContext{ "" };
     void updateGoalText();
-    void updateAudioDevices();
+    void updateAudioDevices(std::string backend);
     void updateAudioBackends();
     bool validateSessionConfig();
 };

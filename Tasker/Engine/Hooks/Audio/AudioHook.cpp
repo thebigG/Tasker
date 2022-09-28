@@ -169,19 +169,12 @@ Hook::HookState AudioHook::getState() {
 
 std::vector<ma_backend> AudioHook::getBackends() {
     std::array<ma_backend, MA_BACKEND_COUNT> backendArr;
-    std::vector<ma_backend> backends{};
-    try {
-        backends.reserve(MA_BACKEND_COUNT);
-    } catch (std::length_error) {
-        qCritical() << "reserve()failed to reserve memory for backends vector";
-    }
 
     size_t count = 0;
     // TODO:Return this value to the caller
     ma_result res = ma_get_enabled_backends(backendArr.data(), MA_BACKEND_COUNT, &count);
-    qDebug() << "res-->" << res;
-
-    return backends;
+    return std::vector<ma_backend>(backendArr.begin(), backendArr.end());
+    ;
 }
 
 std::vector<std::string> AudioHook::getDeviceNames() {
@@ -195,8 +188,9 @@ std::vector<std::string> AudioHook::getDeviceNames() {
     return devices;
 }
 
-std::vector<std::string> AudioHook::queryDeviceNames() {
+std::vector<std::string> AudioHook::queryDeviceNames(std::string backend) {
 
+    auto bakendsMap = getBackendMap();
     std::unique_ptr<ma_context_config> contextConfig =
         std::make_unique<ma_context_config>();
 
@@ -206,7 +200,7 @@ std::vector<std::string> AudioHook::queryDeviceNames() {
     // "init/configure" method in the Hook interface
     ma_context context;
 
-    ma_result res = ma_context_init(getBackends().data(), 1, contextConfig.get(), &context);
+    ma_result res = ma_context_init(&bakendsMap[backend], 1, contextConfig.get(), &context);
 
     ma_uint32 pPlaybackDeviceCount;
     ma_device_info *ppCaptureDeviceInfos;
@@ -234,29 +228,16 @@ std::vector<std::string> AudioHook::queryBackendNames() {
     std::array<ma_backend, MA_BACKEND_COUNT> backendArr;
     std::vector<std::string> backends{};
 
-    //	updateBackendMap();
-    //	for(auto backend: backendsMap)
-    //	{
-    //		backends.push_back(backend.first);
-    //	}
-    size_t count = 0;
-
-    ma_get_enabled_backends(backendArr.data(), backendArr.size(), &count);
-
-    for (size_t i = 0; i < count; ++i) {
-        auto const backend = backendArr[i];
-        backends.push_back(std::string(ma_get_backend_name(backend)));
+    auto backendsMap = getBackendMap();
+    for (auto backend : backendsMap) {
+        backends.push_back(backend.first);
     }
 
     return backends;
 }
-Hook::HookError AudioHook::updateBackendMap() {
+std::map<std::string, ma_backend> AudioHook::getBackendMap() {
 
-    std::unique_ptr<ma_context_config> contextConfig =
-        std::make_unique<ma_context_config>();
-
-    std::unique_ptr<ma_device_config> config = std::make_unique<ma_device_config>();
-
+    std::map<std::string, ma_backend> backendsMap{};
     for (auto backend : getBackends()) {
         switch (backend) {
         case ma_backend_wasapi:
@@ -302,8 +283,7 @@ Hook::HookError AudioHook::updateBackendMap() {
             break;
         }
     }
-    // TODO:Handle this properly
-    return Hook::HookError{ "", Hook::HookError::HookErrorStatus::SUCCESS };
+    return backendsMap;
 }
 
 /**

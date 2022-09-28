@@ -27,6 +27,8 @@ NewSessionQWidget::NewSessionQWidget(QWidget *parent)
             &NewSessionQWidget::startTimerButtonSlot);
     connect(this->ui->audioDeviceQComboBox, QOverload<int>::of(&QComboBox::highlighted),
             this, &NewSessionQWidget::isJackActiveSlot);
+    connect(this->ui->audioBackendQComboBox, (&QComboBox::textActivated), this,
+            &NewSessionQWidget::backendActivated);
     this->addAction(new QAction());
     this->actions().at(0)->setShortcut(QKeySequence::Cancel);
     connect(this->actions().at(0), &QAction::triggered, this, &QWidget::hide);
@@ -126,14 +128,14 @@ void NewSessionQWidget::isJackActiveSlot(int index) {
     qDebug() << "jack active:" << index;
 }
 
-void NewSessionQWidget::updateAudioDevices() {
+void NewSessionQWidget::updateAudioDevices(std::string backend) {
     QStringList devices{};
     devices.clear();
-    auto deviceNames = AudioHook::queryDeviceNames();
+    auto deviceNames = AudioHook::queryDeviceNames(backend);
     for (auto &d : deviceNames) {
         devices.append(d.c_str());
     }
-    this->setAudioQComboBoxItems(devices);
+    this->setAudioDeviceQComboBoxItems(devices);
 }
 
 void NewSessionQWidget::updateAudioBackends() {
@@ -143,7 +145,7 @@ void NewSessionQWidget::updateAudioBackends() {
     for (auto &d : deviceNames) {
         devices.append(d.c_str());
     }
-    this->setAudioQComboBoxItems(devices);
+    this->setAudioBackendQComboBoxItems(devices);
 }
 
 void NewSessionQWidget::show() {
@@ -153,23 +155,28 @@ void NewSessionQWidget::show() {
                          User::getInstance()->getCurrentCommitment().getName() + "\"");
     this->ui->taskLineEdit->setText(User::getInstance()->getCurrentCommitment().getName());
 
-    //    updateAudioDevices();
     updateAudioBackends();
+    updateAudioDevices(
+        this->ui->audioBackendQComboBox->currentData().value<QString>().toStdString());
 
     QWidget::show();
 }
 
-void NewSessionQWidget::setAudioQComboBoxItems(QStringList items) {
+void NewSessionQWidget::setAudioDeviceQComboBoxItems(QStringList items) {
     this->ui->audioDeviceQComboBox->clear();
     this->ui->audioDeviceQComboBox->insertItems(0, items);
+}
+
+void NewSessionQWidget::setAudioBackendQComboBoxItems(QStringList items) {
+    this->ui->audioBackendQComboBox->clear();
+    this->ui->audioBackendQComboBox->insertItems(0, items);
 }
 
 bool NewSessionQWidget::eventFilter(QObject *obj, QEvent *event) {
     if (obj == this->ui->audioDeviceQComboBox) {
         if (event->type() == QEvent::MouseButtonPress) {
             QMouseEvent *keyEvent = static_cast<QMouseEvent *>(event);
-            //            updateAudioDevices();
-            updateAudioBackends();
+            //			updateAudioDevices(this->ui->audioBackendQComboBox->currentData().value<QString>().toStdString());;
             return false;
         } else {
             return false;
@@ -206,4 +213,9 @@ bool NewSessionQWidget::validateSessionConfig() {
         this->ui->mouseQCheckBox->setStyleSheet(Ui::invalidStateStylesheet);
     }
     return valid;
+}
+
+void NewSessionQWidget::backendActivated(QString item) {
+    this->ui->audioDeviceQComboBox->setEnabled(true);
+    updateAudioDevices(item.toStdString());
 }
