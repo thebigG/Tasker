@@ -150,11 +150,13 @@ Hook::HookError Timer::initTimer(EngineConfig &newConfig, udata::Session newSess
 Hook::HookError Timer::configTimer(EngineConfig &newConfig, udata::Session newSession) {
     config.activeHooks = newConfig.activeHooks;
     config.audioDevice = newConfig.audioDevice;
+    config.audioBackend = newConfig.audioBackend;
     for (auto hook : config.activeHooks) {
         switch (hook) {
         case Engine::Hook::HookType::AUDIO: {
             // TODO:Revisit this logic. It is horrendous how I'm handling configs here...
             hookConfigMap[hook].audioDevice = config.audioDevice;
+            hookConfigMap[hook].audioBackend = config.audioBackend;
             hookConfigMap[hook].hook =
                 std::make_unique<AudioHook>(hookConfigMap[hook].audioDevice,
                                             hookConfigMap[hook].audioBackend);

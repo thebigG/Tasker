@@ -84,7 +84,7 @@ void data_callback(ma_device *pDevice, void *pOutput, const void *pInput, ma_uin
  */
 // TODO:Add constructor that that takes the context as a parameter
 AudioHook::AudioHook(std::string newDevice, std::string newBackend)
-: audioListenerState{ AudioHookState::OFF }, deviceName{ newDevice } {
+: audioListenerState{ AudioHookState::OFF }, deviceName{ newDevice }, backendName{ newBackend } {
 }
 
 /**
@@ -384,8 +384,8 @@ Hook::HookError AudioHook::configure() {
 
     // Don't love doing this in a constructor. Maybe I should have an
     // "init/configure" method in the Hook interface
-    HookError error =
-        initContext(contextConfig.get(), &context, 1, &getBackendMap()[backendName]);
+    auto backend = getBackendMap()[backendName];
+    HookError error = initContext(contextConfig.get(), &context, 1, &backend);
     if (error.getStatus() != HookError::HookErrorStatus::SUCCESS) {
         return error;
     }
