@@ -41,7 +41,7 @@ set(SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/AppGuard.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Audio/AudioHook.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/udata/Commitment.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CommitmentSnaphot.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CommitmentSnapshot.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CommStatsQWidget.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Ui/CreateCommitmentQWidget.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Hooks/Hook.cpp

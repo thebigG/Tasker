@@ -45,10 +45,14 @@ float calc_peak_amplitude(void *pOutput, const void *pInput, ma_uint32 frameCoun
 
     const float *audioInput = static_cast<const float *>(pInput);
 
+    // TODO:Move this loop to a function to make it obvious that this is finding the max value from all the samples
     for (unsigned int i = 0; i < frameCount; i++) {
         current_sample_value =
             static_cast<long long>(std::abs((audioInput[i]) * (0x7fffffff)));
 
+        if (current_sample_value > maxValue) {
+            qDebug() << "current_sample_value:" << current_sample_value;
+        }
         maxValue = current_sample_value > maxValue ? current_sample_value : maxValue;
     }
 
@@ -65,7 +69,7 @@ float calc_peak_amplitude(void *pOutput, const void *pInput, ma_uint32 frameCoun
 
 void data_callback(ma_device *pDevice, void *pOutput, const void *pInput, ma_uint32 frameCount) {
     auto deviceLevel = calc_peak_amplitude(pDevice, pInput, frameCount);
-    qDebug() << "deviceLevel:" << deviceLevel;
+    //    qDebug() << "deviceLevel:" << deviceLevel;
     if (deviceLevel > 0.01) {
         Engine::Timer::getInstance()
             ->getHookMap()[Engine::Hook::HookType::AUDIO]
@@ -330,7 +334,7 @@ Hook::HookError AudioHook::initAudioDevice(ma_device_config *config) {
     *config = ma_device_config_init(ma_device_type_capture);
     config->capture.format = ma_format_unknown; // Set to ma_format_unknown to use
                                                 // the device's native format.
-    config->capture.channels = 2; // Set to 0 to use the device's native channel count.
+    config->capture.channels = 0; // Set to 0 to use the device's native channel count.
     config->sampleRate = 0; // Set to 0 to use the device's native sample rate.
     config->dataCallback = data_callback; // This function will be called when
     // miniaudio needs more data.

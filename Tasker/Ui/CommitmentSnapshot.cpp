@@ -6,7 +6,7 @@
  * @param numberOfBars
  * @param customCategories
  */
-CommitmentSnaphot::CommitmentSnaphot() : QWidget() {
+CommitmentSnapshot::CommitmentSnapshot() : QWidget() {
     productiveBarSet << 95 << 0 << 0 << 0 << 0 << 0 << 0;
     unproductiveBarSet << 0 << 0 << 0 << 0 << 0 << 0 << 0;
     series.append(&productiveBarSet);
@@ -66,7 +66,7 @@ CommitmentSnaphot::CommitmentSnaphot() : QWidget() {
     chart.setBackgroundVisible(false);
 }
 
-QChartView &CommitmentSnaphot::getView() {
+QChartView &CommitmentSnapshot::getView() {
     return view;
 }
 /**
@@ -80,9 +80,9 @@ QChartView &CommitmentSnaphot::getView() {
  * @param type
  * @param commitmentGoal
  */
-void CommitmentSnaphot::update(udata::TimeWindow &currentWindow,
-                               udata::CommitmentType type,
-                               int commitmentGoal) {
+void CommitmentSnapshot::update(udata::TimeWindow &currentWindow,
+                                udata::CommitmentType type,
+                                int commitmentGoal) {
 
     QDate dayOfTheWeek = QDate{ currentWindow.startDate };
     weekAxis.clear();
@@ -161,25 +161,25 @@ void CommitmentSnaphot::update(udata::TimeWindow &currentWindow,
  * @param sessionDay
  * @return
  */
-int CommitmentSnaphot::getWeekDayIndex(QDate &dateWindowStart, QDate &sessionDay) {
+int CommitmentSnapshot::getWeekDayIndex(QDate &dateWindowStart, QDate &sessionDay) {
     return dateWindowStart.daysTo(sessionDay);
 }
-QBarSet &CommitmentSnaphot::getProductiveQBarSet() {
+QBarSet &CommitmentSnapshot::getProductiveQBarSet() {
     return productiveBarSet;
 }
-QBarSet &CommitmentSnaphot::getUnproducitveQbarSet() {
+QBarSet &CommitmentSnapshot::getUnproducitveQbarSet() {
     return unproductiveBarSet;
 }
-double CommitmentSnaphot::getProductiveTimeAverage() {
+double CommitmentSnapshot::getProductiveTimeAverage() {
     return productiveTimeAverage;
 }
 
-double CommitmentSnaphot::getUnproductiveTimeAverage() {
+double CommitmentSnapshot::getUnproductiveTimeAverage() {
     return unproductiveTimeAverage;
 }
-QPushButton &CommitmentSnaphot::getNextSnapshotLabel() {
+QPushButton &CommitmentSnapshot::getNextSnapshotLabel() {
     return nextSnapshotLabel;
 }
-QPushButton &CommitmentSnaphot::getPreviousSnaphotLabel() {
+QPushButton &CommitmentSnapshot::getPreviousSnaphotLabel() {
     return previousSnaphotLabel;
 }

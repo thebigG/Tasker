@@ -122,7 +122,7 @@ private:
     std::map<QString, udata::Commitment &> commitmentMap;
     CreateCommitmentQWidget createCommimentWindow;
     NewSessionQWidget newSessionQWidget;
-    CommitmentSnaphot snapshot;
+    CommitmentSnapshot snapshot;
     void updateSnapshot();
     void updateCommitmentInfoStatsQWidget();
     void updateBeginDateQLabel();

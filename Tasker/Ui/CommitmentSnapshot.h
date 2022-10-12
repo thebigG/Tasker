@@ -19,7 +19,7 @@ QT_CHARTS_USE_NAMESPACE
  * @brief The CommitmentSnaphot class is a UI widget that displays a weekly
  * chaty of commitments.
  */
-class CommitmentSnaphot : public QWidget {
+class CommitmentSnapshot : public QWidget {
 private:
     QBarSet productiveBarSet{ "Productive" };
     QBarSet unproductiveBarSet{ "Unproductive" };
@@ -54,7 +54,7 @@ public:
     double getProductiveTimeAverage();
     double getUnproductiveTimeAverage();
 
-    CommitmentSnaphot();
+    CommitmentSnapshot();
     void update(udata::TimeWindow &currentWindow, udata::CommitmentType type, int commitmentGoal);
     QPushButton &getNextSnapshotLabel();
     QPushButton &getPreviousSnaphotLabel();
