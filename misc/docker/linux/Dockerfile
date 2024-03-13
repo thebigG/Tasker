@@ -1,7 +1,7 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 USER root
 
-RUN apt-get update && apt-get install -y qt5-default libqt5charts5-dev libx11-dev \
+RUN apt-get update && apt-get install -y qtbase5-dev libqt5charts5-dev libx11-dev \
                                                    libxtst-dev \
                                                    libxt-dev \
                                                    libxinerama-dev \
@@ -34,24 +34,28 @@ RUN apt-get update && apt-get install -y qt5-default libqt5charts5-dev libx11-de
                                                    p7zip-full \
                                                    patch \
                                                    perl \
-                                                   python \
                                                    ruby \
                                                    sed \
                                                    unzip \
                                                    wget \
                                                    xz-utils\
                                                    python3-pip \
-                                                   libicu-dev
+                                                   libicu-dev \
+                                                   python2
 
 RUN pip3 install --upgrade pip
 RUN pip3 install cmake
 
 RUN git clone https://github.com/thebigG/mxe.git
-RUN make -C mxe -j8 qt5
-#The COPY command does not work for some reason in Github Actions. When running locally, this works with no problem.
-#COPY "Qt5CoreConfigExtras.cmake.patch" /
+
+
+RUN echo "alias python=python2" >> /root/.bashrc
+
+# RUN make -C mxe -j8 qt5
+# #The COPY command does not work for some reason in Github Actions. When running locally, this works with no problem.
+# #COPY "Qt5CoreConfigExtras.cmake.patch" /
 #RUN patch /mxe/usr/i686-w64-mingw32.static/qt5/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake Qt5CoreConfigExtras.cmake.patch
-RUN echo "export PATH=\$PATH:/mxe/usr/bin" >> /root/.bashrc
+# RUN echo "export PATH=\$PATH:/mxe/usr/bin" >> /root/.bashrc
 RUN pip3 install pyyaml
 RUN wget http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu55_55.1-7_amd64.deb
 RUN dpkg -i libicu55_55.1-7_amd64.deb
@@ -61,5 +65,5 @@ RUN chmod +x /opt/linuxdeployqt \
     && cd /opt/; sed -i 's|AI\x02|\x00\x00\x00|' linuxdeployqt; /opt/linuxdeployqt --appimage-extract \
     && mv /opt/squashfs-root /opt/linuxdeployqt.AppDir; exit 0 \
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get install -y clang-format-10
-RUN ln -s  /usr/bin/clang-format-10 /usr/bin/clang-format
+RUN apt-get install -y clang-format
+# RUN ln -s  /usr/bin/clang-format-10 /usr/bin/clang-format
