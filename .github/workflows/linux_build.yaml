@@ -39,7 +39,7 @@ jobs:
 
     - name: Checkout submodules
       run: |
-        git submodule update --init --recursive
+        git config --global --add safe.directory /__w/Tasker/Tasker && git submodule update --init --recursive
 
 
     - name: Check Coding Style
