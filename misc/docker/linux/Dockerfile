@@ -1,7 +1,7 @@
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 USER root
 
-RUN apt-get update && apt-get install -y qtbase5-dev libqt5charts5-dev libx11-dev \
+RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y qtbase5-dev libqt5charts5-dev libx11-dev \
                                                    libxtst-dev \
                                                    libxt-dev \
                                                    libxinerama-dev \
