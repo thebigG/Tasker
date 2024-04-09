@@ -361,6 +361,7 @@ Hook::HookError AudioHook::initAudioDevice(ma_device_config *config) {
 }
 
 Hook::HookError AudioHook::unInitAudioDevice() {
+    qDebug() << "unInitAudioDevice()";
     ma_result result = ma_device_stop(&device);
 
     if (result != MA_SUCCESS) {

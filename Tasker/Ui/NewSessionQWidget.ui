@@ -170,7 +170,7 @@
         <property name="maximumSize">
          <size>
           <width>400</width>
-          <height>100</height>
+          <height>125</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -292,6 +292,19 @@
            <string>Default Mic</string>
           </property>
          </item>
+        </widget>
+        <widget class="QCheckBox" name="networkQCheckBox">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>100</y>
+           <width>90</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Network</string>
+         </property>
         </widget>
        </widget>
       </item>

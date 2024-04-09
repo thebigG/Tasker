@@ -43,7 +43,7 @@ public:
      * sure to add them BEFORE none. The none type is used for bounds
      * checking.
      */
-    enum class HookType { X_MOUSE_KEYBOARD, X_MOUSE, X_KEYBOARD, AUDIO, NONE };
+    enum class HookType { UDP_HOOOK, X_MOUSE_KEYBOARD, X_MOUSE, X_KEYBOARD, AUDIO, NONE };
     Hook();
     ~Hook();
     /**
