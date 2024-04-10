@@ -11,6 +11,8 @@
 #include <iostream>
 
 #include "AudioHook.h"
+#include "UdpHook.h"
+
 #include "XHook.h"
 using namespace Engine;
 using namespace util;
@@ -180,6 +182,13 @@ Hook::HookError Timer::configTimer(EngineConfig &newConfig, udata::Session newSe
             // Any config needed for the XHook goes here
             hookConfigMap[hook].hook =
                 std::make_unique<XHook>(XHookMode::MOUSE_AND_KEYBOARD);
+            break;
+        }
+
+        case Engine::Hook::HookType::UDP_HOOOK: {
+            // Any config needed for the XHook goes here
+            hookConfigMap[hook].hook =
+                std::make_unique<UdpHook>();
             break;
         }
 

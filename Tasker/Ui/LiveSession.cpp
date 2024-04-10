@@ -6,6 +6,7 @@
 
 #include <QDebug>
 #include <QFontDatabase>
+#include <iostream>
 
 #include "ui_LiveSession.h"
 using namespace Engine;
@@ -205,6 +206,9 @@ void LiveSession::updateHookState() {
             case Hook::HookType::AUDIO:
                 hookStateText.replace(13, 10, activeText);
                 break;
+            case Hook::HookType::UDP_HOOOK:
+                hookStateText.replace(15, 10, activeText);
+                break;
             default:
                 break;
             }
@@ -219,6 +223,8 @@ void LiveSession::updateHookState() {
             case Hook::HookType::AUDIO:
                 hookStateText.replace(13, 10, inactiveText);
                 break;
+            case Hook::HookType::UDP_HOOOK:
+                hookStateText.replace(15, 10, inactiveText);
             default:
                 break;
             }
@@ -242,6 +248,10 @@ void LiveSession::initHookState() {
             break;
         case Hook::HookType::X_MOUSE:
             hookStateText.replace(8, 8, "Mouse");
+            break;
+
+        case Hook::HookType::UDP_HOOOK:
+            hookStateText.replace(8, 8, "Network");
             break;
         default:
             break;

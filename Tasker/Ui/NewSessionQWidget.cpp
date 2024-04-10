@@ -75,6 +75,10 @@ void NewSessionQWidget::startTimerButtonSlot() {
     if (this->ui->audioQCheckBox->isChecked()) {
         newHooks.push_back(Engine::Hook::HookType::AUDIO);
     }
+
+    if (this->ui->networkQCheckBox->isChecked()) {
+        newHooks.push_back(Engine::Hook::HookType::UDP_HOOOK);
+    }
     EngineConfig newConfig{};
     newConfig.activeHooks = newHooks;
     Task newTask{ getTaskName(), newHooks };
@@ -207,11 +211,13 @@ bool NewSessionQWidget::validateSessionConfig() {
     }
     if (this->ui->audioQCheckBox->checkState() == Qt::CheckState::Unchecked &&
         this->ui->keyboardQCheckBox->checkState() == Qt::CheckState::Unchecked &&
-        this->ui->mouseQCheckBox->checkState() == Qt::CheckState::Unchecked) {
+        this->ui->mouseQCheckBox->checkState() == Qt::CheckState::Unchecked &&
+        this->ui->networkQCheckBox->checkState() == Qt::CheckState::Unchecked) {
         valid = false;
         this->ui->audioQCheckBox->setStyleSheet(Ui::invalidStateStylesheet);
         this->ui->keyboardQCheckBox->setStyleSheet(Ui::invalidStateStylesheet);
         this->ui->mouseQCheckBox->setStyleSheet(Ui::invalidStateStylesheet);
+        this->ui->networkQCheckBox->setStyleSheet(Ui::invalidStateStylesheet);
     }
     return valid;
 }
